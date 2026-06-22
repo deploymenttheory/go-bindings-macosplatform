@@ -70,13 +70,13 @@ func NewCalNthWeekDay() *CalNthWeekDay {
 	return calNthWeekDayAdopt(_id)
 }
 
-// DayOfTheWeek wraps the corresponding Objective-C method.
+// DayOfTheWeek returns the day of the week.
 func (cnwd *CalNthWeekDay) DayOfTheWeek() int {
 	_r := objc.Send[int](objref.IDOf(cnwd), objc.RegisterName("dayOfTheWeek"))
 	return _r
 }
 
-// WeekNumber wraps the corresponding Objective-C method.
+// WeekNumber returns the week number.
 func (cnwd *CalNthWeekDay) WeekNumber() int {
 	_r := objc.Send[int](objref.IDOf(cnwd), objc.RegisterName("weekNumber"))
 	return _r

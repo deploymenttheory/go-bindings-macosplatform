@@ -108,7 +108,7 @@ func (apn *AudioPlayerNode) PlayerTimeForNodeTime(nodeTime *AudioTime) *AudioTim
 	return AudioTimeFromID(_r)
 }
 
-// IsPlaying wraps the corresponding Objective-C method.
+// IsPlaying reports whether the object is playing.
 func (apn *AudioPlayerNode) IsPlaying() bool {
 	_r := objc.Send[bool](objref.IDOf(apn), objc.RegisterName("isPlaying"))
 	return _r

@@ -136,7 +136,7 @@ func (s *Selection) DrawForPageWithBoxActive(page *Page, box DisplayBox, active 
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("drawForPage:withBox:active:"), objref.IDOf(page), box, active)
 }
 
-// Pages wraps the corresponding Objective-C method.
+// Pages returns the pages.
 //
 // Pages returns the collection as a Go slice.
 func (s *Selection) Pages() []*Page {
@@ -144,7 +144,7 @@ func (s *Selection) Pages() []*Page {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Page { return PageFromID(_id) })
 }
 
-// AttributedString wraps the corresponding Objective-C method.
+// AttributedString returns the attributed string.
 func (s *Selection) AttributedString() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("attributedString"))
 	return obj.Wrap(_r)

@@ -54,25 +54,25 @@ func NewLengthFormatter() *LengthFormatter {
 	return lengthFormatterAdopt(_id)
 }
 
-// WithNumberFormatter sets the property and returns the receiver so calls can be chained.
+// WithNumberFormatter sets the number formatter.
 func (lf *LengthFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *LengthFormatter {
 	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 	return lf
 }
 
-// WithUnitStyle sets the property and returns the receiver so calls can be chained.
+// WithUnitStyle sets the unit style.
 func (lf *LengthFormatter) WithUnitStyle(unitStyle FormattingUnitStyle) *LengthFormatter {
 	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setUnitStyle:"), unitStyle)
 	return lf
 }
 
-// WithForPersonHeightUse sets the property and returns the receiver so calls can be chained.
+// WithForPersonHeightUse sets the for person height use.
 func (lf *LengthFormatter) WithForPersonHeightUse(forPersonHeightUse bool) *LengthFormatter {
 	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setForPersonHeightUse:"), forPersonHeightUse)
 	return lf
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (lf *LengthFormatter) WithScriptingProperties(scriptingProperties obj.Object) *LengthFormatter {
 	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return lf
@@ -116,19 +116,19 @@ func (lf *LengthFormatter) UnitStringFromMetersUsedUnit(numberInMeters float64) 
 	return _v, _out0
 }
 
-// NumberFormatter wraps the corresponding Objective-C method.
+// NumberFormatter returns the number formatter.
 func (lf *LengthFormatter) NumberFormatter() *NumberFormatter {
 	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("numberFormatter"))
 	return NumberFormatterFromID(_r)
 }
 
-// UnitStyle wraps the corresponding Objective-C method.
+// UnitStyle returns the unit style.
 func (lf *LengthFormatter) UnitStyle() FormattingUnitStyle {
 	_r := objc.Send[FormattingUnitStyle](objref.IDOf(lf), objc.RegisterName("unitStyle"))
 	return _r
 }
 
-// IsForPersonHeightUse wraps the corresponding Objective-C method.
+// IsForPersonHeightUse reports whether the object is for person height use.
 func (lf *LengthFormatter) IsForPersonHeightUse() bool {
 	_r := objc.Send[bool](objref.IDOf(lf), objc.RegisterName("isForPersonHeightUse"))
 	return _r

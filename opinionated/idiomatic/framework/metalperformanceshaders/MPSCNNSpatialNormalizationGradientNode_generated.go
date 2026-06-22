@@ -53,13 +53,13 @@ func NewCNNSpatialNormalizationGradientNodeWithSourceGradientSourceImageGradient
 	return cNNSpatialNormalizationGradientNodeAdopt(_id)
 }
 
-// WithKernelWidth sets the property and returns the receiver so calls can be chained.
+// WithKernelWidth sets the kernel width.
 func (csngn *CNNSpatialNormalizationGradientNode) WithKernelWidth(kernelWidth int) *CNNSpatialNormalizationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(csngn), objc.RegisterName("setKernelWidth:"), kernelWidth)
 	return csngn
 }
 
-// WithKernelHeight sets the property and returns the receiver so calls can be chained.
+// WithKernelHeight sets the kernel height.
 func (csngn *CNNSpatialNormalizationGradientNode) WithKernelHeight(kernelHeight int) *CNNSpatialNormalizationGradientNode {
 	objc.Send[objc.ID](objref.IDOf(csngn), objc.RegisterName("setKernelHeight:"), kernelHeight)
 	return csngn
@@ -89,13 +89,13 @@ func (csngn *CNNSpatialNormalizationGradientNode) WithLabel(label string) *CNNSp
 	return csngn
 }
 
-// KernelWidth wraps the corresponding Objective-C method.
+// KernelWidth returns the kernel width.
 func (csngn *CNNSpatialNormalizationGradientNode) KernelWidth() int {
 	_r := objc.Send[int](objref.IDOf(csngn), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
-// KernelHeight wraps the corresponding Objective-C method.
+// KernelHeight returns the kernel height.
 func (csngn *CNNSpatialNormalizationGradientNode) KernelHeight() int {
 	_r := objc.Send[int](objref.IDOf(csngn), objc.RegisterName("kernelHeight"))
 	return _r

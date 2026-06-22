@@ -70,7 +70,7 @@ func NewTransformRotateXOp() *TransformRotateXOp {
 	return transformRotateXOpAdopt(_id)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (trxo *TransformRotateXOp) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(trxo), objc.RegisterName("name"))
 	if _r == 0 {
@@ -79,7 +79,7 @@ func (trxo *TransformRotateXOp) Name() string {
 	return purego.GoString(_r)
 }
 
-// AnimatedValue wraps the corresponding Objective-C method.
+// AnimatedValue returns the animated value.
 func (trxo *TransformRotateXOp) AnimatedValue() *AnimatedScalar {
 	_r := objc.Send[objc.ID](objref.IDOf(trxo), objc.RegisterName("animatedValue"))
 	return AnimatedScalarFromID(_r)

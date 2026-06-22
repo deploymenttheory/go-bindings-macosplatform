@@ -14,12 +14,12 @@ func DefaultController() *FinderSyncController {
 	return FinderSyncControllerFromID(_r)
 }
 
-// ShowExtensionManagementInterface wraps the corresponding Objective-C method.
+// ShowExtensionManagementInterface shows extension management interface.
 func ShowExtensionManagementInterface() {
 	objc.Send[objc.ID](objc.ID(_class("FIFinderSyncController")), objc.RegisterName("showExtensionManagementInterface"))
 }
 
-// IsExtensionEnabled wraps the corresponding Objective-C method.
+// IsExtensionEnabled reports whether the object is extension enabled.
 func IsExtensionEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("FIFinderSyncController")), objc.RegisterName("isExtensionEnabled"))
 	return _r

@@ -156,67 +156,67 @@ func (mctbrm *MTRClusterThreadBorderRouterManagement) GetPendingDatasetRequestWi
 	}
 }
 
-// ReadAttributeBorderRouterNameWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBorderRouterNameWithParams reads attribute border router name with params.
 func (mctbrm *MTRClusterThreadBorderRouterManagement) ReadAttributeBorderRouterNameWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctbrm), objc.RegisterName("readAttributeBorderRouterNameWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBorderAgentIDWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBorderAgentIDWithParams reads attribute border agent ID with params.
 func (mctbrm *MTRClusterThreadBorderRouterManagement) ReadAttributeBorderAgentIDWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctbrm), objc.RegisterName("readAttributeBorderAgentIDWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeThreadVersionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeThreadVersionWithParams reads attribute thread version with params.
 func (mctbrm *MTRClusterThreadBorderRouterManagement) ReadAttributeThreadVersionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctbrm), objc.RegisterName("readAttributeThreadVersionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeInterfaceEnabledWithParams wraps the corresponding Objective-C method.
+// ReadAttributeInterfaceEnabledWithParams reads attribute interface enabled with params.
 func (mctbrm *MTRClusterThreadBorderRouterManagement) ReadAttributeInterfaceEnabledWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctbrm), objc.RegisterName("readAttributeInterfaceEnabledWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveDatasetTimestampWithParams wraps the corresponding Objective-C method.
+// ReadAttributeActiveDatasetTimestampWithParams reads attribute active dataset timestamp with params.
 func (mctbrm *MTRClusterThreadBorderRouterManagement) ReadAttributeActiveDatasetTimestampWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctbrm), objc.RegisterName("readAttributeActiveDatasetTimestampWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePendingDatasetTimestampWithParams wraps the corresponding Objective-C method.
+// ReadAttributePendingDatasetTimestampWithParams reads attribute pending dataset timestamp with params.
 func (mctbrm *MTRClusterThreadBorderRouterManagement) ReadAttributePendingDatasetTimestampWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctbrm), objc.RegisterName("readAttributePendingDatasetTimestampWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mctbrm *MTRClusterThreadBorderRouterManagement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctbrm), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mctbrm *MTRClusterThreadBorderRouterManagement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctbrm), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mctbrm *MTRClusterThreadBorderRouterManagement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctbrm), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mctbrm *MTRClusterThreadBorderRouterManagement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctbrm), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mctbrm *MTRClusterThreadBorderRouterManagement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctbrm), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

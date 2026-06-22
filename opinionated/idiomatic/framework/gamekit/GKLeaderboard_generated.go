@@ -90,13 +90,13 @@ func NewLeaderboardWithPlayers(players []*Player) *Leaderboard {
 	return leaderboardAdopt(_id)
 }
 
-// WithCategory sets the property and returns the receiver so calls can be chained.
+// WithCategory sets the category.
 func (l *Leaderboard) WithCategory(category string) *Leaderboard {
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setCategory:"), purego.NSString(category))
 	return l
 }
 
-// WithTimeScope sets the property and returns the receiver so calls can be chained.
+// WithTimeScope sets the time scope.
 func (l *Leaderboard) WithTimeScope(timeScope LeaderboardTimeScope) *Leaderboard {
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setTimeScope:"), timeScope)
 	return l
@@ -251,7 +251,7 @@ func (l *Leaderboard) LoadScores(ctx context.Context) (result obj.Object, err er
 	}
 }
 
-// Category wraps the corresponding Objective-C method.
+// Category returns the category.
 func (l *Leaderboard) Category() string {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("category"))
 	if _r == 0 {
@@ -260,7 +260,7 @@ func (l *Leaderboard) Category() string {
 	return purego.GoString(_r)
 }
 
-// TimeScope wraps the corresponding Objective-C method.
+// TimeScope returns the time scope.
 func (l *Leaderboard) TimeScope() LeaderboardTimeScope {
 	_r := objc.Send[LeaderboardTimeScope](objref.IDOf(l), objc.RegisterName("timeScope"))
 	return _r

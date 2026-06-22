@@ -96,7 +96,7 @@ func (wt *WindowTab) WithAccessoryView(accessoryView ViewProvider) *WindowTab {
 	return wt
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (wt *WindowTab) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(wt), objc.RegisterName("title"))
 	if _r == 0 {
@@ -105,13 +105,13 @@ func (wt *WindowTab) Title() string {
 	return purego.GoString(_r)
 }
 
-// AttributedTitle wraps the corresponding Objective-C method.
+// AttributedTitle returns the attributed title.
 func (wt *WindowTab) AttributedTitle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(wt), objc.RegisterName("attributedTitle"))
 	return obj.Wrap(_r)
 }
 
-// ToolTip wraps the corresponding Objective-C method.
+// ToolTip returns the tool tip.
 func (wt *WindowTab) ToolTip() string {
 	_r := objc.Send[objc.ID](objref.IDOf(wt), objc.RegisterName("toolTip"))
 	if _r == 0 {
@@ -120,7 +120,7 @@ func (wt *WindowTab) ToolTip() string {
 	return purego.GoString(_r)
 }
 
-// AccessoryView wraps the corresponding Objective-C method.
+// AccessoryView returns the accessory view.
 func (wt *WindowTab) AccessoryView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(wt), objc.RegisterName("accessoryView"))
 	return ViewFromID(_r)

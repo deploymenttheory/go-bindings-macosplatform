@@ -72,13 +72,13 @@ func NewMetadataQueryAttributeValueTuple() *MetadataQueryAttributeValueTuple {
 	return metadataQueryAttributeValueTupleAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (mqavt *MetadataQueryAttributeValueTuple) WithScriptingProperties(scriptingProperties obj.Object) *MetadataQueryAttributeValueTuple {
 	objc.Send[objc.ID](objref.IDOf(mqavt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return mqavt
 }
 
-// Attribute wraps the corresponding Objective-C method.
+// Attribute returns the attribute.
 func (mqavt *MetadataQueryAttributeValueTuple) Attribute() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mqavt), objc.RegisterName("attribute"))
 	if _r == 0 {
@@ -87,13 +87,13 @@ func (mqavt *MetadataQueryAttributeValueTuple) Attribute() string {
 	return purego.GoString(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mqavt *MetadataQueryAttributeValueTuple) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mqavt), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// Count wraps the corresponding Objective-C method.
+// Count returns the count.
 func (mqavt *MetadataQueryAttributeValueTuple) Count() int {
 	_r := objc.Send[int](objref.IDOf(mqavt), objc.RegisterName("count"))
 	return _r

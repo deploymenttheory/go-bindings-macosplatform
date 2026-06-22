@@ -77,19 +77,19 @@ func (a *Attitude) MultiplyByInverseOfAttitude(attitude *Attitude) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("multiplyByInverseOfAttitude:"), objref.IDOf(attitude))
 }
 
-// Roll wraps the corresponding Objective-C method.
+// Roll returns the roll.
 func (a *Attitude) Roll() float64 {
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("roll"))
 	return _r
 }
 
-// Pitch wraps the corresponding Objective-C method.
+// Pitch returns the pitch.
 func (a *Attitude) Pitch() float64 {
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("pitch"))
 	return _r
 }
 
-// Yaw wraps the corresponding Objective-C method.
+// Yaw returns the yaw.
 func (a *Attitude) Yaw() float64 {
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("yaw"))
 	return _r

@@ -96,7 +96,7 @@ func (pert *PredicateEditorRowTemplate) DisplayableSubpredicatesOfPredicate(pred
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// TemplateViews wraps the corresponding Objective-C method.
+// TemplateViews returns the template views.
 //
 // TemplateViews returns the collection as a Go slice.
 func (pert *PredicateEditorRowTemplate) TemplateViews() []*View {
@@ -104,7 +104,7 @@ func (pert *PredicateEditorRowTemplate) TemplateViews() []*View {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *View { return ViewFromID(_id) })
 }
 
-// LeftExpressions wraps the corresponding Objective-C method.
+// LeftExpressions returns the left expressions.
 //
 // LeftExpressions returns the collection as a Go slice.
 func (pert *PredicateEditorRowTemplate) LeftExpressions() []obj.Object {
@@ -112,7 +112,7 @@ func (pert *PredicateEditorRowTemplate) LeftExpressions() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// RightExpressions wraps the corresponding Objective-C method.
+// RightExpressions returns the right expressions.
 //
 // RightExpressions returns the collection as a Go slice.
 func (pert *PredicateEditorRowTemplate) RightExpressions() []obj.Object {
@@ -120,7 +120,7 @@ func (pert *PredicateEditorRowTemplate) RightExpressions() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Operators wraps the corresponding Objective-C method.
+// Operators returns the operators.
 //
 // Operators returns the collection as a Go slice.
 func (pert *PredicateEditorRowTemplate) Operators() []obj.Object {
@@ -128,13 +128,13 @@ func (pert *PredicateEditorRowTemplate) Operators() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Options wraps the corresponding Objective-C method.
+// Options returns the options.
 func (pert *PredicateEditorRowTemplate) Options() int {
 	_r := objc.Send[int](objref.IDOf(pert), objc.RegisterName("options"))
 	return _r
 }
 
-// CompoundTypes wraps the corresponding Objective-C method.
+// CompoundTypes returns the compound types.
 //
 // CompoundTypes returns the collection as a Go slice.
 func (pert *PredicateEditorRowTemplate) CompoundTypes() []obj.Object {

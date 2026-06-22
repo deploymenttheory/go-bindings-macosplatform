@@ -77,13 +77,13 @@ func (vd *VertexDescriptor) Reset() {
 	objc.Send[objc.ID](objref.IDOf(vd), objc.RegisterName("reset"))
 }
 
-// Layouts wraps the corresponding Objective-C method.
+// Layouts returns the layouts.
 func (vd *VertexDescriptor) Layouts() *VertexBufferLayoutDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(vd), objc.RegisterName("layouts"))
 	return VertexBufferLayoutDescriptorArrayFromID(_r)
 }
 
-// Attributes wraps the corresponding Objective-C method.
+// Attributes returns the attributes.
 func (vd *VertexDescriptor) Attributes() *VertexAttributeDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(vd), objc.RegisterName("attributes"))
 	return VertexAttributeDescriptorArrayFromID(_r)

@@ -51,7 +51,7 @@ func NewCategorySample() *CategorySample {
 	return categorySampleAdopt(_id)
 }
 
-// CategoryType wraps the corresponding Objective-C method.
+// CategoryType returns the category type.
 func (cs *CategorySample) CategoryType() *CategoryType {
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("categoryType"))
 	return CategoryTypeFromID(_r)

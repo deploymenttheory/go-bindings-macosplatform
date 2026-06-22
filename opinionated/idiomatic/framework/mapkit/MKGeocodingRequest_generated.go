@@ -112,19 +112,19 @@ func (gr *GeocodingRequest) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("cancel"))
 }
 
-// IsCancelled wraps the corresponding Objective-C method.
+// IsCancelled reports whether the object is cancelled.
 func (gr *GeocodingRequest) IsCancelled() bool {
 	_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("isCancelled"))
 	return _r
 }
 
-// IsLoading wraps the corresponding Objective-C method.
+// IsLoading reports whether the object is loading.
 func (gr *GeocodingRequest) IsLoading() bool {
 	_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("isLoading"))
 	return _r
 }
 
-// AddressString wraps the corresponding Objective-C method.
+// AddressString returns the address string.
 func (gr *GeocodingRequest) AddressString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("addressString"))
 	if _r == 0 {
@@ -133,7 +133,7 @@ func (gr *GeocodingRequest) AddressString() string {
 	return purego.GoString(_r)
 }
 
-// PreferredLocale wraps the corresponding Objective-C method.
+// PreferredLocale returns the preferred locale.
 func (gr *GeocodingRequest) PreferredLocale() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("preferredLocale"))
 	return obj.Wrap(_r)

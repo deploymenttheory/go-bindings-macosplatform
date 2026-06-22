@@ -50,25 +50,25 @@ func NewMTRTestClusterClusterTestNullableOptionalResponseParams() *MTRTestCluste
 	return mTRTestClusterClusterTestNullableOptionalResponseParamsAdopt(_id)
 }
 
-// WithWasPresent sets the property and returns the receiver so calls can be chained.
+// WithWasPresent sets the was present.
 func (mtcctnorp *MTRTestClusterClusterTestNullableOptionalResponseParams) WithWasPresent(wasPresent obj.Object) *MTRTestClusterClusterTestNullableOptionalResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mtcctnorp), objc.RegisterName("setWasPresent:"), objref.IDOf(wasPresent))
 	return mtcctnorp
 }
 
-// WithWasNull sets the property and returns the receiver so calls can be chained.
+// WithWasNull sets the was null.
 func (mtcctnorp *MTRTestClusterClusterTestNullableOptionalResponseParams) WithWasNull(wasNull obj.Object) *MTRTestClusterClusterTestNullableOptionalResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mtcctnorp), objc.RegisterName("setWasNull:"), objref.IDOf(wasNull))
 	return mtcctnorp
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mtcctnorp *MTRTestClusterClusterTestNullableOptionalResponseParams) WithValue(value obj.Object) *MTRTestClusterClusterTestNullableOptionalResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mtcctnorp), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mtcctnorp
 }
 
-// WithOriginalValue sets the property and returns the receiver so calls can be chained.
+// WithOriginalValue sets the original value.
 func (mtcctnorp *MTRTestClusterClusterTestNullableOptionalResponseParams) WithOriginalValue(originalValue obj.Object) *MTRTestClusterClusterTestNullableOptionalResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mtcctnorp), objc.RegisterName("setOriginalValue:"), objref.IDOf(originalValue))
 	return mtcctnorp

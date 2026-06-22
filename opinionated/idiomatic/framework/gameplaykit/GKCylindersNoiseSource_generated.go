@@ -58,7 +58,7 @@ func (cns *CylindersNoiseSource) WithFrequency(frequency float64) *CylindersNois
 	return cns
 }
 
-// Frequency wraps the corresponding Objective-C method.
+// Frequency returns the frequency.
 func (cns *CylindersNoiseSource) Frequency() float64 {
 	_r := objc.Send[float64](objref.IDOf(cns), objc.RegisterName("frequency"))
 	return _r

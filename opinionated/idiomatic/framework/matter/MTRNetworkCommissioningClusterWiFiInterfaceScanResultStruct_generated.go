@@ -66,73 +66,73 @@ func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) S
 	return rt.Description(objref.IDOf(mnccwfisrs))
 }
 
-// WithSecurity sets the property and returns the receiver so calls can be chained.
+// WithSecurity sets the security.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithSecurity(security obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
 	objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("setSecurity:"), objref.IDOf(security))
 	return mnccwfisrs
 }
 
-// WithSsid sets the property and returns the receiver so calls can be chained.
+// WithSsid sets the ssid.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithSsid(ssid obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
 	objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("setSsid:"), objref.IDOf(ssid))
 	return mnccwfisrs
 }
 
-// WithBssid sets the property and returns the receiver so calls can be chained.
+// WithBssid sets the bssid.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithBssid(bssid obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
 	objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("setBssid:"), objref.IDOf(bssid))
 	return mnccwfisrs
 }
 
-// WithChannel sets the property and returns the receiver so calls can be chained.
+// WithChannel sets the channel.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithChannel(channel obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
 	objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 	return mnccwfisrs
 }
 
-// WithWiFiBand sets the property and returns the receiver so calls can be chained.
+// WithWiFiBand sets the wi fi band.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithWiFiBand(wiFiBand obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
 	objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("setWiFiBand:"), objref.IDOf(wiFiBand))
 	return mnccwfisrs
 }
 
-// WithRssi sets the property and returns the receiver so calls can be chained.
+// WithRssi sets the rssi.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WithRssi(rssi obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
 	objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("setRssi:"), objref.IDOf(rssi))
 	return mnccwfisrs
 }
 
-// Security wraps the corresponding Objective-C method.
+// Security returns the security.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Security() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("security"))
 	return obj.Wrap(_r)
 }
 
-// Ssid wraps the corresponding Objective-C method.
+// Ssid returns the ssid.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Ssid() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("ssid"))
 	return obj.Wrap(_r)
 }
 
-// Bssid wraps the corresponding Objective-C method.
+// Bssid returns the bssid.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Bssid() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("bssid"))
 	return obj.Wrap(_r)
 }
 
-// Channel wraps the corresponding Objective-C method.
+// Channel returns the channel.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Channel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("channel"))
 	return obj.Wrap(_r)
 }
 
-// WiFiBand wraps the corresponding Objective-C method.
+// WiFiBand returns the wi fi band.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) WiFiBand() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("wiFiBand"))
 	return obj.Wrap(_r)
 }
 
-// Rssi wraps the corresponding Objective-C method.
+// Rssi returns the rssi.
 func (mnccwfisrs *MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct) Rssi() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccwfisrs), objc.RegisterName("rssi"))
 	return obj.Wrap(_r)

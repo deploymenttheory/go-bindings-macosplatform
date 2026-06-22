@@ -140,31 +140,31 @@ func (t *Texture) TexelDataWithBottomLeftOriginAtMipLevelCreate(level int, creat
 	return obj.Wrap(_r)
 }
 
-// RowStride wraps the corresponding Objective-C method.
+// RowStride returns the row stride.
 func (t *Texture) RowStride() int {
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("rowStride"))
 	return _r
 }
 
-// ChannelCount wraps the corresponding Objective-C method.
+// ChannelCount returns the channel count.
 func (t *Texture) ChannelCount() int {
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("channelCount"))
 	return _r
 }
 
-// MipLevelCount wraps the corresponding Objective-C method.
+// MipLevelCount returns the mip level count.
 func (t *Texture) MipLevelCount() int {
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("mipLevelCount"))
 	return _r
 }
 
-// ChannelEncoding wraps the corresponding Objective-C method.
+// ChannelEncoding returns the channel encoding.
 func (t *Texture) ChannelEncoding() TextureChannelEncoding {
 	_r := objc.Send[TextureChannelEncoding](objref.IDOf(t), objc.RegisterName("channelEncoding"))
 	return _r
 }
 
-// IsCube wraps the corresponding Objective-C method.
+// IsCube reports whether the object is cube.
 func (t *Texture) IsCube() bool {
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isCube"))
 	return _r

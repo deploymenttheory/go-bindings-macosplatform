@@ -70,13 +70,13 @@ func NewMTRAccountLoginClusterLoggedOutEvent() *MTRAccountLoginClusterLoggedOutE
 	return mTRAccountLoginClusterLoggedOutEventAdopt(_id)
 }
 
-// WithNode sets the property and returns the receiver so calls can be chained.
+// WithNode sets the node.
 func (malcloe *MTRAccountLoginClusterLoggedOutEvent) WithNode(node obj.Object) *MTRAccountLoginClusterLoggedOutEvent {
 	objc.Send[objc.ID](objref.IDOf(malcloe), objc.RegisterName("setNode:"), objref.IDOf(node))
 	return malcloe
 }
 
-// Node wraps the corresponding Objective-C method.
+// Node returns the node.
 func (malcloe *MTRAccountLoginClusterLoggedOutEvent) Node() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(malcloe), objc.RegisterName("node"))
 	return obj.Wrap(_r)

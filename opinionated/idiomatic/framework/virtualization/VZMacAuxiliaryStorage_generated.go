@@ -94,7 +94,7 @@ func NewMACAuxiliaryStorageWithContentsOfURL(uRL string) *MacAuxiliaryStorage {
 	return macAuxiliaryStorageAdopt(_id)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (mas *MacAuxiliaryStorage) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("URL"))
 	return obj.Wrap(_r)

@@ -79,13 +79,13 @@ func (or *OverlayRenderer) SetNeedsDisplay() {
 	objc.Send[objc.ID](objref.IDOf(or), objc.RegisterName("setNeedsDisplay"))
 }
 
-// Alpha wraps the corresponding Objective-C method.
+// Alpha returns the alpha.
 func (or *OverlayRenderer) Alpha() float64 {
 	_r := objc.Send[float64](objref.IDOf(or), objc.RegisterName("alpha"))
 	return _r
 }
 
-// ContentScaleFactor wraps the corresponding Objective-C method.
+// ContentScaleFactor returns the content scale factor.
 func (or *OverlayRenderer) ContentScaleFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(or), objc.RegisterName("contentScaleFactor"))
 	return _r

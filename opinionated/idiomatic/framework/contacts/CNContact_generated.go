@@ -95,13 +95,13 @@ func (c *Contact) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// ContactType wraps the corresponding Objective-C method.
+// ContactType returns the contact type.
 func (c *Contact) ContactType() ContactType {
 	_r := objc.Send[ContactType](objref.IDOf(c), objc.RegisterName("contactType"))
 	return _r
 }
 
-// NamePrefix wraps the corresponding Objective-C method.
+// NamePrefix returns the name prefix.
 func (c *Contact) NamePrefix() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("namePrefix"))
 	if _r == 0 {
@@ -110,7 +110,7 @@ func (c *Contact) NamePrefix() string {
 	return purego.GoString(_r)
 }
 
-// GivenName wraps the corresponding Objective-C method.
+// GivenName returns the given name.
 func (c *Contact) GivenName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("givenName"))
 	if _r == 0 {
@@ -119,7 +119,7 @@ func (c *Contact) GivenName() string {
 	return purego.GoString(_r)
 }
 
-// MiddleName wraps the corresponding Objective-C method.
+// MiddleName returns the middle name.
 func (c *Contact) MiddleName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("middleName"))
 	if _r == 0 {
@@ -128,7 +128,7 @@ func (c *Contact) MiddleName() string {
 	return purego.GoString(_r)
 }
 
-// FamilyName wraps the corresponding Objective-C method.
+// FamilyName returns the family name.
 func (c *Contact) FamilyName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("familyName"))
 	if _r == 0 {
@@ -137,7 +137,7 @@ func (c *Contact) FamilyName() string {
 	return purego.GoString(_r)
 }
 
-// PreviousFamilyName wraps the corresponding Objective-C method.
+// PreviousFamilyName returns the previous family name.
 func (c *Contact) PreviousFamilyName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("previousFamilyName"))
 	if _r == 0 {
@@ -146,7 +146,7 @@ func (c *Contact) PreviousFamilyName() string {
 	return purego.GoString(_r)
 }
 
-// NameSuffix wraps the corresponding Objective-C method.
+// NameSuffix returns the name suffix.
 func (c *Contact) NameSuffix() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("nameSuffix"))
 	if _r == 0 {
@@ -155,7 +155,7 @@ func (c *Contact) NameSuffix() string {
 	return purego.GoString(_r)
 }
 
-// Nickname wraps the corresponding Objective-C method.
+// Nickname returns the nickname.
 func (c *Contact) Nickname() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("nickname"))
 	if _r == 0 {
@@ -164,7 +164,7 @@ func (c *Contact) Nickname() string {
 	return purego.GoString(_r)
 }
 
-// OrganizationName wraps the corresponding Objective-C method.
+// OrganizationName returns the organization name.
 func (c *Contact) OrganizationName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("organizationName"))
 	if _r == 0 {
@@ -173,7 +173,7 @@ func (c *Contact) OrganizationName() string {
 	return purego.GoString(_r)
 }
 
-// DepartmentName wraps the corresponding Objective-C method.
+// DepartmentName returns the department name.
 func (c *Contact) DepartmentName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("departmentName"))
 	if _r == 0 {
@@ -182,7 +182,7 @@ func (c *Contact) DepartmentName() string {
 	return purego.GoString(_r)
 }
 
-// JobTitle wraps the corresponding Objective-C method.
+// JobTitle returns the job title.
 func (c *Contact) JobTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("jobTitle"))
 	if _r == 0 {
@@ -191,7 +191,7 @@ func (c *Contact) JobTitle() string {
 	return purego.GoString(_r)
 }
 
-// PhoneticGivenName wraps the corresponding Objective-C method.
+// PhoneticGivenName returns the phonetic given name.
 func (c *Contact) PhoneticGivenName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("phoneticGivenName"))
 	if _r == 0 {
@@ -200,7 +200,7 @@ func (c *Contact) PhoneticGivenName() string {
 	return purego.GoString(_r)
 }
 
-// PhoneticMiddleName wraps the corresponding Objective-C method.
+// PhoneticMiddleName returns the phonetic middle name.
 func (c *Contact) PhoneticMiddleName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("phoneticMiddleName"))
 	if _r == 0 {
@@ -209,7 +209,7 @@ func (c *Contact) PhoneticMiddleName() string {
 	return purego.GoString(_r)
 }
 
-// PhoneticFamilyName wraps the corresponding Objective-C method.
+// PhoneticFamilyName returns the phonetic family name.
 func (c *Contact) PhoneticFamilyName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("phoneticFamilyName"))
 	if _r == 0 {
@@ -218,7 +218,7 @@ func (c *Contact) PhoneticFamilyName() string {
 	return purego.GoString(_r)
 }
 
-// PhoneticOrganizationName wraps the corresponding Objective-C method.
+// PhoneticOrganizationName returns the phonetic organization name.
 func (c *Contact) PhoneticOrganizationName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("phoneticOrganizationName"))
 	if _r == 0 {
@@ -227,7 +227,7 @@ func (c *Contact) PhoneticOrganizationName() string {
 	return purego.GoString(_r)
 }
 
-// Note wraps the corresponding Objective-C method.
+// Note returns the note.
 func (c *Contact) Note() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("note"))
 	if _r == 0 {
@@ -236,13 +236,13 @@ func (c *Contact) Note() string {
 	return purego.GoString(_r)
 }
 
-// ImageData wraps the corresponding Objective-C method.
+// ImageData returns the image data.
 func (c *Contact) ImageData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("imageData"))
 	return obj.Wrap(_r)
 }
 
-// ThumbnailImageData wraps the corresponding Objective-C method.
+// ThumbnailImageData returns the thumbnail image data.
 func (c *Contact) ThumbnailImageData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("thumbnailImageData"))
 	return obj.Wrap(_r)
@@ -254,7 +254,7 @@ func (c *Contact) ImageDataAvailable() bool {
 	return _r
 }
 
-// PhoneNumbers wraps the corresponding Objective-C method.
+// PhoneNumbers returns the phone numbers.
 //
 // PhoneNumbers returns the collection as a Go slice.
 func (c *Contact) PhoneNumbers() []obj.Object {
@@ -262,7 +262,7 @@ func (c *Contact) PhoneNumbers() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// EmailAddresses wraps the corresponding Objective-C method.
+// EmailAddresses returns the email addresses.
 //
 // EmailAddresses returns the collection as a Go slice.
 func (c *Contact) EmailAddresses() []obj.Object {
@@ -270,7 +270,7 @@ func (c *Contact) EmailAddresses() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// PostalAddresses wraps the corresponding Objective-C method.
+// PostalAddresses returns the postal addresses.
 //
 // PostalAddresses returns the collection as a Go slice.
 func (c *Contact) PostalAddresses() []obj.Object {
@@ -278,7 +278,7 @@ func (c *Contact) PostalAddresses() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// URLAddresses wraps the corresponding Objective-C method.
+// URLAddresses returns the URL addresses.
 //
 // URLAddresses returns the collection as a Go slice.
 func (c *Contact) URLAddresses() []obj.Object {
@@ -286,7 +286,7 @@ func (c *Contact) URLAddresses() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// ContactRelations wraps the corresponding Objective-C method.
+// ContactRelations returns the contact relations.
 //
 // ContactRelations returns the collection as a Go slice.
 func (c *Contact) ContactRelations() []obj.Object {
@@ -294,7 +294,7 @@ func (c *Contact) ContactRelations() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SocialProfiles wraps the corresponding Objective-C method.
+// SocialProfiles returns the social profiles.
 //
 // SocialProfiles returns the collection as a Go slice.
 func (c *Contact) SocialProfiles() []obj.Object {
@@ -302,7 +302,7 @@ func (c *Contact) SocialProfiles() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// InstantMessageAddresses wraps the corresponding Objective-C method.
+// InstantMessageAddresses returns the instant message addresses.
 //
 // InstantMessageAddresses returns the collection as a Go slice.
 func (c *Contact) InstantMessageAddresses() []obj.Object {

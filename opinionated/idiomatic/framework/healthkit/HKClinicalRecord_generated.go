@@ -51,7 +51,7 @@ func NewClinicalRecord() *ClinicalRecord {
 	return clinicalRecordAdopt(_id)
 }
 
-// ClinicalType wraps the corresponding Objective-C method.
+// ClinicalType returns the clinical type.
 func (cr *ClinicalRecord) ClinicalType() *ClinicalType {
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("clinicalType"))
 	return ClinicalTypeFromID(_r)

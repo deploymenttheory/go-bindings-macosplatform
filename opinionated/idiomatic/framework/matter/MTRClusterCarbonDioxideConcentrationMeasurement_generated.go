@@ -51,97 +51,97 @@ func NewMTRClusterCarbonDioxideConcentrationMeasurementWithDeviceEndpointIDQueue
 	return mTRClusterCarbonDioxideConcentrationMeasurementAdopt(_id)
 }
 
-// ReadAttributeMeasuredValueWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMeasuredValueWithParams reads attribute measured value with params.
 func (mccdcm *MTRClusterCarbonDioxideConcentrationMeasurement) ReadAttributeMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccdcm), objc.RegisterName("readAttributeMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinMeasuredValueWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMinMeasuredValueWithParams reads attribute min measured value with params.
 func (mccdcm *MTRClusterCarbonDioxideConcentrationMeasurement) ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccdcm), objc.RegisterName("readAttributeMinMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxMeasuredValueWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMaxMeasuredValueWithParams reads attribute max measured value with params.
 func (mccdcm *MTRClusterCarbonDioxideConcentrationMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccdcm), objc.RegisterName("readAttributeMaxMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePeakMeasuredValueWithParams wraps the corresponding Objective-C method.
+// ReadAttributePeakMeasuredValueWithParams reads attribute peak measured value with params.
 func (mccdcm *MTRClusterCarbonDioxideConcentrationMeasurement) ReadAttributePeakMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccdcm), objc.RegisterName("readAttributePeakMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePeakMeasuredValueWindowWithParams wraps the corresponding Objective-C method.
+// ReadAttributePeakMeasuredValueWindowWithParams reads attribute peak measured value window with params.
 func (mccdcm *MTRClusterCarbonDioxideConcentrationMeasurement) ReadAttributePeakMeasuredValueWindowWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccdcm), objc.RegisterName("readAttributePeakMeasuredValueWindowWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAverageMeasuredValueWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAverageMeasuredValueWithParams reads attribute average measured value with params.
 func (mccdcm *MTRClusterCarbonDioxideConcentrationMeasurement) ReadAttributeAverageMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccdcm), objc.RegisterName("readAttributeAverageMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAverageMeasuredValueWindowWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAverageMeasuredValueWindowWithParams reads attribute average measured value window with params.
 func (mccdcm *MTRClusterCarbonDioxideConcentrationMeasurement) ReadAttributeAverageMeasuredValueWindowWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccdcm), objc.RegisterName("readAttributeAverageMeasuredValueWindowWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeUncertaintyWithParams wraps the corresponding Objective-C method.
+// ReadAttributeUncertaintyWithParams reads attribute uncertainty with params.
 func (mccdcm *MTRClusterCarbonDioxideConcentrationMeasurement) ReadAttributeUncertaintyWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccdcm), objc.RegisterName("readAttributeUncertaintyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMeasurementUnitWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMeasurementUnitWithParams reads attribute measurement unit with params.
 func (mccdcm *MTRClusterCarbonDioxideConcentrationMeasurement) ReadAttributeMeasurementUnitWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccdcm), objc.RegisterName("readAttributeMeasurementUnitWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMeasurementMediumWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMeasurementMediumWithParams reads attribute measurement medium with params.
 func (mccdcm *MTRClusterCarbonDioxideConcentrationMeasurement) ReadAttributeMeasurementMediumWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccdcm), objc.RegisterName("readAttributeMeasurementMediumWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeLevelValueWithParams wraps the corresponding Objective-C method.
+// ReadAttributeLevelValueWithParams reads attribute level value with params.
 func (mccdcm *MTRClusterCarbonDioxideConcentrationMeasurement) ReadAttributeLevelValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccdcm), objc.RegisterName("readAttributeLevelValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mccdcm *MTRClusterCarbonDioxideConcentrationMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccdcm), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mccdcm *MTRClusterCarbonDioxideConcentrationMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccdcm), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mccdcm *MTRClusterCarbonDioxideConcentrationMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccdcm), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mccdcm *MTRClusterCarbonDioxideConcentrationMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccdcm), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mccdcm *MTRClusterCarbonDioxideConcentrationMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccdcm), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

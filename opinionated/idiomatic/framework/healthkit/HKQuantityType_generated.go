@@ -57,7 +57,7 @@ func (qt *QuantityType) IsCompatibleWithUnit(unit *Unit) bool {
 	return _r
 }
 
-// AggregationStyle wraps the corresponding Objective-C method.
+// AggregationStyle returns the aggregation style.
 func (qt *QuantityType) AggregationStyle() QuantityAggregationStyle {
 	_r := objc.Send[QuantityAggregationStyle](objref.IDOf(qt), objc.RegisterName("aggregationStyle"))
 	return _r

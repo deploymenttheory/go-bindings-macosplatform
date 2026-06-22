@@ -56,7 +56,55 @@ func buildMethods(
 		seenMethod[e.goName] = true
 		methods = append(methods, *e)
 	}
+	stripGetterPrefixes(methods)
 	return methods
+}
+
+// stripGetterPrefixes renames pure accessors so they drop a leading "Get",
+// following Effective Go's getter convention (a getter for x is named X, not
+// GetX). It runs as a second pass over the fully de-duplicated method set so the
+// complete set of names is known: a strip is applied only when the shortened name
+// is a valid exported identifier that is not already taken by another method or
+// reserved for a promoted root method, which guarantees the rename never collides
+// or displaces a genuine method. Buffer-filling Get methods take output
+// parameters, so plainDocKind classifies them as actions, not getters, and they
+// keep their name. The wrapper dispatches by Objective-C selector, so this is a
+// Go-facing rename only.
+func stripGetterPrefixes(methods []methodEntry) {
+	taken := make(map[string]bool, len(methods))
+	for _, me := range methods {
+		taken[me.goName] = true
+	}
+	for i := range methods {
+		stripped, ok := strippedGetterName(methods[i])
+		if !ok || taken[stripped] || isReservedMemberName(stripped) {
+			continue
+		}
+		taken[stripped] = true
+		methods[i].goName = stripped
+	}
+}
+
+// strippedGetterName returns the method's name with a leading "Get" removed when
+// the method is a pure accessor — the no-argument, non-error, value-returning
+// shape plainDocKind treats as a getter. The remainder must still be an exported
+// identifier (begin with an upper-case ASCII letter), otherwise the original name
+// is kept. Plain string operations only — no regular expressions.
+func strippedGetterName(me methodEntry) (string, bool) {
+	if me.kind != kindPlain {
+		return "", false
+	}
+	if k := plainDocKind(me); k != docGetter && k != docBoolGetter {
+		return "", false
+	}
+	rest, ok := strings.CutPrefix(me.goName, "Get")
+	if !ok || rest == "" {
+		return "", false
+	}
+	if c := rest[0]; c < 'A' || c > 'Z' {
+		return "", false
+	}
+	return rest, true
 }
 
 // instanceBridgeable mirrors the raw emitter's isMethodBridgeable for instance
@@ -694,7 +742,7 @@ func writePlainMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 	}
 
 	out, err := render.Method(view.Method{
-		DocComment: docLeadKind(me.goName, me.doc, "wraps the corresponding Objective-C method.", plainDocKind(me)),
+		DocComment: docLeadKind(me.goName, me.doc, synthFallback(me.goName, plainDocKind(me)), plainDocKind(me)),
 		Recv:       recv,
 		GoName:     me.goName,
 		ParamStr:   strings.Join(paramParts, ", "),
@@ -846,7 +894,7 @@ func writeAsyncMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 			DocComment: docLead(
 				me.goName,
 				me.doc,
-				"wraps the corresponding Objective-C method.",
+				synthFallback(me.goName, docMethod),
 			),
 			Recv:          recv,
 			GoName:        me.goName,
@@ -875,7 +923,7 @@ func writeAsyncMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 		resultConvExpr = fmt.Sprintf("obj.Wrap(_p%d)", ri)
 	}
 	out, err := render.AsyncMethod(view.AsyncMethod{
-		DocComment:     docLead(me.goName, me.doc, "wraps the corresponding Objective-C method."),
+		DocComment:     docLead(me.goName, me.doc, synthFallback(me.goName, docMethod)),
 		Recv:           recv,
 		GoName:         me.goName,
 		ParamStr:       strings.Join(paramParts, ", "),
@@ -894,7 +942,7 @@ func writeAsyncMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 
 func writeBoolNSErrorMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 	out, err := render.BoolNSErrorMethod(view.BoolNSErrorMethod{
-		DocComment: docLead(me.goName, me.doc, "wraps the corresponding Objective-C method."),
+		DocComment: docLead(me.goName, me.doc, synthFallback(me.goName, docMethod)),
 		Recv:       recv,
 		GoName:     me.goName,
 		RecvExpr:   recvExpr,
@@ -912,7 +960,7 @@ func writeSliceMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 	conv := fmt.Sprintf(me.sliceConvFmt, "_id")
 	convClosure := fmt.Sprintf("func(_id objc.ID) %s { return %s }", me.sliceElemGoType, conv)
 	out, err := render.SliceMethod(view.SliceMethod{
-		DocComment:  docLeadKind(me.goName, me.doc, "wraps the corresponding Objective-C method.", docGetter),
+		DocComment:  docLeadKind(me.goName, me.doc, synthFallback(me.goName, docGetter), docGetter),
 		Recv:        recv,
 		GoName:      me.goName,
 		RecvExpr:    recvExpr,

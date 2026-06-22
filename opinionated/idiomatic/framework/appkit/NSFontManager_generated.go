@@ -78,7 +78,7 @@ func (fm *FontManager) WithEnabled(enabled bool) *FontManager {
 	return fm
 }
 
-// WithDelegate sets the property and returns the receiver so calls can be chained.
+// WithDelegate sets the delegate.
 func (fm *FontManager) WithDelegate(delegate obj.Object) *FontManager {
 	objc.Send[objc.ID](objref.IDOf(fm), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return fm
@@ -216,24 +216,24 @@ func (fm *FontManager) FontDescriptorsInCollection(collectionNames string) obj.O
 	return obj.Wrap(_r)
 }
 
-// AddCollectionOptions wraps the corresponding Objective-C method.
+// AddCollectionOptions adds collection options.
 func (fm *FontManager) AddCollectionOptions(collectionName string, collectionOptions FontCollectionOptions) bool {
 	_r := objc.Send[bool](objref.IDOf(fm), objc.RegisterName("addCollection:options:"), purego.NSString(collectionName), collectionOptions)
 	return _r
 }
 
-// RemoveCollection wraps the corresponding Objective-C method.
+// RemoveCollection removes collection.
 func (fm *FontManager) RemoveCollection(collectionName string) bool {
 	_r := objc.Send[bool](objref.IDOf(fm), objc.RegisterName("removeCollection:"), purego.NSString(collectionName))
 	return _r
 }
 
-// AddFontDescriptorsToCollection wraps the corresponding Objective-C method.
+// AddFontDescriptorsToCollection adds font descriptors to collection.
 func (fm *FontManager) AddFontDescriptorsToCollection(descriptors obj.Object, collectionName string) {
 	objc.Send[objc.ID](objref.IDOf(fm), objc.RegisterName("addFontDescriptors:toCollection:"), objref.IDOf(descriptors), purego.NSString(collectionName))
 }
 
-// RemoveFontDescriptorFromCollection wraps the corresponding Objective-C method.
+// RemoveFontDescriptorFromCollection removes font descriptor from collection.
 func (fm *FontManager) RemoveFontDescriptorFromCollection(descriptor *FontDescriptor, collection string) {
 	objc.Send[objc.ID](objref.IDOf(fm), objc.RegisterName("removeFontDescriptor:fromCollection:"), objref.IDOf(descriptor), purego.NSString(collection))
 }
@@ -244,19 +244,19 @@ func (fm *FontManager) ConvertFontTraits(traits FontTraitMask) FontTraitMask {
 	return _r
 }
 
-// IsMultiple wraps the corresponding Objective-C method.
+// IsMultiple reports whether the object is multiple.
 func (fm *FontManager) IsMultiple() bool {
 	_r := objc.Send[bool](objref.IDOf(fm), objc.RegisterName("isMultiple"))
 	return _r
 }
 
-// SelectedFont wraps the corresponding Objective-C method.
+// SelectedFont returns the selected font.
 func (fm *FontManager) SelectedFont() *Font {
 	_r := objc.Send[objc.ID](objref.IDOf(fm), objc.RegisterName("selectedFont"))
 	return FontFromID(_r)
 }
 
-// AvailableFonts wraps the corresponding Objective-C method.
+// AvailableFonts returns the available fonts.
 //
 // AvailableFonts returns the collection as a Go slice.
 func (fm *FontManager) AvailableFonts() []string {
@@ -264,7 +264,7 @@ func (fm *FontManager) AvailableFonts() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// AvailableFontFamilies wraps the corresponding Objective-C method.
+// AvailableFontFamilies returns the available font families.
 //
 // AvailableFontFamilies returns the collection as a Go slice.
 func (fm *FontManager) AvailableFontFamilies() []string {
@@ -272,31 +272,31 @@ func (fm *FontManager) AvailableFontFamilies() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// IsEnabled wraps the corresponding Objective-C method.
+// IsEnabled reports whether the object is enabled.
 func (fm *FontManager) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(fm), objc.RegisterName("isEnabled"))
 	return _r
 }
 
-// Delegate wraps the corresponding Objective-C method.
+// Delegate returns the delegate.
 func (fm *FontManager) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fm), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
-// CollectionNames wraps the corresponding Objective-C method.
+// CollectionNames returns the collection names.
 func (fm *FontManager) CollectionNames() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fm), objc.RegisterName("collectionNames"))
 	return obj.Wrap(_r)
 }
 
-// CurrentFontAction wraps the corresponding Objective-C method.
+// CurrentFontAction returns the current font action.
 func (fm *FontManager) CurrentFontAction() FontAction {
 	_r := objc.Send[FontAction](objref.IDOf(fm), objc.RegisterName("currentFontAction"))
 	return _r
 }
 
-// Target wraps the corresponding Objective-C method.
+// Target returns the target.
 func (fm *FontManager) Target() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fm), objc.RegisterName("target"))
 	return obj.Wrap(_r)

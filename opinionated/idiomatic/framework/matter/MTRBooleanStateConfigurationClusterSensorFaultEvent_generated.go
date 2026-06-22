@@ -70,13 +70,13 @@ func NewMTRBooleanStateConfigurationClusterSensorFaultEvent() *MTRBooleanStateCo
 	return mTRBooleanStateConfigurationClusterSensorFaultEventAdopt(_id)
 }
 
-// WithSensorFault sets the property and returns the receiver so calls can be chained.
+// WithSensorFault sets the sensor fault.
 func (mbsccsfe *MTRBooleanStateConfigurationClusterSensorFaultEvent) WithSensorFault(sensorFault obj.Object) *MTRBooleanStateConfigurationClusterSensorFaultEvent {
 	objc.Send[objc.ID](objref.IDOf(mbsccsfe), objc.RegisterName("setSensorFault:"), objref.IDOf(sensorFault))
 	return mbsccsfe
 }
 
-// SensorFault wraps the corresponding Objective-C method.
+// SensorFault returns the sensor fault.
 func (mbsccsfe *MTRBooleanStateConfigurationClusterSensorFaultEvent) SensorFault() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbsccsfe), objc.RegisterName("sensorFault"))
 	return obj.Wrap(_r)

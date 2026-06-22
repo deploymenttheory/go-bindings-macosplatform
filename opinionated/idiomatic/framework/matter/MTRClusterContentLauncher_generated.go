@@ -111,53 +111,53 @@ func (mccl *MTRClusterContentLauncher) LaunchURLWithParamsExpectedValuesExpected
 	}
 }
 
-// ReadAttributeAcceptHeaderWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptHeaderWithParams reads attribute accept header with params.
 func (mccl *MTRClusterContentLauncher) ReadAttributeAcceptHeaderWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("readAttributeAcceptHeaderWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeSupportedStreamingProtocolsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSupportedStreamingProtocolsWithParams reads attribute supported streaming protocols with params.
 func (mccl *MTRClusterContentLauncher) ReadAttributeSupportedStreamingProtocolsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("readAttributeSupportedStreamingProtocolsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueInterval writes attribute supported streaming protocols with value expected value interval.
 func (mccl *MTRClusterContentLauncher) WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("writeAttributeSupportedStreamingProtocolsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueIntervalParams writes attribute supported streaming protocols with value expected value interval params.
 func (mccl *MTRClusterContentLauncher) WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("writeAttributeSupportedStreamingProtocolsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mccl *MTRClusterContentLauncher) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mccl *MTRClusterContentLauncher) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mccl *MTRClusterContentLauncher) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mccl *MTRClusterContentLauncher) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mccl *MTRClusterContentLauncher) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccl), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

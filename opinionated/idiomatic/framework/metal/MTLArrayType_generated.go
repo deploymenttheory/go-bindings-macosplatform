@@ -81,25 +81,25 @@ func (at *ArrayType) ElementTensorReferenceType() *TensorReferenceType {
 	return TensorReferenceTypeFromID(_r)
 }
 
-// ElementType wraps the corresponding Objective-C method.
+// ElementType returns the element type.
 func (at *ArrayType) ElementType() DataType {
 	_r := objc.Send[DataType](objref.IDOf(at), objc.RegisterName("elementType"))
 	return _r
 }
 
-// ArrayLength wraps the corresponding Objective-C method.
+// ArrayLength returns the array length.
 func (at *ArrayType) ArrayLength() int {
 	_r := objc.Send[int](objref.IDOf(at), objc.RegisterName("arrayLength"))
 	return _r
 }
 
-// Stride wraps the corresponding Objective-C method.
+// Stride returns the stride.
 func (at *ArrayType) Stride() int {
 	_r := objc.Send[int](objref.IDOf(at), objc.RegisterName("stride"))
 	return _r
 }
 
-// ArgumentIndexStride wraps the corresponding Objective-C method.
+// ArgumentIndexStride returns the argument index stride.
 func (at *ArrayType) ArgumentIndexStride() int {
 	_r := objc.Send[int](objref.IDOf(at), objc.RegisterName("argumentIndexStride"))
 	return _r

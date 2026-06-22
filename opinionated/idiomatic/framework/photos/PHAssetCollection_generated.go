@@ -46,31 +46,31 @@ func assetCollectionAdopt(id objc.ID) *AssetCollection {
 	return x
 }
 
-// AssetCollectionType wraps the corresponding Objective-C method.
+// AssetCollectionType returns the asset collection type.
 func (ac *AssetCollection) AssetCollectionType() AssetCollectionType {
 	_r := objc.Send[AssetCollectionType](objref.IDOf(ac), objc.RegisterName("assetCollectionType"))
 	return _r
 }
 
-// EstimatedAssetCount wraps the corresponding Objective-C method.
+// EstimatedAssetCount returns the estimated asset count.
 func (ac *AssetCollection) EstimatedAssetCount() int {
 	_r := objc.Send[int](objref.IDOf(ac), objc.RegisterName("estimatedAssetCount"))
 	return _r
 }
 
-// StartDate wraps the corresponding Objective-C method.
+// StartDate returns the start date.
 func (ac *AssetCollection) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// EndDate wraps the corresponding Objective-C method.
+// EndDate returns the end date.
 func (ac *AssetCollection) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
-// LocalizedLocationNames wraps the corresponding Objective-C method.
+// LocalizedLocationNames returns the localized location names.
 //
 // LocalizedLocationNames returns the collection as a Go slice.
 func (ac *AssetCollection) LocalizedLocationNames() []string {

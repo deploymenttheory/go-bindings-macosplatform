@@ -80,7 +80,7 @@ func NewAVB1722ControlInterfaceWithInterface(anInterface *Interface) *AVB1722Con
 	return aVB1722ControlInterfaceAdopt(_id)
 }
 
-// InterfaceName wraps the corresponding Objective-C method.
+// InterfaceName returns the interface name.
 func (aci *AVB1722ControlInterface) InterfaceName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(aci), objc.RegisterName("interfaceName"))
 	if _r == 0 {

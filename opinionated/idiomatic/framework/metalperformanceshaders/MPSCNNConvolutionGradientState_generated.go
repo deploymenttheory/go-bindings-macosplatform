@@ -46,7 +46,7 @@ func cNNConvolutionGradientStateAdopt(id objc.ID) *CNNConvolutionGradientState {
 	return x
 }
 
-// WithReadCount sets the property and returns the receiver so calls can be chained.
+// WithReadCount sets the read count.
 func (ccgs *CNNConvolutionGradientState) WithReadCount(readCount int) *CNNConvolutionGradientState {
 	objc.Send[objc.ID](objref.IDOf(ccgs), objc.RegisterName("setReadCount:"), readCount)
 	return ccgs

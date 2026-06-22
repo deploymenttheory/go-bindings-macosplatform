@@ -103,13 +103,13 @@ func (c *Cursor) Set() {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("set"))
 }
 
-// Image wraps the corresponding Objective-C method.
+// Image returns the image.
 func (c *Cursor) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
-// HotSpot wraps the corresponding Objective-C method.
+// HotSpot returns the hot spot.
 func (c *Cursor) HotSpot() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(c), objc.RegisterName("hotSpot"))
 	return _r
@@ -135,13 +135,13 @@ func (c *Cursor) MouseExited(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("mouseExited:"), objref.IDOf(event))
 }
 
-// IsSetOnMouseExited wraps the corresponding Objective-C method.
+// IsSetOnMouseExited reports whether the object is set on mouse exited.
 func (c *Cursor) IsSetOnMouseExited() bool {
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isSetOnMouseExited"))
 	return _r
 }
 
-// IsSetOnMouseEntered wraps the corresponding Objective-C method.
+// IsSetOnMouseEntered reports whether the object is set on mouse entered.
 func (c *Cursor) IsSetOnMouseEntered() bool {
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isSetOnMouseEntered"))
 	return _r

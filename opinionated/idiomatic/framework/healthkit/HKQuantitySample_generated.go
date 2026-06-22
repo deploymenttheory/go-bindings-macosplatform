@@ -45,13 +45,13 @@ func quantitySampleAdopt(id objc.ID) *QuantitySample {
 	return x
 }
 
-// QuantityType wraps the corresponding Objective-C method.
+// QuantityType returns the quantity type.
 func (qs *QuantitySample) QuantityType() *QuantityType {
 	_r := objc.Send[objc.ID](objref.IDOf(qs), objc.RegisterName("quantityType"))
 	return QuantityTypeFromID(_r)
 }
 
-// Quantity wraps the corresponding Objective-C method.
+// Quantity returns the quantity.
 func (qs *QuantitySample) Quantity() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(qs), objc.RegisterName("quantity"))
 	return QuantityFromID(_r)

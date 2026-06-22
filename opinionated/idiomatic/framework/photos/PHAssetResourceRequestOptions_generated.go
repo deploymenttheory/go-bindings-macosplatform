@@ -84,7 +84,7 @@ func (arro *AssetResourceRequestOptions) WithProgressHandler(progressHandler fun
 	return arro
 }
 
-// IsNetworkAccessAllowed wraps the corresponding Objective-C method.
+// IsNetworkAccessAllowed reports whether the object is network access allowed.
 func (arro *AssetResourceRequestOptions) IsNetworkAccessAllowed() bool {
 	_r := objc.Send[bool](objref.IDOf(arro), objc.RegisterName("isNetworkAccessAllowed"))
 	return _r

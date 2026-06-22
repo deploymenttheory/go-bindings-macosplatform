@@ -66,37 +66,37 @@ func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) String() st
 	return rt.Description(objref.IDOf(msurcpl))
 }
 
-// WithProviderNodeID sets the property and returns the receiver so calls can be chained.
+// WithProviderNodeID sets the provider node ID.
 func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) WithProviderNodeID(providerNodeID obj.Object) *MTROTASoftwareUpdateRequestorClusterProviderLocation {
 	objc.Send[objc.ID](objref.IDOf(msurcpl), objc.RegisterName("setProviderNodeID:"), objref.IDOf(providerNodeID))
 	return msurcpl
 }
 
-// WithEndpoint sets the property and returns the receiver so calls can be chained.
+// WithEndpoint sets the endpoint.
 func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) WithEndpoint(endpoint obj.Object) *MTROTASoftwareUpdateRequestorClusterProviderLocation {
 	objc.Send[objc.ID](objref.IDOf(msurcpl), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return msurcpl
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) WithFabricIndex(fabricIndex obj.Object) *MTROTASoftwareUpdateRequestorClusterProviderLocation {
 	objc.Send[objc.ID](objref.IDOf(msurcpl), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return msurcpl
 }
 
-// ProviderNodeID wraps the corresponding Objective-C method.
+// ProviderNodeID returns the provider node ID.
 func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) ProviderNodeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msurcpl), objc.RegisterName("providerNodeID"))
 	return obj.Wrap(_r)
 }
 
-// Endpoint wraps the corresponding Objective-C method.
+// Endpoint returns the endpoint.
 func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) Endpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msurcpl), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
 }
 
-// FabricIndex wraps the corresponding Objective-C method.
+// FabricIndex returns the fabric index.
 func (msurcpl *MTROTASoftwareUpdateRequestorClusterProviderLocation) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msurcpl), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)

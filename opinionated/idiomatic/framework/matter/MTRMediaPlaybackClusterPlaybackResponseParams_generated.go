@@ -78,13 +78,13 @@ func NewMTRMediaPlaybackClusterPlaybackResponseParamsWithResponseValueError(resp
 	return mTRMediaPlaybackClusterPlaybackResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mmpcprp *MTRMediaPlaybackClusterPlaybackResponseParams) WithStatus(status obj.Object) *MTRMediaPlaybackClusterPlaybackResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mmpcprp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mmpcprp
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (mmpcprp *MTRMediaPlaybackClusterPlaybackResponseParams) WithData(data string) *MTRMediaPlaybackClusterPlaybackResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mmpcprp), objc.RegisterName("setData:"), purego.NSString(data))
 	return mmpcprp
@@ -96,13 +96,13 @@ func (mmpcprp *MTRMediaPlaybackClusterPlaybackResponseParams) WithTimedInvokeTim
 	return mmpcprp
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (mmpcprp *MTRMediaPlaybackClusterPlaybackResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcprp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (mmpcprp *MTRMediaPlaybackClusterPlaybackResponseParams) Data() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcprp), objc.RegisterName("data"))
 	if _r == 0 {

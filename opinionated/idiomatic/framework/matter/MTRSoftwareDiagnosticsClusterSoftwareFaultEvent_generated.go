@@ -70,31 +70,31 @@ func NewMTRSoftwareDiagnosticsClusterSoftwareFaultEvent() *MTRSoftwareDiagnostic
 	return mTRSoftwareDiagnosticsClusterSoftwareFaultEventAdopt(_id)
 }
 
-// WithID sets the property and returns the receiver so calls can be chained.
+// WithID sets the ID.
 func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) WithID(id_ obj.Object) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
 	objc.Send[objc.ID](objref.IDOf(msdcsfe), objc.RegisterName("setId:"), objref.IDOf(id_))
 	return msdcsfe
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) WithName(name string) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
 	objc.Send[objc.ID](objref.IDOf(msdcsfe), objc.RegisterName("setName:"), purego.NSString(name))
 	return msdcsfe
 }
 
-// WithFaultRecording sets the property and returns the receiver so calls can be chained.
+// WithFaultRecording sets the fault recording.
 func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) WithFaultRecording(faultRecording obj.Object) *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent {
 	objc.Send[objc.ID](objref.IDOf(msdcsfe), objc.RegisterName("setFaultRecording:"), objref.IDOf(faultRecording))
 	return msdcsfe
 }
 
-// ID wraps the corresponding Objective-C method.
+// ID returns the ID.
 func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) ID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msdcsfe), objc.RegisterName("id"))
 	return obj.Wrap(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(msdcsfe), objc.RegisterName("name"))
 	if _r == 0 {
@@ -103,7 +103,7 @@ func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) Name() string {
 	return purego.GoString(_r)
 }
 
-// FaultRecording wraps the corresponding Objective-C method.
+// FaultRecording returns the fault recording.
 func (msdcsfe *MTRSoftwareDiagnosticsClusterSoftwareFaultEvent) FaultRecording() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msdcsfe), objc.RegisterName("faultRecording"))
 	return obj.Wrap(_r)

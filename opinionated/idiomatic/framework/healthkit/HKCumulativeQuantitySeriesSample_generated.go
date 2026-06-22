@@ -51,7 +51,7 @@ func NewCumulativeQuantitySeriesSample() *CumulativeQuantitySeriesSample {
 	return cumulativeQuantitySeriesSampleAdopt(_id)
 }
 
-// Sum wraps the corresponding Objective-C method.
+// Sum returns the sum.
 func (cqss *CumulativeQuantitySeriesSample) Sum() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(cqss), objc.RegisterName("sum"))
 	return QuantityFromID(_r)

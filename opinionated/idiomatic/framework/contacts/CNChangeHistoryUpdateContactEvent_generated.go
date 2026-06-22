@@ -51,7 +51,7 @@ func NewChangeHistoryUpdateContactEvent() *ChangeHistoryUpdateContactEvent {
 	return changeHistoryUpdateContactEventAdopt(_id)
 }
 
-// Contact wraps the corresponding Objective-C method.
+// Contact returns the contact.
 func (chuce *ChangeHistoryUpdateContactEvent) Contact() *Contact {
 	_r := objc.Send[objc.ID](objref.IDOf(chuce), objc.RegisterName("contact"))
 	return ContactFromID(_r)

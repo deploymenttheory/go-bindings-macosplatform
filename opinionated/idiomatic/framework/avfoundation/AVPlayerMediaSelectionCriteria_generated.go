@@ -80,7 +80,7 @@ func NewPlayerMediaSelectionCriteriaWithPrincipalMediaCharacteristicsPreferredLa
 	return playerMediaSelectionCriteriaAdopt(_id)
 }
 
-// PreferredLanguages wraps the corresponding Objective-C method.
+// PreferredLanguages returns the preferred languages.
 //
 // PreferredLanguages returns the collection as a Go slice.
 func (pmsc *PlayerMediaSelectionCriteria) PreferredLanguages() []string {
@@ -88,7 +88,7 @@ func (pmsc *PlayerMediaSelectionCriteria) PreferredLanguages() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// PreferredMediaCharacteristics wraps the corresponding Objective-C method.
+// PreferredMediaCharacteristics returns the preferred media characteristics.
 //
 // PreferredMediaCharacteristics returns the collection as a Go slice.
 func (pmsc *PlayerMediaSelectionCriteria) PreferredMediaCharacteristics() []obj.Object {
@@ -96,7 +96,7 @@ func (pmsc *PlayerMediaSelectionCriteria) PreferredMediaCharacteristics() []obj.
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// PrincipalMediaCharacteristics wraps the corresponding Objective-C method.
+// PrincipalMediaCharacteristics returns the principal media characteristics.
 //
 // PrincipalMediaCharacteristics returns the collection as a Go slice.
 func (pmsc *PlayerMediaSelectionCriteria) PrincipalMediaCharacteristics() []obj.Object {

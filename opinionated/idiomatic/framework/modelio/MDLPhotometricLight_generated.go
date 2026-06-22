@@ -136,19 +136,19 @@ func (pl *PhotometricLight) GenerateTexture(textureSize int) *Texture {
 	return TextureFromID(_r)
 }
 
-// LightCubeMap wraps the corresponding Objective-C method.
+// LightCubeMap returns the light cube map.
 func (pl *PhotometricLight) LightCubeMap() *Texture {
 	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("lightCubeMap"))
 	return TextureFromID(_r)
 }
 
-// SphericalHarmonicsLevel wraps the corresponding Objective-C method.
+// SphericalHarmonicsLevel returns the spherical harmonics level.
 func (pl *PhotometricLight) SphericalHarmonicsLevel() int {
 	_r := objc.Send[int](objref.IDOf(pl), objc.RegisterName("sphericalHarmonicsLevel"))
 	return _r
 }
 
-// SphericalHarmonicsCoefficients wraps the corresponding Objective-C method.
+// SphericalHarmonicsCoefficients returns the spherical harmonics coefficients.
 func (pl *PhotometricLight) SphericalHarmonicsCoefficients() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("sphericalHarmonicsCoefficients"))
 	return obj.Wrap(_r)

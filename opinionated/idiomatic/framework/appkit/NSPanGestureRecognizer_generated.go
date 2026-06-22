@@ -125,13 +125,13 @@ func (pgr *PanGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents b
 	return pgr
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (pgr *PanGestureRecognizer) WithName(name string) *PanGestureRecognizer {
 	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setName:"), purego.NSString(name))
 	return pgr
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (pgr *PanGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PanGestureRecognizer {
 	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return pgr
@@ -154,13 +154,13 @@ func (pgr *PanGestureRecognizer) VelocityInView(view *View) corefoundation.CGPoi
 	return _r
 }
 
-// ButtonMask wraps the corresponding Objective-C method.
+// ButtonMask returns the button mask.
 func (pgr *PanGestureRecognizer) ButtonMask() int {
 	_r := objc.Send[int](objref.IDOf(pgr), objc.RegisterName("buttonMask"))
 	return _r
 }
 
-// NumberOfTouchesRequired wraps the corresponding Objective-C method.
+// NumberOfTouchesRequired returns the number of touches required.
 func (pgr *PanGestureRecognizer) NumberOfTouchesRequired() int {
 	_r := objc.Send[int](objref.IDOf(pgr), objc.RegisterName("numberOfTouchesRequired"))
 	return _r

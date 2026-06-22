@@ -290,7 +290,7 @@ func (ec *EmitterCell) ShouldArchiveValueForKey(key string) bool {
 	return _r
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (ec *EmitterCell) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("name"))
 	if _r == 0 {
@@ -299,181 +299,181 @@ func (ec *EmitterCell) Name() string {
 	return purego.GoString(_r)
 }
 
-// IsEnabled wraps the corresponding Objective-C method.
+// IsEnabled reports whether the object is enabled.
 func (ec *EmitterCell) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(ec), objc.RegisterName("isEnabled"))
 	return _r
 }
 
-// BirthRate wraps the corresponding Objective-C method.
+// BirthRate returns the birth rate.
 func (ec *EmitterCell) BirthRate() float32 {
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("birthRate"))
 	return _r
 }
 
-// Lifetime wraps the corresponding Objective-C method.
+// Lifetime returns the lifetime.
 func (ec *EmitterCell) Lifetime() float32 {
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("lifetime"))
 	return _r
 }
 
-// LifetimeRange wraps the corresponding Objective-C method.
+// LifetimeRange returns the lifetime range.
 func (ec *EmitterCell) LifetimeRange() float32 {
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("lifetimeRange"))
 	return _r
 }
 
-// EmissionLatitude wraps the corresponding Objective-C method.
+// EmissionLatitude returns the emission latitude.
 func (ec *EmitterCell) EmissionLatitude() float64 {
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("emissionLatitude"))
 	return _r
 }
 
-// EmissionLongitude wraps the corresponding Objective-C method.
+// EmissionLongitude returns the emission longitude.
 func (ec *EmitterCell) EmissionLongitude() float64 {
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("emissionLongitude"))
 	return _r
 }
 
-// EmissionRange wraps the corresponding Objective-C method.
+// EmissionRange returns the emission range.
 func (ec *EmitterCell) EmissionRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("emissionRange"))
 	return _r
 }
 
-// Velocity wraps the corresponding Objective-C method.
+// Velocity returns the velocity.
 func (ec *EmitterCell) Velocity() float64 {
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("velocity"))
 	return _r
 }
 
-// VelocityRange wraps the corresponding Objective-C method.
+// VelocityRange returns the velocity range.
 func (ec *EmitterCell) VelocityRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("velocityRange"))
 	return _r
 }
 
-// XAcceleration wraps the corresponding Objective-C method.
+// XAcceleration returns the x acceleration.
 func (ec *EmitterCell) XAcceleration() float64 {
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("xAcceleration"))
 	return _r
 }
 
-// YAcceleration wraps the corresponding Objective-C method.
+// YAcceleration returns the y acceleration.
 func (ec *EmitterCell) YAcceleration() float64 {
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("yAcceleration"))
 	return _r
 }
 
-// ZAcceleration wraps the corresponding Objective-C method.
+// ZAcceleration returns the z acceleration.
 func (ec *EmitterCell) ZAcceleration() float64 {
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("zAcceleration"))
 	return _r
 }
 
-// Scale wraps the corresponding Objective-C method.
+// Scale returns the scale.
 func (ec *EmitterCell) Scale() float64 {
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("scale"))
 	return _r
 }
 
-// ScaleRange wraps the corresponding Objective-C method.
+// ScaleRange returns the scale range.
 func (ec *EmitterCell) ScaleRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("scaleRange"))
 	return _r
 }
 
-// ScaleSpeed wraps the corresponding Objective-C method.
+// ScaleSpeed returns the scale speed.
 func (ec *EmitterCell) ScaleSpeed() float64 {
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("scaleSpeed"))
 	return _r
 }
 
-// Spin wraps the corresponding Objective-C method.
+// Spin returns the spin.
 func (ec *EmitterCell) Spin() float64 {
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("spin"))
 	return _r
 }
 
-// SpinRange wraps the corresponding Objective-C method.
+// SpinRange returns the spin range.
 func (ec *EmitterCell) SpinRange() float64 {
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("spinRange"))
 	return _r
 }
 
-// Color wraps the corresponding Objective-C method.
+// Color returns the color.
 func (ec *EmitterCell) Color() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
 
-// RedRange wraps the corresponding Objective-C method.
+// RedRange returns the red range.
 func (ec *EmitterCell) RedRange() float32 {
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("redRange"))
 	return _r
 }
 
-// GreenRange wraps the corresponding Objective-C method.
+// GreenRange returns the green range.
 func (ec *EmitterCell) GreenRange() float32 {
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("greenRange"))
 	return _r
 }
 
-// BlueRange wraps the corresponding Objective-C method.
+// BlueRange returns the blue range.
 func (ec *EmitterCell) BlueRange() float32 {
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("blueRange"))
 	return _r
 }
 
-// AlphaRange wraps the corresponding Objective-C method.
+// AlphaRange returns the alpha range.
 func (ec *EmitterCell) AlphaRange() float32 {
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("alphaRange"))
 	return _r
 }
 
-// RedSpeed wraps the corresponding Objective-C method.
+// RedSpeed returns the red speed.
 func (ec *EmitterCell) RedSpeed() float32 {
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("redSpeed"))
 	return _r
 }
 
-// GreenSpeed wraps the corresponding Objective-C method.
+// GreenSpeed returns the green speed.
 func (ec *EmitterCell) GreenSpeed() float32 {
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("greenSpeed"))
 	return _r
 }
 
-// BlueSpeed wraps the corresponding Objective-C method.
+// BlueSpeed returns the blue speed.
 func (ec *EmitterCell) BlueSpeed() float32 {
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("blueSpeed"))
 	return _r
 }
 
-// AlphaSpeed wraps the corresponding Objective-C method.
+// AlphaSpeed returns the alpha speed.
 func (ec *EmitterCell) AlphaSpeed() float32 {
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("alphaSpeed"))
 	return _r
 }
 
-// Contents wraps the corresponding Objective-C method.
+// Contents returns the contents.
 func (ec *EmitterCell) Contents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("contents"))
 	return obj.Wrap(_r)
 }
 
-// ContentsRect wraps the corresponding Objective-C method.
+// ContentsRect returns the contents rect.
 func (ec *EmitterCell) ContentsRect() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(ec), objc.RegisterName("contentsRect"))
 	return _r
 }
 
-// ContentsScale wraps the corresponding Objective-C method.
+// ContentsScale returns the contents scale.
 func (ec *EmitterCell) ContentsScale() float64 {
 	_r := objc.Send[float64](objref.IDOf(ec), objc.RegisterName("contentsScale"))
 	return _r
 }
 
-// MinificationFilter wraps the corresponding Objective-C method.
+// MinificationFilter returns the minification filter.
 func (ec *EmitterCell) MinificationFilter() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("minificationFilter"))
 	if _r == 0 {
@@ -482,7 +482,7 @@ func (ec *EmitterCell) MinificationFilter() string {
 	return purego.GoString(_r)
 }
 
-// MagnificationFilter wraps the corresponding Objective-C method.
+// MagnificationFilter returns the magnification filter.
 func (ec *EmitterCell) MagnificationFilter() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("magnificationFilter"))
 	if _r == 0 {
@@ -491,13 +491,13 @@ func (ec *EmitterCell) MagnificationFilter() string {
 	return purego.GoString(_r)
 }
 
-// MinificationFilterBias wraps the corresponding Objective-C method.
+// MinificationFilterBias returns the minification filter bias.
 func (ec *EmitterCell) MinificationFilterBias() float32 {
 	_r := objc.Send[float32](objref.IDOf(ec), objc.RegisterName("minificationFilterBias"))
 	return _r
 }
 
-// EmitterCells wraps the corresponding Objective-C method.
+// EmitterCells returns the emitter cells.
 //
 // EmitterCells returns the collection as a Go slice.
 func (ec *EmitterCell) EmitterCells() []*EmitterCell {
@@ -505,7 +505,7 @@ func (ec *EmitterCell) EmitterCells() []*EmitterCell {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmitterCell { return EmitterCellFromID(_id) })
 }
 
-// Style wraps the corresponding Objective-C method.
+// Style returns the style.
 func (ec *EmitterCell) Style() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("style"))
 	return obj.Wrap(_r)

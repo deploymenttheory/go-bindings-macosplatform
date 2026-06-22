@@ -94,19 +94,19 @@ func (cc *CreateCommand) WithScriptErrorString(scriptErrorString StringProvider)
 	return cc
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (cc *CreateCommand) WithScriptingProperties(scriptingProperties obj.Object) *CreateCommand {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return cc
 }
 
-// CreateClassDescription wraps the corresponding Objective-C method.
+// CreateClassDescription returns the create class description.
 func (cc *CreateCommand) CreateClassDescription() *ScriptClassDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("createClassDescription"))
 	return ScriptClassDescriptionFromID(_r)
 }
 
-// ResolvedKeyDictionary wraps the corresponding Objective-C method.
+// ResolvedKeyDictionary returns the resolved key dictionary.
 func (cc *CreateCommand) ResolvedKeyDictionary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("resolvedKeyDictionary"))
 	return obj.Wrap(_r)

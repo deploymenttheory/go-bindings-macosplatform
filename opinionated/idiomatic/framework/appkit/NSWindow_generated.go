@@ -439,25 +439,25 @@ func (w *Window) WithIgnoresMouseEvents(ignoresMouseEvents bool) *Window {
 	return w
 }
 
-// WithAutodisplay sets the property and returns the receiver so calls can be chained.
+// WithAutodisplay sets the autodisplay.
 func (w *Window) WithAutodisplay(autodisplay bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setAutodisplay:"), autodisplay)
 	return w
 }
 
-// WithOneShot sets the property and returns the receiver so calls can be chained.
+// WithOneShot sets the one shot.
 func (w *Window) WithOneShot(oneShot bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setOneShot:"), oneShot)
 	return w
 }
 
-// WithPreferredBackingLocation sets the property and returns the receiver so calls can be chained.
+// WithPreferredBackingLocation sets the preferred backing location.
 func (w *Window) WithPreferredBackingLocation(preferredBackingLocation WindowBackingLocation) *Window {
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setPreferredBackingLocation:"), preferredBackingLocation)
 	return w
 }
 
-// WithShowsResizeIndicator sets the property and returns the receiver so calls can be chained.
+// WithShowsResizeIndicator sets the shows resize indicator.
 func (w *Window) WithShowsResizeIndicator(showsResizeIndicator bool) *Window {
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("setShowsResizeIndicator:"), showsResizeIndicator)
 	return w
@@ -992,7 +992,7 @@ func (w *Window) RequestSharingOfWindowUsingPreviewTitle(ctx context.Context, im
 	}
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (w *Window) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("title"))
 	if _r == 0 {
@@ -1040,7 +1040,7 @@ func (w *Window) ContentLayoutGuide() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// TitlebarAccessoryViewControllers wraps the corresponding Objective-C method.
+// TitlebarAccessoryViewControllers returns the titlebar accessory view controllers.
 //
 // TitlebarAccessoryViewControllers returns the collection as a Go slice.
 func (w *Window) TitlebarAccessoryViewControllers() []*TitlebarAccessoryViewController {
@@ -1054,7 +1054,7 @@ func (w *Window) RepresentedURL() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// RepresentedFilename wraps the corresponding Objective-C method.
+// RepresentedFilename returns the represented filename.
 func (w *Window) RepresentedFilename() string {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("representedFilename"))
 	if _r == 0 {
@@ -1063,25 +1063,25 @@ func (w *Window) RepresentedFilename() string {
 	return purego.GoString(_r)
 }
 
-// IsExcludedFromWindowsMenu wraps the corresponding Objective-C method.
+// IsExcludedFromWindowsMenu reports whether the object is excluded from windows menu.
 func (w *Window) IsExcludedFromWindowsMenu() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isExcludedFromWindowsMenu"))
 	return _r
 }
 
-// ContentView wraps the corresponding Objective-C method.
+// ContentView returns the content view.
 func (w *Window) ContentView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("contentView"))
 	return ViewFromID(_r)
 }
 
-// WindowNumber wraps the corresponding Objective-C method.
+// WindowNumber returns the window number.
 func (w *Window) WindowNumber() int {
 	_r := objc.Send[int](objref.IDOf(w), objc.RegisterName("windowNumber"))
 	return _r
 }
 
-// StyleMask wraps the corresponding Objective-C method.
+// StyleMask returns the style mask.
 func (w *Window) StyleMask() WindowStyleMask {
 	_r := objc.Send[WindowStyleMask](objref.IDOf(w), objc.RegisterName("styleMask"))
 	return _r
@@ -1093,7 +1093,7 @@ func (w *Window) CascadingReferenceFrame() corefoundation.CGRect {
 	return _r
 }
 
-// Frame wraps the corresponding Objective-C method.
+// Frame returns the frame.
 func (w *Window) Frame() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(w), objc.RegisterName("frame"))
 	return _r
@@ -1105,25 +1105,25 @@ func (w *Window) InLiveResize() bool {
 	return _r
 }
 
-// ResizeIncrements wraps the corresponding Objective-C method.
+// ResizeIncrements returns the resize increments.
 func (w *Window) ResizeIncrements() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(w), objc.RegisterName("resizeIncrements"))
 	return _r
 }
 
-// AspectRatio wraps the corresponding Objective-C method.
+// AspectRatio returns the aspect ratio.
 func (w *Window) AspectRatio() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(w), objc.RegisterName("aspectRatio"))
 	return _r
 }
 
-// ContentResizeIncrements wraps the corresponding Objective-C method.
+// ContentResizeIncrements returns the content resize increments.
 func (w *Window) ContentResizeIncrements() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(w), objc.RegisterName("contentResizeIncrements"))
 	return _r
 }
 
-// ContentAspectRatio wraps the corresponding Objective-C method.
+// ContentAspectRatio returns the content aspect ratio.
 func (w *Window) ContentAspectRatio() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(w), objc.RegisterName("contentAspectRatio"))
 	return _r
@@ -1141,49 +1141,49 @@ func (w *Window) PreservesContentDuringLiveResize() bool {
 	return _r
 }
 
-// FirstResponder wraps the corresponding Objective-C method.
+// FirstResponder returns the first responder.
 func (w *Window) FirstResponder() *Responder {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("firstResponder"))
 	return ResponderFromID(_r)
 }
 
-// ResizeFlags wraps the corresponding Objective-C method.
+// ResizeFlags returns the resize flags.
 func (w *Window) ResizeFlags() EventModifierFlags {
 	_r := objc.Send[EventModifierFlags](objref.IDOf(w), objc.RegisterName("resizeFlags"))
 	return _r
 }
 
-// IsReleasedWhenClosed wraps the corresponding Objective-C method.
+// IsReleasedWhenClosed reports whether the object is released when closed.
 func (w *Window) IsReleasedWhenClosed() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isReleasedWhenClosed"))
 	return _r
 }
 
-// IsZoomed wraps the corresponding Objective-C method.
+// IsZoomed reports whether the object is zoomed.
 func (w *Window) IsZoomed() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isZoomed"))
 	return _r
 }
 
-// IsMiniaturized wraps the corresponding Objective-C method.
+// IsMiniaturized reports whether the object is miniaturized.
 func (w *Window) IsMiniaturized() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isMiniaturized"))
 	return _r
 }
 
-// BackgroundColor wraps the corresponding Objective-C method.
+// BackgroundColor returns the background color.
 func (w *Window) BackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
 }
 
-// IsMovable wraps the corresponding Objective-C method.
+// IsMovable reports whether the object is movable.
 func (w *Window) IsMovable() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isMovable"))
 	return _r
 }
 
-// IsMovableByWindowBackground wraps the corresponding Objective-C method.
+// IsMovableByWindowBackground reports whether the object is movable by window background.
 func (w *Window) IsMovableByWindowBackground() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isMovableByWindowBackground"))
 	return _r
@@ -1201,13 +1201,13 @@ func (w *Window) CanHide() bool {
 	return _r
 }
 
-// MiniwindowImage wraps the corresponding Objective-C method.
+// MiniwindowImage returns the miniwindow image.
 func (w *Window) MiniwindowImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("miniwindowImage"))
 	return ImageFromID(_r)
 }
 
-// MiniwindowTitle wraps the corresponding Objective-C method.
+// MiniwindowTitle returns the miniwindow title.
 func (w *Window) MiniwindowTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("miniwindowTitle"))
 	if _r == 0 {
@@ -1216,31 +1216,31 @@ func (w *Window) MiniwindowTitle() string {
 	return purego.GoString(_r)
 }
 
-// DockTile wraps the corresponding Objective-C method.
+// DockTile returns the dock tile.
 func (w *Window) DockTile() *DockTile {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("dockTile"))
 	return DockTileFromID(_r)
 }
 
-// IsDocumentEdited wraps the corresponding Objective-C method.
+// IsDocumentEdited reports whether the object is document edited.
 func (w *Window) IsDocumentEdited() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isDocumentEdited"))
 	return _r
 }
 
-// IsVisible wraps the corresponding Objective-C method.
+// IsVisible reports whether the object is visible.
 func (w *Window) IsVisible() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isVisible"))
 	return _r
 }
 
-// IsKeyWindow wraps the corresponding Objective-C method.
+// IsKeyWindow reports whether the object is key window.
 func (w *Window) IsKeyWindow() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isKeyWindow"))
 	return _r
 }
 
-// IsMainWindow wraps the corresponding Objective-C method.
+// IsMainWindow reports whether the object is main window.
 func (w *Window) IsMainWindow() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isMainWindow"))
 	return _r
@@ -1282,25 +1282,25 @@ func (w *Window) AllowsToolTipsWhenApplicationIsInactive() bool {
 	return _r
 }
 
-// BackingType wraps the corresponding Objective-C method.
+// BackingType returns the backing type.
 func (w *Window) BackingType() BackingStoreType {
 	_r := objc.Send[BackingStoreType](objref.IDOf(w), objc.RegisterName("backingType"))
 	return _r
 }
 
-// Level wraps the corresponding Objective-C method.
+// Level returns the level.
 func (w *Window) Level() int {
 	_r := objc.Send[int](objref.IDOf(w), objc.RegisterName("level"))
 	return _r
 }
 
-// DepthLimit wraps the corresponding Objective-C method.
+// DepthLimit returns the depth limit.
 func (w *Window) DepthLimit() WindowDepth {
 	_r := objc.Send[WindowDepth](objref.IDOf(w), objc.RegisterName("depthLimit"))
 	return _r
 }
 
-// HasDynamicDepthLimit wraps the corresponding Objective-C method.
+// HasDynamicDepthLimit reports whether the object has dynamic depth limit.
 func (w *Window) HasDynamicDepthLimit() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("hasDynamicDepthLimit"))
 	return _r
@@ -1312,25 +1312,25 @@ func (w *Window) Screen() *Screen {
 	return ScreenFromID(_r)
 }
 
-// DeepestScreen wraps the corresponding Objective-C method.
+// DeepestScreen returns the deepest screen.
 func (w *Window) DeepestScreen() *Screen {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("deepestScreen"))
 	return ScreenFromID(_r)
 }
 
-// HasShadow wraps the corresponding Objective-C method.
+// HasShadow reports whether the object has shadow.
 func (w *Window) HasShadow() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("hasShadow"))
 	return _r
 }
 
-// AlphaValue wraps the corresponding Objective-C method.
+// AlphaValue returns the alpha value.
 func (w *Window) AlphaValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(w), objc.RegisterName("alphaValue"))
 	return _r
 }
 
-// IsOpaque wraps the corresponding Objective-C method.
+// IsOpaque reports whether the object is opaque.
 func (w *Window) IsOpaque() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isOpaque"))
 	return _r
@@ -1360,7 +1360,7 @@ func (w *Window) CanBecomeVisibleWithoutLogin() bool {
 	return _r
 }
 
-// CollectionBehavior wraps the corresponding Objective-C method.
+// CollectionBehavior returns the collection behavior.
 func (w *Window) CollectionBehavior() WindowCollectionBehavior {
 	_r := objc.Send[WindowCollectionBehavior](objref.IDOf(w), objc.RegisterName("collectionBehavior"))
 	return _r
@@ -1378,61 +1378,61 @@ func (w *Window) IsOnActiveSpace() bool {
 	return _r
 }
 
-// StringWithSavedFrame wraps the corresponding Objective-C method.
+// StringWithSavedFrame returns the string with saved frame.
 func (w *Window) StringWithSavedFrame() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("stringWithSavedFrame"))
 	return obj.Wrap(_r)
 }
 
-// FrameAutosaveName wraps the corresponding Objective-C method.
+// FrameAutosaveName returns the frame autosave name.
 func (w *Window) FrameAutosaveName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("frameAutosaveName"))
 	return obj.Wrap(_r)
 }
 
-// MinSize wraps the corresponding Objective-C method.
+// MinSize returns the min size.
 func (w *Window) MinSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(w), objc.RegisterName("minSize"))
 	return _r
 }
 
-// MaxSize wraps the corresponding Objective-C method.
+// MaxSize returns the max size.
 func (w *Window) MaxSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(w), objc.RegisterName("maxSize"))
 	return _r
 }
 
-// ContentMinSize wraps the corresponding Objective-C method.
+// ContentMinSize returns the content min size.
 func (w *Window) ContentMinSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(w), objc.RegisterName("contentMinSize"))
 	return _r
 }
 
-// ContentMaxSize wraps the corresponding Objective-C method.
+// ContentMaxSize returns the content max size.
 func (w *Window) ContentMaxSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(w), objc.RegisterName("contentMaxSize"))
 	return _r
 }
 
-// MinFullScreenContentSize wraps the corresponding Objective-C method.
+// MinFullScreenContentSize returns the min full screen content size.
 func (w *Window) MinFullScreenContentSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(w), objc.RegisterName("minFullScreenContentSize"))
 	return _r
 }
 
-// MaxFullScreenContentSize wraps the corresponding Objective-C method.
+// MaxFullScreenContentSize returns the max full screen content size.
 func (w *Window) MaxFullScreenContentSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(w), objc.RegisterName("maxFullScreenContentSize"))
 	return _r
 }
 
-// DeviceDescription wraps the corresponding Objective-C method.
+// DeviceDescription returns the device description.
 func (w *Window) DeviceDescription() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("deviceDescription"))
 	return obj.Wrap(_r)
 }
 
-// WindowController wraps the corresponding Objective-C method.
+// WindowController returns the window controller.
 func (w *Window) WindowController() *WindowController {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("windowController"))
 	return WindowControllerFromID(_r)
@@ -1452,7 +1452,7 @@ func (w *Window) AttachedSheet() *Window {
 	return WindowFromID(_r)
 }
 
-// IsSheet wraps the corresponding Objective-C method.
+// IsSheet reports whether the object is sheet.
 func (w *Window) IsSheet() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isSheet"))
 	return _r
@@ -1464,7 +1464,7 @@ func (w *Window) SheetParent() *Window {
 	return WindowFromID(_r)
 }
 
-// ChildWindows wraps the corresponding Objective-C method.
+// ChildWindows returns the child windows.
 //
 // ChildWindows returns the collection as a Go slice.
 func (w *Window) ChildWindows() []*Window {
@@ -1472,7 +1472,7 @@ func (w *Window) ChildWindows() []*Window {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
 }
 
-// ParentWindow wraps the corresponding Objective-C method.
+// ParentWindow returns the parent window.
 func (w *Window) ParentWindow() *Window {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("parentWindow"))
 	return WindowFromID(_r)
@@ -1484,13 +1484,13 @@ func (w *Window) AppearanceSource() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// ColorSpace wraps the corresponding Objective-C method.
+// ColorSpace returns the color space.
 func (w *Window) ColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("colorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
-// OcclusionState wraps the corresponding Objective-C method.
+// OcclusionState returns the occlusion state.
 func (w *Window) OcclusionState() WindowOcclusionState {
 	_r := objc.Send[WindowOcclusionState](objref.IDOf(w), objc.RegisterName("occlusionState"))
 	return _r
@@ -1508,13 +1508,13 @@ func (w *Window) ContentViewController() *ViewController {
 	return ViewControllerFromID(_r)
 }
 
-// KeyViewSelectionDirection wraps the corresponding Objective-C method.
+// KeyViewSelectionDirection returns the key view selection direction.
 func (w *Window) KeyViewSelectionDirection() SelectionDirection {
 	_r := objc.Send[SelectionDirection](objref.IDOf(w), objc.RegisterName("keyViewSelectionDirection"))
 	return _r
 }
 
-// DefaultButtonCell wraps the corresponding Objective-C method.
+// DefaultButtonCell returns the default button cell.
 func (w *Window) DefaultButtonCell() *ButtonCell {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("defaultButtonCell"))
 	return ButtonCellFromID(_r)
@@ -1526,7 +1526,7 @@ func (w *Window) AutorecalculatesKeyViewLoop() bool {
 	return _r
 }
 
-// Toolbar wraps the corresponding Objective-C method.
+// Toolbar returns the toolbar.
 func (w *Window) Toolbar() *Toolbar {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("toolbar"))
 	return ToolbarFromID(_r)
@@ -1614,7 +1614,7 @@ func (w *Window) SendEvent(event *Event) {
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("sendEvent:"), objref.IDOf(event))
 }
 
-// CurrentEvent wraps the corresponding Objective-C method.
+// CurrentEvent returns the current event.
 func (w *Window) CurrentEvent() *Event {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("currentEvent"))
 	return EventFromID(_r)
@@ -1632,7 +1632,7 @@ func (w *Window) IgnoresMouseEvents() bool {
 	return _r
 }
 
-// MouseLocationOutsideOfEventStream wraps the corresponding Objective-C method.
+// MouseLocationOutsideOfEventStream returns the mouse location outside of event stream.
 func (w *Window) MouseLocationOutsideOfEventStream() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(w), objc.RegisterName("mouseLocationOutsideOfEventStream"))
 	return _r
@@ -1699,7 +1699,7 @@ func (w *Window) DiscardCachedImage() {
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("discardCachedImage"))
 }
 
-// GState wraps the corresponding Objective-C method.
+// GState returns the g state.
 func (w *Window) GState() int {
 	_r := objc.Send[int](objref.IDOf(w), objc.RegisterName("gState"))
 	return _r
@@ -1717,7 +1717,7 @@ func (w *Window) ConvertScreenToBase(point corefoundation.CGPoint) corefoundatio
 	return _r
 }
 
-// UserSpaceScaleFactor wraps the corresponding Objective-C method.
+// UserSpaceScaleFactor returns the user space scale factor.
 func (w *Window) UserSpaceScaleFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(w), objc.RegisterName("userSpaceScaleFactor"))
 	return _r
@@ -1734,22 +1734,22 @@ func (w *Window) CanStoreColor() bool {
 	return _r
 }
 
-// DisableFlushWindow wraps the corresponding Objective-C method.
+// DisableFlushWindow disables flush window.
 func (w *Window) DisableFlushWindow() {
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("disableFlushWindow"))
 }
 
-// EnableFlushWindow wraps the corresponding Objective-C method.
+// EnableFlushWindow enables flush window.
 func (w *Window) EnableFlushWindow() {
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("enableFlushWindow"))
 }
 
-// FlushWindow wraps the corresponding Objective-C method.
+// FlushWindow flushes window.
 func (w *Window) FlushWindow() {
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("flushWindow"))
 }
 
-// FlushWindowIfNeeded wraps the corresponding Objective-C method.
+// FlushWindowIfNeeded flushes window if needed.
 func (w *Window) FlushWindowIfNeeded() {
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("flushWindowIfNeeded"))
 }
@@ -1759,37 +1759,37 @@ func (w *Window) DisableScreenUpdatesUntilFlush() {
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("disableScreenUpdatesUntilFlush"))
 }
 
-// IsFlushWindowDisabled wraps the corresponding Objective-C method.
+// IsFlushWindowDisabled reports whether the object is flush window disabled.
 func (w *Window) IsFlushWindowDisabled() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isFlushWindowDisabled"))
 	return _r
 }
 
-// IsAutodisplay wraps the corresponding Objective-C method.
+// IsAutodisplay reports whether the object is autodisplay.
 func (w *Window) IsAutodisplay() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isAutodisplay"))
 	return _r
 }
 
-// GraphicsContext wraps the corresponding Objective-C method.
+// GraphicsContext returns the graphics context.
 func (w *Window) GraphicsContext() *GraphicsContext {
 	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("graphicsContext"))
 	return GraphicsContextFromID(_r)
 }
 
-// IsOneShot wraps the corresponding Objective-C method.
+// IsOneShot reports whether the object is one shot.
 func (w *Window) IsOneShot() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isOneShot"))
 	return _r
 }
 
-// PreferredBackingLocation wraps the corresponding Objective-C method.
+// PreferredBackingLocation returns the preferred backing location.
 func (w *Window) PreferredBackingLocation() WindowBackingLocation {
 	_r := objc.Send[WindowBackingLocation](objref.IDOf(w), objc.RegisterName("preferredBackingLocation"))
 	return _r
 }
 
-// BackingLocation wraps the corresponding Objective-C method.
+// BackingLocation returns the backing location.
 func (w *Window) BackingLocation() WindowBackingLocation {
 	_r := objc.Send[WindowBackingLocation](objref.IDOf(w), objc.RegisterName("backingLocation"))
 	return _r
@@ -1827,7 +1827,7 @@ func (w *Window) VisualizeConstraints(constraints []*LayoutConstraint) {
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("visualizeConstraints:"), purego.SliceToNSArray(constraints, func(_v *LayoutConstraint) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Drawers wraps the corresponding Objective-C method.
+// Drawers returns the drawers.
 //
 // Drawers returns the collection as a Go slice.
 func (w *Window) Drawers() []*Drawer {
@@ -1868,49 +1868,49 @@ func (w *Window) HandleSaveScriptCommand(command obj.Object) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// HasCloseBox wraps the corresponding Objective-C method.
+// HasCloseBox reports whether the object has close box.
 func (w *Window) HasCloseBox() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("hasCloseBox"))
 	return _r
 }
 
-// HasTitleBar wraps the corresponding Objective-C method.
+// HasTitleBar reports whether the object has title bar.
 func (w *Window) HasTitleBar() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("hasTitleBar"))
 	return _r
 }
 
-// IsFloatingPanel wraps the corresponding Objective-C method.
+// IsFloatingPanel reports whether the object is floating panel.
 func (w *Window) IsFloatingPanel() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isFloatingPanel"))
 	return _r
 }
 
-// IsMiniaturizable wraps the corresponding Objective-C method.
+// IsMiniaturizable reports whether the object is miniaturizable.
 func (w *Window) IsMiniaturizable() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isMiniaturizable"))
 	return _r
 }
 
-// IsModalPanel wraps the corresponding Objective-C method.
+// IsModalPanel reports whether the object is modal panel.
 func (w *Window) IsModalPanel() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isModalPanel"))
 	return _r
 }
 
-// IsResizable wraps the corresponding Objective-C method.
+// IsResizable reports whether the object is resizable.
 func (w *Window) IsResizable() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isResizable"))
 	return _r
 }
 
-// IsZoomable wraps the corresponding Objective-C method.
+// IsZoomable reports whether the object is zoomable.
 func (w *Window) IsZoomable() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isZoomable"))
 	return _r
 }
 
-// OrderedIndex wraps the corresponding Objective-C method.
+// OrderedIndex returns the ordered index.
 func (w *Window) OrderedIndex() int {
 	_r := objc.Send[int](objref.IDOf(w), objc.RegisterName("orderedIndex"))
 	return _r
@@ -1926,7 +1926,7 @@ func (w *Window) EnableSnapshotRestoration() {
 	objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("enableSnapshotRestoration"))
 }
 
-// IsRestorable wraps the corresponding Objective-C method.
+// IsRestorable reports whether the object is restorable.
 func (w *Window) IsRestorable() bool {
 	_r := objc.Send[bool](objref.IDOf(w), objc.RegisterName("isRestorable"))
 	return _r

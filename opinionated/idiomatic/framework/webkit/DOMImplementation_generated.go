@@ -55,25 +55,25 @@ func (di *DOMImplementation) HasFeatureVersion(feature string, version string) b
 	return _r
 }
 
-// CreateDocumentTypePublicIDSystemID wraps the corresponding Objective-C method.
+// CreateDocumentTypePublicIDSystemID creates document type public ID system ID.
 func (di *DOMImplementation) CreateDocumentTypePublicIDSystemID(qualifiedName string, publicId string, systemId string) *DOMDocumentType {
 	_r := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("createDocumentType:publicId:systemId:"), purego.NSString(qualifiedName), purego.NSString(publicId), purego.NSString(systemId))
 	return DOMDocumentTypeFromID(_r)
 }
 
-// CreateDocumentQualifiedNameDoctype wraps the corresponding Objective-C method.
+// CreateDocumentQualifiedNameDoctype creates document qualified name doctype.
 func (di *DOMImplementation) CreateDocumentQualifiedNameDoctype(namespaceURI string, qualifiedName string, doctype *DOMDocumentType) *DOMDocument {
 	_r := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("createDocument:qualifiedName:doctype:"), purego.NSString(namespaceURI), purego.NSString(qualifiedName), objref.IDOf(doctype))
 	return DOMDocumentFromID(_r)
 }
 
-// CreateCSSStyleSheetMedia wraps the corresponding Objective-C method.
+// CreateCSSStyleSheetMedia creates CSS style sheet media.
 func (di *DOMImplementation) CreateCSSStyleSheetMedia(title string, media string) *DOMCSSStyleSheet {
 	_r := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("createCSSStyleSheet:media:"), purego.NSString(title), purego.NSString(media))
 	return DOMCSSStyleSheetFromID(_r)
 }
 
-// CreateHTMLDocument wraps the corresponding Objective-C method.
+// CreateHTMLDocument creates HTML document.
 func (di *DOMImplementation) CreateHTMLDocument(title string) *DOMHTMLDocument {
 	_r := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("createHTMLDocument:"), purego.NSString(title))
 	return DOMHTMLDocumentFromID(_r)
@@ -85,19 +85,19 @@ func (di *DOMImplementation) HasFeature(feature string, version string) bool {
 	return _r
 }
 
-// CreateDocumentType wraps the corresponding Objective-C method.
+// CreateDocumentType creates document type.
 func (di *DOMImplementation) CreateDocumentType(qualifiedName string, publicId string, systemId string) *DOMDocumentType {
 	_r := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("createDocumentType:::"), purego.NSString(qualifiedName), purego.NSString(publicId), purego.NSString(systemId))
 	return DOMDocumentTypeFromID(_r)
 }
 
-// CreateDocument wraps the corresponding Objective-C method.
+// CreateDocument creates document.
 func (di *DOMImplementation) CreateDocument(namespaceURI string, qualifiedName string, doctype *DOMDocumentType) *DOMDocument {
 	_r := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("createDocument:::"), purego.NSString(namespaceURI), purego.NSString(qualifiedName), objref.IDOf(doctype))
 	return DOMDocumentFromID(_r)
 }
 
-// CreateCSSStyleSheet wraps the corresponding Objective-C method.
+// CreateCSSStyleSheet creates CSS style sheet.
 func (di *DOMImplementation) CreateCSSStyleSheet(title string, media string) *DOMCSSStyleSheet {
 	_r := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("createCSSStyleSheet::"), purego.NSString(title), purego.NSString(media))
 	return DOMCSSStyleSheetFromID(_r)

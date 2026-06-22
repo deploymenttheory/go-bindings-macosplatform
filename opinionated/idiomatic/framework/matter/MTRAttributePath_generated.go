@@ -50,7 +50,7 @@ func NewMTRAttributePath() *MTRAttributePath {
 	return mTRAttributePathAdopt(_id)
 }
 
-// Attribute wraps the corresponding Objective-C method.
+// Attribute returns the attribute.
 func (map_ *MTRAttributePath) Attribute() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(map_), objc.RegisterName("attribute"))
 	return obj.Wrap(_r)

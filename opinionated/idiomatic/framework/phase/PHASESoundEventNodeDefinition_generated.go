@@ -45,7 +45,7 @@ func soundEventNodeDefinitionAdopt(id objc.ID) *SoundEventNodeDefinition {
 	return x
 }
 
-// Children wraps the corresponding Objective-C method.
+// Children returns the children.
 //
 // Children returns the collection as a Go slice.
 func (send *SoundEventNodeDefinition) Children() []*SoundEventNodeDefinition {

@@ -349,19 +349,19 @@ func (moc *ManagedObjectContext) SetQueryGenerationFromToken(generation *QueryGe
 	return nil
 }
 
-// PersistentStoreCoordinator wraps the corresponding Objective-C method.
+// PersistentStoreCoordinator returns the persistent store coordinator.
 func (moc *ManagedObjectContext) PersistentStoreCoordinator() *PersistentStoreCoordinator {
 	_r := objc.Send[objc.ID](objref.IDOf(moc), objc.RegisterName("persistentStoreCoordinator"))
 	return PersistentStoreCoordinatorFromID(_r)
 }
 
-// ParentContext wraps the corresponding Objective-C method.
+// ParentContext returns the parent context.
 func (moc *ManagedObjectContext) ParentContext() *ManagedObjectContext {
 	_r := objc.Send[objc.ID](objref.IDOf(moc), objc.RegisterName("parentContext"))
 	return ManagedObjectContextFromID(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (moc *ManagedObjectContext) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(moc), objc.RegisterName("name"))
 	if _r == 0 {
@@ -370,49 +370,49 @@ func (moc *ManagedObjectContext) Name() string {
 	return purego.GoString(_r)
 }
 
-// UndoManager wraps the corresponding Objective-C method.
+// UndoManager returns the undo manager.
 func (moc *ManagedObjectContext) UndoManager() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moc), objc.RegisterName("undoManager"))
 	return obj.Wrap(_r)
 }
 
-// HasChanges wraps the corresponding Objective-C method.
+// HasChanges reports whether the object has changes.
 func (moc *ManagedObjectContext) HasChanges() bool {
 	_r := objc.Send[bool](objref.IDOf(moc), objc.RegisterName("hasChanges"))
 	return _r
 }
 
-// UserInfo wraps the corresponding Objective-C method.
+// UserInfo returns the user info.
 func (moc *ManagedObjectContext) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moc), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
-// ConcurrencyType wraps the corresponding Objective-C method.
+// ConcurrencyType returns the concurrency type.
 func (moc *ManagedObjectContext) ConcurrencyType() ManagedObjectContextConcurrencyType {
 	_r := objc.Send[ManagedObjectContextConcurrencyType](objref.IDOf(moc), objc.RegisterName("concurrencyType"))
 	return _r
 }
 
-// InsertedObjects wraps the corresponding Objective-C method.
+// InsertedObjects returns the inserted objects.
 func (moc *ManagedObjectContext) InsertedObjects() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moc), objc.RegisterName("insertedObjects"))
 	return obj.Wrap(_r)
 }
 
-// UpdatedObjects wraps the corresponding Objective-C method.
+// UpdatedObjects returns the updated objects.
 func (moc *ManagedObjectContext) UpdatedObjects() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moc), objc.RegisterName("updatedObjects"))
 	return obj.Wrap(_r)
 }
 
-// DeletedObjects wraps the corresponding Objective-C method.
+// DeletedObjects returns the deleted objects.
 func (moc *ManagedObjectContext) DeletedObjects() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moc), objc.RegisterName("deletedObjects"))
 	return obj.Wrap(_r)
 }
 
-// RegisteredObjects wraps the corresponding Objective-C method.
+// RegisteredObjects returns the registered objects.
 func (moc *ManagedObjectContext) RegisteredObjects() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moc), objc.RegisterName("registeredObjects"))
 	return obj.Wrap(_r)
@@ -436,19 +436,19 @@ func (moc *ManagedObjectContext) ShouldDeleteInaccessibleFaults() bool {
 	return _r
 }
 
-// StalenessInterval wraps the corresponding Objective-C method.
+// StalenessInterval returns the staleness interval.
 func (moc *ManagedObjectContext) StalenessInterval() float64 {
 	_r := objc.Send[float64](objref.IDOf(moc), objc.RegisterName("stalenessInterval"))
 	return _r
 }
 
-// MergePolicy wraps the corresponding Objective-C method.
+// MergePolicy returns the merge policy.
 func (moc *ManagedObjectContext) MergePolicy() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moc), objc.RegisterName("mergePolicy"))
 	return obj.Wrap(_r)
 }
 
-// QueryGenerationToken wraps the corresponding Objective-C method.
+// QueryGenerationToken returns the query generation token.
 func (moc *ManagedObjectContext) QueryGenerationToken() *QueryGenerationToken {
 	_r := objc.Send[objc.ID](objref.IDOf(moc), objc.RegisterName("queryGenerationToken"))
 	return QueryGenerationTokenFromID(_r)
@@ -460,7 +460,7 @@ func (moc *ManagedObjectContext) AutomaticallyMergesChangesFromParent() bool {
 	return _r
 }
 
-// TransactionAuthor wraps the corresponding Objective-C method.
+// TransactionAuthor returns the transaction author.
 func (moc *ManagedObjectContext) TransactionAuthor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(moc), objc.RegisterName("transactionAuthor"))
 	if _r == 0 {

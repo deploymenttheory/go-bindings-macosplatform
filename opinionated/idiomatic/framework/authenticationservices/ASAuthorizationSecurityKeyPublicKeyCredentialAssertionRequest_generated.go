@@ -64,7 +64,7 @@ func (askpkcar *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) Wit
 	return askpkcar
 }
 
-// WithPrf sets the property and returns the receiver so calls can be chained.
+// WithPrf sets the prf.
 func (askpkcar *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) WithPrf(prf *AuthorizationPublicKeyCredentialPRFAssertionInput) *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest {
 	objc.Send[objc.ID](objref.IDOf(askpkcar), objc.RegisterName("setPrf:"), objref.IDOf(prf))
 	return askpkcar
@@ -89,7 +89,7 @@ func (askpkcar *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) App
 	return purego.GoString(_r)
 }
 
-// Prf wraps the corresponding Objective-C method.
+// Prf returns the prf.
 func (askpkcar *AuthorizationSecurityKeyPublicKeyCredentialAssertionRequest) Prf() *AuthorizationPublicKeyCredentialPRFAssertionInput {
 	_r := objc.Send[objc.ID](objref.IDOf(askpkcar), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFAssertionInputFromID(_r)

@@ -81,7 +81,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SetTimeZoneWithParamsCompletion(
 	}
 }
 
-// ReadAttributeUTCTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUTCTimeWithCompletion reads attribute utc time with completion.
 //
 // ReadAttributeUTCTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeUTCTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -131,7 +131,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeUTCTimeWithPar
 	}
 }
 
-// ReadAttributeGranularityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGranularityWithCompletion reads attribute granularity with completion.
 //
 // ReadAttributeGranularityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeGranularityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -181,7 +181,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeGranularityWit
 	}
 }
 
-// ReadAttributeTimeSourceWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTimeSourceWithCompletion reads attribute time source with completion.
 //
 // ReadAttributeTimeSourceWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeTimeSourceWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -231,7 +231,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeSourceWith
 	}
 }
 
-// ReadAttributeTrustedTimeSourceWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTrustedTimeSourceWithCompletion reads attribute trusted time source with completion.
 //
 // ReadAttributeTrustedTimeSourceWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeTrustedTimeSourceWithCompletion(ctx context.Context) (result *MTRTimeSynchronizationClusterTrustedTimeSourceStruct, err error) {
@@ -281,7 +281,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeTrustedTimeSou
 	}
 }
 
-// ReadAttributeDefaultNTPWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDefaultNTPWithCompletion reads attribute default ntp with completion.
 //
 // ReadAttributeDefaultNTPWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeDefaultNTPWithCompletion(ctx context.Context) (result string, err error) {
@@ -331,7 +331,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeDefaultNTPWith
 	}
 }
 
-// ReadAttributeTimeZoneWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTimeZoneWithCompletion reads attribute time zone with completion.
 //
 // ReadAttributeTimeZoneWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeTimeZoneWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -381,7 +381,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeZoneWithPa
 	}
 }
 
-// ReadAttributeDSTOffsetWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDSTOffsetWithCompletion reads attribute dst offset with completion.
 //
 // ReadAttributeDSTOffsetWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeDSTOffsetWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -431,7 +431,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeDSTOffsetWithP
 	}
 }
 
-// ReadAttributeLocalTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLocalTimeWithCompletion reads attribute local time with completion.
 //
 // ReadAttributeLocalTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeLocalTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -481,7 +481,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeLocalTimeWithP
 	}
 }
 
-// ReadAttributeTimeZoneDatabaseWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTimeZoneDatabaseWithCompletion reads attribute time zone database with completion.
 //
 // ReadAttributeTimeZoneDatabaseWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeTimeZoneDatabaseWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -531,7 +531,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeZoneDataba
 	}
 }
 
-// ReadAttributeNTPServerAvailableWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNTPServerAvailableWithCompletion reads attribute ntp server available with completion.
 //
 // ReadAttributeNTPServerAvailableWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeNTPServerAvailableWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -581,7 +581,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeNTPServerAvail
 	}
 }
 
-// ReadAttributeTimeZoneListMaxSizeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTimeZoneListMaxSizeWithCompletion reads attribute time zone list max size with completion.
 //
 // ReadAttributeTimeZoneListMaxSizeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeTimeZoneListMaxSizeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -631,7 +631,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeZoneListMa
 	}
 }
 
-// ReadAttributeDSTOffsetListMaxSizeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDSTOffsetListMaxSizeWithCompletion reads attribute dst offset list max size with completion.
 //
 // ReadAttributeDSTOffsetListMaxSizeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeDSTOffsetListMaxSizeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -681,7 +681,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeDSTOffsetListM
 	}
 }
 
-// ReadAttributeSupportsDNSResolveWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupportsDNSResolveWithCompletion reads attribute supports DNS resolve with completion.
 //
 // ReadAttributeSupportsDNSResolveWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeSupportsDNSResolveWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -731,7 +731,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeSupportsDNSRes
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -781,7 +781,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeGeneratedComma
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -831,7 +831,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeAcceptedComman
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -881,7 +881,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeAttributeListW
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -931,7 +931,7 @@ func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeFeatureMapWith
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

@@ -70,13 +70,13 @@ func NewMTROnOffClusterOffWithEffectParams() *MTROnOffClusterOffWithEffectParams
 	return mTROnOffClusterOffWithEffectParamsAdopt(_id)
 }
 
-// WithEffectIdentifier sets the property and returns the receiver so calls can be chained.
+// WithEffectIdentifier sets the effect identifier.
 func (moocowep *MTROnOffClusterOffWithEffectParams) WithEffectIdentifier(effectIdentifier obj.Object) *MTROnOffClusterOffWithEffectParams {
 	objc.Send[objc.ID](objref.IDOf(moocowep), objc.RegisterName("setEffectIdentifier:"), objref.IDOf(effectIdentifier))
 	return moocowep
 }
 
-// WithEffectVariant sets the property and returns the receiver so calls can be chained.
+// WithEffectVariant sets the effect variant.
 func (moocowep *MTROnOffClusterOffWithEffectParams) WithEffectVariant(effectVariant obj.Object) *MTROnOffClusterOffWithEffectParams {
 	objc.Send[objc.ID](objref.IDOf(moocowep), objc.RegisterName("setEffectVariant:"), objref.IDOf(effectVariant))
 	return moocowep
@@ -94,19 +94,19 @@ func (moocowep *MTROnOffClusterOffWithEffectParams) WithServerSideProcessingTime
 	return moocowep
 }
 
-// WithEffectID sets the property and returns the receiver so calls can be chained.
+// WithEffectID sets the effect ID.
 func (moocowep *MTROnOffClusterOffWithEffectParams) WithEffectID(effectId obj.Object) *MTROnOffClusterOffWithEffectParams {
 	objc.Send[objc.ID](objref.IDOf(moocowep), objc.RegisterName("setEffectId:"), objref.IDOf(effectId))
 	return moocowep
 }
 
-// EffectIdentifier wraps the corresponding Objective-C method.
+// EffectIdentifier returns the effect identifier.
 func (moocowep *MTROnOffClusterOffWithEffectParams) EffectIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moocowep), objc.RegisterName("effectIdentifier"))
 	return obj.Wrap(_r)
 }
 
-// EffectVariant wraps the corresponding Objective-C method.
+// EffectVariant returns the effect variant.
 func (moocowep *MTROnOffClusterOffWithEffectParams) EffectVariant() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moocowep), objc.RegisterName("effectVariant"))
 	return obj.Wrap(_r)
@@ -124,7 +124,7 @@ func (moocowep *MTROnOffClusterOffWithEffectParams) ServerSideProcessingTimeout(
 	return obj.Wrap(_r)
 }
 
-// EffectID wraps the corresponding Objective-C method.
+// EffectID returns the effect ID.
 func (moocowep *MTROnOffClusterOffWithEffectParams) EffectID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moocowep), objc.RegisterName("effectId"))
 	return obj.Wrap(_r)

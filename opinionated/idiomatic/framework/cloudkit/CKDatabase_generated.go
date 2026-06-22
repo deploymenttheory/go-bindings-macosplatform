@@ -80,7 +80,7 @@ func (d *Database) AddOperation(operation *DatabaseOperation) {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("addOperation:"), objref.IDOf(operation))
 }
 
-// DatabaseScope wraps the corresponding Objective-C method.
+// DatabaseScope returns the database scope.
 func (d *Database) DatabaseScope() DatabaseScope {
 	_r := objc.Send[DatabaseScope](objref.IDOf(d), objc.RegisterName("databaseScope"))
 	return _r

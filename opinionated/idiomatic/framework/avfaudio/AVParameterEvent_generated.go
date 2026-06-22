@@ -76,25 +76,25 @@ func (pe *ParameterEvent) WithValue(value float32) *ParameterEvent {
 	return pe
 }
 
-// ParameterID wraps the corresponding Objective-C method.
+// ParameterID returns the parameter ID.
 func (pe *ParameterEvent) ParameterID() int {
 	_r := objc.Send[int](objref.IDOf(pe), objc.RegisterName("parameterID"))
 	return _r
 }
 
-// Scope wraps the corresponding Objective-C method.
+// Scope returns the scope.
 func (pe *ParameterEvent) Scope() int {
 	_r := objc.Send[int](objref.IDOf(pe), objc.RegisterName("scope"))
 	return _r
 }
 
-// Element wraps the corresponding Objective-C method.
+// Element returns the element.
 func (pe *ParameterEvent) Element() int {
 	_r := objc.Send[int](objref.IDOf(pe), objc.RegisterName("element"))
 	return _r
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (pe *ParameterEvent) Value() float32 {
 	_r := objc.Send[float32](objref.IDOf(pe), objc.RegisterName("value"))
 	return _r

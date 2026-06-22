@@ -50,13 +50,13 @@ func NewMTRContentLauncherClusterLaunchResponseParams() *MTRContentLauncherClust
 	return mTRContentLauncherClusterLaunchResponseParamsAdopt(_id)
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mclclrp *MTRContentLauncherClusterLaunchResponseParams) WithStatus(status obj.Object) *MTRContentLauncherClusterLaunchResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mclclrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mclclrp
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (mclclrp *MTRContentLauncherClusterLaunchResponseParams) WithData(data string) *MTRContentLauncherClusterLaunchResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mclclrp), objc.RegisterName("setData:"), purego.NSString(data))
 	return mclclrp

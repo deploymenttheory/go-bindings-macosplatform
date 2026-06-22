@@ -70,7 +70,7 @@ func NewMTRLevelControlClusterMoveToClosestFrequencyParams() *MTRLevelControlClu
 	return mTRLevelControlClusterMoveToClosestFrequencyParamsAdopt(_id)
 }
 
-// WithFrequency sets the property and returns the receiver so calls can be chained.
+// WithFrequency sets the frequency.
 func (mlccmtcfp *MTRLevelControlClusterMoveToClosestFrequencyParams) WithFrequency(frequency obj.Object) *MTRLevelControlClusterMoveToClosestFrequencyParams {
 	objc.Send[objc.ID](objref.IDOf(mlccmtcfp), objc.RegisterName("setFrequency:"), objref.IDOf(frequency))
 	return mlccmtcfp
@@ -88,7 +88,7 @@ func (mlccmtcfp *MTRLevelControlClusterMoveToClosestFrequencyParams) WithServerS
 	return mlccmtcfp
 }
 
-// Frequency wraps the corresponding Objective-C method.
+// Frequency returns the frequency.
 func (mlccmtcfp *MTRLevelControlClusterMoveToClosestFrequencyParams) Frequency() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmtcfp), objc.RegisterName("frequency"))
 	return obj.Wrap(_r)

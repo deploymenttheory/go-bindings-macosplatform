@@ -8,7 +8,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// SharedManager wraps the corresponding Objective-C method.
+// SharedManager returns the shared manager.
 func SharedManager() *MusicHapticsManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("MAMusicHapticsManager")), objc.RegisterName("sharedManager"))
 	return MusicHapticsManagerFromID(_r)

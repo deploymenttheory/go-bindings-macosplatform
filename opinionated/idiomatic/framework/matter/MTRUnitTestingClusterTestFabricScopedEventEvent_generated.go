@@ -66,13 +66,13 @@ func (mutctfsee *MTRUnitTestingClusterTestFabricScopedEventEvent) String() strin
 	return rt.Description(objref.IDOf(mutctfsee))
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (mutctfsee *MTRUnitTestingClusterTestFabricScopedEventEvent) WithFabricIndex(fabricIndex obj.Object) *MTRUnitTestingClusterTestFabricScopedEventEvent {
 	objc.Send[objc.ID](objref.IDOf(mutctfsee), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mutctfsee
 }
 
-// FabricIndex wraps the corresponding Objective-C method.
+// FabricIndex returns the fabric index.
 func (mutctfsee *MTRUnitTestingClusterTestFabricScopedEventEvent) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctfsee), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)

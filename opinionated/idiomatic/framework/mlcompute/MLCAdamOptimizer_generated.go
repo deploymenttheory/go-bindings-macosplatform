@@ -75,7 +75,7 @@ func (ao *AdamOptimizer) Beta2() float32 {
 	return _r
 }
 
-// Epsilon wraps the corresponding Objective-C method.
+// Epsilon returns the epsilon.
 func (ao *AdamOptimizer) Epsilon() float32 {
 	_r := objc.Send[float32](objref.IDOf(ao), objc.RegisterName("epsilon"))
 	return _r

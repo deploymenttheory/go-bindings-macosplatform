@@ -87,7 +87,7 @@ func NewDistantObjectWithCoder(inCoder *Coder) *DistantObject {
 	return distantObjectAdopt(_id)
 }
 
-// ConnectionForProxy wraps the corresponding Objective-C method.
+// ConnectionForProxy returns the connection for proxy.
 func (do *DistantObject) ConnectionForProxy() *Connection {
 	_r := objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("connectionForProxy"))
 	return ConnectionFromID(_r)

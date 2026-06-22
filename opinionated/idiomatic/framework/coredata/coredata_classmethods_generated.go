@@ -92,7 +92,7 @@ func ContextShouldIgnoreUnmodeledPropertyChanges() bool {
 	return _r
 }
 
-// New wraps the corresponding Objective-C method.
+// New returns the new.
 func New() *ManagedObjectContext {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectContext")), objc.RegisterName("new"))
 	return ManagedObjectContextFromID(_r)
@@ -153,31 +153,31 @@ func InferredMappingModelForSourceModelDestinationModelError(sourceModel *Manage
 	return MappingModelFromID(_r), nil
 }
 
-// ErrorMergePolicy wraps the corresponding Objective-C method.
+// ErrorMergePolicy returns the error merge policy.
 func ErrorMergePolicy() *MergePolicy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMergePolicy")), objc.RegisterName("errorMergePolicy"))
 	return MergePolicyFromID(_r)
 }
 
-// RollbackMergePolicy wraps the corresponding Objective-C method.
+// RollbackMergePolicy returns the rollback merge policy.
 func RollbackMergePolicy() *MergePolicy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMergePolicy")), objc.RegisterName("rollbackMergePolicy"))
 	return MergePolicyFromID(_r)
 }
 
-// OverwriteMergePolicy wraps the corresponding Objective-C method.
+// OverwriteMergePolicy returns the overwrite merge policy.
 func OverwriteMergePolicy() *MergePolicy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMergePolicy")), objc.RegisterName("overwriteMergePolicy"))
 	return MergePolicyFromID(_r)
 }
 
-// MergeByPropertyObjectTrumpMergePolicy wraps the corresponding Objective-C method.
+// MergeByPropertyObjectTrumpMergePolicy returns the merge by property object trump merge policy.
 func MergeByPropertyObjectTrumpMergePolicy() *MergePolicy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMergePolicy")), objc.RegisterName("mergeByPropertyObjectTrumpMergePolicy"))
 	return MergePolicyFromID(_r)
 }
 
-// MergeByPropertyStoreTrumpMergePolicy wraps the corresponding Objective-C method.
+// MergeByPropertyStoreTrumpMergePolicy returns the merge by property store trump merge policy.
 func MergeByPropertyStoreTrumpMergePolicy() *MergePolicy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMergePolicy")), objc.RegisterName("mergeByPropertyStoreTrumpMergePolicy"))
 	return MergePolicyFromID(_r)
@@ -231,13 +231,13 @@ func EntityDescriptionWithContext(context_ *ManagedObjectContext) *EntityDescrip
 	return EntityDescriptionFromID(_r)
 }
 
-// NSPersistentHistoryChangeEntityDescription wraps the corresponding Objective-C method.
+// NSPersistentHistoryChangeEntityDescription returns the ns persistent history change entity description.
 func NSPersistentHistoryChangeEntityDescription() *EntityDescription {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChange")), objc.RegisterName("entityDescription"))
 	return EntityDescriptionFromID(_r)
 }
 
-// NSPersistentHistoryChangeFetchRequest wraps the corresponding Objective-C method.
+// NSPersistentHistoryChangeFetchRequest returns the ns persistent history change fetch request.
 func NSPersistentHistoryChangeFetchRequest() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChange")), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
@@ -291,13 +291,13 @@ func NSPersistentHistoryTransactionEntityDescriptionWithContext(context_ *Manage
 	return EntityDescriptionFromID(_r)
 }
 
-// NSPersistentHistoryTransactionEntityDescription wraps the corresponding Objective-C method.
+// NSPersistentHistoryTransactionEntityDescription returns the ns persistent history transaction entity description.
 func NSPersistentHistoryTransactionEntityDescription() *EntityDescription {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryTransaction")), objc.RegisterName("entityDescription"))
 	return EntityDescriptionFromID(_r)
 }
 
-// NSPersistentHistoryTransactionFetchRequest wraps the corresponding Objective-C method.
+// NSPersistentHistoryTransactionFetchRequest returns the ns persistent history transaction fetch request.
 func NSPersistentHistoryTransactionFetchRequest() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryTransaction")), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
@@ -389,7 +389,7 @@ func SetMetadataForPersistentStoreOfTypeURL(metadata obj.Object, storeType strin
 	return nil
 }
 
-// RemoveUbiquitousContentAndPersistentStoreAtURLOptions wraps the corresponding Objective-C method.
+// RemoveUbiquitousContentAndPersistentStoreAtURLOptions removes ubiquitous content and persistent store at URL options.
 func RemoveUbiquitousContentAndPersistentStoreAtURLOptions(storeURL string, options obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("removeUbiquitousContentAndPersistentStoreAtURL:options:error:"), rt.FileURL(storeURL), objref.IDOf(options), unsafe.Pointer(&_nsErr))
@@ -399,7 +399,7 @@ func RemoveUbiquitousContentAndPersistentStoreAtURLOptions(storeURL string, opti
 	return nil
 }
 
-// RegisteredStoreTypes wraps the corresponding Objective-C method.
+// RegisteredStoreTypes returns the registered store types.
 func RegisteredStoreTypes() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreCoordinator")), objc.RegisterName("registeredStoreTypes"))
 	return obj.Wrap(_r)
@@ -411,7 +411,7 @@ func PersistentStoreDescriptionWithURL(uRL string) *PersistentStoreDescription {
 	return PersistentStoreDescriptionFromID(_r)
 }
 
-// CurrentQueryGenerationToken wraps the corresponding Objective-C method.
+// CurrentQueryGenerationToken returns the current query generation token.
 func CurrentQueryGenerationToken() *QueryGenerationToken {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSQueryGenerationToken")), objc.RegisterName("currentQueryGenerationToken"))
 	return QueryGenerationTokenFromID(_r)

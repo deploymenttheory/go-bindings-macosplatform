@@ -82,7 +82,7 @@ func (mgcggmp *MTRGroupsClusterGetGroupMembershipParams) WithServerSideProcessin
 	return mgcggmp
 }
 
-// GroupList wraps the corresponding Objective-C method.
+// GroupList returns the group list.
 func (mgcggmp *MTRGroupsClusterGetGroupMembershipParams) GroupList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgcggmp), objc.RegisterName("groupList"))
 	return obj.Wrap(_r)

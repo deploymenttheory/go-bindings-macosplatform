@@ -70,13 +70,13 @@ func NewMTRThreadNetworkDiagnosticsClusterConnectionStatusEvent() *MTRThreadNetw
 	return mTRThreadNetworkDiagnosticsClusterConnectionStatusEventAdopt(_id)
 }
 
-// WithConnectionStatus sets the property and returns the receiver so calls can be chained.
+// WithConnectionStatus sets the connection status.
 func (mtndccse *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) WithConnectionStatus(connectionStatus obj.Object) *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent {
 	objc.Send[objc.ID](objref.IDOf(mtndccse), objc.RegisterName("setConnectionStatus:"), objref.IDOf(connectionStatus))
 	return mtndccse
 }
 
-// ConnectionStatus wraps the corresponding Objective-C method.
+// ConnectionStatus returns the connection status.
 func (mtndccse *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) ConnectionStatus() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndccse), objc.RegisterName("connectionStatus"))
 	return obj.Wrap(_r)

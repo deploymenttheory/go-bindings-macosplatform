@@ -73,7 +73,7 @@ func NewDistributedLockWithPath(path string) *DistributedLock {
 	return distributedLockAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (dl *DistributedLock) WithScriptingProperties(scriptingProperties obj.Object) *DistributedLock {
 	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return dl
@@ -95,7 +95,7 @@ func (dl *DistributedLock) BreakLock() {
 	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("breakLock"))
 }
 
-// LockDate wraps the corresponding Objective-C method.
+// LockDate returns the lock date.
 func (dl *DistributedLock) LockDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("lockDate"))
 	return DateFromID(_r)

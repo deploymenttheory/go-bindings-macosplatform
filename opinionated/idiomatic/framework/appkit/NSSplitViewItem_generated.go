@@ -163,19 +163,19 @@ func (svi *SplitViewItem) WithTopAlignedAccessoryViewControllers(items ...*Split
 	return svi
 }
 
-// WithBottomAlignedAccessoryViewControllers sets the property and returns the receiver so calls can be chained.
+// WithBottomAlignedAccessoryViewControllers sets the bottom aligned accessory view controllers.
 func (svi *SplitViewItem) WithBottomAlignedAccessoryViewControllers(items ...*SplitViewItemAccessoryViewController) *SplitViewItem {
 	_arr := purego.SliceToNSArray(items, func(_v *SplitViewItemAccessoryViewController) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(svi), objc.RegisterName("setBottomAlignedAccessoryViewControllers:"), _arr)
 	return svi
 }
 
-// AddTopAlignedAccessoryViewController wraps the corresponding Objective-C method.
+// AddTopAlignedAccessoryViewController adds top aligned accessory view controller.
 func (svi *SplitViewItem) AddTopAlignedAccessoryViewController(childViewController *SplitViewItemAccessoryViewController) {
 	objc.Send[objc.ID](objref.IDOf(svi), objc.RegisterName("addTopAlignedAccessoryViewController:"), objref.IDOf(childViewController))
 }
 
-// InsertTopAlignedAccessoryViewControllerAtIndex wraps the corresponding Objective-C method.
+// InsertTopAlignedAccessoryViewControllerAtIndex inserts top aligned accessory view controller at index.
 func (svi *SplitViewItem) InsertTopAlignedAccessoryViewControllerAtIndex(childViewController *SplitViewItemAccessoryViewController, index int) {
 	objc.Send[objc.ID](objref.IDOf(svi), objc.RegisterName("insertTopAlignedAccessoryViewController:atIndex:"), objref.IDOf(childViewController), index)
 }
@@ -185,12 +185,12 @@ func (svi *SplitViewItem) RemoveTopAlignedAccessoryViewControllerAtIndex(index i
 	objc.Send[objc.ID](objref.IDOf(svi), objc.RegisterName("removeTopAlignedAccessoryViewControllerAtIndex:"), index)
 }
 
-// AddBottomAlignedAccessoryViewController wraps the corresponding Objective-C method.
+// AddBottomAlignedAccessoryViewController adds bottom aligned accessory view controller.
 func (svi *SplitViewItem) AddBottomAlignedAccessoryViewController(childViewController *SplitViewItemAccessoryViewController) {
 	objc.Send[objc.ID](objref.IDOf(svi), objc.RegisterName("addBottomAlignedAccessoryViewController:"), objref.IDOf(childViewController))
 }
 
-// InsertBottomAlignedAccessoryViewControllerAtIndex wraps the corresponding Objective-C method.
+// InsertBottomAlignedAccessoryViewControllerAtIndex inserts bottom aligned accessory view controller at index.
 func (svi *SplitViewItem) InsertBottomAlignedAccessoryViewControllerAtIndex(childViewController *SplitViewItemAccessoryViewController, index int) {
 	objc.Send[objc.ID](objref.IDOf(svi), objc.RegisterName("insertBottomAlignedAccessoryViewController:atIndex:"), objref.IDOf(childViewController), index)
 }
@@ -300,7 +300,7 @@ func (svi *SplitViewItem) TopAlignedAccessoryViewControllers() []*SplitViewItemA
 	})
 }
 
-// BottomAlignedAccessoryViewControllers wraps the corresponding Objective-C method.
+// BottomAlignedAccessoryViewControllers returns the bottom aligned accessory view controllers.
 //
 // BottomAlignedAccessoryViewControllers returns the collection as a Go slice.
 func (svi *SplitViewItem) BottomAlignedAccessoryViewControllers() []*SplitViewItemAccessoryViewController {

@@ -70,49 +70,49 @@ func NewMTRICDManagementClusterMonitoringRegistrationStruct() *MTRICDManagementC
 	return mTRICDManagementClusterMonitoringRegistrationStructAdopt(_id)
 }
 
-// WithCheckInNodeID sets the property and returns the receiver so calls can be chained.
+// WithCheckInNodeID sets the check in node ID.
 func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) WithCheckInNodeID(checkInNodeID obj.Object) *MTRICDManagementClusterMonitoringRegistrationStruct {
 	objc.Send[objc.ID](objref.IDOf(mmcmrs), objc.RegisterName("setCheckInNodeID:"), objref.IDOf(checkInNodeID))
 	return mmcmrs
 }
 
-// WithMonitoredSubject sets the property and returns the receiver so calls can be chained.
+// WithMonitoredSubject sets the monitored subject.
 func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) WithMonitoredSubject(monitoredSubject obj.Object) *MTRICDManagementClusterMonitoringRegistrationStruct {
 	objc.Send[objc.ID](objref.IDOf(mmcmrs), objc.RegisterName("setMonitoredSubject:"), objref.IDOf(monitoredSubject))
 	return mmcmrs
 }
 
-// WithClientType sets the property and returns the receiver so calls can be chained.
+// WithClientType sets the client type.
 func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) WithClientType(clientType obj.Object) *MTRICDManagementClusterMonitoringRegistrationStruct {
 	objc.Send[objc.ID](objref.IDOf(mmcmrs), objc.RegisterName("setClientType:"), objref.IDOf(clientType))
 	return mmcmrs
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) WithFabricIndex(fabricIndex obj.Object) *MTRICDManagementClusterMonitoringRegistrationStruct {
 	objc.Send[objc.ID](objref.IDOf(mmcmrs), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mmcmrs
 }
 
-// CheckInNodeID wraps the corresponding Objective-C method.
+// CheckInNodeID returns the check in node ID.
 func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) CheckInNodeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmrs), objc.RegisterName("checkInNodeID"))
 	return obj.Wrap(_r)
 }
 
-// MonitoredSubject wraps the corresponding Objective-C method.
+// MonitoredSubject returns the monitored subject.
 func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) MonitoredSubject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmrs), objc.RegisterName("monitoredSubject"))
 	return obj.Wrap(_r)
 }
 
-// ClientType wraps the corresponding Objective-C method.
+// ClientType returns the client type.
 func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) ClientType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmrs), objc.RegisterName("clientType"))
 	return obj.Wrap(_r)
 }
 
-// FabricIndex wraps the corresponding Objective-C method.
+// FabricIndex returns the fabric index.
 func (mmcmrs *MTRICDManagementClusterMonitoringRegistrationStruct) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmrs), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)

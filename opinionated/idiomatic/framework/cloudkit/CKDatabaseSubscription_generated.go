@@ -78,7 +78,7 @@ func (ds *DatabaseSubscription) WithNotificationInfo(notificationInfo *Notificat
 	return ds
 }
 
-// RecordType wraps the corresponding Objective-C method.
+// RecordType returns the record type.
 func (ds *DatabaseSubscription) RecordType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("recordType"))
 	return obj.Wrap(_r)

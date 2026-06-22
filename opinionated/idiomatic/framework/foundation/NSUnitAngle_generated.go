@@ -52,7 +52,7 @@ func NewUnitAngle() *UnitAngle {
 	return unitAngleAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ua *UnitAngle) WithScriptingProperties(scriptingProperties obj.Object) *UnitAngle {
 	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ua

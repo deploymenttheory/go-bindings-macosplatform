@@ -72,7 +72,7 @@ func NewPasskeyRegistrationCredentialExtensionInput() *PasskeyRegistrationCreden
 	return passkeyRegistrationCredentialExtensionInputAdopt(_id)
 }
 
-// LargeBlob wraps the corresponding Objective-C method.
+// LargeBlob returns the large blob.
 func (prcei *PasskeyRegistrationCredentialExtensionInput) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
 	_r := objc.Send[objc.ID](objref.IDOf(prcei), objc.RegisterName("largeBlob"))
 	return AuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID(_r)

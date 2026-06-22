@@ -80,13 +80,13 @@ func NewMTRUnitTestingClusterTestStructArrayArgumentResponseParamsWithResponseVa
 	return mTRUnitTestingClusterTestStructArrayArgumentResponseParamsAdopt(_id), nil
 }
 
-// WithArg5 sets the property and returns the receiver so calls can be chained.
+// WithArg5 sets the arg5.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) WithArg5(arg5 obj.Object) *MTRUnitTestingClusterTestStructArrayArgumentResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("setArg5:"), objref.IDOf(arg5))
 	return mutctsaarp
 }
 
-// WithArg6 sets the property and returns the receiver so calls can be chained.
+// WithArg6 sets the arg6.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) WithArg6(arg6 obj.Object) *MTRUnitTestingClusterTestStructArrayArgumentResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("setArg6:"), objref.IDOf(arg6))
 	return mutctsaarp
@@ -98,7 +98,7 @@ func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Wi
 	return mutctsaarp
 }
 
-// Arg1 wraps the corresponding Objective-C method.
+// Arg1 returns the arg1.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Arg1() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("arg1"))
 	return obj.Wrap(_r)
@@ -109,7 +109,7 @@ func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Se
 	objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 }
 
-// Arg2 wraps the corresponding Objective-C method.
+// Arg2 returns the arg2.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Arg2() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("arg2"))
 	return obj.Wrap(_r)
@@ -120,7 +120,7 @@ func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Se
 	objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
 }
 
-// Arg3 wraps the corresponding Objective-C method.
+// Arg3 returns the arg3.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Arg3() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("arg3"))
 	return obj.Wrap(_r)
@@ -131,7 +131,7 @@ func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Se
 	objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("setArg3:"), objref.IDOf(arg3))
 }
 
-// Arg4 wraps the corresponding Objective-C method.
+// Arg4 returns the arg4.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Arg4() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("arg4"))
 	return obj.Wrap(_r)
@@ -142,13 +142,13 @@ func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Se
 	objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("setArg4:"), objref.IDOf(arg4))
 }
 
-// Arg5 wraps the corresponding Objective-C method.
+// Arg5 returns the arg5.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Arg5() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("arg5"))
 	return obj.Wrap(_r)
 }
 
-// Arg6 wraps the corresponding Objective-C method.
+// Arg6 returns the arg6.
 func (mutctsaarp *MTRUnitTestingClusterTestStructArrayArgumentResponseParams) Arg6() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctsaarp), objc.RegisterName("arg6"))
 	return obj.Wrap(_r)

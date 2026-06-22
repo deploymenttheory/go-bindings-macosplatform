@@ -54,49 +54,49 @@ func NewURLSessionDownloadTask() *URLSessionDownloadTask {
 	return uRLSessionDownloadTaskAdopt(_id)
 }
 
-// WithEarliestBeginDate sets the property and returns the receiver so calls can be chained.
+// WithEarliestBeginDate sets the earliest begin date.
 func (usdt *URLSessionDownloadTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionDownloadTask {
 	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
 	return usdt
 }
 
-// WithCountOfBytesClientExpectsToSend sets the property and returns the receiver so calls can be chained.
+// WithCountOfBytesClientExpectsToSend sets the count of bytes client expects to send.
 func (usdt *URLSessionDownloadTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionDownloadTask {
 	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
 	return usdt
 }
 
-// WithCountOfBytesClientExpectsToReceive sets the property and returns the receiver so calls can be chained.
+// WithCountOfBytesClientExpectsToReceive sets the count of bytes client expects to receive.
 func (usdt *URLSessionDownloadTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionDownloadTask {
 	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
 	return usdt
 }
 
-// WithTaskDescription sets the property and returns the receiver so calls can be chained.
+// WithTaskDescription sets the task description.
 func (usdt *URLSessionDownloadTask) WithTaskDescription(taskDescription StringProvider) *URLSessionDownloadTask {
 	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
 	return usdt
 }
 
-// WithPriority sets the property and returns the receiver so calls can be chained.
+// WithPriority sets the priority.
 func (usdt *URLSessionDownloadTask) WithPriority(priority float32) *URLSessionDownloadTask {
 	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setPriority:"), priority)
 	return usdt
 }
 
-// WithPrefersIncrementalDelivery sets the property and returns the receiver so calls can be chained.
+// WithPrefersIncrementalDelivery sets the prefers incremental delivery.
 func (usdt *URLSessionDownloadTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionDownloadTask {
 	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
 	return usdt
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (usdt *URLSessionDownloadTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionDownloadTask {
 	objc.Send[objc.ID](objref.IDOf(usdt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return usdt
 }
 
-// CancelByProducingResumeData wraps the corresponding Objective-C method.
+// CancelByProducingResumeData cancels by producing resume data.
 //
 // CancelByProducingResumeData blocks until the operation completes or ctx is cancelled.
 func (usdt *URLSessionDownloadTask) CancelByProducingResumeData(ctx context.Context) (result *Data, err error) {

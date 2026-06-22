@@ -142,43 +142,43 @@ func (rd *RelationshipDescription) WithRenamingIdentifier(renamingIdentifier str
 	return rd
 }
 
-// DestinationEntity wraps the corresponding Objective-C method.
+// DestinationEntity returns the destination entity.
 func (rd *RelationshipDescription) DestinationEntity() *EntityDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("destinationEntity"))
 	return EntityDescriptionFromID(_r)
 }
 
-// InverseRelationship wraps the corresponding Objective-C method.
+// InverseRelationship returns the inverse relationship.
 func (rd *RelationshipDescription) InverseRelationship() *RelationshipDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("inverseRelationship"))
 	return RelationshipDescriptionFromID(_r)
 }
 
-// MaxCount wraps the corresponding Objective-C method.
+// MaxCount returns the max count.
 func (rd *RelationshipDescription) MaxCount() int {
 	_r := objc.Send[int](objref.IDOf(rd), objc.RegisterName("maxCount"))
 	return _r
 }
 
-// MinCount wraps the corresponding Objective-C method.
+// MinCount returns the min count.
 func (rd *RelationshipDescription) MinCount() int {
 	_r := objc.Send[int](objref.IDOf(rd), objc.RegisterName("minCount"))
 	return _r
 }
 
-// DeleteRule wraps the corresponding Objective-C method.
+// DeleteRule returns the delete rule.
 func (rd *RelationshipDescription) DeleteRule() DeleteRule {
 	_r := objc.Send[DeleteRule](objref.IDOf(rd), objc.RegisterName("deleteRule"))
 	return _r
 }
 
-// IsToMany wraps the corresponding Objective-C method.
+// IsToMany reports whether the object is to many.
 func (rd *RelationshipDescription) IsToMany() bool {
 	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("isToMany"))
 	return _r
 }
 
-// IsOrdered wraps the corresponding Objective-C method.
+// IsOrdered reports whether the object is ordered.
 func (rd *RelationshipDescription) IsOrdered() bool {
 	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("isOrdered"))
 	return _r

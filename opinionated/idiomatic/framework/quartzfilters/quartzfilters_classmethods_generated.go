@@ -29,7 +29,7 @@ func QuartzFilterWithOutputIntents(outputIntents obj.Object) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// FilterManager wraps the corresponding Objective-C method.
+// FilterManager returns the filter manager.
 func FilterManager() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilterManager")), objc.RegisterName("filterManager"))
 	return obj.Wrap(_r)

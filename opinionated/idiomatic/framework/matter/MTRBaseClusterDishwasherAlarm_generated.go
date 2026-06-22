@@ -56,7 +56,7 @@ func NewMTRBaseClusterDishwasherAlarmWithDeviceEndpointIDQueue(device *MTRBaseDe
 	return mTRBaseClusterDishwasherAlarmAdopt(_id)
 }
 
-// ReadAttributeMaskWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaskWithCompletion reads attribute mask with completion.
 //
 // ReadAttributeMaskWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeMaskWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -106,7 +106,7 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeMaskWithParamsSubs
 	}
 }
 
-// ReadAttributeLatchWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLatchWithCompletion reads attribute latch with completion.
 //
 // ReadAttributeLatchWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeLatchWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -156,7 +156,7 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeLatchWithParamsSub
 	}
 }
 
-// ReadAttributeStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeStateWithCompletion reads attribute state with completion.
 //
 // ReadAttributeStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -206,7 +206,7 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeStateWithParamsSub
 	}
 }
 
-// ReadAttributeSupportedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupportedWithCompletion reads attribute supported with completion.
 //
 // ReadAttributeSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -256,7 +256,7 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeSupportedWithParam
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -306,7 +306,7 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeGeneratedCommandLi
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -356,7 +356,7 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeAcceptedCommandLis
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -406,7 +406,7 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeAttributeListWithP
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -456,7 +456,7 @@ func (mbcda *MTRBaseClusterDishwasherAlarm) SubscribeAttributeFeatureMapWithPara
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcda *MTRBaseClusterDishwasherAlarm) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

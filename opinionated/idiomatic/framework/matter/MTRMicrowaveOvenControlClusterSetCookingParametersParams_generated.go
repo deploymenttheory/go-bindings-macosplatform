@@ -70,25 +70,25 @@ func NewMTRMicrowaveOvenControlClusterSetCookingParametersParams() *MTRMicrowave
 	return mTRMicrowaveOvenControlClusterSetCookingParametersParamsAdopt(_id)
 }
 
-// WithCookMode sets the property and returns the receiver so calls can be chained.
+// WithCookMode sets the cook mode.
 func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithCookMode(cookMode obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
 	objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("setCookMode:"), objref.IDOf(cookMode))
 	return mmoccscpp
 }
 
-// WithCookTime sets the property and returns the receiver so calls can be chained.
+// WithCookTime sets the cook time.
 func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithCookTime(cookTime obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
 	objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("setCookTime:"), objref.IDOf(cookTime))
 	return mmoccscpp
 }
 
-// WithPowerSetting sets the property and returns the receiver so calls can be chained.
+// WithPowerSetting sets the power setting.
 func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithPowerSetting(powerSetting obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
 	objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("setPowerSetting:"), objref.IDOf(powerSetting))
 	return mmoccscpp
 }
 
-// WithStartAfterSetting sets the property and returns the receiver so calls can be chained.
+// WithStartAfterSetting sets the start after setting.
 func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithStartAfterSetting(startAfterSetting obj.Object) *MTRMicrowaveOvenControlClusterSetCookingParametersParams {
 	objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("setStartAfterSetting:"), objref.IDOf(startAfterSetting))
 	return mmoccscpp
@@ -106,25 +106,25 @@ func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) WithS
 	return mmoccscpp
 }
 
-// CookMode wraps the corresponding Objective-C method.
+// CookMode returns the cook mode.
 func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) CookMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("cookMode"))
 	return obj.Wrap(_r)
 }
 
-// CookTime wraps the corresponding Objective-C method.
+// CookTime returns the cook time.
 func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) CookTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("cookTime"))
 	return obj.Wrap(_r)
 }
 
-// PowerSetting wraps the corresponding Objective-C method.
+// PowerSetting returns the power setting.
 func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) PowerSetting() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("powerSetting"))
 	return obj.Wrap(_r)
 }
 
-// StartAfterSetting wraps the corresponding Objective-C method.
+// StartAfterSetting returns the start after setting.
 func (mmoccscpp *MTRMicrowaveOvenControlClusterSetCookingParametersParams) StartAfterSetting() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmoccscpp), objc.RegisterName("startAfterSetting"))
 	return obj.Wrap(_r)

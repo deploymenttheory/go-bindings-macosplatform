@@ -136,19 +136,19 @@ func (oc *ObjectController) Remove(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("remove:"), objref.IDOf(sender))
 }
 
-// Content wraps the corresponding Objective-C method.
+// Content returns the content.
 func (oc *ObjectController) Content() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("content"))
 	return obj.Wrap(_r)
 }
 
-// Selection wraps the corresponding Objective-C method.
+// Selection returns the selection.
 func (oc *ObjectController) Selection() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("selection"))
 	return obj.Wrap(_r)
 }
 
-// SelectedObjects wraps the corresponding Objective-C method.
+// SelectedObjects returns the selected objects.
 func (oc *ObjectController) SelectedObjects() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("selectedObjects"))
 	return obj.Wrap(_r)
@@ -160,7 +160,7 @@ func (oc *ObjectController) AutomaticallyPreparesContent() bool {
 	return _r
 }
 
-// IsEditable wraps the corresponding Objective-C method.
+// IsEditable reports whether the object is editable.
 func (oc *ObjectController) IsEditable() bool {
 	_r := objc.Send[bool](objref.IDOf(oc), objc.RegisterName("isEditable"))
 	return _r
@@ -199,13 +199,13 @@ func (oc *ObjectController) DefaultFetchRequest() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// ManagedObjectContext wraps the corresponding Objective-C method.
+// ManagedObjectContext returns the managed object context.
 func (oc *ObjectController) ManagedObjectContext() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("managedObjectContext"))
 	return obj.Wrap(_r)
 }
 
-// EntityName wraps the corresponding Objective-C method.
+// EntityName returns the entity name.
 func (oc *ObjectController) EntityName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("entityName"))
 	if _r == 0 {
@@ -214,7 +214,7 @@ func (oc *ObjectController) EntityName() string {
 	return purego.GoString(_r)
 }
 
-// FetchPredicate wraps the corresponding Objective-C method.
+// FetchPredicate returns the fetch predicate.
 func (oc *ObjectController) FetchPredicate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("fetchPredicate"))
 	return obj.Wrap(_r)

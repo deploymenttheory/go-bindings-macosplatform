@@ -80,20 +80,20 @@ func NewIOBluetoothSDPServiceAttributeWithIDAttributeElement(newAttributeID uint
 	return iOBluetoothSDPServiceAttributeAdopt(_id)
 }
 
-// GetAttributeID returns the attribute ID for the target service attribute.
-func (ibssa *IOBluetoothSDPServiceAttribute) GetAttributeID() uint16 {
+// AttributeID returns the attribute ID for the target service attribute.
+func (ibssa *IOBluetoothSDPServiceAttribute) AttributeID() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(ibssa), objc.RegisterName("getAttributeID"))
 	return _r
 }
 
-// GetDataElement returns the data element for the target service attribute.
-func (ibssa *IOBluetoothSDPServiceAttribute) GetDataElement() *IOBluetoothSDPDataElement {
+// DataElement returns the data element for the target service attribute.
+func (ibssa *IOBluetoothSDPServiceAttribute) DataElement() *IOBluetoothSDPDataElement {
 	_r := objc.Send[objc.ID](objref.IDOf(ibssa), objc.RegisterName("getDataElement"))
 	return IOBluetoothSDPDataElementFromID(_r)
 }
 
-// GetIDDataElement returns the data element representing the attribute ID for the target service attribute.
-func (ibssa *IOBluetoothSDPServiceAttribute) GetIDDataElement() *IOBluetoothSDPDataElement {
+// IDDataElement returns the data element representing the attribute ID for the target service attribute.
+func (ibssa *IOBluetoothSDPServiceAttribute) IDDataElement() *IOBluetoothSDPDataElement {
 	_r := objc.Send[objc.ID](objref.IDOf(ibssa), objc.RegisterName("getIDDataElement"))
 	return IOBluetoothSDPDataElementFromID(_r)
 }

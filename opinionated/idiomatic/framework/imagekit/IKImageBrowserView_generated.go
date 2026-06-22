@@ -173,7 +173,7 @@ func (ibv *ImageBrowserView) SetContentResizingMask(mask int) {
 	objc.Send[objc.ID](objref.IDOf(ibv), objc.RegisterName("setContentResizingMask:"), mask)
 }
 
-// ContentResizingMask wraps the corresponding Objective-C method.
+// ContentResizingMask returns the content resizing mask.
 func (ibv *ImageBrowserView) ContentResizingMask() int {
 	_r := objc.Send[int](objref.IDOf(ibv), objc.RegisterName("contentResizingMask"))
 	return _r

@@ -73,25 +73,25 @@ func NewCollectionLayoutAnchor() *CollectionLayoutAnchor {
 	return collectionLayoutAnchorAdopt(_id)
 }
 
-// Edges wraps the corresponding Objective-C method.
+// Edges returns the edges.
 func (cla *CollectionLayoutAnchor) Edges() DirectionalRectEdge {
 	_r := objc.Send[DirectionalRectEdge](objref.IDOf(cla), objc.RegisterName("edges"))
 	return _r
 }
 
-// Offset wraps the corresponding Objective-C method.
+// Offset returns the offset.
 func (cla *CollectionLayoutAnchor) Offset() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cla), objc.RegisterName("offset"))
 	return _r
 }
 
-// IsAbsoluteOffset wraps the corresponding Objective-C method.
+// IsAbsoluteOffset reports whether the object is absolute offset.
 func (cla *CollectionLayoutAnchor) IsAbsoluteOffset() bool {
 	_r := objc.Send[bool](objref.IDOf(cla), objc.RegisterName("isAbsoluteOffset"))
 	return _r
 }
 
-// IsFractionalOffset wraps the corresponding Objective-C method.
+// IsFractionalOffset reports whether the object is fractional offset.
 func (cla *CollectionLayoutAnchor) IsFractionalOffset() bool {
 	_r := objc.Send[bool](objref.IDOf(cla), objc.RegisterName("isFractionalOffset"))
 	return _r

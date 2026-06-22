@@ -58,43 +58,43 @@ func NewMTRClusterMediaInputWithDeviceEndpointQueue(device *MTRDevice, endpoint 
 	return mTRClusterMediaInputAdopt(_id)
 }
 
-// ReadAttributeInputListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeInputListWithParams reads attribute input list with params.
 func (mcmi *MTRClusterMediaInput) ReadAttributeInputListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmi), objc.RegisterName("readAttributeInputListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentInputWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCurrentInputWithParams reads attribute current input with params.
 func (mcmi *MTRClusterMediaInput) ReadAttributeCurrentInputWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmi), objc.RegisterName("readAttributeCurrentInputWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcmi *MTRClusterMediaInput) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmi), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcmi *MTRClusterMediaInput) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmi), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcmi *MTRClusterMediaInput) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmi), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcmi *MTRClusterMediaInput) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmi), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcmi *MTRClusterMediaInput) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmi), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

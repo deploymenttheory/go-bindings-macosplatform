@@ -118,12 +118,12 @@ func (c *Candidates) ShowAnnotation(annotationString obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("showAnnotation:"), objref.IDOf(annotationString))
 }
 
-// ShowSublistSubListDelegate wraps the corresponding Objective-C method.
+// ShowSublistSubListDelegate shows sublist sub list delegate.
 func (c *Candidates) ShowSublistSubListDelegate(candidates obj.Object, delegate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("showSublist:subListDelegate:"), objref.IDOf(candidates), objref.IDOf(delegate))
 }
 
-// CandidateFrame wraps the corresponding Objective-C method.
+// CandidateFrame returns the candidate frame.
 func (c *Candidates) CandidateFrame() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(c), objc.RegisterName("candidateFrame"))
 	return _r
@@ -215,7 +215,7 @@ func (c *Candidates) SelectCandidateWithIdentifier(candidateIdentifier int) bool
 	return _r
 }
 
-// SelectCandidate wraps the corresponding Objective-C method.
+// SelectCandidate selects candidate.
 func (c *Candidates) SelectCandidate(candidateIdentifier int) {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("selectCandidate:"), candidateIdentifier)
 }
@@ -249,7 +249,7 @@ func (c *Candidates) LineNumberForCandidateWithIdentifier(candidateIdentifier in
 	return _r
 }
 
-// ClearSelection wraps the corresponding Objective-C method.
+// ClearSelection clears selection.
 func (c *Candidates) ClearSelection() {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("clearSelection"))
 }

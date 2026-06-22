@@ -258,38 +258,38 @@ func (s *Slider) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Slid
 	return s
 }
 
-// WithCell sets the property and returns the receiver so calls can be chained.
+// WithCell sets the cell.
 func (s *Slider) WithCell(cell CellProvider) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return s
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (s *Slider) WithSubviews(items ...ViewProvider) *Slider {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSubviews:"), _arr)
 	return s
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (s *Slider) WithHidden(hidden bool) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHidden:"), hidden)
 	return s
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (s *Slider) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return s
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (s *Slider) WithAutoresizesSubviews(autoresizesSubviews bool) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return s
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (s *Slider) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return s
@@ -301,19 +301,19 @@ func (s *Slider) WithFrame(frame corefoundation.CGRect) *Slider {
 	return s
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (s *Slider) WithFrameRotation(frameRotation float64) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return s
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (s *Slider) WithFrameCenterRotation(frameCenterRotation float64) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return s
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (s *Slider) WithBoundsRotation(boundsRotation float64) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return s
@@ -325,7 +325,7 @@ func (s *Slider) WithBounds(bounds corefoundation.CGRect) *Slider {
 	return s
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (s *Slider) WithCanDrawConcurrently(canDrawConcurrently bool) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return s
@@ -337,148 +337,148 @@ func (s *Slider) WithNeedsDisplay(needsDisplay bool) *Slider {
 	return s
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (s *Slider) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return s
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (s *Slider) WithWantsRestingTouches(wantsRestingTouches bool) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return s
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (s *Slider) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return s
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (s *Slider) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return s
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (s *Slider) WithWantsLayer(wantsLayer bool) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return s
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (s *Slider) WithLayer(layer obj.Object) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return s
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (s *Slider) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return s
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (s *Slider) WithNeedsLayout(needsLayout bool) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return s
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (s *Slider) WithAlphaValue(alphaValue float64) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return s
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (s *Slider) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return s
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (s *Slider) WithBackgroundFilters(items ...obj.Object) *Slider {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return s
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (s *Slider) WithCompositingFilter(compositingFilter obj.Object) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return s
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (s *Slider) WithContentFilters(items ...obj.Object) *Slider {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setContentFilters:"), _arr)
 	return s
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (s *Slider) WithShadow(shadow *Shadow) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return s
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (s *Slider) WithClipsToBounds(clipsToBounds bool) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return s
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (s *Slider) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return s
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (s *Slider) WithToolTip(toolTip string) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return s
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (s *Slider) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return s
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (s *Slider) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return s
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (s *Slider) WithNextKeyView(nextKeyView ViewProvider) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return s
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (s *Slider) WithFocusRingType(focusRingType FocusRingType) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return s
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (s *Slider) WithGestureRecognizers(items ...GestureRecognizerProvider) *Slider {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return s
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (s *Slider) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return s
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (s *Slider) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return s
@@ -490,49 +490,49 @@ func (s *Slider) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeM
 	return s
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (s *Slider) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return s
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (s *Slider) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return s
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (s *Slider) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return s
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (s *Slider) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return s
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (s *Slider) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return s
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (s *Slider) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return s
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (s *Slider) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return s
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (s *Slider) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Slider {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return s
@@ -562,19 +562,19 @@ func (s *Slider) WithTouchBar(touchBar *TouchBar) *Slider {
 	return s
 }
 
-// SliderType wraps the corresponding Objective-C method.
+// SliderType returns the slider type.
 func (s *Slider) SliderType() SliderType {
 	_r := objc.Send[SliderType](objref.IDOf(s), objc.RegisterName("sliderType"))
 	return _r
 }
 
-// MinValue wraps the corresponding Objective-C method.
+// MinValue returns the min value.
 func (s *Slider) MinValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("minValue"))
 	return _r
 }
 
-// MaxValue wraps the corresponding Objective-C method.
+// MaxValue returns the max value.
 func (s *Slider) MaxValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("maxValue"))
 	return _r
@@ -586,25 +586,25 @@ func (s *Slider) NeutralValue() float64 {
 	return _r
 }
 
-// AltIncrementValue wraps the corresponding Objective-C method.
+// AltIncrementValue returns the alt increment value.
 func (s *Slider) AltIncrementValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("altIncrementValue"))
 	return _r
 }
 
-// KnobThickness wraps the corresponding Objective-C method.
+// KnobThickness returns the knob thickness.
 func (s *Slider) KnobThickness() float64 {
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("knobThickness"))
 	return _r
 }
 
-// IsVertical wraps the corresponding Objective-C method.
+// IsVertical reports whether the object is vertical.
 func (s *Slider) IsVertical() bool {
 	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isVertical"))
 	return _r
 }
 
-// TrackFillColor wraps the corresponding Objective-C method.
+// TrackFillColor returns the track fill color.
 func (s *Slider) TrackFillColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("trackFillColor"))
 	return ColorFromID(_r)
@@ -640,13 +640,13 @@ func (s *Slider) ClosestTickMarkValueToValue(value float64) float64 {
 	return _r
 }
 
-// NumberOfTickMarks wraps the corresponding Objective-C method.
+// NumberOfTickMarks returns the number of tick marks.
 func (s *Slider) NumberOfTickMarks() int {
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("numberOfTickMarks"))
 	return _r
 }
 
-// TickMarkPosition wraps the corresponding Objective-C method.
+// TickMarkPosition returns the tick mark position.
 func (s *Slider) TickMarkPosition() TickMarkPosition {
 	_r := objc.Send[TickMarkPosition](objref.IDOf(s), objc.RegisterName("tickMarkPosition"))
 	return _r

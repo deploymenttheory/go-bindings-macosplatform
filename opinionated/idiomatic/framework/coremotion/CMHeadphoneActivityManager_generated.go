@@ -82,25 +82,25 @@ func (ham *HeadphoneActivityManager) StopStatusUpdates() {
 	objc.Send[objc.ID](objref.IDOf(ham), objc.RegisterName("stopStatusUpdates"))
 }
 
-// IsActivityAvailable wraps the corresponding Objective-C method.
+// IsActivityAvailable reports whether the object is activity available.
 func (ham *HeadphoneActivityManager) IsActivityAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(ham), objc.RegisterName("isActivityAvailable"))
 	return _r
 }
 
-// IsActivityActive wraps the corresponding Objective-C method.
+// IsActivityActive reports whether the object is activity active.
 func (ham *HeadphoneActivityManager) IsActivityActive() bool {
 	_r := objc.Send[bool](objref.IDOf(ham), objc.RegisterName("isActivityActive"))
 	return _r
 }
 
-// IsStatusAvailable wraps the corresponding Objective-C method.
+// IsStatusAvailable reports whether the object is status available.
 func (ham *HeadphoneActivityManager) IsStatusAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(ham), objc.RegisterName("isStatusAvailable"))
 	return _r
 }
 
-// IsStatusActive wraps the corresponding Objective-C method.
+// IsStatusActive reports whether the object is status active.
 func (ham *HeadphoneActivityManager) IsStatusActive() bool {
 	_r := objc.Send[bool](objref.IDOf(ham), objc.RegisterName("isStatusActive"))
 	return _r

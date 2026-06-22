@@ -61,7 +61,7 @@ func NewMTRBaseClusterFixedLabelWithDeviceEndpointQueue(device *MTRBaseDevice, e
 	return mTRBaseClusterFixedLabelAdopt(_id)
 }
 
-// ReadAttributeLabelListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLabelListWithCompletion reads attribute label list with completion.
 //
 // ReadAttributeLabelListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfl *MTRBaseClusterFixedLabel) ReadAttributeLabelListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcfl *MTRBaseClusterFixedLabel) SubscribeAttributeLabelListWithParamsSubs
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfl *MTRBaseClusterFixedLabel) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcfl *MTRBaseClusterFixedLabel) SubscribeAttributeGeneratedCommandListWit
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfl *MTRBaseClusterFixedLabel) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcfl *MTRBaseClusterFixedLabel) SubscribeAttributeAcceptedCommandListWith
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfl *MTRBaseClusterFixedLabel) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcfl *MTRBaseClusterFixedLabel) SubscribeAttributeAttributeListWithParams
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfl *MTRBaseClusterFixedLabel) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcfl *MTRBaseClusterFixedLabel) SubscribeAttributeFeatureMapWithParamsSub
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfl *MTRBaseClusterFixedLabel) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcfl *MTRBaseClusterFixedLabel) SubscribeAttributeClusterRevisionWithPara
 	}
 }
 
-// ReadAttributeLabelList wraps the corresponding Objective-C method.
+// ReadAttributeLabelList reads attribute label list.
 //
 // ReadAttributeLabelList blocks until the operation completes or ctx is cancelled.
 func (mbcfl *MTRBaseClusterFixedLabel) ReadAttributeLabelList(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcfl *MTRBaseClusterFixedLabel) SubscribeAttributeLabelListWithMinInterva
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcfl *MTRBaseClusterFixedLabel) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcfl *MTRBaseClusterFixedLabel) SubscribeAttributeGeneratedCommandListWit
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcfl *MTRBaseClusterFixedLabel) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcfl *MTRBaseClusterFixedLabel) SubscribeAttributeAcceptedCommandListWith
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcfl *MTRBaseClusterFixedLabel) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcfl *MTRBaseClusterFixedLabel) SubscribeAttributeAttributeListWithMinInt
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcfl *MTRBaseClusterFixedLabel) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcfl *MTRBaseClusterFixedLabel) SubscribeAttributeFeatureMapWithMinInterv
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcfl *MTRBaseClusterFixedLabel) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

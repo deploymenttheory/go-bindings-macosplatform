@@ -78,7 +78,7 @@ func (i *Invocation) WithTarget(target obj.Object) *Invocation {
 	return i
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (i *Invocation) WithScriptingProperties(scriptingProperties obj.Object) *Invocation {
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return i
@@ -99,7 +99,7 @@ func (i *Invocation) InvokeWithTarget(target obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("invokeWithTarget:"), objref.IDOf(target))
 }
 
-// MethodSignature wraps the corresponding Objective-C method.
+// MethodSignature returns the method signature.
 func (i *Invocation) MethodSignature() *MethodSignature {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("methodSignature"))
 	return MethodSignatureFromID(_r)
@@ -111,7 +111,7 @@ func (i *Invocation) ArgumentsRetained() bool {
 	return _r
 }
 
-// Target wraps the corresponding Objective-C method.
+// Target returns the target.
 func (i *Invocation) Target() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("target"))
 	return obj.Wrap(_r)

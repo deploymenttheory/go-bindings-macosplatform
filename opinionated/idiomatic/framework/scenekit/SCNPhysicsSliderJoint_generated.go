@@ -99,61 +99,61 @@ func (psj *PhysicsSliderJoint) WithMotorMaximumTorque(motorMaximumTorque float64
 	return psj
 }
 
-// BodyA wraps the corresponding Objective-C method.
+// BodyA returns the body a.
 func (psj *PhysicsSliderJoint) BodyA() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(psj), objc.RegisterName("bodyA"))
 	return PhysicsBodyFromID(_r)
 }
 
-// BodyB wraps the corresponding Objective-C method.
+// BodyB returns the body b.
 func (psj *PhysicsSliderJoint) BodyB() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(psj), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)
 }
 
-// MinimumLinearLimit wraps the corresponding Objective-C method.
+// MinimumLinearLimit returns the minimum linear limit.
 func (psj *PhysicsSliderJoint) MinimumLinearLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(psj), objc.RegisterName("minimumLinearLimit"))
 	return _r
 }
 
-// MaximumLinearLimit wraps the corresponding Objective-C method.
+// MaximumLinearLimit returns the maximum linear limit.
 func (psj *PhysicsSliderJoint) MaximumLinearLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(psj), objc.RegisterName("maximumLinearLimit"))
 	return _r
 }
 
-// MinimumAngularLimit wraps the corresponding Objective-C method.
+// MinimumAngularLimit returns the minimum angular limit.
 func (psj *PhysicsSliderJoint) MinimumAngularLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(psj), objc.RegisterName("minimumAngularLimit"))
 	return _r
 }
 
-// MaximumAngularLimit wraps the corresponding Objective-C method.
+// MaximumAngularLimit returns the maximum angular limit.
 func (psj *PhysicsSliderJoint) MaximumAngularLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(psj), objc.RegisterName("maximumAngularLimit"))
 	return _r
 }
 
-// MotorTargetLinearVelocity wraps the corresponding Objective-C method.
+// MotorTargetLinearVelocity returns the motor target linear velocity.
 func (psj *PhysicsSliderJoint) MotorTargetLinearVelocity() float64 {
 	_r := objc.Send[float64](objref.IDOf(psj), objc.RegisterName("motorTargetLinearVelocity"))
 	return _r
 }
 
-// MotorMaximumForce wraps the corresponding Objective-C method.
+// MotorMaximumForce returns the motor maximum force.
 func (psj *PhysicsSliderJoint) MotorMaximumForce() float64 {
 	_r := objc.Send[float64](objref.IDOf(psj), objc.RegisterName("motorMaximumForce"))
 	return _r
 }
 
-// MotorTargetAngularVelocity wraps the corresponding Objective-C method.
+// MotorTargetAngularVelocity returns the motor target angular velocity.
 func (psj *PhysicsSliderJoint) MotorTargetAngularVelocity() float64 {
 	_r := objc.Send[float64](objref.IDOf(psj), objc.RegisterName("motorTargetAngularVelocity"))
 	return _r
 }
 
-// MotorMaximumTorque wraps the corresponding Objective-C method.
+// MotorMaximumTorque returns the motor maximum torque.
 func (psj *PhysicsSliderJoint) MotorMaximumTorque() float64 {
 	_r := objc.Send[float64](objref.IDOf(psj), objc.RegisterName("motorMaximumTorque"))
 	return _r

@@ -58,7 +58,7 @@ func (lms *LightweightMigrationStage) WithLabel(label string) *LightweightMigrat
 	return lms
 }
 
-// VersionChecksums wraps the corresponding Objective-C method.
+// VersionChecksums returns the version checksums.
 //
 // VersionChecksums returns the collection as a Go slice.
 func (lms *LightweightMigrationStage) VersionChecksums() []string {

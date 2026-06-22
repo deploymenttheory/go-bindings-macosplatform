@@ -72,13 +72,13 @@ func NewProductSubscriptionPeriod() *ProductSubscriptionPeriod {
 	return productSubscriptionPeriodAdopt(_id)
 }
 
-// NumberOfUnits wraps the corresponding Objective-C method.
+// NumberOfUnits returns the number of units.
 func (psp *ProductSubscriptionPeriod) NumberOfUnits() int {
 	_r := objc.Send[int](objref.IDOf(psp), objc.RegisterName("numberOfUnits"))
 	return _r
 }
 
-// Unit wraps the corresponding Objective-C method.
+// Unit returns the unit.
 func (psp *ProductSubscriptionPeriod) Unit() ProductPeriodUnit {
 	_r := objc.Send[ProductPeriodUnit](objref.IDOf(psp), objc.RegisterName("unit"))
 	return _r

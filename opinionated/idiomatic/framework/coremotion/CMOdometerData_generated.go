@@ -72,37 +72,37 @@ func NewOdometerData() *OdometerData {
 	return odometerDataAdopt(_id)
 }
 
-// StartDate wraps the corresponding Objective-C method.
+// StartDate returns the start date.
 func (od *OdometerData) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(od), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// EndDate wraps the corresponding Objective-C method.
+// EndDate returns the end date.
 func (od *OdometerData) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(od), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
-// GpsDate wraps the corresponding Objective-C method.
+// GpsDate returns the gps date.
 func (od *OdometerData) GpsDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(od), objc.RegisterName("gpsDate"))
 	return obj.Wrap(_r)
 }
 
-// OriginDevice wraps the corresponding Objective-C method.
+// OriginDevice returns the origin device.
 func (od *OdometerData) OriginDevice() OdometerOriginDevice {
 	_r := objc.Send[OdometerOriginDevice](objref.IDOf(od), objc.RegisterName("originDevice"))
 	return _r
 }
 
-// Slope wraps the corresponding Objective-C method.
+// Slope returns the slope.
 func (od *OdometerData) Slope() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(od), objc.RegisterName("slope"))
 	return obj.Wrap(_r)
 }
 
-// MaxAbsSlope wraps the corresponding Objective-C method.
+// MaxAbsSlope returns the max abs slope.
 func (od *OdometerData) MaxAbsSlope() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(od), objc.RegisterName("maxAbsSlope"))
 	return obj.Wrap(_r)

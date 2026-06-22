@@ -89,7 +89,7 @@ func (bm *BrailleMap) PresentImage(image obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(bm), objc.RegisterName("presentImage:"), objref.IDOf(image))
 }
 
-// Dimensions wraps the corresponding Objective-C method.
+// Dimensions returns the dimensions.
 func (bm *BrailleMap) Dimensions() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(bm), objc.RegisterName("dimensions"))
 	return _r

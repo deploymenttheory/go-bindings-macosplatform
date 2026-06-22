@@ -1172,7 +1172,7 @@ func (sias *SearchableItemAttributeSet) WithGPSDifferental(gPSDifferental obj.Ob
 	return sias
 }
 
-// DisplayName wraps the corresponding Objective-C method.
+// DisplayName returns the display name.
 func (sias *SearchableItemAttributeSet) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -1181,7 +1181,7 @@ func (sias *SearchableItemAttributeSet) DisplayName() string {
 	return purego.GoString(_r)
 }
 
-// AlternateNames wraps the corresponding Objective-C method.
+// AlternateNames returns the alternate names.
 //
 // AlternateNames returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) AlternateNames() []string {
@@ -1189,7 +1189,7 @@ func (sias *SearchableItemAttributeSet) AlternateNames() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Path wraps the corresponding Objective-C method.
+// Path returns the path.
 func (sias *SearchableItemAttributeSet) Path() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("path"))
 	if _r == 0 {
@@ -1198,31 +1198,31 @@ func (sias *SearchableItemAttributeSet) Path() string {
 	return purego.GoString(_r)
 }
 
-// ContentURL wraps the corresponding Objective-C method.
+// ContentURL returns the content URL.
 func (sias *SearchableItemAttributeSet) ContentURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("contentURL"))
 	return obj.Wrap(_r)
 }
 
-// ThumbnailURL wraps the corresponding Objective-C method.
+// ThumbnailURL returns the thumbnail URL.
 func (sias *SearchableItemAttributeSet) ThumbnailURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("thumbnailURL"))
 	return obj.Wrap(_r)
 }
 
-// ThumbnailData wraps the corresponding Objective-C method.
+// ThumbnailData returns the thumbnail data.
 func (sias *SearchableItemAttributeSet) ThumbnailData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("thumbnailData"))
 	return obj.Wrap(_r)
 }
 
-// DarkThumbnailURL wraps the corresponding Objective-C method.
+// DarkThumbnailURL returns the dark thumbnail URL.
 func (sias *SearchableItemAttributeSet) DarkThumbnailURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("darkThumbnailURL"))
 	return obj.Wrap(_r)
 }
 
-// RelatedUniqueIdentifier wraps the corresponding Objective-C method.
+// RelatedUniqueIdentifier returns the related unique identifier.
 func (sias *SearchableItemAttributeSet) RelatedUniqueIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("relatedUniqueIdentifier"))
 	if _r == 0 {
@@ -1231,13 +1231,13 @@ func (sias *SearchableItemAttributeSet) RelatedUniqueIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// MetadataModificationDate wraps the corresponding Objective-C method.
+// MetadataModificationDate returns the metadata modification date.
 func (sias *SearchableItemAttributeSet) MetadataModificationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("metadataModificationDate"))
 	return obj.Wrap(_r)
 }
 
-// ContentType wraps the corresponding Objective-C method.
+// ContentType returns the content type.
 func (sias *SearchableItemAttributeSet) ContentType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("contentType"))
 	if _r == 0 {
@@ -1246,7 +1246,7 @@ func (sias *SearchableItemAttributeSet) ContentType() string {
 	return purego.GoString(_r)
 }
 
-// ContentTypeTree wraps the corresponding Objective-C method.
+// ContentTypeTree returns the content type tree.
 //
 // ContentTypeTree returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) ContentTypeTree() []string {
@@ -1254,7 +1254,7 @@ func (sias *SearchableItemAttributeSet) ContentTypeTree() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Keywords wraps the corresponding Objective-C method.
+// Keywords returns the keywords.
 //
 // Keywords returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Keywords() []string {
@@ -1262,7 +1262,7 @@ func (sias *SearchableItemAttributeSet) Keywords() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (sias *SearchableItemAttributeSet) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("title"))
 	if _r == 0 {
@@ -1271,7 +1271,7 @@ func (sias *SearchableItemAttributeSet) Title() string {
 	return purego.GoString(_r)
 }
 
-// TextContentSummary wraps the corresponding Objective-C method.
+// TextContentSummary returns the text content summary.
 func (sias *SearchableItemAttributeSet) TextContentSummary() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("textContentSummary"))
 	if _r == 0 {
@@ -1280,7 +1280,7 @@ func (sias *SearchableItemAttributeSet) TextContentSummary() string {
 	return purego.GoString(_r)
 }
 
-// TranscribedTextContent wraps the corresponding Objective-C method.
+// TranscribedTextContent returns the transcribed text content.
 func (sias *SearchableItemAttributeSet) TranscribedTextContent() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("transcribedTextContent"))
 	if _r == 0 {
@@ -1289,19 +1289,19 @@ func (sias *SearchableItemAttributeSet) TranscribedTextContent() string {
 	return purego.GoString(_r)
 }
 
-// SupportsPhoneCall wraps the corresponding Objective-C method.
+// SupportsPhoneCall returns the supports phone call.
 func (sias *SearchableItemAttributeSet) SupportsPhoneCall() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("supportsPhoneCall"))
 	return obj.Wrap(_r)
 }
 
-// SupportsNavigation wraps the corresponding Objective-C method.
+// SupportsNavigation returns the supports navigation.
 func (sias *SearchableItemAttributeSet) SupportsNavigation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("supportsNavigation"))
 	return obj.Wrap(_r)
 }
 
-// ContainerTitle wraps the corresponding Objective-C method.
+// ContainerTitle returns the container title.
 func (sias *SearchableItemAttributeSet) ContainerTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("containerTitle"))
 	if _r == 0 {
@@ -1310,7 +1310,7 @@ func (sias *SearchableItemAttributeSet) ContainerTitle() string {
 	return purego.GoString(_r)
 }
 
-// ContainerDisplayName wraps the corresponding Objective-C method.
+// ContainerDisplayName returns the container display name.
 func (sias *SearchableItemAttributeSet) ContainerDisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("containerDisplayName"))
 	if _r == 0 {
@@ -1319,7 +1319,7 @@ func (sias *SearchableItemAttributeSet) ContainerDisplayName() string {
 	return purego.GoString(_r)
 }
 
-// ContainerIdentifier wraps the corresponding Objective-C method.
+// ContainerIdentifier returns the container identifier.
 func (sias *SearchableItemAttributeSet) ContainerIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("containerIdentifier"))
 	if _r == 0 {
@@ -1328,7 +1328,7 @@ func (sias *SearchableItemAttributeSet) ContainerIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// ContainerOrder wraps the corresponding Objective-C method.
+// ContainerOrder returns the container order.
 func (sias *SearchableItemAttributeSet) ContainerOrder() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("containerOrder"))
 	return obj.Wrap(_r)
@@ -1343,7 +1343,7 @@ func (sias *SearchableItemAttributeSet) Subject() string {
 	return purego.GoString(_r)
 }
 
-// Theme wraps the corresponding Objective-C method.
+// Theme returns the theme.
 func (sias *SearchableItemAttributeSet) Theme() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("theme"))
 	if _r == 0 {
@@ -1352,7 +1352,7 @@ func (sias *SearchableItemAttributeSet) Theme() string {
 	return purego.GoString(_r)
 }
 
-// ContentDescription wraps the corresponding Objective-C method.
+// ContentDescription returns the content description.
 func (sias *SearchableItemAttributeSet) ContentDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("contentDescription"))
 	if _r == 0 {
@@ -1361,7 +1361,7 @@ func (sias *SearchableItemAttributeSet) ContentDescription() string {
 	return purego.GoString(_r)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (sias *SearchableItemAttributeSet) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -1370,7 +1370,7 @@ func (sias *SearchableItemAttributeSet) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Audiences wraps the corresponding Objective-C method.
+// Audiences returns the audiences.
 //
 // Audiences returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Audiences() []string {
@@ -1378,31 +1378,31 @@ func (sias *SearchableItemAttributeSet) Audiences() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// FileSize wraps the corresponding Objective-C method.
+// FileSize returns the file size.
 func (sias *SearchableItemAttributeSet) FileSize() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("fileSize"))
 	return obj.Wrap(_r)
 }
 
-// PageCount wraps the corresponding Objective-C method.
+// PageCount returns the page count.
 func (sias *SearchableItemAttributeSet) PageCount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("pageCount"))
 	return obj.Wrap(_r)
 }
 
-// PageWidth wraps the corresponding Objective-C method.
+// PageWidth returns the page width.
 func (sias *SearchableItemAttributeSet) PageWidth() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("pageWidth"))
 	return obj.Wrap(_r)
 }
 
-// PageHeight wraps the corresponding Objective-C method.
+// PageHeight returns the page height.
 func (sias *SearchableItemAttributeSet) PageHeight() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("pageHeight"))
 	return obj.Wrap(_r)
 }
 
-// SecurityMethod wraps the corresponding Objective-C method.
+// SecurityMethod returns the security method.
 func (sias *SearchableItemAttributeSet) SecurityMethod() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("securityMethod"))
 	if _r == 0 {
@@ -1411,7 +1411,7 @@ func (sias *SearchableItemAttributeSet) SecurityMethod() string {
 	return purego.GoString(_r)
 }
 
-// Creator wraps the corresponding Objective-C method.
+// Creator returns the creator.
 func (sias *SearchableItemAttributeSet) Creator() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("creator"))
 	if _r == 0 {
@@ -1420,7 +1420,7 @@ func (sias *SearchableItemAttributeSet) Creator() string {
 	return purego.GoString(_r)
 }
 
-// EncodingApplications wraps the corresponding Objective-C method.
+// EncodingApplications returns the encoding applications.
 //
 // EncodingApplications returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) EncodingApplications() []string {
@@ -1428,7 +1428,7 @@ func (sias *SearchableItemAttributeSet) EncodingApplications() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Kind wraps the corresponding Objective-C method.
+// Kind returns the kind.
 func (sias *SearchableItemAttributeSet) Kind() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("kind"))
 	if _r == 0 {
@@ -1437,7 +1437,7 @@ func (sias *SearchableItemAttributeSet) Kind() string {
 	return purego.GoString(_r)
 }
 
-// FontNames wraps the corresponding Objective-C method.
+// FontNames returns the font names.
 //
 // FontNames returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) FontNames() []string {
@@ -1445,31 +1445,31 @@ func (sias *SearchableItemAttributeSet) FontNames() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// DueDate wraps the corresponding Objective-C method.
+// DueDate returns the due date.
 func (sias *SearchableItemAttributeSet) DueDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("dueDate"))
 	return obj.Wrap(_r)
 }
 
-// CompletionDate wraps the corresponding Objective-C method.
+// CompletionDate returns the completion date.
 func (sias *SearchableItemAttributeSet) CompletionDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("completionDate"))
 	return obj.Wrap(_r)
 }
 
-// StartDate wraps the corresponding Objective-C method.
+// StartDate returns the start date.
 func (sias *SearchableItemAttributeSet) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// EndDate wraps the corresponding Objective-C method.
+// EndDate returns the end date.
 func (sias *SearchableItemAttributeSet) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
-// ImportantDates wraps the corresponding Objective-C method.
+// ImportantDates returns the important dates.
 //
 // ImportantDates returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) ImportantDates() []obj.Object {
@@ -1477,13 +1477,13 @@ func (sias *SearchableItemAttributeSet) ImportantDates() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// AllDay wraps the corresponding Objective-C method.
+// AllDay returns the all day.
 func (sias *SearchableItemAttributeSet) AllDay() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("allDay"))
 	return obj.Wrap(_r)
 }
 
-// AccountIdentifier wraps the corresponding Objective-C method.
+// AccountIdentifier returns the account identifier.
 func (sias *SearchableItemAttributeSet) AccountIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("accountIdentifier"))
 	if _r == 0 {
@@ -1492,7 +1492,7 @@ func (sias *SearchableItemAttributeSet) AccountIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// AccountHandles wraps the corresponding Objective-C method.
+// AccountHandles returns the account handles.
 //
 // AccountHandles returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) AccountHandles() []string {
@@ -1500,13 +1500,13 @@ func (sias *SearchableItemAttributeSet) AccountHandles() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// HTMLContentData wraps the corresponding Objective-C method.
+// HTMLContentData returns the HTML content data.
 func (sias *SearchableItemAttributeSet) HTMLContentData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("HTMLContentData"))
 	return obj.Wrap(_r)
 }
 
-// TextContent wraps the corresponding Objective-C method.
+// TextContent returns the text content.
 func (sias *SearchableItemAttributeSet) TextContent() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("textContent"))
 	if _r == 0 {
@@ -1515,7 +1515,7 @@ func (sias *SearchableItemAttributeSet) TextContent() string {
 	return purego.GoString(_r)
 }
 
-// Authors wraps the corresponding Objective-C method.
+// Authors returns the authors.
 //
 // Authors returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Authors() []*Person {
@@ -1523,7 +1523,7 @@ func (sias *SearchableItemAttributeSet) Authors() []*Person {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
-// PrimaryRecipients wraps the corresponding Objective-C method.
+// PrimaryRecipients returns the primary recipients.
 //
 // PrimaryRecipients returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) PrimaryRecipients() []*Person {
@@ -1531,7 +1531,7 @@ func (sias *SearchableItemAttributeSet) PrimaryRecipients() []*Person {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
-// AdditionalRecipients wraps the corresponding Objective-C method.
+// AdditionalRecipients returns the additional recipients.
 //
 // AdditionalRecipients returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) AdditionalRecipients() []*Person {
@@ -1539,7 +1539,7 @@ func (sias *SearchableItemAttributeSet) AdditionalRecipients() []*Person {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
-// HiddenAdditionalRecipients wraps the corresponding Objective-C method.
+// HiddenAdditionalRecipients returns the hidden additional recipients.
 //
 // HiddenAdditionalRecipients returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) HiddenAdditionalRecipients() []*Person {
@@ -1547,13 +1547,13 @@ func (sias *SearchableItemAttributeSet) HiddenAdditionalRecipients() []*Person {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
-// EmailHeaders wraps the corresponding Objective-C method.
+// EmailHeaders returns the email headers.
 func (sias *SearchableItemAttributeSet) EmailHeaders() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("emailHeaders"))
 	return obj.Wrap(_r)
 }
 
-// MailboxIdentifiers wraps the corresponding Objective-C method.
+// MailboxIdentifiers returns the mailbox identifiers.
 //
 // MailboxIdentifiers returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) MailboxIdentifiers() []string {
@@ -1561,7 +1561,7 @@ func (sias *SearchableItemAttributeSet) MailboxIdentifiers() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// AuthorNames wraps the corresponding Objective-C method.
+// AuthorNames returns the author names.
 //
 // AuthorNames returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) AuthorNames() []string {
@@ -1569,7 +1569,7 @@ func (sias *SearchableItemAttributeSet) AuthorNames() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// RecipientNames wraps the corresponding Objective-C method.
+// RecipientNames returns the recipient names.
 //
 // RecipientNames returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) RecipientNames() []string {
@@ -1577,7 +1577,7 @@ func (sias *SearchableItemAttributeSet) RecipientNames() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// AuthorEmailAddresses wraps the corresponding Objective-C method.
+// AuthorEmailAddresses returns the author email addresses.
 //
 // AuthorEmailAddresses returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) AuthorEmailAddresses() []string {
@@ -1585,7 +1585,7 @@ func (sias *SearchableItemAttributeSet) AuthorEmailAddresses() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// RecipientEmailAddresses wraps the corresponding Objective-C method.
+// RecipientEmailAddresses returns the recipient email addresses.
 //
 // RecipientEmailAddresses returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) RecipientEmailAddresses() []string {
@@ -1593,7 +1593,7 @@ func (sias *SearchableItemAttributeSet) RecipientEmailAddresses() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// AuthorAddresses wraps the corresponding Objective-C method.
+// AuthorAddresses returns the author addresses.
 //
 // AuthorAddresses returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) AuthorAddresses() []string {
@@ -1601,7 +1601,7 @@ func (sias *SearchableItemAttributeSet) AuthorAddresses() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// RecipientAddresses wraps the corresponding Objective-C method.
+// RecipientAddresses returns the recipient addresses.
 //
 // RecipientAddresses returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) RecipientAddresses() []string {
@@ -1609,7 +1609,7 @@ func (sias *SearchableItemAttributeSet) RecipientAddresses() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// PhoneNumbers wraps the corresponding Objective-C method.
+// PhoneNumbers returns the phone numbers.
 //
 // PhoneNumbers returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) PhoneNumbers() []string {
@@ -1617,7 +1617,7 @@ func (sias *SearchableItemAttributeSet) PhoneNumbers() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// EmailAddresses wraps the corresponding Objective-C method.
+// EmailAddresses returns the email addresses.
 //
 // EmailAddresses returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) EmailAddresses() []string {
@@ -1625,7 +1625,7 @@ func (sias *SearchableItemAttributeSet) EmailAddresses() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// InstantMessageAddresses wraps the corresponding Objective-C method.
+// InstantMessageAddresses returns the instant message addresses.
 //
 // InstantMessageAddresses returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) InstantMessageAddresses() []string {
@@ -1633,19 +1633,19 @@ func (sias *SearchableItemAttributeSet) InstantMessageAddresses() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// IsLikelyJunk wraps the corresponding Objective-C method.
+// IsLikelyJunk returns the is likely junk.
 func (sias *SearchableItemAttributeSet) IsLikelyJunk() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("isLikelyJunk"))
 	return obj.Wrap(_r)
 }
 
-// IsPriority wraps the corresponding Objective-C method.
+// IsPriority returns the is priority.
 func (sias *SearchableItemAttributeSet) IsPriority() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("isPriority"))
 	return obj.Wrap(_r)
 }
 
-// Editors wraps the corresponding Objective-C method.
+// Editors returns the editors.
 //
 // Editors returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Editors() []string {
@@ -1653,7 +1653,7 @@ func (sias *SearchableItemAttributeSet) Editors() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Participants wraps the corresponding Objective-C method.
+// Participants returns the participants.
 //
 // Participants returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Participants() []string {
@@ -1661,7 +1661,7 @@ func (sias *SearchableItemAttributeSet) Participants() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Projects wraps the corresponding Objective-C method.
+// Projects returns the projects.
 //
 // Projects returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Projects() []string {
@@ -1669,7 +1669,7 @@ func (sias *SearchableItemAttributeSet) Projects() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ContentSources wraps the corresponding Objective-C method.
+// ContentSources returns the content sources.
 //
 // ContentSources returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) ContentSources() []string {
@@ -1677,7 +1677,7 @@ func (sias *SearchableItemAttributeSet) ContentSources() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Comment wraps the corresponding Objective-C method.
+// Comment returns the comment.
 func (sias *SearchableItemAttributeSet) Comment() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("comment"))
 	if _r == 0 {
@@ -1686,7 +1686,7 @@ func (sias *SearchableItemAttributeSet) Comment() string {
 	return purego.GoString(_r)
 }
 
-// Copyright wraps the corresponding Objective-C method.
+// Copyright returns the copyright.
 func (sias *SearchableItemAttributeSet) Copyright() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("copyright"))
 	if _r == 0 {
@@ -1695,43 +1695,43 @@ func (sias *SearchableItemAttributeSet) Copyright() string {
 	return purego.GoString(_r)
 }
 
-// LastUsedDate wraps the corresponding Objective-C method.
+// LastUsedDate returns the last used date.
 func (sias *SearchableItemAttributeSet) LastUsedDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("lastUsedDate"))
 	return obj.Wrap(_r)
 }
 
-// ContentCreationDate wraps the corresponding Objective-C method.
+// ContentCreationDate returns the content creation date.
 func (sias *SearchableItemAttributeSet) ContentCreationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("contentCreationDate"))
 	return obj.Wrap(_r)
 }
 
-// ContentModificationDate wraps the corresponding Objective-C method.
+// ContentModificationDate returns the content modification date.
 func (sias *SearchableItemAttributeSet) ContentModificationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("contentModificationDate"))
 	return obj.Wrap(_r)
 }
 
-// AddedDate wraps the corresponding Objective-C method.
+// AddedDate returns the added date.
 func (sias *SearchableItemAttributeSet) AddedDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("addedDate"))
 	return obj.Wrap(_r)
 }
 
-// DownloadedDate wraps the corresponding Objective-C method.
+// DownloadedDate returns the downloaded date.
 func (sias *SearchableItemAttributeSet) DownloadedDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("downloadedDate"))
 	return obj.Wrap(_r)
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (sias *SearchableItemAttributeSet) Duration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
 
-// ContactKeywords wraps the corresponding Objective-C method.
+// ContactKeywords returns the contact keywords.
 //
 // ContactKeywords returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) ContactKeywords() []string {
@@ -1739,7 +1739,7 @@ func (sias *SearchableItemAttributeSet) ContactKeywords() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Codecs wraps the corresponding Objective-C method.
+// Codecs returns the codecs.
 //
 // Codecs returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Codecs() []string {
@@ -1747,7 +1747,7 @@ func (sias *SearchableItemAttributeSet) Codecs() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// MediaTypes wraps the corresponding Objective-C method.
+// MediaTypes returns the media types.
 //
 // MediaTypes returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) MediaTypes() []string {
@@ -1755,37 +1755,37 @@ func (sias *SearchableItemAttributeSet) MediaTypes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// IsStreamable wraps the corresponding Objective-C method.
+// IsStreamable returns the is streamable.
 func (sias *SearchableItemAttributeSet) IsStreamable() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("isStreamable"))
 	return obj.Wrap(_r)
 }
 
-// TotalBitRate wraps the corresponding Objective-C method.
+// TotalBitRate returns the total bit rate.
 func (sias *SearchableItemAttributeSet) TotalBitRate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("totalBitRate"))
 	return obj.Wrap(_r)
 }
 
-// VideoBitRate wraps the corresponding Objective-C method.
+// VideoBitRate returns the video bit rate.
 func (sias *SearchableItemAttributeSet) VideoBitRate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("videoBitRate"))
 	return obj.Wrap(_r)
 }
 
-// AudioBitRate wraps the corresponding Objective-C method.
+// AudioBitRate returns the audio bit rate.
 func (sias *SearchableItemAttributeSet) AudioBitRate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("audioBitRate"))
 	return obj.Wrap(_r)
 }
 
-// DeliveryType wraps the corresponding Objective-C method.
+// DeliveryType returns the delivery type.
 func (sias *SearchableItemAttributeSet) DeliveryType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("deliveryType"))
 	return obj.Wrap(_r)
 }
 
-// Organizations wraps the corresponding Objective-C method.
+// Organizations returns the organizations.
 //
 // Organizations returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Organizations() []string {
@@ -1793,7 +1793,7 @@ func (sias *SearchableItemAttributeSet) Organizations() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Role wraps the corresponding Objective-C method.
+// Role returns the role.
 func (sias *SearchableItemAttributeSet) Role() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("role"))
 	if _r == 0 {
@@ -1802,7 +1802,7 @@ func (sias *SearchableItemAttributeSet) Role() string {
 	return purego.GoString(_r)
 }
 
-// Languages wraps the corresponding Objective-C method.
+// Languages returns the languages.
 //
 // Languages returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Languages() []string {
@@ -1810,7 +1810,7 @@ func (sias *SearchableItemAttributeSet) Languages() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Rights wraps the corresponding Objective-C method.
+// Rights returns the rights.
 func (sias *SearchableItemAttributeSet) Rights() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("rights"))
 	if _r == 0 {
@@ -1819,7 +1819,7 @@ func (sias *SearchableItemAttributeSet) Rights() string {
 	return purego.GoString(_r)
 }
 
-// Publishers wraps the corresponding Objective-C method.
+// Publishers returns the publishers.
 //
 // Publishers returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Publishers() []string {
@@ -1827,7 +1827,7 @@ func (sias *SearchableItemAttributeSet) Publishers() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Contributors wraps the corresponding Objective-C method.
+// Contributors returns the contributors.
 //
 // Contributors returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Contributors() []string {
@@ -1835,7 +1835,7 @@ func (sias *SearchableItemAttributeSet) Contributors() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Coverage wraps the corresponding Objective-C method.
+// Coverage returns the coverage.
 //
 // Coverage returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Coverage() []string {
@@ -1843,13 +1843,13 @@ func (sias *SearchableItemAttributeSet) Coverage() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Rating wraps the corresponding Objective-C method.
+// Rating returns the rating.
 func (sias *SearchableItemAttributeSet) Rating() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("rating"))
 	return obj.Wrap(_r)
 }
 
-// RatingDescription wraps the corresponding Objective-C method.
+// RatingDescription returns the rating description.
 func (sias *SearchableItemAttributeSet) RatingDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("ratingDescription"))
 	if _r == 0 {
@@ -1858,13 +1858,13 @@ func (sias *SearchableItemAttributeSet) RatingDescription() string {
 	return purego.GoString(_r)
 }
 
-// PlayCount wraps the corresponding Objective-C method.
+// PlayCount returns the play count.
 func (sias *SearchableItemAttributeSet) PlayCount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("playCount"))
 	return obj.Wrap(_r)
 }
 
-// Information wraps the corresponding Objective-C method.
+// Information returns the information.
 func (sias *SearchableItemAttributeSet) Information() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("information"))
 	if _r == 0 {
@@ -1873,7 +1873,7 @@ func (sias *SearchableItemAttributeSet) Information() string {
 	return purego.GoString(_r)
 }
 
-// Director wraps the corresponding Objective-C method.
+// Director returns the director.
 func (sias *SearchableItemAttributeSet) Director() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("director"))
 	if _r == 0 {
@@ -1882,7 +1882,7 @@ func (sias *SearchableItemAttributeSet) Director() string {
 	return purego.GoString(_r)
 }
 
-// Producer wraps the corresponding Objective-C method.
+// Producer returns the producer.
 func (sias *SearchableItemAttributeSet) Producer() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("producer"))
 	if _r == 0 {
@@ -1891,7 +1891,7 @@ func (sias *SearchableItemAttributeSet) Producer() string {
 	return purego.GoString(_r)
 }
 
-// Genre wraps the corresponding Objective-C method.
+// Genre returns the genre.
 func (sias *SearchableItemAttributeSet) Genre() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("genre"))
 	if _r == 0 {
@@ -1900,7 +1900,7 @@ func (sias *SearchableItemAttributeSet) Genre() string {
 	return purego.GoString(_r)
 }
 
-// Performers wraps the corresponding Objective-C method.
+// Performers returns the performers.
 //
 // Performers returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) Performers() []string {
@@ -1908,7 +1908,7 @@ func (sias *SearchableItemAttributeSet) Performers() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// OriginalFormat wraps the corresponding Objective-C method.
+// OriginalFormat returns the original format.
 func (sias *SearchableItemAttributeSet) OriginalFormat() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("originalFormat"))
 	if _r == 0 {
@@ -1917,7 +1917,7 @@ func (sias *SearchableItemAttributeSet) OriginalFormat() string {
 	return purego.GoString(_r)
 }
 
-// OriginalSource wraps the corresponding Objective-C method.
+// OriginalSource returns the original source.
 func (sias *SearchableItemAttributeSet) OriginalSource() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("originalSource"))
 	if _r == 0 {
@@ -1926,43 +1926,43 @@ func (sias *SearchableItemAttributeSet) OriginalSource() string {
 	return purego.GoString(_r)
 }
 
-// IsLocal wraps the corresponding Objective-C method.
+// IsLocal returns the is local.
 func (sias *SearchableItemAttributeSet) IsLocal() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("isLocal"))
 	return obj.Wrap(_r)
 }
 
-// ContentRating wraps the corresponding Objective-C method.
+// ContentRating returns the content rating.
 func (sias *SearchableItemAttributeSet) ContentRating() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("contentRating"))
 	return obj.Wrap(_r)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (sias *SearchableItemAttributeSet) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// AudioSampleRate wraps the corresponding Objective-C method.
+// AudioSampleRate returns the audio sample rate.
 func (sias *SearchableItemAttributeSet) AudioSampleRate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("audioSampleRate"))
 	return obj.Wrap(_r)
 }
 
-// AudioChannelCount wraps the corresponding Objective-C method.
+// AudioChannelCount returns the audio channel count.
 func (sias *SearchableItemAttributeSet) AudioChannelCount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("audioChannelCount"))
 	return obj.Wrap(_r)
 }
 
-// Tempo wraps the corresponding Objective-C method.
+// Tempo returns the tempo.
 func (sias *SearchableItemAttributeSet) Tempo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("tempo"))
 	return obj.Wrap(_r)
 }
 
-// KeySignature wraps the corresponding Objective-C method.
+// KeySignature returns the key signature.
 func (sias *SearchableItemAttributeSet) KeySignature() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("keySignature"))
 	if _r == 0 {
@@ -1971,7 +1971,7 @@ func (sias *SearchableItemAttributeSet) KeySignature() string {
 	return purego.GoString(_r)
 }
 
-// TimeSignature wraps the corresponding Objective-C method.
+// TimeSignature returns the time signature.
 func (sias *SearchableItemAttributeSet) TimeSignature() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("timeSignature"))
 	if _r == 0 {
@@ -1980,7 +1980,7 @@ func (sias *SearchableItemAttributeSet) TimeSignature() string {
 	return purego.GoString(_r)
 }
 
-// AudioEncodingApplication wraps the corresponding Objective-C method.
+// AudioEncodingApplication returns the audio encoding application.
 func (sias *SearchableItemAttributeSet) AudioEncodingApplication() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("audioEncodingApplication"))
 	if _r == 0 {
@@ -1989,7 +1989,7 @@ func (sias *SearchableItemAttributeSet) AudioEncodingApplication() string {
 	return purego.GoString(_r)
 }
 
-// Composer wraps the corresponding Objective-C method.
+// Composer returns the composer.
 func (sias *SearchableItemAttributeSet) Composer() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("composer"))
 	if _r == 0 {
@@ -1998,7 +1998,7 @@ func (sias *SearchableItemAttributeSet) Composer() string {
 	return purego.GoString(_r)
 }
 
-// Lyricist wraps the corresponding Objective-C method.
+// Lyricist returns the lyricist.
 func (sias *SearchableItemAttributeSet) Lyricist() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("lyricist"))
 	if _r == 0 {
@@ -2007,7 +2007,7 @@ func (sias *SearchableItemAttributeSet) Lyricist() string {
 	return purego.GoString(_r)
 }
 
-// Album wraps the corresponding Objective-C method.
+// Album returns the album.
 func (sias *SearchableItemAttributeSet) Album() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("album"))
 	if _r == 0 {
@@ -2016,7 +2016,7 @@ func (sias *SearchableItemAttributeSet) Album() string {
 	return purego.GoString(_r)
 }
 
-// Artist wraps the corresponding Objective-C method.
+// Artist returns the artist.
 func (sias *SearchableItemAttributeSet) Artist() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("artist"))
 	if _r == 0 {
@@ -2025,19 +2025,19 @@ func (sias *SearchableItemAttributeSet) Artist() string {
 	return purego.GoString(_r)
 }
 
-// AudioTrackNumber wraps the corresponding Objective-C method.
+// AudioTrackNumber returns the audio track number.
 func (sias *SearchableItemAttributeSet) AudioTrackNumber() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("audioTrackNumber"))
 	return obj.Wrap(_r)
 }
 
-// RecordingDate wraps the corresponding Objective-C method.
+// RecordingDate returns the recording date.
 func (sias *SearchableItemAttributeSet) RecordingDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("recordingDate"))
 	return obj.Wrap(_r)
 }
 
-// MusicalGenre wraps the corresponding Objective-C method.
+// MusicalGenre returns the musical genre.
 func (sias *SearchableItemAttributeSet) MusicalGenre() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("musicalGenre"))
 	if _r == 0 {
@@ -2046,13 +2046,13 @@ func (sias *SearchableItemAttributeSet) MusicalGenre() string {
 	return purego.GoString(_r)
 }
 
-// IsGeneralMIDISequence wraps the corresponding Objective-C method.
+// IsGeneralMIDISequence returns the is general midi sequence.
 func (sias *SearchableItemAttributeSet) IsGeneralMIDISequence() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("isGeneralMIDISequence"))
 	return obj.Wrap(_r)
 }
 
-// MusicalInstrumentCategory wraps the corresponding Objective-C method.
+// MusicalInstrumentCategory returns the musical instrument category.
 func (sias *SearchableItemAttributeSet) MusicalInstrumentCategory() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("musicalInstrumentCategory"))
 	if _r == 0 {
@@ -2061,7 +2061,7 @@ func (sias *SearchableItemAttributeSet) MusicalInstrumentCategory() string {
 	return purego.GoString(_r)
 }
 
-// MusicalInstrumentName wraps the corresponding Objective-C method.
+// MusicalInstrumentName returns the musical instrument name.
 func (sias *SearchableItemAttributeSet) MusicalInstrumentName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("musicalInstrumentName"))
 	if _r == 0 {
@@ -2070,25 +2070,25 @@ func (sias *SearchableItemAttributeSet) MusicalInstrumentName() string {
 	return purego.GoString(_r)
 }
 
-// PixelHeight wraps the corresponding Objective-C method.
+// PixelHeight returns the pixel height.
 func (sias *SearchableItemAttributeSet) PixelHeight() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("pixelHeight"))
 	return obj.Wrap(_r)
 }
 
-// PixelWidth wraps the corresponding Objective-C method.
+// PixelWidth returns the pixel width.
 func (sias *SearchableItemAttributeSet) PixelWidth() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("pixelWidth"))
 	return obj.Wrap(_r)
 }
 
-// PixelCount wraps the corresponding Objective-C method.
+// PixelCount returns the pixel count.
 func (sias *SearchableItemAttributeSet) PixelCount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("pixelCount"))
 	return obj.Wrap(_r)
 }
 
-// ColorSpace wraps the corresponding Objective-C method.
+// ColorSpace returns the color space.
 func (sias *SearchableItemAttributeSet) ColorSpace() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("colorSpace"))
 	if _r == 0 {
@@ -2097,31 +2097,31 @@ func (sias *SearchableItemAttributeSet) ColorSpace() string {
 	return purego.GoString(_r)
 }
 
-// BitsPerSample wraps the corresponding Objective-C method.
+// BitsPerSample returns the bits per sample.
 func (sias *SearchableItemAttributeSet) BitsPerSample() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("bitsPerSample"))
 	return obj.Wrap(_r)
 }
 
-// IsFlashOn wraps the corresponding Objective-C method.
+// IsFlashOn returns the is flash on.
 func (sias *SearchableItemAttributeSet) IsFlashOn() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("isFlashOn"))
 	return obj.Wrap(_r)
 }
 
-// FocalLength wraps the corresponding Objective-C method.
+// FocalLength returns the focal length.
 func (sias *SearchableItemAttributeSet) FocalLength() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("focalLength"))
 	return obj.Wrap(_r)
 }
 
-// IsFocalLength35mm wraps the corresponding Objective-C method.
+// IsFocalLength35mm returns the is focal length35mm.
 func (sias *SearchableItemAttributeSet) IsFocalLength35mm() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("isFocalLength35mm"))
 	return obj.Wrap(_r)
 }
 
-// AcquisitionMake wraps the corresponding Objective-C method.
+// AcquisitionMake returns the acquisition make.
 func (sias *SearchableItemAttributeSet) AcquisitionMake() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("acquisitionMake"))
 	if _r == 0 {
@@ -2130,7 +2130,7 @@ func (sias *SearchableItemAttributeSet) AcquisitionMake() string {
 	return purego.GoString(_r)
 }
 
-// AcquisitionModel wraps the corresponding Objective-C method.
+// AcquisitionModel returns the acquisition model.
 func (sias *SearchableItemAttributeSet) AcquisitionModel() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("acquisitionModel"))
 	if _r == 0 {
@@ -2139,7 +2139,7 @@ func (sias *SearchableItemAttributeSet) AcquisitionModel() string {
 	return purego.GoString(_r)
 }
 
-// CameraOwner wraps the corresponding Objective-C method.
+// CameraOwner returns the camera owner.
 func (sias *SearchableItemAttributeSet) CameraOwner() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("cameraOwner"))
 	if _r == 0 {
@@ -2148,7 +2148,7 @@ func (sias *SearchableItemAttributeSet) CameraOwner() string {
 	return purego.GoString(_r)
 }
 
-// LensModel wraps the corresponding Objective-C method.
+// LensModel returns the lens model.
 func (sias *SearchableItemAttributeSet) LensModel() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("lensModel"))
 	if _r == 0 {
@@ -2157,19 +2157,19 @@ func (sias *SearchableItemAttributeSet) LensModel() string {
 	return purego.GoString(_r)
 }
 
-// ISOSpeed wraps the corresponding Objective-C method.
+// ISOSpeed returns the iso speed.
 func (sias *SearchableItemAttributeSet) ISOSpeed() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("ISOSpeed"))
 	return obj.Wrap(_r)
 }
 
-// Orientation wraps the corresponding Objective-C method.
+// Orientation returns the orientation.
 func (sias *SearchableItemAttributeSet) Orientation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("orientation"))
 	return obj.Wrap(_r)
 }
 
-// LayerNames wraps the corresponding Objective-C method.
+// LayerNames returns the layer names.
 //
 // LayerNames returns the collection as a Go slice.
 func (sias *SearchableItemAttributeSet) LayerNames() []string {
@@ -2177,19 +2177,19 @@ func (sias *SearchableItemAttributeSet) LayerNames() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// WhiteBalance wraps the corresponding Objective-C method.
+// WhiteBalance returns the white balance.
 func (sias *SearchableItemAttributeSet) WhiteBalance() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("whiteBalance"))
 	return obj.Wrap(_r)
 }
 
-// Aperture wraps the corresponding Objective-C method.
+// Aperture returns the aperture.
 func (sias *SearchableItemAttributeSet) Aperture() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("aperture"))
 	return obj.Wrap(_r)
 }
 
-// ProfileName wraps the corresponding Objective-C method.
+// ProfileName returns the profile name.
 func (sias *SearchableItemAttributeSet) ProfileName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("profileName"))
 	if _r == 0 {
@@ -2198,31 +2198,31 @@ func (sias *SearchableItemAttributeSet) ProfileName() string {
 	return purego.GoString(_r)
 }
 
-// ResolutionWidthDPI wraps the corresponding Objective-C method.
+// ResolutionWidthDPI returns the resolution width dpi.
 func (sias *SearchableItemAttributeSet) ResolutionWidthDPI() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("resolutionWidthDPI"))
 	return obj.Wrap(_r)
 }
 
-// ResolutionHeightDPI wraps the corresponding Objective-C method.
+// ResolutionHeightDPI returns the resolution height dpi.
 func (sias *SearchableItemAttributeSet) ResolutionHeightDPI() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("resolutionHeightDPI"))
 	return obj.Wrap(_r)
 }
 
-// ExposureMode wraps the corresponding Objective-C method.
+// ExposureMode returns the exposure mode.
 func (sias *SearchableItemAttributeSet) ExposureMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("exposureMode"))
 	return obj.Wrap(_r)
 }
 
-// ExposureTime wraps the corresponding Objective-C method.
+// ExposureTime returns the exposure time.
 func (sias *SearchableItemAttributeSet) ExposureTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("exposureTime"))
 	return obj.Wrap(_r)
 }
 
-// EXIFVersion wraps the corresponding Objective-C method.
+// EXIFVersion returns the exif version.
 func (sias *SearchableItemAttributeSet) EXIFVersion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("EXIFVersion"))
 	if _r == 0 {
@@ -2231,7 +2231,7 @@ func (sias *SearchableItemAttributeSet) EXIFVersion() string {
 	return purego.GoString(_r)
 }
 
-// EXIFGPSVersion wraps the corresponding Objective-C method.
+// EXIFGPSVersion returns the exifgps version.
 func (sias *SearchableItemAttributeSet) EXIFGPSVersion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("EXIFGPSVersion"))
 	if _r == 0 {
@@ -2240,19 +2240,19 @@ func (sias *SearchableItemAttributeSet) EXIFGPSVersion() string {
 	return purego.GoString(_r)
 }
 
-// HasAlphaChannel wraps the corresponding Objective-C method.
+// HasAlphaChannel returns the has alpha channel.
 func (sias *SearchableItemAttributeSet) HasAlphaChannel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("hasAlphaChannel"))
 	return obj.Wrap(_r)
 }
 
-// IsRedEyeOn wraps the corresponding Objective-C method.
+// IsRedEyeOn returns the is red eye on.
 func (sias *SearchableItemAttributeSet) IsRedEyeOn() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("isRedEyeOn"))
 	return obj.Wrap(_r)
 }
 
-// MeteringMode wraps the corresponding Objective-C method.
+// MeteringMode returns the metering mode.
 func (sias *SearchableItemAttributeSet) MeteringMode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("meteringMode"))
 	if _r == 0 {
@@ -2261,19 +2261,19 @@ func (sias *SearchableItemAttributeSet) MeteringMode() string {
 	return purego.GoString(_r)
 }
 
-// MaxAperture wraps the corresponding Objective-C method.
+// MaxAperture returns the max aperture.
 func (sias *SearchableItemAttributeSet) MaxAperture() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("maxAperture"))
 	return obj.Wrap(_r)
 }
 
-// FNumber wraps the corresponding Objective-C method.
+// FNumber returns the f number.
 func (sias *SearchableItemAttributeSet) FNumber() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("fNumber"))
 	return obj.Wrap(_r)
 }
 
-// ExposureProgram wraps the corresponding Objective-C method.
+// ExposureProgram returns the exposure program.
 func (sias *SearchableItemAttributeSet) ExposureProgram() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("exposureProgram"))
 	if _r == 0 {
@@ -2282,7 +2282,7 @@ func (sias *SearchableItemAttributeSet) ExposureProgram() string {
 	return purego.GoString(_r)
 }
 
-// ExposureTimeString wraps the corresponding Objective-C method.
+// ExposureTimeString returns the exposure time string.
 func (sias *SearchableItemAttributeSet) ExposureTimeString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("exposureTimeString"))
 	if _r == 0 {
@@ -2291,7 +2291,7 @@ func (sias *SearchableItemAttributeSet) ExposureTimeString() string {
 	return purego.GoString(_r)
 }
 
-// Headline wraps the corresponding Objective-C method.
+// Headline returns the headline.
 func (sias *SearchableItemAttributeSet) Headline() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("headline"))
 	if _r == 0 {
@@ -2300,7 +2300,7 @@ func (sias *SearchableItemAttributeSet) Headline() string {
 	return purego.GoString(_r)
 }
 
-// Instructions wraps the corresponding Objective-C method.
+// Instructions returns the instructions.
 func (sias *SearchableItemAttributeSet) Instructions() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("instructions"))
 	if _r == 0 {
@@ -2309,7 +2309,7 @@ func (sias *SearchableItemAttributeSet) Instructions() string {
 	return purego.GoString(_r)
 }
 
-// Thoroughfare wraps the corresponding Objective-C method.
+// Thoroughfare returns the thoroughfare.
 func (sias *SearchableItemAttributeSet) Thoroughfare() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("thoroughfare"))
 	if _r == 0 {
@@ -2318,7 +2318,7 @@ func (sias *SearchableItemAttributeSet) Thoroughfare() string {
 	return purego.GoString(_r)
 }
 
-// SubThoroughfare wraps the corresponding Objective-C method.
+// SubThoroughfare returns the sub thoroughfare.
 func (sias *SearchableItemAttributeSet) SubThoroughfare() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("subThoroughfare"))
 	if _r == 0 {
@@ -2327,7 +2327,7 @@ func (sias *SearchableItemAttributeSet) SubThoroughfare() string {
 	return purego.GoString(_r)
 }
 
-// PostalCode wraps the corresponding Objective-C method.
+// PostalCode returns the postal code.
 func (sias *SearchableItemAttributeSet) PostalCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("postalCode"))
 	if _r == 0 {
@@ -2336,7 +2336,7 @@ func (sias *SearchableItemAttributeSet) PostalCode() string {
 	return purego.GoString(_r)
 }
 
-// City wraps the corresponding Objective-C method.
+// City returns the city.
 func (sias *SearchableItemAttributeSet) City() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("city"))
 	if _r == 0 {
@@ -2345,7 +2345,7 @@ func (sias *SearchableItemAttributeSet) City() string {
 	return purego.GoString(_r)
 }
 
-// StateOrProvince wraps the corresponding Objective-C method.
+// StateOrProvince returns the state or province.
 func (sias *SearchableItemAttributeSet) StateOrProvince() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("stateOrProvince"))
 	if _r == 0 {
@@ -2354,7 +2354,7 @@ func (sias *SearchableItemAttributeSet) StateOrProvince() string {
 	return purego.GoString(_r)
 }
 
-// Country wraps the corresponding Objective-C method.
+// Country returns the country.
 func (sias *SearchableItemAttributeSet) Country() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("country"))
 	if _r == 0 {
@@ -2363,7 +2363,7 @@ func (sias *SearchableItemAttributeSet) Country() string {
 	return purego.GoString(_r)
 }
 
-// FullyFormattedAddress wraps the corresponding Objective-C method.
+// FullyFormattedAddress returns the fully formatted address.
 func (sias *SearchableItemAttributeSet) FullyFormattedAddress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("fullyFormattedAddress"))
 	if _r == 0 {
@@ -2372,43 +2372,43 @@ func (sias *SearchableItemAttributeSet) FullyFormattedAddress() string {
 	return purego.GoString(_r)
 }
 
-// Altitude wraps the corresponding Objective-C method.
+// Altitude returns the altitude.
 func (sias *SearchableItemAttributeSet) Altitude() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("altitude"))
 	return obj.Wrap(_r)
 }
 
-// Latitude wraps the corresponding Objective-C method.
+// Latitude returns the latitude.
 func (sias *SearchableItemAttributeSet) Latitude() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("latitude"))
 	return obj.Wrap(_r)
 }
 
-// Longitude wraps the corresponding Objective-C method.
+// Longitude returns the longitude.
 func (sias *SearchableItemAttributeSet) Longitude() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("longitude"))
 	return obj.Wrap(_r)
 }
 
-// Speed wraps the corresponding Objective-C method.
+// Speed returns the speed.
 func (sias *SearchableItemAttributeSet) Speed() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("speed"))
 	return obj.Wrap(_r)
 }
 
-// Timestamp wraps the corresponding Objective-C method.
+// Timestamp returns the timestamp.
 func (sias *SearchableItemAttributeSet) Timestamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("timestamp"))
 	return obj.Wrap(_r)
 }
 
-// ImageDirection wraps the corresponding Objective-C method.
+// ImageDirection returns the image direction.
 func (sias *SearchableItemAttributeSet) ImageDirection() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("imageDirection"))
 	return obj.Wrap(_r)
 }
 
-// NamedLocation wraps the corresponding Objective-C method.
+// NamedLocation returns the named location.
 func (sias *SearchableItemAttributeSet) NamedLocation() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("namedLocation"))
 	if _r == 0 {
@@ -2417,13 +2417,13 @@ func (sias *SearchableItemAttributeSet) NamedLocation() string {
 	return purego.GoString(_r)
 }
 
-// GPSTrack wraps the corresponding Objective-C method.
+// GPSTrack returns the gps track.
 func (sias *SearchableItemAttributeSet) GPSTrack() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSTrack"))
 	return obj.Wrap(_r)
 }
 
-// GPSStatus wraps the corresponding Objective-C method.
+// GPSStatus returns the gps status.
 func (sias *SearchableItemAttributeSet) GPSStatus() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSStatus"))
 	if _r == 0 {
@@ -2432,7 +2432,7 @@ func (sias *SearchableItemAttributeSet) GPSStatus() string {
 	return purego.GoString(_r)
 }
 
-// GPSMeasureMode wraps the corresponding Objective-C method.
+// GPSMeasureMode returns the gps measure mode.
 func (sias *SearchableItemAttributeSet) GPSMeasureMode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSMeasureMode"))
 	if _r == 0 {
@@ -2441,13 +2441,13 @@ func (sias *SearchableItemAttributeSet) GPSMeasureMode() string {
 	return purego.GoString(_r)
 }
 
-// GPSDOP wraps the corresponding Objective-C method.
+// GPSDOP returns the gpsdop.
 func (sias *SearchableItemAttributeSet) GPSDOP() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSDOP"))
 	return obj.Wrap(_r)
 }
 
-// GPSMapDatum wraps the corresponding Objective-C method.
+// GPSMapDatum returns the gps map datum.
 func (sias *SearchableItemAttributeSet) GPSMapDatum() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSMapDatum"))
 	if _r == 0 {
@@ -2456,31 +2456,31 @@ func (sias *SearchableItemAttributeSet) GPSMapDatum() string {
 	return purego.GoString(_r)
 }
 
-// GPSDestLatitude wraps the corresponding Objective-C method.
+// GPSDestLatitude returns the gps dest latitude.
 func (sias *SearchableItemAttributeSet) GPSDestLatitude() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSDestLatitude"))
 	return obj.Wrap(_r)
 }
 
-// GPSDestLongitude wraps the corresponding Objective-C method.
+// GPSDestLongitude returns the gps dest longitude.
 func (sias *SearchableItemAttributeSet) GPSDestLongitude() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSDestLongitude"))
 	return obj.Wrap(_r)
 }
 
-// GPSDestBearing wraps the corresponding Objective-C method.
+// GPSDestBearing returns the gps dest bearing.
 func (sias *SearchableItemAttributeSet) GPSDestBearing() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSDestBearing"))
 	return obj.Wrap(_r)
 }
 
-// GPSDestDistance wraps the corresponding Objective-C method.
+// GPSDestDistance returns the gps dest distance.
 func (sias *SearchableItemAttributeSet) GPSDestDistance() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSDestDistance"))
 	return obj.Wrap(_r)
 }
 
-// GPSProcessingMethod wraps the corresponding Objective-C method.
+// GPSProcessingMethod returns the gps processing method.
 func (sias *SearchableItemAttributeSet) GPSProcessingMethod() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSProcessingMethod"))
 	if _r == 0 {
@@ -2489,7 +2489,7 @@ func (sias *SearchableItemAttributeSet) GPSProcessingMethod() string {
 	return purego.GoString(_r)
 }
 
-// GPSAreaInformation wraps the corresponding Objective-C method.
+// GPSAreaInformation returns the gps area information.
 func (sias *SearchableItemAttributeSet) GPSAreaInformation() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSAreaInformation"))
 	if _r == 0 {
@@ -2498,13 +2498,13 @@ func (sias *SearchableItemAttributeSet) GPSAreaInformation() string {
 	return purego.GoString(_r)
 }
 
-// GPSDateStamp wraps the corresponding Objective-C method.
+// GPSDateStamp returns the gps date stamp.
 func (sias *SearchableItemAttributeSet) GPSDateStamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSDateStamp"))
 	return obj.Wrap(_r)
 }
 
-// GPSDifferental wraps the corresponding Objective-C method.
+// GPSDifferental returns the gps differental.
 func (sias *SearchableItemAttributeSet) GPSDifferental() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sias), objc.RegisterName("GPSDifferental"))
 	return obj.Wrap(_r)

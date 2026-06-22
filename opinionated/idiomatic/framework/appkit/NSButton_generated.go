@@ -200,7 +200,7 @@ func (b *Button) WithKeyEquivalentModifierMask(keyEquivalentModifierMask EventMo
 	return b
 }
 
-// WithBorderShape sets the property and returns the receiver so calls can be chained.
+// WithBorderShape sets the border shape.
 func (b *Button) WithBorderShape(borderShape ControlBorderShape) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBorderShape:"), borderShape)
 	return b
@@ -338,38 +338,38 @@ func (b *Button) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Butt
 	return b
 }
 
-// WithCell sets the property and returns the receiver so calls can be chained.
+// WithCell sets the cell.
 func (b *Button) WithCell(cell CellProvider) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return b
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (b *Button) WithSubviews(items ...ViewProvider) *Button {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setSubviews:"), _arr)
 	return b
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (b *Button) WithHidden(hidden bool) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setHidden:"), hidden)
 	return b
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (b *Button) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return b
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (b *Button) WithAutoresizesSubviews(autoresizesSubviews bool) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return b
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (b *Button) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return b
@@ -381,19 +381,19 @@ func (b *Button) WithFrame(frame corefoundation.CGRect) *Button {
 	return b
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (b *Button) WithFrameRotation(frameRotation float64) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return b
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (b *Button) WithFrameCenterRotation(frameCenterRotation float64) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return b
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (b *Button) WithBoundsRotation(boundsRotation float64) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return b
@@ -405,7 +405,7 @@ func (b *Button) WithBounds(bounds corefoundation.CGRect) *Button {
 	return b
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (b *Button) WithCanDrawConcurrently(canDrawConcurrently bool) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return b
@@ -417,148 +417,148 @@ func (b *Button) WithNeedsDisplay(needsDisplay bool) *Button {
 	return b
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (b *Button) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return b
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (b *Button) WithWantsRestingTouches(wantsRestingTouches bool) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return b
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (b *Button) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return b
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (b *Button) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return b
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (b *Button) WithWantsLayer(wantsLayer bool) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return b
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (b *Button) WithLayer(layer obj.Object) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return b
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (b *Button) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return b
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (b *Button) WithNeedsLayout(needsLayout bool) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return b
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (b *Button) WithAlphaValue(alphaValue float64) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return b
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (b *Button) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return b
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (b *Button) WithBackgroundFilters(items ...obj.Object) *Button {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return b
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (b *Button) WithCompositingFilter(compositingFilter obj.Object) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return b
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (b *Button) WithContentFilters(items ...obj.Object) *Button {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setContentFilters:"), _arr)
 	return b
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (b *Button) WithShadow(shadow *Shadow) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return b
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (b *Button) WithClipsToBounds(clipsToBounds bool) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return b
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (b *Button) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return b
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (b *Button) WithToolTip(toolTip string) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return b
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (b *Button) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return b
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (b *Button) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return b
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (b *Button) WithNextKeyView(nextKeyView ViewProvider) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return b
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (b *Button) WithFocusRingType(focusRingType FocusRingType) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return b
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (b *Button) WithGestureRecognizers(items ...GestureRecognizerProvider) *Button {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return b
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (b *Button) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return b
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (b *Button) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return b
@@ -570,49 +570,49 @@ func (b *Button) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeM
 	return b
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (b *Button) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return b
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (b *Button) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return b
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (b *Button) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return b
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (b *Button) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return b
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (b *Button) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return b
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (b *Button) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return b
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (b *Button) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return b
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (b *Button) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Button {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return b
@@ -840,13 +840,13 @@ func (b *Button) KeyEquivalentModifierMask() EventModifierFlags {
 	return _r
 }
 
-// ActiveCompressionOptions wraps the corresponding Objective-C method.
+// ActiveCompressionOptions returns the active compression options.
 func (b *Button) ActiveCompressionOptions() *UserInterfaceCompressionOptions {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("activeCompressionOptions"))
 	return UserInterfaceCompressionOptionsFromID(_r)
 }
 
-// BorderShape wraps the corresponding Objective-C method.
+// BorderShape returns the border shape.
 func (b *Button) BorderShape() ControlBorderShape {
 	_r := objc.Send[ControlBorderShape](objref.IDOf(b), objc.RegisterName("borderShape"))
 	return _r

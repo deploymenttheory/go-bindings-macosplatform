@@ -170,32 +170,32 @@ func (t *Text) WithVerticallyResizable(verticallyResizable bool) *Text {
 	return t
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (t *Text) WithSubviews(items ...ViewProvider) *Text {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setSubviews:"), _arr)
 	return t
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (t *Text) WithHidden(hidden bool) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setHidden:"), hidden)
 	return t
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (t *Text) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return t
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (t *Text) WithAutoresizesSubviews(autoresizesSubviews bool) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return t
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (t *Text) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return t
@@ -207,19 +207,19 @@ func (t *Text) WithFrame(frame corefoundation.CGRect) *Text {
 	return t
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (t *Text) WithFrameRotation(frameRotation float64) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return t
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (t *Text) WithFrameCenterRotation(frameCenterRotation float64) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return t
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (t *Text) WithBoundsRotation(boundsRotation float64) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return t
@@ -231,7 +231,7 @@ func (t *Text) WithBounds(bounds corefoundation.CGRect) *Text {
 	return t
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (t *Text) WithCanDrawConcurrently(canDrawConcurrently bool) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return t
@@ -243,148 +243,148 @@ func (t *Text) WithNeedsDisplay(needsDisplay bool) *Text {
 	return t
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (t *Text) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return t
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (t *Text) WithWantsRestingTouches(wantsRestingTouches bool) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return t
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (t *Text) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return t
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (t *Text) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return t
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (t *Text) WithWantsLayer(wantsLayer bool) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return t
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (t *Text) WithLayer(layer obj.Object) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return t
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (t *Text) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return t
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (t *Text) WithNeedsLayout(needsLayout bool) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return t
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (t *Text) WithAlphaValue(alphaValue float64) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return t
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (t *Text) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return t
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (t *Text) WithBackgroundFilters(items ...obj.Object) *Text {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return t
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (t *Text) WithCompositingFilter(compositingFilter obj.Object) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return t
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (t *Text) WithContentFilters(items ...obj.Object) *Text {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setContentFilters:"), _arr)
 	return t
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (t *Text) WithShadow(shadow *Shadow) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return t
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (t *Text) WithClipsToBounds(clipsToBounds bool) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return t
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (t *Text) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return t
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (t *Text) WithToolTip(toolTip string) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return t
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (t *Text) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return t
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (t *Text) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return t
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (t *Text) WithNextKeyView(nextKeyView ViewProvider) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return t
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (t *Text) WithFocusRingType(focusRingType FocusRingType) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return t
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (t *Text) WithGestureRecognizers(items ...GestureRecognizerProvider) *Text {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return t
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (t *Text) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return t
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (t *Text) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return t
@@ -396,49 +396,49 @@ func (t *Text) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMet
 	return t
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (t *Text) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return t
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (t *Text) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return t
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (t *Text) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return t
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (t *Text) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return t
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (t *Text) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return t
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (t *Text) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return t
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (t *Text) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return t
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (t *Text) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Text {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return t
@@ -627,19 +627,19 @@ func (t *Text) ToggleRuler(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("toggleRuler:"), objref.IDOf(sender))
 }
 
-// IsEditable wraps the corresponding Objective-C method.
+// IsEditable reports whether the object is editable.
 func (t *Text) IsEditable() bool {
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isEditable"))
 	return _r
 }
 
-// IsSelectable wraps the corresponding Objective-C method.
+// IsSelectable reports whether the object is selectable.
 func (t *Text) IsSelectable() bool {
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isSelectable"))
 	return _r
 }
 
-// IsRichText wraps the corresponding Objective-C method.
+// IsRichText reports whether the object is rich text.
 func (t *Text) IsRichText() bool {
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isRichText"))
 	return _r
@@ -651,7 +651,7 @@ func (t *Text) ImportsGraphics() bool {
 	return _r
 }
 
-// IsFieldEditor wraps the corresponding Objective-C method.
+// IsFieldEditor reports whether the object is field editor.
 func (t *Text) IsFieldEditor() bool {
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isFieldEditor"))
 	return _r
@@ -669,67 +669,67 @@ func (t *Text) DrawsBackground() bool {
 	return _r
 }
 
-// BackgroundColor wraps the corresponding Objective-C method.
+// BackgroundColor returns the background color.
 func (t *Text) BackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
 }
 
-// IsRulerVisible wraps the corresponding Objective-C method.
+// IsRulerVisible reports whether the object is ruler visible.
 func (t *Text) IsRulerVisible() bool {
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isRulerVisible"))
 	return _r
 }
 
-// SelectedRange wraps the corresponding Objective-C method.
+// SelectedRange returns the selected range.
 func (t *Text) SelectedRange() foundation.NSRange {
 	_r := objc.Send[foundation.NSRange](objref.IDOf(t), objc.RegisterName("selectedRange"))
 	return _r
 }
 
-// Font wraps the corresponding Objective-C method.
+// Font returns the font.
 func (t *Text) Font() *Font {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("font"))
 	return FontFromID(_r)
 }
 
-// TextColor wraps the corresponding Objective-C method.
+// TextColor returns the text color.
 func (t *Text) TextColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("textColor"))
 	return ColorFromID(_r)
 }
 
-// Alignment wraps the corresponding Objective-C method.
+// Alignment returns the alignment.
 func (t *Text) Alignment() TextAlignment {
 	_r := objc.Send[TextAlignment](objref.IDOf(t), objc.RegisterName("alignment"))
 	return _r
 }
 
-// BaseWritingDirection wraps the corresponding Objective-C method.
+// BaseWritingDirection returns the base writing direction.
 func (t *Text) BaseWritingDirection() WritingDirection {
 	_r := objc.Send[WritingDirection](objref.IDOf(t), objc.RegisterName("baseWritingDirection"))
 	return _r
 }
 
-// MaxSize wraps the corresponding Objective-C method.
+// MaxSize returns the max size.
 func (t *Text) MaxSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(t), objc.RegisterName("maxSize"))
 	return _r
 }
 
-// MinSize wraps the corresponding Objective-C method.
+// MinSize returns the min size.
 func (t *Text) MinSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(t), objc.RegisterName("minSize"))
 	return _r
 }
 
-// IsHorizontallyResizable wraps the corresponding Objective-C method.
+// IsHorizontallyResizable reports whether the object is horizontally resizable.
 func (t *Text) IsHorizontallyResizable() bool {
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isHorizontallyResizable"))
 	return _r
 }
 
-// IsVerticallyResizable wraps the corresponding Objective-C method.
+// IsVerticallyResizable reports whether the object is vertically resizable.
 func (t *Text) IsVerticallyResizable() bool {
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isVerticallyResizable"))
 	return _r

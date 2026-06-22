@@ -63,7 +63,7 @@ func (csmc *ChangeShuffleModeCommand) WithEnabled(enabled bool) *ChangeShuffleMo
 	return csmc
 }
 
-// CurrentShuffleType wraps the corresponding Objective-C method.
+// CurrentShuffleType returns the current shuffle type.
 func (csmc *ChangeShuffleModeCommand) CurrentShuffleType() ShuffleType {
 	_r := objc.Send[ShuffleType](objref.IDOf(csmc), objc.RegisterName("currentShuffleType"))
 	return _r

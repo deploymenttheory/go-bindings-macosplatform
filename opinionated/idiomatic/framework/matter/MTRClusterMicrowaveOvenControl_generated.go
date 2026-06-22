@@ -53,73 +53,73 @@ func NewMTRClusterMicrowaveOvenControlWithDeviceEndpointIDQueue(device *MTRDevic
 	return mTRClusterMicrowaveOvenControlAdopt(_id)
 }
 
-// ReadAttributeCookTimeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCookTimeWithParams reads attribute cook time with params.
 func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeCookTimeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeCookTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxCookTimeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMaxCookTimeWithParams reads attribute max cook time with params.
 func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeMaxCookTimeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeMaxCookTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePowerSettingWithParams wraps the corresponding Objective-C method.
+// ReadAttributePowerSettingWithParams reads attribute power setting with params.
 func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributePowerSettingWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributePowerSettingWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinPowerWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMinPowerWithParams reads attribute min power with params.
 func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeMinPowerWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeMinPowerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxPowerWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMaxPowerWithParams reads attribute max power with params.
 func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeMaxPowerWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeMaxPowerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePowerStepWithParams wraps the corresponding Objective-C method.
+// ReadAttributePowerStepWithParams reads attribute power step with params.
 func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributePowerStepWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributePowerStepWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeWattRatingWithParams wraps the corresponding Objective-C method.
+// ReadAttributeWattRatingWithParams reads attribute watt rating with params.
 func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeWattRatingWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeWattRatingWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcmoc *MTRClusterMicrowaveOvenControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmoc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

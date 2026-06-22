@@ -73,7 +73,7 @@ func NewPaymentDiscountWithIdentifierKeyIdentifierNonceSignatureTimestamp(identi
 	return paymentDiscountAdopt(_id)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (pd *PaymentDiscount) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -82,7 +82,7 @@ func (pd *PaymentDiscount) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// KeyIdentifier wraps the corresponding Objective-C method.
+// KeyIdentifier returns the key identifier.
 func (pd *PaymentDiscount) KeyIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("keyIdentifier"))
 	if _r == 0 {
@@ -91,13 +91,13 @@ func (pd *PaymentDiscount) KeyIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Nonce wraps the corresponding Objective-C method.
+// Nonce returns the nonce.
 func (pd *PaymentDiscount) Nonce() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("nonce"))
 	return obj.Wrap(_r)
 }
 
-// Signature wraps the corresponding Objective-C method.
+// Signature returns the signature.
 func (pd *PaymentDiscount) Signature() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("signature"))
 	if _r == 0 {
@@ -106,7 +106,7 @@ func (pd *PaymentDiscount) Signature() string {
 	return purego.GoString(_r)
 }
 
-// Timestamp wraps the corresponding Objective-C method.
+// Timestamp returns the timestamp.
 func (pd *PaymentDiscount) Timestamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("timestamp"))
 	return obj.Wrap(_r)

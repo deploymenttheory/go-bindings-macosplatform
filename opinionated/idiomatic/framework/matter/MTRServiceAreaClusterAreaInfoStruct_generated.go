@@ -70,25 +70,25 @@ func NewMTRServiceAreaClusterAreaInfoStruct() *MTRServiceAreaClusterAreaInfoStru
 	return mTRServiceAreaClusterAreaInfoStructAdopt(_id)
 }
 
-// WithLocationInfo sets the property and returns the receiver so calls can be chained.
+// WithLocationInfo sets the location info.
 func (msacais *MTRServiceAreaClusterAreaInfoStruct) WithLocationInfo(locationInfo *MTRDataTypeLocationDescriptorStruct) *MTRServiceAreaClusterAreaInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(msacais), objc.RegisterName("setLocationInfo:"), objref.IDOf(locationInfo))
 	return msacais
 }
 
-// WithLandmarkInfo sets the property and returns the receiver so calls can be chained.
+// WithLandmarkInfo sets the landmark info.
 func (msacais *MTRServiceAreaClusterAreaInfoStruct) WithLandmarkInfo(landmarkInfo *MTRServiceAreaClusterLandmarkInfoStruct) *MTRServiceAreaClusterAreaInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(msacais), objc.RegisterName("setLandmarkInfo:"), objref.IDOf(landmarkInfo))
 	return msacais
 }
 
-// LocationInfo wraps the corresponding Objective-C method.
+// LocationInfo returns the location info.
 func (msacais *MTRServiceAreaClusterAreaInfoStruct) LocationInfo() *MTRDataTypeLocationDescriptorStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(msacais), objc.RegisterName("locationInfo"))
 	return MTRDataTypeLocationDescriptorStructFromID(_r)
 }
 
-// LandmarkInfo wraps the corresponding Objective-C method.
+// LandmarkInfo returns the landmark info.
 func (msacais *MTRServiceAreaClusterAreaInfoStruct) LandmarkInfo() *MTRServiceAreaClusterLandmarkInfoStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(msacais), objc.RegisterName("landmarkInfo"))
 	return MTRServiceAreaClusterLandmarkInfoStructFromID(_r)

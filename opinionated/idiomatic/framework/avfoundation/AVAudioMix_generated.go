@@ -68,7 +68,7 @@ func (am *AudioMix) String() string {
 	return rt.Description(objref.IDOf(am))
 }
 
-// InputParameters wraps the corresponding Objective-C method.
+// InputParameters returns the input parameters.
 //
 // InputParameters returns the collection as a Go slice.
 func (am *AudioMix) InputParameters() []*AudioMixInputParameters {

@@ -70,43 +70,43 @@ func NewMTRMessagesClusterMessageCompleteEvent() *MTRMessagesClusterMessageCompl
 	return mTRMessagesClusterMessageCompleteEventAdopt(_id)
 }
 
-// WithMessageID sets the property and returns the receiver so calls can be chained.
+// WithMessageID sets the message ID.
 func (mmcmce *MTRMessagesClusterMessageCompleteEvent) WithMessageID(messageID obj.Object) *MTRMessagesClusterMessageCompleteEvent {
 	objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
 	return mmcmce
 }
 
-// WithResponseID sets the property and returns the receiver so calls can be chained.
+// WithResponseID sets the response ID.
 func (mmcmce *MTRMessagesClusterMessageCompleteEvent) WithResponseID(responseID obj.Object) *MTRMessagesClusterMessageCompleteEvent {
 	objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("setResponseID:"), objref.IDOf(responseID))
 	return mmcmce
 }
 
-// WithReply sets the property and returns the receiver so calls can be chained.
+// WithReply sets the reply.
 func (mmcmce *MTRMessagesClusterMessageCompleteEvent) WithReply(reply string) *MTRMessagesClusterMessageCompleteEvent {
 	objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("setReply:"), purego.NSString(reply))
 	return mmcmce
 }
 
-// WithFutureMessagesPreference sets the property and returns the receiver so calls can be chained.
+// WithFutureMessagesPreference sets the future messages preference.
 func (mmcmce *MTRMessagesClusterMessageCompleteEvent) WithFutureMessagesPreference(futureMessagesPreference obj.Object) *MTRMessagesClusterMessageCompleteEvent {
 	objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("setFutureMessagesPreference:"), objref.IDOf(futureMessagesPreference))
 	return mmcmce
 }
 
-// MessageID wraps the corresponding Objective-C method.
+// MessageID returns the message ID.
 func (mmcmce *MTRMessagesClusterMessageCompleteEvent) MessageID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("messageID"))
 	return obj.Wrap(_r)
 }
 
-// ResponseID wraps the corresponding Objective-C method.
+// ResponseID returns the response ID.
 func (mmcmce *MTRMessagesClusterMessageCompleteEvent) ResponseID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("responseID"))
 	return obj.Wrap(_r)
 }
 
-// Reply wraps the corresponding Objective-C method.
+// Reply returns the reply.
 func (mmcmce *MTRMessagesClusterMessageCompleteEvent) Reply() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("reply"))
 	if _r == 0 {
@@ -115,7 +115,7 @@ func (mmcmce *MTRMessagesClusterMessageCompleteEvent) Reply() string {
 	return purego.GoString(_r)
 }
 
-// FutureMessagesPreference wraps the corresponding Objective-C method.
+// FutureMessagesPreference returns the future messages preference.
 func (mmcmce *MTRMessagesClusterMessageCompleteEvent) FutureMessagesPreference() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("futureMessagesPreference"))
 	return obj.Wrap(_r)

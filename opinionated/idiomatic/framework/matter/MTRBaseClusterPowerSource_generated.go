@@ -61,7 +61,7 @@ func NewMTRBaseClusterPowerSourceWithDeviceEndpointQueue(device *MTRBaseDevice, 
 	return mTRBaseClusterPowerSourceAdopt(_id)
 }
 
-// ReadAttributeStatusWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeStatusWithCompletion reads attribute status with completion.
 //
 // ReadAttributeStatusWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeStatusWithParamsSubscr
 	}
 }
 
-// ReadAttributeOrderWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOrderWithCompletion reads attribute order with completion.
 //
 // ReadAttributeOrderWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeOrderWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeOrderWithParamsSubscri
 	}
 }
 
-// ReadAttributeDescriptionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDescriptionWithCompletion reads attribute description with completion.
 //
 // ReadAttributeDescriptionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeDescriptionWithCompletion(ctx context.Context) (result string, err error) {
@@ -211,7 +211,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeDescriptionWithParamsS
 	}
 }
 
-// ReadAttributeWiredAssessedInputVoltageWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeWiredAssessedInputVoltageWithCompletion reads attribute wired assessed input voltage with completion.
 //
 // ReadAttributeWiredAssessedInputVoltageWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeWiredAssessedInputVoltageWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeWiredAssessedInputVolt
 	}
 }
 
-// ReadAttributeWiredAssessedInputFrequencyWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeWiredAssessedInputFrequencyWithCompletion reads attribute wired assessed input frequency with completion.
 //
 // ReadAttributeWiredAssessedInputFrequencyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeWiredAssessedInputFrequencyWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeWiredAssessedInputFreq
 	}
 }
 
-// ReadAttributeWiredCurrentTypeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeWiredCurrentTypeWithCompletion reads attribute wired current type with completion.
 //
 // ReadAttributeWiredCurrentTypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeWiredCurrentTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeWiredCurrentTypeWithPa
 	}
 }
 
-// ReadAttributeWiredAssessedCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeWiredAssessedCurrentWithCompletion reads attribute wired assessed current with completion.
 //
 // ReadAttributeWiredAssessedCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeWiredAssessedCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeWiredAssessedCurrentWi
 	}
 }
 
-// ReadAttributeWiredNominalVoltageWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeWiredNominalVoltageWithCompletion reads attribute wired nominal voltage with completion.
 //
 // ReadAttributeWiredNominalVoltageWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeWiredNominalVoltageWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeWiredNominalVoltageWit
 	}
 }
 
-// ReadAttributeWiredMaximumCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeWiredMaximumCurrentWithCompletion reads attribute wired maximum current with completion.
 //
 // ReadAttributeWiredMaximumCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeWiredMaximumCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeWiredMaximumCurrentWit
 	}
 }
 
-// ReadAttributeWiredPresentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeWiredPresentWithCompletion reads attribute wired present with completion.
 //
 // ReadAttributeWiredPresentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeWiredPresentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeWiredPresentWithParams
 	}
 }
 
-// ReadAttributeActiveWiredFaultsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActiveWiredFaultsWithCompletion reads attribute active wired faults with completion.
 //
 // ReadAttributeActiveWiredFaultsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeActiveWiredFaultsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeActiveWiredFaultsWithP
 	}
 }
 
-// ReadAttributeBatVoltageWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBatVoltageWithCompletion reads attribute bat voltage with completion.
 //
 // ReadAttributeBatVoltageWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatVoltageWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatVoltageWithParamsSu
 	}
 }
 
-// ReadAttributeBatPercentRemainingWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBatPercentRemainingWithCompletion reads attribute bat percent remaining with completion.
 //
 // ReadAttributeBatPercentRemainingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatPercentRemainingWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatPercentRemainingWit
 	}
 }
 
-// ReadAttributeBatTimeRemainingWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBatTimeRemainingWithCompletion reads attribute bat time remaining with completion.
 //
 // ReadAttributeBatTimeRemainingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatTimeRemainingWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatTimeRemainingWithPa
 	}
 }
 
-// ReadAttributeBatChargeLevelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBatChargeLevelWithCompletion reads attribute bat charge level with completion.
 //
 // ReadAttributeBatChargeLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatChargeLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatChargeLevelWithPara
 	}
 }
 
-// ReadAttributeBatReplacementNeededWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBatReplacementNeededWithCompletion reads attribute bat replacement needed with completion.
 //
 // ReadAttributeBatReplacementNeededWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatReplacementNeededWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatReplacementNeededWi
 	}
 }
 
-// ReadAttributeBatReplaceabilityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBatReplaceabilityWithCompletion reads attribute bat replaceability with completion.
 //
 // ReadAttributeBatReplaceabilityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatReplaceabilityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatReplaceabilityWithP
 	}
 }
 
-// ReadAttributeBatPresentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBatPresentWithCompletion reads attribute bat present with completion.
 //
 // ReadAttributeBatPresentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatPresentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -961,7 +961,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatPresentWithParamsSu
 	}
 }
 
-// ReadAttributeActiveBatFaultsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActiveBatFaultsWithCompletion reads attribute active bat faults with completion.
 //
 // ReadAttributeActiveBatFaultsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeActiveBatFaultsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeActiveBatFaultsWithPar
 	}
 }
 
-// ReadAttributeBatReplacementDescriptionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBatReplacementDescriptionWithCompletion reads attribute bat replacement description with completion.
 //
 // ReadAttributeBatReplacementDescriptionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatReplacementDescriptionWithCompletion(ctx context.Context) (result string, err error) {
@@ -1061,7 +1061,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatReplacementDescript
 	}
 }
 
-// ReadAttributeBatCommonDesignationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBatCommonDesignationWithCompletion reads attribute bat common designation with completion.
 //
 // ReadAttributeBatCommonDesignationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatCommonDesignationWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatCommonDesignationWi
 	}
 }
 
-// ReadAttributeBatANSIDesignationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBatANSIDesignationWithCompletion reads attribute bat ansi designation with completion.
 //
 // ReadAttributeBatANSIDesignationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatANSIDesignationWithCompletion(ctx context.Context) (result string, err error) {
@@ -1161,7 +1161,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatANSIDesignationWith
 	}
 }
 
-// ReadAttributeBatIECDesignationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBatIECDesignationWithCompletion reads attribute bat iec designation with completion.
 //
 // ReadAttributeBatIECDesignationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatIECDesignationWithCompletion(ctx context.Context) (result string, err error) {
@@ -1211,7 +1211,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatIECDesignationWithP
 	}
 }
 
-// ReadAttributeBatApprovedChemistryWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBatApprovedChemistryWithCompletion reads attribute bat approved chemistry with completion.
 //
 // ReadAttributeBatApprovedChemistryWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatApprovedChemistryWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1261,7 +1261,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatApprovedChemistryWi
 	}
 }
 
-// ReadAttributeBatCapacityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBatCapacityWithCompletion reads attribute bat capacity with completion.
 //
 // ReadAttributeBatCapacityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatCapacityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1311,7 +1311,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatCapacityWithParamsS
 	}
 }
 
-// ReadAttributeBatQuantityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBatQuantityWithCompletion reads attribute bat quantity with completion.
 //
 // ReadAttributeBatQuantityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatQuantityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1361,7 +1361,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatQuantityWithParamsS
 	}
 }
 
-// ReadAttributeBatChargeStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBatChargeStateWithCompletion reads attribute bat charge state with completion.
 //
 // ReadAttributeBatChargeStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatChargeStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1411,7 +1411,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatChargeStateWithPara
 	}
 }
 
-// ReadAttributeBatTimeToFullChargeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBatTimeToFullChargeWithCompletion reads attribute bat time to full charge with completion.
 //
 // ReadAttributeBatTimeToFullChargeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatTimeToFullChargeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1461,7 +1461,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatTimeToFullChargeWit
 	}
 }
 
-// ReadAttributeBatFunctionalWhileChargingWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBatFunctionalWhileChargingWithCompletion reads attribute bat functional while charging with completion.
 //
 // ReadAttributeBatFunctionalWhileChargingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatFunctionalWhileChargingWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1511,7 +1511,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatFunctionalWhileChar
 	}
 }
 
-// ReadAttributeBatChargingCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBatChargingCurrentWithCompletion reads attribute bat charging current with completion.
 //
 // ReadAttributeBatChargingCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatChargingCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1561,7 +1561,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatChargingCurrentWith
 	}
 }
 
-// ReadAttributeActiveBatChargeFaultsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActiveBatChargeFaultsWithCompletion reads attribute active bat charge faults with completion.
 //
 // ReadAttributeActiveBatChargeFaultsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeActiveBatChargeFaultsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1611,7 +1611,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeActiveBatChargeFaultsW
 	}
 }
 
-// ReadAttributeEndpointListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEndpointListWithCompletion reads attribute endpoint list with completion.
 //
 // ReadAttributeEndpointListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeEndpointListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1661,7 +1661,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeEndpointListWithParams
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1711,7 +1711,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeGeneratedCommandListWi
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1761,7 +1761,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeAcceptedCommandListWit
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1811,7 +1811,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeAttributeListWithParam
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1861,7 +1861,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeFeatureMapWithParamsSu
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1911,7 +1911,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeClusterRevisionWithPar
 	}
 }
 
-// ReadAttributeStatus wraps the corresponding Objective-C method.
+// ReadAttributeStatus reads attribute status.
 //
 // ReadAttributeStatus blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeStatus(ctx context.Context) (result obj.Object, err error) {
@@ -1961,7 +1961,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeStatusWithMinIntervalM
 	}
 }
 
-// ReadAttributeOrder wraps the corresponding Objective-C method.
+// ReadAttributeOrder reads attribute order.
 //
 // ReadAttributeOrder blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeOrder(ctx context.Context) (result obj.Object, err error) {
@@ -2011,7 +2011,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeOrderWithMinIntervalMa
 	}
 }
 
-// ReadAttributeDescription wraps the corresponding Objective-C method.
+// ReadAttributeDescription reads attribute description.
 //
 // ReadAttributeDescription blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeDescription(ctx context.Context) (result string, err error) {
@@ -2061,7 +2061,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeDescriptionWithMinInte
 	}
 }
 
-// ReadAttributeWiredAssessedInputVoltage wraps the corresponding Objective-C method.
+// ReadAttributeWiredAssessedInputVoltage reads attribute wired assessed input voltage.
 //
 // ReadAttributeWiredAssessedInputVoltage blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeWiredAssessedInputVoltage(ctx context.Context) (result obj.Object, err error) {
@@ -2111,7 +2111,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeWiredAssessedInputVolt
 	}
 }
 
-// ReadAttributeWiredAssessedInputFrequency wraps the corresponding Objective-C method.
+// ReadAttributeWiredAssessedInputFrequency reads attribute wired assessed input frequency.
 //
 // ReadAttributeWiredAssessedInputFrequency blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeWiredAssessedInputFrequency(ctx context.Context) (result obj.Object, err error) {
@@ -2161,7 +2161,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeWiredAssessedInputFreq
 	}
 }
 
-// ReadAttributeWiredCurrentType wraps the corresponding Objective-C method.
+// ReadAttributeWiredCurrentType reads attribute wired current type.
 //
 // ReadAttributeWiredCurrentType blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeWiredCurrentType(ctx context.Context) (result obj.Object, err error) {
@@ -2211,7 +2211,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeWiredCurrentTypeWithMi
 	}
 }
 
-// ReadAttributeWiredAssessedCurrent wraps the corresponding Objective-C method.
+// ReadAttributeWiredAssessedCurrent reads attribute wired assessed current.
 //
 // ReadAttributeWiredAssessedCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeWiredAssessedCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -2261,7 +2261,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeWiredAssessedCurrentWi
 	}
 }
 
-// ReadAttributeWiredNominalVoltage wraps the corresponding Objective-C method.
+// ReadAttributeWiredNominalVoltage reads attribute wired nominal voltage.
 //
 // ReadAttributeWiredNominalVoltage blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeWiredNominalVoltage(ctx context.Context) (result obj.Object, err error) {
@@ -2311,7 +2311,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeWiredNominalVoltageWit
 	}
 }
 
-// ReadAttributeWiredMaximumCurrent wraps the corresponding Objective-C method.
+// ReadAttributeWiredMaximumCurrent reads attribute wired maximum current.
 //
 // ReadAttributeWiredMaximumCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeWiredMaximumCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -2361,7 +2361,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeWiredMaximumCurrentWit
 	}
 }
 
-// ReadAttributeWiredPresent wraps the corresponding Objective-C method.
+// ReadAttributeWiredPresent reads attribute wired present.
 //
 // ReadAttributeWiredPresent blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeWiredPresent(ctx context.Context) (result obj.Object, err error) {
@@ -2411,7 +2411,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeWiredPresentWithMinInt
 	}
 }
 
-// ReadAttributeActiveWiredFaults wraps the corresponding Objective-C method.
+// ReadAttributeActiveWiredFaults reads attribute active wired faults.
 //
 // ReadAttributeActiveWiredFaults blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeActiveWiredFaults(ctx context.Context) (result obj.Object, err error) {
@@ -2461,7 +2461,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeActiveWiredFaultsWithM
 	}
 }
 
-// ReadAttributeBatVoltage wraps the corresponding Objective-C method.
+// ReadAttributeBatVoltage reads attribute bat voltage.
 //
 // ReadAttributeBatVoltage blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatVoltage(ctx context.Context) (result obj.Object, err error) {
@@ -2511,7 +2511,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatVoltageWithMinInter
 	}
 }
 
-// ReadAttributeBatPercentRemaining wraps the corresponding Objective-C method.
+// ReadAttributeBatPercentRemaining reads attribute bat percent remaining.
 //
 // ReadAttributeBatPercentRemaining blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatPercentRemaining(ctx context.Context) (result obj.Object, err error) {
@@ -2561,7 +2561,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatPercentRemainingWit
 	}
 }
 
-// ReadAttributeBatTimeRemaining wraps the corresponding Objective-C method.
+// ReadAttributeBatTimeRemaining reads attribute bat time remaining.
 //
 // ReadAttributeBatTimeRemaining blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatTimeRemaining(ctx context.Context) (result obj.Object, err error) {
@@ -2611,7 +2611,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatTimeRemainingWithMi
 	}
 }
 
-// ReadAttributeBatChargeLevel wraps the corresponding Objective-C method.
+// ReadAttributeBatChargeLevel reads attribute bat charge level.
 //
 // ReadAttributeBatChargeLevel blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatChargeLevel(ctx context.Context) (result obj.Object, err error) {
@@ -2661,7 +2661,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatChargeLevelWithMinI
 	}
 }
 
-// ReadAttributeBatReplacementNeeded wraps the corresponding Objective-C method.
+// ReadAttributeBatReplacementNeeded reads attribute bat replacement needed.
 //
 // ReadAttributeBatReplacementNeeded blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatReplacementNeeded(ctx context.Context) (result obj.Object, err error) {
@@ -2711,7 +2711,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatReplacementNeededWi
 	}
 }
 
-// ReadAttributeBatReplaceability wraps the corresponding Objective-C method.
+// ReadAttributeBatReplaceability reads attribute bat replaceability.
 //
 // ReadAttributeBatReplaceability blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatReplaceability(ctx context.Context) (result obj.Object, err error) {
@@ -2761,7 +2761,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatReplaceabilityWithM
 	}
 }
 
-// ReadAttributeBatPresent wraps the corresponding Objective-C method.
+// ReadAttributeBatPresent reads attribute bat present.
 //
 // ReadAttributeBatPresent blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatPresent(ctx context.Context) (result obj.Object, err error) {
@@ -2811,7 +2811,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatPresentWithMinInter
 	}
 }
 
-// ReadAttributeActiveBatFaults wraps the corresponding Objective-C method.
+// ReadAttributeActiveBatFaults reads attribute active bat faults.
 //
 // ReadAttributeActiveBatFaults blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeActiveBatFaults(ctx context.Context) (result obj.Object, err error) {
@@ -2861,7 +2861,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeActiveBatFaultsWithMin
 	}
 }
 
-// ReadAttributeBatReplacementDescription wraps the corresponding Objective-C method.
+// ReadAttributeBatReplacementDescription reads attribute bat replacement description.
 //
 // ReadAttributeBatReplacementDescription blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatReplacementDescription(ctx context.Context) (result string, err error) {
@@ -2911,7 +2911,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatReplacementDescript
 	}
 }
 
-// ReadAttributeBatCommonDesignation wraps the corresponding Objective-C method.
+// ReadAttributeBatCommonDesignation reads attribute bat common designation.
 //
 // ReadAttributeBatCommonDesignation blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatCommonDesignation(ctx context.Context) (result obj.Object, err error) {
@@ -2961,7 +2961,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatCommonDesignationWi
 	}
 }
 
-// ReadAttributeBatANSIDesignation wraps the corresponding Objective-C method.
+// ReadAttributeBatANSIDesignation reads attribute bat ansi designation.
 //
 // ReadAttributeBatANSIDesignation blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatANSIDesignation(ctx context.Context) (result string, err error) {
@@ -3011,7 +3011,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatANSIDesignationWith
 	}
 }
 
-// ReadAttributeBatIECDesignation wraps the corresponding Objective-C method.
+// ReadAttributeBatIECDesignation reads attribute bat iec designation.
 //
 // ReadAttributeBatIECDesignation blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatIECDesignation(ctx context.Context) (result string, err error) {
@@ -3061,7 +3061,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatIECDesignationWithM
 	}
 }
 
-// ReadAttributeBatApprovedChemistry wraps the corresponding Objective-C method.
+// ReadAttributeBatApprovedChemistry reads attribute bat approved chemistry.
 //
 // ReadAttributeBatApprovedChemistry blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatApprovedChemistry(ctx context.Context) (result obj.Object, err error) {
@@ -3111,7 +3111,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatApprovedChemistryWi
 	}
 }
 
-// ReadAttributeBatCapacity wraps the corresponding Objective-C method.
+// ReadAttributeBatCapacity reads attribute bat capacity.
 //
 // ReadAttributeBatCapacity blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatCapacity(ctx context.Context) (result obj.Object, err error) {
@@ -3161,7 +3161,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatCapacityWithMinInte
 	}
 }
 
-// ReadAttributeBatQuantity wraps the corresponding Objective-C method.
+// ReadAttributeBatQuantity reads attribute bat quantity.
 //
 // ReadAttributeBatQuantity blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatQuantity(ctx context.Context) (result obj.Object, err error) {
@@ -3211,7 +3211,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatQuantityWithMinInte
 	}
 }
 
-// ReadAttributeBatChargeState wraps the corresponding Objective-C method.
+// ReadAttributeBatChargeState reads attribute bat charge state.
 //
 // ReadAttributeBatChargeState blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatChargeState(ctx context.Context) (result obj.Object, err error) {
@@ -3261,7 +3261,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatChargeStateWithMinI
 	}
 }
 
-// ReadAttributeBatTimeToFullCharge wraps the corresponding Objective-C method.
+// ReadAttributeBatTimeToFullCharge reads attribute bat time to full charge.
 //
 // ReadAttributeBatTimeToFullCharge blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatTimeToFullCharge(ctx context.Context) (result obj.Object, err error) {
@@ -3311,7 +3311,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatTimeToFullChargeWit
 	}
 }
 
-// ReadAttributeBatFunctionalWhileCharging wraps the corresponding Objective-C method.
+// ReadAttributeBatFunctionalWhileCharging reads attribute bat functional while charging.
 //
 // ReadAttributeBatFunctionalWhileCharging blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatFunctionalWhileCharging(ctx context.Context) (result obj.Object, err error) {
@@ -3361,7 +3361,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatFunctionalWhileChar
 	}
 }
 
-// ReadAttributeBatChargingCurrent wraps the corresponding Objective-C method.
+// ReadAttributeBatChargingCurrent reads attribute bat charging current.
 //
 // ReadAttributeBatChargingCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeBatChargingCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -3411,7 +3411,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeBatChargingCurrentWith
 	}
 }
 
-// ReadAttributeActiveBatChargeFaults wraps the corresponding Objective-C method.
+// ReadAttributeActiveBatChargeFaults reads attribute active bat charge faults.
 //
 // ReadAttributeActiveBatChargeFaults blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeActiveBatChargeFaults(ctx context.Context) (result obj.Object, err error) {
@@ -3461,7 +3461,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeActiveBatChargeFaultsW
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -3511,7 +3511,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeGeneratedCommandListWi
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -3561,7 +3561,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeAcceptedCommandListWit
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -3611,7 +3611,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeAttributeListWithMinIn
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -3661,7 +3661,7 @@ func (mbcps *MTRBaseClusterPowerSource) SubscribeAttributeFeatureMapWithMinInter
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcps *MTRBaseClusterPowerSource) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

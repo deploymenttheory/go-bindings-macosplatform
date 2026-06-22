@@ -108,13 +108,13 @@ func (ns *NameSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *N
 	return ns
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ns *NameSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *NameSpecifier {
 	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ns
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (ns *NameSpecifier) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("name"))
 	if _r == 0 {

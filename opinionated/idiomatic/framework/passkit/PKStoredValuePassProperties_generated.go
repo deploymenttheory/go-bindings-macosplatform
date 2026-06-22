@@ -68,25 +68,25 @@ func (svpp *StoredValuePassProperties) String() string {
 	return rt.Description(objref.IDOf(svpp))
 }
 
-// IsBlacklisted wraps the corresponding Objective-C method.
+// IsBlacklisted reports whether the object is blacklisted.
 func (svpp *StoredValuePassProperties) IsBlacklisted() bool {
 	_r := objc.Send[bool](objref.IDOf(svpp), objc.RegisterName("isBlacklisted"))
 	return _r
 }
 
-// IsBlocked wraps the corresponding Objective-C method.
+// IsBlocked reports whether the object is blocked.
 func (svpp *StoredValuePassProperties) IsBlocked() bool {
 	_r := objc.Send[bool](objref.IDOf(svpp), objc.RegisterName("isBlocked"))
 	return _r
 }
 
-// ExpirationDate wraps the corresponding Objective-C method.
+// ExpirationDate returns the expiration date.
 func (svpp *StoredValuePassProperties) ExpirationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(svpp), objc.RegisterName("expirationDate"))
 	return obj.Wrap(_r)
 }
 
-// Balances wraps the corresponding Objective-C method.
+// Balances returns the balances.
 //
 // Balances returns the collection as a Go slice.
 func (svpp *StoredValuePassProperties) Balances() []*StoredValuePassBalance {

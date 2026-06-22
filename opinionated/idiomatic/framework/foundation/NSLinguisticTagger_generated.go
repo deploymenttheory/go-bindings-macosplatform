@@ -79,13 +79,13 @@ func (lt *LinguisticTagger) WithString(string_ StringProvider) *LinguisticTagger
 	return lt
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (lt *LinguisticTagger) WithScriptingProperties(scriptingProperties obj.Object) *LinguisticTagger {
 	objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return lt
 }
 
-// TagSchemes wraps the corresponding Objective-C method.
+// TagSchemes returns the tag schemes.
 //
 // TagSchemes returns the collection as a Go slice.
 func (lt *LinguisticTagger) TagSchemes() []*String {
@@ -93,7 +93,7 @@ func (lt *LinguisticTagger) TagSchemes() []*String {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *String { return StringFromID(_id) })
 }
 
-// DominantLanguage wraps the corresponding Objective-C method.
+// DominantLanguage returns the dominant language.
 func (lt *LinguisticTagger) DominantLanguage() string {
 	_r := objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("dominantLanguage"))
 	if _r == 0 {

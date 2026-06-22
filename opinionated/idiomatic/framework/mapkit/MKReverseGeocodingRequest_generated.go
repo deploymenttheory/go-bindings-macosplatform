@@ -111,19 +111,19 @@ func (rgr *ReverseGeocodingRequest) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("cancel"))
 }
 
-// IsCancelled wraps the corresponding Objective-C method.
+// IsCancelled reports whether the object is cancelled.
 func (rgr *ReverseGeocodingRequest) IsCancelled() bool {
 	_r := objc.Send[bool](objref.IDOf(rgr), objc.RegisterName("isCancelled"))
 	return _r
 }
 
-// IsLoading wraps the corresponding Objective-C method.
+// IsLoading reports whether the object is loading.
 func (rgr *ReverseGeocodingRequest) IsLoading() bool {
 	_r := objc.Send[bool](objref.IDOf(rgr), objc.RegisterName("isLoading"))
 	return _r
 }
 
-// PreferredLocale wraps the corresponding Objective-C method.
+// PreferredLocale returns the preferred locale.
 func (rgr *ReverseGeocodingRequest) PreferredLocale() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rgr), objc.RegisterName("preferredLocale"))
 	return obj.Wrap(_r)

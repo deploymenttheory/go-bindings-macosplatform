@@ -14,7 +14,7 @@ func NCWidgetControllerWidgetController() *WidgetController {
 	return WidgetControllerFromID(_r)
 }
 
-// DefaultWidgetController wraps the corresponding Objective-C method.
+// DefaultWidgetController returns the default widget controller.
 func DefaultWidgetController() *WidgetController {
 	_r := objc.Send[objc.ID](objc.ID(_class("NCWidgetController")), objc.RegisterName("defaultWidgetController"))
 	return WidgetControllerFromID(_r)

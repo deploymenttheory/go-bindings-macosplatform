@@ -73,7 +73,7 @@ func NewHighlightPersistenceEventWithHighlightTrigger(highlight *Highlight, trig
 	return highlightPersistenceEventAdopt(_id)
 }
 
-// PersistenceEventTrigger wraps the corresponding Objective-C method.
+// PersistenceEventTrigger returns the persistence event trigger.
 func (hpe *HighlightPersistenceEvent) PersistenceEventTrigger() HighlightPersistenceEventTrigger {
 	_r := objc.Send[HighlightPersistenceEventTrigger](objref.IDOf(hpe), objc.RegisterName("persistenceEventTrigger"))
 	return _r

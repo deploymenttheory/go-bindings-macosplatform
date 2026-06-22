@@ -65,7 +65,7 @@ func (tkc *TokenKeychainCertificate) WithConstraints(constraints obj.Object) *To
 	return tkc
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (tkc *TokenKeychainCertificate) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tkc), objc.RegisterName("data"))
 	return obj.Wrap(_r)

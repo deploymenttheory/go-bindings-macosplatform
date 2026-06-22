@@ -79,13 +79,13 @@ func (ascn *AtomicStoreCacheNode) WithPropertyCache(propertyCache obj.Object) *A
 	return ascn
 }
 
-// ObjectID wraps the corresponding Objective-C method.
+// ObjectID returns the object ID.
 func (ascn *AtomicStoreCacheNode) ObjectID() *ManagedObjectID {
 	_r := objc.Send[objc.ID](objref.IDOf(ascn), objc.RegisterName("objectID"))
 	return ManagedObjectIDFromID(_r)
 }
 
-// PropertyCache wraps the corresponding Objective-C method.
+// PropertyCache returns the property cache.
 func (ascn *AtomicStoreCacheNode) PropertyCache() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ascn), objc.RegisterName("propertyCache"))
 	return obj.Wrap(_r)

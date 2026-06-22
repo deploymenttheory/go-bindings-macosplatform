@@ -52,8 +52,8 @@ func NewIOBluetoothRFCOMMChannel() *IOBluetoothRFCOMMChannel {
 	return iOBluetoothRFCOMMChannelAdopt(_id)
 }
 
-// GetRFCOMMChannelRef returns an IOBluetoothRFCOMMChannelRef representation of the target IOBluetoothRFCOMMChannel object.
-func (ibrc *IOBluetoothRFCOMMChannel) GetRFCOMMChannelRef() obj.Object {
+// RFCOMMChannelRef returns an IOBluetoothRFCOMMChannelRef representation of the target IOBluetoothRFCOMMChannel object.
+func (ibrc *IOBluetoothRFCOMMChannel) RFCOMMChannelRef() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibrc), objc.RegisterName("getRFCOMMChannelRef"))
 	return obj.Wrap(_r)
 }
@@ -70,8 +70,8 @@ func (ibrc *IOBluetoothRFCOMMChannel) IsOpen() bool {
 	return _r
 }
 
-// GetMTU returns the channel maximum transfer unit.
-func (ibrc *IOBluetoothRFCOMMChannel) GetMTU() uint16 {
+// MTU returns the channel maximum transfer unit.
+func (ibrc *IOBluetoothRFCOMMChannel) MTU() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(ibrc), objc.RegisterName("getMTU"))
 	return _r
 }
@@ -106,8 +106,8 @@ func (ibrc *IOBluetoothRFCOMMChannel) Delegate() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// GetChannelID returns the object rfcomm channel ID.
-func (ibrc *IOBluetoothRFCOMMChannel) GetChannelID() uint8 {
+// ChannelID returns the object rfcomm channel ID.
+func (ibrc *IOBluetoothRFCOMMChannel) ChannelID() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(ibrc), objc.RegisterName("getChannelID"))
 	return _r
 }
@@ -118,14 +118,14 @@ func (ibrc *IOBluetoothRFCOMMChannel) IsIncoming() bool {
 	return _r
 }
 
-// GetDevice returns the Bluetooth Device that carries the rfcomm data.
-func (ibrc *IOBluetoothRFCOMMChannel) GetDevice() *IOBluetoothDevice {
+// Device returns the Bluetooth Device that carries the rfcomm data.
+func (ibrc *IOBluetoothRFCOMMChannel) Device() *IOBluetoothDevice {
 	_r := objc.Send[objc.ID](objref.IDOf(ibrc), objc.RegisterName("getDevice"))
 	return IOBluetoothDeviceFromID(_r)
 }
 
-// GetObjectID returns the IOBluetoothObjectID of the given IOBluetoothRFCOMMChannel.
-func (ibrc *IOBluetoothRFCOMMChannel) GetObjectID() int {
+// ObjectID returns the IOBluetoothObjectID of the given IOBluetoothRFCOMMChannel.
+func (ibrc *IOBluetoothRFCOMMChannel) ObjectID() int {
 	_r := objc.Send[int](objref.IDOf(ibrc), objc.RegisterName("getObjectID"))
 	return _r
 }

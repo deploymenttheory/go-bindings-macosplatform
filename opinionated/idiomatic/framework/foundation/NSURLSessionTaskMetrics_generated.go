@@ -72,13 +72,13 @@ func NewURLSessionTaskMetrics() *URLSessionTaskMetrics {
 	return uRLSessionTaskMetricsAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ustm *URLSessionTaskMetrics) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionTaskMetrics {
 	objc.Send[objc.ID](objref.IDOf(ustm), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ustm
 }
 
-// TransactionMetrics wraps the corresponding Objective-C method.
+// TransactionMetrics returns the transaction metrics.
 //
 // TransactionMetrics returns the collection as a Go slice.
 func (ustm *URLSessionTaskMetrics) TransactionMetrics() []*URLSessionTaskTransactionMetrics {
@@ -88,13 +88,13 @@ func (ustm *URLSessionTaskMetrics) TransactionMetrics() []*URLSessionTaskTransac
 	})
 }
 
-// TaskInterval wraps the corresponding Objective-C method.
+// TaskInterval returns the task interval.
 func (ustm *URLSessionTaskMetrics) TaskInterval() *DateInterval {
 	_r := objc.Send[objc.ID](objref.IDOf(ustm), objc.RegisterName("taskInterval"))
 	return DateIntervalFromID(_r)
 }
 
-// RedirectCount wraps the corresponding Objective-C method.
+// RedirectCount returns the redirect count.
 func (ustm *URLSessionTaskMetrics) RedirectCount() int {
 	_r := objc.Send[int](objref.IDOf(ustm), objc.RegisterName("redirectCount"))
 	return _r

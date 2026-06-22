@@ -49,7 +49,7 @@ func NewDOMXPathResult() *DOMXPathResult {
 	return dOMXPathResultAdopt(_id)
 }
 
-// IterateNext wraps the corresponding Objective-C method.
+// IterateNext returns the iterate next.
 func (dpr *DOMXPathResult) IterateNext() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("iterateNext"))
 	return DOMNodeFromID(_r)
@@ -61,19 +61,19 @@ func (dpr *DOMXPathResult) SnapshotItem(index int) *DOMNode {
 	return DOMNodeFromID(_r)
 }
 
-// ResultType wraps the corresponding Objective-C method.
+// ResultType returns the result type.
 func (dpr *DOMXPathResult) ResultType() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(dpr), objc.RegisterName("resultType"))
 	return _r
 }
 
-// NumberValue wraps the corresponding Objective-C method.
+// NumberValue returns the number value.
 func (dpr *DOMXPathResult) NumberValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(dpr), objc.RegisterName("numberValue"))
 	return _r
 }
 
-// StringValue wraps the corresponding Objective-C method.
+// StringValue returns the string value.
 func (dpr *DOMXPathResult) StringValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("stringValue"))
 	if _r == 0 {
@@ -88,7 +88,7 @@ func (dpr *DOMXPathResult) BooleanValue() bool {
 	return _r
 }
 
-// SingleNodeValue wraps the corresponding Objective-C method.
+// SingleNodeValue returns the single node value.
 func (dpr *DOMXPathResult) SingleNodeValue() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("singleNodeValue"))
 	return DOMNodeFromID(_r)
@@ -100,7 +100,7 @@ func (dpr *DOMXPathResult) InvalidIteratorState() bool {
 	return _r
 }
 
-// SnapshotLength wraps the corresponding Objective-C method.
+// SnapshotLength returns the snapshot length.
 func (dpr *DOMXPathResult) SnapshotLength() int {
 	_r := objc.Send[int](objref.IDOf(dpr), objc.RegisterName("snapshotLength"))
 	return _r

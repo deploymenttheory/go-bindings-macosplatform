@@ -73,7 +73,7 @@ func NewExecutionPolicy() *ExecutionPolicy {
 	return executionPolicyAdopt(_id)
 }
 
-// AddPolicyExceptionForURL wraps the corresponding Objective-C method.
+// AddPolicyExceptionForURL adds policy exception for URL.
 func (ep *ExecutionPolicy) AddPolicyExceptionForURL(url string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(ep), objc.RegisterName("addPolicyExceptionForURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))

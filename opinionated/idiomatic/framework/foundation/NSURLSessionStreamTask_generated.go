@@ -55,49 +55,49 @@ func NewURLSessionStreamTask() *URLSessionStreamTask {
 	return uRLSessionStreamTaskAdopt(_id)
 }
 
-// WithEarliestBeginDate sets the property and returns the receiver so calls can be chained.
+// WithEarliestBeginDate sets the earliest begin date.
 func (usst *URLSessionStreamTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionStreamTask {
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
 	return usst
 }
 
-// WithCountOfBytesClientExpectsToSend sets the property and returns the receiver so calls can be chained.
+// WithCountOfBytesClientExpectsToSend sets the count of bytes client expects to send.
 func (usst *URLSessionStreamTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionStreamTask {
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
 	return usst
 }
 
-// WithCountOfBytesClientExpectsToReceive sets the property and returns the receiver so calls can be chained.
+// WithCountOfBytesClientExpectsToReceive sets the count of bytes client expects to receive.
 func (usst *URLSessionStreamTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionStreamTask {
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
 	return usst
 }
 
-// WithTaskDescription sets the property and returns the receiver so calls can be chained.
+// WithTaskDescription sets the task description.
 func (usst *URLSessionStreamTask) WithTaskDescription(taskDescription StringProvider) *URLSessionStreamTask {
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
 	return usst
 }
 
-// WithPriority sets the property and returns the receiver so calls can be chained.
+// WithPriority sets the priority.
 func (usst *URLSessionStreamTask) WithPriority(priority float32) *URLSessionStreamTask {
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setPriority:"), priority)
 	return usst
 }
 
-// WithPrefersIncrementalDelivery sets the property and returns the receiver so calls can be chained.
+// WithPrefersIncrementalDelivery sets the prefers incremental delivery.
 func (usst *URLSessionStreamTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionStreamTask {
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
 	return usst
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (usst *URLSessionStreamTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionStreamTask {
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return usst
 }
 
-// WriteDataTimeout wraps the corresponding Objective-C method.
+// WriteDataTimeout writes data timeout.
 //
 // WriteDataTimeout blocks until the operation completes or ctx is cancelled.
 func (usst *URLSessionStreamTask) WriteDataTimeout(ctx context.Context, data *Data, timeout float64) error {
@@ -121,22 +121,22 @@ func (usst *URLSessionStreamTask) CaptureStreams() {
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("captureStreams"))
 }
 
-// CloseWrite wraps the corresponding Objective-C method.
+// CloseWrite closes write.
 func (usst *URLSessionStreamTask) CloseWrite() {
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("closeWrite"))
 }
 
-// CloseRead wraps the corresponding Objective-C method.
+// CloseRead closes read.
 func (usst *URLSessionStreamTask) CloseRead() {
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("closeRead"))
 }
 
-// StartSecureConnection wraps the corresponding Objective-C method.
+// StartSecureConnection starts secure connection.
 func (usst *URLSessionStreamTask) StartSecureConnection() {
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("startSecureConnection"))
 }
 
-// StopSecureConnection wraps the corresponding Objective-C method.
+// StopSecureConnection stops secure connection.
 func (usst *URLSessionStreamTask) StopSecureConnection() {
 	objc.Send[objc.ID](objref.IDOf(usst), objc.RegisterName("stopSecureConnection"))
 }

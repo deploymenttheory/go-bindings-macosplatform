@@ -78,13 +78,13 @@ func NewMTRNetworkCommissioningClusterScanNetworksResponseParamsWithResponseValu
 	return mTRNetworkCommissioningClusterScanNetworksResponseParamsAdopt(_id), nil
 }
 
-// WithNetworkingStatus sets the property and returns the receiver so calls can be chained.
+// WithNetworkingStatus sets the networking status.
 func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) WithNetworkingStatus(networkingStatus obj.Object) *MTRNetworkCommissioningClusterScanNetworksResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mnccsnrp), objc.RegisterName("setNetworkingStatus:"), objref.IDOf(networkingStatus))
 	return mnccsnrp
 }
 
-// WithDebugText sets the property and returns the receiver so calls can be chained.
+// WithDebugText sets the debug text.
 func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) WithDebugText(debugText string) *MTRNetworkCommissioningClusterScanNetworksResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mnccsnrp), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
 	return mnccsnrp
@@ -96,13 +96,13 @@ func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) WithTi
 	return mnccsnrp
 }
 
-// NetworkingStatus wraps the corresponding Objective-C method.
+// NetworkingStatus returns the networking status.
 func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) NetworkingStatus() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccsnrp), objc.RegisterName("networkingStatus"))
 	return obj.Wrap(_r)
 }
 
-// DebugText wraps the corresponding Objective-C method.
+// DebugText returns the debug text.
 func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) DebugText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccsnrp), objc.RegisterName("debugText"))
 	if _r == 0 {
@@ -111,7 +111,7 @@ func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) DebugT
 	return purego.GoString(_r)
 }
 
-// WiFiScanResults wraps the corresponding Objective-C method.
+// WiFiScanResults returns the wi fi scan results.
 func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) WiFiScanResults() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccsnrp), objc.RegisterName("wiFiScanResults"))
 	return obj.Wrap(_r)
@@ -122,7 +122,7 @@ func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetWiF
 	objc.Send[objc.ID](objref.IDOf(mnccsnrp), objc.RegisterName("setWiFiScanResults:"), objref.IDOf(wiFiScanResults))
 }
 
-// ThreadScanResults wraps the corresponding Objective-C method.
+// ThreadScanResults returns the thread scan results.
 func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) ThreadScanResults() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccsnrp), objc.RegisterName("threadScanResults"))
 	return obj.Wrap(_r)

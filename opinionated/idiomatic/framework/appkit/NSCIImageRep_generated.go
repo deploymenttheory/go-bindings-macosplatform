@@ -102,7 +102,7 @@ func (cir *CIImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection)
 	return cir
 }
 
-// CIImage wraps the corresponding Objective-C method.
+// CIImage returns the ci image.
 func (cir *CIImageRep) CIImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("CIImage"))
 	return obj.Wrap(_r)

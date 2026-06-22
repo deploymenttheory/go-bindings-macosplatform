@@ -70,25 +70,25 @@ func NewMTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct()
 	return mTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStructAdopt(_id)
 }
 
-// WithMfgCode sets the property and returns the receiver so calls can be chained.
+// WithMfgCode sets the mfg code.
 func (mratccmcmts *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct {
 	objc.Send[objc.ID](objref.IDOf(mratccmcmts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return mratccmcmts
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mratccmcmts *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) WithValue(value obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct {
 	objc.Send[objc.ID](objref.IDOf(mratccmcmts), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mratccmcmts
 }
 
-// MfgCode wraps the corresponding Objective-C method.
+// MfgCode returns the mfg code.
 func (mratccmcmts *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) MfgCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mratccmcmts), objc.RegisterName("mfgCode"))
 	return obj.Wrap(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mratccmcmts *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterModeTagStruct) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mratccmcmts), objc.RegisterName("value"))
 	return obj.Wrap(_r)

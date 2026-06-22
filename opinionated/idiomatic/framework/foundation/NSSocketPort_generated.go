@@ -87,37 +87,37 @@ func NewSocketPortRemoteWithProtocolFamilySocketTypeProtocolAddress(family int, 
 	return socketPortAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (sp *SocketPort) WithScriptingProperties(scriptingProperties obj.Object) *SocketPort {
 	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return sp
 }
 
-// ProtocolFamily wraps the corresponding Objective-C method.
+// ProtocolFamily returns the protocol family.
 func (sp *SocketPort) ProtocolFamily() int {
 	_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("protocolFamily"))
 	return _r
 }
 
-// SocketType wraps the corresponding Objective-C method.
+// SocketType returns the socket type.
 func (sp *SocketPort) SocketType() int {
 	_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("socketType"))
 	return _r
 }
 
-// Protocol wraps the corresponding Objective-C method.
+// Protocol returns the protocol.
 func (sp *SocketPort) Protocol() int {
 	_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("protocol"))
 	return _r
 }
 
-// Address wraps the corresponding Objective-C method.
+// Address returns the address.
 func (sp *SocketPort) Address() *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("address"))
 	return DataFromID(_r)
 }
 
-// Socket wraps the corresponding Objective-C method.
+// Socket returns the socket.
 func (sp *SocketPort) Socket() int {
 	_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("socket"))
 	return _r

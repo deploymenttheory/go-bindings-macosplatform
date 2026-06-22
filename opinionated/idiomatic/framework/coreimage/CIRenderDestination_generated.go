@@ -121,49 +121,49 @@ func (rd *RenderDestination) WithCaptureTraceURL(captureTraceURL string) *Render
 	return rd
 }
 
-// Width wraps the corresponding Objective-C method.
+// Width returns the width.
 func (rd *RenderDestination) Width() int {
 	_r := objc.Send[int](objref.IDOf(rd), objc.RegisterName("width"))
 	return _r
 }
 
-// Height wraps the corresponding Objective-C method.
+// Height returns the height.
 func (rd *RenderDestination) Height() int {
 	_r := objc.Send[int](objref.IDOf(rd), objc.RegisterName("height"))
 	return _r
 }
 
-// AlphaMode wraps the corresponding Objective-C method.
+// AlphaMode returns the alpha mode.
 func (rd *RenderDestination) AlphaMode() RenderDestinationAlphaMode {
 	_r := objc.Send[RenderDestinationAlphaMode](objref.IDOf(rd), objc.RegisterName("alphaMode"))
 	return _r
 }
 
-// IsFlipped wraps the corresponding Objective-C method.
+// IsFlipped reports whether the object is flipped.
 func (rd *RenderDestination) IsFlipped() bool {
 	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("isFlipped"))
 	return _r
 }
 
-// IsDithered wraps the corresponding Objective-C method.
+// IsDithered reports whether the object is dithered.
 func (rd *RenderDestination) IsDithered() bool {
 	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("isDithered"))
 	return _r
 }
 
-// IsClamped wraps the corresponding Objective-C method.
+// IsClamped reports whether the object is clamped.
 func (rd *RenderDestination) IsClamped() bool {
 	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("isClamped"))
 	return _r
 }
 
-// ColorSpace wraps the corresponding Objective-C method.
+// ColorSpace returns the color space.
 func (rd *RenderDestination) ColorSpace() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("colorSpace"))
 	return obj.Wrap(_r)
 }
 
-// BlendKernel wraps the corresponding Objective-C method.
+// BlendKernel returns the blend kernel.
 func (rd *RenderDestination) BlendKernel() *BlendKernel {
 	_r := objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("blendKernel"))
 	return BlendKernelFromID(_r)

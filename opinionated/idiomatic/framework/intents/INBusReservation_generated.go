@@ -54,13 +54,13 @@ func NewBusReservationWithItemReferenceReservationNumberBookingTimeReservationSt
 	return busReservationAdopt(_id)
 }
 
-// ReservedSeat wraps the corresponding Objective-C method.
+// ReservedSeat returns the reserved seat.
 func (br *BusReservation) ReservedSeat() *Seat {
 	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("reservedSeat"))
 	return SeatFromID(_r)
 }
 
-// BusTrip wraps the corresponding Objective-C method.
+// BusTrip returns the bus trip.
 func (br *BusReservation) BusTrip() *BusTrip {
 	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("busTrip"))
 	return BusTripFromID(_r)

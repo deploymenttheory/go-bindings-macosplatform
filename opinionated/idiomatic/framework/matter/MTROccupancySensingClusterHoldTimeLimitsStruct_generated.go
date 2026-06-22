@@ -70,37 +70,37 @@ func NewMTROccupancySensingClusterHoldTimeLimitsStruct() *MTROccupancySensingClu
 	return mTROccupancySensingClusterHoldTimeLimitsStructAdopt(_id)
 }
 
-// WithHoldTimeMin sets the property and returns the receiver so calls can be chained.
+// WithHoldTimeMin sets the hold time min.
 func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) WithHoldTimeMin(holdTimeMin obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct {
 	objc.Send[objc.ID](objref.IDOf(moschtls), objc.RegisterName("setHoldTimeMin:"), objref.IDOf(holdTimeMin))
 	return moschtls
 }
 
-// WithHoldTimeMax sets the property and returns the receiver so calls can be chained.
+// WithHoldTimeMax sets the hold time max.
 func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) WithHoldTimeMax(holdTimeMax obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct {
 	objc.Send[objc.ID](objref.IDOf(moschtls), objc.RegisterName("setHoldTimeMax:"), objref.IDOf(holdTimeMax))
 	return moschtls
 }
 
-// WithHoldTimeDefault sets the property and returns the receiver so calls can be chained.
+// WithHoldTimeDefault sets the hold time default.
 func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) WithHoldTimeDefault(holdTimeDefault obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct {
 	objc.Send[objc.ID](objref.IDOf(moschtls), objc.RegisterName("setHoldTimeDefault:"), objref.IDOf(holdTimeDefault))
 	return moschtls
 }
 
-// HoldTimeMin wraps the corresponding Objective-C method.
+// HoldTimeMin returns the hold time min.
 func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeMin() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moschtls), objc.RegisterName("holdTimeMin"))
 	return obj.Wrap(_r)
 }
 
-// HoldTimeMax wraps the corresponding Objective-C method.
+// HoldTimeMax returns the hold time max.
 func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeMax() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moschtls), objc.RegisterName("holdTimeMax"))
 	return obj.Wrap(_r)
 }
 
-// HoldTimeDefault wraps the corresponding Objective-C method.
+// HoldTimeDefault returns the hold time default.
 func (moschtls *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeDefault() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moschtls), objc.RegisterName("holdTimeDefault"))
 	return obj.Wrap(_r)

@@ -54,7 +54,7 @@ func NewMTRBaseClusterHEPAFilterMonitoringWithDeviceEndpointIDQueue(device *MTRB
 	return mTRBaseClusterHEPAFilterMonitoringAdopt(_id)
 }
 
-// ReadAttributeConditionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeConditionWithCompletion reads attribute condition with completion.
 //
 // ReadAttributeConditionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeConditionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -104,7 +104,7 @@ func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeConditionWit
 	}
 }
 
-// ReadAttributeDegradationDirectionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDegradationDirectionWithCompletion reads attribute degradation direction with completion.
 //
 // ReadAttributeDegradationDirectionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeDegradationDirectionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -154,7 +154,7 @@ func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeDegradationD
 	}
 }
 
-// ReadAttributeChangeIndicationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeChangeIndicationWithCompletion reads attribute change indication with completion.
 //
 // ReadAttributeChangeIndicationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeChangeIndicationWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -204,7 +204,7 @@ func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeChangeIndica
 	}
 }
 
-// ReadAttributeInPlaceIndicatorWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInPlaceIndicatorWithCompletion reads attribute in place indicator with completion.
 //
 // ReadAttributeInPlaceIndicatorWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeInPlaceIndicatorWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -254,7 +254,7 @@ func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeInPlaceIndic
 	}
 }
 
-// ReadAttributeLastChangedTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLastChangedTimeWithCompletion reads attribute last changed time with completion.
 //
 // ReadAttributeLastChangedTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeLastChangedTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -304,7 +304,7 @@ func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeLastChangedT
 	}
 }
 
-// ReadAttributeReplacementProductListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeReplacementProductListWithCompletion reads attribute replacement product list with completion.
 //
 // ReadAttributeReplacementProductListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeReplacementProductListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -354,7 +354,7 @@ func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeReplacementP
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -404,7 +404,7 @@ func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeGeneratedCom
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -454,7 +454,7 @@ func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeAcceptedComm
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -504,7 +504,7 @@ func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeAttributeLis
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -554,7 +554,7 @@ func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) SubscribeAttributeFeatureMapWi
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbchfm *MTRBaseClusterHEPAFilterMonitoring) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

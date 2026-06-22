@@ -133,7 +133,7 @@ func (p *Page) TransformForBox(box DisplayBox) corefoundation.CGAffineTransform 
 	return _r
 }
 
-// DrawWithBoxToContext wraps the corresponding Objective-C method.
+// DrawWithBoxToContext draws with box to context.
 func (p *Page) DrawWithBoxToContext(box DisplayBox, context_ obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("drawWithBox:toContext:"), box, objref.IDOf(context_))
 }
@@ -191,19 +191,19 @@ func (p *Page) SelectionForRange(range_ foundation.NSRange) *Selection {
 	return SelectionFromID(_r)
 }
 
-// Document wraps the corresponding Objective-C method.
+// Document returns the document.
 func (p *Page) Document() *Document {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("document"))
 	return DocumentFromID(_r)
 }
 
-// PageRef wraps the corresponding Objective-C method.
+// PageRef returns the page ref.
 func (p *Page) PageRef() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("pageRef"))
 	return obj.Wrap(_r)
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (p *Page) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("label"))
 	if _r == 0 {
@@ -212,13 +212,13 @@ func (p *Page) Label() string {
 	return purego.GoString(_r)
 }
 
-// Rotation wraps the corresponding Objective-C method.
+// Rotation returns the rotation.
 func (p *Page) Rotation() int {
 	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("rotation"))
 	return _r
 }
 
-// Annotations wraps the corresponding Objective-C method.
+// Annotations returns the annotations.
 //
 // Annotations returns the collection as a Go slice.
 func (p *Page) Annotations() []*Annotation {
@@ -232,19 +232,19 @@ func (p *Page) DisplaysAnnotations() bool {
 	return _r
 }
 
-// NumberOfCharacters wraps the corresponding Objective-C method.
+// NumberOfCharacters returns the number of characters.
 func (p *Page) NumberOfCharacters() int {
 	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("numberOfCharacters"))
 	return _r
 }
 
-// AttributedString wraps the corresponding Objective-C method.
+// AttributedString returns the attributed string.
 func (p *Page) AttributedString() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("attributedString"))
 	return obj.Wrap(_r)
 }
 
-// DataRepresentation wraps the corresponding Objective-C method.
+// DataRepresentation returns the data representation.
 func (p *Page) DataRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)

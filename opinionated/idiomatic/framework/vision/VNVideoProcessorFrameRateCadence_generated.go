@@ -52,7 +52,7 @@ func NewVideoProcessorFrameRateCadenceWithFrameRate(frameRate int) *VideoProcess
 	return videoProcessorFrameRateCadenceAdopt(_id)
 }
 
-// FrameRate wraps the corresponding Objective-C method.
+// FrameRate returns the frame rate.
 func (vpfrc *VideoProcessorFrameRateCadence) FrameRate() int {
 	_r := objc.Send[int](objref.IDOf(vpfrc), objc.RegisterName("frameRate"))
 	return _r

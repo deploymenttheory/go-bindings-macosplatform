@@ -61,13 +61,13 @@ func NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservatio
 	return flightReservationAdopt(_id)
 }
 
-// ReservedSeat wraps the corresponding Objective-C method.
+// ReservedSeat returns the reserved seat.
 func (fr *FlightReservation) ReservedSeat() *Seat {
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("reservedSeat"))
 	return SeatFromID(_r)
 }
 
-// Flight wraps the corresponding Objective-C method.
+// Flight returns the flight.
 func (fr *FlightReservation) Flight() *Flight {
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("flight"))
 	return FlightFromID(_r)

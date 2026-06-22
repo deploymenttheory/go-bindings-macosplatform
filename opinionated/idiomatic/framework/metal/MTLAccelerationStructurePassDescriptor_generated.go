@@ -70,7 +70,7 @@ func NewAccelerationStructurePassDescriptor() *AccelerationStructurePassDescript
 	return accelerationStructurePassDescriptorAdopt(_id)
 }
 
-// SampleBufferAttachments wraps the corresponding Objective-C method.
+// SampleBufferAttachments returns the sample buffer attachments.
 func (aspd *AccelerationStructurePassDescriptor) SampleBufferAttachments() *AccelerationStructurePassSampleBufferAttachmentDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(aspd), objc.RegisterName("sampleBufferAttachments"))
 	return AccelerationStructurePassSampleBufferAttachmentDescriptorArrayFromID(_r)

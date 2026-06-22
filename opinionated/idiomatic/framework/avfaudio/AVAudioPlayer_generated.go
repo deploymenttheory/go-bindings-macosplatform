@@ -211,25 +211,25 @@ func (ap *AudioPlayer) AveragePowerForChannel(channelNumber int) float32 {
 	return _r
 }
 
-// IsPlaying wraps the corresponding Objective-C method.
+// IsPlaying reports whether the object is playing.
 func (ap *AudioPlayer) IsPlaying() bool {
 	_r := objc.Send[bool](objref.IDOf(ap), objc.RegisterName("isPlaying"))
 	return _r
 }
 
-// NumberOfChannels wraps the corresponding Objective-C method.
+// NumberOfChannels returns the number of channels.
 func (ap *AudioPlayer) NumberOfChannels() int {
 	_r := objc.Send[int](objref.IDOf(ap), objc.RegisterName("numberOfChannels"))
 	return _r
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (ap *AudioPlayer) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(ap), objc.RegisterName("duration"))
 	return _r
 }
 
-// CurrentDevice wraps the corresponding Objective-C method.
+// CurrentDevice returns the current device.
 func (ap *AudioPlayer) CurrentDevice() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("currentDevice"))
 	if _r == 0 {
@@ -238,25 +238,25 @@ func (ap *AudioPlayer) CurrentDevice() string {
 	return purego.GoString(_r)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (ap *AudioPlayer) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (ap *AudioPlayer) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// Pan wraps the corresponding Objective-C method.
+// Pan returns the pan.
 func (ap *AudioPlayer) Pan() float32 {
 	_r := objc.Send[float32](objref.IDOf(ap), objc.RegisterName("pan"))
 	return _r
 }
 
-// Volume wraps the corresponding Objective-C method.
+// Volume returns the volume.
 func (ap *AudioPlayer) Volume() float32 {
 	_r := objc.Send[float32](objref.IDOf(ap), objc.RegisterName("volume"))
 	return _r
@@ -268,43 +268,43 @@ func (ap *AudioPlayer) EnableRate() bool {
 	return _r
 }
 
-// Rate wraps the corresponding Objective-C method.
+// Rate returns the rate.
 func (ap *AudioPlayer) Rate() float32 {
 	_r := objc.Send[float32](objref.IDOf(ap), objc.RegisterName("rate"))
 	return _r
 }
 
-// CurrentTime wraps the corresponding Objective-C method.
+// CurrentTime returns the current time.
 func (ap *AudioPlayer) CurrentTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(ap), objc.RegisterName("currentTime"))
 	return _r
 }
 
-// DeviceCurrentTime wraps the corresponding Objective-C method.
+// DeviceCurrentTime returns the device current time.
 func (ap *AudioPlayer) DeviceCurrentTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(ap), objc.RegisterName("deviceCurrentTime"))
 	return _r
 }
 
-// NumberOfLoops wraps the corresponding Objective-C method.
+// NumberOfLoops returns the number of loops.
 func (ap *AudioPlayer) NumberOfLoops() int {
 	_r := objc.Send[int](objref.IDOf(ap), objc.RegisterName("numberOfLoops"))
 	return _r
 }
 
-// Settings wraps the corresponding Objective-C method.
+// Settings returns the settings.
 func (ap *AudioPlayer) Settings() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("settings"))
 	return obj.Wrap(_r)
 }
 
-// Format wraps the corresponding Objective-C method.
+// Format returns the format.
 func (ap *AudioPlayer) Format() *AudioFormat {
 	_r := objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("format"))
 	return AudioFormatFromID(_r)
 }
 
-// IsMeteringEnabled wraps the corresponding Objective-C method.
+// IsMeteringEnabled reports whether the object is metering enabled.
 func (ap *AudioPlayer) IsMeteringEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(ap), objc.RegisterName("isMeteringEnabled"))
 	return _r

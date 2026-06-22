@@ -73,13 +73,13 @@ func NewWebAppManifestWithJSONDataManifestURL(jsonData obj.Object, manifestURL s
 	return webAppManifestAdopt(_id)
 }
 
-// JSONData wraps the corresponding Objective-C method.
+// JSONData returns the JSON data.
 func (wam *WebAppManifest) JSONData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(wam), objc.RegisterName("jsonData"))
 	return obj.Wrap(_r)
 }
 
-// ManifestURL wraps the corresponding Objective-C method.
+// ManifestURL returns the manifest URL.
 func (wam *WebAppManifest) ManifestURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(wam), objc.RegisterName("manifestURL"))
 	return obj.Wrap(_r)

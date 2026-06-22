@@ -109,7 +109,7 @@ func (rpr *RecurringPaymentRequest) WithTokenNotificationURL(tokenNotificationUR
 	return rpr
 }
 
-// PaymentDescription wraps the corresponding Objective-C method.
+// PaymentDescription returns the payment description.
 func (rpr *RecurringPaymentRequest) PaymentDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("paymentDescription"))
 	if _r == 0 {
@@ -118,19 +118,19 @@ func (rpr *RecurringPaymentRequest) PaymentDescription() string {
 	return purego.GoString(_r)
 }
 
-// RegularBilling wraps the corresponding Objective-C method.
+// RegularBilling returns the regular billing.
 func (rpr *RecurringPaymentRequest) RegularBilling() *RecurringPaymentSummaryItem {
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("regularBilling"))
 	return RecurringPaymentSummaryItemFromID(_r)
 }
 
-// TrialBilling wraps the corresponding Objective-C method.
+// TrialBilling returns the trial billing.
 func (rpr *RecurringPaymentRequest) TrialBilling() *RecurringPaymentSummaryItem {
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("trialBilling"))
 	return RecurringPaymentSummaryItemFromID(_r)
 }
 
-// BillingAgreement wraps the corresponding Objective-C method.
+// BillingAgreement returns the billing agreement.
 func (rpr *RecurringPaymentRequest) BillingAgreement() string {
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("billingAgreement"))
 	if _r == 0 {
@@ -139,13 +139,13 @@ func (rpr *RecurringPaymentRequest) BillingAgreement() string {
 	return purego.GoString(_r)
 }
 
-// ManagementURL wraps the corresponding Objective-C method.
+// ManagementURL returns the management URL.
 func (rpr *RecurringPaymentRequest) ManagementURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("managementURL"))
 	return obj.Wrap(_r)
 }
 
-// TokenNotificationURL wraps the corresponding Objective-C method.
+// TokenNotificationURL returns the token notification URL.
 func (rpr *RecurringPaymentRequest) TokenNotificationURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("tokenNotificationURL"))
 	return obj.Wrap(_r)

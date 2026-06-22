@@ -70,13 +70,13 @@ func NewMTRDeviceEnergyManagementClusterResumedEvent() *MTRDeviceEnergyManagemen
 	return mTRDeviceEnergyManagementClusterResumedEventAdopt(_id)
 }
 
-// WithCause sets the property and returns the receiver so calls can be chained.
+// WithCause sets the cause.
 func (mdemcre *MTRDeviceEnergyManagementClusterResumedEvent) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterResumedEvent {
 	objc.Send[objc.ID](objref.IDOf(mdemcre), objc.RegisterName("setCause:"), objref.IDOf(cause))
 	return mdemcre
 }
 
-// Cause wraps the corresponding Objective-C method.
+// Cause returns the cause.
 func (mdemcre *MTRDeviceEnergyManagementClusterResumedEvent) Cause() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcre), objc.RegisterName("cause"))
 	return obj.Wrap(_r)

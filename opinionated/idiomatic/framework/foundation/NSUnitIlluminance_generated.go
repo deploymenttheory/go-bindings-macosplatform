@@ -52,7 +52,7 @@ func NewUnitIlluminance() *UnitIlluminance {
 	return unitIlluminanceAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ui *UnitIlluminance) WithScriptingProperties(scriptingProperties obj.Object) *UnitIlluminance {
 	objc.Send[objc.ID](objref.IDOf(ui), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ui

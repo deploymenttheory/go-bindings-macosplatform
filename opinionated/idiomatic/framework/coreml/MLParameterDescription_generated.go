@@ -72,19 +72,19 @@ func NewParameterDescription() *ParameterDescription {
 	return parameterDescriptionAdopt(_id)
 }
 
-// Key wraps the corresponding Objective-C method.
+// Key returns the key.
 func (pd *ParameterDescription) Key() *ParameterKey {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("key"))
 	return ParameterKeyFromID(_r)
 }
 
-// DefaultValue wraps the corresponding Objective-C method.
+// DefaultValue returns the default value.
 func (pd *ParameterDescription) DefaultValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("defaultValue"))
 	return obj.Wrap(_r)
 }
 
-// NumericConstraint wraps the corresponding Objective-C method.
+// NumericConstraint returns the numeric constraint.
 func (pd *ParameterDescription) NumericConstraint() *NumericConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("numericConstraint"))
 	return NumericConstraintFromID(_r)

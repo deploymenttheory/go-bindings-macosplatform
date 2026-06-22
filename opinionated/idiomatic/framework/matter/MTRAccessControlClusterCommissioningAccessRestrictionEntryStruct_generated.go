@@ -70,31 +70,31 @@ func NewMTRAccessControlClusterCommissioningAccessRestrictionEntryStruct() *MTRA
 	return mTRAccessControlClusterCommissioningAccessRestrictionEntryStructAdopt(_id)
 }
 
-// WithEndpoint sets the property and returns the receiver so calls can be chained.
+// WithEndpoint sets the endpoint.
 func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct {
 	objc.Send[objc.ID](objref.IDOf(macccares), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return macccares
 }
 
-// WithCluster sets the property and returns the receiver so calls can be chained.
+// WithCluster sets the cluster.
 func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) WithCluster(cluster obj.Object) *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct {
 	objc.Send[objc.ID](objref.IDOf(macccares), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
 	return macccares
 }
 
-// Endpoint wraps the corresponding Objective-C method.
+// Endpoint returns the endpoint.
 func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Endpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macccares), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
 }
 
-// Cluster wraps the corresponding Objective-C method.
+// Cluster returns the cluster.
 func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Cluster() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macccares), objc.RegisterName("cluster"))
 	return obj.Wrap(_r)
 }
 
-// Restrictions wraps the corresponding Objective-C method.
+// Restrictions returns the restrictions.
 func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Restrictions() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macccares), objc.RegisterName("restrictions"))
 	return obj.Wrap(_r)

@@ -72,19 +72,19 @@ func NewAudiogramSensitivityPoint() *AudiogramSensitivityPoint {
 	return audiogramSensitivityPointAdopt(_id)
 }
 
-// Frequency wraps the corresponding Objective-C method.
+// Frequency returns the frequency.
 func (asp *AudiogramSensitivityPoint) Frequency() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(asp), objc.RegisterName("frequency"))
 	return QuantityFromID(_r)
 }
 
-// LeftEarSensitivity wraps the corresponding Objective-C method.
+// LeftEarSensitivity returns the left ear sensitivity.
 func (asp *AudiogramSensitivityPoint) LeftEarSensitivity() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(asp), objc.RegisterName("leftEarSensitivity"))
 	return QuantityFromID(_r)
 }
 
-// RightEarSensitivity wraps the corresponding Objective-C method.
+// RightEarSensitivity returns the right ear sensitivity.
 func (asp *AudiogramSensitivityPoint) RightEarSensitivity() *Quantity {
 	_r := objc.Send[objc.ID](objref.IDOf(asp), objc.RegisterName("rightEarSensitivity"))
 	return QuantityFromID(_r)

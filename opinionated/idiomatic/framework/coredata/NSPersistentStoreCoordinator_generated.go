@@ -299,13 +299,13 @@ func (psc *PersistentStoreCoordinator) TryLock() bool {
 	return _r
 }
 
-// ManagedObjectModel wraps the corresponding Objective-C method.
+// ManagedObjectModel returns the managed object model.
 func (psc *PersistentStoreCoordinator) ManagedObjectModel() *ManagedObjectModel {
 	_r := objc.Send[objc.ID](objref.IDOf(psc), objc.RegisterName("managedObjectModel"))
 	return ManagedObjectModelFromID(_r)
 }
 
-// PersistentStores wraps the corresponding Objective-C method.
+// PersistentStores returns the persistent stores.
 //
 // PersistentStores returns the collection as a Go slice.
 func (psc *PersistentStoreCoordinator) PersistentStores() []*PersistentStore {
@@ -313,7 +313,7 @@ func (psc *PersistentStoreCoordinator) PersistentStores() []*PersistentStore {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersistentStore { return PersistentStoreFromID(_id) })
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (psc *PersistentStoreCoordinator) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(psc), objc.RegisterName("name"))
 	if _r == 0 {

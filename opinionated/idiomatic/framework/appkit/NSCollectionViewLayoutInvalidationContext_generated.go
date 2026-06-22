@@ -108,31 +108,31 @@ func (cvlic *CollectionViewLayoutInvalidationContext) InvalidateDataSourceCounts
 	return _r
 }
 
-// InvalidatedItemIndexPaths wraps the corresponding Objective-C method.
+// InvalidatedItemIndexPaths returns the invalidated item index paths.
 func (cvlic *CollectionViewLayoutInvalidationContext) InvalidatedItemIndexPaths() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidatedItemIndexPaths"))
 	return obj.Wrap(_r)
 }
 
-// InvalidatedSupplementaryIndexPaths wraps the corresponding Objective-C method.
+// InvalidatedSupplementaryIndexPaths returns the invalidated supplementary index paths.
 func (cvlic *CollectionViewLayoutInvalidationContext) InvalidatedSupplementaryIndexPaths() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidatedSupplementaryIndexPaths"))
 	return obj.Wrap(_r)
 }
 
-// InvalidatedDecorationIndexPaths wraps the corresponding Objective-C method.
+// InvalidatedDecorationIndexPaths returns the invalidated decoration index paths.
 func (cvlic *CollectionViewLayoutInvalidationContext) InvalidatedDecorationIndexPaths() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cvlic), objc.RegisterName("invalidatedDecorationIndexPaths"))
 	return obj.Wrap(_r)
 }
 
-// ContentOffsetAdjustment wraps the corresponding Objective-C method.
+// ContentOffsetAdjustment returns the content offset adjustment.
 func (cvlic *CollectionViewLayoutInvalidationContext) ContentOffsetAdjustment() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cvlic), objc.RegisterName("contentOffsetAdjustment"))
 	return _r
 }
 
-// ContentSizeAdjustment wraps the corresponding Objective-C method.
+// ContentSizeAdjustment returns the content size adjustment.
 func (cvlic *CollectionViewLayoutInvalidationContext) ContentSizeAdjustment() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvlic), objc.RegisterName("contentSizeAdjustment"))
 	return _r

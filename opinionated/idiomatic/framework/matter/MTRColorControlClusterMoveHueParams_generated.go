@@ -70,25 +70,25 @@ func NewMTRColorControlClusterMoveHueParams() *MTRColorControlClusterMoveHuePara
 	return mTRColorControlClusterMoveHueParamsAdopt(_id)
 }
 
-// WithMoveMode sets the property and returns the receiver so calls can be chained.
+// WithMoveMode sets the move mode.
 func (mcccmhp *MTRColorControlClusterMoveHueParams) WithMoveMode(moveMode obj.Object) *MTRColorControlClusterMoveHueParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmhp), objc.RegisterName("setMoveMode:"), objref.IDOf(moveMode))
 	return mcccmhp
 }
 
-// WithRate sets the property and returns the receiver so calls can be chained.
+// WithRate sets the rate.
 func (mcccmhp *MTRColorControlClusterMoveHueParams) WithRate(rate obj.Object) *MTRColorControlClusterMoveHueParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmhp), objc.RegisterName("setRate:"), objref.IDOf(rate))
 	return mcccmhp
 }
 
-// WithOptionsMask sets the property and returns the receiver so calls can be chained.
+// WithOptionsMask sets the options mask.
 func (mcccmhp *MTRColorControlClusterMoveHueParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterMoveHueParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmhp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mcccmhp
 }
 
-// WithOptionsOverride sets the property and returns the receiver so calls can be chained.
+// WithOptionsOverride sets the options override.
 func (mcccmhp *MTRColorControlClusterMoveHueParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterMoveHueParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmhp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mcccmhp
@@ -106,25 +106,25 @@ func (mcccmhp *MTRColorControlClusterMoveHueParams) WithServerSideProcessingTime
 	return mcccmhp
 }
 
-// MoveMode wraps the corresponding Objective-C method.
+// MoveMode returns the move mode.
 func (mcccmhp *MTRColorControlClusterMoveHueParams) MoveMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmhp), objc.RegisterName("moveMode"))
 	return obj.Wrap(_r)
 }
 
-// Rate wraps the corresponding Objective-C method.
+// Rate returns the rate.
 func (mcccmhp *MTRColorControlClusterMoveHueParams) Rate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmhp), objc.RegisterName("rate"))
 	return obj.Wrap(_r)
 }
 
-// OptionsMask wraps the corresponding Objective-C method.
+// OptionsMask returns the options mask.
 func (mcccmhp *MTRColorControlClusterMoveHueParams) OptionsMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmhp), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
 }
 
-// OptionsOverride wraps the corresponding Objective-C method.
+// OptionsOverride returns the options override.
 func (mcccmhp *MTRColorControlClusterMoveHueParams) OptionsOverride() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmhp), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)

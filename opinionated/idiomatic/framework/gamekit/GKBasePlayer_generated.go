@@ -68,7 +68,7 @@ func (bp *BasePlayer) String() string {
 	return rt.Description(objref.IDOf(bp))
 }
 
-// PlayerID wraps the corresponding Objective-C method.
+// PlayerID returns the player ID.
 func (bp *BasePlayer) PlayerID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bp), objc.RegisterName("playerID"))
 	if _r == 0 {

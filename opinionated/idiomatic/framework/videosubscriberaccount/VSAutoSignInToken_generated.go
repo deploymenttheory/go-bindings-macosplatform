@@ -72,13 +72,13 @@ func NewVSAutoSignInToken() *VSAutoSignInToken {
 	return vSAutoSignInTokenAdopt(_id)
 }
 
-// Authorization wraps the corresponding Objective-C method.
+// Authorization returns the authorization.
 func (vasit *VSAutoSignInToken) Authorization() VSAutoSignInAuthorization {
 	_r := objc.Send[VSAutoSignInAuthorization](objref.IDOf(vasit), objc.RegisterName("authorization"))
 	return _r
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (vasit *VSAutoSignInToken) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(vasit), objc.RegisterName("value"))
 	if _r == 0 {

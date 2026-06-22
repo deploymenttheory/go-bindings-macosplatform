@@ -70,13 +70,13 @@ func NewMTRDoorLockClusterGetWeekDayScheduleParams() *MTRDoorLockClusterGetWeekD
 	return mTRDoorLockClusterGetWeekDayScheduleParamsAdopt(_id)
 }
 
-// WithWeekDayIndex sets the property and returns the receiver so calls can be chained.
+// WithWeekDayIndex sets the week day index.
 func (mdlcgwdsp *MTRDoorLockClusterGetWeekDayScheduleParams) WithWeekDayIndex(weekDayIndex obj.Object) *MTRDoorLockClusterGetWeekDayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgwdsp), objc.RegisterName("setWeekDayIndex:"), objref.IDOf(weekDayIndex))
 	return mdlcgwdsp
 }
 
-// WithUserIndex sets the property and returns the receiver so calls can be chained.
+// WithUserIndex sets the user index.
 func (mdlcgwdsp *MTRDoorLockClusterGetWeekDayScheduleParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterGetWeekDayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgwdsp), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlcgwdsp
@@ -94,13 +94,13 @@ func (mdlcgwdsp *MTRDoorLockClusterGetWeekDayScheduleParams) WithServerSideProce
 	return mdlcgwdsp
 }
 
-// WeekDayIndex wraps the corresponding Objective-C method.
+// WeekDayIndex returns the week day index.
 func (mdlcgwdsp *MTRDoorLockClusterGetWeekDayScheduleParams) WeekDayIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgwdsp), objc.RegisterName("weekDayIndex"))
 	return obj.Wrap(_r)
 }
 
-// UserIndex wraps the corresponding Objective-C method.
+// UserIndex returns the user index.
 func (mdlcgwdsp *MTRDoorLockClusterGetWeekDayScheduleParams) UserIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgwdsp), objc.RegisterName("userIndex"))
 	return obj.Wrap(_r)

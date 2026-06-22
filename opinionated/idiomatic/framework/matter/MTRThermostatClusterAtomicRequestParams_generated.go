@@ -70,13 +70,13 @@ func NewMTRThermostatClusterAtomicRequestParams() *MTRThermostatClusterAtomicReq
 	return mTRThermostatClusterAtomicRequestParamsAdopt(_id)
 }
 
-// WithRequestType sets the property and returns the receiver so calls can be chained.
+// WithRequestType sets the request type.
 func (mtcarp *MTRThermostatClusterAtomicRequestParams) WithRequestType(requestType obj.Object) *MTRThermostatClusterAtomicRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("setRequestType:"), objref.IDOf(requestType))
 	return mtcarp
 }
 
-// WithTimeout sets the property and returns the receiver so calls can be chained.
+// WithTimeout sets the timeout.
 func (mtcarp *MTRThermostatClusterAtomicRequestParams) WithTimeout(timeout obj.Object) *MTRThermostatClusterAtomicRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("setTimeout:"), objref.IDOf(timeout))
 	return mtcarp
@@ -94,13 +94,13 @@ func (mtcarp *MTRThermostatClusterAtomicRequestParams) WithServerSideProcessingT
 	return mtcarp
 }
 
-// RequestType wraps the corresponding Objective-C method.
+// RequestType returns the request type.
 func (mtcarp *MTRThermostatClusterAtomicRequestParams) RequestType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("requestType"))
 	return obj.Wrap(_r)
 }
 
-// AttributeRequests wraps the corresponding Objective-C method.
+// AttributeRequests returns the attribute requests.
 func (mtcarp *MTRThermostatClusterAtomicRequestParams) AttributeRequests() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("attributeRequests"))
 	return obj.Wrap(_r)
@@ -111,7 +111,7 @@ func (mtcarp *MTRThermostatClusterAtomicRequestParams) SetAttributeRequests(attr
 	objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("setAttributeRequests:"), objref.IDOf(attributeRequests))
 }
 
-// Timeout wraps the corresponding Objective-C method.
+// Timeout returns the timeout.
 func (mtcarp *MTRThermostatClusterAtomicRequestParams) Timeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcarp), objc.RegisterName("timeout"))
 	return obj.Wrap(_r)

@@ -70,7 +70,7 @@ func NewMTRRVCRunModeClusterChangeToModeParams() *MTRRVCRunModeClusterChangeToMo
 	return mTRRVCRunModeClusterChangeToModeParamsAdopt(_id)
 }
 
-// WithNewMode sets the property and returns the receiver so calls can be chained.
+// WithNewMode sets the new mode.
 func (mrmcctmp *MTRRVCRunModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTRRVCRunModeClusterChangeToModeParams {
 	objc.Send[objc.ID](objref.IDOf(mrmcctmp), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
 	return mrmcctmp
@@ -88,8 +88,8 @@ func (mrmcctmp *MTRRVCRunModeClusterChangeToModeParams) WithServerSideProcessing
 	return mrmcctmp
 }
 
-// GetNewMode wraps the corresponding Objective-C method.
-func (mrmcctmp *MTRRVCRunModeClusterChangeToModeParams) GetNewMode() obj.Object {
+// NewMode returns the new mode.
+func (mrmcctmp *MTRRVCRunModeClusterChangeToModeParams) NewMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mrmcctmp), objc.RegisterName("getNewMode"))
 	return obj.Wrap(_r)
 }

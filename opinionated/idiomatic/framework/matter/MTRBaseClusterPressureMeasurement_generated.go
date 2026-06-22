@@ -61,7 +61,7 @@ func NewMTRBaseClusterPressureMeasurementWithDeviceEndpointQueue(device *MTRBase
 	return mTRBaseClusterPressureMeasurementAdopt(_id)
 }
 
-// ReadAttributeMeasuredValueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMeasuredValueWithCompletion reads attribute measured value with completion.
 //
 // ReadAttributeMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeMeasuredValueW
 	}
 }
 
-// ReadAttributeMinMeasuredValueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinMeasuredValueWithCompletion reads attribute min measured value with completion.
 //
 // ReadAttributeMinMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeMinMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeMinMeasuredVal
 	}
 }
 
-// ReadAttributeMaxMeasuredValueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxMeasuredValueWithCompletion reads attribute max measured value with completion.
 //
 // ReadAttributeMaxMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeMaxMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeMaxMeasuredVal
 	}
 }
 
-// ReadAttributeToleranceWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeToleranceWithCompletion reads attribute tolerance with completion.
 //
 // ReadAttributeToleranceWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeToleranceWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeToleranceWithP
 	}
 }
 
-// ReadAttributeScaledValueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeScaledValueWithCompletion reads attribute scaled value with completion.
 //
 // ReadAttributeScaledValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeScaledValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaledValueWit
 	}
 }
 
-// ReadAttributeMinScaledValueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinScaledValueWithCompletion reads attribute min scaled value with completion.
 //
 // ReadAttributeMinScaledValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeMinScaledValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeMinScaledValue
 	}
 }
 
-// ReadAttributeMaxScaledValueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxScaledValueWithCompletion reads attribute max scaled value with completion.
 //
 // ReadAttributeMaxScaledValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeMaxScaledValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeMaxScaledValue
 	}
 }
 
-// ReadAttributeScaledToleranceWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeScaledToleranceWithCompletion reads attribute scaled tolerance with completion.
 //
 // ReadAttributeScaledToleranceWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeScaledToleranceWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaledToleranc
 	}
 }
 
-// ReadAttributeScaleWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeScaleWithCompletion reads attribute scale with completion.
 //
 // ReadAttributeScaleWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeScaleWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaleWithParam
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeGeneratedComma
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeAcceptedComman
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeAttributeListW
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeFeatureMapWith
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeClusterRevisio
 	}
 }
 
-// ReadAttributeMeasuredValue wraps the corresponding Objective-C method.
+// ReadAttributeMeasuredValue reads attribute measured value.
 //
 // ReadAttributeMeasuredValue blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeMeasuredValue(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeMeasuredValueW
 	}
 }
 
-// ReadAttributeMinMeasuredValue wraps the corresponding Objective-C method.
+// ReadAttributeMinMeasuredValue reads attribute min measured value.
 //
 // ReadAttributeMinMeasuredValue blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeMinMeasuredValue(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeMinMeasuredVal
 	}
 }
 
-// ReadAttributeMaxMeasuredValue wraps the corresponding Objective-C method.
+// ReadAttributeMaxMeasuredValue reads attribute max measured value.
 //
 // ReadAttributeMaxMeasuredValue blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeMaxMeasuredValue(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeMaxMeasuredVal
 	}
 }
 
-// ReadAttributeTolerance wraps the corresponding Objective-C method.
+// ReadAttributeTolerance reads attribute tolerance.
 //
 // ReadAttributeTolerance blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeTolerance(ctx context.Context) (result obj.Object, err error) {
@@ -961,7 +961,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeToleranceWithM
 	}
 }
 
-// ReadAttributeScaledValue wraps the corresponding Objective-C method.
+// ReadAttributeScaledValue reads attribute scaled value.
 //
 // ReadAttributeScaledValue blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeScaledValue(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaledValueWit
 	}
 }
 
-// ReadAttributeMinScaledValue wraps the corresponding Objective-C method.
+// ReadAttributeMinScaledValue reads attribute min scaled value.
 //
 // ReadAttributeMinScaledValue blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeMinScaledValue(ctx context.Context) (result obj.Object, err error) {
@@ -1061,7 +1061,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeMinScaledValue
 	}
 }
 
-// ReadAttributeMaxScaledValue wraps the corresponding Objective-C method.
+// ReadAttributeMaxScaledValue reads attribute max scaled value.
 //
 // ReadAttributeMaxScaledValue blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeMaxScaledValue(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeMaxScaledValue
 	}
 }
 
-// ReadAttributeScaledTolerance wraps the corresponding Objective-C method.
+// ReadAttributeScaledTolerance reads attribute scaled tolerance.
 //
 // ReadAttributeScaledTolerance blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeScaledTolerance(ctx context.Context) (result obj.Object, err error) {
@@ -1161,7 +1161,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaledToleranc
 	}
 }
 
-// ReadAttributeScale wraps the corresponding Objective-C method.
+// ReadAttributeScale reads attribute scale.
 //
 // ReadAttributeScale blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeScale(ctx context.Context) (result obj.Object, err error) {
@@ -1211,7 +1211,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeScaleWithMinIn
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1261,7 +1261,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeGeneratedComma
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1311,7 +1311,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeAcceptedComman
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -1361,7 +1361,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeAttributeListW
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -1411,7 +1411,7 @@ func (mbcpm *MTRBaseClusterPressureMeasurement) SubscribeAttributeFeatureMapWith
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcpm *MTRBaseClusterPressureMeasurement) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

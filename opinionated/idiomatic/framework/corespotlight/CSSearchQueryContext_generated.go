@@ -94,7 +94,7 @@ func (sqc *SearchQueryContext) WithSourceOptions(sourceOptions SearchQuerySource
 	return sqc
 }
 
-// FetchAttributes wraps the corresponding Objective-C method.
+// FetchAttributes returns the fetch attributes.
 //
 // FetchAttributes returns the collection as a Go slice.
 func (sqc *SearchQueryContext) FetchAttributes() []string {
@@ -102,7 +102,7 @@ func (sqc *SearchQueryContext) FetchAttributes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// FilterQueries wraps the corresponding Objective-C method.
+// FilterQueries returns the filter queries.
 //
 // FilterQueries returns the collection as a Go slice.
 func (sqc *SearchQueryContext) FilterQueries() []string {
@@ -110,7 +110,7 @@ func (sqc *SearchQueryContext) FilterQueries() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// KeyboardLanguage wraps the corresponding Objective-C method.
+// KeyboardLanguage returns the keyboard language.
 func (sqc *SearchQueryContext) KeyboardLanguage() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sqc), objc.RegisterName("keyboardLanguage"))
 	if _r == 0 {
@@ -119,7 +119,7 @@ func (sqc *SearchQueryContext) KeyboardLanguage() string {
 	return purego.GoString(_r)
 }
 
-// SourceOptions wraps the corresponding Objective-C method.
+// SourceOptions returns the source options.
 func (sqc *SearchQueryContext) SourceOptions() SearchQuerySourceOptions {
 	_r := objc.Send[SearchQuerySourceOptions](objref.IDOf(sqc), objc.RegisterName("sourceOptions"))
 	return _r

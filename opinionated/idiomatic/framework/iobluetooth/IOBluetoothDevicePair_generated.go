@@ -72,7 +72,7 @@ func NewIOBluetoothDevicePair() *IOBluetoothDevicePair {
 	return iOBluetoothDevicePairAdopt(_id)
 }
 
-// WithDelegate sets the property and returns the receiver so calls can be chained.
+// WithDelegate sets the delegate.
 func (ibdp *IOBluetoothDevicePair) WithDelegate(delegate obj.Object) *IOBluetoothDevicePair {
 	objc.Send[objc.ID](objref.IDOf(ibdp), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return ibdp
@@ -105,7 +105,7 @@ func (ibdp *IOBluetoothDevicePair) ReplyUserConfirmation(reply bool) {
 	objc.Send[objc.ID](objref.IDOf(ibdp), objc.RegisterName("replyUserConfirmation:"), reply)
 }
 
-// Delegate wraps the corresponding Objective-C method.
+// Delegate returns the delegate.
 func (ibdp *IOBluetoothDevicePair) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibdp), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)

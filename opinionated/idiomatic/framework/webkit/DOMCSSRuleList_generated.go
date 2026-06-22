@@ -55,7 +55,7 @@ func (drl *DOMCSSRuleList) Item(index int) *DOMCSSRule {
 	return DOMCSSRuleFromID(_r)
 }
 
-// Length wraps the corresponding Objective-C method.
+// Length returns the length.
 func (drl *DOMCSSRuleList) Length() int {
 	_r := objc.Send[int](objref.IDOf(drl), objc.RegisterName("length"))
 	return _r

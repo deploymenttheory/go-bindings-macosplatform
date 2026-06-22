@@ -86,7 +86,7 @@ func NewUserDefaultsWithUser(username string) *UserDefaults {
 	return userDefaultsAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ud *UserDefaults) WithScriptingProperties(scriptingProperties obj.Object) *UserDefaults {
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ud
@@ -228,7 +228,7 @@ func (ud *UserDefaults) SetVolatileDomainForName(domain obj.Object, domainName s
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setVolatileDomain:forName:"), objref.IDOf(domain), purego.NSString(domainName))
 }
 
-// RemoveVolatileDomainForName wraps the corresponding Objective-C method.
+// RemoveVolatileDomainForName removes volatile domain for name.
 func (ud *UserDefaults) RemoveVolatileDomainForName(domainName string) {
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("removeVolatileDomainForName:"), purego.NSString(domainName))
 }
@@ -273,7 +273,7 @@ func (ud *UserDefaults) ObjectIsForcedForKeyInDomain(key string, domain string) 
 	return _r
 }
 
-// VolatileDomainNames wraps the corresponding Objective-C method.
+// VolatileDomainNames returns the volatile domain names.
 //
 // VolatileDomainNames returns the collection as a Go slice.
 func (ud *UserDefaults) VolatileDomainNames() []string {

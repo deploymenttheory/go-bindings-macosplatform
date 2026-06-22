@@ -100,7 +100,7 @@ func (lv *LabeledValue) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (lv *LabeledValue) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("label"))
 	if _r == 0 {
@@ -109,7 +109,7 @@ func (lv *LabeledValue) Label() string {
 	return purego.GoString(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (lv *LabeledValue) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("value"))
 	return obj.Wrap(_r)

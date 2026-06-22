@@ -210,25 +210,25 @@ func (tl *TextLayer) WithContentsFormat(contentsFormat obj.Object) *TextLayer {
 	return tl
 }
 
-// WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeContent sets the wants extended dynamic range content.
 func (tl *TextLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *TextLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
 	return tl
 }
 
-// WithToneMapMode sets the property and returns the receiver so calls can be chained.
+// WithToneMapMode sets the tone map mode.
 func (tl *TextLayer) WithToneMapMode(toneMapMode obj.Object) *TextLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return tl
 }
 
-// WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
+// WithPreferredDynamicRange sets the preferred dynamic range.
 func (tl *TextLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *TextLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return tl
 }
 
-// WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
+// WithContentsHeadroom sets the contents headroom.
 func (tl *TextLayer) WithContentsHeadroom(contentsHeadroom float64) *TextLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
 	return tl
@@ -294,13 +294,13 @@ func (tl *TextLayer) WithCornerRadius(cornerRadius float64) *TextLayer {
 	return tl
 }
 
-// WithMaskedCorners sets the property and returns the receiver so calls can be chained.
+// WithMaskedCorners sets the masked corners.
 func (tl *TextLayer) WithMaskedCorners(maskedCorners CornerMask) *TextLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setMaskedCorners:"), maskedCorners)
 	return tl
 }
 
-// WithCornerCurve sets the property and returns the receiver so calls can be chained.
+// WithCornerCurve sets the corner curve.
 func (tl *TextLayer) WithCornerCurve(cornerCurve obj.Object) *TextLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return tl
@@ -409,37 +409,37 @@ func (tl *TextLayer) WithConstraints(items ...*Constraint) *TextLayer {
 	return tl
 }
 
-// Font wraps the corresponding Objective-C method.
+// Font returns the font.
 func (tl *TextLayer) Font() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("font"))
 	return obj.Wrap(_r)
 }
 
-// FontSize wraps the corresponding Objective-C method.
+// FontSize returns the font size.
 func (tl *TextLayer) FontSize() float64 {
 	_r := objc.Send[float64](objref.IDOf(tl), objc.RegisterName("fontSize"))
 	return _r
 }
 
-// ForegroundColor wraps the corresponding Objective-C method.
+// ForegroundColor returns the foreground color.
 func (tl *TextLayer) ForegroundColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("foregroundColor"))
 	return obj.Wrap(_r)
 }
 
-// IsWrapped wraps the corresponding Objective-C method.
+// IsWrapped reports whether the object is wrapped.
 func (tl *TextLayer) IsWrapped() bool {
 	_r := objc.Send[bool](objref.IDOf(tl), objc.RegisterName("isWrapped"))
 	return _r
 }
 
-// TruncationMode wraps the corresponding Objective-C method.
+// TruncationMode returns the truncation mode.
 func (tl *TextLayer) TruncationMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("truncationMode"))
 	return obj.Wrap(_r)
 }
 
-// AlignmentMode wraps the corresponding Objective-C method.
+// AlignmentMode returns the alignment mode.
 func (tl *TextLayer) AlignmentMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("alignmentMode"))
 	return obj.Wrap(_r)

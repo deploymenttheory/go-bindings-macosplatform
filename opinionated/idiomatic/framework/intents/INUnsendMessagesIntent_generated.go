@@ -56,13 +56,13 @@ func (umi *UnsendMessagesIntent) WithSuggestedInvocationPhrase(suggestedInvocati
 	return umi
 }
 
-// WithDonationMetadata sets the property and returns the receiver so calls can be chained.
+// WithDonationMetadata sets the donation metadata.
 func (umi *UnsendMessagesIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *UnsendMessagesIntent {
 	objc.Send[objc.ID](objref.IDOf(umi), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return umi
 }
 
-// MessageIdentifiers wraps the corresponding Objective-C method.
+// MessageIdentifiers returns the message identifiers.
 //
 // MessageIdentifiers returns the collection as a Go slice.
 func (umi *UnsendMessagesIntent) MessageIdentifiers() []string {

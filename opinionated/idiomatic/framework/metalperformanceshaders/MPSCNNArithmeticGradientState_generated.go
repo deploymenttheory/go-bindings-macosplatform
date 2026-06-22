@@ -51,7 +51,7 @@ func NewCNNArithmeticGradientState() *CNNArithmeticGradientState {
 	return cNNArithmeticGradientStateAdopt(_id)
 }
 
-// WithReadCount sets the property and returns the receiver so calls can be chained.
+// WithReadCount sets the read count.
 func (cags *CNNArithmeticGradientState) WithReadCount(readCount int) *CNNArithmeticGradientState {
 	objc.Send[objc.ID](objref.IDOf(cags), objc.RegisterName("setReadCount:"), readCount)
 	return cags

@@ -72,7 +72,7 @@ func NewTermOfAddress() *TermOfAddress {
 	return termOfAddressAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (toa *TermOfAddress) WithScriptingProperties(scriptingProperties obj.Object) *TermOfAddress {
 	objc.Send[objc.ID](objref.IDOf(toa), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return toa

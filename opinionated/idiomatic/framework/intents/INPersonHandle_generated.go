@@ -80,7 +80,7 @@ func NewPersonHandleWithValueType(value string, type_ PersonHandleType) *PersonH
 	return personHandleAdopt(_id)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (ph *PersonHandle) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ph), objc.RegisterName("value"))
 	if _r == 0 {
@@ -89,13 +89,13 @@ func (ph *PersonHandle) Value() string {
 	return purego.GoString(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (ph *PersonHandle) Type() PersonHandleType {
 	_r := objc.Send[PersonHandleType](objref.IDOf(ph), objc.RegisterName("type"))
 	return _r
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (ph *PersonHandle) Label() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ph), objc.RegisterName("label"))
 	return obj.Wrap(_r)

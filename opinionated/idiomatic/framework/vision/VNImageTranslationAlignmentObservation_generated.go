@@ -52,7 +52,7 @@ func NewImageTranslationAlignmentObservation() *ImageTranslationAlignmentObserva
 	return imageTranslationAlignmentObservationAdopt(_id)
 }
 
-// AlignmentTransform wraps the corresponding Objective-C method.
+// AlignmentTransform returns the alignment transform.
 func (itao *ImageTranslationAlignmentObservation) AlignmentTransform() corefoundation.CGAffineTransform {
 	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(itao), objc.RegisterName("alignmentTransform"))
 	return _r

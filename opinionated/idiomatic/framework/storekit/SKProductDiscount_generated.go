@@ -72,19 +72,19 @@ func NewProductDiscount() *ProductDiscount {
 	return productDiscountAdopt(_id)
 }
 
-// Price wraps the corresponding Objective-C method.
+// Price returns the price.
 func (pd *ProductDiscount) Price() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("price"))
 	return obj.Wrap(_r)
 }
 
-// PriceLocale wraps the corresponding Objective-C method.
+// PriceLocale returns the price locale.
 func (pd *ProductDiscount) PriceLocale() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("priceLocale"))
 	return obj.Wrap(_r)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (pd *ProductDiscount) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -93,25 +93,25 @@ func (pd *ProductDiscount) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// SubscriptionPeriod wraps the corresponding Objective-C method.
+// SubscriptionPeriod returns the subscription period.
 func (pd *ProductDiscount) SubscriptionPeriod() *ProductSubscriptionPeriod {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("subscriptionPeriod"))
 	return ProductSubscriptionPeriodFromID(_r)
 }
 
-// NumberOfPeriods wraps the corresponding Objective-C method.
+// NumberOfPeriods returns the number of periods.
 func (pd *ProductDiscount) NumberOfPeriods() int {
 	_r := objc.Send[int](objref.IDOf(pd), objc.RegisterName("numberOfPeriods"))
 	return _r
 }
 
-// PaymentMode wraps the corresponding Objective-C method.
+// PaymentMode returns the payment mode.
 func (pd *ProductDiscount) PaymentMode() ProductDiscountPaymentMode {
 	_r := objc.Send[ProductDiscountPaymentMode](objref.IDOf(pd), objc.RegisterName("paymentMode"))
 	return _r
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (pd *ProductDiscount) Type() ProductDiscountType {
 	_r := objc.Send[ProductDiscountType](objref.IDOf(pd), objc.RegisterName("type"))
 	return _r

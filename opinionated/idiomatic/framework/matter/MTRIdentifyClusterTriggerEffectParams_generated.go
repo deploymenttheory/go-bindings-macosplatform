@@ -70,13 +70,13 @@ func NewMTRIdentifyClusterTriggerEffectParams() *MTRIdentifyClusterTriggerEffect
 	return mTRIdentifyClusterTriggerEffectParamsAdopt(_id)
 }
 
-// WithEffectIdentifier sets the property and returns the receiver so calls can be chained.
+// WithEffectIdentifier sets the effect identifier.
 func (mictep *MTRIdentifyClusterTriggerEffectParams) WithEffectIdentifier(effectIdentifier obj.Object) *MTRIdentifyClusterTriggerEffectParams {
 	objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("setEffectIdentifier:"), objref.IDOf(effectIdentifier))
 	return mictep
 }
 
-// WithEffectVariant sets the property and returns the receiver so calls can be chained.
+// WithEffectVariant sets the effect variant.
 func (mictep *MTRIdentifyClusterTriggerEffectParams) WithEffectVariant(effectVariant obj.Object) *MTRIdentifyClusterTriggerEffectParams {
 	objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("setEffectVariant:"), objref.IDOf(effectVariant))
 	return mictep
@@ -94,13 +94,13 @@ func (mictep *MTRIdentifyClusterTriggerEffectParams) WithServerSideProcessingTim
 	return mictep
 }
 
-// EffectIdentifier wraps the corresponding Objective-C method.
+// EffectIdentifier returns the effect identifier.
 func (mictep *MTRIdentifyClusterTriggerEffectParams) EffectIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("effectIdentifier"))
 	return obj.Wrap(_r)
 }
 
-// EffectVariant wraps the corresponding Objective-C method.
+// EffectVariant returns the effect variant.
 func (mictep *MTRIdentifyClusterTriggerEffectParams) EffectVariant() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mictep), objc.RegisterName("effectVariant"))
 	return obj.Wrap(_r)

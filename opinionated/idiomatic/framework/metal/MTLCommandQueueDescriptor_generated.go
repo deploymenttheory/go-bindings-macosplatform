@@ -78,7 +78,7 @@ func (cqd *CommandQueueDescriptor) WithMaxCommandBufferCount(maxCommandBufferCou
 	return cqd
 }
 
-// MaxCommandBufferCount wraps the corresponding Objective-C method.
+// MaxCommandBufferCount returns the max command buffer count.
 func (cqd *CommandQueueDescriptor) MaxCommandBufferCount() int {
 	_r := objc.Send[int](objref.IDOf(cqd), objc.RegisterName("maxCommandBufferCount"))
 	return _r

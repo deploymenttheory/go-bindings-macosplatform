@@ -132,37 +132,37 @@ func (ws *WhoseSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *
 	return ws
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ws *WhoseSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *WhoseSpecifier {
 	objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ws
 }
 
-// Test wraps the corresponding Objective-C method.
+// Test returns the test.
 func (ws *WhoseSpecifier) Test() *ScriptWhoseTest {
 	_r := objc.Send[objc.ID](objref.IDOf(ws), objc.RegisterName("test"))
 	return ScriptWhoseTestFromID(_r)
 }
 
-// StartSubelementIdentifier wraps the corresponding Objective-C method.
+// StartSubelementIdentifier returns the start subelement identifier.
 func (ws *WhoseSpecifier) StartSubelementIdentifier() WhoseSubelementIdentifier {
 	_r := objc.Send[WhoseSubelementIdentifier](objref.IDOf(ws), objc.RegisterName("startSubelementIdentifier"))
 	return _r
 }
 
-// StartSubelementIndex wraps the corresponding Objective-C method.
+// StartSubelementIndex returns the start subelement index.
 func (ws *WhoseSpecifier) StartSubelementIndex() int {
 	_r := objc.Send[int](objref.IDOf(ws), objc.RegisterName("startSubelementIndex"))
 	return _r
 }
 
-// EndSubelementIdentifier wraps the corresponding Objective-C method.
+// EndSubelementIdentifier returns the end subelement identifier.
 func (ws *WhoseSpecifier) EndSubelementIdentifier() WhoseSubelementIdentifier {
 	_r := objc.Send[WhoseSubelementIdentifier](objref.IDOf(ws), objc.RegisterName("endSubelementIdentifier"))
 	return _r
 }
 
-// EndSubelementIndex wraps the corresponding Objective-C method.
+// EndSubelementIndex returns the end subelement index.
 func (ws *WhoseSpecifier) EndSubelementIndex() int {
 	_r := objc.Send[int](objref.IDOf(ws), objc.RegisterName("endSubelementIndex"))
 	return _r

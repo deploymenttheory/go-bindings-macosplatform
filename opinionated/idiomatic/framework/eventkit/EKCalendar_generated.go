@@ -142,7 +142,7 @@ func (c *Calendar) SupportedEventAvailabilities() CalendarEventAvailabilityMask 
 	return _r
 }
 
-// AllowedEntityTypes wraps the corresponding Objective-C method.
+// AllowedEntityTypes returns the allowed entity types.
 func (c *Calendar) AllowedEntityTypes() EntityMask {
 	_r := objc.Send[EntityMask](objref.IDOf(c), objc.RegisterName("allowedEntityTypes"))
 	return _r

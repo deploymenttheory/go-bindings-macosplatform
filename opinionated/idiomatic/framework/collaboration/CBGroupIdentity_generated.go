@@ -64,7 +64,7 @@ func (gi *GroupIdentity) Members() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// MemberIdentities wraps the corresponding Objective-C method.
+// MemberIdentities returns the member identities.
 //
 // MemberIdentities returns the collection as a Go slice.
 func (gi *GroupIdentity) MemberIdentities() []*Identity {

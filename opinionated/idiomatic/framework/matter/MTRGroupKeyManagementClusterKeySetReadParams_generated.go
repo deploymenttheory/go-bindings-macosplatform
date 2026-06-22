@@ -70,7 +70,7 @@ func NewMTRGroupKeyManagementClusterKeySetReadParams() *MTRGroupKeyManagementClu
 	return mTRGroupKeyManagementClusterKeySetReadParamsAdopt(_id)
 }
 
-// WithGroupKeySetID sets the property and returns the receiver so calls can be chained.
+// WithGroupKeySetID sets the group key set ID.
 func (mgkmcksrp *MTRGroupKeyManagementClusterKeySetReadParams) WithGroupKeySetID(groupKeySetID obj.Object) *MTRGroupKeyManagementClusterKeySetReadParams {
 	objc.Send[objc.ID](objref.IDOf(mgkmcksrp), objc.RegisterName("setGroupKeySetID:"), objref.IDOf(groupKeySetID))
 	return mgkmcksrp
@@ -88,7 +88,7 @@ func (mgkmcksrp *MTRGroupKeyManagementClusterKeySetReadParams) WithServerSidePro
 	return mgkmcksrp
 }
 
-// GroupKeySetID wraps the corresponding Objective-C method.
+// GroupKeySetID returns the group key set ID.
 func (mgkmcksrp *MTRGroupKeyManagementClusterKeySetReadParams) GroupKeySetID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcksrp), objc.RegisterName("groupKeySetID"))
 	return obj.Wrap(_r)

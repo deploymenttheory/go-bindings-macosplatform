@@ -68,7 +68,7 @@ func (cca *CaptionConversionAdjustment) String() string {
 	return rt.Description(objref.IDOf(cca))
 }
 
-// AdjustmentType wraps the corresponding Objective-C method.
+// AdjustmentType returns the adjustment type.
 func (cca *CaptionConversionAdjustment) AdjustmentType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cca), objc.RegisterName("adjustmentType"))
 	return obj.Wrap(_r)

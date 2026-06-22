@@ -130,13 +130,13 @@ func (al *AreaLight) WithHidden(hidden bool) *AreaLight {
 	return al
 }
 
-// AreaRadius wraps the corresponding Objective-C method.
+// AreaRadius returns the area radius.
 func (al *AreaLight) AreaRadius() float32 {
 	_r := objc.Send[float32](objref.IDOf(al), objc.RegisterName("areaRadius"))
 	return _r
 }
 
-// Aspect wraps the corresponding Objective-C method.
+// Aspect returns the aspect.
 func (al *AreaLight) Aspect() float32 {
 	_r := objc.Send[float32](objref.IDOf(al), objc.RegisterName("aspect"))
 	return _r

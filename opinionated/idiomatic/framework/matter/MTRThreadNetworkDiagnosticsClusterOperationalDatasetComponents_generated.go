@@ -70,145 +70,145 @@ func NewMTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents() *MTRThr
 	return mTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsAdopt(_id)
 }
 
-// WithActiveTimestampPresent sets the property and returns the receiver so calls can be chained.
+// WithActiveTimestampPresent sets the active timestamp present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithActiveTimestampPresent(activeTimestampPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setActiveTimestampPresent:"), objref.IDOf(activeTimestampPresent))
 	return mtndcodc
 }
 
-// WithPendingTimestampPresent sets the property and returns the receiver so calls can be chained.
+// WithPendingTimestampPresent sets the pending timestamp present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithPendingTimestampPresent(pendingTimestampPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setPendingTimestampPresent:"), objref.IDOf(pendingTimestampPresent))
 	return mtndcodc
 }
 
-// WithMasterKeyPresent sets the property and returns the receiver so calls can be chained.
+// WithMasterKeyPresent sets the master key present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithMasterKeyPresent(masterKeyPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setMasterKeyPresent:"), objref.IDOf(masterKeyPresent))
 	return mtndcodc
 }
 
-// WithNetworkNamePresent sets the property and returns the receiver so calls can be chained.
+// WithNetworkNamePresent sets the network name present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithNetworkNamePresent(networkNamePresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setNetworkNamePresent:"), objref.IDOf(networkNamePresent))
 	return mtndcodc
 }
 
-// WithExtendedPanIDPresent sets the property and returns the receiver so calls can be chained.
+// WithExtendedPanIDPresent sets the extended pan ID present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithExtendedPanIDPresent(extendedPanIdPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setExtendedPanIdPresent:"), objref.IDOf(extendedPanIdPresent))
 	return mtndcodc
 }
 
-// WithMeshLocalPrefixPresent sets the property and returns the receiver so calls can be chained.
+// WithMeshLocalPrefixPresent sets the mesh local prefix present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithMeshLocalPrefixPresent(meshLocalPrefixPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setMeshLocalPrefixPresent:"), objref.IDOf(meshLocalPrefixPresent))
 	return mtndcodc
 }
 
-// WithDelayPresent sets the property and returns the receiver so calls can be chained.
+// WithDelayPresent sets the delay present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithDelayPresent(delayPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setDelayPresent:"), objref.IDOf(delayPresent))
 	return mtndcodc
 }
 
-// WithPanIDPresent sets the property and returns the receiver so calls can be chained.
+// WithPanIDPresent sets the pan ID present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithPanIDPresent(panIdPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setPanIdPresent:"), objref.IDOf(panIdPresent))
 	return mtndcodc
 }
 
-// WithChannelPresent sets the property and returns the receiver so calls can be chained.
+// WithChannelPresent sets the channel present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithChannelPresent(channelPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setChannelPresent:"), objref.IDOf(channelPresent))
 	return mtndcodc
 }
 
-// WithPskcPresent sets the property and returns the receiver so calls can be chained.
+// WithPskcPresent sets the pskc present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithPskcPresent(pskcPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setPskcPresent:"), objref.IDOf(pskcPresent))
 	return mtndcodc
 }
 
-// WithSecurityPolicyPresent sets the property and returns the receiver so calls can be chained.
+// WithSecurityPolicyPresent sets the security policy present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithSecurityPolicyPresent(securityPolicyPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setSecurityPolicyPresent:"), objref.IDOf(securityPolicyPresent))
 	return mtndcodc
 }
 
-// WithChannelMaskPresent sets the property and returns the receiver so calls can be chained.
+// WithChannelMaskPresent sets the channel mask present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) WithChannelMaskPresent(channelMaskPresent obj.Object) *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents {
 	objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("setChannelMaskPresent:"), objref.IDOf(channelMaskPresent))
 	return mtndcodc
 }
 
-// ActiveTimestampPresent wraps the corresponding Objective-C method.
+// ActiveTimestampPresent returns the active timestamp present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) ActiveTimestampPresent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("activeTimestampPresent"))
 	return obj.Wrap(_r)
 }
 
-// PendingTimestampPresent wraps the corresponding Objective-C method.
+// PendingTimestampPresent returns the pending timestamp present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) PendingTimestampPresent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("pendingTimestampPresent"))
 	return obj.Wrap(_r)
 }
 
-// MasterKeyPresent wraps the corresponding Objective-C method.
+// MasterKeyPresent returns the master key present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) MasterKeyPresent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("masterKeyPresent"))
 	return obj.Wrap(_r)
 }
 
-// NetworkNamePresent wraps the corresponding Objective-C method.
+// NetworkNamePresent returns the network name present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) NetworkNamePresent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("networkNamePresent"))
 	return obj.Wrap(_r)
 }
 
-// ExtendedPanIDPresent wraps the corresponding Objective-C method.
+// ExtendedPanIDPresent returns the extended pan ID present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) ExtendedPanIDPresent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("extendedPanIdPresent"))
 	return obj.Wrap(_r)
 }
 
-// MeshLocalPrefixPresent wraps the corresponding Objective-C method.
+// MeshLocalPrefixPresent returns the mesh local prefix present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) MeshLocalPrefixPresent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("meshLocalPrefixPresent"))
 	return obj.Wrap(_r)
 }
 
-// DelayPresent wraps the corresponding Objective-C method.
+// DelayPresent returns the delay present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) DelayPresent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("delayPresent"))
 	return obj.Wrap(_r)
 }
 
-// PanIDPresent wraps the corresponding Objective-C method.
+// PanIDPresent returns the pan ID present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) PanIDPresent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("panIdPresent"))
 	return obj.Wrap(_r)
 }
 
-// ChannelPresent wraps the corresponding Objective-C method.
+// ChannelPresent returns the channel present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) ChannelPresent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("channelPresent"))
 	return obj.Wrap(_r)
 }
 
-// PskcPresent wraps the corresponding Objective-C method.
+// PskcPresent returns the pskc present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) PskcPresent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("pskcPresent"))
 	return obj.Wrap(_r)
 }
 
-// SecurityPolicyPresent wraps the corresponding Objective-C method.
+// SecurityPolicyPresent returns the security policy present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) SecurityPolicyPresent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("securityPolicyPresent"))
 	return obj.Wrap(_r)
 }
 
-// ChannelMaskPresent wraps the corresponding Objective-C method.
+// ChannelMaskPresent returns the channel mask present.
 func (mtndcodc *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents) ChannelMaskPresent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcodc), objc.RegisterName("channelMaskPresent"))
 	return obj.Wrap(_r)

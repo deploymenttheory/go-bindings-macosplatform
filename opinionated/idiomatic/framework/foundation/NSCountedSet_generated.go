@@ -67,7 +67,7 @@ func NewCountedSetWithSet(set obj.Object) *CountedSet {
 	return countedSetAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (cs *CountedSet) WithScriptingProperties(scriptingProperties obj.Object) *CountedSet {
 	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return cs

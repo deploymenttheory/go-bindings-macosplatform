@@ -88,13 +88,13 @@ func (nsb *NearbyServiceBrowser) InvitePeerToSessionWithContextTimeout(peerID *P
 	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("invitePeer:toSession:withContext:timeout:"), objref.IDOf(peerID), objref.IDOf(session), objref.IDOf(context_), timeout)
 }
 
-// MyPeerID wraps the corresponding Objective-C method.
+// MyPeerID returns the my peer ID.
 func (nsb *NearbyServiceBrowser) MyPeerID() *PeerID {
 	_r := objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("myPeerID"))
 	return PeerIDFromID(_r)
 }
 
-// ServiceType wraps the corresponding Objective-C method.
+// ServiceType returns the service type.
 func (nsb *NearbyServiceBrowser) ServiceType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("serviceType"))
 	if _r == 0 {

@@ -136,7 +136,7 @@ func (mbcal *MTRBaseClusterApplicationLauncher) StopAppWithParamsCompletion(ctx 
 	}
 }
 
-// StopAppWithCompletion wraps the corresponding Objective-C method.
+// StopAppWithCompletion stops app with completion.
 //
 // StopAppWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterApplicationLauncher) StopAppWithCompletion(ctx context.Context) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
@@ -186,7 +186,7 @@ func (mbcal *MTRBaseClusterApplicationLauncher) HideAppWithParamsCompletion(ctx 
 	}
 }
 
-// HideAppWithCompletion wraps the corresponding Objective-C method.
+// HideAppWithCompletion hides app with completion.
 //
 // HideAppWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterApplicationLauncher) HideAppWithCompletion(ctx context.Context) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
@@ -211,7 +211,7 @@ func (mbcal *MTRBaseClusterApplicationLauncher) HideAppWithCompletion(ctx contex
 	}
 }
 
-// ReadAttributeCatalogListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCatalogListWithCompletion reads attribute catalog list with completion.
 //
 // ReadAttributeCatalogListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeCatalogListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeCatalogListWit
 	}
 }
 
-// ReadAttributeCurrentAppWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentAppWithCompletion reads attribute current app with completion.
 //
 // ReadAttributeCurrentAppWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeCurrentAppWithCompletion(ctx context.Context) (result *MTRApplicationLauncherClusterApplicationEPStruct, err error) {
@@ -311,7 +311,7 @@ func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeCurrentAppWith
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeGeneratedComma
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeAcceptedComman
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeAttributeListW
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeFeatureMapWith
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -586,7 +586,7 @@ func (mbcal *MTRBaseClusterApplicationLauncher) LaunchAppWithParams(ctx context.
 	}
 }
 
-// StopAppWithParams wraps the corresponding Objective-C method.
+// StopAppWithParams stops app with params.
 //
 // StopAppWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterApplicationLauncher) StopAppWithParams(ctx context.Context, params *MTRApplicationLauncherClusterStopAppParams) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
@@ -611,7 +611,7 @@ func (mbcal *MTRBaseClusterApplicationLauncher) StopAppWithParams(ctx context.Co
 	}
 }
 
-// HideAppWithParams wraps the corresponding Objective-C method.
+// HideAppWithParams hides app with params.
 //
 // HideAppWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterApplicationLauncher) HideAppWithParams(ctx context.Context, params *MTRApplicationLauncherClusterHideAppParams) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
@@ -636,7 +636,7 @@ func (mbcal *MTRBaseClusterApplicationLauncher) HideAppWithParams(ctx context.Co
 	}
 }
 
-// ReadAttributeCatalogList wraps the corresponding Objective-C method.
+// ReadAttributeCatalogList reads attribute catalog list.
 //
 // ReadAttributeCatalogList blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeCatalogList(ctx context.Context) (result obj.Object, err error) {
@@ -686,7 +686,7 @@ func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeCatalogListWit
 	}
 }
 
-// ReadAttributeCurrentApp wraps the corresponding Objective-C method.
+// ReadAttributeCurrentApp reads attribute current app.
 //
 // ReadAttributeCurrentApp blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeCurrentApp(ctx context.Context) (result *MTRApplicationLauncherClusterApplicationEP, err error) {
@@ -736,7 +736,7 @@ func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeCurrentAppWith
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -786,7 +786,7 @@ func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeGeneratedComma
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -836,7 +836,7 @@ func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeAcceptedComman
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -886,7 +886,7 @@ func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeAttributeListW
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -936,7 +936,7 @@ func (mbcal *MTRBaseClusterApplicationLauncher) SubscribeAttributeFeatureMapWith
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcal *MTRBaseClusterApplicationLauncher) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

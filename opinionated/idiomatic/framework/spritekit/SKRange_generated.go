@@ -85,13 +85,13 @@ func (r *Range) WithUpperLimit(upperLimit float64) *Range {
 	return r
 }
 
-// LowerLimit wraps the corresponding Objective-C method.
+// LowerLimit returns the lower limit.
 func (r *Range) LowerLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(r), objc.RegisterName("lowerLimit"))
 	return _r
 }
 
-// UpperLimit wraps the corresponding Objective-C method.
+// UpperLimit returns the upper limit.
 func (r *Range) UpperLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(r), objc.RegisterName("upperLimit"))
 	return _r

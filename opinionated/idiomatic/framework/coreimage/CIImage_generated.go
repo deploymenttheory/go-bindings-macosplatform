@@ -408,19 +408,19 @@ func (i *Image) Properties() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Definition wraps the corresponding Objective-C method.
+// Definition returns the definition.
 func (i *Image) Definition() *FilterShape {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("definition"))
 	return FilterShapeFromID(_r)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (i *Image) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// ColorSpace wraps the corresponding Objective-C method.
+// ColorSpace returns the color space.
 func (i *Image) ColorSpace() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("colorSpace"))
 	return obj.Wrap(_r)
@@ -438,7 +438,7 @@ func (i *Image) ContentAverageLightLevel() float32 {
 	return _r
 }
 
-// CGImage wraps the corresponding Objective-C method.
+// CGImage returns the cg image.
 func (i *Image) CGImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("CGImage"))
 	return obj.Wrap(_r)
@@ -458,31 +458,31 @@ func (i *Image) AutoAdjustmentFiltersWithOptions(options obj.Object) []*Filter {
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Filter { return FilterFromID(_id) })
 }
 
-// ImageByConvertingWorkingSpaceToLab wraps the corresponding Objective-C method.
+// ImageByConvertingWorkingSpaceToLab returns the image by converting working space to lab.
 func (i *Image) ImageByConvertingWorkingSpaceToLab() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("imageByConvertingWorkingSpaceToLab"))
 	return ImageFromID(_r)
 }
 
-// ImageByConvertingLabToWorkingSpace wraps the corresponding Objective-C method.
+// ImageByConvertingLabToWorkingSpace returns the image by converting lab to working space.
 func (i *Image) ImageByConvertingLabToWorkingSpace() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("imageByConvertingLabToWorkingSpace"))
 	return ImageFromID(_r)
 }
 
-// DepthData wraps the corresponding Objective-C method.
+// DepthData returns the depth data.
 func (i *Image) DepthData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("depthData"))
 	return obj.Wrap(_r)
 }
 
-// PortraitEffectsMatte wraps the corresponding Objective-C method.
+// PortraitEffectsMatte returns the portrait effects matte.
 func (i *Image) PortraitEffectsMatte() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("portraitEffectsMatte"))
 	return obj.Wrap(_r)
 }
 
-// SemanticSegmentationMatte wraps the corresponding Objective-C method.
+// SemanticSegmentationMatte returns the semantic segmentation matte.
 func (i *Image) SemanticSegmentationMatte() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("semanticSegmentationMatte"))
 	return obj.Wrap(_r)

@@ -68,7 +68,7 @@ func (ipepe *IssuerProvisioningExtensionPassEntry) String() string {
 	return rt.Description(objref.IDOf(ipepe))
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (ipepe *IssuerProvisioningExtensionPassEntry) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ipepe), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -77,7 +77,7 @@ func (ipepe *IssuerProvisioningExtensionPassEntry) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (ipepe *IssuerProvisioningExtensionPassEntry) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ipepe), objc.RegisterName("title"))
 	if _r == 0 {
@@ -86,7 +86,7 @@ func (ipepe *IssuerProvisioningExtensionPassEntry) Title() string {
 	return purego.GoString(_r)
 }
 
-// Art wraps the corresponding Objective-C method.
+// Art returns the art.
 func (ipepe *IssuerProvisioningExtensionPassEntry) Art() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ipepe), objc.RegisterName("art"))
 	return obj.Wrap(_r)

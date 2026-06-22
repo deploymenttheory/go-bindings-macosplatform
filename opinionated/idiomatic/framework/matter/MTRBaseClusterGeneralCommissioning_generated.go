@@ -161,7 +161,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) CommissioningCompleteWithComple
 	}
 }
 
-// ReadAttributeBreadcrumbWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBreadcrumbWithCompletion reads attribute breadcrumb with completion.
 //
 // ReadAttributeBreadcrumbWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeBreadcrumbWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) SubscribeAttributeBreadcrumbWit
 	}
 }
 
-// ReadAttributeBasicCommissioningInfoWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBasicCommissioningInfoWithCompletion reads attribute basic commissioning info with completion.
 //
 // ReadAttributeBasicCommissioningInfoWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeBasicCommissioningInfoWithCompletion(ctx context.Context) (result *MTRGeneralCommissioningClusterBasicCommissioningInfo, err error) {
@@ -261,7 +261,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) SubscribeAttributeBasicCommissi
 	}
 }
 
-// ReadAttributeRegulatoryConfigWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRegulatoryConfigWithCompletion reads attribute regulatory config with completion.
 //
 // ReadAttributeRegulatoryConfigWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeRegulatoryConfigWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) SubscribeAttributeRegulatoryCon
 	}
 }
 
-// ReadAttributeLocationCapabilityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLocationCapabilityWithCompletion reads attribute location capability with completion.
 //
 // ReadAttributeLocationCapabilityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeLocationCapabilityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) SubscribeAttributeLocationCapab
 	}
 }
 
-// ReadAttributeSupportsConcurrentConnectionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupportsConcurrentConnectionWithCompletion reads attribute supports concurrent connection with completion.
 //
 // ReadAttributeSupportsConcurrentConnectionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeSupportsConcurrentConnectionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) SubscribeAttributeSupportsConcu
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) SubscribeAttributeGeneratedComm
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) SubscribeAttributeAcceptedComma
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) SubscribeAttributeAttributeList
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) SubscribeAttributeFeatureMapWit
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) CommissioningComplete(ctx conte
 	}
 }
 
-// ReadAttributeBreadcrumb wraps the corresponding Objective-C method.
+// ReadAttributeBreadcrumb reads attribute breadcrumb.
 //
 // ReadAttributeBreadcrumb blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeBreadcrumb(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) SubscribeAttributeBreadcrumbWit
 	}
 }
 
-// ReadAttributeBasicCommissioningInfo wraps the corresponding Objective-C method.
+// ReadAttributeBasicCommissioningInfo reads attribute basic commissioning info.
 //
 // ReadAttributeBasicCommissioningInfo blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeBasicCommissioningInfo(ctx context.Context) (result *MTRGeneralCommissioningClusterBasicCommissioningInfo, err error) {
@@ -861,7 +861,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) SubscribeAttributeBasicCommissi
 	}
 }
 
-// ReadAttributeRegulatoryConfig wraps the corresponding Objective-C method.
+// ReadAttributeRegulatoryConfig reads attribute regulatory config.
 //
 // ReadAttributeRegulatoryConfig blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeRegulatoryConfig(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) SubscribeAttributeRegulatoryCon
 	}
 }
 
-// ReadAttributeLocationCapability wraps the corresponding Objective-C method.
+// ReadAttributeLocationCapability reads attribute location capability.
 //
 // ReadAttributeLocationCapability blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeLocationCapability(ctx context.Context) (result obj.Object, err error) {
@@ -961,7 +961,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) SubscribeAttributeLocationCapab
 	}
 }
 
-// ReadAttributeSupportsConcurrentConnection wraps the corresponding Objective-C method.
+// ReadAttributeSupportsConcurrentConnection reads attribute supports concurrent connection.
 //
 // ReadAttributeSupportsConcurrentConnection blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeSupportsConcurrentConnection(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) SubscribeAttributeSupportsConcu
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1061,7 +1061,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) SubscribeAttributeGeneratedComm
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) SubscribeAttributeAcceptedComma
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -1161,7 +1161,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) SubscribeAttributeAttributeList
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -1211,7 +1211,7 @@ func (mbcgc *MTRBaseClusterGeneralCommissioning) SubscribeAttributeFeatureMapWit
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcgc *MTRBaseClusterGeneralCommissioning) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

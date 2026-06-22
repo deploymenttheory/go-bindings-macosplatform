@@ -78,7 +78,7 @@ func (t *Task) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("cancel"))
 }
 
-// TaskIdentifier wraps the corresponding Objective-C method.
+// TaskIdentifier returns the task identifier.
 func (t *Task) TaskIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("taskIdentifier"))
 	if _r == 0 {
@@ -87,7 +87,7 @@ func (t *Task) TaskIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// State wraps the corresponding Objective-C method.
+// State returns the state.
 func (t *Task) State() TaskState {
 	_r := objc.Send[TaskState](objref.IDOf(t), objc.RegisterName("state"))
 	return _r

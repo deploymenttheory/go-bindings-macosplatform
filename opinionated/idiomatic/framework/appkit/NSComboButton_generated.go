@@ -210,38 +210,38 @@ func (cb *ComboButton) WithAllowsExpansionToolTips(allowsExpansionToolTips bool)
 	return cb
 }
 
-// WithCell sets the property and returns the receiver so calls can be chained.
+// WithCell sets the cell.
 func (cb *ComboButton) WithCell(cell CellProvider) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return cb
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (cb *ComboButton) WithSubviews(items ...ViewProvider) *ComboButton {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setSubviews:"), _arr)
 	return cb
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (cb *ComboButton) WithHidden(hidden bool) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setHidden:"), hidden)
 	return cb
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (cb *ComboButton) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return cb
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (cb *ComboButton) WithAutoresizesSubviews(autoresizesSubviews bool) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return cb
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (cb *ComboButton) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return cb
@@ -253,19 +253,19 @@ func (cb *ComboButton) WithFrame(frame corefoundation.CGRect) *ComboButton {
 	return cb
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (cb *ComboButton) WithFrameRotation(frameRotation float64) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return cb
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (cb *ComboButton) WithFrameCenterRotation(frameCenterRotation float64) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return cb
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (cb *ComboButton) WithBoundsRotation(boundsRotation float64) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return cb
@@ -277,7 +277,7 @@ func (cb *ComboButton) WithBounds(bounds corefoundation.CGRect) *ComboButton {
 	return cb
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (cb *ComboButton) WithCanDrawConcurrently(canDrawConcurrently bool) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return cb
@@ -289,148 +289,148 @@ func (cb *ComboButton) WithNeedsDisplay(needsDisplay bool) *ComboButton {
 	return cb
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (cb *ComboButton) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return cb
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (cb *ComboButton) WithWantsRestingTouches(wantsRestingTouches bool) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return cb
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (cb *ComboButton) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return cb
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (cb *ComboButton) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return cb
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (cb *ComboButton) WithWantsLayer(wantsLayer bool) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return cb
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (cb *ComboButton) WithLayer(layer obj.Object) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return cb
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (cb *ComboButton) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return cb
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (cb *ComboButton) WithNeedsLayout(needsLayout bool) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return cb
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (cb *ComboButton) WithAlphaValue(alphaValue float64) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return cb
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (cb *ComboButton) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return cb
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (cb *ComboButton) WithBackgroundFilters(items ...obj.Object) *ComboButton {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return cb
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (cb *ComboButton) WithCompositingFilter(compositingFilter obj.Object) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return cb
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (cb *ComboButton) WithContentFilters(items ...obj.Object) *ComboButton {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setContentFilters:"), _arr)
 	return cb
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (cb *ComboButton) WithShadow(shadow *Shadow) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return cb
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (cb *ComboButton) WithClipsToBounds(clipsToBounds bool) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return cb
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (cb *ComboButton) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return cb
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (cb *ComboButton) WithToolTip(toolTip string) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return cb
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (cb *ComboButton) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return cb
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (cb *ComboButton) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return cb
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (cb *ComboButton) WithNextKeyView(nextKeyView ViewProvider) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return cb
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (cb *ComboButton) WithFocusRingType(focusRingType FocusRingType) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return cb
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (cb *ComboButton) WithGestureRecognizers(items ...GestureRecognizerProvider) *ComboButton {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return cb
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (cb *ComboButton) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return cb
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (cb *ComboButton) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return cb
@@ -442,49 +442,49 @@ func (cb *ComboButton) WithPrefersCompactControlSizeMetrics(prefersCompactContro
 	return cb
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (cb *ComboButton) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return cb
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (cb *ComboButton) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return cb
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (cb *ComboButton) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return cb
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (cb *ComboButton) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return cb
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (cb *ComboButton) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return cb
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (cb *ComboButton) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return cb
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (cb *ComboButton) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return cb
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (cb *ComboButton) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ComboButton {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return cb

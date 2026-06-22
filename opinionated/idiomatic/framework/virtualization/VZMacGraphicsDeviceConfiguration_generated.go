@@ -58,7 +58,7 @@ func (mgdc *MacGraphicsDeviceConfiguration) WithDisplays(items ...*MacGraphicsDi
 	return mgdc
 }
 
-// Displays wraps the corresponding Objective-C method.
+// Displays returns the displays.
 //
 // Displays returns the collection as a Go slice.
 func (mgdc *MacGraphicsDeviceConfiguration) Displays() []*MacGraphicsDisplayConfiguration {

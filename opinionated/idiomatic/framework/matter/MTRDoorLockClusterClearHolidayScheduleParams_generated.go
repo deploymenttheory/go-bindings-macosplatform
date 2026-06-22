@@ -70,7 +70,7 @@ func NewMTRDoorLockClusterClearHolidayScheduleParams() *MTRDoorLockClusterClearH
 	return mTRDoorLockClusterClearHolidayScheduleParamsAdopt(_id)
 }
 
-// WithHolidayIndex sets the property and returns the receiver so calls can be chained.
+// WithHolidayIndex sets the holiday index.
 func (mdlcchsp *MTRDoorLockClusterClearHolidayScheduleParams) WithHolidayIndex(holidayIndex obj.Object) *MTRDoorLockClusterClearHolidayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcchsp), objc.RegisterName("setHolidayIndex:"), objref.IDOf(holidayIndex))
 	return mdlcchsp
@@ -88,7 +88,7 @@ func (mdlcchsp *MTRDoorLockClusterClearHolidayScheduleParams) WithServerSideProc
 	return mdlcchsp
 }
 
-// HolidayIndex wraps the corresponding Objective-C method.
+// HolidayIndex returns the holiday index.
 func (mdlcchsp *MTRDoorLockClusterClearHolidayScheduleParams) HolidayIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcchsp), objc.RegisterName("holidayIndex"))
 	return obj.Wrap(_r)

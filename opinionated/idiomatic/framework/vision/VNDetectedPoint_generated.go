@@ -45,7 +45,7 @@ func detectedPointAdopt(id objc.ID) *DetectedPoint {
 	return x
 }
 
-// Confidence wraps the corresponding Objective-C method.
+// Confidence returns the confidence.
 func (dp *DetectedPoint) Confidence() float32 {
 	_r := objc.Send[float32](objref.IDOf(dp), objc.RegisterName("confidence"))
 	return _r

@@ -73,7 +73,7 @@ func NewXPCListenerWithMachServiceName(name string) *XPCListener {
 	return xPCListenerAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (xl *XPCListener) WithScriptingProperties(scriptingProperties obj.Object) *XPCListener {
 	objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return xl
@@ -104,7 +104,7 @@ func (xl *XPCListener) SetConnectionCodeSigningRequirement(requirement string) {
 	objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("setConnectionCodeSigningRequirement:"), purego.NSString(requirement))
 }
 
-// Endpoint wraps the corresponding Objective-C method.
+// Endpoint returns the endpoint.
 func (xl *XPCListener) Endpoint() *XPCListenerEndpoint {
 	_r := objc.Send[objc.ID](objref.IDOf(xl), objc.RegisterName("endpoint"))
 	return XPCListenerEndpointFromID(_r)

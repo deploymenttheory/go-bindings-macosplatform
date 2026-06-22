@@ -72,7 +72,7 @@ func NewKeyValueSharedObservers() *KeyValueSharedObservers {
 	return keyValueSharedObserversAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (kvso *KeyValueSharedObservers) WithScriptingProperties(scriptingProperties obj.Object) *KeyValueSharedObservers {
 	objc.Send[objc.ID](objref.IDOf(kvso), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return kvso

@@ -96,7 +96,7 @@ func (cm *CaptureManager) StopCapture() {
 	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("stopCapture"))
 }
 
-// IsCapturing wraps the corresponding Objective-C method.
+// IsCapturing reports whether the object is capturing.
 func (cm *CaptureManager) IsCapturing() bool {
 	_r := objc.Send[bool](objref.IDOf(cm), objc.RegisterName("isCapturing"))
 	return _r

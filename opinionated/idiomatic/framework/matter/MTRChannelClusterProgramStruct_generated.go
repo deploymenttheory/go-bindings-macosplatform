@@ -70,73 +70,73 @@ func NewMTRChannelClusterProgramStruct() *MTRChannelClusterProgramStruct {
 	return mTRChannelClusterProgramStructAdopt(_id)
 }
 
-// WithIdentifier sets the property and returns the receiver so calls can be chained.
+// WithIdentifier sets the identifier.
 func (mccps *MTRChannelClusterProgramStruct) WithIdentifier(identifier string) *MTRChannelClusterProgramStruct {
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 	return mccps
 }
 
-// WithChannel sets the property and returns the receiver so calls can be chained.
+// WithChannel sets the channel.
 func (mccps *MTRChannelClusterProgramStruct) WithChannel(channel MTRChannelClusterChannelInfoStructProvider) *MTRChannelClusterProgramStruct {
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 	return mccps
 }
 
-// WithStartTime sets the property and returns the receiver so calls can be chained.
+// WithStartTime sets the start time.
 func (mccps *MTRChannelClusterProgramStruct) WithStartTime(startTime obj.Object) *MTRChannelClusterProgramStruct {
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return mccps
 }
 
-// WithEndTime sets the property and returns the receiver so calls can be chained.
+// WithEndTime sets the end time.
 func (mccps *MTRChannelClusterProgramStruct) WithEndTime(endTime obj.Object) *MTRChannelClusterProgramStruct {
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setEndTime:"), objref.IDOf(endTime))
 	return mccps
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (mccps *MTRChannelClusterProgramStruct) WithTitle(title string) *MTRChannelClusterProgramStruct {
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return mccps
 }
 
-// WithSubtitle sets the property and returns the receiver so calls can be chained.
+// WithSubtitle sets the subtitle.
 func (mccps *MTRChannelClusterProgramStruct) WithSubtitle(subtitle string) *MTRChannelClusterProgramStruct {
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return mccps
 }
 
-// WithDescriptionString sets the property and returns the receiver so calls can be chained.
+// WithDescriptionString sets the description string.
 func (mccps *MTRChannelClusterProgramStruct) WithDescriptionString(descriptionString string) *MTRChannelClusterProgramStruct {
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setDescriptionString:"), purego.NSString(descriptionString))
 	return mccps
 }
 
-// WithReleaseDate sets the property and returns the receiver so calls can be chained.
+// WithReleaseDate sets the release date.
 func (mccps *MTRChannelClusterProgramStruct) WithReleaseDate(releaseDate string) *MTRChannelClusterProgramStruct {
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setReleaseDate:"), purego.NSString(releaseDate))
 	return mccps
 }
 
-// WithParentalGuidanceText sets the property and returns the receiver so calls can be chained.
+// WithParentalGuidanceText sets the parental guidance text.
 func (mccps *MTRChannelClusterProgramStruct) WithParentalGuidanceText(parentalGuidanceText string) *MTRChannelClusterProgramStruct {
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setParentalGuidanceText:"), purego.NSString(parentalGuidanceText))
 	return mccps
 }
 
-// WithRecordingFlag sets the property and returns the receiver so calls can be chained.
+// WithRecordingFlag sets the recording flag.
 func (mccps *MTRChannelClusterProgramStruct) WithRecordingFlag(recordingFlag obj.Object) *MTRChannelClusterProgramStruct {
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setRecordingFlag:"), objref.IDOf(recordingFlag))
 	return mccps
 }
 
-// WithSeriesInfo sets the property and returns the receiver so calls can be chained.
+// WithSeriesInfo sets the series info.
 func (mccps *MTRChannelClusterProgramStruct) WithSeriesInfo(seriesInfo *MTRChannelClusterSeriesInfoStruct) *MTRChannelClusterProgramStruct {
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setSeriesInfo:"), objref.IDOf(seriesInfo))
 	return mccps
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (mccps *MTRChannelClusterProgramStruct) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -145,25 +145,25 @@ func (mccps *MTRChannelClusterProgramStruct) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Channel wraps the corresponding Objective-C method.
+// Channel returns the channel.
 func (mccps *MTRChannelClusterProgramStruct) Channel() *MTRChannelClusterChannelInfoStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("channel"))
 	return MTRChannelClusterChannelInfoStructFromID(_r)
 }
 
-// StartTime wraps the corresponding Objective-C method.
+// StartTime returns the start time.
 func (mccps *MTRChannelClusterProgramStruct) StartTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("startTime"))
 	return obj.Wrap(_r)
 }
 
-// EndTime wraps the corresponding Objective-C method.
+// EndTime returns the end time.
 func (mccps *MTRChannelClusterProgramStruct) EndTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("endTime"))
 	return obj.Wrap(_r)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (mccps *MTRChannelClusterProgramStruct) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("title"))
 	if _r == 0 {
@@ -172,7 +172,7 @@ func (mccps *MTRChannelClusterProgramStruct) Title() string {
 	return purego.GoString(_r)
 }
 
-// Subtitle wraps the corresponding Objective-C method.
+// Subtitle returns the subtitle.
 func (mccps *MTRChannelClusterProgramStruct) Subtitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("subtitle"))
 	if _r == 0 {
@@ -181,7 +181,7 @@ func (mccps *MTRChannelClusterProgramStruct) Subtitle() string {
 	return purego.GoString(_r)
 }
 
-// DescriptionString wraps the corresponding Objective-C method.
+// DescriptionString returns the description string.
 func (mccps *MTRChannelClusterProgramStruct) DescriptionString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("descriptionString"))
 	if _r == 0 {
@@ -190,7 +190,7 @@ func (mccps *MTRChannelClusterProgramStruct) DescriptionString() string {
 	return purego.GoString(_r)
 }
 
-// AudioLanguages wraps the corresponding Objective-C method.
+// AudioLanguages returns the audio languages.
 func (mccps *MTRChannelClusterProgramStruct) AudioLanguages() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("audioLanguages"))
 	return obj.Wrap(_r)
@@ -201,7 +201,7 @@ func (mccps *MTRChannelClusterProgramStruct) SetAudioLanguages(audioLanguages ob
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setAudioLanguages:"), objref.IDOf(audioLanguages))
 }
 
-// Ratings wraps the corresponding Objective-C method.
+// Ratings returns the ratings.
 func (mccps *MTRChannelClusterProgramStruct) Ratings() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("ratings"))
 	return obj.Wrap(_r)
@@ -212,7 +212,7 @@ func (mccps *MTRChannelClusterProgramStruct) SetRatings(ratings obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setRatings:"), objref.IDOf(ratings))
 }
 
-// ReleaseDate wraps the corresponding Objective-C method.
+// ReleaseDate returns the release date.
 func (mccps *MTRChannelClusterProgramStruct) ReleaseDate() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("releaseDate"))
 	if _r == 0 {
@@ -221,7 +221,7 @@ func (mccps *MTRChannelClusterProgramStruct) ReleaseDate() string {
 	return purego.GoString(_r)
 }
 
-// ParentalGuidanceText wraps the corresponding Objective-C method.
+// ParentalGuidanceText returns the parental guidance text.
 func (mccps *MTRChannelClusterProgramStruct) ParentalGuidanceText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("parentalGuidanceText"))
 	if _r == 0 {
@@ -230,19 +230,19 @@ func (mccps *MTRChannelClusterProgramStruct) ParentalGuidanceText() string {
 	return purego.GoString(_r)
 }
 
-// RecordingFlag wraps the corresponding Objective-C method.
+// RecordingFlag returns the recording flag.
 func (mccps *MTRChannelClusterProgramStruct) RecordingFlag() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("recordingFlag"))
 	return obj.Wrap(_r)
 }
 
-// SeriesInfo wraps the corresponding Objective-C method.
+// SeriesInfo returns the series info.
 func (mccps *MTRChannelClusterProgramStruct) SeriesInfo() *MTRChannelClusterSeriesInfoStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("seriesInfo"))
 	return MTRChannelClusterSeriesInfoStructFromID(_r)
 }
 
-// CategoryList wraps the corresponding Objective-C method.
+// CategoryList returns the category list.
 func (mccps *MTRChannelClusterProgramStruct) CategoryList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("categoryList"))
 	return obj.Wrap(_r)
@@ -253,7 +253,7 @@ func (mccps *MTRChannelClusterProgramStruct) SetCategoryList(categoryList obj.Ob
 	objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("setCategoryList:"), objref.IDOf(categoryList))
 }
 
-// CastList wraps the corresponding Objective-C method.
+// CastList returns the cast list.
 func (mccps *MTRChannelClusterProgramStruct) CastList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccps), objc.RegisterName("castList"))
 	return obj.Wrap(_r)

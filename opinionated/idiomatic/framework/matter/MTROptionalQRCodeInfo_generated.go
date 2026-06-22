@@ -84,7 +84,7 @@ func NewMTROptionalQRCodeInfoWithTagInt32Value(tag obj.Object, value int32) *MTR
 	return mTROptionalQRCodeInfoAdopt(_id)
 }
 
-// WithType sets the property and returns the receiver so calls can be chained.
+// WithType sets the type.
 func (moqci *MTROptionalQRCodeInfo) WithType(type_ MTROptionalQRCodeInfoType) *MTROptionalQRCodeInfo {
 	objc.Send[objc.ID](objref.IDOf(moqci), objc.RegisterName("setType:"), type_)
 	return moqci
@@ -108,13 +108,13 @@ func (moqci *MTROptionalQRCodeInfo) WithStringValue(stringValue string) *MTROpti
 	return moqci
 }
 
-// WithInfoType sets the property and returns the receiver so calls can be chained.
+// WithInfoType sets the info type.
 func (moqci *MTROptionalQRCodeInfo) WithInfoType(infoType obj.Object) *MTROptionalQRCodeInfo {
 	objc.Send[objc.ID](objref.IDOf(moqci), objc.RegisterName("setInfoType:"), objref.IDOf(infoType))
 	return moqci
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (moqci *MTROptionalQRCodeInfo) Type() MTROptionalQRCodeInfoType {
 	_r := objc.Send[MTROptionalQRCodeInfoType](objref.IDOf(moqci), objc.RegisterName("type"))
 	return _r
@@ -141,7 +141,7 @@ func (moqci *MTROptionalQRCodeInfo) StringValue() string {
 	return purego.GoString(_r)
 }
 
-// InfoType wraps the corresponding Objective-C method.
+// InfoType returns the info type.
 func (moqci *MTROptionalQRCodeInfo) InfoType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moqci), objc.RegisterName("infoType"))
 	return obj.Wrap(_r)

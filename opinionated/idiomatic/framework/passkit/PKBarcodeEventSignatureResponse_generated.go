@@ -71,13 +71,13 @@ func NewBarcodeEventSignatureResponseWithSignedData(signedData obj.Object) *Barc
 	return barcodeEventSignatureResponseAdopt(_id)
 }
 
-// WithSignedData sets the property and returns the receiver so calls can be chained.
+// WithSignedData sets the signed data.
 func (besr *BarcodeEventSignatureResponse) WithSignedData(signedData obj.Object) *BarcodeEventSignatureResponse {
 	objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("setSignedData:"), objref.IDOf(signedData))
 	return besr
 }
 
-// SignedData wraps the corresponding Objective-C method.
+// SignedData returns the signed data.
 func (besr *BarcodeEventSignatureResponse) SignedData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("signedData"))
 	return obj.Wrap(_r)

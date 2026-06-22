@@ -100,7 +100,7 @@ func (auba *AudioUnitBusArray) SetBusCount(count int) error {
 	return nil
 }
 
-// Count wraps the corresponding Objective-C method.
+// Count returns the count.
 func (auba *AudioUnitBusArray) Count() int {
 	_r := objc.Send[int](objref.IDOf(auba), objc.RegisterName("count"))
 	return _r

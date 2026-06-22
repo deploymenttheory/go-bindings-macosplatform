@@ -77,19 +77,19 @@ func (wasr *WebAuthenticationSessionRequest) CompleteWithCallbackURL(url string)
 	objc.Send[objc.ID](objref.IDOf(wasr), objc.RegisterName("completeWithCallbackURL:"), rt.FileURL(url))
 }
 
-// UUID wraps the corresponding Objective-C method.
+// UUID returns the UUID.
 func (wasr *WebAuthenticationSessionRequest) UUID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(wasr), objc.RegisterName("UUID"))
 	return obj.Wrap(_r)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (wasr *WebAuthenticationSessionRequest) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(wasr), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// CallbackURLScheme wraps the corresponding Objective-C method.
+// CallbackURLScheme returns the callback URL scheme.
 func (wasr *WebAuthenticationSessionRequest) CallbackURLScheme() string {
 	_r := objc.Send[objc.ID](objref.IDOf(wasr), objc.RegisterName("callbackURLScheme"))
 	if _r == 0 {

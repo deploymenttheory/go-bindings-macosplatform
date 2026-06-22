@@ -70,7 +70,7 @@ func NewLocalizedNumberFormatRule() *LocalizedNumberFormatRule {
 	return localizedNumberFormatRuleAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (lnfr *LocalizedNumberFormatRule) WithScriptingProperties(scriptingProperties obj.Object) *LocalizedNumberFormatRule {
 	objc.Send[objc.ID](objref.IDOf(lnfr), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return lnfr

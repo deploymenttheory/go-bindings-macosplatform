@@ -86,7 +86,7 @@ func (fc *FontCollection) MatchingDescriptorsForFamilyOptions(family string, opt
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }
 
-// QueryDescriptors wraps the corresponding Objective-C method.
+// QueryDescriptors returns the query descriptors.
 //
 // QueryDescriptors returns the collection as a Go slice.
 func (fc *FontCollection) QueryDescriptors() []*FontDescriptor {
@@ -94,7 +94,7 @@ func (fc *FontCollection) QueryDescriptors() []*FontDescriptor {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }
 
-// ExclusionDescriptors wraps the corresponding Objective-C method.
+// ExclusionDescriptors returns the exclusion descriptors.
 //
 // ExclusionDescriptors returns the collection as a Go slice.
 func (fc *FontCollection) ExclusionDescriptors() []*FontDescriptor {
@@ -102,7 +102,7 @@ func (fc *FontCollection) ExclusionDescriptors() []*FontDescriptor {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }
 
-// MatchingDescriptors wraps the corresponding Objective-C method.
+// MatchingDescriptors returns the matching descriptors.
 //
 // MatchingDescriptors returns the collection as a Go slice.
 func (fc *FontCollection) MatchingDescriptors() []*FontDescriptor {

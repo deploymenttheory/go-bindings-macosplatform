@@ -266,7 +266,7 @@ func writeWithMethod(w io.Writer, typeName string, we withEntry) {
 		DocComment: docLeadKind(
 			we.goName,
 			we.doc,
-			"sets the property and returns the receiver so calls can be chained.",
+			synthFallback(we.goName, docSetter),
 			docSetter,
 		),
 		TypeName:       typeName,

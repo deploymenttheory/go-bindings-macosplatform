@@ -70,7 +70,7 @@ func NewMTRWaterHeaterManagementClusterBoostParams() *MTRWaterHeaterManagementCl
 	return mTRWaterHeaterManagementClusterBoostParamsAdopt(_id)
 }
 
-// WithBoostInfo sets the property and returns the receiver so calls can be chained.
+// WithBoostInfo sets the boost info.
 func (mwhmcbp *MTRWaterHeaterManagementClusterBoostParams) WithBoostInfo(boostInfo *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) *MTRWaterHeaterManagementClusterBoostParams {
 	objc.Send[objc.ID](objref.IDOf(mwhmcbp), objc.RegisterName("setBoostInfo:"), objref.IDOf(boostInfo))
 	return mwhmcbp
@@ -88,7 +88,7 @@ func (mwhmcbp *MTRWaterHeaterManagementClusterBoostParams) WithServerSideProcess
 	return mwhmcbp
 }
 
-// BoostInfo wraps the corresponding Objective-C method.
+// BoostInfo returns the boost info.
 func (mwhmcbp *MTRWaterHeaterManagementClusterBoostParams) BoostInfo() *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(mwhmcbp), objc.RegisterName("boostInfo"))
 	return MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructFromID(_r)

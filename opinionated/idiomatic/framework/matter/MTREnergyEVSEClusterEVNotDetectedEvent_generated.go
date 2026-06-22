@@ -70,49 +70,49 @@ func NewMTREnergyEVSEClusterEVNotDetectedEvent() *MTREnergyEVSEClusterEVNotDetec
 	return mTREnergyEVSEClusterEVNotDetectedEventAdopt(_id)
 }
 
-// WithSessionID sets the property and returns the receiver so calls can be chained.
+// WithSessionID sets the session ID.
 func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent {
 	objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 	return meecende
 }
 
-// WithState sets the property and returns the receiver so calls can be chained.
+// WithState sets the state.
 func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) WithState(state obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent {
 	objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("setState:"), objref.IDOf(state))
 	return meecende
 }
 
-// WithSessionDuration sets the property and returns the receiver so calls can be chained.
+// WithSessionDuration sets the session duration.
 func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) WithSessionDuration(sessionDuration obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent {
 	objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("setSessionDuration:"), objref.IDOf(sessionDuration))
 	return meecende
 }
 
-// WithSessionEnergyCharged sets the property and returns the receiver so calls can be chained.
+// WithSessionEnergyCharged sets the session energy charged.
 func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) WithSessionEnergyCharged(sessionEnergyCharged obj.Object) *MTREnergyEVSEClusterEVNotDetectedEvent {
 	objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("setSessionEnergyCharged:"), objref.IDOf(sessionEnergyCharged))
 	return meecende
 }
 
-// SessionID wraps the corresponding Objective-C method.
+// SessionID returns the session ID.
 func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) SessionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("sessionID"))
 	return obj.Wrap(_r)
 }
 
-// State wraps the corresponding Objective-C method.
+// State returns the state.
 func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) State() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("state"))
 	return obj.Wrap(_r)
 }
 
-// SessionDuration wraps the corresponding Objective-C method.
+// SessionDuration returns the session duration.
 func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) SessionDuration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("sessionDuration"))
 	return obj.Wrap(_r)
 }
 
-// SessionEnergyCharged wraps the corresponding Objective-C method.
+// SessionEnergyCharged returns the session energy charged.
 func (meecende *MTREnergyEVSEClusterEVNotDetectedEvent) SessionEnergyCharged() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecende), objc.RegisterName("sessionEnergyCharged"))
 	return obj.Wrap(_r)

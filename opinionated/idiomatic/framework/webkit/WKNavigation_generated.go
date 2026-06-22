@@ -72,7 +72,7 @@ func NewWKNavigation() *WKNavigation {
 	return wKNavigationAdopt(_id)
 }
 
-// EffectiveContentMode wraps the corresponding Objective-C method.
+// EffectiveContentMode returns the effective content mode.
 func (wn *WKNavigation) EffectiveContentMode() WKContentMode {
 	_r := objc.Send[WKContentMode](objref.IDOf(wn), objc.RegisterName("effectiveContentMode"))
 	return _r

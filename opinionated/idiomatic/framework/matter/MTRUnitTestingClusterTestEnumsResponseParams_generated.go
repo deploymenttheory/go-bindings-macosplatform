@@ -80,13 +80,13 @@ func NewMTRUnitTestingClusterTestEnumsResponseParamsWithResponseValueError(respo
 	return mTRUnitTestingClusterTestEnumsResponseParamsAdopt(_id), nil
 }
 
-// WithArg1 sets the property and returns the receiver so calls can be chained.
+// WithArg1 sets the arg1.
 func (mutcterp *MTRUnitTestingClusterTestEnumsResponseParams) WithArg1(arg1 obj.Object) *MTRUnitTestingClusterTestEnumsResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mutcterp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mutcterp
 }
 
-// WithArg2 sets the property and returns the receiver so calls can be chained.
+// WithArg2 sets the arg2.
 func (mutcterp *MTRUnitTestingClusterTestEnumsResponseParams) WithArg2(arg2 obj.Object) *MTRUnitTestingClusterTestEnumsResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mutcterp), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
 	return mutcterp
@@ -98,13 +98,13 @@ func (mutcterp *MTRUnitTestingClusterTestEnumsResponseParams) WithTimedInvokeTim
 	return mutcterp
 }
 
-// Arg1 wraps the corresponding Objective-C method.
+// Arg1 returns the arg1.
 func (mutcterp *MTRUnitTestingClusterTestEnumsResponseParams) Arg1() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcterp), objc.RegisterName("arg1"))
 	return obj.Wrap(_r)
 }
 
-// Arg2 wraps the corresponding Objective-C method.
+// Arg2 returns the arg2.
 func (mutcterp *MTRUnitTestingClusterTestEnumsResponseParams) Arg2() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcterp), objc.RegisterName("arg2"))
 	return obj.Wrap(_r)

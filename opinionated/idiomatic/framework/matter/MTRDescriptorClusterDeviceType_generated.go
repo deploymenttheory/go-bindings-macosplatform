@@ -50,19 +50,19 @@ func NewMTRDescriptorClusterDeviceType() *MTRDescriptorClusterDeviceType {
 	return mTRDescriptorClusterDeviceTypeAdopt(_id)
 }
 
-// WithDeviceType sets the property and returns the receiver so calls can be chained.
+// WithDeviceType sets the device type.
 func (mdcdt *MTRDescriptorClusterDeviceType) WithDeviceType(deviceType obj.Object) *MTRDescriptorClusterDeviceType {
 	objc.Send[objc.ID](objref.IDOf(mdcdt), objc.RegisterName("setDeviceType:"), objref.IDOf(deviceType))
 	return mdcdt
 }
 
-// WithType sets the property and returns the receiver so calls can be chained.
+// WithType sets the type.
 func (mdcdt *MTRDescriptorClusterDeviceType) WithType(type_ obj.Object) *MTRDescriptorClusterDeviceType {
 	objc.Send[objc.ID](objref.IDOf(mdcdt), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return mdcdt
 }
 
-// WithRevision sets the property and returns the receiver so calls can be chained.
+// WithRevision sets the revision.
 func (mdcdt *MTRDescriptorClusterDeviceType) WithRevision(revision obj.Object) *MTRDescriptorClusterDeviceType {
 	objc.Send[objc.ID](objref.IDOf(mdcdt), objc.RegisterName("setRevision:"), objref.IDOf(revision))
 	return mdcdt

@@ -51,13 +51,13 @@ func (psar *PersistentStoreAsynchronousResult) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(psar), objc.RegisterName("cancel"))
 }
 
-// ManagedObjectContext wraps the corresponding Objective-C method.
+// ManagedObjectContext returns the managed object context.
 func (psar *PersistentStoreAsynchronousResult) ManagedObjectContext() *ManagedObjectContext {
 	_r := objc.Send[objc.ID](objref.IDOf(psar), objc.RegisterName("managedObjectContext"))
 	return ManagedObjectContextFromID(_r)
 }
 
-// Progress wraps the corresponding Objective-C method.
+// Progress returns the progress.
 func (psar *PersistentStoreAsynchronousResult) Progress() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(psar), objc.RegisterName("progress"))
 	return obj.Wrap(_r)

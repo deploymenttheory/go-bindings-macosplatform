@@ -73,7 +73,7 @@ func NewLabeledValueWithLabelValue(label string, value string) *LabeledValue {
 	return labeledValueAdopt(_id)
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (lv *LabeledValue) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("label"))
 	if _r == 0 {
@@ -82,7 +82,7 @@ func (lv *LabeledValue) Label() string {
 	return purego.GoString(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (lv *LabeledValue) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("value"))
 	if _r == 0 {

@@ -73,13 +73,13 @@ func NewFloatRangeWithLowerBoundUpperBound(lowerBound float64, upperBound float6
 	return floatRangeAdopt(_id)
 }
 
-// LowerBound wraps the corresponding Objective-C method.
+// LowerBound returns the lower bound.
 func (fr *FloatRange) LowerBound() float64 {
 	_r := objc.Send[float64](objref.IDOf(fr), objc.RegisterName("lowerBound"))
 	return _r
 }
 
-// UpperBound wraps the corresponding Objective-C method.
+// UpperBound returns the upper bound.
 func (fr *FloatRange) UpperBound() float64 {
 	_r := objc.Send[float64](objref.IDOf(fr), objc.RegisterName("upperBound"))
 	return _r

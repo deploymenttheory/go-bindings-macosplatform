@@ -72,7 +72,7 @@ func NewNotificationAttachment() *NotificationAttachment {
 	return notificationAttachmentAdopt(_id)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (na *NotificationAttachment) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -81,13 +81,13 @@ func (na *NotificationAttachment) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (na *NotificationAttachment) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (na *NotificationAttachment) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(na), objc.RegisterName("type"))
 	if _r == 0 {

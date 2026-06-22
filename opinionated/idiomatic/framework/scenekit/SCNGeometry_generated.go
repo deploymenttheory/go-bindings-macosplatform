@@ -94,7 +94,7 @@ func (g *Geometry) WithLevelsOfDetail(items ...*LevelOfDetail) *Geometry {
 	return g
 }
 
-// WithTessellator sets the property and returns the receiver so calls can be chained.
+// WithTessellator sets the tessellator.
 func (g *Geometry) WithTessellator(tessellator *GeometryTessellator) *Geometry {
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return g
@@ -218,7 +218,7 @@ func (g *Geometry) LevelsOfDetail() []*LevelOfDetail {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LevelOfDetail { return LevelOfDetailFromID(_id) })
 }
 
-// Tessellator wraps the corresponding Objective-C method.
+// Tessellator returns the tessellator.
 func (g *Geometry) Tessellator() *GeometryTessellator {
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("tessellator"))
 	return GeometryTessellatorFromID(_r)

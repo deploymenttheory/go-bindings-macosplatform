@@ -149,13 +149,13 @@ func (lm *LayoutManager) WithTypesetterBehavior(typesetterBehavior TypesetterBeh
 	return lm
 }
 
-// WithUsesScreenFonts sets the property and returns the receiver so calls can be chained.
+// WithUsesScreenFonts sets the uses screen fonts.
 func (lm *LayoutManager) WithUsesScreenFonts(usesScreenFonts bool) *LayoutManager {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setUsesScreenFonts:"), usesScreenFonts)
 	return lm
 }
 
-// WithHyphenationFactor sets the property and returns the receiver so calls can be chained.
+// WithHyphenationFactor sets the hyphenation factor.
 func (lm *LayoutManager) WithHyphenationFactor(hyphenationFactor float32) *LayoutManager {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setHyphenationFactor:"), hyphenationFactor)
 	return lm
@@ -542,13 +542,13 @@ func (lm *LayoutManager) DefaultBaselineOffsetForFont(theFont *Font) float64 {
 	return _r
 }
 
-// TextStorage wraps the corresponding Objective-C method.
+// TextStorage returns the text storage.
 func (lm *LayoutManager) TextStorage() *TextStorage {
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("textStorage"))
 	return TextStorageFromID(_r)
 }
 
-// TextContainers wraps the corresponding Objective-C method.
+// TextContainers returns the text containers.
 //
 // TextContainers returns the collection as a Go slice.
 func (lm *LayoutManager) TextContainers() []*TextContainer {
@@ -586,7 +586,7 @@ func (lm *LayoutManager) AllowsNonContiguousLayout() bool {
 	return _r
 }
 
-// HasNonContiguousLayout wraps the corresponding Objective-C method.
+// HasNonContiguousLayout reports whether the object has non contiguous layout.
 func (lm *LayoutManager) HasNonContiguousLayout() bool {
 	_r := objc.Send[bool](objref.IDOf(lm), objc.RegisterName("hasNonContiguousLayout"))
 	return _r
@@ -604,43 +604,43 @@ func (lm *LayoutManager) BackgroundLayoutEnabled() bool {
 	return _r
 }
 
-// DefaultAttachmentScaling wraps the corresponding Objective-C method.
+// DefaultAttachmentScaling returns the default attachment scaling.
 func (lm *LayoutManager) DefaultAttachmentScaling() ImageScaling {
 	_r := objc.Send[ImageScaling](objref.IDOf(lm), objc.RegisterName("defaultAttachmentScaling"))
 	return _r
 }
 
-// Typesetter wraps the corresponding Objective-C method.
+// Typesetter returns the typesetter.
 func (lm *LayoutManager) Typesetter() *Typesetter {
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("typesetter"))
 	return TypesetterFromID(_r)
 }
 
-// TypesetterBehavior wraps the corresponding Objective-C method.
+// TypesetterBehavior returns the typesetter behavior.
 func (lm *LayoutManager) TypesetterBehavior() TypesetterBehavior {
 	_r := objc.Send[TypesetterBehavior](objref.IDOf(lm), objc.RegisterName("typesetterBehavior"))
 	return _r
 }
 
-// NumberOfGlyphs wraps the corresponding Objective-C method.
+// NumberOfGlyphs returns the number of glyphs.
 func (lm *LayoutManager) NumberOfGlyphs() int {
 	_r := objc.Send[int](objref.IDOf(lm), objc.RegisterName("numberOfGlyphs"))
 	return _r
 }
 
-// ExtraLineFragmentRect wraps the corresponding Objective-C method.
+// ExtraLineFragmentRect returns the extra line fragment rect.
 func (lm *LayoutManager) ExtraLineFragmentRect() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(lm), objc.RegisterName("extraLineFragmentRect"))
 	return _r
 }
 
-// ExtraLineFragmentUsedRect wraps the corresponding Objective-C method.
+// ExtraLineFragmentUsedRect returns the extra line fragment used rect.
 func (lm *LayoutManager) ExtraLineFragmentUsedRect() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(lm), objc.RegisterName("extraLineFragmentUsedRect"))
 	return _r
 }
 
-// ExtraLineFragmentTextContainer wraps the corresponding Objective-C method.
+// ExtraLineFragmentTextContainer returns the extra line fragment text container.
 func (lm *LayoutManager) ExtraLineFragmentTextContainer() *TextContainer {
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("extraLineFragmentTextContainer"))
 	return TextContainerFromID(_r)
@@ -664,13 +664,13 @@ func (lm *LayoutManager) LayoutManagerOwnsFirstResponderInWindow(window *Window)
 	return _r
 }
 
-// FirstTextView wraps the corresponding Objective-C method.
+// FirstTextView returns the first text view.
 func (lm *LayoutManager) FirstTextView() *TextView {
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("firstTextView"))
 	return TextViewFromID(_r)
 }
 
-// TextViewForBeginningOfSelection wraps the corresponding Objective-C method.
+// TextViewForBeginningOfSelection returns the text view for beginning of selection.
 func (lm *LayoutManager) TextViewForBeginningOfSelection() *TextView {
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("textViewForBeginningOfSelection"))
 	return TextViewFromID(_r)
@@ -695,24 +695,24 @@ func (lm *LayoutManager) SubstituteFontForFont(originalFont *Font) *Font {
 	return FontFromID(_r)
 }
 
-// InsertGlyphsLengthForStartingGlyphAtIndexCharacterIndex wraps the corresponding Objective-C method.
+// InsertGlyphsLengthForStartingGlyphAtIndexCharacterIndex inserts glyphs length for starting glyph at index character index.
 func (lm *LayoutManager) InsertGlyphsLengthForStartingGlyphAtIndexCharacterIndex(length int, glyphIndex int, charIndex int) (glyphs int) {
 	var _out0 int
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("insertGlyphs:length:forStartingGlyphAtIndex:characterIndex:"), unsafe.Pointer(&_out0), length, glyphIndex, charIndex)
 	return _out0
 }
 
-// InsertGlyphAtGlyphIndexCharacterIndex wraps the corresponding Objective-C method.
+// InsertGlyphAtGlyphIndexCharacterIndex inserts glyph at glyph index character index.
 func (lm *LayoutManager) InsertGlyphAtGlyphIndexCharacterIndex(glyph int, glyphIndex int, charIndex int) {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("insertGlyph:atGlyphIndex:characterIndex:"), glyph, glyphIndex, charIndex)
 }
 
-// ReplaceGlyphAtIndexWithGlyph wraps the corresponding Objective-C method.
+// ReplaceGlyphAtIndexWithGlyph replaces glyph at index with glyph.
 func (lm *LayoutManager) ReplaceGlyphAtIndexWithGlyph(glyphIndex int, newGlyph int) {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("replaceGlyphAtIndex:withGlyph:"), glyphIndex, newGlyph)
 }
 
-// DeleteGlyphsInRange wraps the corresponding Objective-C method.
+// DeleteGlyphsInRange deletes glyphs in range.
 func (lm *LayoutManager) DeleteGlyphsInRange(glyphRange foundation.NSRange) {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("deleteGlyphsInRange:"), glyphRange)
 }
@@ -727,7 +727,7 @@ func (lm *LayoutManager) SetIntAttributeValueForGlyphAtIndex(attributeTag int, v
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setIntAttribute:value:forGlyphAtIndex:"), attributeTag, val, glyphIndex)
 }
 
-// InvalidateGlyphsOnLayoutInvalidationForGlyphRange wraps the corresponding Objective-C method.
+// InvalidateGlyphsOnLayoutInvalidationForGlyphRange invalidates glyphs on layout invalidation for glyph range.
 func (lm *LayoutManager) InvalidateGlyphsOnLayoutInvalidationForGlyphRange(glyphRange foundation.NSRange) {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("invalidateGlyphsOnLayoutInvalidationForGlyphRange:"), glyphRange)
 }
@@ -771,7 +771,7 @@ func (lm *LayoutManager) TextStorageEditedRangeChangeInLengthInvalidatedRange(st
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("textStorage:edited:range:changeInLength:invalidatedRange:"), objref.IDOf(str), editedMask, newCharRange, delta, invalidatedCharRange)
 }
 
-// ShowPackedGlyphsLengthGlyphRangeAtPointFontColorPrintingAdjustment wraps the corresponding Objective-C method.
+// ShowPackedGlyphsLengthGlyphRangeAtPointFontColorPrintingAdjustment shows packed glyphs length glyph range at point font color printing adjustment.
 func (lm *LayoutManager) ShowPackedGlyphsLengthGlyphRangeAtPointFontColorPrintingAdjustment(glyphs string, glyphLen int, glyphRange foundation.NSRange, point corefoundation.CGPoint, font *Font, color *Color, printingAdjustment corefoundation.CGSize) {
 	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("showPackedGlyphs:length:glyphRange:atPoint:font:color:printingAdjustment:"), glyphs, glyphLen, glyphRange, point, objref.IDOf(font), objref.IDOf(color), printingAdjustment)
 }
@@ -782,13 +782,13 @@ func (lm *LayoutManager) UsesScreenFonts() bool {
 	return _r
 }
 
-// HyphenationFactor wraps the corresponding Objective-C method.
+// HyphenationFactor returns the hyphenation factor.
 func (lm *LayoutManager) HyphenationFactor() float32 {
 	_r := objc.Send[float32](objref.IDOf(lm), objc.RegisterName("hyphenationFactor"))
 	return _r
 }
 
-// GlyphGenerator wraps the corresponding Objective-C method.
+// GlyphGenerator returns the glyph generator.
 func (lm *LayoutManager) GlyphGenerator() *GlyphGenerator {
 	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("glyphGenerator"))
 	return GlyphGeneratorFromID(_r)

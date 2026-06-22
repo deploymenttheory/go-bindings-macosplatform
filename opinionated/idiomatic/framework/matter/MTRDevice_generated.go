@@ -133,7 +133,7 @@ func (md *MTRDevice) DeviceCachePrimed() bool {
 	return _r
 }
 
-// EstimatedStartTime wraps the corresponding Objective-C method.
+// EstimatedStartTime returns the estimated start time.
 func (md *MTRDevice) EstimatedStartTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("estimatedStartTime"))
 	return obj.Wrap(_r)

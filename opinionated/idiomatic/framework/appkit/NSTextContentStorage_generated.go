@@ -52,7 +52,7 @@ func NewTextContentStorage() *TextContentStorage {
 	return textContentStorageAdopt(_id)
 }
 
-// WithIncludesTextListMarkers sets the property and returns the receiver so calls can be chained.
+// WithIncludesTextListMarkers sets the includes text list markers.
 func (tcs *TextContentStorage) WithIncludesTextListMarkers(includesTextListMarkers bool) *TextContentStorage {
 	objc.Send[objc.ID](objref.IDOf(tcs), objc.RegisterName("setIncludesTextListMarkers:"), includesTextListMarkers)
 	return tcs
@@ -106,7 +106,7 @@ func (tcs *TextContentStorage) IncludesTextListMarkers() bool {
 	return _r
 }
 
-// AttributedString wraps the corresponding Objective-C method.
+// AttributedString returns the attributed string.
 func (tcs *TextContentStorage) AttributedString() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tcs), objc.RegisterName("attributedString"))
 	return obj.Wrap(_r)

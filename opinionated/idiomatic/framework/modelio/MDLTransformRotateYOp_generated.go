@@ -70,7 +70,7 @@ func NewTransformRotateYOp() *TransformRotateYOp {
 	return transformRotateYOpAdopt(_id)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (tryo *TransformRotateYOp) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tryo), objc.RegisterName("name"))
 	if _r == 0 {
@@ -79,7 +79,7 @@ func (tryo *TransformRotateYOp) Name() string {
 	return purego.GoString(_r)
 }
 
-// AnimatedValue wraps the corresponding Objective-C method.
+// AnimatedValue returns the animated value.
 func (tryo *TransformRotateYOp) AnimatedValue() *AnimatedScalar {
 	_r := objc.Send[objc.ID](objref.IDOf(tryo), objc.RegisterName("animatedValue"))
 	return AnimatedScalarFromID(_r)

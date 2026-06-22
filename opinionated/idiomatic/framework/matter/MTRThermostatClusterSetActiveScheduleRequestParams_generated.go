@@ -70,7 +70,7 @@ func NewMTRThermostatClusterSetActiveScheduleRequestParams() *MTRThermostatClust
 	return mTRThermostatClusterSetActiveScheduleRequestParamsAdopt(_id)
 }
 
-// WithScheduleHandle sets the property and returns the receiver so calls can be chained.
+// WithScheduleHandle sets the schedule handle.
 func (mtcsasrp *MTRThermostatClusterSetActiveScheduleRequestParams) WithScheduleHandle(scheduleHandle obj.Object) *MTRThermostatClusterSetActiveScheduleRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mtcsasrp), objc.RegisterName("setScheduleHandle:"), objref.IDOf(scheduleHandle))
 	return mtcsasrp
@@ -88,7 +88,7 @@ func (mtcsasrp *MTRThermostatClusterSetActiveScheduleRequestParams) WithServerSi
 	return mtcsasrp
 }
 
-// ScheduleHandle wraps the corresponding Objective-C method.
+// ScheduleHandle returns the schedule handle.
 func (mtcsasrp *MTRThermostatClusterSetActiveScheduleRequestParams) ScheduleHandle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsasrp), objc.RegisterName("scheduleHandle"))
 	return obj.Wrap(_r)

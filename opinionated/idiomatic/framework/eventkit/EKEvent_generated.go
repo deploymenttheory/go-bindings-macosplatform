@@ -154,7 +154,7 @@ func (e *Event) StartDate() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// EndDate wraps the corresponding Objective-C method.
+// EndDate returns the end date.
 func (e *Event) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)

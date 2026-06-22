@@ -78,19 +78,19 @@ func NewMTRDoorLockClusterSetCredentialResponseParamsWithResponseValueError(resp
 	return mTRDoorLockClusterSetCredentialResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mdlcscrp *MTRDoorLockClusterSetCredentialResponseParams) WithStatus(status obj.Object) *MTRDoorLockClusterSetCredentialResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcscrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mdlcscrp
 }
 
-// WithUserIndex sets the property and returns the receiver so calls can be chained.
+// WithUserIndex sets the user index.
 func (mdlcscrp *MTRDoorLockClusterSetCredentialResponseParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterSetCredentialResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcscrp), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlcscrp
 }
 
-// WithNextCredentialIndex sets the property and returns the receiver so calls can be chained.
+// WithNextCredentialIndex sets the next credential index.
 func (mdlcscrp *MTRDoorLockClusterSetCredentialResponseParams) WithNextCredentialIndex(nextCredentialIndex obj.Object) *MTRDoorLockClusterSetCredentialResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcscrp), objc.RegisterName("setNextCredentialIndex:"), objref.IDOf(nextCredentialIndex))
 	return mdlcscrp
@@ -102,19 +102,19 @@ func (mdlcscrp *MTRDoorLockClusterSetCredentialResponseParams) WithTimedInvokeTi
 	return mdlcscrp
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (mdlcscrp *MTRDoorLockClusterSetCredentialResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcscrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// UserIndex wraps the corresponding Objective-C method.
+// UserIndex returns the user index.
 func (mdlcscrp *MTRDoorLockClusterSetCredentialResponseParams) UserIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcscrp), objc.RegisterName("userIndex"))
 	return obj.Wrap(_r)
 }
 
-// NextCredentialIndex wraps the corresponding Objective-C method.
+// NextCredentialIndex returns the next credential index.
 func (mdlcscrp *MTRDoorLockClusterSetCredentialResponseParams) NextCredentialIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcscrp), objc.RegisterName("nextCredentialIndex"))
 	return obj.Wrap(_r)

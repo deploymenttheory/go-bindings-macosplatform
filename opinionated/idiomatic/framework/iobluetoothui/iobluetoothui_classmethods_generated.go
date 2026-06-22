@@ -22,7 +22,7 @@ func PairingController() *BluetoothPairingController {
 	return BluetoothPairingControllerFromID(_r)
 }
 
-// SharedDisplayView wraps the corresponding Objective-C method.
+// SharedDisplayView returns the shared display view.
 func SharedDisplayView() *BluetoothPasskeyDisplay {
 	_r := objc.Send[objc.ID](objc.ID(_class("IOBluetoothPasskeyDisplay")), objc.RegisterName("sharedDisplayView"))
 	return BluetoothPasskeyDisplayFromID(_r)

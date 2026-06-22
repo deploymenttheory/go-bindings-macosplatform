@@ -89,7 +89,7 @@ func (sabrr *SpeechAudioBufferRecognitionRequest) WithAddsPunctuation(addsPunctu
 	return sabrr
 }
 
-// WithCustomizedLanguageModel sets the property and returns the receiver so calls can be chained.
+// WithCustomizedLanguageModel sets the customized language model.
 func (sabrr *SpeechAudioBufferRecognitionRequest) WithCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) *SpeechAudioBufferRecognitionRequest {
 	objc.Send[objc.ID](objref.IDOf(sabrr), objc.RegisterName("setCustomizedLanguageModel:"), objref.IDOf(customizedLanguageModel))
 	return sabrr

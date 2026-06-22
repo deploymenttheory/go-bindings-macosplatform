@@ -49,163 +49,163 @@ func NewDOMHTMLTextAreaElement() *DOMHTMLTextAreaElement {
 	return dOMHTMLTextAreaElementAdopt(_id)
 }
 
-// WithAutofocus sets the property and returns the receiver so calls can be chained.
+// WithAutofocus sets the autofocus.
 func (dtae *DOMHTMLTextAreaElement) WithAutofocus(autofocus bool) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setAutofocus:"), autofocus)
 	return dtae
 }
 
-// WithDisabled sets the property and returns the receiver so calls can be chained.
+// WithDisabled sets the disabled.
 func (dtae *DOMHTMLTextAreaElement) WithDisabled(disabled bool) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setDisabled:"), disabled)
 	return dtae
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (dtae *DOMHTMLTextAreaElement) WithName(name string) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setName:"), purego.NSString(name))
 	return dtae
 }
 
-// WithReadOnly sets the property and returns the receiver so calls can be chained.
+// WithReadOnly sets the read only.
 func (dtae *DOMHTMLTextAreaElement) WithReadOnly(readOnly bool) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setReadOnly:"), readOnly)
 	return dtae
 }
 
-// WithRows sets the property and returns the receiver so calls can be chained.
+// WithRows sets the rows.
 func (dtae *DOMHTMLTextAreaElement) WithRows(rows int) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setRows:"), rows)
 	return dtae
 }
 
-// WithCols sets the property and returns the receiver so calls can be chained.
+// WithCols sets the cols.
 func (dtae *DOMHTMLTextAreaElement) WithCols(cols int) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setCols:"), cols)
 	return dtae
 }
 
-// WithDefaultValue sets the property and returns the receiver so calls can be chained.
+// WithDefaultValue sets the default value.
 func (dtae *DOMHTMLTextAreaElement) WithDefaultValue(defaultValue string) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setDefaultValue:"), purego.NSString(defaultValue))
 	return dtae
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (dtae *DOMHTMLTextAreaElement) WithValue(value string) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setValue:"), purego.NSString(value))
 	return dtae
 }
 
-// WithSelectionStart sets the property and returns the receiver so calls can be chained.
+// WithSelectionStart sets the selection start.
 func (dtae *DOMHTMLTextAreaElement) WithSelectionStart(selectionStart int) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setSelectionStart:"), selectionStart)
 	return dtae
 }
 
-// WithSelectionEnd sets the property and returns the receiver so calls can be chained.
+// WithSelectionEnd sets the selection end.
 func (dtae *DOMHTMLTextAreaElement) WithSelectionEnd(selectionEnd int) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setSelectionEnd:"), selectionEnd)
 	return dtae
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (dtae *DOMHTMLTextAreaElement) WithTitle(title string) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return dtae
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (dtae *DOMHTMLTextAreaElement) WithLang(lang string) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return dtae
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (dtae *DOMHTMLTextAreaElement) WithDir(dir string) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return dtae
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (dtae *DOMHTMLTextAreaElement) WithTabIndex(tabIndex int) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setTabIndex:"), tabIndex)
 	return dtae
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (dtae *DOMHTMLTextAreaElement) WithAccessKey(accessKey string) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return dtae
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (dtae *DOMHTMLTextAreaElement) WithInnerText(innerText string) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return dtae
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (dtae *DOMHTMLTextAreaElement) WithOuterText(outerText string) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return dtae
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (dtae *DOMHTMLTextAreaElement) WithContentEditable(contentEditable string) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return dtae
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (dtae *DOMHTMLTextAreaElement) WithIDName(idName string) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return dtae
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (dtae *DOMHTMLTextAreaElement) WithScrollLeft(scrollLeft int) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return dtae
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (dtae *DOMHTMLTextAreaElement) WithScrollTop(scrollTop int) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setScrollTop:"), scrollTop)
 	return dtae
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (dtae *DOMHTMLTextAreaElement) WithInnerHTML(innerHTML string) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return dtae
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (dtae *DOMHTMLTextAreaElement) WithOuterHTML(outerHTML string) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return dtae
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (dtae *DOMHTMLTextAreaElement) WithClassName(className string) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return dtae
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dtae *DOMHTMLTextAreaElement) WithNodeValue(nodeValue string) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dtae
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dtae *DOMHTMLTextAreaElement) WithPrefix(prefix string) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dtae
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dtae *DOMHTMLTextAreaElement) WithTextContent(textContent string) *DOMHTMLTextAreaElement {
 	objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dtae
@@ -233,13 +233,13 @@ func (dtae *DOMHTMLTextAreaElement) Disabled() bool {
 	return _r
 }
 
-// Form wraps the corresponding Objective-C method.
+// Form returns the form.
 func (dtae *DOMHTMLTextAreaElement) Form() *DOMHTMLFormElement {
 	_r := objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("form"))
 	return DOMHTMLFormElementFromID(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (dtae *DOMHTMLTextAreaElement) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("name"))
 	if _r == 0 {
@@ -254,19 +254,19 @@ func (dtae *DOMHTMLTextAreaElement) ReadOnly() bool {
 	return _r
 }
 
-// Rows wraps the corresponding Objective-C method.
+// Rows returns the rows.
 func (dtae *DOMHTMLTextAreaElement) Rows() int {
 	_r := objc.Send[int](objref.IDOf(dtae), objc.RegisterName("rows"))
 	return _r
 }
 
-// Cols wraps the corresponding Objective-C method.
+// Cols returns the cols.
 func (dtae *DOMHTMLTextAreaElement) Cols() int {
 	_r := objc.Send[int](objref.IDOf(dtae), objc.RegisterName("cols"))
 	return _r
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (dtae *DOMHTMLTextAreaElement) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("type"))
 	if _r == 0 {
@@ -275,7 +275,7 @@ func (dtae *DOMHTMLTextAreaElement) Type() string {
 	return purego.GoString(_r)
 }
 
-// DefaultValue wraps the corresponding Objective-C method.
+// DefaultValue returns the default value.
 func (dtae *DOMHTMLTextAreaElement) DefaultValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("defaultValue"))
 	if _r == 0 {
@@ -284,7 +284,7 @@ func (dtae *DOMHTMLTextAreaElement) DefaultValue() string {
 	return purego.GoString(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (dtae *DOMHTMLTextAreaElement) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dtae), objc.RegisterName("value"))
 	if _r == 0 {
@@ -299,13 +299,13 @@ func (dtae *DOMHTMLTextAreaElement) WillValidate() bool {
 	return _r
 }
 
-// SelectionStart wraps the corresponding Objective-C method.
+// SelectionStart returns the selection start.
 func (dtae *DOMHTMLTextAreaElement) SelectionStart() int {
 	_r := objc.Send[int](objref.IDOf(dtae), objc.RegisterName("selectionStart"))
 	return _r
 }
 
-// SelectionEnd wraps the corresponding Objective-C method.
+// SelectionEnd returns the selection end.
 func (dtae *DOMHTMLTextAreaElement) SelectionEnd() int {
 	_r := objc.Send[int](objref.IDOf(dtae), objc.RegisterName("selectionEnd"))
 	return _r

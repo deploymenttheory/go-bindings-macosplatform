@@ -75,7 +75,7 @@ func (bc *BillboardConstraint) WithIncremental(incremental bool) *BillboardConst
 	return bc
 }
 
-// FreeAxes wraps the corresponding Objective-C method.
+// FreeAxes returns the free axes.
 func (bc *BillboardConstraint) FreeAxes() BillboardAxis {
 	_r := objc.Send[BillboardAxis](objref.IDOf(bc), objc.RegisterName("freeAxes"))
 	return _r

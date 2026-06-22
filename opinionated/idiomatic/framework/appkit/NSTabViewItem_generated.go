@@ -139,19 +139,19 @@ func (tvi *TabViewItem) SizeOfLabel(computeMin bool) corefoundation.CGSize {
 	return _r
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (tvi *TabViewItem) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tvi), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// Color wraps the corresponding Objective-C method.
+// Color returns the color.
 func (tvi *TabViewItem) Color() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(tvi), objc.RegisterName("color"))
 	return ColorFromID(_r)
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (tvi *TabViewItem) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tvi), objc.RegisterName("label"))
 	if _r == 0 {
@@ -166,7 +166,7 @@ func (tvi *TabViewItem) Image() *Image {
 	return ImageFromID(_r)
 }
 
-// View wraps the corresponding Objective-C method.
+// View returns the view.
 func (tvi *TabViewItem) View() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(tvi), objc.RegisterName("view"))
 	return ViewFromID(_r)
@@ -178,19 +178,19 @@ func (tvi *TabViewItem) ViewController() *ViewController {
 	return ViewControllerFromID(_r)
 }
 
-// TabState wraps the corresponding Objective-C method.
+// TabState returns the tab state.
 func (tvi *TabViewItem) TabState() TabState {
 	_r := objc.Send[TabState](objref.IDOf(tvi), objc.RegisterName("tabState"))
 	return _r
 }
 
-// TabView wraps the corresponding Objective-C method.
+// TabView returns the tab view.
 func (tvi *TabViewItem) TabView() *TabView {
 	_r := objc.Send[objc.ID](objref.IDOf(tvi), objc.RegisterName("tabView"))
 	return TabViewFromID(_r)
 }
 
-// ToolTip wraps the corresponding Objective-C method.
+// ToolTip returns the tool tip.
 func (tvi *TabViewItem) ToolTip() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tvi), objc.RegisterName("toolTip"))
 	if _r == 0 {

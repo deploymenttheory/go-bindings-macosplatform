@@ -94,13 +94,13 @@ func (mc *MoveCommand) WithScriptErrorString(scriptErrorString StringProvider) *
 	return mc
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (mc *MoveCommand) WithScriptingProperties(scriptingProperties obj.Object) *MoveCommand {
 	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return mc
 }
 
-// KeySpecifier wraps the corresponding Objective-C method.
+// KeySpecifier returns the key specifier.
 func (mc *MoveCommand) KeySpecifier() *ScriptObjectSpecifier {
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("keySpecifier"))
 	return ScriptObjectSpecifierFromID(_r)

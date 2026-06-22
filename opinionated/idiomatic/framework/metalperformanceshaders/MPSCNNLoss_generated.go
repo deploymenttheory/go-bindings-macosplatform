@@ -89,31 +89,31 @@ func (cl *CNNLoss) WithLabel(label string) *CNNLoss {
 	return cl
 }
 
-// Weight wraps the corresponding Objective-C method.
+// Weight returns the weight.
 func (cl *CNNLoss) Weight() float32 {
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("weight"))
 	return _r
 }
 
-// LabelSmoothing wraps the corresponding Objective-C method.
+// LabelSmoothing returns the label smoothing.
 func (cl *CNNLoss) LabelSmoothing() float32 {
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("labelSmoothing"))
 	return _r
 }
 
-// NumberOfClasses wraps the corresponding Objective-C method.
+// NumberOfClasses returns the number of classes.
 func (cl *CNNLoss) NumberOfClasses() int {
 	_r := objc.Send[int](objref.IDOf(cl), objc.RegisterName("numberOfClasses"))
 	return _r
 }
 
-// Epsilon wraps the corresponding Objective-C method.
+// Epsilon returns the epsilon.
 func (cl *CNNLoss) Epsilon() float32 {
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("epsilon"))
 	return _r
 }
 
-// Delta wraps the corresponding Objective-C method.
+// Delta returns the delta.
 func (cl *CNNLoss) Delta() float32 {
 	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("delta"))
 	return _r

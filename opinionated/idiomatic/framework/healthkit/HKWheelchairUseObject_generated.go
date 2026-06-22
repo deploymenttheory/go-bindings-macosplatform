@@ -72,7 +72,7 @@ func NewWheelchairUseObject() *WheelchairUseObject {
 	return wheelchairUseObjectAdopt(_id)
 }
 
-// WheelchairUse wraps the corresponding Objective-C method.
+// WheelchairUse returns the wheelchair use.
 func (wuo *WheelchairUseObject) WheelchairUse() WheelchairUse {
 	_r := objc.Send[WheelchairUse](objref.IDOf(wuo), objc.RegisterName("wheelchairUse"))
 	return _r

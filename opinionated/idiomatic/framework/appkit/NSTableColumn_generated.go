@@ -163,37 +163,37 @@ func (tc *TableColumn) SizeToFit() {
 	objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("sizeToFit"))
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (tc *TableColumn) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// TableView wraps the corresponding Objective-C method.
+// TableView returns the table view.
 func (tc *TableColumn) TableView() *TableView {
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("tableView"))
 	return TableViewFromID(_r)
 }
 
-// Width wraps the corresponding Objective-C method.
+// Width returns the width.
 func (tc *TableColumn) Width() float64 {
 	_r := objc.Send[float64](objref.IDOf(tc), objc.RegisterName("width"))
 	return _r
 }
 
-// MinWidth wraps the corresponding Objective-C method.
+// MinWidth returns the min width.
 func (tc *TableColumn) MinWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(tc), objc.RegisterName("minWidth"))
 	return _r
 }
 
-// MaxWidth wraps the corresponding Objective-C method.
+// MaxWidth returns the max width.
 func (tc *TableColumn) MaxWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(tc), objc.RegisterName("maxWidth"))
 	return _r
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (tc *TableColumn) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("title"))
 	if _r == 0 {
@@ -202,31 +202,31 @@ func (tc *TableColumn) Title() string {
 	return purego.GoString(_r)
 }
 
-// HeaderCell wraps the corresponding Objective-C method.
+// HeaderCell returns the header cell.
 func (tc *TableColumn) HeaderCell() *TableHeaderCell {
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("headerCell"))
 	return TableHeaderCellFromID(_r)
 }
 
-// IsEditable wraps the corresponding Objective-C method.
+// IsEditable reports whether the object is editable.
 func (tc *TableColumn) IsEditable() bool {
 	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("isEditable"))
 	return _r
 }
 
-// SortDescriptorPrototype wraps the corresponding Objective-C method.
+// SortDescriptorPrototype returns the sort descriptor prototype.
 func (tc *TableColumn) SortDescriptorPrototype() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("sortDescriptorPrototype"))
 	return obj.Wrap(_r)
 }
 
-// ResizingMask wraps the corresponding Objective-C method.
+// ResizingMask returns the resizing mask.
 func (tc *TableColumn) ResizingMask() TableColumnResizingOptions {
 	_r := objc.Send[TableColumnResizingOptions](objref.IDOf(tc), objc.RegisterName("resizingMask"))
 	return _r
 }
 
-// HeaderToolTip wraps the corresponding Objective-C method.
+// HeaderToolTip returns the header tool tip.
 func (tc *TableColumn) HeaderToolTip() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("headerToolTip"))
 	if _r == 0 {
@@ -235,7 +235,7 @@ func (tc *TableColumn) HeaderToolTip() string {
 	return purego.GoString(_r)
 }
 
-// IsHidden wraps the corresponding Objective-C method.
+// IsHidden reports whether the object is hidden.
 func (tc *TableColumn) IsHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(tc), objc.RegisterName("isHidden"))
 	return _r
@@ -258,7 +258,7 @@ func (tc *TableColumn) DataCellForRow(row int) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// DataCell wraps the corresponding Objective-C method.
+// DataCell returns the data cell.
 func (tc *TableColumn) DataCell() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("dataCell"))
 	return obj.Wrap(_r)

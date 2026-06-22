@@ -89,7 +89,7 @@ func (dc *DialogController) Dismiss(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("dismiss:"), objref.IDOf(sender))
 }
 
-// ParentWindow wraps the corresponding Objective-C method.
+// ParentWindow returns the parent window.
 func (dc *DialogController) ParentWindow() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("parentWindow"))
 	return obj.Wrap(_r)

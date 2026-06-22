@@ -61,7 +61,7 @@ func NewMTRBaseClusterBarrierControlWithDeviceEndpointQueue(device *MTRBaseDevic
 	return mTRBaseClusterBarrierControlAdopt(_id)
 }
 
-// ReadAttributeBarrierMovingStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBarrierMovingStateWithCompletion reads attribute barrier moving state with completion.
 //
 // ReadAttributeBarrierMovingStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierMovingStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierMovingStateW
 	}
 }
 
-// ReadAttributeBarrierSafetyStatusWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBarrierSafetyStatusWithCompletion reads attribute barrier safety status with completion.
 //
 // ReadAttributeBarrierSafetyStatusWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierSafetyStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierSafetyStatus
 	}
 }
 
-// ReadAttributeBarrierCapabilitiesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBarrierCapabilitiesWithCompletion reads attribute barrier capabilities with completion.
 //
 // ReadAttributeBarrierCapabilitiesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierCapabilitiesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierCapabilities
 	}
 }
 
-// ReadAttributeBarrierOpenEventsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBarrierOpenEventsWithCompletion reads attribute barrier open events with completion.
 //
 // ReadAttributeBarrierOpenEventsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierOpenEventsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierOpenEventsWi
 	}
 }
 
-// ReadAttributeBarrierCloseEventsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBarrierCloseEventsWithCompletion reads attribute barrier close events with completion.
 //
 // ReadAttributeBarrierCloseEventsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierCloseEventsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierCloseEventsW
 	}
 }
 
-// ReadAttributeBarrierCommandOpenEventsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBarrierCommandOpenEventsWithCompletion reads attribute barrier command open events with completion.
 //
 // ReadAttributeBarrierCommandOpenEventsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierCommandOpenEventsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierCommandOpenE
 	}
 }
 
-// ReadAttributeBarrierCommandCloseEventsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBarrierCommandCloseEventsWithCompletion reads attribute barrier command close events with completion.
 //
 // ReadAttributeBarrierCommandCloseEventsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierCommandCloseEventsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierCommandClose
 	}
 }
 
-// ReadAttributeBarrierOpenPeriodWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBarrierOpenPeriodWithCompletion reads attribute barrier open period with completion.
 //
 // ReadAttributeBarrierOpenPeriodWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierOpenPeriodWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierOpenPeriodWi
 	}
 }
 
-// ReadAttributeBarrierClosePeriodWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBarrierClosePeriodWithCompletion reads attribute barrier close period with completion.
 //
 // ReadAttributeBarrierClosePeriodWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierClosePeriodWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierClosePeriodW
 	}
 }
 
-// ReadAttributeBarrierPositionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBarrierPositionWithCompletion reads attribute barrier position with completion.
 //
 // ReadAttributeBarrierPositionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierPositionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierPositionWith
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeGeneratedCommandLis
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeAcceptedCommandList
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeAttributeListWithPa
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeFeatureMapWithParam
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeClusterRevisionWith
 	}
 }
 
-// ReadAttributeBarrierMovingState wraps the corresponding Objective-C method.
+// ReadAttributeBarrierMovingState reads attribute barrier moving state.
 //
 // ReadAttributeBarrierMovingState blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierMovingState(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierMovingStateW
 	}
 }
 
-// ReadAttributeBarrierSafetyStatus wraps the corresponding Objective-C method.
+// ReadAttributeBarrierSafetyStatus reads attribute barrier safety status.
 //
 // ReadAttributeBarrierSafetyStatus blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierSafetyStatus(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierSafetyStatus
 	}
 }
 
-// ReadAttributeBarrierCapabilities wraps the corresponding Objective-C method.
+// ReadAttributeBarrierCapabilities reads attribute barrier capabilities.
 //
 // ReadAttributeBarrierCapabilities blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierCapabilities(ctx context.Context) (result obj.Object, err error) {
@@ -961,7 +961,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierCapabilities
 	}
 }
 
-// ReadAttributeBarrierOpenEvents wraps the corresponding Objective-C method.
+// ReadAttributeBarrierOpenEvents reads attribute barrier open events.
 //
 // ReadAttributeBarrierOpenEvents blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierOpenEvents(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierOpenEventsWi
 	}
 }
 
-// ReadAttributeBarrierCloseEvents wraps the corresponding Objective-C method.
+// ReadAttributeBarrierCloseEvents reads attribute barrier close events.
 //
 // ReadAttributeBarrierCloseEvents blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierCloseEvents(ctx context.Context) (result obj.Object, err error) {
@@ -1061,7 +1061,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierCloseEventsW
 	}
 }
 
-// ReadAttributeBarrierCommandOpenEvents wraps the corresponding Objective-C method.
+// ReadAttributeBarrierCommandOpenEvents reads attribute barrier command open events.
 //
 // ReadAttributeBarrierCommandOpenEvents blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierCommandOpenEvents(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierCommandOpenE
 	}
 }
 
-// ReadAttributeBarrierCommandCloseEvents wraps the corresponding Objective-C method.
+// ReadAttributeBarrierCommandCloseEvents reads attribute barrier command close events.
 //
 // ReadAttributeBarrierCommandCloseEvents blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierCommandCloseEvents(ctx context.Context) (result obj.Object, err error) {
@@ -1161,7 +1161,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierCommandClose
 	}
 }
 
-// ReadAttributeBarrierOpenPeriod wraps the corresponding Objective-C method.
+// ReadAttributeBarrierOpenPeriod reads attribute barrier open period.
 //
 // ReadAttributeBarrierOpenPeriod blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierOpenPeriod(ctx context.Context) (result obj.Object, err error) {
@@ -1211,7 +1211,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierOpenPeriodWi
 	}
 }
 
-// ReadAttributeBarrierClosePeriod wraps the corresponding Objective-C method.
+// ReadAttributeBarrierClosePeriod reads attribute barrier close period.
 //
 // ReadAttributeBarrierClosePeriod blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierClosePeriod(ctx context.Context) (result obj.Object, err error) {
@@ -1261,7 +1261,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierClosePeriodW
 	}
 }
 
-// ReadAttributeBarrierPosition wraps the corresponding Objective-C method.
+// ReadAttributeBarrierPosition reads attribute barrier position.
 //
 // ReadAttributeBarrierPosition blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeBarrierPosition(ctx context.Context) (result obj.Object, err error) {
@@ -1311,7 +1311,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeBarrierPositionWith
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1361,7 +1361,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeGeneratedCommandLis
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1411,7 +1411,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeAcceptedCommandList
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -1461,7 +1461,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeAttributeListWithMi
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -1511,7 +1511,7 @@ func (mbcbc *MTRBaseClusterBarrierControl) SubscribeAttributeFeatureMapWithMinIn
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcbc *MTRBaseClusterBarrierControl) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

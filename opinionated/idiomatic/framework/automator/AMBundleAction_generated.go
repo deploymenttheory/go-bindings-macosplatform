@@ -63,25 +63,25 @@ func (ba *BundleAction) AwakeFromBundle() {
 	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("awakeFromBundle"))
 }
 
-// HasView wraps the corresponding Objective-C method.
+// HasView reports whether the object has view.
 func (ba *BundleAction) HasView() bool {
 	_r := objc.Send[bool](objref.IDOf(ba), objc.RegisterName("hasView"))
 	return _r
 }
 
-// View wraps the corresponding Objective-C method.
+// View returns the view.
 func (ba *BundleAction) View() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("view"))
 	return obj.Wrap(_r)
 }
 
-// Bundle wraps the corresponding Objective-C method.
+// Bundle returns the bundle.
 func (ba *BundleAction) Bundle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("bundle"))
 	return obj.Wrap(_r)
 }
 
-// Parameters wraps the corresponding Objective-C method.
+// Parameters returns the parameters.
 func (ba *BundleAction) Parameters() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("parameters"))
 	return obj.Wrap(_r)

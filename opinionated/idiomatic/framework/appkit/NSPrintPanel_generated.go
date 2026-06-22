@@ -126,7 +126,7 @@ func (pp *PrintPanel) RunModal() int {
 	return _r
 }
 
-// AccessoryControllers wraps the corresponding Objective-C method.
+// AccessoryControllers returns the accessory controllers.
 //
 // AccessoryControllers returns the collection as a Go slice.
 func (pp *PrintPanel) AccessoryControllers() []*ViewController {
@@ -134,25 +134,25 @@ func (pp *PrintPanel) AccessoryControllers() []*ViewController {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ViewController { return ViewControllerFromID(_id) })
 }
 
-// Options wraps the corresponding Objective-C method.
+// Options returns the options.
 func (pp *PrintPanel) Options() PrintPanelOptions {
 	_r := objc.Send[PrintPanelOptions](objref.IDOf(pp), objc.RegisterName("options"))
 	return _r
 }
 
-// HelpAnchor wraps the corresponding Objective-C method.
+// HelpAnchor returns the help anchor.
 func (pp *PrintPanel) HelpAnchor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("helpAnchor"))
 	return obj.Wrap(_r)
 }
 
-// JobStyleHint wraps the corresponding Objective-C method.
+// JobStyleHint returns the job style hint.
 func (pp *PrintPanel) JobStyleHint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("jobStyleHint"))
 	return obj.Wrap(_r)
 }
 
-// PrintInfo wraps the corresponding Objective-C method.
+// PrintInfo returns the print info.
 func (pp *PrintPanel) PrintInfo() *PrintInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("printInfo"))
 	return PrintInfoFromID(_r)

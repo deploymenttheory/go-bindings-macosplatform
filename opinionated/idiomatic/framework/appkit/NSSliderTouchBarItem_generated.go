@@ -136,7 +136,7 @@ func (stbi *SliderTouchBarItem) MinimumSliderWidth() float64 {
 	return _r
 }
 
-// MaximumSliderWidth wraps the corresponding Objective-C method.
+// MaximumSliderWidth returns the maximum slider width.
 func (stbi *SliderTouchBarItem) MaximumSliderWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(stbi), objc.RegisterName("maximumSliderWidth"))
 	return _r

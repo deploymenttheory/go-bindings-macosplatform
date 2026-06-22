@@ -72,25 +72,25 @@ func NewCollectionLayoutEdgeSpacing() *CollectionLayoutEdgeSpacing {
 	return collectionLayoutEdgeSpacingAdopt(_id)
 }
 
-// Leading wraps the corresponding Objective-C method.
+// Leading returns the leading.
 func (cles *CollectionLayoutEdgeSpacing) Leading() *CollectionLayoutSpacing {
 	_r := objc.Send[objc.ID](objref.IDOf(cles), objc.RegisterName("leading"))
 	return CollectionLayoutSpacingFromID(_r)
 }
 
-// Top wraps the corresponding Objective-C method.
+// Top returns the top.
 func (cles *CollectionLayoutEdgeSpacing) Top() *CollectionLayoutSpacing {
 	_r := objc.Send[objc.ID](objref.IDOf(cles), objc.RegisterName("top"))
 	return CollectionLayoutSpacingFromID(_r)
 }
 
-// Trailing wraps the corresponding Objective-C method.
+// Trailing returns the trailing.
 func (cles *CollectionLayoutEdgeSpacing) Trailing() *CollectionLayoutSpacing {
 	_r := objc.Send[objc.ID](objref.IDOf(cles), objc.RegisterName("trailing"))
 	return CollectionLayoutSpacingFromID(_r)
 }
 
-// Bottom wraps the corresponding Objective-C method.
+// Bottom returns the bottom.
 func (cles *CollectionLayoutEdgeSpacing) Bottom() *CollectionLayoutSpacing {
 	_r := objc.Send[objc.ID](objref.IDOf(cles), objc.RegisterName("bottom"))
 	return CollectionLayoutSpacingFromID(_r)

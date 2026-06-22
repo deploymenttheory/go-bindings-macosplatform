@@ -133,7 +133,7 @@ func (fd *FontDescriptor) FontDescriptorWithDesign(design obj.Object) *FontDescr
 	return FontDescriptorFromID(_r)
 }
 
-// PostscriptName wraps the corresponding Objective-C method.
+// PostscriptName returns the postscript name.
 func (fd *FontDescriptor) PostscriptName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("postscriptName"))
 	if _r == 0 {
@@ -142,19 +142,19 @@ func (fd *FontDescriptor) PostscriptName() string {
 	return purego.GoString(_r)
 }
 
-// PointSize wraps the corresponding Objective-C method.
+// PointSize returns the point size.
 func (fd *FontDescriptor) PointSize() float64 {
 	_r := objc.Send[float64](objref.IDOf(fd), objc.RegisterName("pointSize"))
 	return _r
 }
 
-// Matrix wraps the corresponding Objective-C method.
+// Matrix returns the matrix.
 func (fd *FontDescriptor) Matrix() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("matrix"))
 	return obj.Wrap(_r)
 }
 
-// SymbolicTraits wraps the corresponding Objective-C method.
+// SymbolicTraits returns the symbolic traits.
 func (fd *FontDescriptor) SymbolicTraits() FontDescriptorSymbolicTraits {
 	_r := objc.Send[FontDescriptorSymbolicTraits](objref.IDOf(fd), objc.RegisterName("symbolicTraits"))
 	return _r
@@ -166,7 +166,7 @@ func (fd *FontDescriptor) RequiresFontAssetRequest() bool {
 	return _r
 }
 
-// FontAttributes wraps the corresponding Objective-C method.
+// FontAttributes returns the font attributes.
 func (fd *FontDescriptor) FontAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fd), objc.RegisterName("fontAttributes"))
 	return obj.Wrap(_r)

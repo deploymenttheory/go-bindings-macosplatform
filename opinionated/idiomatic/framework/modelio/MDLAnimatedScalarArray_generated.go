@@ -52,7 +52,7 @@ func NewAnimatedScalarArrayWithElementCount(arrayElementCount int) *AnimatedScal
 	return animatedScalarArrayAdopt(_id)
 }
 
-// WithInterpolation sets the property and returns the receiver so calls can be chained.
+// WithInterpolation sets the interpolation.
 func (asa *AnimatedScalarArray) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedScalarArray {
 	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("setInterpolation:"), interpolation)
 	return asa
@@ -86,7 +86,7 @@ func (asa *AnimatedScalarArray) GetDoubleArrayMaxCountAtTime(maxCount int, time_
 	return _r, _out0
 }
 
-// ResetWithFloatArrayCountAtTimesCount wraps the corresponding Objective-C method.
+// ResetWithFloatArrayCountAtTimesCount resets with float array count at times count.
 func (asa *AnimatedScalarArray) ResetWithFloatArrayCountAtTimesCount(valuesCount int, timesCount int) (valuesArray float32, timesArray float64) {
 	var _out0 float32
 	var _out1 float64
@@ -94,7 +94,7 @@ func (asa *AnimatedScalarArray) ResetWithFloatArrayCountAtTimesCount(valuesCount
 	return _out0, _out1
 }
 
-// ResetWithDoubleArrayCountAtTimesCount wraps the corresponding Objective-C method.
+// ResetWithDoubleArrayCountAtTimesCount resets with double array count at times count.
 func (asa *AnimatedScalarArray) ResetWithDoubleArrayCountAtTimesCount(valuesCount int, timesCount int) (valuesArray float64, timesArray float64) {
 	var _out0 float64
 	var _out1 float64
@@ -116,7 +116,7 @@ func (asa *AnimatedScalarArray) GetDoubleArrayMaxCount(maxCount int) (result int
 	return _r, _out0
 }
 
-// ElementCount wraps the corresponding Objective-C method.
+// ElementCount returns the element count.
 func (asa *AnimatedScalarArray) ElementCount() int {
 	_r := objc.Send[int](objref.IDOf(asa), objc.RegisterName("elementCount"))
 	return _r

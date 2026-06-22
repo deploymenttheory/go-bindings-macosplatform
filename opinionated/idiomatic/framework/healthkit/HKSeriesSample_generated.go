@@ -45,7 +45,7 @@ func seriesSampleAdopt(id objc.ID) *SeriesSample {
 	return x
 }
 
-// Count wraps the corresponding Objective-C method.
+// Count returns the count.
 func (ss *SeriesSample) Count() int {
 	_r := objc.Send[int](objref.IDOf(ss), objc.RegisterName("count"))
 	return _r

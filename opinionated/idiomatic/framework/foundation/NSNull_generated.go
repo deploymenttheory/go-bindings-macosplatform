@@ -72,7 +72,7 @@ func NewNull() *Null {
 	return nullAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (n *Null) WithScriptingProperties(scriptingProperties obj.Object) *Null {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return n

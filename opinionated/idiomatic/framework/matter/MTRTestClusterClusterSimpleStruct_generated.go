@@ -50,49 +50,49 @@ func NewMTRTestClusterClusterSimpleStruct() *MTRTestClusterClusterSimpleStruct {
 	return mTRTestClusterClusterSimpleStructAdopt(_id)
 }
 
-// WithA sets the property and returns the receiver so calls can be chained.
+// WithA sets the a.
 func (mtccss *MTRTestClusterClusterSimpleStruct) WithA(a obj.Object) *MTRTestClusterClusterSimpleStruct {
 	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setA:"), objref.IDOf(a))
 	return mtccss
 }
 
-// WithB sets the property and returns the receiver so calls can be chained.
+// WithB sets the b.
 func (mtccss *MTRTestClusterClusterSimpleStruct) WithB(b obj.Object) *MTRTestClusterClusterSimpleStruct {
 	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setB:"), objref.IDOf(b))
 	return mtccss
 }
 
-// WithC sets the property and returns the receiver so calls can be chained.
+// WithC sets the c.
 func (mtccss *MTRTestClusterClusterSimpleStruct) WithC(c obj.Object) *MTRTestClusterClusterSimpleStruct {
 	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setC:"), objref.IDOf(c))
 	return mtccss
 }
 
-// WithD sets the property and returns the receiver so calls can be chained.
+// WithD sets the d.
 func (mtccss *MTRTestClusterClusterSimpleStruct) WithD(d obj.Object) *MTRTestClusterClusterSimpleStruct {
 	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setD:"), objref.IDOf(d))
 	return mtccss
 }
 
-// WithE sets the property and returns the receiver so calls can be chained.
+// WithE sets the e.
 func (mtccss *MTRTestClusterClusterSimpleStruct) WithE(e string) *MTRTestClusterClusterSimpleStruct {
 	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setE:"), purego.NSString(e))
 	return mtccss
 }
 
-// WithF sets the property and returns the receiver so calls can be chained.
+// WithF sets the f.
 func (mtccss *MTRTestClusterClusterSimpleStruct) WithF(f obj.Object) *MTRTestClusterClusterSimpleStruct {
 	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setF:"), objref.IDOf(f))
 	return mtccss
 }
 
-// WithG sets the property and returns the receiver so calls can be chained.
+// WithG sets the g.
 func (mtccss *MTRTestClusterClusterSimpleStruct) WithG(g obj.Object) *MTRTestClusterClusterSimpleStruct {
 	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setG:"), objref.IDOf(g))
 	return mtccss
 }
 
-// WithH sets the property and returns the receiver so calls can be chained.
+// WithH sets the h.
 func (mtccss *MTRTestClusterClusterSimpleStruct) WithH(h obj.Object) *MTRTestClusterClusterSimpleStruct {
 	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setH:"), objref.IDOf(h))
 	return mtccss

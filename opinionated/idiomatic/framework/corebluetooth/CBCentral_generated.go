@@ -51,7 +51,7 @@ func NewCentral() *Central {
 	return centralAdopt(_id)
 }
 
-// MaximumUpdateValueLength wraps the corresponding Objective-C method.
+// MaximumUpdateValueLength returns the maximum update value length.
 func (c *Central) MaximumUpdateValueLength() int {
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("maximumUpdateValueLength"))
 	return _r

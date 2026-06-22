@@ -51,7 +51,7 @@ func (mce *MIDIChannelEvent) WithChannel(channel int) *MIDIChannelEvent {
 	return mce
 }
 
-// Channel wraps the corresponding Objective-C method.
+// Channel returns the channel.
 func (mce *MIDIChannelEvent) Channel() int {
 	_r := objc.Send[int](objref.IDOf(mce), objc.RegisterName("channel"))
 	return _r

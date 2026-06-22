@@ -72,7 +72,7 @@ func NewNetworkConnection() *NetworkConnection {
 	return networkConnectionAdopt(_id)
 }
 
-// Host wraps the corresponding Objective-C method.
+// Host returns the host.
 func (nc *NetworkConnection) Host() *NetworkHost {
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("host"))
 	return NetworkHostFromID(_r)

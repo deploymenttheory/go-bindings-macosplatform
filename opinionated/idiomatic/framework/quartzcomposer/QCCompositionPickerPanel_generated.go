@@ -70,7 +70,7 @@ func NewCompositionPickerPanel() *CompositionPickerPanel {
 	return compositionPickerPanelAdopt(_id)
 }
 
-// CompositionPickerView wraps the corresponding Objective-C method.
+// CompositionPickerView returns the composition picker view.
 func (cpp *CompositionPickerPanel) CompositionPickerView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cpp), objc.RegisterName("compositionPickerView"))
 	return obj.Wrap(_r)

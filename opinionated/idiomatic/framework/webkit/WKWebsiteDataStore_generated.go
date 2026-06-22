@@ -72,7 +72,7 @@ func NewWKWebsiteDataStore() *WKWebsiteDataStore {
 	return wKWebsiteDataStoreAdopt(_id)
 }
 
-// WithProxyConfigurations sets the property and returns the receiver so calls can be chained.
+// WithProxyConfigurations sets the proxy configurations.
 func (wwds *WKWebsiteDataStore) WithProxyConfigurations(items ...obj.Object) *WKWebsiteDataStore {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(wwds), objc.RegisterName("setProxyConfigurations:"), _arr)
@@ -112,7 +112,7 @@ func (wwds *WKWebsiteDataStore) Identifier() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// ProxyConfigurations wraps the corresponding Objective-C method.
+// ProxyConfigurations returns the proxy configurations.
 //
 // ProxyConfigurations returns the collection as a Go slice.
 func (wwds *WKWebsiteDataStore) ProxyConfigurations() []obj.Object {

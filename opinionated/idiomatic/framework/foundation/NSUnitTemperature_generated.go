@@ -52,7 +52,7 @@ func NewUnitTemperature() *UnitTemperature {
 	return unitTemperatureAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ut *UnitTemperature) WithScriptingProperties(scriptingProperties obj.Object) *UnitTemperature {
 	objc.Send[objc.ID](objref.IDOf(ut), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ut

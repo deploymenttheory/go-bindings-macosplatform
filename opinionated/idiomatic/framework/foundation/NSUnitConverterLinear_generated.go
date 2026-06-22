@@ -60,19 +60,19 @@ func NewUnitConverterLinearWithCoefficientConstant(coefficient float64, constant
 	return unitConverterLinearAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ucl *UnitConverterLinear) WithScriptingProperties(scriptingProperties obj.Object) *UnitConverterLinear {
 	objc.Send[objc.ID](objref.IDOf(ucl), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ucl
 }
 
-// Coefficient wraps the corresponding Objective-C method.
+// Coefficient returns the coefficient.
 func (ucl *UnitConverterLinear) Coefficient() float64 {
 	_r := objc.Send[float64](objref.IDOf(ucl), objc.RegisterName("coefficient"))
 	return _r
 }
 
-// Constant wraps the corresponding Objective-C method.
+// Constant returns the constant.
 func (ucl *UnitConverterLinear) Constant() float64 {
 	_r := objc.Send[float64](objref.IDOf(ucl), objc.RegisterName("constant"))
 	return _r

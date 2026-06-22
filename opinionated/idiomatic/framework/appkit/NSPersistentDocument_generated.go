@@ -147,13 +147,13 @@ func (pd *PersistentDocument) PersistentStoreTypeForFileType(fileType string) st
 	return purego.GoString(_r)
 }
 
-// ManagedObjectContext wraps the corresponding Objective-C method.
+// ManagedObjectContext returns the managed object context.
 func (pd *PersistentDocument) ManagedObjectContext() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("managedObjectContext"))
 	return obj.Wrap(_r)
 }
 
-// ManagedObjectModel wraps the corresponding Objective-C method.
+// ManagedObjectModel returns the managed object model.
 func (pd *PersistentDocument) ManagedObjectModel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("managedObjectModel"))
 	return obj.Wrap(_r)

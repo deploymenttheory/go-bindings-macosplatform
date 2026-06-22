@@ -58,13 +58,13 @@ func (uat *UserAutomatorTask) WithVariables(variables obj.Object) *UserAutomator
 	return uat
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (uat *UserAutomatorTask) WithScriptingProperties(scriptingProperties obj.Object) *UserAutomatorTask {
 	objc.Send[objc.ID](objref.IDOf(uat), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return uat
 }
 
-// Variables wraps the corresponding Objective-C method.
+// Variables returns the variables.
 func (uat *UserAutomatorTask) Variables() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(uat), objc.RegisterName("variables"))
 	return obj.Wrap(_r)

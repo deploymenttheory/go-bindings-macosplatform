@@ -70,14 +70,14 @@ func NewMTRSwitchClusterInitialPressEvent() *MTRSwitchClusterInitialPressEvent {
 	return mTRSwitchClusterInitialPressEventAdopt(_id)
 }
 
-// WithNewPosition sets the property and returns the receiver so calls can be chained.
+// WithNewPosition sets the new position.
 func (mscipe *MTRSwitchClusterInitialPressEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterInitialPressEvent {
 	objc.Send[objc.ID](objref.IDOf(mscipe), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
 	return mscipe
 }
 
-// GetNewPosition wraps the corresponding Objective-C method.
-func (mscipe *MTRSwitchClusterInitialPressEvent) GetNewPosition() obj.Object {
+// NewPosition returns the new position.
+func (mscipe *MTRSwitchClusterInitialPressEvent) NewPosition() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mscipe), objc.RegisterName("getNewPosition"))
 	return obj.Wrap(_r)
 }

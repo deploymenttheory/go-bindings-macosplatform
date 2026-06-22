@@ -52,7 +52,7 @@ func NewConeDirectivityModelParametersWithSubbandParameters(subbandParameters []
 	return coneDirectivityModelParametersAdopt(_id)
 }
 
-// SubbandParameters wraps the corresponding Objective-C method.
+// SubbandParameters returns the subband parameters.
 //
 // SubbandParameters returns the collection as a Go slice.
 func (cdmp *ConeDirectivityModelParameters) SubbandParameters() []*ConeDirectivityModelSubbandParameters {

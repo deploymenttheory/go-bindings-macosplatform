@@ -202,7 +202,7 @@ func PhoneNumberWithStringValue(stringValue string) *PhoneNumber {
 	return PhoneNumberFromID(_r)
 }
 
-// New wraps the corresponding Objective-C method.
+// New returns the new.
 func New() *PhoneNumber {
 	_r := objc.Send[objc.ID](objc.ID(_class("CNPhoneNumber")), objc.RegisterName("new"))
 	return PhoneNumberFromID(_r)

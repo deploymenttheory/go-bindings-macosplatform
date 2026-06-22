@@ -49,121 +49,121 @@ func NewDOMHTMLMapElement() *DOMHTMLMapElement {
 	return dOMHTMLMapElementAdopt(_id)
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (dme *DOMHTMLMapElement) WithName(name string) *DOMHTMLMapElement {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setName:"), purego.NSString(name))
 	return dme
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (dme *DOMHTMLMapElement) WithTitle(title string) *DOMHTMLMapElement {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return dme
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (dme *DOMHTMLMapElement) WithLang(lang string) *DOMHTMLMapElement {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return dme
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (dme *DOMHTMLMapElement) WithDir(dir string) *DOMHTMLMapElement {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return dme
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (dme *DOMHTMLMapElement) WithTabIndex(tabIndex int) *DOMHTMLMapElement {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setTabIndex:"), tabIndex)
 	return dme
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (dme *DOMHTMLMapElement) WithAccessKey(accessKey string) *DOMHTMLMapElement {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return dme
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (dme *DOMHTMLMapElement) WithInnerText(innerText string) *DOMHTMLMapElement {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return dme
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (dme *DOMHTMLMapElement) WithOuterText(outerText string) *DOMHTMLMapElement {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return dme
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (dme *DOMHTMLMapElement) WithContentEditable(contentEditable string) *DOMHTMLMapElement {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return dme
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (dme *DOMHTMLMapElement) WithIDName(idName string) *DOMHTMLMapElement {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return dme
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (dme *DOMHTMLMapElement) WithScrollLeft(scrollLeft int) *DOMHTMLMapElement {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return dme
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (dme *DOMHTMLMapElement) WithScrollTop(scrollTop int) *DOMHTMLMapElement {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setScrollTop:"), scrollTop)
 	return dme
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (dme *DOMHTMLMapElement) WithInnerHTML(innerHTML string) *DOMHTMLMapElement {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return dme
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (dme *DOMHTMLMapElement) WithOuterHTML(outerHTML string) *DOMHTMLMapElement {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return dme
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (dme *DOMHTMLMapElement) WithClassName(className string) *DOMHTMLMapElement {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return dme
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dme *DOMHTMLMapElement) WithNodeValue(nodeValue string) *DOMHTMLMapElement {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dme
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dme *DOMHTMLMapElement) WithPrefix(prefix string) *DOMHTMLMapElement {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dme
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dme *DOMHTMLMapElement) WithTextContent(textContent string) *DOMHTMLMapElement {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dme
 }
 
-// Areas wraps the corresponding Objective-C method.
+// Areas returns the areas.
 func (dme *DOMHTMLMapElement) Areas() *DOMHTMLCollection {
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("areas"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (dme *DOMHTMLMapElement) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("name"))
 	if _r == 0 {

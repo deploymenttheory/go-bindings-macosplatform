@@ -142,7 +142,7 @@ func (ti *ToolbarItem) WithBordered(bordered bool) *ToolbarItem {
 	return ti
 }
 
-// WithBackgroundTintColor sets the property and returns the receiver so calls can be chained.
+// WithBackgroundTintColor sets the background tint color.
 func (ti *ToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *ToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
 	return ti
@@ -207,7 +207,7 @@ func (ti *ToolbarItem) Validate() {
 	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("validate"))
 }
 
-// ItemIdentifier wraps the corresponding Objective-C method.
+// ItemIdentifier returns the item identifier.
 func (ti *ToolbarItem) ItemIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("itemIdentifier"))
 	return obj.Wrap(_r)
@@ -276,7 +276,7 @@ func (ti *ToolbarItem) IsEnabled() bool {
 	return _r
 }
 
-// Image wraps the corresponding Objective-C method.
+// Image returns the image.
 func (ti *ToolbarItem) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("image"))
 	return ImageFromID(_r)
@@ -297,7 +297,7 @@ func (ti *ToolbarItem) IsBordered() bool {
 	return _r
 }
 
-// BackgroundTintColor wraps the corresponding Objective-C method.
+// BackgroundTintColor returns the background tint color.
 func (ti *ToolbarItem) BackgroundTintColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("backgroundTintColor"))
 	return ColorFromID(_r)
@@ -339,7 +339,7 @@ func (ti *ToolbarItem) MinSize() corefoundation.CGSize {
 	return _r
 }
 
-// MaxSize wraps the corresponding Objective-C method.
+// MaxSize returns the max size.
 func (ti *ToolbarItem) MaxSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ti), objc.RegisterName("maxSize"))
 	return _r

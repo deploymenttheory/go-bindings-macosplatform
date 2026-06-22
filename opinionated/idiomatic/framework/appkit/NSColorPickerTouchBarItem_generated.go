@@ -101,7 +101,7 @@ func (cptbi *ColorPickerTouchBarItem) WithVisibilityPriority(visibilityPriority 
 	return cptbi
 }
 
-// Color wraps the corresponding Objective-C method.
+// Color returns the color.
 func (cptbi *ColorPickerTouchBarItem) Color() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("color"))
 	return ColorFromID(_r)
@@ -127,7 +127,7 @@ func (cptbi *ColorPickerTouchBarItem) ColorList() *ColorList {
 	return ColorListFromID(_r)
 }
 
-// Target wraps the corresponding Objective-C method.
+// Target returns the target.
 func (cptbi *ColorPickerTouchBarItem) Target() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cptbi), objc.RegisterName("target"))
 	return obj.Wrap(_r)

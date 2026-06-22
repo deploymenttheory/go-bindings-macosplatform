@@ -135,19 +135,19 @@ func (md *MetaData) LowPowerModeEnabled() bool {
 	return _r
 }
 
-// IsTestFlightApp wraps the corresponding Objective-C method.
+// IsTestFlightApp reports whether the object is test flight app.
 func (md *MetaData) IsTestFlightApp() bool {
 	_r := objc.Send[bool](objref.IDOf(md), objc.RegisterName("isTestFlightApp"))
 	return _r
 }
 
-// Pid wraps the corresponding Objective-C method.
+// Pid returns the pid.
 func (md *MetaData) Pid() int {
 	_r := objc.Send[int](objref.IDOf(md), objc.RegisterName("pid"))
 	return _r
 }
 
-// BundleIdentifier wraps the corresponding Objective-C method.
+// BundleIdentifier returns the bundle identifier.
 func (md *MetaData) BundleIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {

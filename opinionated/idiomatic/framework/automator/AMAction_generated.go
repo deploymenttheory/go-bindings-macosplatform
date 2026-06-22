@@ -177,13 +177,13 @@ func (a *Action) IgnoresInput() bool {
 	return _r
 }
 
-// ProgressValue wraps the corresponding Objective-C method.
+// ProgressValue returns the progress value.
 func (a *Action) ProgressValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("progressValue"))
 	return _r
 }
 
-// IsStopped wraps the corresponding Objective-C method.
+// IsStopped reports whether the object is stopped.
 func (a *Action) IsStopped() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isStopped"))
 	return _r

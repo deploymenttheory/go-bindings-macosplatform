@@ -334,7 +334,7 @@ func (s *Scene) DidChangeSize(oldSize corefoundation.CGSize) {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didChangeSize:"), oldSize)
 }
 
-// Size wraps the corresponding Objective-C method.
+// Size returns the size.
 func (s *Scene) Size() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(s), objc.RegisterName("size"))
 	return _r
@@ -358,7 +358,7 @@ func (s *Scene) Listener() *Node {
 	return NodeFromID(_r)
 }
 
-// AudioEngine wraps the corresponding Objective-C method.
+// AudioEngine returns the audio engine.
 func (s *Scene) AudioEngine() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("audioEngine"))
 	return obj.Wrap(_r)

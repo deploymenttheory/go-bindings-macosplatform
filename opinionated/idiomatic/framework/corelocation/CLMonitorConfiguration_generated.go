@@ -72,7 +72,7 @@ func NewMonitorConfiguration() *MonitorConfiguration {
 	return monitorConfigurationAdopt(_id)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (mc *MonitorConfiguration) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("name"))
 	if _r == 0 {
@@ -81,7 +81,7 @@ func (mc *MonitorConfiguration) Name() string {
 	return purego.GoString(_r)
 }
 
-// Queue wraps the corresponding Objective-C method.
+// Queue returns the queue.
 func (mc *MonitorConfiguration) Queue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("queue"))
 	return obj.Wrap(_r)

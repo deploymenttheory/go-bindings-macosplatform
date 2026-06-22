@@ -96,32 +96,32 @@ func (sv *StackView) WithHasEqualSpacing(hasEqualSpacing bool) *StackView {
 	return sv
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (sv *StackView) WithSubviews(items ...ViewProvider) *StackView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setSubviews:"), _arr)
 	return sv
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (sv *StackView) WithHidden(hidden bool) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHidden:"), hidden)
 	return sv
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (sv *StackView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return sv
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (sv *StackView) WithAutoresizesSubviews(autoresizesSubviews bool) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return sv
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (sv *StackView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return sv
@@ -133,19 +133,19 @@ func (sv *StackView) WithFrame(frame corefoundation.CGRect) *StackView {
 	return sv
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (sv *StackView) WithFrameRotation(frameRotation float64) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return sv
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (sv *StackView) WithFrameCenterRotation(frameCenterRotation float64) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return sv
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (sv *StackView) WithBoundsRotation(boundsRotation float64) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return sv
@@ -157,7 +157,7 @@ func (sv *StackView) WithBounds(bounds corefoundation.CGRect) *StackView {
 	return sv
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (sv *StackView) WithCanDrawConcurrently(canDrawConcurrently bool) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return sv
@@ -169,148 +169,148 @@ func (sv *StackView) WithNeedsDisplay(needsDisplay bool) *StackView {
 	return sv
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (sv *StackView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return sv
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (sv *StackView) WithWantsRestingTouches(wantsRestingTouches bool) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return sv
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (sv *StackView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return sv
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (sv *StackView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return sv
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (sv *StackView) WithWantsLayer(wantsLayer bool) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return sv
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (sv *StackView) WithLayer(layer obj.Object) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return sv
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (sv *StackView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return sv
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (sv *StackView) WithNeedsLayout(needsLayout bool) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return sv
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (sv *StackView) WithAlphaValue(alphaValue float64) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return sv
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (sv *StackView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return sv
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (sv *StackView) WithBackgroundFilters(items ...obj.Object) *StackView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return sv
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (sv *StackView) WithCompositingFilter(compositingFilter obj.Object) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return sv
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (sv *StackView) WithContentFilters(items ...obj.Object) *StackView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setContentFilters:"), _arr)
 	return sv
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (sv *StackView) WithShadow(shadow *Shadow) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return sv
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (sv *StackView) WithClipsToBounds(clipsToBounds bool) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return sv
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (sv *StackView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return sv
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (sv *StackView) WithToolTip(toolTip string) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return sv
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (sv *StackView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return sv
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (sv *StackView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return sv
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (sv *StackView) WithNextKeyView(nextKeyView ViewProvider) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return sv
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (sv *StackView) WithFocusRingType(focusRingType FocusRingType) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return sv
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (sv *StackView) WithGestureRecognizers(items ...GestureRecognizerProvider) *StackView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return sv
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (sv *StackView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return sv
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (sv *StackView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return sv
@@ -322,49 +322,49 @@ func (sv *StackView) WithPrefersCompactControlSizeMetrics(prefersCompactControlS
 	return sv
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (sv *StackView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return sv
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (sv *StackView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return sv
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (sv *StackView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return sv
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (sv *StackView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return sv
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (sv *StackView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return sv
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (sv *StackView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return sv
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (sv *StackView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return sv
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (sv *StackView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *StackView {
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return sv
@@ -531,7 +531,7 @@ func (sv *StackView) SetViewsInGravity(views []*View, gravity StackViewGravity) 
 	objc.Send[objc.ID](objref.IDOf(sv), objc.RegisterName("setViews:inGravity:"), purego.SliceToNSArray(views, func(_v *View) objc.ID { return objref.IDOf(_v) }), gravity)
 }
 
-// Views wraps the corresponding Objective-C method.
+// Views returns the views.
 //
 // Views returns the collection as a Go slice.
 func (sv *StackView) Views() []*View {
@@ -539,7 +539,7 @@ func (sv *StackView) Views() []*View {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *View { return ViewFromID(_id) })
 }
 
-// HasEqualSpacing wraps the corresponding Objective-C method.
+// HasEqualSpacing reports whether the object has equal spacing.
 func (sv *StackView) HasEqualSpacing() bool {
 	_r := objc.Send[bool](objref.IDOf(sv), objc.RegisterName("hasEqualSpacing"))
 	return _r

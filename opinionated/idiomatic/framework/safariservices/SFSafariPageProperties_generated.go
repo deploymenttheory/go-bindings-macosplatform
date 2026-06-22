@@ -72,13 +72,13 @@ func NewSafariPageProperties() *SafariPageProperties {
 	return safariPagePropertiesAdopt(_id)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (spp *SafariPageProperties) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(spp), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (spp *SafariPageProperties) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(spp), objc.RegisterName("title"))
 	if _r == 0 {
@@ -93,7 +93,7 @@ func (spp *SafariPageProperties) UsesPrivateBrowsing() bool {
 	return _r
 }
 
-// IsActive wraps the corresponding Objective-C method.
+// IsActive reports whether the object is active.
 func (spp *SafariPageProperties) IsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(spp), objc.RegisterName("isActive"))
 	return _r

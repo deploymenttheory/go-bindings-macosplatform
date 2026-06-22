@@ -73,7 +73,7 @@ func NewVirtualConferenceRoomTypeDescriptorWithTitleIdentifier(title string, ide
 	return virtualConferenceRoomTypeDescriptorAdopt(_id)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (vcrtd *VirtualConferenceRoomTypeDescriptor) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(vcrtd), objc.RegisterName("title"))
 	if _r == 0 {
@@ -82,7 +82,7 @@ func (vcrtd *VirtualConferenceRoomTypeDescriptor) Title() string {
 	return purego.GoString(_r)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (vcrtd *VirtualConferenceRoomTypeDescriptor) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(vcrtd), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)

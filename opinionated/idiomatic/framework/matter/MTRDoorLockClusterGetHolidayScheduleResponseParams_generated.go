@@ -78,31 +78,31 @@ func NewMTRDoorLockClusterGetHolidayScheduleResponseParamsWithResponseValueError
 	return mTRDoorLockClusterGetHolidayScheduleResponseParamsAdopt(_id), nil
 }
 
-// WithHolidayIndex sets the property and returns the receiver so calls can be chained.
+// WithHolidayIndex sets the holiday index.
 func (mdlcghsrp *MTRDoorLockClusterGetHolidayScheduleResponseParams) WithHolidayIndex(holidayIndex obj.Object) *MTRDoorLockClusterGetHolidayScheduleResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcghsrp), objc.RegisterName("setHolidayIndex:"), objref.IDOf(holidayIndex))
 	return mdlcghsrp
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mdlcghsrp *MTRDoorLockClusterGetHolidayScheduleResponseParams) WithStatus(status obj.Object) *MTRDoorLockClusterGetHolidayScheduleResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcghsrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mdlcghsrp
 }
 
-// WithLocalStartTime sets the property and returns the receiver so calls can be chained.
+// WithLocalStartTime sets the local start time.
 func (mdlcghsrp *MTRDoorLockClusterGetHolidayScheduleResponseParams) WithLocalStartTime(localStartTime obj.Object) *MTRDoorLockClusterGetHolidayScheduleResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcghsrp), objc.RegisterName("setLocalStartTime:"), objref.IDOf(localStartTime))
 	return mdlcghsrp
 }
 
-// WithLocalEndTime sets the property and returns the receiver so calls can be chained.
+// WithLocalEndTime sets the local end time.
 func (mdlcghsrp *MTRDoorLockClusterGetHolidayScheduleResponseParams) WithLocalEndTime(localEndTime obj.Object) *MTRDoorLockClusterGetHolidayScheduleResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcghsrp), objc.RegisterName("setLocalEndTime:"), objref.IDOf(localEndTime))
 	return mdlcghsrp
 }
 
-// WithOperatingMode sets the property and returns the receiver so calls can be chained.
+// WithOperatingMode sets the operating mode.
 func (mdlcghsrp *MTRDoorLockClusterGetHolidayScheduleResponseParams) WithOperatingMode(operatingMode obj.Object) *MTRDoorLockClusterGetHolidayScheduleResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcghsrp), objc.RegisterName("setOperatingMode:"), objref.IDOf(operatingMode))
 	return mdlcghsrp
@@ -114,31 +114,31 @@ func (mdlcghsrp *MTRDoorLockClusterGetHolidayScheduleResponseParams) WithTimedIn
 	return mdlcghsrp
 }
 
-// HolidayIndex wraps the corresponding Objective-C method.
+// HolidayIndex returns the holiday index.
 func (mdlcghsrp *MTRDoorLockClusterGetHolidayScheduleResponseParams) HolidayIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcghsrp), objc.RegisterName("holidayIndex"))
 	return obj.Wrap(_r)
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (mdlcghsrp *MTRDoorLockClusterGetHolidayScheduleResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcghsrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// LocalStartTime wraps the corresponding Objective-C method.
+// LocalStartTime returns the local start time.
 func (mdlcghsrp *MTRDoorLockClusterGetHolidayScheduleResponseParams) LocalStartTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcghsrp), objc.RegisterName("localStartTime"))
 	return obj.Wrap(_r)
 }
 
-// LocalEndTime wraps the corresponding Objective-C method.
+// LocalEndTime returns the local end time.
 func (mdlcghsrp *MTRDoorLockClusterGetHolidayScheduleResponseParams) LocalEndTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcghsrp), objc.RegisterName("localEndTime"))
 	return obj.Wrap(_r)
 }
 
-// OperatingMode wraps the corresponding Objective-C method.
+// OperatingMode returns the operating mode.
 func (mdlcghsrp *MTRDoorLockClusterGetHolidayScheduleResponseParams) OperatingMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcghsrp), objc.RegisterName("operatingMode"))
 	return obj.Wrap(_r)

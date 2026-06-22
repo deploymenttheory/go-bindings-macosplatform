@@ -82,7 +82,7 @@ func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) WithServerSideP
 	return mtscsdop
 }
 
-// DstOffset wraps the corresponding Objective-C method.
+// DstOffset returns the dst offset.
 func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) DstOffset() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtscsdop), objc.RegisterName("dstOffset"))
 	return obj.Wrap(_r)

@@ -3,4 +3,7 @@
 //go:build darwin
 
 // Package latentsemanticmapping provides a fluent Go API over the macOS LatentSemanticMapping framework.
+//
+// Each With… method sets one property and returns its receiver, so configuration
+// calls can be chained.
 package latentsemanticmapping

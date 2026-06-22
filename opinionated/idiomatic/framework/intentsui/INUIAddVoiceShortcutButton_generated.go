@@ -91,13 +91,13 @@ func (avsb *AddVoiceShortcutButton) WithCornerRadius(cornerRadius float64) *AddV
 	return avsb
 }
 
-// Style wraps the corresponding Objective-C method.
+// Style returns the style.
 func (avsb *AddVoiceShortcutButton) Style() AddVoiceShortcutButtonStyle {
 	_r := objc.Send[AddVoiceShortcutButtonStyle](objref.IDOf(avsb), objc.RegisterName("style"))
 	return _r
 }
 
-// Shortcut wraps the corresponding Objective-C method.
+// Shortcut returns the shortcut.
 func (avsb *AddVoiceShortcutButton) Shortcut() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(avsb), objc.RegisterName("shortcut"))
 	return obj.Wrap(_r)

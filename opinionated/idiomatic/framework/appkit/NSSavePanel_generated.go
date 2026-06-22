@@ -556,25 +556,25 @@ func (sp *SavePanel) WithIgnoresMouseEvents(ignoresMouseEvents bool) *SavePanel 
 	return sp
 }
 
-// WithAutodisplay sets the property and returns the receiver so calls can be chained.
+// WithAutodisplay sets the autodisplay.
 func (sp *SavePanel) WithAutodisplay(autodisplay bool) *SavePanel {
 	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setAutodisplay:"), autodisplay)
 	return sp
 }
 
-// WithOneShot sets the property and returns the receiver so calls can be chained.
+// WithOneShot sets the one shot.
 func (sp *SavePanel) WithOneShot(oneShot bool) *SavePanel {
 	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setOneShot:"), oneShot)
 	return sp
 }
 
-// WithPreferredBackingLocation sets the property and returns the receiver so calls can be chained.
+// WithPreferredBackingLocation sets the preferred backing location.
 func (sp *SavePanel) WithPreferredBackingLocation(preferredBackingLocation WindowBackingLocation) *SavePanel {
 	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setPreferredBackingLocation:"), preferredBackingLocation)
 	return sp
 }
 
-// WithShowsResizeIndicator sets the property and returns the receiver so calls can be chained.
+// WithShowsResizeIndicator sets the shows resize indicator.
 func (sp *SavePanel) WithShowsResizeIndicator(showsResizeIndicator bool) *SavePanel {
 	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setShowsResizeIndicator:"), showsResizeIndicator)
 	return sp
@@ -783,7 +783,7 @@ func (sp *SavePanel) ShowsContentTypes() bool {
 	return _r
 }
 
-// Filename wraps the corresponding Objective-C method.
+// Filename returns the filename.
 func (sp *SavePanel) Filename() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("filename"))
 	if _r == 0 {
@@ -792,7 +792,7 @@ func (sp *SavePanel) Filename() string {
 	return purego.GoString(_r)
 }
 
-// Directory wraps the corresponding Objective-C method.
+// Directory returns the directory.
 func (sp *SavePanel) Directory() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("directory"))
 	if _r == 0 {
@@ -806,7 +806,7 @@ func (sp *SavePanel) SetDirectory(path string) {
 	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setDirectory:"), purego.NSString(path))
 }
 
-// RequiredFileType wraps the corresponding Objective-C method.
+// RequiredFileType returns the required file type.
 func (sp *SavePanel) RequiredFileType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("requiredFileType"))
 	if _r == 0 {
@@ -820,13 +820,13 @@ func (sp *SavePanel) SetRequiredFileType(type_ string) {
 	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setRequiredFileType:"), purego.NSString(type_))
 }
 
-// RunModalForDirectoryFile wraps the corresponding Objective-C method.
+// RunModalForDirectoryFile runs modal for directory file.
 func (sp *SavePanel) RunModalForDirectoryFile(path string, name string) int {
 	_r := objc.Send[int](objref.IDOf(sp), objc.RegisterName("runModalForDirectory:file:"), purego.NSString(path), purego.NSString(name))
 	return _r
 }
 
-// SelectText wraps the corresponding Objective-C method.
+// SelectText selects text.
 func (sp *SavePanel) SelectText(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("selectText:"), objref.IDOf(sender))
 }

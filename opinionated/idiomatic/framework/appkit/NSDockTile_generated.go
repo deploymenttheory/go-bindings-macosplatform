@@ -96,13 +96,13 @@ func (dt *DockTile) Display() {
 	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("display"))
 }
 
-// Size wraps the corresponding Objective-C method.
+// Size returns the size.
 func (dt *DockTile) Size() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(dt), objc.RegisterName("size"))
 	return _r
 }
 
-// ContentView wraps the corresponding Objective-C method.
+// ContentView returns the content view.
 func (dt *DockTile) ContentView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("contentView"))
 	return ViewFromID(_r)
@@ -114,7 +114,7 @@ func (dt *DockTile) ShowsApplicationBadge() bool {
 	return _r
 }
 
-// BadgeLabel wraps the corresponding Objective-C method.
+// BadgeLabel returns the badge label.
 func (dt *DockTile) BadgeLabel() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("badgeLabel"))
 	if _r == 0 {
@@ -123,7 +123,7 @@ func (dt *DockTile) BadgeLabel() string {
 	return purego.GoString(_r)
 }
 
-// Owner wraps the corresponding Objective-C method.
+// Owner returns the owner.
 func (dt *DockTile) Owner() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("owner"))
 	return obj.Wrap(_r)

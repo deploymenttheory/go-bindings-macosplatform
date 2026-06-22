@@ -228,38 +228,38 @@ func (cw *ColorWell) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *
 	return cw
 }
 
-// WithCell sets the property and returns the receiver so calls can be chained.
+// WithCell sets the cell.
 func (cw *ColorWell) WithCell(cell CellProvider) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return cw
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (cw *ColorWell) WithSubviews(items ...ViewProvider) *ColorWell {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setSubviews:"), _arr)
 	return cw
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (cw *ColorWell) WithHidden(hidden bool) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setHidden:"), hidden)
 	return cw
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (cw *ColorWell) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return cw
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (cw *ColorWell) WithAutoresizesSubviews(autoresizesSubviews bool) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return cw
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (cw *ColorWell) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return cw
@@ -271,19 +271,19 @@ func (cw *ColorWell) WithFrame(frame corefoundation.CGRect) *ColorWell {
 	return cw
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (cw *ColorWell) WithFrameRotation(frameRotation float64) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return cw
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (cw *ColorWell) WithFrameCenterRotation(frameCenterRotation float64) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return cw
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (cw *ColorWell) WithBoundsRotation(boundsRotation float64) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return cw
@@ -295,7 +295,7 @@ func (cw *ColorWell) WithBounds(bounds corefoundation.CGRect) *ColorWell {
 	return cw
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (cw *ColorWell) WithCanDrawConcurrently(canDrawConcurrently bool) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return cw
@@ -307,148 +307,148 @@ func (cw *ColorWell) WithNeedsDisplay(needsDisplay bool) *ColorWell {
 	return cw
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (cw *ColorWell) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return cw
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (cw *ColorWell) WithWantsRestingTouches(wantsRestingTouches bool) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return cw
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (cw *ColorWell) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return cw
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (cw *ColorWell) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return cw
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (cw *ColorWell) WithWantsLayer(wantsLayer bool) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return cw
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (cw *ColorWell) WithLayer(layer obj.Object) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return cw
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (cw *ColorWell) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return cw
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (cw *ColorWell) WithNeedsLayout(needsLayout bool) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return cw
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (cw *ColorWell) WithAlphaValue(alphaValue float64) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return cw
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (cw *ColorWell) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return cw
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (cw *ColorWell) WithBackgroundFilters(items ...obj.Object) *ColorWell {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return cw
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (cw *ColorWell) WithCompositingFilter(compositingFilter obj.Object) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return cw
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (cw *ColorWell) WithContentFilters(items ...obj.Object) *ColorWell {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setContentFilters:"), _arr)
 	return cw
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (cw *ColorWell) WithShadow(shadow *Shadow) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return cw
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (cw *ColorWell) WithClipsToBounds(clipsToBounds bool) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return cw
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (cw *ColorWell) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return cw
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (cw *ColorWell) WithToolTip(toolTip string) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return cw
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (cw *ColorWell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return cw
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (cw *ColorWell) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return cw
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (cw *ColorWell) WithNextKeyView(nextKeyView ViewProvider) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return cw
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (cw *ColorWell) WithFocusRingType(focusRingType FocusRingType) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return cw
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (cw *ColorWell) WithGestureRecognizers(items ...GestureRecognizerProvider) *ColorWell {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return cw
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (cw *ColorWell) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return cw
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (cw *ColorWell) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return cw
@@ -460,49 +460,49 @@ func (cw *ColorWell) WithPrefersCompactControlSizeMetrics(prefersCompactControlS
 	return cw
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (cw *ColorWell) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return cw
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (cw *ColorWell) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return cw
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (cw *ColorWell) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return cw
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (cw *ColorWell) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return cw
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (cw *ColorWell) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return cw
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (cw *ColorWell) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return cw
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (cw *ColorWell) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return cw
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (cw *ColorWell) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ColorWell {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return cw
@@ -552,37 +552,37 @@ func (cw *ColorWell) TakeColorFrom(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("takeColorFrom:"), objref.IDOf(sender))
 }
 
-// IsActive wraps the corresponding Objective-C method.
+// IsActive reports whether the object is active.
 func (cw *ColorWell) IsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(cw), objc.RegisterName("isActive"))
 	return _r
 }
 
-// IsBordered wraps the corresponding Objective-C method.
+// IsBordered reports whether the object is bordered.
 func (cw *ColorWell) IsBordered() bool {
 	_r := objc.Send[bool](objref.IDOf(cw), objc.RegisterName("isBordered"))
 	return _r
 }
 
-// Color wraps the corresponding Objective-C method.
+// Color returns the color.
 func (cw *ColorWell) Color() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("color"))
 	return ColorFromID(_r)
 }
 
-// ColorWellStyle wraps the corresponding Objective-C method.
+// ColorWellStyle returns the color well style.
 func (cw *ColorWell) ColorWellStyle() ColorWellStyle {
 	_r := objc.Send[ColorWellStyle](objref.IDOf(cw), objc.RegisterName("colorWellStyle"))
 	return _r
 }
 
-// Image wraps the corresponding Objective-C method.
+// Image returns the image.
 func (cw *ColorWell) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
-// PulldownTarget wraps the corresponding Objective-C method.
+// PulldownTarget returns the pulldown target.
 func (cw *ColorWell) PulldownTarget() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cw), objc.RegisterName("pulldownTarget"))
 	return obj.Wrap(_r)

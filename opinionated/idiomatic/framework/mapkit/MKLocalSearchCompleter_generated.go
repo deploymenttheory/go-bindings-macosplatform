@@ -113,7 +113,7 @@ func (lsc *LocalSearchCompleter) Cancel() {
 	objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("cancel"))
 }
 
-// QueryFragment wraps the corresponding Objective-C method.
+// QueryFragment returns the query fragment.
 func (lsc *LocalSearchCompleter) QueryFragment() string {
 	_r := objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("queryFragment"))
 	if _r == 0 {
@@ -122,37 +122,37 @@ func (lsc *LocalSearchCompleter) QueryFragment() string {
 	return purego.GoString(_r)
 }
 
-// RegionPriority wraps the corresponding Objective-C method.
+// RegionPriority returns the region priority.
 func (lsc *LocalSearchCompleter) RegionPriority() LocalSearchRegionPriority {
 	_r := objc.Send[LocalSearchRegionPriority](objref.IDOf(lsc), objc.RegisterName("regionPriority"))
 	return _r
 }
 
-// FilterType wraps the corresponding Objective-C method.
+// FilterType returns the filter type.
 func (lsc *LocalSearchCompleter) FilterType() SearchCompletionFilterType {
 	_r := objc.Send[SearchCompletionFilterType](objref.IDOf(lsc), objc.RegisterName("filterType"))
 	return _r
 }
 
-// ResultTypes wraps the corresponding Objective-C method.
+// ResultTypes returns the result types.
 func (lsc *LocalSearchCompleter) ResultTypes() LocalSearchCompleterResultType {
 	_r := objc.Send[LocalSearchCompleterResultType](objref.IDOf(lsc), objc.RegisterName("resultTypes"))
 	return _r
 }
 
-// PointOfInterestFilter wraps the corresponding Objective-C method.
+// PointOfInterestFilter returns the point of interest filter.
 func (lsc *LocalSearchCompleter) PointOfInterestFilter() *PointOfInterestFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
-// AddressFilter wraps the corresponding Objective-C method.
+// AddressFilter returns the address filter.
 func (lsc *LocalSearchCompleter) AddressFilter() *AddressFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("addressFilter"))
 	return AddressFilterFromID(_r)
 }
 
-// Results wraps the corresponding Objective-C method.
+// Results returns the results.
 //
 // Results returns the collection as a Go slice.
 func (lsc *LocalSearchCompleter) Results() []*LocalSearchCompletion {
@@ -160,7 +160,7 @@ func (lsc *LocalSearchCompleter) Results() []*LocalSearchCompletion {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LocalSearchCompletion { return LocalSearchCompletionFromID(_id) })
 }
 
-// IsSearching wraps the corresponding Objective-C method.
+// IsSearching reports whether the object is searching.
 func (lsc *LocalSearchCompleter) IsSearching() bool {
 	_r := objc.Send[bool](objref.IDOf(lsc), objc.RegisterName("isSearching"))
 	return _r

@@ -70,37 +70,37 @@ func NewMTRServiceAreaClusterAreaStruct() *MTRServiceAreaClusterAreaStruct {
 	return mTRServiceAreaClusterAreaStructAdopt(_id)
 }
 
-// WithAreaID sets the property and returns the receiver so calls can be chained.
+// WithAreaID sets the area ID.
 func (msacas *MTRServiceAreaClusterAreaStruct) WithAreaID(areaID obj.Object) *MTRServiceAreaClusterAreaStruct {
 	objc.Send[objc.ID](objref.IDOf(msacas), objc.RegisterName("setAreaID:"), objref.IDOf(areaID))
 	return msacas
 }
 
-// WithMapID sets the property and returns the receiver so calls can be chained.
+// WithMapID sets the map ID.
 func (msacas *MTRServiceAreaClusterAreaStruct) WithMapID(mapID obj.Object) *MTRServiceAreaClusterAreaStruct {
 	objc.Send[objc.ID](objref.IDOf(msacas), objc.RegisterName("setMapID:"), objref.IDOf(mapID))
 	return msacas
 }
 
-// WithAreaInfo sets the property and returns the receiver so calls can be chained.
+// WithAreaInfo sets the area info.
 func (msacas *MTRServiceAreaClusterAreaStruct) WithAreaInfo(areaInfo *MTRServiceAreaClusterAreaInfoStruct) *MTRServiceAreaClusterAreaStruct {
 	objc.Send[objc.ID](objref.IDOf(msacas), objc.RegisterName("setAreaInfo:"), objref.IDOf(areaInfo))
 	return msacas
 }
 
-// AreaID wraps the corresponding Objective-C method.
+// AreaID returns the area ID.
 func (msacas *MTRServiceAreaClusterAreaStruct) AreaID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msacas), objc.RegisterName("areaID"))
 	return obj.Wrap(_r)
 }
 
-// MapID wraps the corresponding Objective-C method.
+// MapID returns the map ID.
 func (msacas *MTRServiceAreaClusterAreaStruct) MapID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msacas), objc.RegisterName("mapID"))
 	return obj.Wrap(_r)
 }
 
-// AreaInfo wraps the corresponding Objective-C method.
+// AreaInfo returns the area info.
 func (msacas *MTRServiceAreaClusterAreaStruct) AreaInfo() *MTRServiceAreaClusterAreaInfoStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(msacas), objc.RegisterName("areaInfo"))
 	return MTRServiceAreaClusterAreaInfoStructFromID(_r)

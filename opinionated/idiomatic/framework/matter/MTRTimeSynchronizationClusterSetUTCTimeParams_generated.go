@@ -66,19 +66,19 @@ func (mtscsutp *MTRTimeSynchronizationClusterSetUTCTimeParams) String() string {
 	return rt.Description(objref.IDOf(mtscsutp))
 }
 
-// WithUtcTime sets the property and returns the receiver so calls can be chained.
+// WithUtcTime sets the utc time.
 func (mtscsutp *MTRTimeSynchronizationClusterSetUTCTimeParams) WithUtcTime(utcTime obj.Object) *MTRTimeSynchronizationClusterSetUTCTimeParams {
 	objc.Send[objc.ID](objref.IDOf(mtscsutp), objc.RegisterName("setUtcTime:"), objref.IDOf(utcTime))
 	return mtscsutp
 }
 
-// WithGranularity sets the property and returns the receiver so calls can be chained.
+// WithGranularity sets the granularity.
 func (mtscsutp *MTRTimeSynchronizationClusterSetUTCTimeParams) WithGranularity(granularity obj.Object) *MTRTimeSynchronizationClusterSetUTCTimeParams {
 	objc.Send[objc.ID](objref.IDOf(mtscsutp), objc.RegisterName("setGranularity:"), objref.IDOf(granularity))
 	return mtscsutp
 }
 
-// WithTimeSource sets the property and returns the receiver so calls can be chained.
+// WithTimeSource sets the time source.
 func (mtscsutp *MTRTimeSynchronizationClusterSetUTCTimeParams) WithTimeSource(timeSource obj.Object) *MTRTimeSynchronizationClusterSetUTCTimeParams {
 	objc.Send[objc.ID](objref.IDOf(mtscsutp), objc.RegisterName("setTimeSource:"), objref.IDOf(timeSource))
 	return mtscsutp
@@ -96,19 +96,19 @@ func (mtscsutp *MTRTimeSynchronizationClusterSetUTCTimeParams) WithServerSidePro
 	return mtscsutp
 }
 
-// UtcTime wraps the corresponding Objective-C method.
+// UtcTime returns the utc time.
 func (mtscsutp *MTRTimeSynchronizationClusterSetUTCTimeParams) UtcTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtscsutp), objc.RegisterName("utcTime"))
 	return obj.Wrap(_r)
 }
 
-// Granularity wraps the corresponding Objective-C method.
+// Granularity returns the granularity.
 func (mtscsutp *MTRTimeSynchronizationClusterSetUTCTimeParams) Granularity() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtscsutp), objc.RegisterName("granularity"))
 	return obj.Wrap(_r)
 }
 
-// TimeSource wraps the corresponding Objective-C method.
+// TimeSource returns the time source.
 func (mtscsutp *MTRTimeSynchronizationClusterSetUTCTimeParams) TimeSource() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtscsutp), objc.RegisterName("timeSource"))
 	return obj.Wrap(_r)

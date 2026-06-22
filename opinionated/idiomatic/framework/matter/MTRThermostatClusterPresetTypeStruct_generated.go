@@ -70,37 +70,37 @@ func NewMTRThermostatClusterPresetTypeStruct() *MTRThermostatClusterPresetTypeSt
 	return mTRThermostatClusterPresetTypeStructAdopt(_id)
 }
 
-// WithPresetScenario sets the property and returns the receiver so calls can be chained.
+// WithPresetScenario sets the preset scenario.
 func (mtcpts *MTRThermostatClusterPresetTypeStruct) WithPresetScenario(presetScenario obj.Object) *MTRThermostatClusterPresetTypeStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcpts), objc.RegisterName("setPresetScenario:"), objref.IDOf(presetScenario))
 	return mtcpts
 }
 
-// WithNumberOfPresets sets the property and returns the receiver so calls can be chained.
+// WithNumberOfPresets sets the number of presets.
 func (mtcpts *MTRThermostatClusterPresetTypeStruct) WithNumberOfPresets(numberOfPresets obj.Object) *MTRThermostatClusterPresetTypeStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcpts), objc.RegisterName("setNumberOfPresets:"), objref.IDOf(numberOfPresets))
 	return mtcpts
 }
 
-// WithPresetTypeFeatures sets the property and returns the receiver so calls can be chained.
+// WithPresetTypeFeatures sets the preset type features.
 func (mtcpts *MTRThermostatClusterPresetTypeStruct) WithPresetTypeFeatures(presetTypeFeatures obj.Object) *MTRThermostatClusterPresetTypeStruct {
 	objc.Send[objc.ID](objref.IDOf(mtcpts), objc.RegisterName("setPresetTypeFeatures:"), objref.IDOf(presetTypeFeatures))
 	return mtcpts
 }
 
-// PresetScenario wraps the corresponding Objective-C method.
+// PresetScenario returns the preset scenario.
 func (mtcpts *MTRThermostatClusterPresetTypeStruct) PresetScenario() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcpts), objc.RegisterName("presetScenario"))
 	return obj.Wrap(_r)
 }
 
-// NumberOfPresets wraps the corresponding Objective-C method.
+// NumberOfPresets returns the number of presets.
 func (mtcpts *MTRThermostatClusterPresetTypeStruct) NumberOfPresets() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcpts), objc.RegisterName("numberOfPresets"))
 	return obj.Wrap(_r)
 }
 
-// PresetTypeFeatures wraps the corresponding Objective-C method.
+// PresetTypeFeatures returns the preset type features.
 func (mtcpts *MTRThermostatClusterPresetTypeStruct) PresetTypeFeatures() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcpts), objc.RegisterName("presetTypeFeatures"))
 	return obj.Wrap(_r)

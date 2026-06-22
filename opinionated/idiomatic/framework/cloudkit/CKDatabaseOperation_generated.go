@@ -99,7 +99,7 @@ func (do *DatabaseOperation) WithTimeoutIntervalForResource(timeoutIntervalForRe
 	return do
 }
 
-// Database wraps the corresponding Objective-C method.
+// Database returns the database.
 func (do *DatabaseOperation) Database() *Database {
 	_r := objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("database"))
 	return DatabaseFromID(_r)

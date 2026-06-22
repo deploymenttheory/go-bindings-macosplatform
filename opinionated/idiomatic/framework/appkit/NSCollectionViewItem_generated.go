@@ -108,7 +108,7 @@ func (cvi *CollectionViewItem) WithChildViewControllers(items ...ViewControllerP
 	return cvi
 }
 
-// WithSourceItemView sets the property and returns the receiver so calls can be chained.
+// WithSourceItemView sets the source item view.
 func (cvi *CollectionViewItem) WithSourceItemView(sourceItemView ViewProvider) *CollectionViewItem {
 	objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
 	return cvi
@@ -144,37 +144,37 @@ func (cvi *CollectionViewItem) WithTouchBar(touchBar *TouchBar) *CollectionViewI
 	return cvi
 }
 
-// CollectionView wraps the corresponding Objective-C method.
+// CollectionView returns the collection view.
 func (cvi *CollectionViewItem) CollectionView() *CollectionView {
 	_r := objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("collectionView"))
 	return CollectionViewFromID(_r)
 }
 
-// IsSelected wraps the corresponding Objective-C method.
+// IsSelected reports whether the object is selected.
 func (cvi *CollectionViewItem) IsSelected() bool {
 	_r := objc.Send[bool](objref.IDOf(cvi), objc.RegisterName("isSelected"))
 	return _r
 }
 
-// HighlightState wraps the corresponding Objective-C method.
+// HighlightState returns the highlight state.
 func (cvi *CollectionViewItem) HighlightState() CollectionViewItemHighlightState {
 	_r := objc.Send[CollectionViewItemHighlightState](objref.IDOf(cvi), objc.RegisterName("highlightState"))
 	return _r
 }
 
-// ImageView wraps the corresponding Objective-C method.
+// ImageView returns the image view.
 func (cvi *CollectionViewItem) ImageView() *ImageView {
 	_r := objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("imageView"))
 	return ImageViewFromID(_r)
 }
 
-// TextField wraps the corresponding Objective-C method.
+// TextField returns the text field.
 func (cvi *CollectionViewItem) TextField() *TextField {
 	_r := objc.Send[objc.ID](objref.IDOf(cvi), objc.RegisterName("textField"))
 	return TextFieldFromID(_r)
 }
 
-// DraggingImageComponents wraps the corresponding Objective-C method.
+// DraggingImageComponents returns the dragging image components.
 //
 // DraggingImageComponents returns the collection as a Go slice.
 func (cvi *CollectionViewItem) DraggingImageComponents() []*DraggingImageComponent {

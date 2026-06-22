@@ -108,37 +108,37 @@ func (tf *TextureFilter) WithMipFilter(mipFilter MaterialMipMapFilterMode) *Text
 	return tf
 }
 
-// SWrapMode wraps the corresponding Objective-C method.
+// SWrapMode returns the s wrap mode.
 func (tf *TextureFilter) SWrapMode() MaterialTextureWrapMode {
 	_r := objc.Send[MaterialTextureWrapMode](objref.IDOf(tf), objc.RegisterName("sWrapMode"))
 	return _r
 }
 
-// TWrapMode wraps the corresponding Objective-C method.
+// TWrapMode returns the t wrap mode.
 func (tf *TextureFilter) TWrapMode() MaterialTextureWrapMode {
 	_r := objc.Send[MaterialTextureWrapMode](objref.IDOf(tf), objc.RegisterName("tWrapMode"))
 	return _r
 }
 
-// RWrapMode wraps the corresponding Objective-C method.
+// RWrapMode returns the r wrap mode.
 func (tf *TextureFilter) RWrapMode() MaterialTextureWrapMode {
 	_r := objc.Send[MaterialTextureWrapMode](objref.IDOf(tf), objc.RegisterName("rWrapMode"))
 	return _r
 }
 
-// MinFilter wraps the corresponding Objective-C method.
+// MinFilter returns the min filter.
 func (tf *TextureFilter) MinFilter() MaterialTextureFilterMode {
 	_r := objc.Send[MaterialTextureFilterMode](objref.IDOf(tf), objc.RegisterName("minFilter"))
 	return _r
 }
 
-// MagFilter wraps the corresponding Objective-C method.
+// MagFilter returns the mag filter.
 func (tf *TextureFilter) MagFilter() MaterialTextureFilterMode {
 	_r := objc.Send[MaterialTextureFilterMode](objref.IDOf(tf), objc.RegisterName("magFilter"))
 	return _r
 }
 
-// MipFilter wraps the corresponding Objective-C method.
+// MipFilter returns the mip filter.
 func (tf *TextureFilter) MipFilter() MaterialMipMapFilterMode {
 	_r := objc.Send[MaterialMipMapFilterMode](objref.IDOf(tf), objc.RegisterName("mipFilter"))
 	return _r

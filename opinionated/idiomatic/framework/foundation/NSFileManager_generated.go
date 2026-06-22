@@ -76,7 +76,7 @@ func NewFileManager() *FileManager {
 	return fileManagerAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (fm *FileManager) WithScriptingProperties(scriptingProperties obj.Object) *FileManager {
 	objc.Send[objc.ID](objref.IDOf(fm), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return fm
@@ -155,7 +155,7 @@ func (fm *FileManager) GetRelationshipOfDirectoryInDomainToItemAtURL(directory S
 	return _out0, nil
 }
 
-// CreateDirectoryAtURLWithIntermediateDirectoriesAttributes wraps the corresponding Objective-C method.
+// CreateDirectoryAtURLWithIntermediateDirectoriesAttributes creates directory at URL with intermediate directories attributes.
 func (fm *FileManager) CreateDirectoryAtURLWithIntermediateDirectoriesAttributes(url string, createIntermediates bool, attributes obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(fm), objc.RegisterName("createDirectoryAtURL:withIntermediateDirectories:attributes:error:"), rt.FileURL(url), createIntermediates, objref.IDOf(attributes), unsafe.Pointer(&_nsErr))
@@ -165,7 +165,7 @@ func (fm *FileManager) CreateDirectoryAtURLWithIntermediateDirectoriesAttributes
 	return nil
 }
 
-// CreateSymbolicLinkAtURLWithDestinationURL wraps the corresponding Objective-C method.
+// CreateSymbolicLinkAtURLWithDestinationURL creates symbolic link at URL with destination URL.
 func (fm *FileManager) CreateSymbolicLinkAtURLWithDestinationURL(url string, destURL string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(fm), objc.RegisterName("createSymbolicLinkAtURL:withDestinationURL:error:"), rt.FileURL(url), rt.FileURL(destURL), unsafe.Pointer(&_nsErr))
@@ -185,7 +185,7 @@ func (fm *FileManager) SetAttributesOfItemAtPath(attributes obj.Object, path str
 	return nil
 }
 
-// CreateDirectoryAtPathWithIntermediateDirectoriesAttributes wraps the corresponding Objective-C method.
+// CreateDirectoryAtPathWithIntermediateDirectoriesAttributes creates directory at path with intermediate directories attributes.
 func (fm *FileManager) CreateDirectoryAtPathWithIntermediateDirectoriesAttributes(path string, createIntermediates bool, attributes obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(fm), objc.RegisterName("createDirectoryAtPath:withIntermediateDirectories:attributes:error:"), purego.NSString(path), createIntermediates, objref.IDOf(attributes), unsafe.Pointer(&_nsErr))
@@ -235,7 +235,7 @@ func (fm *FileManager) AttributesOfFileSystemForPathError(path string) (result o
 	return obj.Wrap(_r), nil
 }
 
-// CreateSymbolicLinkAtPathWithDestinationPath wraps the corresponding Objective-C method.
+// CreateSymbolicLinkAtPathWithDestinationPath creates symbolic link at path with destination path.
 func (fm *FileManager) CreateSymbolicLinkAtPathWithDestinationPath(path string, destPath string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(fm), objc.RegisterName("createSymbolicLinkAtPath:withDestinationPath:error:"), purego.NSString(path), purego.NSString(destPath), unsafe.Pointer(&_nsErr))
@@ -258,7 +258,7 @@ func (fm *FileManager) DestinationOfSymbolicLinkAtPathError(path string) (result
 	return purego.GoString(_r), nil
 }
 
-// CopyItemAtPathToPath wraps the corresponding Objective-C method.
+// CopyItemAtPathToPath copies item at path to path.
 func (fm *FileManager) CopyItemAtPathToPath(srcPath string, dstPath string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(fm), objc.RegisterName("copyItemAtPath:toPath:error:"), purego.NSString(srcPath), purego.NSString(dstPath), unsafe.Pointer(&_nsErr))
@@ -268,7 +268,7 @@ func (fm *FileManager) CopyItemAtPathToPath(srcPath string, dstPath string) erro
 	return nil
 }
 
-// MoveItemAtPathToPath wraps the corresponding Objective-C method.
+// MoveItemAtPathToPath moves item at path to path.
 func (fm *FileManager) MoveItemAtPathToPath(srcPath string, dstPath string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(fm), objc.RegisterName("moveItemAtPath:toPath:error:"), purego.NSString(srcPath), purego.NSString(dstPath), unsafe.Pointer(&_nsErr))
@@ -288,7 +288,7 @@ func (fm *FileManager) LinkItemAtPathToPath(srcPath string, dstPath string) erro
 	return nil
 }
 
-// RemoveItemAtPath wraps the corresponding Objective-C method.
+// RemoveItemAtPath removes item at path.
 func (fm *FileManager) RemoveItemAtPath(path string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(fm), objc.RegisterName("removeItemAtPath:error:"), purego.NSString(path), unsafe.Pointer(&_nsErr))
@@ -298,7 +298,7 @@ func (fm *FileManager) RemoveItemAtPath(path string) error {
 	return nil
 }
 
-// CopyItemAtURLToURL wraps the corresponding Objective-C method.
+// CopyItemAtURLToURL copies item at URL to URL.
 func (fm *FileManager) CopyItemAtURLToURL(srcURL string, dstURL string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(fm), objc.RegisterName("copyItemAtURL:toURL:error:"), rt.FileURL(srcURL), rt.FileURL(dstURL), unsafe.Pointer(&_nsErr))
@@ -308,7 +308,7 @@ func (fm *FileManager) CopyItemAtURLToURL(srcURL string, dstURL string) error {
 	return nil
 }
 
-// MoveItemAtURLToURL wraps the corresponding Objective-C method.
+// MoveItemAtURLToURL moves item at URL to URL.
 func (fm *FileManager) MoveItemAtURLToURL(srcURL string, dstURL string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(fm), objc.RegisterName("moveItemAtURL:toURL:error:"), rt.FileURL(srcURL), rt.FileURL(dstURL), unsafe.Pointer(&_nsErr))
@@ -328,7 +328,7 @@ func (fm *FileManager) LinkItemAtURLToURL(srcURL string, dstURL string) error {
 	return nil
 }
 
-// RemoveItemAtURL wraps the corresponding Objective-C method.
+// RemoveItemAtURL removes item at URL.
 func (fm *FileManager) RemoveItemAtURL(uRL string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(fm), objc.RegisterName("removeItemAtURL:error:"), rt.FileURL(uRL), unsafe.Pointer(&_nsErr))
@@ -381,13 +381,13 @@ func (fm *FileManager) PathContentOfSymbolicLinkAtPath(path string) string {
 	return purego.GoString(_r)
 }
 
-// CreateSymbolicLinkAtPathPathContent wraps the corresponding Objective-C method.
+// CreateSymbolicLinkAtPathPathContent creates symbolic link at path path content.
 func (fm *FileManager) CreateSymbolicLinkAtPathPathContent(path string, otherpath string) bool {
 	_r := objc.Send[bool](objref.IDOf(fm), objc.RegisterName("createSymbolicLinkAtPath:pathContent:"), purego.NSString(path), purego.NSString(otherpath))
 	return _r
 }
 
-// CreateDirectoryAtPathAttributes wraps the corresponding Objective-C method.
+// CreateDirectoryAtPathAttributes creates directory at path attributes.
 func (fm *FileManager) CreateDirectoryAtPathAttributes(path string, attributes obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(fm), objc.RegisterName("createDirectoryAtPath:attributes:"), purego.NSString(path), objref.IDOf(attributes))
 	return _r
@@ -499,7 +499,7 @@ func (fm *FileManager) ContentsAtPath(path string) *Data {
 	return DataFromID(_r)
 }
 
-// CreateFileAtPathContentsAttributes wraps the corresponding Objective-C method.
+// CreateFileAtPathContentsAttributes creates file at path contents attributes.
 func (fm *FileManager) CreateFileAtPathContentsAttributes(path string, data *Data, attr obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(fm), objc.RegisterName("createFileAtPath:contents:attributes:"), purego.NSString(path), objref.IDOf(data), objref.IDOf(attr))
 	return _r
@@ -520,7 +520,7 @@ func (fm *FileManager) StringWithFileSystemRepresentationLength(str string, len_
 	return purego.GoString(_r)
 }
 
-// ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURL wraps the corresponding Objective-C method.
+// ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURL replaces item at URL with item at URL backup item name options resulting item URL.
 func (fm *FileManager) ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURL(originalItemURL string, newItemURL string, backupItemName string, options FileManagerItemReplacementOptions, resultingURL string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(fm), objc.RegisterName("replaceItemAtURL:withItemAtURL:backupItemName:options:resultingItemURL:error:"), rt.FileURL(originalItemURL), rt.FileURL(newItemURL), purego.NSString(backupItemName), options, rt.FileURL(resultingURL), unsafe.Pointer(&_nsErr))
@@ -546,7 +546,7 @@ func (fm *FileManager) IsUbiquitousItemAtURL(url string) bool {
 	return _r
 }
 
-// StartDownloadingUbiquitousItemAtURL wraps the corresponding Objective-C method.
+// StartDownloadingUbiquitousItemAtURL starts downloading ubiquitous item at URL.
 func (fm *FileManager) StartDownloadingUbiquitousItemAtURL(url string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(fm), objc.RegisterName("startDownloadingUbiquitousItemAtURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
@@ -676,7 +676,7 @@ func (fm *FileManager) ContainerURLForSecurityApplicationGroupIdentifier(groupId
 	return URLFromID(_r)
 }
 
-// CurrentDirectoryPath wraps the corresponding Objective-C method.
+// CurrentDirectoryPath returns the current directory path.
 func (fm *FileManager) CurrentDirectoryPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(fm), objc.RegisterName("currentDirectoryPath"))
 	if _r == 0 {
@@ -685,7 +685,7 @@ func (fm *FileManager) CurrentDirectoryPath() string {
 	return purego.GoString(_r)
 }
 
-// UbiquityIdentityToken wraps the corresponding Objective-C method.
+// UbiquityIdentityToken returns the ubiquity identity token.
 func (fm *FileManager) UbiquityIdentityToken() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fm), objc.RegisterName("ubiquityIdentityToken"))
 	return obj.Wrap(_r)
@@ -697,13 +697,13 @@ func (fm *FileManager) HomeDirectoryForUser(userName string) *URL {
 	return URLFromID(_r)
 }
 
-// HomeDirectoryForCurrentUser wraps the corresponding Objective-C method.
+// HomeDirectoryForCurrentUser returns the home directory for current user.
 func (fm *FileManager) HomeDirectoryForCurrentUser() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(fm), objc.RegisterName("homeDirectoryForCurrentUser"))
 	return URLFromID(_r)
 }
 
-// TemporaryDirectory wraps the corresponding Objective-C method.
+// TemporaryDirectory returns the temporary directory.
 func (fm *FileManager) TemporaryDirectory() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(fm), objc.RegisterName("temporaryDirectory"))
 	return URLFromID(_r)

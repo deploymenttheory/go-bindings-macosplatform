@@ -78,13 +78,13 @@ func NewMTRTargetNavigatorClusterNavigateTargetResponseParamsWithResponseValueEr
 	return mTRTargetNavigatorClusterNavigateTargetResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mtncntrp *MTRTargetNavigatorClusterNavigateTargetResponseParams) WithStatus(status obj.Object) *MTRTargetNavigatorClusterNavigateTargetResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mtncntrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mtncntrp
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (mtncntrp *MTRTargetNavigatorClusterNavigateTargetResponseParams) WithData(data string) *MTRTargetNavigatorClusterNavigateTargetResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mtncntrp), objc.RegisterName("setData:"), purego.NSString(data))
 	return mtncntrp
@@ -96,13 +96,13 @@ func (mtncntrp *MTRTargetNavigatorClusterNavigateTargetResponseParams) WithTimed
 	return mtncntrp
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (mtncntrp *MTRTargetNavigatorClusterNavigateTargetResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtncntrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (mtncntrp *MTRTargetNavigatorClusterNavigateTargetResponseParams) Data() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mtncntrp), objc.RegisterName("data"))
 	if _r == 0 {

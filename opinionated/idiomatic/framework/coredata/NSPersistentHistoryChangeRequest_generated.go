@@ -71,19 +71,19 @@ func (phcr *PersistentHistoryChangeRequest) WithAffectedStores(items ...Persiste
 	return phcr
 }
 
-// ResultType wraps the corresponding Objective-C method.
+// ResultType returns the result type.
 func (phcr *PersistentHistoryChangeRequest) ResultType() PersistentHistoryResultType {
 	_r := objc.Send[PersistentHistoryResultType](objref.IDOf(phcr), objc.RegisterName("resultType"))
 	return _r
 }
 
-// Token wraps the corresponding Objective-C method.
+// Token returns the token.
 func (phcr *PersistentHistoryChangeRequest) Token() *PersistentHistoryToken {
 	_r := objc.Send[objc.ID](objref.IDOf(phcr), objc.RegisterName("token"))
 	return PersistentHistoryTokenFromID(_r)
 }
 
-// FetchRequest wraps the corresponding Objective-C method.
+// FetchRequest returns the fetch request.
 func (phcr *PersistentHistoryChangeRequest) FetchRequest() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(phcr), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)

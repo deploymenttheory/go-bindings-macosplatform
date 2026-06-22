@@ -25,7 +25,7 @@ func RunWorkflowAtURLWithInputError(fileURL string, input obj.Object) (result ob
 	return obj.Wrap(_r), nil
 }
 
-// SharedWorkspace wraps the corresponding Objective-C method.
+// SharedWorkspace returns the shared workspace.
 func SharedWorkspace() *Workspace {
 	_r := objc.Send[objc.ID](objc.ID(_class("AMWorkspace")), objc.RegisterName("sharedWorkspace"))
 	return WorkspaceFromID(_r)

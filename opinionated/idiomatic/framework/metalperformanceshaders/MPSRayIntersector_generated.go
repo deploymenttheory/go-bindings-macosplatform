@@ -82,7 +82,7 @@ func (ri *RayIntersector) RecommendedMinimumRayBatchSizeForRayCount(rayCount int
 	return _r
 }
 
-// EncodeWithCoder wraps the corresponding Objective-C method.
+// EncodeWithCoder encodes with coder.
 func (ri *RayIntersector) EncodeWithCoder(coder obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(ri), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }

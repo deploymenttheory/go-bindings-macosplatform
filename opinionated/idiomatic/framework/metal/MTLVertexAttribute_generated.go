@@ -72,7 +72,7 @@ func NewVertexAttribute() *VertexAttribute {
 	return vertexAttributeAdopt(_id)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (va *VertexAttribute) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(va), objc.RegisterName("name"))
 	if _r == 0 {
@@ -81,31 +81,31 @@ func (va *VertexAttribute) Name() string {
 	return purego.GoString(_r)
 }
 
-// AttributeIndex wraps the corresponding Objective-C method.
+// AttributeIndex returns the attribute index.
 func (va *VertexAttribute) AttributeIndex() int {
 	_r := objc.Send[int](objref.IDOf(va), objc.RegisterName("attributeIndex"))
 	return _r
 }
 
-// AttributeType wraps the corresponding Objective-C method.
+// AttributeType returns the attribute type.
 func (va *VertexAttribute) AttributeType() DataType {
 	_r := objc.Send[DataType](objref.IDOf(va), objc.RegisterName("attributeType"))
 	return _r
 }
 
-// IsActive wraps the corresponding Objective-C method.
+// IsActive reports whether the object is active.
 func (va *VertexAttribute) IsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(va), objc.RegisterName("isActive"))
 	return _r
 }
 
-// IsPatchData wraps the corresponding Objective-C method.
+// IsPatchData reports whether the object is patch data.
 func (va *VertexAttribute) IsPatchData() bool {
 	_r := objc.Send[bool](objref.IDOf(va), objc.RegisterName("isPatchData"))
 	return _r
 }
 
-// IsPatchControlPointData wraps the corresponding Objective-C method.
+// IsPatchControlPointData reports whether the object is patch control point data.
 func (va *VertexAttribute) IsPatchControlPointData() bool {
 	_r := objc.Send[bool](objref.IDOf(va), objc.RegisterName("isPatchControlPointData"))
 	return _r

@@ -81,19 +81,19 @@ func (ibssr *IOBluetoothSDPServiceRecord) RemoveServiceRecord() int {
 	return _r
 }
 
-// GetSDPServiceRecordRef returns an IOBluetoothSDPServiceRecordRef representation of the target IOBluetoothSDPServiceRecord object.
-func (ibssr *IOBluetoothSDPServiceRecord) GetSDPServiceRecordRef() obj.Object {
+// SDPServiceRecordRef returns an IOBluetoothSDPServiceRecordRef representation of the target IOBluetoothSDPServiceRecord object.
+func (ibssr *IOBluetoothSDPServiceRecord) SDPServiceRecordRef() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibssr), objc.RegisterName("getSDPServiceRecordRef"))
 	return obj.Wrap(_r)
 }
 
-// GetDevice wraps the corresponding Objective-C method.
+// GetDevice returns the get device.
 func (ibssr *IOBluetoothSDPServiceRecord) GetDevice() *IOBluetoothDevice {
 	_r := objc.Send[objc.ID](objref.IDOf(ibssr), objc.RegisterName("getDevice"))
 	return IOBluetoothDeviceFromID(_r)
 }
 
-// GetAttributes wraps the corresponding Objective-C method.
+// GetAttributes returns the get attributes.
 func (ibssr *IOBluetoothSDPServiceRecord) GetAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibssr), objc.RegisterName("getAttributes"))
 	return obj.Wrap(_r)
@@ -105,8 +105,8 @@ func (ibssr *IOBluetoothSDPServiceRecord) GetAttributeDataElement(attributeID ui
 	return IOBluetoothSDPDataElementFromID(_r)
 }
 
-// GetServiceName returns the name of the service.
-func (ibssr *IOBluetoothSDPServiceRecord) GetServiceName() string {
+// ServiceName returns the name of the service.
+func (ibssr *IOBluetoothSDPServiceRecord) ServiceName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ibssr), objc.RegisterName("getServiceName"))
 	if _r == 0 {
 		return ""
@@ -159,19 +159,19 @@ func (ibssr *IOBluetoothSDPServiceRecord) HasServiceFromArray(array obj.Object) 
 	return _r
 }
 
-// Device wraps the corresponding Objective-C method.
+// Device returns the device.
 func (ibssr *IOBluetoothSDPServiceRecord) Device() *IOBluetoothDevice {
 	_r := objc.Send[objc.ID](objref.IDOf(ibssr), objc.RegisterName("device"))
 	return IOBluetoothDeviceFromID(_r)
 }
 
-// Attributes wraps the corresponding Objective-C method.
+// Attributes returns the attributes.
 func (ibssr *IOBluetoothSDPServiceRecord) Attributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibssr), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
-// SortedAttributes wraps the corresponding Objective-C method.
+// SortedAttributes returns the sorted attributes.
 func (ibssr *IOBluetoothSDPServiceRecord) SortedAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibssr), objc.RegisterName("sortedAttributes"))
 	return obj.Wrap(_r)

@@ -53,19 +53,19 @@ func NewCNNAddGradient() *CNNAddGradient {
 	return cNNAddGradientAdopt(_id)
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (cag *CNNAddGradient) WithPrimaryScale(primaryScale float32) *CNNAddGradient {
 	objc.Send[objc.ID](objref.IDOf(cag), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return cag
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (cag *CNNAddGradient) WithSecondaryScale(secondaryScale float32) *CNNAddGradient {
 	objc.Send[objc.ID](objref.IDOf(cag), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return cag
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (cag *CNNAddGradient) WithBias(bias float32) *CNNAddGradient {
 	objc.Send[objc.ID](objref.IDOf(cag), objc.RegisterName("setBias:"), bias)
 	return cag

@@ -70,7 +70,7 @@ func NewMTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent() *MTRE
 	return mTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventAdopt(_id)
 }
 
-// Ranges wraps the corresponding Objective-C method.
+// Ranges returns the ranges.
 func (mepmcmpre *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) Ranges() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mepmcmpre), objc.RegisterName("ranges"))
 	return obj.Wrap(_r)

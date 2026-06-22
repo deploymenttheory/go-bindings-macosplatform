@@ -78,7 +78,7 @@ func (pc *PressureConfiguration) Set() {
 	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("set"))
 }
 
-// PressureBehavior wraps the corresponding Objective-C method.
+// PressureBehavior returns the pressure behavior.
 func (pc *PressureConfiguration) PressureBehavior() PressureBehavior {
 	_r := objc.Send[PressureBehavior](objref.IDOf(pc), objc.RegisterName("pressureBehavior"))
 	return _r

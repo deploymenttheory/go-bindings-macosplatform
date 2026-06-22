@@ -84,37 +84,37 @@ func (mdsbc *MTRDeviceStorageBehaviorConfiguration) WithReportToPersistenceDelay
 	return mdsbc
 }
 
-// WithReportToPersistenceDelayTimeMax sets the property and returns the receiver so calls can be chained.
+// WithReportToPersistenceDelayTimeMax sets the report to persistence delay time max.
 func (mdsbc *MTRDeviceStorageBehaviorConfiguration) WithReportToPersistenceDelayTimeMax(reportToPersistenceDelayTimeMax float64) *MTRDeviceStorageBehaviorConfiguration {
 	objc.Send[objc.ID](objref.IDOf(mdsbc), objc.RegisterName("setReportToPersistenceDelayTimeMax:"), reportToPersistenceDelayTimeMax)
 	return mdsbc
 }
 
-// WithRecentReportTimesMaxCount sets the property and returns the receiver so calls can be chained.
+// WithRecentReportTimesMaxCount sets the recent report times max count.
 func (mdsbc *MTRDeviceStorageBehaviorConfiguration) WithRecentReportTimesMaxCount(recentReportTimesMaxCount int) *MTRDeviceStorageBehaviorConfiguration {
 	objc.Send[objc.ID](objref.IDOf(mdsbc), objc.RegisterName("setRecentReportTimesMaxCount:"), recentReportTimesMaxCount)
 	return mdsbc
 }
 
-// WithTimeBetweenReportsTooShortThreshold sets the property and returns the receiver so calls can be chained.
+// WithTimeBetweenReportsTooShortThreshold sets the time between reports too short threshold.
 func (mdsbc *MTRDeviceStorageBehaviorConfiguration) WithTimeBetweenReportsTooShortThreshold(timeBetweenReportsTooShortThreshold float64) *MTRDeviceStorageBehaviorConfiguration {
 	objc.Send[objc.ID](objref.IDOf(mdsbc), objc.RegisterName("setTimeBetweenReportsTooShortThreshold:"), timeBetweenReportsTooShortThreshold)
 	return mdsbc
 }
 
-// WithTimeBetweenReportsTooShortMinThreshold sets the property and returns the receiver so calls can be chained.
+// WithTimeBetweenReportsTooShortMinThreshold sets the time between reports too short min threshold.
 func (mdsbc *MTRDeviceStorageBehaviorConfiguration) WithTimeBetweenReportsTooShortMinThreshold(timeBetweenReportsTooShortMinThreshold float64) *MTRDeviceStorageBehaviorConfiguration {
 	objc.Send[objc.ID](objref.IDOf(mdsbc), objc.RegisterName("setTimeBetweenReportsTooShortMinThreshold:"), timeBetweenReportsTooShortMinThreshold)
 	return mdsbc
 }
 
-// WithReportToPersistenceDelayMaxMultiplier sets the property and returns the receiver so calls can be chained.
+// WithReportToPersistenceDelayMaxMultiplier sets the report to persistence delay max multiplier.
 func (mdsbc *MTRDeviceStorageBehaviorConfiguration) WithReportToPersistenceDelayMaxMultiplier(reportToPersistenceDelayMaxMultiplier float64) *MTRDeviceStorageBehaviorConfiguration {
 	objc.Send[objc.ID](objref.IDOf(mdsbc), objc.RegisterName("setReportToPersistenceDelayMaxMultiplier:"), reportToPersistenceDelayMaxMultiplier)
 	return mdsbc
 }
 
-// WithDeviceReportingExcessivelyIntervalThreshold sets the property and returns the receiver so calls can be chained.
+// WithDeviceReportingExcessivelyIntervalThreshold sets the device reporting excessively interval threshold.
 func (mdsbc *MTRDeviceStorageBehaviorConfiguration) WithDeviceReportingExcessivelyIntervalThreshold(deviceReportingExcessivelyIntervalThreshold float64) *MTRDeviceStorageBehaviorConfiguration {
 	objc.Send[objc.ID](objref.IDOf(mdsbc), objc.RegisterName("setDeviceReportingExcessivelyIntervalThreshold:"), deviceReportingExcessivelyIntervalThreshold)
 	return mdsbc
@@ -132,37 +132,37 @@ func (mdsbc *MTRDeviceStorageBehaviorConfiguration) ReportToPersistenceDelayTime
 	return _r
 }
 
-// ReportToPersistenceDelayTimeMax wraps the corresponding Objective-C method.
+// ReportToPersistenceDelayTimeMax returns the report to persistence delay time max.
 func (mdsbc *MTRDeviceStorageBehaviorConfiguration) ReportToPersistenceDelayTimeMax() float64 {
 	_r := objc.Send[float64](objref.IDOf(mdsbc), objc.RegisterName("reportToPersistenceDelayTimeMax"))
 	return _r
 }
 
-// RecentReportTimesMaxCount wraps the corresponding Objective-C method.
+// RecentReportTimesMaxCount returns the recent report times max count.
 func (mdsbc *MTRDeviceStorageBehaviorConfiguration) RecentReportTimesMaxCount() int {
 	_r := objc.Send[int](objref.IDOf(mdsbc), objc.RegisterName("recentReportTimesMaxCount"))
 	return _r
 }
 
-// TimeBetweenReportsTooShortThreshold wraps the corresponding Objective-C method.
+// TimeBetweenReportsTooShortThreshold returns the time between reports too short threshold.
 func (mdsbc *MTRDeviceStorageBehaviorConfiguration) TimeBetweenReportsTooShortThreshold() float64 {
 	_r := objc.Send[float64](objref.IDOf(mdsbc), objc.RegisterName("timeBetweenReportsTooShortThreshold"))
 	return _r
 }
 
-// TimeBetweenReportsTooShortMinThreshold wraps the corresponding Objective-C method.
+// TimeBetweenReportsTooShortMinThreshold returns the time between reports too short min threshold.
 func (mdsbc *MTRDeviceStorageBehaviorConfiguration) TimeBetweenReportsTooShortMinThreshold() float64 {
 	_r := objc.Send[float64](objref.IDOf(mdsbc), objc.RegisterName("timeBetweenReportsTooShortMinThreshold"))
 	return _r
 }
 
-// ReportToPersistenceDelayMaxMultiplier wraps the corresponding Objective-C method.
+// ReportToPersistenceDelayMaxMultiplier returns the report to persistence delay max multiplier.
 func (mdsbc *MTRDeviceStorageBehaviorConfiguration) ReportToPersistenceDelayMaxMultiplier() float64 {
 	_r := objc.Send[float64](objref.IDOf(mdsbc), objc.RegisterName("reportToPersistenceDelayMaxMultiplier"))
 	return _r
 }
 
-// DeviceReportingExcessivelyIntervalThreshold wraps the corresponding Objective-C method.
+// DeviceReportingExcessivelyIntervalThreshold returns the device reporting excessively interval threshold.
 func (mdsbc *MTRDeviceStorageBehaviorConfiguration) DeviceReportingExcessivelyIntervalThreshold() float64 {
 	_r := objc.Send[float64](objref.IDOf(mdsbc), objc.RegisterName("deviceReportingExcessivelyIntervalThreshold"))
 	return _r

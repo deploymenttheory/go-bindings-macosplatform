@@ -129,19 +129,19 @@ func NewPersonWithHandleNameComponentsDisplayNameImageContactIdentifier(handle s
 	return personAdopt(_id)
 }
 
-// PersonHandle wraps the corresponding Objective-C method.
+// PersonHandle returns the person handle.
 func (p *Person) PersonHandle() *PersonHandle {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("personHandle"))
 	return PersonHandleFromID(_r)
 }
 
-// NameComponents wraps the corresponding Objective-C method.
+// NameComponents returns the name components.
 func (p *Person) NameComponents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("nameComponents"))
 	return obj.Wrap(_r)
 }
 
-// DisplayName wraps the corresponding Objective-C method.
+// DisplayName returns the display name.
 func (p *Person) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -150,13 +150,13 @@ func (p *Person) DisplayName() string {
 	return purego.GoString(_r)
 }
 
-// Image wraps the corresponding Objective-C method.
+// Image returns the image.
 func (p *Person) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
-// ContactIdentifier wraps the corresponding Objective-C method.
+// ContactIdentifier returns the contact identifier.
 func (p *Person) ContactIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("contactIdentifier"))
 	if _r == 0 {
@@ -165,7 +165,7 @@ func (p *Person) ContactIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// CustomIdentifier wraps the corresponding Objective-C method.
+// CustomIdentifier returns the custom identifier.
 func (p *Person) CustomIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("customIdentifier"))
 	if _r == 0 {
@@ -174,19 +174,19 @@ func (p *Person) CustomIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Relationship wraps the corresponding Objective-C method.
+// Relationship returns the relationship.
 func (p *Person) Relationship() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("relationship"))
 	return obj.Wrap(_r)
 }
 
-// IsContactSuggestion wraps the corresponding Objective-C method.
+// IsContactSuggestion reports whether the object is contact suggestion.
 func (p *Person) IsContactSuggestion() bool {
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isContactSuggestion"))
 	return _r
 }
 
-// Aliases wraps the corresponding Objective-C method.
+// Aliases returns the aliases.
 //
 // Aliases returns the collection as a Go slice.
 func (p *Person) Aliases() []*PersonHandle {
@@ -194,13 +194,13 @@ func (p *Person) Aliases() []*PersonHandle {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersonHandle { return PersonHandleFromID(_id) })
 }
 
-// SuggestionType wraps the corresponding Objective-C method.
+// SuggestionType returns the suggestion type.
 func (p *Person) SuggestionType() PersonSuggestionType {
 	_r := objc.Send[PersonSuggestionType](objref.IDOf(p), objc.RegisterName("suggestionType"))
 	return _r
 }
 
-// IsMe wraps the corresponding Objective-C method.
+// IsMe reports whether the object is me.
 func (p *Person) IsMe() bool {
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isMe"))
 	return _r

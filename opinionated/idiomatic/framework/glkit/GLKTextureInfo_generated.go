@@ -72,43 +72,43 @@ func NewTextureInfo() *TextureInfo {
 	return textureInfoAdopt(_id)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (ti *TextureInfo) Name() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(ti), objc.RegisterName("name"))
 	return _r
 }
 
-// Target wraps the corresponding Objective-C method.
+// Target returns the target.
 func (ti *TextureInfo) Target() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(ti), objc.RegisterName("target"))
 	return _r
 }
 
-// Width wraps the corresponding Objective-C method.
+// Width returns the width.
 func (ti *TextureInfo) Width() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(ti), objc.RegisterName("width"))
 	return _r
 }
 
-// Height wraps the corresponding Objective-C method.
+// Height returns the height.
 func (ti *TextureInfo) Height() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(ti), objc.RegisterName("height"))
 	return _r
 }
 
-// Depth wraps the corresponding Objective-C method.
+// Depth returns the depth.
 func (ti *TextureInfo) Depth() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(ti), objc.RegisterName("depth"))
 	return _r
 }
 
-// AlphaState wraps the corresponding Objective-C method.
+// AlphaState returns the alpha state.
 func (ti *TextureInfo) AlphaState() TextureInfoAlphaState {
 	_r := objc.Send[TextureInfoAlphaState](objref.IDOf(ti), objc.RegisterName("alphaState"))
 	return _r
 }
 
-// TextureOrigin wraps the corresponding Objective-C method.
+// TextureOrigin returns the texture origin.
 func (ti *TextureInfo) TextureOrigin() TextureInfoOrigin {
 	_r := objc.Send[TextureInfoOrigin](objref.IDOf(ti), objc.RegisterName("textureOrigin"))
 	return _r
@@ -120,13 +120,13 @@ func (ti *TextureInfo) ContainsMipmaps() bool {
 	return _r
 }
 
-// MimapLevelCount wraps the corresponding Objective-C method.
+// MimapLevelCount returns the mimap level count.
 func (ti *TextureInfo) MimapLevelCount() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(ti), objc.RegisterName("mimapLevelCount"))
 	return _r
 }
 
-// ArrayLength wraps the corresponding Objective-C method.
+// ArrayLength returns the array length.
 func (ti *TextureInfo) ArrayLength() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(ti), objc.RegisterName("arrayLength"))
 	return _r

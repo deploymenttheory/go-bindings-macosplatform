@@ -70,19 +70,19 @@ func NewMTREnergyEVSEClusterChargingTargetScheduleStruct() *MTREnergyEVSECluster
 	return mTREnergyEVSEClusterChargingTargetScheduleStructAdopt(_id)
 }
 
-// WithDayOfWeekForSequence sets the property and returns the receiver so calls can be chained.
+// WithDayOfWeekForSequence sets the day of week for sequence.
 func (meecctss *MTREnergyEVSEClusterChargingTargetScheduleStruct) WithDayOfWeekForSequence(dayOfWeekForSequence obj.Object) *MTREnergyEVSEClusterChargingTargetScheduleStruct {
 	objc.Send[objc.ID](objref.IDOf(meecctss), objc.RegisterName("setDayOfWeekForSequence:"), objref.IDOf(dayOfWeekForSequence))
 	return meecctss
 }
 
-// DayOfWeekForSequence wraps the corresponding Objective-C method.
+// DayOfWeekForSequence returns the day of week for sequence.
 func (meecctss *MTREnergyEVSEClusterChargingTargetScheduleStruct) DayOfWeekForSequence() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecctss), objc.RegisterName("dayOfWeekForSequence"))
 	return obj.Wrap(_r)
 }
 
-// ChargingTargets wraps the corresponding Objective-C method.
+// ChargingTargets returns the charging targets.
 func (meecctss *MTREnergyEVSEClusterChargingTargetScheduleStruct) ChargingTargets() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecctss), objc.RegisterName("chargingTargets"))
 	return obj.Wrap(_r)

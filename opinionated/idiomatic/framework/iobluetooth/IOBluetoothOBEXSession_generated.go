@@ -59,14 +59,14 @@ func NewIOBluetoothOBEXSessionWithDeviceChannelID(inDevice *IOBluetoothDevice, i
 	return iOBluetoothOBEXSessionAdopt(_id)
 }
 
-// GetRFCOMMChannel get the Bluetooth RFCOMM channel being used by the session object.
-func (ibos *IOBluetoothOBEXSession) GetRFCOMMChannel() *IOBluetoothRFCOMMChannel {
+// RFCOMMChannel get the Bluetooth RFCOMM channel being used by the session object.
+func (ibos *IOBluetoothOBEXSession) RFCOMMChannel() *IOBluetoothRFCOMMChannel {
 	_r := objc.Send[objc.ID](objref.IDOf(ibos), objc.RegisterName("getRFCOMMChannel"))
 	return IOBluetoothRFCOMMChannelFromID(_r)
 }
 
-// GetDevice get the Bluetooth Device being used by the session object.
-func (ibos *IOBluetoothOBEXSession) GetDevice() *IOBluetoothDevice {
+// Device get the Bluetooth Device being used by the session object.
+func (ibos *IOBluetoothOBEXSession) Device() *IOBluetoothDevice {
 	_r := objc.Send[objc.ID](objref.IDOf(ibos), objc.RegisterName("getDevice"))
 	return IOBluetoothDeviceFromID(_r)
 }

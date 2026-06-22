@@ -3,4 +3,7 @@
 //go:build darwin
 
 // Package _coredata_cloudkit provides a fluent Go API over the macOS _CoreData_CloudKit framework.
+//
+// Each With… method sets one property and returns its receiver, so configuration
+// calls can be chained.
 package _coredata_cloudkit

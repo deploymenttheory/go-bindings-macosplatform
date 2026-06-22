@@ -114,19 +114,19 @@ func (rs *RangeSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *
 	return rs
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (rs *RangeSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *RangeSpecifier {
 	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return rs
 }
 
-// StartSpecifier wraps the corresponding Objective-C method.
+// StartSpecifier returns the start specifier.
 func (rs *RangeSpecifier) StartSpecifier() *ScriptObjectSpecifier {
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("startSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
 
-// EndSpecifier wraps the corresponding Objective-C method.
+// EndSpecifier returns the end specifier.
 func (rs *RangeSpecifier) EndSpecifier() *ScriptObjectSpecifier {
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("endSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)

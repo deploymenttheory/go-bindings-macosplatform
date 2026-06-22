@@ -70,13 +70,13 @@ func NewMTRBooleanStateClusterStateChangeEvent() *MTRBooleanStateClusterStateCha
 	return mTRBooleanStateClusterStateChangeEventAdopt(_id)
 }
 
-// WithStateValue sets the property and returns the receiver so calls can be chained.
+// WithStateValue sets the state value.
 func (mbscsce *MTRBooleanStateClusterStateChangeEvent) WithStateValue(stateValue obj.Object) *MTRBooleanStateClusterStateChangeEvent {
 	objc.Send[objc.ID](objref.IDOf(mbscsce), objc.RegisterName("setStateValue:"), objref.IDOf(stateValue))
 	return mbscsce
 }
 
-// StateValue wraps the corresponding Objective-C method.
+// StateValue returns the state value.
 func (mbscsce *MTRBooleanStateClusterStateChangeEvent) StateValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbscsce), objc.RegisterName("stateValue"))
 	return obj.Wrap(_r)

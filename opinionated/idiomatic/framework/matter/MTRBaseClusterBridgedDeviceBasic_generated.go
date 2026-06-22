@@ -54,7 +54,7 @@ func NewMTRBaseClusterBridgedDeviceBasicWithDeviceEndpointQueue(device *MTRBaseD
 	return mTRBaseClusterBridgedDeviceBasicAdopt(_id)
 }
 
-// ReadAttributeVendorName wraps the corresponding Objective-C method.
+// ReadAttributeVendorName reads attribute vendor name.
 //
 // ReadAttributeVendorName blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributeVendorName(ctx context.Context) (result string, err error) {
@@ -104,7 +104,7 @@ func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributeVendorNameWith
 	}
 }
 
-// ReadAttributeVendorID wraps the corresponding Objective-C method.
+// ReadAttributeVendorID reads attribute vendor ID.
 //
 // ReadAttributeVendorID blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributeVendorID(ctx context.Context) (result obj.Object, err error) {
@@ -154,7 +154,7 @@ func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributeVendorIDWithMi
 	}
 }
 
-// ReadAttributeProductName wraps the corresponding Objective-C method.
+// ReadAttributeProductName reads attribute product name.
 //
 // ReadAttributeProductName blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributeProductName(ctx context.Context) (result string, err error) {
@@ -204,7 +204,7 @@ func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributeProductNameWit
 	}
 }
 
-// ReadAttributeNodeLabel wraps the corresponding Objective-C method.
+// ReadAttributeNodeLabel reads attribute node label.
 //
 // ReadAttributeNodeLabel blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributeNodeLabel(ctx context.Context) (result string, err error) {
@@ -254,7 +254,7 @@ func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributeNodeLabelWithM
 	}
 }
 
-// ReadAttributeHardwareVersion wraps the corresponding Objective-C method.
+// ReadAttributeHardwareVersion reads attribute hardware version.
 //
 // ReadAttributeHardwareVersion blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributeHardwareVersion(ctx context.Context) (result obj.Object, err error) {
@@ -304,7 +304,7 @@ func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributeHardwareVersio
 	}
 }
 
-// ReadAttributeHardwareVersionString wraps the corresponding Objective-C method.
+// ReadAttributeHardwareVersionString reads attribute hardware version string.
 //
 // ReadAttributeHardwareVersionString blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributeHardwareVersionString(ctx context.Context) (result string, err error) {
@@ -354,7 +354,7 @@ func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributeHardwareVersio
 	}
 }
 
-// ReadAttributeSoftwareVersion wraps the corresponding Objective-C method.
+// ReadAttributeSoftwareVersion reads attribute software version.
 //
 // ReadAttributeSoftwareVersion blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributeSoftwareVersion(ctx context.Context) (result obj.Object, err error) {
@@ -404,7 +404,7 @@ func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributeSoftwareVersio
 	}
 }
 
-// ReadAttributeSoftwareVersionString wraps the corresponding Objective-C method.
+// ReadAttributeSoftwareVersionString reads attribute software version string.
 //
 // ReadAttributeSoftwareVersionString blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributeSoftwareVersionString(ctx context.Context) (result string, err error) {
@@ -454,7 +454,7 @@ func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributeSoftwareVersio
 	}
 }
 
-// ReadAttributeManufacturingDate wraps the corresponding Objective-C method.
+// ReadAttributeManufacturingDate reads attribute manufacturing date.
 //
 // ReadAttributeManufacturingDate blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributeManufacturingDate(ctx context.Context) (result string, err error) {
@@ -504,7 +504,7 @@ func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributeManufacturingD
 	}
 }
 
-// ReadAttributePartNumber wraps the corresponding Objective-C method.
+// ReadAttributePartNumber reads attribute part number.
 //
 // ReadAttributePartNumber blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributePartNumber(ctx context.Context) (result string, err error) {
@@ -554,7 +554,7 @@ func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributePartNumberWith
 	}
 }
 
-// ReadAttributeProductURL wraps the corresponding Objective-C method.
+// ReadAttributeProductURL reads attribute product URL.
 //
 // ReadAttributeProductURL blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributeProductURL(ctx context.Context) (result string, err error) {
@@ -604,7 +604,7 @@ func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributeProductURLWith
 	}
 }
 
-// ReadAttributeProductLabel wraps the corresponding Objective-C method.
+// ReadAttributeProductLabel reads attribute product label.
 //
 // ReadAttributeProductLabel blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributeProductLabel(ctx context.Context) (result string, err error) {
@@ -654,7 +654,7 @@ func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributeProductLabelWi
 	}
 }
 
-// ReadAttributeSerialNumber wraps the corresponding Objective-C method.
+// ReadAttributeSerialNumber reads attribute serial number.
 //
 // ReadAttributeSerialNumber blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributeSerialNumber(ctx context.Context) (result string, err error) {
@@ -704,7 +704,7 @@ func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributeSerialNumberWi
 	}
 }
 
-// ReadAttributeReachable wraps the corresponding Objective-C method.
+// ReadAttributeReachable reads attribute reachable.
 //
 // ReadAttributeReachable blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributeReachable(ctx context.Context) (result obj.Object, err error) {
@@ -754,7 +754,7 @@ func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributeReachableWithM
 	}
 }
 
-// ReadAttributeUniqueID wraps the corresponding Objective-C method.
+// ReadAttributeUniqueID reads attribute unique ID.
 //
 // ReadAttributeUniqueID blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributeUniqueID(ctx context.Context) (result string, err error) {
@@ -804,7 +804,7 @@ func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributeUniqueIDWithMi
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -854,7 +854,7 @@ func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributeGeneratedComma
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -904,7 +904,7 @@ func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributeAcceptedComman
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -954,7 +954,7 @@ func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributeAttributeListW
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -1004,7 +1004,7 @@ func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) SubscribeAttributeFeatureMapWith
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcbdb *MTRBaseClusterBridgedDeviceBasic) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

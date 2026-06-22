@@ -70,25 +70,25 @@ func NewMTRThreadNetworkDiagnosticsClusterSecurityPolicy() *MTRThreadNetworkDiag
 	return mTRThreadNetworkDiagnosticsClusterSecurityPolicyAdopt(_id)
 }
 
-// WithRotationTime sets the property and returns the receiver so calls can be chained.
+// WithRotationTime sets the rotation time.
 func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) WithRotationTime(rotationTime obj.Object) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
 	objc.Send[objc.ID](objref.IDOf(mtndcsp), objc.RegisterName("setRotationTime:"), objref.IDOf(rotationTime))
 	return mtndcsp
 }
 
-// WithFlags sets the property and returns the receiver so calls can be chained.
+// WithFlags sets the flags.
 func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) WithFlags(flags obj.Object) *MTRThreadNetworkDiagnosticsClusterSecurityPolicy {
 	objc.Send[objc.ID](objref.IDOf(mtndcsp), objc.RegisterName("setFlags:"), objref.IDOf(flags))
 	return mtndcsp
 }
 
-// RotationTime wraps the corresponding Objective-C method.
+// RotationTime returns the rotation time.
 func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) RotationTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcsp), objc.RegisterName("rotationTime"))
 	return obj.Wrap(_r)
 }
 
-// Flags wraps the corresponding Objective-C method.
+// Flags returns the flags.
 func (mtndcsp *MTRThreadNetworkDiagnosticsClusterSecurityPolicy) Flags() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcsp), objc.RegisterName("flags"))
 	return obj.Wrap(_r)

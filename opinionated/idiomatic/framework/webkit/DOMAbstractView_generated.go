@@ -49,7 +49,7 @@ func NewDOMAbstractView() *DOMAbstractView {
 	return dOMAbstractViewAdopt(_id)
 }
 
-// Document wraps the corresponding Objective-C method.
+// Document returns the document.
 func (dav *DOMAbstractView) Document() *DOMDocument {
 	_r := objc.Send[objc.ID](objref.IDOf(dav), objc.RegisterName("document"))
 	return DOMDocumentFromID(_r)

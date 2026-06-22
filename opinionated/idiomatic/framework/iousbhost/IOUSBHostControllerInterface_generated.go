@@ -106,7 +106,7 @@ func (hci *HostControllerInterface) InterruptRateHz() int {
 	return _r
 }
 
-// ControllerStateMachine wraps the corresponding Objective-C method.
+// ControllerStateMachine returns the controller state machine.
 func (hci *HostControllerInterface) ControllerStateMachine() *HostCIControllerStateMachine {
 	_r := objc.Send[objc.ID](objref.IDOf(hci), objc.RegisterName("controllerStateMachine"))
 	return HostCIControllerStateMachineFromID(_r)

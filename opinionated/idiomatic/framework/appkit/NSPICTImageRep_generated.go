@@ -102,13 +102,13 @@ func (pir *PICTImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirectio
 	return pir
 }
 
-// PICTRepresentation wraps the corresponding Objective-C method.
+// PICTRepresentation returns the pict representation.
 func (pir *PICTImageRep) PICTRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("PICTRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// BoundingBox wraps the corresponding Objective-C method.
+// BoundingBox returns the bounding box.
 func (pir *PICTImageRep) BoundingBox() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(pir), objc.RegisterName("boundingBox"))
 	return _r

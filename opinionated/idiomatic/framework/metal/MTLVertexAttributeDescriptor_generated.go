@@ -90,19 +90,19 @@ func (vad *VertexAttributeDescriptor) WithBufferIndex(bufferIndex int) *VertexAt
 	return vad
 }
 
-// Format wraps the corresponding Objective-C method.
+// Format returns the format.
 func (vad *VertexAttributeDescriptor) Format() VertexFormat {
 	_r := objc.Send[VertexFormat](objref.IDOf(vad), objc.RegisterName("format"))
 	return _r
 }
 
-// Offset wraps the corresponding Objective-C method.
+// Offset returns the offset.
 func (vad *VertexAttributeDescriptor) Offset() int {
 	_r := objc.Send[int](objref.IDOf(vad), objc.RegisterName("offset"))
 	return _r
 }
 
-// BufferIndex wraps the corresponding Objective-C method.
+// BufferIndex returns the buffer index.
 func (vad *VertexAttributeDescriptor) BufferIndex() int {
 	_r := objc.Send[int](objref.IDOf(vad), objc.RegisterName("bufferIndex"))
 	return _r

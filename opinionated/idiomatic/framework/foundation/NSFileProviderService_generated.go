@@ -75,7 +75,7 @@ func NewFileProviderService() *FileProviderService {
 	return fileProviderServiceAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (fps *FileProviderService) WithScriptingProperties(scriptingProperties obj.Object) *FileProviderService {
 	objc.Send[objc.ID](objref.IDOf(fps), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return fps
@@ -106,7 +106,7 @@ func (fps *FileProviderService) GetFileProviderConnection(ctx context.Context) (
 	}
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (fps *FileProviderService) Name() *String {
 	_r := objc.Send[objc.ID](objref.IDOf(fps), objc.RegisterName("name"))
 	return StringFromID(_r)

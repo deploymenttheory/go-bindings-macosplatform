@@ -72,80 +72,80 @@ func NewWorkspaceOpenConfiguration() *WorkspaceOpenConfiguration {
 	return workspaceOpenConfigurationAdopt(_id)
 }
 
-// WithPromptsUserIfNeeded sets the property and returns the receiver so calls can be chained.
+// WithPromptsUserIfNeeded sets the prompts user if needed.
 func (woc *WorkspaceOpenConfiguration) WithPromptsUserIfNeeded(promptsUserIfNeeded bool) *WorkspaceOpenConfiguration {
 	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setPromptsUserIfNeeded:"), promptsUserIfNeeded)
 	return woc
 }
 
-// WithAddsToRecentItems sets the property and returns the receiver so calls can be chained.
+// WithAddsToRecentItems sets the adds to recent items.
 func (woc *WorkspaceOpenConfiguration) WithAddsToRecentItems(addsToRecentItems bool) *WorkspaceOpenConfiguration {
 	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setAddsToRecentItems:"), addsToRecentItems)
 	return woc
 }
 
-// WithActivates sets the property and returns the receiver so calls can be chained.
+// WithActivates sets the activates.
 func (woc *WorkspaceOpenConfiguration) WithActivates(activates bool) *WorkspaceOpenConfiguration {
 	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setActivates:"), activates)
 	return woc
 }
 
-// WithHides sets the property and returns the receiver so calls can be chained.
+// WithHides sets the hides.
 func (woc *WorkspaceOpenConfiguration) WithHides(hides bool) *WorkspaceOpenConfiguration {
 	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setHides:"), hides)
 	return woc
 }
 
-// WithHidesOthers sets the property and returns the receiver so calls can be chained.
+// WithHidesOthers sets the hides others.
 func (woc *WorkspaceOpenConfiguration) WithHidesOthers(hidesOthers bool) *WorkspaceOpenConfiguration {
 	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setHidesOthers:"), hidesOthers)
 	return woc
 }
 
-// WithForPrinting sets the property and returns the receiver so calls can be chained.
+// WithForPrinting sets the for printing.
 func (woc *WorkspaceOpenConfiguration) WithForPrinting(forPrinting bool) *WorkspaceOpenConfiguration {
 	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setForPrinting:"), forPrinting)
 	return woc
 }
 
-// WithCreatesNewApplicationInstance sets the property and returns the receiver so calls can be chained.
+// WithCreatesNewApplicationInstance sets the creates new application instance.
 func (woc *WorkspaceOpenConfiguration) WithCreatesNewApplicationInstance(createsNewApplicationInstance bool) *WorkspaceOpenConfiguration {
 	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setCreatesNewApplicationInstance:"), createsNewApplicationInstance)
 	return woc
 }
 
-// WithAllowsRunningApplicationSubstitution sets the property and returns the receiver so calls can be chained.
+// WithAllowsRunningApplicationSubstitution sets the allows running application substitution.
 func (woc *WorkspaceOpenConfiguration) WithAllowsRunningApplicationSubstitution(allowsRunningApplicationSubstitution bool) *WorkspaceOpenConfiguration {
 	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setAllowsRunningApplicationSubstitution:"), allowsRunningApplicationSubstitution)
 	return woc
 }
 
-// WithArguments sets the property and returns the receiver so calls can be chained.
+// WithArguments sets the arguments.
 func (woc *WorkspaceOpenConfiguration) WithArguments(items ...obj.Object) *WorkspaceOpenConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setArguments:"), _arr)
 	return woc
 }
 
-// WithEnvironment sets the property and returns the receiver so calls can be chained.
+// WithEnvironment sets the environment.
 func (woc *WorkspaceOpenConfiguration) WithEnvironment(environment obj.Object) *WorkspaceOpenConfiguration {
 	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setEnvironment:"), objref.IDOf(environment))
 	return woc
 }
 
-// WithAppleEvent sets the property and returns the receiver so calls can be chained.
+// WithAppleEvent sets the apple event.
 func (woc *WorkspaceOpenConfiguration) WithAppleEvent(appleEvent obj.Object) *WorkspaceOpenConfiguration {
 	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setAppleEvent:"), objref.IDOf(appleEvent))
 	return woc
 }
 
-// WithArchitecture sets the property and returns the receiver so calls can be chained.
+// WithArchitecture sets the architecture.
 func (woc *WorkspaceOpenConfiguration) WithArchitecture(architecture int) *WorkspaceOpenConfiguration {
 	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setArchitecture:"), architecture)
 	return woc
 }
 
-// WithRequiresUniversalLinks sets the property and returns the receiver so calls can be chained.
+// WithRequiresUniversalLinks sets the requires universal links.
 func (woc *WorkspaceOpenConfiguration) WithRequiresUniversalLinks(requiresUniversalLinks bool) *WorkspaceOpenConfiguration {
 	objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("setRequiresUniversalLinks:"), requiresUniversalLinks)
 	return woc
@@ -181,7 +181,7 @@ func (woc *WorkspaceOpenConfiguration) HidesOthers() bool {
 	return _r
 }
 
-// IsForPrinting wraps the corresponding Objective-C method.
+// IsForPrinting reports whether the object is for printing.
 func (woc *WorkspaceOpenConfiguration) IsForPrinting() bool {
 	_r := objc.Send[bool](objref.IDOf(woc), objc.RegisterName("isForPrinting"))
 	return _r
@@ -199,7 +199,7 @@ func (woc *WorkspaceOpenConfiguration) AllowsRunningApplicationSubstitution() bo
 	return _r
 }
 
-// Arguments wraps the corresponding Objective-C method.
+// Arguments returns the arguments.
 //
 // Arguments returns the collection as a Go slice.
 func (woc *WorkspaceOpenConfiguration) Arguments() []string {
@@ -207,19 +207,19 @@ func (woc *WorkspaceOpenConfiguration) Arguments() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Environment wraps the corresponding Objective-C method.
+// Environment returns the environment.
 func (woc *WorkspaceOpenConfiguration) Environment() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("environment"))
 	return obj.Wrap(_r)
 }
 
-// AppleEvent wraps the corresponding Objective-C method.
+// AppleEvent returns the apple event.
 func (woc *WorkspaceOpenConfiguration) AppleEvent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(woc), objc.RegisterName("appleEvent"))
 	return obj.Wrap(_r)
 }
 
-// Architecture wraps the corresponding Objective-C method.
+// Architecture returns the architecture.
 func (woc *WorkspaceOpenConfiguration) Architecture() int {
 	_r := objc.Send[int](objref.IDOf(woc), objc.RegisterName("architecture"))
 	return _r

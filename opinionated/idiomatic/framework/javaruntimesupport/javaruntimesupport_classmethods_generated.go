@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// RegisterAWTAppWithOptions wraps the corresponding Objective-C method.
+// RegisterAWTAppWithOptions registers awt app with options.
 func RegisterAWTAppWithOptions(options obj.Object) {
 	objc.Send[objc.ID](objc.ID(_class("JRSAppKitAWT")), objc.RegisterName("registerAWTAppWithOptions:"), objref.IDOf(options))
 }
@@ -22,25 +22,25 @@ func MarkAppIsDaemon() bool {
 	return _r
 }
 
-// CurrentModifiers wraps the corresponding Objective-C method.
+// CurrentModifiers returns the current modifiers.
 func CurrentModifiers() int {
 	_r := objc.Send[int](objc.ID(_class("JRSDrag")), objc.RegisterName("currentModifiers"))
 	return _r
 }
 
-// Controller wraps the corresponding Objective-C method.
+// Controller returns the controller.
 func Controller() *InputMethodController {
 	_r := objc.Send[objc.ID](objc.ID(_class("JRSInputMethodController")), objc.RegisterName("controller"))
 	return InputMethodControllerFromID(_r)
 }
 
-// StartRenderServer wraps the corresponding Objective-C method.
+// StartRenderServer returns the start render server.
 func StartRenderServer() int {
 	_r := objc.Send[int](objc.ID(_class("JRSRenderServer")), objc.RegisterName("startRenderServer"))
 	return _r
 }
 
-// SendRenderServer wraps the corresponding Objective-C method.
+// SendRenderServer sends render server.
 func SendRenderServer(serverPort int) string {
 	_r := objc.Send[objc.ID](objc.ID(_class("JRSRenderServer")), objc.RegisterName("sendRenderServer:"), serverPort)
 	if _r == 0 {

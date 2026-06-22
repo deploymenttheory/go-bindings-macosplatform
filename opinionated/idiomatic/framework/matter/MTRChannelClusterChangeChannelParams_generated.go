@@ -70,7 +70,7 @@ func NewMTRChannelClusterChangeChannelParams() *MTRChannelClusterChangeChannelPa
 	return mTRChannelClusterChangeChannelParamsAdopt(_id)
 }
 
-// WithMatch sets the property and returns the receiver so calls can be chained.
+// WithMatch sets the match.
 func (mccccp *MTRChannelClusterChangeChannelParams) WithMatch(match string) *MTRChannelClusterChangeChannelParams {
 	objc.Send[objc.ID](objref.IDOf(mccccp), objc.RegisterName("setMatch:"), purego.NSString(match))
 	return mccccp
@@ -88,7 +88,7 @@ func (mccccp *MTRChannelClusterChangeChannelParams) WithServerSideProcessingTime
 	return mccccp
 }
 
-// Match wraps the corresponding Objective-C method.
+// Match returns the match.
 func (mccccp *MTRChannelClusterChangeChannelParams) Match() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mccccp), objc.RegisterName("match"))
 	if _r == 0 {

@@ -120,19 +120,19 @@ func (pr *PolylineRenderer) WithAlpha(alpha float64) *PolylineRenderer {
 	return pr
 }
 
-// Polyline wraps the corresponding Objective-C method.
+// Polyline returns the polyline.
 func (pr *PolylineRenderer) Polyline() *Polyline {
 	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("polyline"))
 	return PolylineFromID(_r)
 }
 
-// StrokeStart wraps the corresponding Objective-C method.
+// StrokeStart returns the stroke start.
 func (pr *PolylineRenderer) StrokeStart() float64 {
 	_r := objc.Send[float64](objref.IDOf(pr), objc.RegisterName("strokeStart"))
 	return _r
 }
 
-// StrokeEnd wraps the corresponding Objective-C method.
+// StrokeEnd returns the stroke end.
 func (pr *PolylineRenderer) StrokeEnd() float64 {
 	_r := objc.Send[float64](objref.IDOf(pr), objc.RegisterName("strokeEnd"))
 	return _r

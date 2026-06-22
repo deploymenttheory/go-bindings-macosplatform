@@ -72,13 +72,13 @@ func NewTurnBasedExchangeReply() *TurnBasedExchangeReply {
 	return turnBasedExchangeReplyAdopt(_id)
 }
 
-// Recipient wraps the corresponding Objective-C method.
+// Recipient returns the recipient.
 func (tber *TurnBasedExchangeReply) Recipient() *TurnBasedParticipant {
 	_r := objc.Send[objc.ID](objref.IDOf(tber), objc.RegisterName("recipient"))
 	return TurnBasedParticipantFromID(_r)
 }
 
-// Message wraps the corresponding Objective-C method.
+// Message returns the message.
 func (tber *TurnBasedExchangeReply) Message() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tber), objc.RegisterName("message"))
 	if _r == 0 {
@@ -87,13 +87,13 @@ func (tber *TurnBasedExchangeReply) Message() string {
 	return purego.GoString(_r)
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (tber *TurnBasedExchangeReply) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tber), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// ReplyDate wraps the corresponding Objective-C method.
+// ReplyDate returns the reply date.
 func (tber *TurnBasedExchangeReply) ReplyDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tber), objc.RegisterName("replyDate"))
 	return obj.Wrap(_r)

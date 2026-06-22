@@ -52,7 +52,7 @@ func NewRecognizedPoint() *RecognizedPoint {
 	return recognizedPointAdopt(_id)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (rp *RecognizedPoint) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rp), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)

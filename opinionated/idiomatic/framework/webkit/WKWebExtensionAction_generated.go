@@ -139,7 +139,7 @@ func (wwea *WKWebExtensionAction) IsEnabled() bool {
 	return _r
 }
 
-// MenuItems wraps the corresponding Objective-C method.
+// MenuItems returns the menu items.
 //
 // MenuItems returns the collection as a Go slice.
 func (wwea *WKWebExtensionAction) MenuItems() []obj.Object {

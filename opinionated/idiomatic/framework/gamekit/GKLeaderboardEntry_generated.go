@@ -72,25 +72,25 @@ func NewLeaderboardEntry() *LeaderboardEntry {
 	return leaderboardEntryAdopt(_id)
 }
 
-// Player wraps the corresponding Objective-C method.
+// Player returns the player.
 func (le *LeaderboardEntry) Player() *Player {
 	_r := objc.Send[objc.ID](objref.IDOf(le), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
 
-// Rank wraps the corresponding Objective-C method.
+// Rank returns the rank.
 func (le *LeaderboardEntry) Rank() int {
 	_r := objc.Send[int](objref.IDOf(le), objc.RegisterName("rank"))
 	return _r
 }
 
-// Score wraps the corresponding Objective-C method.
+// Score returns the score.
 func (le *LeaderboardEntry) Score() int {
 	_r := objc.Send[int](objref.IDOf(le), objc.RegisterName("score"))
 	return _r
 }
 
-// FormattedScore wraps the corresponding Objective-C method.
+// FormattedScore returns the formatted score.
 func (le *LeaderboardEntry) FormattedScore() string {
 	_r := objc.Send[objc.ID](objref.IDOf(le), objc.RegisterName("formattedScore"))
 	if _r == 0 {
@@ -99,13 +99,13 @@ func (le *LeaderboardEntry) FormattedScore() string {
 	return purego.GoString(_r)
 }
 
-// Context wraps the corresponding Objective-C method.
+// Context returns the context.
 func (le *LeaderboardEntry) Context() int {
 	_r := objc.Send[int](objref.IDOf(le), objc.RegisterName("context"))
 	return _r
 }
 
-// Date wraps the corresponding Objective-C method.
+// Date returns the date.
 func (le *LeaderboardEntry) Date() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(le), objc.RegisterName("date"))
 	return obj.Wrap(_r)

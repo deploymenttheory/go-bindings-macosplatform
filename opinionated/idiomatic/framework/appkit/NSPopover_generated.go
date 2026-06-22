@@ -147,13 +147,13 @@ func (p *Popover) Appearance() *Appearance {
 	return AppearanceFromID(_r)
 }
 
-// EffectiveAppearance wraps the corresponding Objective-C method.
+// EffectiveAppearance returns the effective appearance.
 func (p *Popover) EffectiveAppearance() *Appearance {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("effectiveAppearance"))
 	return AppearanceFromID(_r)
 }
 
-// Behavior wraps the corresponding Objective-C method.
+// Behavior returns the behavior.
 func (p *Popover) Behavior() PopoverBehavior {
 	_r := objc.Send[PopoverBehavior](objref.IDOf(p), objc.RegisterName("behavior"))
 	return _r
@@ -165,19 +165,19 @@ func (p *Popover) Animates() bool {
 	return _r
 }
 
-// ContentViewController wraps the corresponding Objective-C method.
+// ContentViewController returns the content view controller.
 func (p *Popover) ContentViewController() *ViewController {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("contentViewController"))
 	return ViewControllerFromID(_r)
 }
 
-// ContentSize wraps the corresponding Objective-C method.
+// ContentSize returns the content size.
 func (p *Popover) ContentSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(p), objc.RegisterName("contentSize"))
 	return _r
 }
 
-// IsShown wraps the corresponding Objective-C method.
+// IsShown reports whether the object is shown.
 func (p *Popover) IsShown() bool {
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isShown"))
 	return _r
@@ -189,13 +189,13 @@ func (p *Popover) IsDetached() bool {
 	return _r
 }
 
-// PositioningRect wraps the corresponding Objective-C method.
+// PositioningRect returns the positioning rect.
 func (p *Popover) PositioningRect() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(p), objc.RegisterName("positioningRect"))
 	return _r
 }
 
-// HasFullSizeContent wraps the corresponding Objective-C method.
+// HasFullSizeContent reports whether the object has full size content.
 func (p *Popover) HasFullSizeContent() bool {
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("hasFullSizeContent"))
 	return _r

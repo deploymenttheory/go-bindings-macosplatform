@@ -68,7 +68,7 @@ func (t *Type) String() string {
 	return rt.Description(objref.IDOf(t))
 }
 
-// DataType wraps the corresponding Objective-C method.
+// DataType returns the data type.
 func (t *Type) DataType() DataType {
 	_r := objc.Send[DataType](objref.IDOf(t), objc.RegisterName("dataType"))
 	return _r

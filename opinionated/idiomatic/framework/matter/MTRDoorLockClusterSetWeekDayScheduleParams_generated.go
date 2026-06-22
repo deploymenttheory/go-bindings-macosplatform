@@ -70,43 +70,43 @@ func NewMTRDoorLockClusterSetWeekDayScheduleParams() *MTRDoorLockClusterSetWeekD
 	return mTRDoorLockClusterSetWeekDayScheduleParamsAdopt(_id)
 }
 
-// WithWeekDayIndex sets the property and returns the receiver so calls can be chained.
+// WithWeekDayIndex sets the week day index.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WithWeekDayIndex(weekDayIndex obj.Object) *MTRDoorLockClusterSetWeekDayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("setWeekDayIndex:"), objref.IDOf(weekDayIndex))
 	return mdlcswdsp
 }
 
-// WithUserIndex sets the property and returns the receiver so calls can be chained.
+// WithUserIndex sets the user index.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterSetWeekDayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlcswdsp
 }
 
-// WithDaysMask sets the property and returns the receiver so calls can be chained.
+// WithDaysMask sets the days mask.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WithDaysMask(daysMask obj.Object) *MTRDoorLockClusterSetWeekDayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("setDaysMask:"), objref.IDOf(daysMask))
 	return mdlcswdsp
 }
 
-// WithStartHour sets the property and returns the receiver so calls can be chained.
+// WithStartHour sets the start hour.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WithStartHour(startHour obj.Object) *MTRDoorLockClusterSetWeekDayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("setStartHour:"), objref.IDOf(startHour))
 	return mdlcswdsp
 }
 
-// WithStartMinute sets the property and returns the receiver so calls can be chained.
+// WithStartMinute sets the start minute.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WithStartMinute(startMinute obj.Object) *MTRDoorLockClusterSetWeekDayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("setStartMinute:"), objref.IDOf(startMinute))
 	return mdlcswdsp
 }
 
-// WithEndHour sets the property and returns the receiver so calls can be chained.
+// WithEndHour sets the end hour.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WithEndHour(endHour obj.Object) *MTRDoorLockClusterSetWeekDayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("setEndHour:"), objref.IDOf(endHour))
 	return mdlcswdsp
 }
 
-// WithEndMinute sets the property and returns the receiver so calls can be chained.
+// WithEndMinute sets the end minute.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WithEndMinute(endMinute obj.Object) *MTRDoorLockClusterSetWeekDayScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("setEndMinute:"), objref.IDOf(endMinute))
 	return mdlcswdsp
@@ -124,43 +124,43 @@ func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WithServerSideProce
 	return mdlcswdsp
 }
 
-// WeekDayIndex wraps the corresponding Objective-C method.
+// WeekDayIndex returns the week day index.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) WeekDayIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("weekDayIndex"))
 	return obj.Wrap(_r)
 }
 
-// UserIndex wraps the corresponding Objective-C method.
+// UserIndex returns the user index.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) UserIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("userIndex"))
 	return obj.Wrap(_r)
 }
 
-// DaysMask wraps the corresponding Objective-C method.
+// DaysMask returns the days mask.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) DaysMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("daysMask"))
 	return obj.Wrap(_r)
 }
 
-// StartHour wraps the corresponding Objective-C method.
+// StartHour returns the start hour.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) StartHour() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("startHour"))
 	return obj.Wrap(_r)
 }
 
-// StartMinute wraps the corresponding Objective-C method.
+// StartMinute returns the start minute.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) StartMinute() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("startMinute"))
 	return obj.Wrap(_r)
 }
 
-// EndHour wraps the corresponding Objective-C method.
+// EndHour returns the end hour.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) EndHour() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("endHour"))
 	return obj.Wrap(_r)
 }
 
-// EndMinute wraps the corresponding Objective-C method.
+// EndMinute returns the end minute.
 func (mdlcswdsp *MTRDoorLockClusterSetWeekDayScheduleParams) EndMinute() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcswdsp), objc.RegisterName("endMinute"))
 	return obj.Wrap(_r)

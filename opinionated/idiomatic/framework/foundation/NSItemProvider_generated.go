@@ -85,7 +85,7 @@ func (ip *ItemProvider) WithSuggestedName(suggestedName StringProvider) *ItemPro
 	return ip
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ip *ItemProvider) WithScriptingProperties(scriptingProperties obj.Object) *ItemProvider {
 	objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ip
@@ -109,7 +109,7 @@ func (ip *ItemProvider) HasRepresentationConformingToTypeIdentifierFileOptions(t
 	return _r
 }
 
-// RegisteredTypeIdentifiers wraps the corresponding Objective-C method.
+// RegisteredTypeIdentifiers returns the registered type identifiers.
 //
 // RegisteredTypeIdentifiers returns the collection as a Go slice.
 func (ip *ItemProvider) RegisteredTypeIdentifiers() []string {
@@ -117,7 +117,7 @@ func (ip *ItemProvider) RegisteredTypeIdentifiers() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SuggestedName wraps the corresponding Objective-C method.
+// SuggestedName returns the suggested name.
 func (ip *ItemProvider) SuggestedName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ip), objc.RegisterName("suggestedName"))
 	if _r == 0 {

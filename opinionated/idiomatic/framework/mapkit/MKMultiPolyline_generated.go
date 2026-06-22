@@ -64,7 +64,7 @@ func (mp *MultiPolyline) WithSubtitle(subtitle string) *MultiPolyline {
 	return mp
 }
 
-// Polylines wraps the corresponding Objective-C method.
+// Polylines returns the polylines.
 //
 // Polylines returns the collection as a Go slice.
 func (mp *MultiPolyline) Polylines() []*Polyline {

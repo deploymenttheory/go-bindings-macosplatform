@@ -58,7 +58,7 @@ func (cnt *CalendarNotificationTrigger) NextTriggerDate() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// DateComponents wraps the corresponding Objective-C method.
+// DateComponents returns the date components.
 func (cnt *CalendarNotificationTrigger) DateComponents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cnt), objc.RegisterName("dateComponents"))
 	return obj.Wrap(_r)

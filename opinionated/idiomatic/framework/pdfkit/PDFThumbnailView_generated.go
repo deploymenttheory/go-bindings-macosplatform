@@ -115,19 +115,19 @@ func (tv *ThumbnailView) WithAllowsMultipleSelection(allowsMultipleSelection boo
 	return tv
 }
 
-// PDFView wraps the corresponding Objective-C method.
+// PDFView returns the pdf view.
 func (tv *ThumbnailView) PDFView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("PDFView"))
 	return ViewFromID(_r)
 }
 
-// BackgroundColor wraps the corresponding Objective-C method.
+// BackgroundColor returns the background color.
 func (tv *ThumbnailView) BackgroundColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
 }
 
-// SelectedPages wraps the corresponding Objective-C method.
+// SelectedPages returns the selected pages.
 //
 // SelectedPages returns the collection as a Go slice.
 func (tv *ThumbnailView) SelectedPages() []*Page {
@@ -135,19 +135,19 @@ func (tv *ThumbnailView) SelectedPages() []*Page {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Page { return PageFromID(_id) })
 }
 
-// ThumbnailSize wraps the corresponding Objective-C method.
+// ThumbnailSize returns the thumbnail size.
 func (tv *ThumbnailView) ThumbnailSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(tv), objc.RegisterName("thumbnailSize"))
 	return _r
 }
 
-// MaximumNumberOfColumns wraps the corresponding Objective-C method.
+// MaximumNumberOfColumns returns the maximum number of columns.
 func (tv *ThumbnailView) MaximumNumberOfColumns() int {
 	_r := objc.Send[int](objref.IDOf(tv), objc.RegisterName("maximumNumberOfColumns"))
 	return _r
 }
 
-// LabelFont wraps the corresponding Objective-C method.
+// LabelFont returns the label font.
 func (tv *ThumbnailView) LabelFont() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tv), objc.RegisterName("labelFont"))
 	return obj.Wrap(_r)

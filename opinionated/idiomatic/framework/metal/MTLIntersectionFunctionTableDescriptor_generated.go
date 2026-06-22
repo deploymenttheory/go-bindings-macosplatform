@@ -78,7 +78,7 @@ func (iftd *IntersectionFunctionTableDescriptor) WithFunctionCount(functionCount
 	return iftd
 }
 
-// FunctionCount wraps the corresponding Objective-C method.
+// FunctionCount returns the function count.
 func (iftd *IntersectionFunctionTableDescriptor) FunctionCount() int {
 	_r := objc.Send[int](objref.IDOf(iftd), objc.RegisterName("functionCount"))
 	return _r

@@ -57,19 +57,19 @@ func NewDOMMutationEventMutationEvent(type_ string, canBubble bool, cancelable b
 	return dOMMutationEventAdopt(_id)
 }
 
-// WithReturnValue sets the property and returns the receiver so calls can be chained.
+// WithReturnValue sets the return value.
 func (dme *DOMMutationEvent) WithReturnValue(returnValue bool) *DOMMutationEvent {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setReturnValue:"), returnValue)
 	return dme
 }
 
-// WithCancelBubble sets the property and returns the receiver so calls can be chained.
+// WithCancelBubble sets the cancel bubble.
 func (dme *DOMMutationEvent) WithCancelBubble(cancelBubble bool) *DOMMutationEvent {
 	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setCancelBubble:"), cancelBubble)
 	return dme
 }
 
-// NewValue wraps the corresponding Objective-C method.
+// NewValue returns the new value.
 func (dme *DOMMutationEvent) NewValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("newValue"))
 	if _r == 0 {
@@ -78,13 +78,13 @@ func (dme *DOMMutationEvent) NewValue() string {
 	return purego.GoString(_r)
 }
 
-// RelatedNode wraps the corresponding Objective-C method.
+// RelatedNode returns the related node.
 func (dme *DOMMutationEvent) RelatedNode() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("relatedNode"))
 	return DOMNodeFromID(_r)
 }
 
-// PrevValue wraps the corresponding Objective-C method.
+// PrevValue returns the prev value.
 func (dme *DOMMutationEvent) PrevValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("prevValue"))
 	if _r == 0 {
@@ -93,7 +93,7 @@ func (dme *DOMMutationEvent) PrevValue() string {
 	return purego.GoString(_r)
 }
 
-// AttrName wraps the corresponding Objective-C method.
+// AttrName returns the attr name.
 func (dme *DOMMutationEvent) AttrName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("attrName"))
 	if _r == 0 {
@@ -102,7 +102,7 @@ func (dme *DOMMutationEvent) AttrName() string {
 	return purego.GoString(_r)
 }
 
-// AttrChange wraps the corresponding Objective-C method.
+// AttrChange returns the attr change.
 func (dme *DOMMutationEvent) AttrChange() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(dme), objc.RegisterName("attrChange"))
 	return _r

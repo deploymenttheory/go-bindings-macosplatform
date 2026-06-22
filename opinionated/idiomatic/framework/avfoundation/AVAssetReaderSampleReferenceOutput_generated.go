@@ -64,7 +64,7 @@ func (arsro *AssetReaderSampleReferenceOutput) WithSupportsRandomAccess(supports
 	return arsro
 }
 
-// Track wraps the corresponding Objective-C method.
+// Track returns the track.
 func (arsro *AssetReaderSampleReferenceOutput) Track() *AssetTrack {
 	_r := objc.Send[objc.ID](objref.IDOf(arsro), objc.RegisterName("track"))
 	return AssetTrackFromID(_r)

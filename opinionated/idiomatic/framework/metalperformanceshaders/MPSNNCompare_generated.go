@@ -57,19 +57,19 @@ func (nc *NNCompare) WithThreshold(threshold float32) *NNCompare {
 	return nc
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (nc *NNCompare) WithPrimaryScale(primaryScale float32) *NNCompare {
 	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return nc
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (nc *NNCompare) WithSecondaryScale(secondaryScale float32) *NNCompare {
 	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return nc
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (nc *NNCompare) WithBias(bias float32) *NNCompare {
 	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("setBias:"), bias)
 	return nc

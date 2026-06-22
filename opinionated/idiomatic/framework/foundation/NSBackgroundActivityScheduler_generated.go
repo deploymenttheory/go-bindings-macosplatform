@@ -97,7 +97,7 @@ func (bas *BackgroundActivityScheduler) WithTolerance(tolerance float64) *Backgr
 	return bas
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (bas *BackgroundActivityScheduler) WithScriptingProperties(scriptingProperties obj.Object) *BackgroundActivityScheduler {
 	objc.Send[objc.ID](objref.IDOf(bas), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return bas
@@ -108,7 +108,7 @@ func (bas *BackgroundActivityScheduler) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(bas), objc.RegisterName("invalidate"))
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (bas *BackgroundActivityScheduler) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bas), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -117,7 +117,7 @@ func (bas *BackgroundActivityScheduler) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// QualityOfService wraps the corresponding Objective-C method.
+// QualityOfService returns the quality of service.
 func (bas *BackgroundActivityScheduler) QualityOfService() QualityOfService {
 	_r := objc.Send[QualityOfService](objref.IDOf(bas), objc.RegisterName("qualityOfService"))
 	return _r
@@ -129,13 +129,13 @@ func (bas *BackgroundActivityScheduler) Repeats() bool {
 	return _r
 }
 
-// Interval wraps the corresponding Objective-C method.
+// Interval returns the interval.
 func (bas *BackgroundActivityScheduler) Interval() float64 {
 	_r := objc.Send[float64](objref.IDOf(bas), objc.RegisterName("interval"))
 	return _r
 }
 
-// Tolerance wraps the corresponding Objective-C method.
+// Tolerance returns the tolerance.
 func (bas *BackgroundActivityScheduler) Tolerance() float64 {
 	_r := objc.Send[float64](objref.IDOf(bas), objc.RegisterName("tolerance"))
 	return _r

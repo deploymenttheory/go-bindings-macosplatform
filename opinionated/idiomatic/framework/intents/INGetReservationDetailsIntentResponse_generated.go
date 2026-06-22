@@ -66,13 +66,13 @@ func (grdir *GetReservationDetailsIntentResponse) WithUserActivity(userActivity 
 	return grdir
 }
 
-// Code wraps the corresponding Objective-C method.
+// Code returns the code.
 func (grdir *GetReservationDetailsIntentResponse) Code() GetReservationDetailsIntentResponseCode {
 	_r := objc.Send[GetReservationDetailsIntentResponseCode](objref.IDOf(grdir), objc.RegisterName("code"))
 	return _r
 }
 
-// Reservations wraps the corresponding Objective-C method.
+// Reservations returns the reservations.
 //
 // Reservations returns the collection as a Go slice.
 func (grdir *GetReservationDetailsIntentResponse) Reservations() []*Reservation {

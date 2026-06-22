@@ -75,7 +75,7 @@ func NewTokenWithTokenDriverInstanceID(tokenDriver *TokenDriver, instanceID obj.
 	return tokenAdopt(_id)
 }
 
-// TokenDriver wraps the corresponding Objective-C method.
+// TokenDriver returns the token driver.
 func (t *Token) TokenDriver() *TokenDriver {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("tokenDriver"))
 	return TokenDriverFromID(_r)

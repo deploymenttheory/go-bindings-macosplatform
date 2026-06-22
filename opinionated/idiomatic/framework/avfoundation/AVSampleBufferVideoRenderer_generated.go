@@ -113,7 +113,7 @@ func (sbvr *SampleBufferVideoRenderer) ResetUpcomingSampleBufferPresentationTime
 	objc.Send[objc.ID](objref.IDOf(sbvr), objc.RegisterName("resetUpcomingSampleBufferPresentationTimeExpectations"))
 }
 
-// RecommendedPixelBufferAttributes wraps the corresponding Objective-C method.
+// RecommendedPixelBufferAttributes returns the recommended pixel buffer attributes.
 func (sbvr *SampleBufferVideoRenderer) RecommendedPixelBufferAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sbvr), objc.RegisterName("recommendedPixelBufferAttributes"))
 	return obj.Wrap(_r)

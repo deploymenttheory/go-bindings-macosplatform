@@ -76,13 +76,13 @@ func (cre *CalRecurrenceEnd) UsesEndDate() bool {
 	return _r
 }
 
-// EndDate wraps the corresponding Objective-C method.
+// EndDate returns the end date.
 func (cre *CalRecurrenceEnd) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cre), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
-// OccurrenceCount wraps the corresponding Objective-C method.
+// OccurrenceCount returns the occurrence count.
 func (cre *CalRecurrenceEnd) OccurrenceCount() int {
 	_r := objc.Send[int](objref.IDOf(cre), objc.RegisterName("occurrenceCount"))
 	return _r

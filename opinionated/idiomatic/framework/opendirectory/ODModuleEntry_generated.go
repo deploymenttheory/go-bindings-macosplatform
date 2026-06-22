@@ -70,25 +70,25 @@ func NewModuleEntry() *ModuleEntry {
 	return moduleEntryAdopt(_id)
 }
 
-// WithMappings sets the property and returns the receiver so calls can be chained.
+// WithMappings sets the mappings.
 func (me *ModuleEntry) WithMappings(mappings *Mappings) *ModuleEntry {
 	objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("setMappings:"), objref.IDOf(mappings))
 	return me
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (me *ModuleEntry) WithName(name string) *ModuleEntry {
 	objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("setName:"), purego.NSString(name))
 	return me
 }
 
-// WithXpcServiceName sets the property and returns the receiver so calls can be chained.
+// WithXpcServiceName sets the xpc service name.
 func (me *ModuleEntry) WithXpcServiceName(xpcServiceName string) *ModuleEntry {
 	objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("setXpcServiceName:"), purego.NSString(xpcServiceName))
 	return me
 }
 
-// WithUUIDString sets the property and returns the receiver so calls can be chained.
+// WithUUIDString sets the UUID string.
 func (me *ModuleEntry) WithUUIDString(uuidString string) *ModuleEntry {
 	objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("setUuidString:"), purego.NSString(uuidString))
 	return me
@@ -105,19 +105,19 @@ func (me *ModuleEntry) Option(optionName string) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Mappings wraps the corresponding Objective-C method.
+// Mappings returns the mappings.
 func (me *ModuleEntry) Mappings() *Mappings {
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("mappings"))
 	return MappingsFromID(_r)
 }
 
-// SupportedOptions wraps the corresponding Objective-C method.
+// SupportedOptions returns the supported options.
 func (me *ModuleEntry) SupportedOptions() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("supportedOptions"))
 	return obj.Wrap(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (me *ModuleEntry) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("name"))
 	if _r == 0 {
@@ -126,7 +126,7 @@ func (me *ModuleEntry) Name() string {
 	return purego.GoString(_r)
 }
 
-// XpcServiceName wraps the corresponding Objective-C method.
+// XpcServiceName returns the xpc service name.
 func (me *ModuleEntry) XpcServiceName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("xpcServiceName"))
 	if _r == 0 {
@@ -135,7 +135,7 @@ func (me *ModuleEntry) XpcServiceName() string {
 	return purego.GoString(_r)
 }
 
-// UUIDString wraps the corresponding Objective-C method.
+// UUIDString returns the UUID string.
 func (me *ModuleEntry) UUIDString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("uuidString"))
 	if _r == 0 {

@@ -186,7 +186,7 @@ func (ra *RunningApplication) LaunchDate() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Icon wraps the corresponding Objective-C method.
+// Icon returns the icon.
 func (ra *RunningApplication) Icon() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(ra), objc.RegisterName("icon"))
 	return ImageFromID(_r)

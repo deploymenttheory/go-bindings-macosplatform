@@ -150,7 +150,7 @@ func (ci *CalendarItem) Title() string {
 	return purego.GoString(_r)
 }
 
-// Location wraps the corresponding Objective-C method.
+// Location returns the location.
 func (ci *CalendarItem) Location() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("location"))
 	if _r == 0 {
@@ -159,7 +159,7 @@ func (ci *CalendarItem) Location() string {
 	return purego.GoString(_r)
 }
 
-// Notes wraps the corresponding Objective-C method.
+// Notes returns the notes.
 func (ci *CalendarItem) Notes() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("notes"))
 	if _r == 0 {
@@ -168,55 +168,55 @@ func (ci *CalendarItem) Notes() string {
 	return purego.GoString(_r)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (ci *CalendarItem) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// LastModifiedDate wraps the corresponding Objective-C method.
+// LastModifiedDate returns the last modified date.
 func (ci *CalendarItem) LastModifiedDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("lastModifiedDate"))
 	return obj.Wrap(_r)
 }
 
-// CreationDate wraps the corresponding Objective-C method.
+// CreationDate returns the creation date.
 func (ci *CalendarItem) CreationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("creationDate"))
 	return obj.Wrap(_r)
 }
 
-// TimeZone wraps the corresponding Objective-C method.
+// TimeZone returns the time zone.
 func (ci *CalendarItem) TimeZone() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("timeZone"))
 	return obj.Wrap(_r)
 }
 
-// HasAlarms wraps the corresponding Objective-C method.
+// HasAlarms reports whether the object has alarms.
 func (ci *CalendarItem) HasAlarms() bool {
 	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("hasAlarms"))
 	return _r
 }
 
-// HasRecurrenceRules wraps the corresponding Objective-C method.
+// HasRecurrenceRules reports whether the object has recurrence rules.
 func (ci *CalendarItem) HasRecurrenceRules() bool {
 	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("hasRecurrenceRules"))
 	return _r
 }
 
-// HasAttendees wraps the corresponding Objective-C method.
+// HasAttendees reports whether the object has attendees.
 func (ci *CalendarItem) HasAttendees() bool {
 	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("hasAttendees"))
 	return _r
 }
 
-// HasNotes wraps the corresponding Objective-C method.
+// HasNotes reports whether the object has notes.
 func (ci *CalendarItem) HasNotes() bool {
 	_r := objc.Send[bool](objref.IDOf(ci), objc.RegisterName("hasNotes"))
 	return _r
 }
 
-// Attendees wraps the corresponding Objective-C method.
+// Attendees returns the attendees.
 //
 // Attendees returns the collection as a Go slice.
 func (ci *CalendarItem) Attendees() []*Participant {
@@ -224,7 +224,7 @@ func (ci *CalendarItem) Attendees() []*Participant {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Participant { return ParticipantFromID(_id) })
 }
 
-// Alarms wraps the corresponding Objective-C method.
+// Alarms returns the alarms.
 //
 // Alarms returns the collection as a Go slice.
 func (ci *CalendarItem) Alarms() []*Alarm {

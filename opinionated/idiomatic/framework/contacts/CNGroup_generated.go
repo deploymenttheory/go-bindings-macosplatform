@@ -77,7 +77,7 @@ func (g *Group) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (g *Group) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("name"))
 	if _r == 0 {

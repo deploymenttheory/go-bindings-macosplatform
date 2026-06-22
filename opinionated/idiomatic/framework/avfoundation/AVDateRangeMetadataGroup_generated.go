@@ -53,13 +53,13 @@ func NewDateRangeMetadataGroupWithItemsStartDateEndDate(items []*MetadataItem, s
 	return dateRangeMetadataGroupAdopt(_id)
 }
 
-// StartDate wraps the corresponding Objective-C method.
+// StartDate returns the start date.
 func (drmg *DateRangeMetadataGroup) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(drmg), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// EndDate wraps the corresponding Objective-C method.
+// EndDate returns the end date.
 func (drmg *DateRangeMetadataGroup) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(drmg), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)

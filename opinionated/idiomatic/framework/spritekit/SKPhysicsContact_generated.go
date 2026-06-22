@@ -73,31 +73,31 @@ func NewPhysicsContact() *PhysicsContact {
 	return physicsContactAdopt(_id)
 }
 
-// BodyA wraps the corresponding Objective-C method.
+// BodyA returns the body a.
 func (pc *PhysicsContact) BodyA() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("bodyA"))
 	return PhysicsBodyFromID(_r)
 }
 
-// BodyB wraps the corresponding Objective-C method.
+// BodyB returns the body b.
 func (pc *PhysicsContact) BodyB() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)
 }
 
-// ContactPoint wraps the corresponding Objective-C method.
+// ContactPoint returns the contact point.
 func (pc *PhysicsContact) ContactPoint() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(pc), objc.RegisterName("contactPoint"))
 	return _r
 }
 
-// ContactNormal wraps the corresponding Objective-C method.
+// ContactNormal returns the contact normal.
 func (pc *PhysicsContact) ContactNormal() corefoundation.CGVector {
 	_r := objc.Send[corefoundation.CGVector](objref.IDOf(pc), objc.RegisterName("contactNormal"))
 	return _r
 }
 
-// CollisionImpulse wraps the corresponding Objective-C method.
+// CollisionImpulse returns the collision impulse.
 func (pc *PhysicsContact) CollisionImpulse() float64 {
 	_r := objc.Send[float64](objref.IDOf(pc), objc.RegisterName("collisionImpulse"))
 	return _r

@@ -284,31 +284,31 @@ func (t *Toolbar) SetConfigurationFromDictionary(configDict obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setConfigurationFromDictionary:"), objref.IDOf(configDict))
 }
 
-// SizeMode wraps the corresponding Objective-C method.
+// SizeMode returns the size mode.
 func (t *Toolbar) SizeMode() ToolbarSizeMode {
 	_r := objc.Send[ToolbarSizeMode](objref.IDOf(t), objc.RegisterName("sizeMode"))
 	return _r
 }
 
-// CenteredItemIdentifier wraps the corresponding Objective-C method.
+// CenteredItemIdentifier returns the centered item identifier.
 func (t *Toolbar) CenteredItemIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("centeredItemIdentifier"))
 	return obj.Wrap(_r)
 }
 
-// FullScreenAccessoryView wraps the corresponding Objective-C method.
+// FullScreenAccessoryView returns the full screen accessory view.
 func (t *Toolbar) FullScreenAccessoryView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("fullScreenAccessoryView"))
 	return ViewFromID(_r)
 }
 
-// FullScreenAccessoryViewMinHeight wraps the corresponding Objective-C method.
+// FullScreenAccessoryViewMinHeight returns the full screen accessory view min height.
 func (t *Toolbar) FullScreenAccessoryViewMinHeight() float64 {
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("fullScreenAccessoryViewMinHeight"))
 	return _r
 }
 
-// FullScreenAccessoryViewMaxHeight wraps the corresponding Objective-C method.
+// FullScreenAccessoryViewMaxHeight returns the full screen accessory view max height.
 func (t *Toolbar) FullScreenAccessoryViewMaxHeight() float64 {
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("fullScreenAccessoryViewMaxHeight"))
 	return _r
@@ -320,7 +320,7 @@ func (t *Toolbar) ShowsBaselineSeparator() bool {
 	return _r
 }
 
-// ConfigurationDictionary wraps the corresponding Objective-C method.
+// ConfigurationDictionary returns the configuration dictionary.
 func (t *Toolbar) ConfigurationDictionary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("configurationDictionary"))
 	return obj.Wrap(_r)

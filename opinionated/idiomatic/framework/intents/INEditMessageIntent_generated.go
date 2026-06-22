@@ -56,13 +56,13 @@ func (emi *EditMessageIntent) WithSuggestedInvocationPhrase(suggestedInvocationP
 	return emi
 }
 
-// WithDonationMetadata sets the property and returns the receiver so calls can be chained.
+// WithDonationMetadata sets the donation metadata.
 func (emi *EditMessageIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *EditMessageIntent {
 	objc.Send[objc.ID](objref.IDOf(emi), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return emi
 }
 
-// MessageIdentifier wraps the corresponding Objective-C method.
+// MessageIdentifier returns the message identifier.
 func (emi *EditMessageIntent) MessageIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(emi), objc.RegisterName("messageIdentifier"))
 	if _r == 0 {
@@ -71,7 +71,7 @@ func (emi *EditMessageIntent) MessageIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// EditedContent wraps the corresponding Objective-C method.
+// EditedContent returns the edited content.
 func (emi *EditMessageIntent) EditedContent() string {
 	_r := objc.Send[objc.ID](objref.IDOf(emi), objc.RegisterName("editedContent"))
 	if _r == 0 {

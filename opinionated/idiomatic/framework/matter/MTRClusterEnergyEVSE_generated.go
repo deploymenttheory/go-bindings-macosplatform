@@ -106,163 +106,163 @@ func (mcee *MTRClusterEnergyEVSE) GetTargetsWithExpectedValuesExpectedValueInter
 	}
 }
 
-// ReadAttributeStateWithParams wraps the corresponding Objective-C method.
+// ReadAttributeStateWithParams reads attribute state with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeStateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeSupplyStateWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSupplyStateWithParams reads attribute supply state with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeSupplyStateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeSupplyStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFaultStateWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFaultStateWithParams reads attribute fault state with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeFaultStateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeFaultStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeChargingEnabledUntilWithParams wraps the corresponding Objective-C method.
+// ReadAttributeChargingEnabledUntilWithParams reads attribute charging enabled until with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeChargingEnabledUntilWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeChargingEnabledUntilWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCircuitCapacityWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCircuitCapacityWithParams reads attribute circuit capacity with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeCircuitCapacityWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeCircuitCapacityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinimumChargeCurrentWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMinimumChargeCurrentWithParams reads attribute minimum charge current with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeMinimumChargeCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeMinimumChargeCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaximumChargeCurrentWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMaximumChargeCurrentWithParams reads attribute maximum charge current with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeMaximumChargeCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeMaximumChargeCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeUserMaximumChargeCurrentWithParams wraps the corresponding Objective-C method.
+// ReadAttributeUserMaximumChargeCurrentWithParams reads attribute user maximum charge current with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeUserMaximumChargeCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeUserMaximumChargeCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeUserMaximumChargeCurrentWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeUserMaximumChargeCurrentWithValueExpectedValueInterval writes attribute user maximum charge current with value expected value interval.
 func (mcee *MTRClusterEnergyEVSE) WriteAttributeUserMaximumChargeCurrentWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("writeAttributeUserMaximumChargeCurrentWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeUserMaximumChargeCurrentWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeUserMaximumChargeCurrentWithValueExpectedValueIntervalParams writes attribute user maximum charge current with value expected value interval params.
 func (mcee *MTRClusterEnergyEVSE) WriteAttributeUserMaximumChargeCurrentWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("writeAttributeUserMaximumChargeCurrentWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeRandomizationDelayWindowWithParams wraps the corresponding Objective-C method.
+// ReadAttributeRandomizationDelayWindowWithParams reads attribute randomization delay window with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeRandomizationDelayWindowWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeRandomizationDelayWindowWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeRandomizationDelayWindowWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeRandomizationDelayWindowWithValueExpectedValueInterval writes attribute randomization delay window with value expected value interval.
 func (mcee *MTRClusterEnergyEVSE) WriteAttributeRandomizationDelayWindowWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("writeAttributeRandomizationDelayWindowWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeRandomizationDelayWindowWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeRandomizationDelayWindowWithValueExpectedValueIntervalParams writes attribute randomization delay window with value expected value interval params.
 func (mcee *MTRClusterEnergyEVSE) WriteAttributeRandomizationDelayWindowWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("writeAttributeRandomizationDelayWindowWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeNextChargeStartTimeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeNextChargeStartTimeWithParams reads attribute next charge start time with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeNextChargeStartTimeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeNextChargeStartTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeNextChargeTargetTimeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeNextChargeTargetTimeWithParams reads attribute next charge target time with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeNextChargeTargetTimeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeNextChargeTargetTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeNextChargeRequiredEnergyWithParams wraps the corresponding Objective-C method.
+// ReadAttributeNextChargeRequiredEnergyWithParams reads attribute next charge required energy with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeNextChargeRequiredEnergyWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeNextChargeRequiredEnergyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeNextChargeTargetSoCWithParams wraps the corresponding Objective-C method.
+// ReadAttributeNextChargeTargetSoCWithParams reads attribute next charge target so c with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeNextChargeTargetSoCWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeNextChargeTargetSoCWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeApproximateEVEfficiencyWithParams wraps the corresponding Objective-C method.
+// ReadAttributeApproximateEVEfficiencyWithParams reads attribute approximate ev efficiency with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeApproximateEVEfficiencyWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeApproximateEVEfficiencyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeApproximateEVEfficiencyWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeApproximateEVEfficiencyWithValueExpectedValueInterval writes attribute approximate ev efficiency with value expected value interval.
 func (mcee *MTRClusterEnergyEVSE) WriteAttributeApproximateEVEfficiencyWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("writeAttributeApproximateEVEfficiencyWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeApproximateEVEfficiencyWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeApproximateEVEfficiencyWithValueExpectedValueIntervalParams writes attribute approximate ev efficiency with value expected value interval params.
 func (mcee *MTRClusterEnergyEVSE) WriteAttributeApproximateEVEfficiencyWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("writeAttributeApproximateEVEfficiencyWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeSessionIDWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSessionIDWithParams reads attribute session ID with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeSessionIDWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeSessionIDWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeSessionDurationWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSessionDurationWithParams reads attribute session duration with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeSessionDurationWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeSessionDurationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeSessionEnergyChargedWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSessionEnergyChargedWithParams reads attribute session energy charged with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeSessionEnergyChargedWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeSessionEnergyChargedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcee *MTRClusterEnergyEVSE) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcee), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

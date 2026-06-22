@@ -73,25 +73,25 @@ func NewImageSizeConstraint() *ImageSizeConstraint {
 	return imageSizeConstraintAdopt(_id)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (isc *ImageSizeConstraint) Type() ImageSizeConstraintType {
 	_r := objc.Send[ImageSizeConstraintType](objref.IDOf(isc), objc.RegisterName("type"))
 	return _r
 }
 
-// PixelsWideRange wraps the corresponding Objective-C method.
+// PixelsWideRange returns the pixels wide range.
 func (isc *ImageSizeConstraint) PixelsWideRange() foundation.NSRange {
 	_r := objc.Send[foundation.NSRange](objref.IDOf(isc), objc.RegisterName("pixelsWideRange"))
 	return _r
 }
 
-// PixelsHighRange wraps the corresponding Objective-C method.
+// PixelsHighRange returns the pixels high range.
 func (isc *ImageSizeConstraint) PixelsHighRange() foundation.NSRange {
 	_r := objc.Send[foundation.NSRange](objref.IDOf(isc), objc.RegisterName("pixelsHighRange"))
 	return _r
 }
 
-// EnumeratedImageSizes wraps the corresponding Objective-C method.
+// EnumeratedImageSizes returns the enumerated image sizes.
 //
 // EnumeratedImageSizes returns the collection as a Go slice.
 func (isc *ImageSizeConstraint) EnumeratedImageSizes() []*ImageSize {

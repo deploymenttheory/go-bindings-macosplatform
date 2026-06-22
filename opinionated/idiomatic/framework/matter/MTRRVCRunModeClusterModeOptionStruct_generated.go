@@ -70,19 +70,19 @@ func NewMTRRVCRunModeClusterModeOptionStruct() *MTRRVCRunModeClusterModeOptionSt
 	return mTRRVCRunModeClusterModeOptionStructAdopt(_id)
 }
 
-// WithLabel sets the property and returns the receiver so calls can be chained.
+// WithLabel sets the label.
 func (mrmcmos *MTRRVCRunModeClusterModeOptionStruct) WithLabel(label string) *MTRRVCRunModeClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(mrmcmos), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return mrmcmos
 }
 
-// WithMode sets the property and returns the receiver so calls can be chained.
+// WithMode sets the mode.
 func (mrmcmos *MTRRVCRunModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTRRVCRunModeClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(mrmcmos), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return mrmcmos
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (mrmcmos *MTRRVCRunModeClusterModeOptionStruct) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mrmcmos), objc.RegisterName("label"))
 	if _r == 0 {
@@ -91,13 +91,13 @@ func (mrmcmos *MTRRVCRunModeClusterModeOptionStruct) Label() string {
 	return purego.GoString(_r)
 }
 
-// Mode wraps the corresponding Objective-C method.
+// Mode returns the mode.
 func (mrmcmos *MTRRVCRunModeClusterModeOptionStruct) Mode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mrmcmos), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
-// ModeTags wraps the corresponding Objective-C method.
+// ModeTags returns the mode tags.
 func (mrmcmos *MTRRVCRunModeClusterModeOptionStruct) ModeTags() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mrmcmos), objc.RegisterName("modeTags"))
 	return obj.Wrap(_r)

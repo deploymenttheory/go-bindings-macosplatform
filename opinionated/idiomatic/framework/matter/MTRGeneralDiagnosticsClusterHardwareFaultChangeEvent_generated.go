@@ -70,7 +70,7 @@ func NewMTRGeneralDiagnosticsClusterHardwareFaultChangeEvent() *MTRGeneralDiagno
 	return mTRGeneralDiagnosticsClusterHardwareFaultChangeEventAdopt(_id)
 }
 
-// Current wraps the corresponding Objective-C method.
+// Current returns the current.
 func (mgdchfce *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Current() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgdchfce), objc.RegisterName("current"))
 	return obj.Wrap(_r)
@@ -81,7 +81,7 @@ func (mgdchfce *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) SetCurrent
 	objc.Send[objc.ID](objref.IDOf(mgdchfce), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
-// Previous wraps the corresponding Objective-C method.
+// Previous returns the previous.
 func (mgdchfce *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Previous() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgdchfce), objc.RegisterName("previous"))
 	return obj.Wrap(_r)

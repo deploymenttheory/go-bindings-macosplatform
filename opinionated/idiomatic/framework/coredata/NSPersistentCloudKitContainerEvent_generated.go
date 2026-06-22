@@ -72,13 +72,13 @@ func NewPersistentCloudKitContainerEvent() *PersistentCloudKitContainerEvent {
 	return persistentCloudKitContainerEventAdopt(_id)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (pckce *PersistentCloudKitContainerEvent) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pckce), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// StoreIdentifier wraps the corresponding Objective-C method.
+// StoreIdentifier returns the store identifier.
 func (pckce *PersistentCloudKitContainerEvent) StoreIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pckce), objc.RegisterName("storeIdentifier"))
 	if _r == 0 {
@@ -87,19 +87,19 @@ func (pckce *PersistentCloudKitContainerEvent) StoreIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (pckce *PersistentCloudKitContainerEvent) Type() PersistentCloudKitContainerEventType {
 	_r := objc.Send[PersistentCloudKitContainerEventType](objref.IDOf(pckce), objc.RegisterName("type"))
 	return _r
 }
 
-// StartDate wraps the corresponding Objective-C method.
+// StartDate returns the start date.
 func (pckce *PersistentCloudKitContainerEvent) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pckce), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// EndDate wraps the corresponding Objective-C method.
+// EndDate returns the end date.
 func (pckce *PersistentCloudKitContainerEvent) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pckce), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)

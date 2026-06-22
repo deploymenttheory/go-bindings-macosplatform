@@ -457,25 +457,25 @@ func (fp *FontPanel) WithIgnoresMouseEvents(ignoresMouseEvents bool) *FontPanel 
 	return fp
 }
 
-// WithAutodisplay sets the property and returns the receiver so calls can be chained.
+// WithAutodisplay sets the autodisplay.
 func (fp *FontPanel) WithAutodisplay(autodisplay bool) *FontPanel {
 	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setAutodisplay:"), autodisplay)
 	return fp
 }
 
-// WithOneShot sets the property and returns the receiver so calls can be chained.
+// WithOneShot sets the one shot.
 func (fp *FontPanel) WithOneShot(oneShot bool) *FontPanel {
 	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setOneShot:"), oneShot)
 	return fp
 }
 
-// WithPreferredBackingLocation sets the property and returns the receiver so calls can be chained.
+// WithPreferredBackingLocation sets the preferred backing location.
 func (fp *FontPanel) WithPreferredBackingLocation(preferredBackingLocation WindowBackingLocation) *FontPanel {
 	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setPreferredBackingLocation:"), preferredBackingLocation)
 	return fp
 }
 
-// WithShowsResizeIndicator sets the property and returns the receiver so calls can be chained.
+// WithShowsResizeIndicator sets the shows resize indicator.
 func (fp *FontPanel) WithShowsResizeIndicator(showsResizeIndicator bool) *FontPanel {
 	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("setShowsResizeIndicator:"), showsResizeIndicator)
 	return fp
@@ -533,13 +533,13 @@ func (fp *FontPanel) ReloadDefaultFontFamilies() {
 	objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("reloadDefaultFontFamilies"))
 }
 
-// AccessoryView wraps the corresponding Objective-C method.
+// AccessoryView returns the accessory view.
 func (fp *FontPanel) AccessoryView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(fp), objc.RegisterName("accessoryView"))
 	return ViewFromID(_r)
 }
 
-// IsEnabled wraps the corresponding Objective-C method.
+// IsEnabled reports whether the object is enabled.
 func (fp *FontPanel) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(fp), objc.RegisterName("isEnabled"))
 	return _r

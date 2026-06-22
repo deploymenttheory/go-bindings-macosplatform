@@ -53,7 +53,7 @@ func NewUnarchiverForReadingWithData(data *Data) *Unarchiver {
 	return unarchiverAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (u *Unarchiver) WithScriptingProperties(scriptingProperties obj.Object) *Unarchiver {
 	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return u
@@ -78,7 +78,7 @@ func (u *Unarchiver) ReplaceObjectWithObject(object obj.Object, newObject obj.Ob
 	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("replaceObject:withObject:"), objref.IDOf(object), objref.IDOf(newObject))
 }
 
-// IsAtEnd wraps the corresponding Objective-C method.
+// IsAtEnd reports whether the object is at end.
 func (u *Unarchiver) IsAtEnd() bool {
 	_r := objc.Send[bool](objref.IDOf(u), objc.RegisterName("isAtEnd"))
 	return _r

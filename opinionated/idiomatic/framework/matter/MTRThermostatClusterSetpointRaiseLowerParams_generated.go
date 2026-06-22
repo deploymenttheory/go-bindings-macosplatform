@@ -70,13 +70,13 @@ func NewMTRThermostatClusterSetpointRaiseLowerParams() *MTRThermostatClusterSetp
 	return mTRThermostatClusterSetpointRaiseLowerParamsAdopt(_id)
 }
 
-// WithMode sets the property and returns the receiver so calls can be chained.
+// WithMode sets the mode.
 func (mtcsrlp *MTRThermostatClusterSetpointRaiseLowerParams) WithMode(mode obj.Object) *MTRThermostatClusterSetpointRaiseLowerParams {
 	objc.Send[objc.ID](objref.IDOf(mtcsrlp), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return mtcsrlp
 }
 
-// WithAmount sets the property and returns the receiver so calls can be chained.
+// WithAmount sets the amount.
 func (mtcsrlp *MTRThermostatClusterSetpointRaiseLowerParams) WithAmount(amount obj.Object) *MTRThermostatClusterSetpointRaiseLowerParams {
 	objc.Send[objc.ID](objref.IDOf(mtcsrlp), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return mtcsrlp
@@ -94,13 +94,13 @@ func (mtcsrlp *MTRThermostatClusterSetpointRaiseLowerParams) WithServerSideProce
 	return mtcsrlp
 }
 
-// Mode wraps the corresponding Objective-C method.
+// Mode returns the mode.
 func (mtcsrlp *MTRThermostatClusterSetpointRaiseLowerParams) Mode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsrlp), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
-// Amount wraps the corresponding Objective-C method.
+// Amount returns the amount.
 func (mtcsrlp *MTRThermostatClusterSetpointRaiseLowerParams) Amount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcsrlp), objc.RegisterName("amount"))
 	return obj.Wrap(_r)

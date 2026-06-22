@@ -78,13 +78,13 @@ func NewMTRTimeSynchronizationClusterSetTimeZoneResponseParamsWithResponseValueE
 	return mTRTimeSynchronizationClusterSetTimeZoneResponseParamsAdopt(_id), nil
 }
 
-// WithDstOffsetRequired sets the property and returns the receiver so calls can be chained.
+// WithDstOffsetRequired sets the dst offset required.
 func (mtscstzrp *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) WithDstOffsetRequired(dstOffsetRequired obj.Object) *MTRTimeSynchronizationClusterSetTimeZoneResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mtscstzrp), objc.RegisterName("setDstOffsetRequired:"), objref.IDOf(dstOffsetRequired))
 	return mtscstzrp
 }
 
-// DstOffsetRequired wraps the corresponding Objective-C method.
+// DstOffsetRequired returns the dst offset required.
 func (mtscstzrp *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) DstOffsetRequired() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtscstzrp), objc.RegisterName("dstOffsetRequired"))
 	return obj.Wrap(_r)

@@ -70,31 +70,31 @@ func NewComposition() *Composition {
 	return compositionAdopt(_id)
 }
 
-// Protocols wraps the corresponding Objective-C method.
+// Protocols returns the protocols.
 func (c *Composition) Protocols() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("protocols"))
 	return obj.Wrap(_r)
 }
 
-// Attributes wraps the corresponding Objective-C method.
+// Attributes returns the attributes.
 func (c *Composition) Attributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
-// InputKeys wraps the corresponding Objective-C method.
+// InputKeys returns the input keys.
 func (c *Composition) InputKeys() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("inputKeys"))
 	return obj.Wrap(_r)
 }
 
-// OutputKeys wraps the corresponding Objective-C method.
+// OutputKeys returns the output keys.
 func (c *Composition) OutputKeys() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("outputKeys"))
 	return obj.Wrap(_r)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (c *Composition) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("identifier"))
 	if _r == 0 {

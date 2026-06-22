@@ -73,7 +73,7 @@ func NewAssetWithFileURL(fileURL string) *Asset {
 	return assetAdopt(_id)
 }
 
-// FileURL wraps the corresponding Objective-C method.
+// FileURL returns the file URL.
 func (a *Asset) FileURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("fileURL"))
 	return obj.Wrap(_r)

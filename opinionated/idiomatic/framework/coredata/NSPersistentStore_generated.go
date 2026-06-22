@@ -124,13 +124,13 @@ func (ps *PersistentStore) WillRemoveFromPersistentStoreCoordinator(coordinator 
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("willRemoveFromPersistentStoreCoordinator:"), objref.IDOf(coordinator))
 }
 
-// PersistentStoreCoordinator wraps the corresponding Objective-C method.
+// PersistentStoreCoordinator returns the persistent store coordinator.
 func (ps *PersistentStore) PersistentStoreCoordinator() *PersistentStoreCoordinator {
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("persistentStoreCoordinator"))
 	return PersistentStoreCoordinatorFromID(_r)
 }
 
-// ConfigurationName wraps the corresponding Objective-C method.
+// ConfigurationName returns the configuration name.
 func (ps *PersistentStore) ConfigurationName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("configurationName"))
 	if _r == 0 {
@@ -139,19 +139,19 @@ func (ps *PersistentStore) ConfigurationName() string {
 	return purego.GoString(_r)
 }
 
-// Options wraps the corresponding Objective-C method.
+// Options returns the options.
 func (ps *PersistentStore) Options() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("options"))
 	return obj.Wrap(_r)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (ps *PersistentStore) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (ps *PersistentStore) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -160,7 +160,7 @@ func (ps *PersistentStore) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (ps *PersistentStore) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("type"))
 	if _r == 0 {
@@ -169,19 +169,19 @@ func (ps *PersistentStore) Type() string {
 	return purego.GoString(_r)
 }
 
-// IsReadOnly wraps the corresponding Objective-C method.
+// IsReadOnly reports whether the object is read only.
 func (ps *PersistentStore) IsReadOnly() bool {
 	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("isReadOnly"))
 	return _r
 }
 
-// Metadata wraps the corresponding Objective-C method.
+// Metadata returns the metadata.
 func (ps *PersistentStore) Metadata() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("metadata"))
 	return obj.Wrap(_r)
 }
 
-// CoreSpotlightExporter wraps the corresponding Objective-C method.
+// CoreSpotlightExporter returns the core spotlight exporter.
 func (ps *PersistentStore) CoreSpotlightExporter() *CoreDataCoreSpotlightDelegate {
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("coreSpotlightExporter"))
 	return CoreDataCoreSpotlightDelegateFromID(_r)

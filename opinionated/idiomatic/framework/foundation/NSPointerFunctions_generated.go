@@ -85,7 +85,7 @@ func (pf *PointerFunctions) WithUsesWeakReadAndWriteBarriers(usesWeakReadAndWrit
 	return pf
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (pf *PointerFunctions) WithScriptingProperties(scriptingProperties obj.Object) *PointerFunctions {
 	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return pf

@@ -82,7 +82,7 @@ func (mtscstzp *MTRTimeSynchronizationClusterSetTimeZoneParams) WithServerSidePr
 	return mtscstzp
 }
 
-// TimeZone wraps the corresponding Objective-C method.
+// TimeZone returns the time zone.
 func (mtscstzp *MTRTimeSynchronizationClusterSetTimeZoneParams) TimeZone() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtscstzp), objc.RegisterName("timeZone"))
 	return obj.Wrap(_r)

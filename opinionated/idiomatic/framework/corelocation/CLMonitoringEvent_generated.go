@@ -72,7 +72,7 @@ func NewMonitoringEvent() *MonitoringEvent {
 	return monitoringEventAdopt(_id)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (me *MonitoringEvent) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -81,19 +81,19 @@ func (me *MonitoringEvent) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Refinement wraps the corresponding Objective-C method.
+// Refinement returns the refinement.
 func (me *MonitoringEvent) Refinement() *Condition {
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("refinement"))
 	return ConditionFromID(_r)
 }
 
-// State wraps the corresponding Objective-C method.
+// State returns the state.
 func (me *MonitoringEvent) State() MonitoringState {
 	_r := objc.Send[MonitoringState](objref.IDOf(me), objc.RegisterName("state"))
 	return _r
 }
 
-// Date wraps the corresponding Objective-C method.
+// Date returns the date.
 func (me *MonitoringEvent) Date() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("date"))
 	return obj.Wrap(_r)

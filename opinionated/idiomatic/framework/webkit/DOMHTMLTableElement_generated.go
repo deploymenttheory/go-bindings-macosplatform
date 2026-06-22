@@ -49,255 +49,255 @@ func NewDOMHTMLTableElement() *DOMHTMLTableElement {
 	return dOMHTMLTableElementAdopt(_id)
 }
 
-// WithCaption sets the property and returns the receiver so calls can be chained.
+// WithCaption sets the caption.
 func (dte *DOMHTMLTableElement) WithCaption(caption *DOMHTMLTableCaptionElement) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setCaption:"), objref.IDOf(caption))
 	return dte
 }
 
-// WithTHead sets the property and returns the receiver so calls can be chained.
+// WithTHead sets the t head.
 func (dte *DOMHTMLTableElement) WithTHead(tHead *DOMHTMLTableSectionElement) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setTHead:"), objref.IDOf(tHead))
 	return dte
 }
 
-// WithTFoot sets the property and returns the receiver so calls can be chained.
+// WithTFoot sets the t foot.
 func (dte *DOMHTMLTableElement) WithTFoot(tFoot *DOMHTMLTableSectionElement) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setTFoot:"), objref.IDOf(tFoot))
 	return dte
 }
 
-// WithAlign sets the property and returns the receiver so calls can be chained.
+// WithAlign sets the align.
 func (dte *DOMHTMLTableElement) WithAlign(align string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setAlign:"), purego.NSString(align))
 	return dte
 }
 
-// WithBgColor sets the property and returns the receiver so calls can be chained.
+// WithBgColor sets the bg color.
 func (dte *DOMHTMLTableElement) WithBgColor(bgColor string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setBgColor:"), purego.NSString(bgColor))
 	return dte
 }
 
-// WithBorder sets the property and returns the receiver so calls can be chained.
+// WithBorder sets the border.
 func (dte *DOMHTMLTableElement) WithBorder(border string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setBorder:"), purego.NSString(border))
 	return dte
 }
 
-// WithCellPadding sets the property and returns the receiver so calls can be chained.
+// WithCellPadding sets the cell padding.
 func (dte *DOMHTMLTableElement) WithCellPadding(cellPadding string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setCellPadding:"), purego.NSString(cellPadding))
 	return dte
 }
 
-// WithCellSpacing sets the property and returns the receiver so calls can be chained.
+// WithCellSpacing sets the cell spacing.
 func (dte *DOMHTMLTableElement) WithCellSpacing(cellSpacing string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setCellSpacing:"), purego.NSString(cellSpacing))
 	return dte
 }
 
-// WithFrameBorders sets the property and returns the receiver so calls can be chained.
+// WithFrameBorders sets the frame borders.
 func (dte *DOMHTMLTableElement) WithFrameBorders(frameBorders string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setFrameBorders:"), purego.NSString(frameBorders))
 	return dte
 }
 
-// WithRules sets the property and returns the receiver so calls can be chained.
+// WithRules sets the rules.
 func (dte *DOMHTMLTableElement) WithRules(rules string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setRules:"), purego.NSString(rules))
 	return dte
 }
 
-// WithSummary sets the property and returns the receiver so calls can be chained.
+// WithSummary sets the summary.
 func (dte *DOMHTMLTableElement) WithSummary(summary string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setSummary:"), purego.NSString(summary))
 	return dte
 }
 
-// WithWidth sets the property and returns the receiver so calls can be chained.
+// WithWidth sets the width.
 func (dte *DOMHTMLTableElement) WithWidth(width string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setWidth:"), purego.NSString(width))
 	return dte
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (dte *DOMHTMLTableElement) WithTitle(title string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return dte
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (dte *DOMHTMLTableElement) WithLang(lang string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return dte
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (dte *DOMHTMLTableElement) WithDir(dir string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return dte
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (dte *DOMHTMLTableElement) WithTabIndex(tabIndex int) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setTabIndex:"), tabIndex)
 	return dte
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (dte *DOMHTMLTableElement) WithAccessKey(accessKey string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return dte
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (dte *DOMHTMLTableElement) WithInnerText(innerText string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return dte
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (dte *DOMHTMLTableElement) WithOuterText(outerText string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return dte
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (dte *DOMHTMLTableElement) WithContentEditable(contentEditable string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return dte
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (dte *DOMHTMLTableElement) WithIDName(idName string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return dte
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (dte *DOMHTMLTableElement) WithScrollLeft(scrollLeft int) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return dte
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (dte *DOMHTMLTableElement) WithScrollTop(scrollTop int) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setScrollTop:"), scrollTop)
 	return dte
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (dte *DOMHTMLTableElement) WithInnerHTML(innerHTML string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return dte
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (dte *DOMHTMLTableElement) WithOuterHTML(outerHTML string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return dte
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (dte *DOMHTMLTableElement) WithClassName(className string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return dte
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dte *DOMHTMLTableElement) WithNodeValue(nodeValue string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dte
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dte *DOMHTMLTableElement) WithPrefix(prefix string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dte
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dte *DOMHTMLTableElement) WithTextContent(textContent string) *DOMHTMLTableElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dte
 }
 
-// CreateTHead wraps the corresponding Objective-C method.
+// CreateTHead returns the create t head.
 func (dte *DOMHTMLTableElement) CreateTHead() *DOMHTMLElement {
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("createTHead"))
 	return DOMHTMLElementFromID(_r)
 }
 
-// DeleteTHead wraps the corresponding Objective-C method.
+// DeleteTHead deletes t head.
 func (dte *DOMHTMLTableElement) DeleteTHead() {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("deleteTHead"))
 }
 
-// CreateTFoot wraps the corresponding Objective-C method.
+// CreateTFoot returns the create t foot.
 func (dte *DOMHTMLTableElement) CreateTFoot() *DOMHTMLElement {
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("createTFoot"))
 	return DOMHTMLElementFromID(_r)
 }
 
-// DeleteTFoot wraps the corresponding Objective-C method.
+// DeleteTFoot deletes t foot.
 func (dte *DOMHTMLTableElement) DeleteTFoot() {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("deleteTFoot"))
 }
 
-// CreateCaption wraps the corresponding Objective-C method.
+// CreateCaption returns the create caption.
 func (dte *DOMHTMLTableElement) CreateCaption() *DOMHTMLElement {
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("createCaption"))
 	return DOMHTMLElementFromID(_r)
 }
 
-// DeleteCaption wraps the corresponding Objective-C method.
+// DeleteCaption deletes caption.
 func (dte *DOMHTMLTableElement) DeleteCaption() {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("deleteCaption"))
 }
 
-// InsertRow wraps the corresponding Objective-C method.
+// InsertRow inserts row.
 func (dte *DOMHTMLTableElement) InsertRow(index int) *DOMHTMLElement {
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("insertRow:"), index)
 	return DOMHTMLElementFromID(_r)
 }
 
-// DeleteRow wraps the corresponding Objective-C method.
+// DeleteRow deletes row.
 func (dte *DOMHTMLTableElement) DeleteRow(index int) {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("deleteRow:"), index)
 }
 
-// Caption wraps the corresponding Objective-C method.
+// Caption returns the caption.
 func (dte *DOMHTMLTableElement) Caption() *DOMHTMLTableCaptionElement {
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("caption"))
 	return DOMHTMLTableCaptionElementFromID(_r)
 }
 
-// THead wraps the corresponding Objective-C method.
+// THead returns the t head.
 func (dte *DOMHTMLTableElement) THead() *DOMHTMLTableSectionElement {
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("tHead"))
 	return DOMHTMLTableSectionElementFromID(_r)
 }
 
-// TFoot wraps the corresponding Objective-C method.
+// TFoot returns the t foot.
 func (dte *DOMHTMLTableElement) TFoot() *DOMHTMLTableSectionElement {
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("tFoot"))
 	return DOMHTMLTableSectionElementFromID(_r)
 }
 
-// Rows wraps the corresponding Objective-C method.
+// Rows returns the rows.
 func (dte *DOMHTMLTableElement) Rows() *DOMHTMLCollection {
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("rows"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
-// TBodies wraps the corresponding Objective-C method.
+// TBodies returns the t bodies.
 func (dte *DOMHTMLTableElement) TBodies() *DOMHTMLCollection {
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("tBodies"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
-// Align wraps the corresponding Objective-C method.
+// Align returns the align.
 func (dte *DOMHTMLTableElement) Align() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("align"))
 	if _r == 0 {
@@ -306,7 +306,7 @@ func (dte *DOMHTMLTableElement) Align() string {
 	return purego.GoString(_r)
 }
 
-// BgColor wraps the corresponding Objective-C method.
+// BgColor returns the bg color.
 func (dte *DOMHTMLTableElement) BgColor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("bgColor"))
 	if _r == 0 {
@@ -315,7 +315,7 @@ func (dte *DOMHTMLTableElement) BgColor() string {
 	return purego.GoString(_r)
 }
 
-// Border wraps the corresponding Objective-C method.
+// Border returns the border.
 func (dte *DOMHTMLTableElement) Border() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("border"))
 	if _r == 0 {
@@ -324,7 +324,7 @@ func (dte *DOMHTMLTableElement) Border() string {
 	return purego.GoString(_r)
 }
 
-// CellPadding wraps the corresponding Objective-C method.
+// CellPadding returns the cell padding.
 func (dte *DOMHTMLTableElement) CellPadding() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("cellPadding"))
 	if _r == 0 {
@@ -333,7 +333,7 @@ func (dte *DOMHTMLTableElement) CellPadding() string {
 	return purego.GoString(_r)
 }
 
-// CellSpacing wraps the corresponding Objective-C method.
+// CellSpacing returns the cell spacing.
 func (dte *DOMHTMLTableElement) CellSpacing() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("cellSpacing"))
 	if _r == 0 {
@@ -342,7 +342,7 @@ func (dte *DOMHTMLTableElement) CellSpacing() string {
 	return purego.GoString(_r)
 }
 
-// FrameBorders wraps the corresponding Objective-C method.
+// FrameBorders returns the frame borders.
 func (dte *DOMHTMLTableElement) FrameBorders() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("frameBorders"))
 	if _r == 0 {
@@ -351,7 +351,7 @@ func (dte *DOMHTMLTableElement) FrameBorders() string {
 	return purego.GoString(_r)
 }
 
-// Rules wraps the corresponding Objective-C method.
+// Rules returns the rules.
 func (dte *DOMHTMLTableElement) Rules() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("rules"))
 	if _r == 0 {
@@ -360,7 +360,7 @@ func (dte *DOMHTMLTableElement) Rules() string {
 	return purego.GoString(_r)
 }
 
-// Summary wraps the corresponding Objective-C method.
+// Summary returns the summary.
 func (dte *DOMHTMLTableElement) Summary() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("summary"))
 	if _r == 0 {
@@ -369,7 +369,7 @@ func (dte *DOMHTMLTableElement) Summary() string {
 	return purego.GoString(_r)
 }
 
-// Width wraps the corresponding Objective-C method.
+// Width returns the width.
 func (dte *DOMHTMLTableElement) Width() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("width"))
 	if _r == 0 {

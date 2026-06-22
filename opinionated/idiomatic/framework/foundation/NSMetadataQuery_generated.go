@@ -113,7 +113,7 @@ func (mq *MetadataQuery) WithOperationQueue(operationQueue *OperationQueue) *Met
 	return mq
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (mq *MetadataQuery) WithScriptingProperties(scriptingProperties obj.Object) *MetadataQuery {
 	objc.Send[objc.ID](objref.IDOf(mq), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return mq
@@ -168,13 +168,13 @@ func (mq *MetadataQuery) ValueOfAttributeForResultAtIndex(attrName string, idx i
 	return obj.Wrap(_r)
 }
 
-// Predicate wraps the corresponding Objective-C method.
+// Predicate returns the predicate.
 func (mq *MetadataQuery) Predicate() *Predicate {
 	_r := objc.Send[objc.ID](objref.IDOf(mq), objc.RegisterName("predicate"))
 	return PredicateFromID(_r)
 }
 
-// SortDescriptors wraps the corresponding Objective-C method.
+// SortDescriptors returns the sort descriptors.
 //
 // SortDescriptors returns the collection as a Go slice.
 func (mq *MetadataQuery) SortDescriptors() []*SortDescriptor {
@@ -182,7 +182,7 @@ func (mq *MetadataQuery) SortDescriptors() []*SortDescriptor {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SortDescriptor { return SortDescriptorFromID(_id) })
 }
 
-// ValueListAttributes wraps the corresponding Objective-C method.
+// ValueListAttributes returns the value list attributes.
 //
 // ValueListAttributes returns the collection as a Go slice.
 func (mq *MetadataQuery) ValueListAttributes() []string {
@@ -190,7 +190,7 @@ func (mq *MetadataQuery) ValueListAttributes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// GroupingAttributes wraps the corresponding Objective-C method.
+// GroupingAttributes returns the grouping attributes.
 //
 // GroupingAttributes returns the collection as a Go slice.
 func (mq *MetadataQuery) GroupingAttributes() []string {
@@ -198,13 +198,13 @@ func (mq *MetadataQuery) GroupingAttributes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// NotificationBatchingInterval wraps the corresponding Objective-C method.
+// NotificationBatchingInterval returns the notification batching interval.
 func (mq *MetadataQuery) NotificationBatchingInterval() float64 {
 	_r := objc.Send[float64](objref.IDOf(mq), objc.RegisterName("notificationBatchingInterval"))
 	return _r
 }
 
-// SearchScopes wraps the corresponding Objective-C method.
+// SearchScopes returns the search scopes.
 func (mq *MetadataQuery) SearchScopes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mq), objc.RegisterName("searchScopes"))
 	return obj.Wrap(_r)
@@ -215,7 +215,7 @@ func (mq *MetadataQuery) SetSearchScopes(searchScopes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mq), objc.RegisterName("setSearchScopes:"), objref.IDOf(searchScopes))
 }
 
-// SearchItems wraps the corresponding Objective-C method.
+// SearchItems returns the search items.
 func (mq *MetadataQuery) SearchItems() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mq), objc.RegisterName("searchItems"))
 	return obj.Wrap(_r)
@@ -226,49 +226,49 @@ func (mq *MetadataQuery) SetSearchItems(searchItems obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mq), objc.RegisterName("setSearchItems:"), objref.IDOf(searchItems))
 }
 
-// OperationQueue wraps the corresponding Objective-C method.
+// OperationQueue returns the operation queue.
 func (mq *MetadataQuery) OperationQueue() *OperationQueue {
 	_r := objc.Send[objc.ID](objref.IDOf(mq), objc.RegisterName("operationQueue"))
 	return OperationQueueFromID(_r)
 }
 
-// IsStarted wraps the corresponding Objective-C method.
+// IsStarted reports whether the object is started.
 func (mq *MetadataQuery) IsStarted() bool {
 	_r := objc.Send[bool](objref.IDOf(mq), objc.RegisterName("isStarted"))
 	return _r
 }
 
-// IsGathering wraps the corresponding Objective-C method.
+// IsGathering reports whether the object is gathering.
 func (mq *MetadataQuery) IsGathering() bool {
 	_r := objc.Send[bool](objref.IDOf(mq), objc.RegisterName("isGathering"))
 	return _r
 }
 
-// IsStopped wraps the corresponding Objective-C method.
+// IsStopped reports whether the object is stopped.
 func (mq *MetadataQuery) IsStopped() bool {
 	_r := objc.Send[bool](objref.IDOf(mq), objc.RegisterName("isStopped"))
 	return _r
 }
 
-// ResultCount wraps the corresponding Objective-C method.
+// ResultCount returns the result count.
 func (mq *MetadataQuery) ResultCount() int {
 	_r := objc.Send[int](objref.IDOf(mq), objc.RegisterName("resultCount"))
 	return _r
 }
 
-// Results wraps the corresponding Objective-C method.
+// Results returns the results.
 func (mq *MetadataQuery) Results() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mq), objc.RegisterName("results"))
 	return obj.Wrap(_r)
 }
 
-// ValueLists wraps the corresponding Objective-C method.
+// ValueLists returns the value lists.
 func (mq *MetadataQuery) ValueLists() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mq), objc.RegisterName("valueLists"))
 	return obj.Wrap(_r)
 }
 
-// GroupedResults wraps the corresponding Objective-C method.
+// GroupedResults returns the grouped results.
 //
 // GroupedResults returns the collection as a Go slice.
 func (mq *MetadataQuery) GroupedResults() []*MetadataQueryResultGroup {

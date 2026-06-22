@@ -80,13 +80,13 @@ func NewCIProfileStateWithEnabledProfilesDisabledProfiles(enabled []*CIProfile, 
 	return cIProfileStateAdopt(_id)
 }
 
-// MidiChannel wraps the corresponding Objective-C method.
+// MidiChannel returns the midi channel.
 func (cps *CIProfileState) MidiChannel() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(cps), objc.RegisterName("midiChannel"))
 	return _r
 }
 
-// EnabledProfiles wraps the corresponding Objective-C method.
+// EnabledProfiles returns the enabled profiles.
 //
 // EnabledProfiles returns the collection as a Go slice.
 func (cps *CIProfileState) EnabledProfiles() []*CIProfile {
@@ -94,7 +94,7 @@ func (cps *CIProfileState) EnabledProfiles() []*CIProfile {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CIProfile { return CIProfileFromID(_id) })
 }
 
-// DisabledProfiles wraps the corresponding Objective-C method.
+// DisabledProfiles returns the disabled profiles.
 //
 // DisabledProfiles returns the collection as a Go slice.
 func (cps *CIProfileState) DisabledProfiles() []*CIProfile {

@@ -74,13 +74,13 @@ func NewURLSession() *URLSession {
 	return uRLSessionAdopt(_id)
 }
 
-// WithSessionDescription sets the property and returns the receiver so calls can be chained.
+// WithSessionDescription sets the session description.
 func (us *URLSession) WithSessionDescription(sessionDescription StringProvider) *URLSession {
 	objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("setSessionDescription:"), objref.IDOf(sessionDescription))
 	return us
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (us *URLSession) WithScriptingProperties(scriptingProperties obj.Object) *URLSession {
 	objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return us
@@ -91,7 +91,7 @@ func (us *URLSession) FinishTasksAndInvalidate() {
 	objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("finishTasksAndInvalidate"))
 }
 
-// InvalidateAndCancel wraps the corresponding Objective-C method.
+// InvalidateAndCancel invalidates and cancel.
 func (us *URLSession) InvalidateAndCancel() {
 	objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("invalidateAndCancel"))
 }
@@ -245,19 +245,19 @@ func (us *URLSession) WebSocketTaskWithRequest(request *URLRequest) *URLSessionW
 	return URLSessionWebSocketTaskFromID(_r)
 }
 
-// DelegateQueue wraps the corresponding Objective-C method.
+// DelegateQueue returns the delegate queue.
 func (us *URLSession) DelegateQueue() *OperationQueue {
 	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("delegateQueue"))
 	return OperationQueueFromID(_r)
 }
 
-// Configuration wraps the corresponding Objective-C method.
+// Configuration returns the configuration.
 func (us *URLSession) Configuration() *URLSessionConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("configuration"))
 	return URLSessionConfigurationFromID(_r)
 }
 
-// SessionDescription wraps the corresponding Objective-C method.
+// SessionDescription returns the session description.
 func (us *URLSession) SessionDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("sessionDescription"))
 	if _r == 0 {

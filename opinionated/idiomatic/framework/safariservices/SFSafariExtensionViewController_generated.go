@@ -72,7 +72,7 @@ func NewSafariExtensionViewController() *SafariExtensionViewController {
 	return safariExtensionViewControllerAdopt(_id)
 }
 
-// DismissPopover wraps the corresponding Objective-C method.
+// DismissPopover dismisses popover.
 func (sevc *SafariExtensionViewController) DismissPopover() {
 	objc.Send[objc.ID](objref.IDOf(sevc), objc.RegisterName("dismissPopover"))
 }

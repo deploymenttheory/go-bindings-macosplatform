@@ -73,79 +73,79 @@ func NewConfiguration() *Configuration {
 	return configurationAdopt(_id)
 }
 
-// WithNodeName sets the property and returns the receiver so calls can be chained.
+// WithNodeName sets the node name.
 func (c *Configuration) WithNodeName(nodeName string) *Configuration {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setNodeName:"), purego.NSString(nodeName))
 	return c
 }
 
-// WithComment sets the property and returns the receiver so calls can be chained.
+// WithComment sets the comment.
 func (c *Configuration) WithComment(comment string) *Configuration {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setComment:"), purego.NSString(comment))
 	return c
 }
 
-// WithDefaultMappings sets the property and returns the receiver so calls can be chained.
+// WithDefaultMappings sets the default mappings.
 func (c *Configuration) WithDefaultMappings(defaultMappings *Mappings) *Configuration {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setDefaultMappings:"), objref.IDOf(defaultMappings))
 	return c
 }
 
-// WithTemplateName sets the property and returns the receiver so calls can be chained.
+// WithTemplateName sets the template name.
 func (c *Configuration) WithTemplateName(templateName string) *Configuration {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTemplateName:"), purego.NSString(templateName))
 	return c
 }
 
-// WithHideRegistration sets the property and returns the receiver so calls can be chained.
+// WithHideRegistration sets the hide registration.
 func (c *Configuration) WithHideRegistration(hideRegistration bool) *Configuration {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setHideRegistration:"), hideRegistration)
 	return c
 }
 
-// WithPreferredDestinationHostName sets the property and returns the receiver so calls can be chained.
+// WithPreferredDestinationHostName sets the preferred destination host name.
 func (c *Configuration) WithPreferredDestinationHostName(preferredDestinationHostName string) *Configuration {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPreferredDestinationHostName:"), purego.NSString(preferredDestinationHostName))
 	return c
 }
 
-// WithPreferredDestinationHostPort sets the property and returns the receiver so calls can be chained.
+// WithPreferredDestinationHostPort sets the preferred destination host port.
 func (c *Configuration) WithPreferredDestinationHostPort(preferredDestinationHostPort uint16) *Configuration {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPreferredDestinationHostPort:"), preferredDestinationHostPort)
 	return c
 }
 
-// WithPacketSigning sets the property and returns the receiver so calls can be chained.
+// WithPacketSigning sets the packet signing.
 func (c *Configuration) WithPacketSigning(packetSigning int) *Configuration {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPacketSigning:"), packetSigning)
 	return c
 }
 
-// WithPacketEncryption sets the property and returns the receiver so calls can be chained.
+// WithPacketEncryption sets the packet encryption.
 func (c *Configuration) WithPacketEncryption(packetEncryption int) *Configuration {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setPacketEncryption:"), packetEncryption)
 	return c
 }
 
-// WithManInTheMiddleProtection sets the property and returns the receiver so calls can be chained.
+// WithManInTheMiddleProtection sets the man in the middle protection.
 func (c *Configuration) WithManInTheMiddleProtection(manInTheMiddleProtection bool) *Configuration {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setManInTheMiddleProtection:"), manInTheMiddleProtection)
 	return c
 }
 
-// WithQueryTimeoutInSeconds sets the property and returns the receiver so calls can be chained.
+// WithQueryTimeoutInSeconds sets the query timeout in seconds.
 func (c *Configuration) WithQueryTimeoutInSeconds(queryTimeoutInSeconds int) *Configuration {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setQueryTimeoutInSeconds:"), queryTimeoutInSeconds)
 	return c
 }
 
-// WithConnectionSetupTimeoutInSeconds sets the property and returns the receiver so calls can be chained.
+// WithConnectionSetupTimeoutInSeconds sets the connection setup timeout in seconds.
 func (c *Configuration) WithConnectionSetupTimeoutInSeconds(connectionSetupTimeoutInSeconds int) *Configuration {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setConnectionSetupTimeoutInSeconds:"), connectionSetupTimeoutInSeconds)
 	return c
 }
 
-// WithConnectionIdleTimeoutInSeconds sets the property and returns the receiver so calls can be chained.
+// WithConnectionIdleTimeoutInSeconds sets the connection idle timeout in seconds.
 func (c *Configuration) WithConnectionIdleTimeoutInSeconds(connectionIdleTimeoutInSeconds int) *Configuration {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setConnectionIdleTimeoutInSeconds:"), connectionIdleTimeoutInSeconds)
 	return c
@@ -181,7 +181,7 @@ func (c *Configuration) RemoveTrustUsingUsernamePasswordDeleteTrustAccount(usern
 	return nil
 }
 
-// NodeName wraps the corresponding Objective-C method.
+// NodeName returns the node name.
 func (c *Configuration) NodeName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("nodeName"))
 	if _r == 0 {
@@ -190,7 +190,7 @@ func (c *Configuration) NodeName() string {
 	return purego.GoString(_r)
 }
 
-// Comment wraps the corresponding Objective-C method.
+// Comment returns the comment.
 func (c *Configuration) Comment() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("comment"))
 	if _r == 0 {
@@ -199,13 +199,13 @@ func (c *Configuration) Comment() string {
 	return purego.GoString(_r)
 }
 
-// DefaultMappings wraps the corresponding Objective-C method.
+// DefaultMappings returns the default mappings.
 func (c *Configuration) DefaultMappings() *Mappings {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("defaultMappings"))
 	return MappingsFromID(_r)
 }
 
-// TemplateName wraps the corresponding Objective-C method.
+// TemplateName returns the template name.
 func (c *Configuration) TemplateName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("templateName"))
 	if _r == 0 {
@@ -214,7 +214,7 @@ func (c *Configuration) TemplateName() string {
 	return purego.GoString(_r)
 }
 
-// VirtualSubnodes wraps the corresponding Objective-C method.
+// VirtualSubnodes returns the virtual subnodes.
 func (c *Configuration) VirtualSubnodes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("virtualSubnodes"))
 	return obj.Wrap(_r)
@@ -231,7 +231,7 @@ func (c *Configuration) HideRegistration() bool {
 	return _r
 }
 
-// PreferredDestinationHostName wraps the corresponding Objective-C method.
+// PreferredDestinationHostName returns the preferred destination host name.
 func (c *Configuration) PreferredDestinationHostName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("preferredDestinationHostName"))
 	if _r == 0 {
@@ -240,13 +240,13 @@ func (c *Configuration) PreferredDestinationHostName() string {
 	return purego.GoString(_r)
 }
 
-// PreferredDestinationHostPort wraps the corresponding Objective-C method.
+// PreferredDestinationHostPort returns the preferred destination host port.
 func (c *Configuration) PreferredDestinationHostPort() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(c), objc.RegisterName("preferredDestinationHostPort"))
 	return _r
 }
 
-// TrustAccount wraps the corresponding Objective-C method.
+// TrustAccount returns the trust account.
 func (c *Configuration) TrustAccount() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("trustAccount"))
 	if _r == 0 {
@@ -255,7 +255,7 @@ func (c *Configuration) TrustAccount() string {
 	return purego.GoString(_r)
 }
 
-// TrustMetaAccount wraps the corresponding Objective-C method.
+// TrustMetaAccount returns the trust meta account.
 func (c *Configuration) TrustMetaAccount() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("trustMetaAccount"))
 	if _r == 0 {
@@ -264,7 +264,7 @@ func (c *Configuration) TrustMetaAccount() string {
 	return purego.GoString(_r)
 }
 
-// TrustKerberosPrincipal wraps the corresponding Objective-C method.
+// TrustKerberosPrincipal returns the trust kerberos principal.
 func (c *Configuration) TrustKerberosPrincipal() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("trustKerberosPrincipal"))
 	if _r == 0 {
@@ -273,7 +273,7 @@ func (c *Configuration) TrustKerberosPrincipal() string {
 	return purego.GoString(_r)
 }
 
-// TrustType wraps the corresponding Objective-C method.
+// TrustType returns the trust type.
 func (c *Configuration) TrustType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("trustType"))
 	if _r == 0 {
@@ -300,13 +300,13 @@ func (c *Configuration) TrustUsesSystemKeychain() bool {
 	return _r
 }
 
-// PacketSigning wraps the corresponding Objective-C method.
+// PacketSigning returns the packet signing.
 func (c *Configuration) PacketSigning() int {
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("packetSigning"))
 	return _r
 }
 
-// PacketEncryption wraps the corresponding Objective-C method.
+// PacketEncryption returns the packet encryption.
 func (c *Configuration) PacketEncryption() int {
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("packetEncryption"))
 	return _r
@@ -318,25 +318,25 @@ func (c *Configuration) ManInTheMiddleProtection() bool {
 	return _r
 }
 
-// QueryTimeoutInSeconds wraps the corresponding Objective-C method.
+// QueryTimeoutInSeconds returns the query timeout in seconds.
 func (c *Configuration) QueryTimeoutInSeconds() int {
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("queryTimeoutInSeconds"))
 	return _r
 }
 
-// ConnectionSetupTimeoutInSeconds wraps the corresponding Objective-C method.
+// ConnectionSetupTimeoutInSeconds returns the connection setup timeout in seconds.
 func (c *Configuration) ConnectionSetupTimeoutInSeconds() int {
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("connectionSetupTimeoutInSeconds"))
 	return _r
 }
 
-// ConnectionIdleTimeoutInSeconds wraps the corresponding Objective-C method.
+// ConnectionIdleTimeoutInSeconds returns the connection idle timeout in seconds.
 func (c *Configuration) ConnectionIdleTimeoutInSeconds() int {
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("connectionIdleTimeoutInSeconds"))
 	return _r
 }
 
-// DefaultModuleEntries wraps the corresponding Objective-C method.
+// DefaultModuleEntries returns the default module entries.
 func (c *Configuration) DefaultModuleEntries() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("defaultModuleEntries"))
 	return obj.Wrap(_r)
@@ -347,7 +347,7 @@ func (c *Configuration) SetDefaultModuleEntries(defaultModuleEntries obj.Object)
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setDefaultModuleEntries:"), objref.IDOf(defaultModuleEntries))
 }
 
-// AuthenticationModuleEntries wraps the corresponding Objective-C method.
+// AuthenticationModuleEntries returns the authentication module entries.
 func (c *Configuration) AuthenticationModuleEntries() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("authenticationModuleEntries"))
 	return obj.Wrap(_r)
@@ -358,7 +358,7 @@ func (c *Configuration) SetAuthenticationModuleEntries(authenticationModuleEntri
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAuthenticationModuleEntries:"), objref.IDOf(authenticationModuleEntries))
 }
 
-// DiscoveryModuleEntries wraps the corresponding Objective-C method.
+// DiscoveryModuleEntries returns the discovery module entries.
 func (c *Configuration) DiscoveryModuleEntries() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("discoveryModuleEntries"))
 	return obj.Wrap(_r)
@@ -369,7 +369,7 @@ func (c *Configuration) SetDiscoveryModuleEntries(discoveryModuleEntries obj.Obj
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setDiscoveryModuleEntries:"), objref.IDOf(discoveryModuleEntries))
 }
 
-// GeneralModuleEntries wraps the corresponding Objective-C method.
+// GeneralModuleEntries returns the general module entries.
 func (c *Configuration) GeneralModuleEntries() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("generalModuleEntries"))
 	return obj.Wrap(_r)

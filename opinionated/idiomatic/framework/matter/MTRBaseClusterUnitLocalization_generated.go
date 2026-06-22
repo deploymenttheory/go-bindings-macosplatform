@@ -61,7 +61,7 @@ func NewMTRBaseClusterUnitLocalizationWithDeviceEndpointQueue(device *MTRBaseDev
 	return mTRBaseClusterUnitLocalizationAdopt(_id)
 }
 
-// ReadAttributeTemperatureUnitWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTemperatureUnitWithCompletion reads attribute temperature unit with completion.
 //
 // ReadAttributeTemperatureUnitWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcul *MTRBaseClusterUnitLocalization) ReadAttributeTemperatureUnitWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeTemperatureUnitWi
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcul *MTRBaseClusterUnitLocalization) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeGeneratedCommandL
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcul *MTRBaseClusterUnitLocalization) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeAcceptedCommandLi
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcul *MTRBaseClusterUnitLocalization) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeAttributeListWith
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcul *MTRBaseClusterUnitLocalization) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeFeatureMapWithPar
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcul *MTRBaseClusterUnitLocalization) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeClusterRevisionWi
 	}
 }
 
-// ReadAttributeTemperatureUnit wraps the corresponding Objective-C method.
+// ReadAttributeTemperatureUnit reads attribute temperature unit.
 //
 // ReadAttributeTemperatureUnit blocks until the operation completes or ctx is cancelled.
 func (mbcul *MTRBaseClusterUnitLocalization) ReadAttributeTemperatureUnit(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeTemperatureUnitWi
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcul *MTRBaseClusterUnitLocalization) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeGeneratedCommandL
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcul *MTRBaseClusterUnitLocalization) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeAcceptedCommandLi
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcul *MTRBaseClusterUnitLocalization) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeAttributeListWith
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcul *MTRBaseClusterUnitLocalization) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcul *MTRBaseClusterUnitLocalization) SubscribeAttributeFeatureMapWithMin
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcul *MTRBaseClusterUnitLocalization) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

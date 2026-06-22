@@ -112,25 +112,25 @@ func (tlf *TextLineFragment) FractionOfDistanceThroughGlyphForPoint(point corefo
 	return _r
 }
 
-// AttributedString wraps the corresponding Objective-C method.
+// AttributedString returns the attributed string.
 func (tlf *TextLineFragment) AttributedString() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("attributedString"))
 	return obj.Wrap(_r)
 }
 
-// CharacterRange wraps the corresponding Objective-C method.
+// CharacterRange returns the character range.
 func (tlf *TextLineFragment) CharacterRange() foundation.NSRange {
 	_r := objc.Send[foundation.NSRange](objref.IDOf(tlf), objc.RegisterName("characterRange"))
 	return _r
 }
 
-// TypographicBounds wraps the corresponding Objective-C method.
+// TypographicBounds returns the typographic bounds.
 func (tlf *TextLineFragment) TypographicBounds() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tlf), objc.RegisterName("typographicBounds"))
 	return _r
 }
 
-// GlyphOrigin wraps the corresponding Objective-C method.
+// GlyphOrigin returns the glyph origin.
 func (tlf *TextLineFragment) GlyphOrigin() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(tlf), objc.RegisterName("glyphOrigin"))
 	return _r

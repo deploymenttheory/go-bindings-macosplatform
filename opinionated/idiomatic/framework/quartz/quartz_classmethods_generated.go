@@ -144,7 +144,7 @@ func QuartzFilterWithOutputIntents(outputIntents obj.Object) *QuartzFilter {
 	return QuartzFilterFromID(_r)
 }
 
-// FilterManager wraps the corresponding Objective-C method.
+// FilterManager returns the filter manager.
 func FilterManager() *QuartzFilterManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilterManager")), objc.RegisterName("filterManager"))
 	return QuartzFilterManagerFromID(_r)

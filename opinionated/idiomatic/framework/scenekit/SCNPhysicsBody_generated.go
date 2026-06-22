@@ -168,13 +168,13 @@ func (pb *PhysicsBody) WithContinuousCollisionDetectionThreshold(continuousColli
 	return pb
 }
 
-// WithLinearRestingThreshold sets the property and returns the receiver so calls can be chained.
+// WithLinearRestingThreshold sets the linear resting threshold.
 func (pb *PhysicsBody) WithLinearRestingThreshold(linearRestingThreshold float64) *PhysicsBody {
 	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setLinearRestingThreshold:"), linearRestingThreshold)
 	return pb
 }
 
-// WithAngularRestingThreshold sets the property and returns the receiver so calls can be chained.
+// WithAngularRestingThreshold sets the angular resting threshold.
 func (pb *PhysicsBody) WithAngularRestingThreshold(angularRestingThreshold float64) *PhysicsBody {
 	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setAngularRestingThreshold:"), angularRestingThreshold)
 	return pb
@@ -195,13 +195,13 @@ func (pb *PhysicsBody) SetResting(resting bool) {
 	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setResting:"), resting)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (pb *PhysicsBody) Type() PhysicsBodyType {
 	_r := objc.Send[PhysicsBodyType](objref.IDOf(pb), objc.RegisterName("type"))
 	return _r
 }
 
-// Mass wraps the corresponding Objective-C method.
+// Mass returns the mass.
 func (pb *PhysicsBody) Mass() float64 {
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("mass"))
 	return _r
@@ -213,37 +213,37 @@ func (pb *PhysicsBody) UsesDefaultMomentOfInertia() bool {
 	return _r
 }
 
-// Charge wraps the corresponding Objective-C method.
+// Charge returns the charge.
 func (pb *PhysicsBody) Charge() float64 {
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("charge"))
 	return _r
 }
 
-// Friction wraps the corresponding Objective-C method.
+// Friction returns the friction.
 func (pb *PhysicsBody) Friction() float64 {
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("friction"))
 	return _r
 }
 
-// Restitution wraps the corresponding Objective-C method.
+// Restitution returns the restitution.
 func (pb *PhysicsBody) Restitution() float64 {
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("restitution"))
 	return _r
 }
 
-// RollingFriction wraps the corresponding Objective-C method.
+// RollingFriction returns the rolling friction.
 func (pb *PhysicsBody) RollingFriction() float64 {
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("rollingFriction"))
 	return _r
 }
 
-// PhysicsShape wraps the corresponding Objective-C method.
+// PhysicsShape returns the physics shape.
 func (pb *PhysicsBody) PhysicsShape() *PhysicsShape {
 	_r := objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("physicsShape"))
 	return PhysicsShapeFromID(_r)
 }
 
-// IsResting wraps the corresponding Objective-C method.
+// IsResting reports whether the object is resting.
 func (pb *PhysicsBody) IsResting() bool {
 	_r := objc.Send[bool](objref.IDOf(pb), objc.RegisterName("isResting"))
 	return _r
@@ -255,55 +255,55 @@ func (pb *PhysicsBody) AllowsResting() bool {
 	return _r
 }
 
-// Damping wraps the corresponding Objective-C method.
+// Damping returns the damping.
 func (pb *PhysicsBody) Damping() float64 {
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("damping"))
 	return _r
 }
 
-// AngularDamping wraps the corresponding Objective-C method.
+// AngularDamping returns the angular damping.
 func (pb *PhysicsBody) AngularDamping() float64 {
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("angularDamping"))
 	return _r
 }
 
-// CategoryBitMask wraps the corresponding Objective-C method.
+// CategoryBitMask returns the category bit mask.
 func (pb *PhysicsBody) CategoryBitMask() int {
 	_r := objc.Send[int](objref.IDOf(pb), objc.RegisterName("categoryBitMask"))
 	return _r
 }
 
-// CollisionBitMask wraps the corresponding Objective-C method.
+// CollisionBitMask returns the collision bit mask.
 func (pb *PhysicsBody) CollisionBitMask() int {
 	_r := objc.Send[int](objref.IDOf(pb), objc.RegisterName("collisionBitMask"))
 	return _r
 }
 
-// ContactTestBitMask wraps the corresponding Objective-C method.
+// ContactTestBitMask returns the contact test bit mask.
 func (pb *PhysicsBody) ContactTestBitMask() int {
 	_r := objc.Send[int](objref.IDOf(pb), objc.RegisterName("contactTestBitMask"))
 	return _r
 }
 
-// IsAffectedByGravity wraps the corresponding Objective-C method.
+// IsAffectedByGravity reports whether the object is affected by gravity.
 func (pb *PhysicsBody) IsAffectedByGravity() bool {
 	_r := objc.Send[bool](objref.IDOf(pb), objc.RegisterName("isAffectedByGravity"))
 	return _r
 }
 
-// ContinuousCollisionDetectionThreshold wraps the corresponding Objective-C method.
+// ContinuousCollisionDetectionThreshold returns the continuous collision detection threshold.
 func (pb *PhysicsBody) ContinuousCollisionDetectionThreshold() float64 {
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("continuousCollisionDetectionThreshold"))
 	return _r
 }
 
-// LinearRestingThreshold wraps the corresponding Objective-C method.
+// LinearRestingThreshold returns the linear resting threshold.
 func (pb *PhysicsBody) LinearRestingThreshold() float64 {
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("linearRestingThreshold"))
 	return _r
 }
 
-// AngularRestingThreshold wraps the corresponding Objective-C method.
+// AngularRestingThreshold returns the angular resting threshold.
 func (pb *PhysicsBody) AngularRestingThreshold() float64 {
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("angularRestingThreshold"))
 	return _r

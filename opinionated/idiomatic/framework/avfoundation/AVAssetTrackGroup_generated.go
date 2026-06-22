@@ -72,7 +72,7 @@ func NewAssetTrackGroup() *AssetTrackGroup {
 	return assetTrackGroupAdopt(_id)
 }
 
-// TrackIDs wraps the corresponding Objective-C method.
+// TrackIDs returns the track i ds.
 //
 // TrackIDs returns the collection as a Go slice.
 func (atg *AssetTrackGroup) TrackIDs() []obj.Object {

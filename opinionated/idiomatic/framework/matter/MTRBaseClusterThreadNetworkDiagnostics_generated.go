@@ -61,7 +61,7 @@ func NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointQueue(device *MT
 	return mTRBaseClusterThreadNetworkDiagnosticsAdopt(_id)
 }
 
-// ReadAttributeChannelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeChannelWithCompletion reads attribute channel with completion.
 //
 // ReadAttributeChannelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelW
 	}
 }
 
-// ReadAttributeRoutingRoleWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRoutingRoleWithCompletion reads attribute routing role with completion.
 //
 // ReadAttributeRoutingRoleWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRoutingRoleWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingR
 	}
 }
 
-// ReadAttributeNetworkNameWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNetworkNameWithCompletion reads attribute network name with completion.
 //
 // ReadAttributeNetworkNameWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNetworkNameWithCompletion(ctx context.Context) (result string, err error) {
@@ -211,7 +211,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkN
 	}
 }
 
-// ReadAttributePanIDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePanIDWithCompletion reads attribute pan ID with completion.
 //
 // ReadAttributePanIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePanIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIDWit
 	}
 }
 
-// ReadAttributeExtendedPanIDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeExtendedPanIDWithCompletion reads attribute extended pan ID with completion.
 //
 // ReadAttributeExtendedPanIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtended
 	}
 }
 
-// ReadAttributeMeshLocalPrefixWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMeshLocalPrefixWithCompletion reads attribute mesh local prefix with completion.
 //
 // ReadAttributeMeshLocalPrefixWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefixWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLoca
 	}
 }
 
-// ReadAttributeOverrunCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOverrunCountWithCompletion reads attribute overrun count with completion.
 //
 // ReadAttributeOverrunCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOverrunCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunC
 	}
 }
 
-// ReadAttributeNeighborTableWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNeighborTableWithCompletion reads attribute neighbor table with completion.
 //
 // ReadAttributeNeighborTableWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighbor
 	}
 }
 
-// ReadAttributeRouteTableWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRouteTableWithCompletion reads attribute route table with completion.
 //
 // ReadAttributeRouteTableWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouteTableWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTab
 	}
 }
 
-// ReadAttributePartitionIDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePartitionIDWithCompletion reads attribute partition ID with completion.
 //
 // ReadAttributePartitionIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitio
 	}
 }
 
-// ReadAttributeWeightingWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeWeightingWithCompletion reads attribute weighting with completion.
 //
 // ReadAttributeWeightingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeWeightingWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightin
 	}
 }
 
-// ReadAttributeDataVersionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDataVersionWithCompletion reads attribute data version with completion.
 //
 // ReadAttributeDataVersionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDataVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVers
 	}
 }
 
-// ReadAttributeStableDataVersionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeStableDataVersionWithCompletion reads attribute stable data version with completion.
 //
 // ReadAttributeStableDataVersionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDa
 	}
 }
 
-// ReadAttributeLeaderRouterIDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLeaderRouterIDWithCompletion reads attribute leader router ID with completion.
 //
 // ReadAttributeLeaderRouterIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRo
 	}
 }
 
-// ReadAttributeDetachedRoleCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDetachedRoleCountWithCompletion reads attribute detached role count with completion.
 //
 // ReadAttributeDetachedRoleCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetached
 	}
 }
 
-// ReadAttributeChildRoleCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeChildRoleCountWithCompletion reads attribute child role count with completion.
 //
 // ReadAttributeChildRoleCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRol
 	}
 }
 
-// ReadAttributeRouterRoleCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRouterRoleCountWithCompletion reads attribute router role count with completion.
 //
 // ReadAttributeRouterRoleCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRo
 	}
 }
 
-// ReadAttributeLeaderRoleCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLeaderRoleCountWithCompletion reads attribute leader role count with completion.
 //
 // ReadAttributeLeaderRoleCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -961,7 +961,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRo
 	}
 }
 
-// ReadAttributeAttachAttemptCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttachAttemptCountWithCompletion reads attribute attach attempt count with completion.
 //
 // ReadAttributeAttachAttemptCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAt
 	}
 }
 
-// ReadAttributePartitionIDChangeCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePartitionIDChangeCountWithCompletion reads attribute partition ID change count with completion.
 //
 // ReadAttributePartitionIDChangeCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIDChangeCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1061,7 +1061,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitio
 	}
 }
 
-// ReadAttributeBetterPartitionAttachAttemptCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBetterPartitionAttachAttemptCountWithCompletion reads attribute better partition attach attempt count with completion.
 //
 // ReadAttributeBetterPartitionAttachAttemptCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAttachAttemptCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPa
 	}
 }
 
-// ReadAttributeParentChangeCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeParentChangeCountWithCompletion reads attribute parent change count with completion.
 //
 // ReadAttributeParentChangeCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1161,7 +1161,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentCh
 	}
 }
 
-// ReadAttributeTxTotalCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTxTotalCountWithCompletion reads attribute tx total count with completion.
 //
 // ReadAttributeTxTotalCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1211,7 +1211,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalC
 	}
 }
 
-// ReadAttributeTxUnicastCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTxUnicastCountWithCompletion reads attribute tx unicast count with completion.
 //
 // ReadAttributeTxUnicastCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1261,7 +1261,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicas
 	}
 }
 
-// ReadAttributeTxBroadcastCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTxBroadcastCountWithCompletion reads attribute tx broadcast count with completion.
 //
 // ReadAttributeTxBroadcastCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1311,7 +1311,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadc
 	}
 }
 
-// ReadAttributeTxAckRequestedCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTxAckRequestedCountWithCompletion reads attribute tx ack requested count with completion.
 //
 // ReadAttributeTxAckRequestedCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1361,7 +1361,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckReq
 	}
 }
 
-// ReadAttributeTxAckedCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTxAckedCountWithCompletion reads attribute tx acked count with completion.
 //
 // ReadAttributeTxAckedCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1411,7 +1411,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedC
 	}
 }
 
-// ReadAttributeTxNoAckRequestedCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTxNoAckRequestedCountWithCompletion reads attribute tx no ack requested count with completion.
 //
 // ReadAttributeTxNoAckRequestedCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1461,7 +1461,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckR
 	}
 }
 
-// ReadAttributeTxDataCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTxDataCountWithCompletion reads attribute tx data count with completion.
 //
 // ReadAttributeTxDataCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1511,7 +1511,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCo
 	}
 }
 
-// ReadAttributeTxDataPollCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTxDataPollCountWithCompletion reads attribute tx data poll count with completion.
 //
 // ReadAttributeTxDataPollCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1561,7 +1561,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPo
 	}
 }
 
-// ReadAttributeTxBeaconCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTxBeaconCountWithCompletion reads attribute tx beacon count with completion.
 //
 // ReadAttributeTxBeaconCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1611,7 +1611,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeacon
 	}
 }
 
-// ReadAttributeTxBeaconRequestCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTxBeaconRequestCountWithCompletion reads attribute tx beacon request count with completion.
 //
 // ReadAttributeTxBeaconRequestCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1661,7 +1661,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeacon
 	}
 }
 
-// ReadAttributeTxOtherCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTxOtherCountWithCompletion reads attribute tx other count with completion.
 //
 // ReadAttributeTxOtherCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1711,7 +1711,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherC
 	}
 }
 
-// ReadAttributeTxRetryCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTxRetryCountWithCompletion reads attribute tx retry count with completion.
 //
 // ReadAttributeTxRetryCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1761,7 +1761,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryC
 	}
 }
 
-// ReadAttributeTxDirectMaxRetryExpiryCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTxDirectMaxRetryExpiryCountWithCompletion reads attribute tx direct max retry expiry count with completion.
 //
 // ReadAttributeTxDirectMaxRetryExpiryCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryExpiryCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1811,7 +1811,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirect
 	}
 }
 
-// ReadAttributeTxIndirectMaxRetryExpiryCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTxIndirectMaxRetryExpiryCountWithCompletion reads attribute tx indirect max retry expiry count with completion.
 //
 // ReadAttributeTxIndirectMaxRetryExpiryCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetryExpiryCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1861,7 +1861,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndire
 	}
 }
 
-// ReadAttributeTxErrCcaCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTxErrCcaCountWithCompletion reads attribute tx err cca count with completion.
 //
 // ReadAttributeTxErrCcaCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1911,7 +1911,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCca
 	}
 }
 
-// ReadAttributeTxErrAbortCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTxErrAbortCountWithCompletion reads attribute tx err abort count with completion.
 //
 // ReadAttributeTxErrAbortCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1961,7 +1961,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbo
 	}
 }
 
-// ReadAttributeTxErrBusyChannelCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTxErrBusyChannelCountWithCompletion reads attribute tx err busy channel count with completion.
 //
 // ReadAttributeTxErrBusyChannelCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2011,7 +2011,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBus
 	}
 }
 
-// ReadAttributeRxTotalCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRxTotalCountWithCompletion reads attribute rx total count with completion.
 //
 // ReadAttributeRxTotalCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2061,7 +2061,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalC
 	}
 }
 
-// ReadAttributeRxUnicastCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRxUnicastCountWithCompletion reads attribute rx unicast count with completion.
 //
 // ReadAttributeRxUnicastCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2111,7 +2111,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicas
 	}
 }
 
-// ReadAttributeRxBroadcastCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRxBroadcastCountWithCompletion reads attribute rx broadcast count with completion.
 //
 // ReadAttributeRxBroadcastCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2161,7 +2161,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadc
 	}
 }
 
-// ReadAttributeRxDataCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRxDataCountWithCompletion reads attribute rx data count with completion.
 //
 // ReadAttributeRxDataCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2211,7 +2211,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCo
 	}
 }
 
-// ReadAttributeRxDataPollCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRxDataPollCountWithCompletion reads attribute rx data poll count with completion.
 //
 // ReadAttributeRxDataPollCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2261,7 +2261,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPo
 	}
 }
 
-// ReadAttributeRxBeaconCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRxBeaconCountWithCompletion reads attribute rx beacon count with completion.
 //
 // ReadAttributeRxBeaconCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2311,7 +2311,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeacon
 	}
 }
 
-// ReadAttributeRxBeaconRequestCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRxBeaconRequestCountWithCompletion reads attribute rx beacon request count with completion.
 //
 // ReadAttributeRxBeaconRequestCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2361,7 +2361,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeacon
 	}
 }
 
-// ReadAttributeRxOtherCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRxOtherCountWithCompletion reads attribute rx other count with completion.
 //
 // ReadAttributeRxOtherCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2411,7 +2411,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherC
 	}
 }
 
-// ReadAttributeRxAddressFilteredCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRxAddressFilteredCountWithCompletion reads attribute rx address filtered count with completion.
 //
 // ReadAttributeRxAddressFilteredCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2461,7 +2461,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddres
 	}
 }
 
-// ReadAttributeRxDestAddrFilteredCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRxDestAddrFilteredCountWithCompletion reads attribute rx dest addr filtered count with completion.
 //
 // ReadAttributeRxDestAddrFilteredCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFilteredCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2511,7 +2511,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAd
 	}
 }
 
-// ReadAttributeRxDuplicatedCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRxDuplicatedCountWithCompletion reads attribute rx duplicated count with completion.
 //
 // ReadAttributeRxDuplicatedCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2561,7 +2561,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplic
 	}
 }
 
-// ReadAttributeRxErrNoFrameCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRxErrNoFrameCountWithCompletion reads attribute rx err no frame count with completion.
 //
 // ReadAttributeRxErrNoFrameCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2611,7 +2611,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoF
 	}
 }
 
-// ReadAttributeRxErrUnknownNeighborCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRxErrUnknownNeighborCountWithCompletion reads attribute rx err unknown neighbor count with completion.
 //
 // ReadAttributeRxErrUnknownNeighborCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighborCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2661,7 +2661,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnk
 	}
 }
 
-// ReadAttributeRxErrInvalidSrcAddrCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRxErrInvalidSrcAddrCountWithCompletion reads attribute rx err invalid src addr count with completion.
 //
 // ReadAttributeRxErrInvalidSrcAddrCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAddrCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2711,7 +2711,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInv
 	}
 }
 
-// ReadAttributeRxErrSecCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRxErrSecCountWithCompletion reads attribute rx err sec count with completion.
 //
 // ReadAttributeRxErrSecCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2761,7 +2761,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSec
 	}
 }
 
-// ReadAttributeRxErrFcsCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRxErrFcsCountWithCompletion reads attribute rx err fcs count with completion.
 //
 // ReadAttributeRxErrFcsCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2811,7 +2811,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcs
 	}
 }
 
-// ReadAttributeRxErrOtherCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRxErrOtherCountWithCompletion reads attribute rx err other count with completion.
 //
 // ReadAttributeRxErrOtherCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2861,7 +2861,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOth
 	}
 }
 
-// ReadAttributeActiveTimestampWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActiveTimestampWithCompletion reads attribute active timestamp with completion.
 //
 // ReadAttributeActiveTimestampWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestampWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2911,7 +2911,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTi
 	}
 }
 
-// ReadAttributePendingTimestampWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePendingTimestampWithCompletion reads attribute pending timestamp with completion.
 //
 // ReadAttributePendingTimestampWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePendingTimestampWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2961,7 +2961,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingT
 	}
 }
 
-// ReadAttributeDelayWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDelayWithCompletion reads attribute delay with completion.
 //
 // ReadAttributeDelayWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3011,7 +3011,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWit
 	}
 }
 
-// ReadAttributeSecurityPolicyWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSecurityPolicyWithCompletion reads attribute security policy with completion.
 //
 // ReadAttributeSecurityPolicyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicyWithCompletion(ctx context.Context) (result *MTRThreadNetworkDiagnosticsClusterSecurityPolicy, err error) {
@@ -3061,7 +3061,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurity
 	}
 }
 
-// ReadAttributeChannelPage0MaskWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeChannelPage0MaskWithCompletion reads attribute channel page0 mask with completion.
 //
 // ReadAttributeChannelPage0MaskWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0MaskWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3111,7 +3111,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelP
 	}
 }
 
-// ReadAttributeOperationalDatasetComponentsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOperationalDatasetComponentsWithCompletion reads attribute operational dataset components with completion.
 //
 // ReadAttributeOperationalDatasetComponentsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOperationalDatasetComponentsWithCompletion(ctx context.Context) (result *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, err error) {
@@ -3161,7 +3161,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperatio
 	}
 }
 
-// ReadAttributeActiveNetworkFaultsListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActiveNetworkFaultsListWithCompletion reads attribute active network faults list with completion.
 //
 // ReadAttributeActiveNetworkFaultsListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFaultsListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3211,7 +3211,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNe
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3261,7 +3261,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGenerate
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3311,7 +3311,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAccepted
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3361,7 +3361,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttribut
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3411,7 +3411,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureM
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3461,7 +3461,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeClusterR
 	}
 }
 
-// ReadAttributeChannel wraps the corresponding Objective-C method.
+// ReadAttributeChannel reads attribute channel.
 //
 // ReadAttributeChannel blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannel(ctx context.Context) (result obj.Object, err error) {
@@ -3511,7 +3511,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelW
 	}
 }
 
-// ReadAttributeRoutingRole wraps the corresponding Objective-C method.
+// ReadAttributeRoutingRole reads attribute routing role.
 //
 // ReadAttributeRoutingRole blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRoutingRole(ctx context.Context) (result obj.Object, err error) {
@@ -3561,7 +3561,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingR
 	}
 }
 
-// ReadAttributeNetworkName wraps the corresponding Objective-C method.
+// ReadAttributeNetworkName reads attribute network name.
 //
 // ReadAttributeNetworkName blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNetworkName(ctx context.Context) (result string, err error) {
@@ -3611,7 +3611,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkN
 	}
 }
 
-// ReadAttributePanID wraps the corresponding Objective-C method.
+// ReadAttributePanID reads attribute pan ID.
 //
 // ReadAttributePanID blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePanID(ctx context.Context) (result obj.Object, err error) {
@@ -3661,7 +3661,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIDWit
 	}
 }
 
-// ReadAttributeExtendedPanID wraps the corresponding Objective-C method.
+// ReadAttributeExtendedPanID reads attribute extended pan ID.
 //
 // ReadAttributeExtendedPanID blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanID(ctx context.Context) (result obj.Object, err error) {
@@ -3711,7 +3711,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtended
 	}
 }
 
-// ReadAttributeMeshLocalPrefix wraps the corresponding Objective-C method.
+// ReadAttributeMeshLocalPrefix reads attribute mesh local prefix.
 //
 // ReadAttributeMeshLocalPrefix blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefix(ctx context.Context) (result obj.Object, err error) {
@@ -3761,7 +3761,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLoca
 	}
 }
 
-// ReadAttributeOverrunCount wraps the corresponding Objective-C method.
+// ReadAttributeOverrunCount reads attribute overrun count.
 //
 // ReadAttributeOverrunCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOverrunCount(ctx context.Context) (result obj.Object, err error) {
@@ -3811,7 +3811,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunC
 	}
 }
 
-// ReadAttributeNeighborTableList wraps the corresponding Objective-C method.
+// ReadAttributeNeighborTableList reads attribute neighbor table list.
 //
 // ReadAttributeNeighborTableList blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableList(ctx context.Context) (result obj.Object, err error) {
@@ -3861,7 +3861,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighbor
 	}
 }
 
-// ReadAttributeRouteTableList wraps the corresponding Objective-C method.
+// ReadAttributeRouteTableList reads attribute route table list.
 //
 // ReadAttributeRouteTableList blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouteTableList(ctx context.Context) (result obj.Object, err error) {
@@ -3911,7 +3911,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTab
 	}
 }
 
-// ReadAttributePartitionID wraps the corresponding Objective-C method.
+// ReadAttributePartitionID reads attribute partition ID.
 //
 // ReadAttributePartitionID blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionID(ctx context.Context) (result obj.Object, err error) {
@@ -3961,7 +3961,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitio
 	}
 }
 
-// ReadAttributeWeighting wraps the corresponding Objective-C method.
+// ReadAttributeWeighting reads attribute weighting.
 //
 // ReadAttributeWeighting blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeWeighting(ctx context.Context) (result obj.Object, err error) {
@@ -4011,7 +4011,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightin
 	}
 }
 
-// ReadAttributeDataVersion wraps the corresponding Objective-C method.
+// ReadAttributeDataVersion reads attribute data version.
 //
 // ReadAttributeDataVersion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDataVersion(ctx context.Context) (result obj.Object, err error) {
@@ -4061,7 +4061,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVers
 	}
 }
 
-// ReadAttributeStableDataVersion wraps the corresponding Objective-C method.
+// ReadAttributeStableDataVersion reads attribute stable data version.
 //
 // ReadAttributeStableDataVersion blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersion(ctx context.Context) (result obj.Object, err error) {
@@ -4111,7 +4111,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDa
 	}
 }
 
-// ReadAttributeLeaderRouterID wraps the corresponding Objective-C method.
+// ReadAttributeLeaderRouterID reads attribute leader router ID.
 //
 // ReadAttributeLeaderRouterID blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterID(ctx context.Context) (result obj.Object, err error) {
@@ -4161,7 +4161,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRo
 	}
 }
 
-// ReadAttributeDetachedRoleCount wraps the corresponding Objective-C method.
+// ReadAttributeDetachedRoleCount reads attribute detached role count.
 //
 // ReadAttributeDetachedRoleCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCount(ctx context.Context) (result obj.Object, err error) {
@@ -4211,7 +4211,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetached
 	}
 }
 
-// ReadAttributeChildRoleCount wraps the corresponding Objective-C method.
+// ReadAttributeChildRoleCount reads attribute child role count.
 //
 // ReadAttributeChildRoleCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCount(ctx context.Context) (result obj.Object, err error) {
@@ -4261,7 +4261,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRol
 	}
 }
 
-// ReadAttributeRouterRoleCount wraps the corresponding Objective-C method.
+// ReadAttributeRouterRoleCount reads attribute router role count.
 //
 // ReadAttributeRouterRoleCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCount(ctx context.Context) (result obj.Object, err error) {
@@ -4311,7 +4311,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRo
 	}
 }
 
-// ReadAttributeLeaderRoleCount wraps the corresponding Objective-C method.
+// ReadAttributeLeaderRoleCount reads attribute leader role count.
 //
 // ReadAttributeLeaderRoleCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCount(ctx context.Context) (result obj.Object, err error) {
@@ -4361,7 +4361,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRo
 	}
 }
 
-// ReadAttributeAttachAttemptCount wraps the corresponding Objective-C method.
+// ReadAttributeAttachAttemptCount reads attribute attach attempt count.
 //
 // ReadAttributeAttachAttemptCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCount(ctx context.Context) (result obj.Object, err error) {
@@ -4411,7 +4411,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAt
 	}
 }
 
-// ReadAttributePartitionIDChangeCount wraps the corresponding Objective-C method.
+// ReadAttributePartitionIDChangeCount reads attribute partition ID change count.
 //
 // ReadAttributePartitionIDChangeCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIDChangeCount(ctx context.Context) (result obj.Object, err error) {
@@ -4461,7 +4461,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitio
 	}
 }
 
-// ReadAttributeBetterPartitionAttachAttemptCount wraps the corresponding Objective-C method.
+// ReadAttributeBetterPartitionAttachAttemptCount reads attribute better partition attach attempt count.
 //
 // ReadAttributeBetterPartitionAttachAttemptCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAttachAttemptCount(ctx context.Context) (result obj.Object, err error) {
@@ -4511,7 +4511,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPa
 	}
 }
 
-// ReadAttributeParentChangeCount wraps the corresponding Objective-C method.
+// ReadAttributeParentChangeCount reads attribute parent change count.
 //
 // ReadAttributeParentChangeCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCount(ctx context.Context) (result obj.Object, err error) {
@@ -4561,7 +4561,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentCh
 	}
 }
 
-// ReadAttributeTxTotalCount wraps the corresponding Objective-C method.
+// ReadAttributeTxTotalCount reads attribute tx total count.
 //
 // ReadAttributeTxTotalCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCount(ctx context.Context) (result obj.Object, err error) {
@@ -4611,7 +4611,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalC
 	}
 }
 
-// ReadAttributeTxUnicastCount wraps the corresponding Objective-C method.
+// ReadAttributeTxUnicastCount reads attribute tx unicast count.
 //
 // ReadAttributeTxUnicastCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCount(ctx context.Context) (result obj.Object, err error) {
@@ -4661,7 +4661,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicas
 	}
 }
 
-// ReadAttributeTxBroadcastCount wraps the corresponding Objective-C method.
+// ReadAttributeTxBroadcastCount reads attribute tx broadcast count.
 //
 // ReadAttributeTxBroadcastCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCount(ctx context.Context) (result obj.Object, err error) {
@@ -4711,7 +4711,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadc
 	}
 }
 
-// ReadAttributeTxAckRequestedCount wraps the corresponding Objective-C method.
+// ReadAttributeTxAckRequestedCount reads attribute tx ack requested count.
 //
 // ReadAttributeTxAckRequestedCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCount(ctx context.Context) (result obj.Object, err error) {
@@ -4761,7 +4761,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckReq
 	}
 }
 
-// ReadAttributeTxAckedCount wraps the corresponding Objective-C method.
+// ReadAttributeTxAckedCount reads attribute tx acked count.
 //
 // ReadAttributeTxAckedCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCount(ctx context.Context) (result obj.Object, err error) {
@@ -4811,7 +4811,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedC
 	}
 }
 
-// ReadAttributeTxNoAckRequestedCount wraps the corresponding Objective-C method.
+// ReadAttributeTxNoAckRequestedCount reads attribute tx no ack requested count.
 //
 // ReadAttributeTxNoAckRequestedCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCount(ctx context.Context) (result obj.Object, err error) {
@@ -4861,7 +4861,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckR
 	}
 }
 
-// ReadAttributeTxDataCount wraps the corresponding Objective-C method.
+// ReadAttributeTxDataCount reads attribute tx data count.
 //
 // ReadAttributeTxDataCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataCount(ctx context.Context) (result obj.Object, err error) {
@@ -4911,7 +4911,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCo
 	}
 }
 
-// ReadAttributeTxDataPollCount wraps the corresponding Objective-C method.
+// ReadAttributeTxDataPollCount reads attribute tx data poll count.
 //
 // ReadAttributeTxDataPollCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCount(ctx context.Context) (result obj.Object, err error) {
@@ -4961,7 +4961,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPo
 	}
 }
 
-// ReadAttributeTxBeaconCount wraps the corresponding Objective-C method.
+// ReadAttributeTxBeaconCount reads attribute tx beacon count.
 //
 // ReadAttributeTxBeaconCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCount(ctx context.Context) (result obj.Object, err error) {
@@ -5011,7 +5011,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeacon
 	}
 }
 
-// ReadAttributeTxBeaconRequestCount wraps the corresponding Objective-C method.
+// ReadAttributeTxBeaconRequestCount reads attribute tx beacon request count.
 //
 // ReadAttributeTxBeaconRequestCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCount(ctx context.Context) (result obj.Object, err error) {
@@ -5061,7 +5061,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeacon
 	}
 }
 
-// ReadAttributeTxOtherCount wraps the corresponding Objective-C method.
+// ReadAttributeTxOtherCount reads attribute tx other count.
 //
 // ReadAttributeTxOtherCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCount(ctx context.Context) (result obj.Object, err error) {
@@ -5111,7 +5111,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherC
 	}
 }
 
-// ReadAttributeTxRetryCount wraps the corresponding Objective-C method.
+// ReadAttributeTxRetryCount reads attribute tx retry count.
 //
 // ReadAttributeTxRetryCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCount(ctx context.Context) (result obj.Object, err error) {
@@ -5161,7 +5161,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryC
 	}
 }
 
-// ReadAttributeTxDirectMaxRetryExpiryCount wraps the corresponding Objective-C method.
+// ReadAttributeTxDirectMaxRetryExpiryCount reads attribute tx direct max retry expiry count.
 //
 // ReadAttributeTxDirectMaxRetryExpiryCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryExpiryCount(ctx context.Context) (result obj.Object, err error) {
@@ -5211,7 +5211,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirect
 	}
 }
 
-// ReadAttributeTxIndirectMaxRetryExpiryCount wraps the corresponding Objective-C method.
+// ReadAttributeTxIndirectMaxRetryExpiryCount reads attribute tx indirect max retry expiry count.
 //
 // ReadAttributeTxIndirectMaxRetryExpiryCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetryExpiryCount(ctx context.Context) (result obj.Object, err error) {
@@ -5261,7 +5261,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndire
 	}
 }
 
-// ReadAttributeTxErrCcaCount wraps the corresponding Objective-C method.
+// ReadAttributeTxErrCcaCount reads attribute tx err cca count.
 //
 // ReadAttributeTxErrCcaCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCount(ctx context.Context) (result obj.Object, err error) {
@@ -5311,7 +5311,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCca
 	}
 }
 
-// ReadAttributeTxErrAbortCount wraps the corresponding Objective-C method.
+// ReadAttributeTxErrAbortCount reads attribute tx err abort count.
 //
 // ReadAttributeTxErrAbortCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCount(ctx context.Context) (result obj.Object, err error) {
@@ -5361,7 +5361,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbo
 	}
 }
 
-// ReadAttributeTxErrBusyChannelCount wraps the corresponding Objective-C method.
+// ReadAttributeTxErrBusyChannelCount reads attribute tx err busy channel count.
 //
 // ReadAttributeTxErrBusyChannelCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCount(ctx context.Context) (result obj.Object, err error) {
@@ -5411,7 +5411,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBus
 	}
 }
 
-// ReadAttributeRxTotalCount wraps the corresponding Objective-C method.
+// ReadAttributeRxTotalCount reads attribute rx total count.
 //
 // ReadAttributeRxTotalCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCount(ctx context.Context) (result obj.Object, err error) {
@@ -5461,7 +5461,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalC
 	}
 }
 
-// ReadAttributeRxUnicastCount wraps the corresponding Objective-C method.
+// ReadAttributeRxUnicastCount reads attribute rx unicast count.
 //
 // ReadAttributeRxUnicastCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCount(ctx context.Context) (result obj.Object, err error) {
@@ -5511,7 +5511,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicas
 	}
 }
 
-// ReadAttributeRxBroadcastCount wraps the corresponding Objective-C method.
+// ReadAttributeRxBroadcastCount reads attribute rx broadcast count.
 //
 // ReadAttributeRxBroadcastCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCount(ctx context.Context) (result obj.Object, err error) {
@@ -5561,7 +5561,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadc
 	}
 }
 
-// ReadAttributeRxDataCount wraps the corresponding Objective-C method.
+// ReadAttributeRxDataCount reads attribute rx data count.
 //
 // ReadAttributeRxDataCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataCount(ctx context.Context) (result obj.Object, err error) {
@@ -5611,7 +5611,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCo
 	}
 }
 
-// ReadAttributeRxDataPollCount wraps the corresponding Objective-C method.
+// ReadAttributeRxDataPollCount reads attribute rx data poll count.
 //
 // ReadAttributeRxDataPollCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCount(ctx context.Context) (result obj.Object, err error) {
@@ -5661,7 +5661,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPo
 	}
 }
 
-// ReadAttributeRxBeaconCount wraps the corresponding Objective-C method.
+// ReadAttributeRxBeaconCount reads attribute rx beacon count.
 //
 // ReadAttributeRxBeaconCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCount(ctx context.Context) (result obj.Object, err error) {
@@ -5711,7 +5711,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeacon
 	}
 }
 
-// ReadAttributeRxBeaconRequestCount wraps the corresponding Objective-C method.
+// ReadAttributeRxBeaconRequestCount reads attribute rx beacon request count.
 //
 // ReadAttributeRxBeaconRequestCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCount(ctx context.Context) (result obj.Object, err error) {
@@ -5761,7 +5761,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeacon
 	}
 }
 
-// ReadAttributeRxOtherCount wraps the corresponding Objective-C method.
+// ReadAttributeRxOtherCount reads attribute rx other count.
 //
 // ReadAttributeRxOtherCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCount(ctx context.Context) (result obj.Object, err error) {
@@ -5811,7 +5811,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherC
 	}
 }
 
-// ReadAttributeRxAddressFilteredCount wraps the corresponding Objective-C method.
+// ReadAttributeRxAddressFilteredCount reads attribute rx address filtered count.
 //
 // ReadAttributeRxAddressFilteredCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredCount(ctx context.Context) (result obj.Object, err error) {
@@ -5861,7 +5861,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddres
 	}
 }
 
-// ReadAttributeRxDestAddrFilteredCount wraps the corresponding Objective-C method.
+// ReadAttributeRxDestAddrFilteredCount reads attribute rx dest addr filtered count.
 //
 // ReadAttributeRxDestAddrFilteredCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFilteredCount(ctx context.Context) (result obj.Object, err error) {
@@ -5911,7 +5911,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAd
 	}
 }
 
-// ReadAttributeRxDuplicatedCount wraps the corresponding Objective-C method.
+// ReadAttributeRxDuplicatedCount reads attribute rx duplicated count.
 //
 // ReadAttributeRxDuplicatedCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCount(ctx context.Context) (result obj.Object, err error) {
@@ -5961,7 +5961,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplic
 	}
 }
 
-// ReadAttributeRxErrNoFrameCount wraps the corresponding Objective-C method.
+// ReadAttributeRxErrNoFrameCount reads attribute rx err no frame count.
 //
 // ReadAttributeRxErrNoFrameCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCount(ctx context.Context) (result obj.Object, err error) {
@@ -6011,7 +6011,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoF
 	}
 }
 
-// ReadAttributeRxErrUnknownNeighborCount wraps the corresponding Objective-C method.
+// ReadAttributeRxErrUnknownNeighborCount reads attribute rx err unknown neighbor count.
 //
 // ReadAttributeRxErrUnknownNeighborCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighborCount(ctx context.Context) (result obj.Object, err error) {
@@ -6061,7 +6061,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnk
 	}
 }
 
-// ReadAttributeRxErrInvalidSrcAddrCount wraps the corresponding Objective-C method.
+// ReadAttributeRxErrInvalidSrcAddrCount reads attribute rx err invalid src addr count.
 //
 // ReadAttributeRxErrInvalidSrcAddrCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAddrCount(ctx context.Context) (result obj.Object, err error) {
@@ -6111,7 +6111,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInv
 	}
 }
 
-// ReadAttributeRxErrSecCount wraps the corresponding Objective-C method.
+// ReadAttributeRxErrSecCount reads attribute rx err sec count.
 //
 // ReadAttributeRxErrSecCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCount(ctx context.Context) (result obj.Object, err error) {
@@ -6161,7 +6161,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSec
 	}
 }
 
-// ReadAttributeRxErrFcsCount wraps the corresponding Objective-C method.
+// ReadAttributeRxErrFcsCount reads attribute rx err fcs count.
 //
 // ReadAttributeRxErrFcsCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCount(ctx context.Context) (result obj.Object, err error) {
@@ -6211,7 +6211,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcs
 	}
 }
 
-// ReadAttributeRxErrOtherCount wraps the corresponding Objective-C method.
+// ReadAttributeRxErrOtherCount reads attribute rx err other count.
 //
 // ReadAttributeRxErrOtherCount blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCount(ctx context.Context) (result obj.Object, err error) {
@@ -6261,7 +6261,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOth
 	}
 }
 
-// ReadAttributeActiveTimestamp wraps the corresponding Objective-C method.
+// ReadAttributeActiveTimestamp reads attribute active timestamp.
 //
 // ReadAttributeActiveTimestamp blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestamp(ctx context.Context) (result obj.Object, err error) {
@@ -6311,7 +6311,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTi
 	}
 }
 
-// ReadAttributePendingTimestamp wraps the corresponding Objective-C method.
+// ReadAttributePendingTimestamp reads attribute pending timestamp.
 //
 // ReadAttributePendingTimestamp blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePendingTimestamp(ctx context.Context) (result obj.Object, err error) {
@@ -6361,7 +6361,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingT
 	}
 }
 
-// ReadAttributeDelay wraps the corresponding Objective-C method.
+// ReadAttributeDelay reads attribute delay.
 //
 // ReadAttributeDelay blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDelay(ctx context.Context) (result obj.Object, err error) {
@@ -6411,7 +6411,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWit
 	}
 }
 
-// ReadAttributeSecurityPolicy wraps the corresponding Objective-C method.
+// ReadAttributeSecurityPolicy reads attribute security policy.
 //
 // ReadAttributeSecurityPolicy blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicy(ctx context.Context) (result *MTRThreadNetworkDiagnosticsClusterSecurityPolicy, err error) {
@@ -6461,7 +6461,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurity
 	}
 }
 
-// ReadAttributeChannelPage0Mask wraps the corresponding Objective-C method.
+// ReadAttributeChannelPage0Mask reads attribute channel page0 mask.
 //
 // ReadAttributeChannelPage0Mask blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0Mask(ctx context.Context) (result obj.Object, err error) {
@@ -6511,7 +6511,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelP
 	}
 }
 
-// ReadAttributeOperationalDatasetComponents wraps the corresponding Objective-C method.
+// ReadAttributeOperationalDatasetComponents reads attribute operational dataset components.
 //
 // ReadAttributeOperationalDatasetComponents blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOperationalDatasetComponents(ctx context.Context) (result *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, err error) {
@@ -6561,7 +6561,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperatio
 	}
 }
 
-// ReadAttributeActiveNetworkFaultsList wraps the corresponding Objective-C method.
+// ReadAttributeActiveNetworkFaultsList reads attribute active network faults list.
 //
 // ReadAttributeActiveNetworkFaultsList blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFaultsList(ctx context.Context) (result obj.Object, err error) {
@@ -6611,7 +6611,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNe
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -6661,7 +6661,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGenerate
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -6711,7 +6711,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAccepted
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -6761,7 +6761,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttribut
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -6811,7 +6811,7 @@ func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureM
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

@@ -70,19 +70,19 @@ func (mi *MouseInput) LeftButton() *ControllerButtonInput {
 	return ControllerButtonInputFromID(_r)
 }
 
-// RightButton wraps the corresponding Objective-C method.
+// RightButton returns the right button.
 func (mi *MouseInput) RightButton() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("rightButton"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// MiddleButton wraps the corresponding Objective-C method.
+// MiddleButton returns the middle button.
 func (mi *MouseInput) MiddleButton() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("middleButton"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// AuxiliaryButtons wraps the corresponding Objective-C method.
+// AuxiliaryButtons returns the auxiliary buttons.
 //
 // AuxiliaryButtons returns the collection as a Go slice.
 func (mi *MouseInput) AuxiliaryButtons() []*ControllerButtonInput {

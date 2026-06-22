@@ -92,32 +92,32 @@ func (gv *GridView) WithColumnSpacing(columnSpacing float64) *GridView {
 	return gv
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (gv *GridView) WithSubviews(items ...ViewProvider) *GridView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setSubviews:"), _arr)
 	return gv
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (gv *GridView) WithHidden(hidden bool) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setHidden:"), hidden)
 	return gv
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (gv *GridView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return gv
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (gv *GridView) WithAutoresizesSubviews(autoresizesSubviews bool) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return gv
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (gv *GridView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return gv
@@ -129,19 +129,19 @@ func (gv *GridView) WithFrame(frame corefoundation.CGRect) *GridView {
 	return gv
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (gv *GridView) WithFrameRotation(frameRotation float64) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return gv
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (gv *GridView) WithFrameCenterRotation(frameCenterRotation float64) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return gv
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (gv *GridView) WithBoundsRotation(boundsRotation float64) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return gv
@@ -153,7 +153,7 @@ func (gv *GridView) WithBounds(bounds corefoundation.CGRect) *GridView {
 	return gv
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (gv *GridView) WithCanDrawConcurrently(canDrawConcurrently bool) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return gv
@@ -165,148 +165,148 @@ func (gv *GridView) WithNeedsDisplay(needsDisplay bool) *GridView {
 	return gv
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (gv *GridView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return gv
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (gv *GridView) WithWantsRestingTouches(wantsRestingTouches bool) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return gv
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (gv *GridView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return gv
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (gv *GridView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return gv
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (gv *GridView) WithWantsLayer(wantsLayer bool) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return gv
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (gv *GridView) WithLayer(layer obj.Object) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return gv
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (gv *GridView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return gv
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (gv *GridView) WithNeedsLayout(needsLayout bool) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return gv
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (gv *GridView) WithAlphaValue(alphaValue float64) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return gv
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (gv *GridView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return gv
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (gv *GridView) WithBackgroundFilters(items ...obj.Object) *GridView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return gv
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (gv *GridView) WithCompositingFilter(compositingFilter obj.Object) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return gv
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (gv *GridView) WithContentFilters(items ...obj.Object) *GridView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setContentFilters:"), _arr)
 	return gv
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (gv *GridView) WithShadow(shadow *Shadow) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return gv
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (gv *GridView) WithClipsToBounds(clipsToBounds bool) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return gv
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (gv *GridView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return gv
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (gv *GridView) WithToolTip(toolTip string) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return gv
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (gv *GridView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return gv
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (gv *GridView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return gv
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (gv *GridView) WithNextKeyView(nextKeyView ViewProvider) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return gv
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (gv *GridView) WithFocusRingType(focusRingType FocusRingType) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return gv
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (gv *GridView) WithGestureRecognizers(items ...GestureRecognizerProvider) *GridView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return gv
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (gv *GridView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return gv
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (gv *GridView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return gv
@@ -318,49 +318,49 @@ func (gv *GridView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSi
 	return gv
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (gv *GridView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return gv
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (gv *GridView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return gv
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (gv *GridView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return gv
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (gv *GridView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return gv
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (gv *GridView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return gv
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (gv *GridView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return gv
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (gv *GridView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return gv
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (gv *GridView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GridView {
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return gv
@@ -475,43 +475,43 @@ func (gv *GridView) MergeCellsInHorizontalRangeVerticalRange(hRange foundation.N
 	objc.Send[objc.ID](objref.IDOf(gv), objc.RegisterName("mergeCellsInHorizontalRange:verticalRange:"), hRange, vRange)
 }
 
-// NumberOfRows wraps the corresponding Objective-C method.
+// NumberOfRows returns the number of rows.
 func (gv *GridView) NumberOfRows() int {
 	_r := objc.Send[int](objref.IDOf(gv), objc.RegisterName("numberOfRows"))
 	return _r
 }
 
-// NumberOfColumns wraps the corresponding Objective-C method.
+// NumberOfColumns returns the number of columns.
 func (gv *GridView) NumberOfColumns() int {
 	_r := objc.Send[int](objref.IDOf(gv), objc.RegisterName("numberOfColumns"))
 	return _r
 }
 
-// XPlacement wraps the corresponding Objective-C method.
+// XPlacement returns the x placement.
 func (gv *GridView) XPlacement() GridCellPlacement {
 	_r := objc.Send[GridCellPlacement](objref.IDOf(gv), objc.RegisterName("xPlacement"))
 	return _r
 }
 
-// YPlacement wraps the corresponding Objective-C method.
+// YPlacement returns the y placement.
 func (gv *GridView) YPlacement() GridCellPlacement {
 	_r := objc.Send[GridCellPlacement](objref.IDOf(gv), objc.RegisterName("yPlacement"))
 	return _r
 }
 
-// RowAlignment wraps the corresponding Objective-C method.
+// RowAlignment returns the row alignment.
 func (gv *GridView) RowAlignment() GridRowAlignment {
 	_r := objc.Send[GridRowAlignment](objref.IDOf(gv), objc.RegisterName("rowAlignment"))
 	return _r
 }
 
-// RowSpacing wraps the corresponding Objective-C method.
+// RowSpacing returns the row spacing.
 func (gv *GridView) RowSpacing() float64 {
 	_r := objc.Send[float64](objref.IDOf(gv), objc.RegisterName("rowSpacing"))
 	return _r
 }
 
-// ColumnSpacing wraps the corresponding Objective-C method.
+// ColumnSpacing returns the column spacing.
 func (gv *GridView) ColumnSpacing() float64 {
 	_r := objc.Send[float64](objref.IDOf(gv), objc.RegisterName("columnSpacing"))
 	return _r

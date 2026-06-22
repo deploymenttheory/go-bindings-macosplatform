@@ -83,19 +83,19 @@ func (aa *AdvertiserAssistant) Stop() {
 	objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("stop"))
 }
 
-// Session wraps the corresponding Objective-C method.
+// Session returns the session.
 func (aa *AdvertiserAssistant) Session() *Session {
 	_r := objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("session"))
 	return SessionFromID(_r)
 }
 
-// DiscoveryInfo wraps the corresponding Objective-C method.
+// DiscoveryInfo returns the discovery info.
 func (aa *AdvertiserAssistant) DiscoveryInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("discoveryInfo"))
 	return obj.Wrap(_r)
 }
 
-// ServiceType wraps the corresponding Objective-C method.
+// ServiceType returns the service type.
 func (aa *AdvertiserAssistant) ServiceType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("serviceType"))
 	if _r == 0 {

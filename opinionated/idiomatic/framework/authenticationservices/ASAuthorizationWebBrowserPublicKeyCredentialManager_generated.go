@@ -98,7 +98,7 @@ func (awbpkcm *AuthorizationWebBrowserPublicKeyCredentialManager) PlatformCreden
 	}
 }
 
-// AuthorizationStateForPlatformCredentials wraps the corresponding Objective-C method.
+// AuthorizationStateForPlatformCredentials returns the authorization state for platform credentials.
 func (awbpkcm *AuthorizationWebBrowserPublicKeyCredentialManager) AuthorizationStateForPlatformCredentials() AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState {
 	_r := objc.Send[AuthorizationWebBrowserPublicKeyCredentialManagerAuthorizationState](objref.IDOf(awbpkcm), objc.RegisterName("authorizationStateForPlatformCredentials"))
 	return _r

@@ -70,7 +70,7 @@ func NewTransformScaleOp() *TransformScaleOp {
 	return transformScaleOpAdopt(_id)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (tso *TransformScaleOp) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tso), objc.RegisterName("name"))
 	if _r == 0 {
@@ -79,7 +79,7 @@ func (tso *TransformScaleOp) Name() string {
 	return purego.GoString(_r)
 }
 
-// AnimatedValue wraps the corresponding Objective-C method.
+// AnimatedValue returns the animated value.
 func (tso *TransformScaleOp) AnimatedValue() *AnimatedVector3 {
 	_r := objc.Send[objc.ID](objref.IDOf(tso), objc.RegisterName("animatedValue"))
 	return AnimatedVector3FromID(_r)

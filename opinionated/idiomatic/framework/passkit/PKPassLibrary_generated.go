@@ -75,7 +75,7 @@ func NewPassLibrary() *PassLibrary {
 	return passLibraryAdopt(_id)
 }
 
-// IsPaymentPassActivationAvailable wraps the corresponding Objective-C method.
+// IsPaymentPassActivationAvailable reports whether the object is payment pass activation available.
 func (pl *PassLibrary) IsPaymentPassActivationAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(pl), objc.RegisterName("isPaymentPassActivationAvailable"))
 	return _r
@@ -107,7 +107,7 @@ func (pl *PassLibrary) PassesOfType(passType PassType) []*Pass {
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Pass { return PassFromID(_id) })
 }
 
-// RemotePaymentPasses wraps the corresponding Objective-C method.
+// RemotePaymentPasses returns the remote payment passes.
 //
 // RemotePaymentPasses returns the collection as a Go slice.
 func (pl *PassLibrary) RemotePaymentPasses() []*PaymentPass {
@@ -137,12 +137,12 @@ func (pl *PassLibrary) OpenPaymentSetup() {
 	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("openPaymentSetup"))
 }
 
-// OpenPaymentSetupWithMerchantIdentifier wraps the corresponding Objective-C method.
+// OpenPaymentSetupWithMerchantIdentifier opens payment setup with merchant identifier.
 func (pl *PassLibrary) OpenPaymentSetupWithMerchantIdentifier(merchantIdentifier string) {
 	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("openPaymentSetupWithMerchantIdentifier:"), purego.NSString(merchantIdentifier))
 }
 
-// PresentPaymentPass wraps the corresponding Objective-C method.
+// PresentPaymentPass presents payment pass.
 func (pl *PassLibrary) PresentPaymentPass(pass *PaymentPass) {
 	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("presentPaymentPass:"), objref.IDOf(pass))
 }
@@ -201,13 +201,13 @@ func (pl *PassLibrary) AuthorizationStatusForCapability(capability PassLibraryCa
 	return _r
 }
 
-// IsSecureElementPassActivationAvailable wraps the corresponding Objective-C method.
+// IsSecureElementPassActivationAvailable reports whether the object is secure element pass activation available.
 func (pl *PassLibrary) IsSecureElementPassActivationAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(pl), objc.RegisterName("isSecureElementPassActivationAvailable"))
 	return _r
 }
 
-// RemoteSecureElementPasses wraps the corresponding Objective-C method.
+// RemoteSecureElementPasses returns the remote secure element passes.
 //
 // RemoteSecureElementPasses returns the collection as a Go slice.
 func (pl *PassLibrary) RemoteSecureElementPasses() []*SecureElementPass {

@@ -118,19 +118,19 @@ func (mgr *MagnificationGestureRecognizer) WithDelaysRotationEvents(delaysRotati
 	return mgr
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (mgr *MagnificationGestureRecognizer) WithName(name string) *MagnificationGestureRecognizer {
 	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setName:"), purego.NSString(name))
 	return mgr
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (mgr *MagnificationGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *MagnificationGestureRecognizer {
 	objc.Send[objc.ID](objref.IDOf(mgr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return mgr
 }
 
-// Magnification wraps the corresponding Objective-C method.
+// Magnification returns the magnification.
 func (mgr *MagnificationGestureRecognizer) Magnification() float64 {
 	_r := objc.Send[float64](objref.IDOf(mgr), objc.RegisterName("magnification"))
 	return _r

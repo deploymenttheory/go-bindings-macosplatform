@@ -72,7 +72,7 @@ func NewFilePreviewRequest() *FilePreviewRequest {
 	return filePreviewRequestAdopt(_id)
 }
 
-// FileURL wraps the corresponding Objective-C method.
+// FileURL returns the file URL.
 func (fpr *FilePreviewRequest) FileURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fpr), objc.RegisterName("fileURL"))
 	return obj.Wrap(_r)

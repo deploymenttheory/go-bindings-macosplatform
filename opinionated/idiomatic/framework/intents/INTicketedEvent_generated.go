@@ -73,13 +73,13 @@ func NewTicketedEventWithCategoryNameEventDurationLocation(category TicketedEven
 	return ticketedEventAdopt(_id)
 }
 
-// Category wraps the corresponding Objective-C method.
+// Category returns the category.
 func (te *TicketedEvent) Category() TicketedEventCategory {
 	_r := objc.Send[TicketedEventCategory](objref.IDOf(te), objc.RegisterName("category"))
 	return _r
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (te *TicketedEvent) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("name"))
 	if _r == 0 {
@@ -88,13 +88,13 @@ func (te *TicketedEvent) Name() string {
 	return purego.GoString(_r)
 }
 
-// EventDuration wraps the corresponding Objective-C method.
+// EventDuration returns the event duration.
 func (te *TicketedEvent) EventDuration() *DateComponentsRange {
 	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("eventDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
-// Location wraps the corresponding Objective-C method.
+// Location returns the location.
 func (te *TicketedEvent) Location() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("location"))
 	return obj.Wrap(_r)

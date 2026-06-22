@@ -52,7 +52,7 @@ func NewUnitDispersion() *UnitDispersion {
 	return unitDispersionAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ud *UnitDispersion) WithScriptingProperties(scriptingProperties obj.Object) *UnitDispersion {
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ud

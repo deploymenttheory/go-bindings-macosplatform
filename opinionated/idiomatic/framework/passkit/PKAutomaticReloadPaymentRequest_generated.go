@@ -103,7 +103,7 @@ func (arpr *AutomaticReloadPaymentRequest) WithTokenNotificationURL(tokenNotific
 	return arpr
 }
 
-// PaymentDescription wraps the corresponding Objective-C method.
+// PaymentDescription returns the payment description.
 func (arpr *AutomaticReloadPaymentRequest) PaymentDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(arpr), objc.RegisterName("paymentDescription"))
 	if _r == 0 {
@@ -112,13 +112,13 @@ func (arpr *AutomaticReloadPaymentRequest) PaymentDescription() string {
 	return purego.GoString(_r)
 }
 
-// AutomaticReloadBilling wraps the corresponding Objective-C method.
+// AutomaticReloadBilling returns the automatic reload billing.
 func (arpr *AutomaticReloadPaymentRequest) AutomaticReloadBilling() *AutomaticReloadPaymentSummaryItem {
 	_r := objc.Send[objc.ID](objref.IDOf(arpr), objc.RegisterName("automaticReloadBilling"))
 	return AutomaticReloadPaymentSummaryItemFromID(_r)
 }
 
-// BillingAgreement wraps the corresponding Objective-C method.
+// BillingAgreement returns the billing agreement.
 func (arpr *AutomaticReloadPaymentRequest) BillingAgreement() string {
 	_r := objc.Send[objc.ID](objref.IDOf(arpr), objc.RegisterName("billingAgreement"))
 	if _r == 0 {
@@ -127,13 +127,13 @@ func (arpr *AutomaticReloadPaymentRequest) BillingAgreement() string {
 	return purego.GoString(_r)
 }
 
-// ManagementURL wraps the corresponding Objective-C method.
+// ManagementURL returns the management URL.
 func (arpr *AutomaticReloadPaymentRequest) ManagementURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(arpr), objc.RegisterName("managementURL"))
 	return obj.Wrap(_r)
 }
 
-// TokenNotificationURL wraps the corresponding Objective-C method.
+// TokenNotificationURL returns the token notification URL.
 func (arpr *AutomaticReloadPaymentRequest) TokenNotificationURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(arpr), objc.RegisterName("tokenNotificationURL"))
 	return obj.Wrap(_r)

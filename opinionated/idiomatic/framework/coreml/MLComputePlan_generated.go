@@ -90,7 +90,7 @@ func (cp *ComputePlan) ComputeDeviceUsageForMLProgramOperation(operation *ModelS
 	return ComputePlanDeviceUsageFromID(_r)
 }
 
-// ModelStructure wraps the corresponding Objective-C method.
+// ModelStructure returns the model structure.
 func (cp *ComputePlan) ModelStructure() *ModelStructure {
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("modelStructure"))
 	return ModelStructureFromID(_r)

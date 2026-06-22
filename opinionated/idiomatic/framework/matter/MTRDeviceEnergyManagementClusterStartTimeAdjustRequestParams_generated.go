@@ -70,13 +70,13 @@ func NewMTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams() *MTRDevic
 	return mTRDeviceEnergyManagementClusterStartTimeAdjustRequestParamsAdopt(_id)
 }
 
-// WithRequestedStartTime sets the property and returns the receiver so calls can be chained.
+// WithRequestedStartTime sets the requested start time.
 func (mdemcstarp *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams) WithRequestedStartTime(requestedStartTime obj.Object) *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mdemcstarp), objc.RegisterName("setRequestedStartTime:"), objref.IDOf(requestedStartTime))
 	return mdemcstarp
 }
 
-// WithCause sets the property and returns the receiver so calls can be chained.
+// WithCause sets the cause.
 func (mdemcstarp *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mdemcstarp), objc.RegisterName("setCause:"), objref.IDOf(cause))
 	return mdemcstarp
@@ -94,13 +94,13 @@ func (mdemcstarp *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams) 
 	return mdemcstarp
 }
 
-// RequestedStartTime wraps the corresponding Objective-C method.
+// RequestedStartTime returns the requested start time.
 func (mdemcstarp *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams) RequestedStartTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcstarp), objc.RegisterName("requestedStartTime"))
 	return obj.Wrap(_r)
 }
 
-// Cause wraps the corresponding Objective-C method.
+// Cause returns the cause.
 func (mdemcstarp *MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams) Cause() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcstarp), objc.RegisterName("cause"))
 	return obj.Wrap(_r)

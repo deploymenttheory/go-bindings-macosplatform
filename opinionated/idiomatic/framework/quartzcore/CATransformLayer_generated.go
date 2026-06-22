@@ -162,25 +162,25 @@ func (tl *TransformLayer) WithContentsFormat(contentsFormat obj.Object) *Transfo
 	return tl
 }
 
-// WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeContent sets the wants extended dynamic range content.
 func (tl *TransformLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *TransformLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
 	return tl
 }
 
-// WithToneMapMode sets the property and returns the receiver so calls can be chained.
+// WithToneMapMode sets the tone map mode.
 func (tl *TransformLayer) WithToneMapMode(toneMapMode obj.Object) *TransformLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return tl
 }
 
-// WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
+// WithPreferredDynamicRange sets the preferred dynamic range.
 func (tl *TransformLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *TransformLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return tl
 }
 
-// WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
+// WithContentsHeadroom sets the contents headroom.
 func (tl *TransformLayer) WithContentsHeadroom(contentsHeadroom float64) *TransformLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
 	return tl
@@ -246,13 +246,13 @@ func (tl *TransformLayer) WithCornerRadius(cornerRadius float64) *TransformLayer
 	return tl
 }
 
-// WithMaskedCorners sets the property and returns the receiver so calls can be chained.
+// WithMaskedCorners sets the masked corners.
 func (tl *TransformLayer) WithMaskedCorners(maskedCorners CornerMask) *TransformLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setMaskedCorners:"), maskedCorners)
 	return tl
 }
 
-// WithCornerCurve sets the property and returns the receiver so calls can be chained.
+// WithCornerCurve sets the corner curve.
 func (tl *TransformLayer) WithCornerCurve(cornerCurve obj.Object) *TransformLayer {
 	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return tl

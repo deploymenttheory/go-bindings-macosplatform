@@ -79,7 +79,7 @@ func (apkcpri *AuthorizationPublicKeyCredentialPRFRegistrationInput) ShouldCheck
 	return _r
 }
 
-// InputValues wraps the corresponding Objective-C method.
+// InputValues returns the input values.
 func (apkcpri *AuthorizationPublicKeyCredentialPRFRegistrationInput) InputValues() *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
 	_r := objc.Send[objc.ID](objref.IDOf(apkcpri), objc.RegisterName("inputValues"))
 	return AuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(_r)

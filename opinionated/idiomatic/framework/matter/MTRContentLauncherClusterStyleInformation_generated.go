@@ -49,19 +49,19 @@ func NewMTRContentLauncherClusterStyleInformation() *MTRContentLauncherClusterSt
 	return mTRContentLauncherClusterStyleInformationAdopt(_id)
 }
 
-// WithImageURL sets the property and returns the receiver so calls can be chained.
+// WithImageURL sets the image URL.
 func (mclcsi *MTRContentLauncherClusterStyleInformation) WithImageURL(imageURL string) *MTRContentLauncherClusterStyleInformation {
 	objc.Send[objc.ID](objref.IDOf(mclcsi), objc.RegisterName("setImageURL:"), purego.NSString(imageURL))
 	return mclcsi
 }
 
-// WithColor sets the property and returns the receiver so calls can be chained.
+// WithColor sets the color.
 func (mclcsi *MTRContentLauncherClusterStyleInformation) WithColor(color string) *MTRContentLauncherClusterStyleInformation {
 	objc.Send[objc.ID](objref.IDOf(mclcsi), objc.RegisterName("setColor:"), purego.NSString(color))
 	return mclcsi
 }
 
-// WithSize sets the property and returns the receiver so calls can be chained.
+// WithSize sets the size.
 func (mclcsi *MTRContentLauncherClusterStyleInformation) WithSize(size MTRContentLauncherClusterDimensionStructProvider) *MTRContentLauncherClusterStyleInformation {
 	objc.Send[objc.ID](objref.IDOf(mclcsi), objc.RegisterName("setSize:"), objref.IDOf(size))
 	return mclcsi

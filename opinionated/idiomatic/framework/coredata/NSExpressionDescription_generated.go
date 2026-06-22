@@ -118,13 +118,13 @@ func (ed *ExpressionDescription) WithRenamingIdentifier(renamingIdentifier strin
 	return ed
 }
 
-// Expression wraps the corresponding Objective-C method.
+// Expression returns the expression.
 func (ed *ExpressionDescription) Expression() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("expression"))
 	return obj.Wrap(_r)
 }
 
-// ExpressionResultType wraps the corresponding Objective-C method.
+// ExpressionResultType returns the expression result type.
 func (ed *ExpressionDescription) ExpressionResultType() AttributeType {
 	_r := objc.Send[AttributeType](objref.IDOf(ed), objc.RegisterName("expressionResultType"))
 	return _r

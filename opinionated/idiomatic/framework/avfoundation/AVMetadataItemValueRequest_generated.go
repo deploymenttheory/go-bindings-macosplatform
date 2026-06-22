@@ -77,7 +77,7 @@ func (mivr *MetadataItemValueRequest) RespondWithValue(value obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mivr), objc.RegisterName("respondWithValue:"), objref.IDOf(value))
 }
 
-// MetadataItem wraps the corresponding Objective-C method.
+// MetadataItem returns the metadata item.
 func (mivr *MetadataItemValueRequest) MetadataItem() *MetadataItem {
 	_r := objc.Send[objc.ID](objref.IDOf(mivr), objc.RegisterName("metadataItem"))
 	return MetadataItemFromID(_r)

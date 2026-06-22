@@ -84,7 +84,7 @@ func (mgkmcksrairp *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponsePara
 	return mgkmcksrairp
 }
 
-// GroupKeySetIDs wraps the corresponding Objective-C method.
+// GroupKeySetIDs returns the group key set i ds.
 func (mgkmcksrairp *MTRGroupKeyManagementClusterKeySetReadAllIndicesResponseParams) GroupKeySetIDs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcksrairp), objc.RegisterName("groupKeySetIDs"))
 	return obj.Wrap(_r)

@@ -236,7 +236,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) RemoveFabricWithParamsComplet
 	}
 }
 
-// ReadAttributeNOCsWithParamsCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNOCsWithParamsCompletion reads attribute no cs with params completion.
 //
 // ReadAttributeNOCsWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
@@ -286,7 +286,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithPar
 	}
 }
 
-// ReadAttributeFabricsWithParamsCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFabricsWithParamsCompletion reads attribute fabrics with params completion.
 //
 // ReadAttributeFabricsWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
@@ -336,7 +336,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWith
 	}
 }
 
-// ReadAttributeSupportedFabricsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupportedFabricsWithCompletion reads attribute supported fabrics with completion.
 //
 // ReadAttributeSupportedFabricsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabricsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -386,7 +386,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFa
 	}
 }
 
-// ReadAttributeCommissionedFabricsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCommissionedFabricsWithCompletion reads attribute commissioned fabrics with completion.
 //
 // ReadAttributeCommissionedFabricsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabricsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -436,7 +436,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissione
 	}
 }
 
-// ReadAttributeTrustedRootCertificatesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTrustedRootCertificatesWithCompletion reads attribute trusted root certificates with completion.
 //
 // ReadAttributeTrustedRootCertificatesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCertificatesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -486,7 +486,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRoot
 	}
 }
 
-// ReadAttributeCurrentFabricIndexWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentFabricIndexWithCompletion reads attribute current fabric index with completion.
 //
 // ReadAttributeCurrentFabricIndexWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricIndexWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -536,7 +536,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabr
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -586,7 +586,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedCo
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -636,7 +636,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCom
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -686,7 +686,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeLi
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -736,7 +736,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapW
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) CSRRequestWithParams(ctx cont
 	}
 }
 
-// AddNOCWithParams wraps the corresponding Objective-C method.
+// AddNOCWithParams adds noc with params.
 //
 // AddNOCWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) AddNOCWithParams(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
@@ -886,7 +886,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) AddNOCWithParams(ctx context.
 	}
 }
 
-// UpdateNOCWithParams wraps the corresponding Objective-C method.
+// UpdateNOCWithParams updates noc with params.
 //
 // UpdateNOCWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) UpdateNOCWithParams(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
@@ -911,7 +911,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) UpdateNOCWithParams(ctx conte
 	}
 }
 
-// UpdateFabricLabelWithParams wraps the corresponding Objective-C method.
+// UpdateFabricLabelWithParams updates fabric label with params.
 //
 // UpdateFabricLabelWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParams(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
@@ -936,7 +936,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParams(c
 	}
 }
 
-// RemoveFabricWithParams wraps the corresponding Objective-C method.
+// RemoveFabricWithParams removes fabric with params.
 //
 // RemoveFabricWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) RemoveFabricWithParams(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
@@ -961,7 +961,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) RemoveFabricWithParams(ctx co
 	}
 }
 
-// ReadAttributeNOCsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeNOCsWithParams reads attribute no cs with params.
 //
 // ReadAttributeNOCsWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParams(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithMin
 	}
 }
 
-// ReadAttributeFabricsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFabricsWithParams reads attribute fabrics with params.
 //
 // ReadAttributeFabricsWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParams(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
@@ -1061,7 +1061,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWith
 	}
 }
 
-// ReadAttributeSupportedFabrics wraps the corresponding Objective-C method.
+// ReadAttributeSupportedFabrics reads attribute supported fabrics.
 //
 // ReadAttributeSupportedFabrics blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabrics(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFa
 	}
 }
 
-// ReadAttributeCommissionedFabrics wraps the corresponding Objective-C method.
+// ReadAttributeCommissionedFabrics reads attribute commissioned fabrics.
 //
 // ReadAttributeCommissionedFabrics blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabrics(ctx context.Context) (result obj.Object, err error) {
@@ -1161,7 +1161,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissione
 	}
 }
 
-// ReadAttributeTrustedRootCertificates wraps the corresponding Objective-C method.
+// ReadAttributeTrustedRootCertificates reads attribute trusted root certificates.
 //
 // ReadAttributeTrustedRootCertificates blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCertificates(ctx context.Context) (result obj.Object, err error) {
@@ -1211,7 +1211,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRoot
 	}
 }
 
-// ReadAttributeCurrentFabricIndex wraps the corresponding Objective-C method.
+// ReadAttributeCurrentFabricIndex reads attribute current fabric index.
 //
 // ReadAttributeCurrentFabricIndex blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricIndex(ctx context.Context) (result obj.Object, err error) {
@@ -1261,7 +1261,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabr
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1311,7 +1311,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedCo
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1361,7 +1361,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCom
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -1411,7 +1411,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeLi
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -1461,7 +1461,7 @@ func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapW
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

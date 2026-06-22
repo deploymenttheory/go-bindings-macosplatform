@@ -52,7 +52,7 @@ func NewUnitDuration() *UnitDuration {
 	return unitDurationAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ud *UnitDuration) WithScriptingProperties(scriptingProperties obj.Object) *UnitDuration {
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ud

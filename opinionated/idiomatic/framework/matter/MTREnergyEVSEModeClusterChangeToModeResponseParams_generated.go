@@ -78,25 +78,25 @@ func NewMTREnergyEVSEModeClusterChangeToModeResponseParamsWithResponseValueError
 	return mTREnergyEVSEModeClusterChangeToModeResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (meemcctmrp *MTREnergyEVSEModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTREnergyEVSEModeClusterChangeToModeResponseParams {
 	objc.Send[objc.ID](objref.IDOf(meemcctmrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return meemcctmrp
 }
 
-// WithStatusText sets the property and returns the receiver so calls can be chained.
+// WithStatusText sets the status text.
 func (meemcctmrp *MTREnergyEVSEModeClusterChangeToModeResponseParams) WithStatusText(statusText string) *MTREnergyEVSEModeClusterChangeToModeResponseParams {
 	objc.Send[objc.ID](objref.IDOf(meemcctmrp), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
 	return meemcctmrp
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (meemcctmrp *MTREnergyEVSEModeClusterChangeToModeResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meemcctmrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// StatusText wraps the corresponding Objective-C method.
+// StatusText returns the status text.
 func (meemcctmrp *MTREnergyEVSEModeClusterChangeToModeResponseParams) StatusText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(meemcctmrp), objc.RegisterName("statusText"))
 	if _r == 0 {

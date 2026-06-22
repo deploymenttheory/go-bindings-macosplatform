@@ -70,25 +70,25 @@ func NewMTRLevelControlClusterMoveToLevelParams() *MTRLevelControlClusterMoveToL
 	return mTRLevelControlClusterMoveToLevelParamsAdopt(_id)
 }
 
-// WithLevel sets the property and returns the receiver so calls can be chained.
+// WithLevel sets the level.
 func (mlccmtlp *MTRLevelControlClusterMoveToLevelParams) WithLevel(level obj.Object) *MTRLevelControlClusterMoveToLevelParams {
 	objc.Send[objc.ID](objref.IDOf(mlccmtlp), objc.RegisterName("setLevel:"), objref.IDOf(level))
 	return mlccmtlp
 }
 
-// WithTransitionTime sets the property and returns the receiver so calls can be chained.
+// WithTransitionTime sets the transition time.
 func (mlccmtlp *MTRLevelControlClusterMoveToLevelParams) WithTransitionTime(transitionTime obj.Object) *MTRLevelControlClusterMoveToLevelParams {
 	objc.Send[objc.ID](objref.IDOf(mlccmtlp), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return mlccmtlp
 }
 
-// WithOptionsMask sets the property and returns the receiver so calls can be chained.
+// WithOptionsMask sets the options mask.
 func (mlccmtlp *MTRLevelControlClusterMoveToLevelParams) WithOptionsMask(optionsMask obj.Object) *MTRLevelControlClusterMoveToLevelParams {
 	objc.Send[objc.ID](objref.IDOf(mlccmtlp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mlccmtlp
 }
 
-// WithOptionsOverride sets the property and returns the receiver so calls can be chained.
+// WithOptionsOverride sets the options override.
 func (mlccmtlp *MTRLevelControlClusterMoveToLevelParams) WithOptionsOverride(optionsOverride obj.Object) *MTRLevelControlClusterMoveToLevelParams {
 	objc.Send[objc.ID](objref.IDOf(mlccmtlp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mlccmtlp
@@ -106,25 +106,25 @@ func (mlccmtlp *MTRLevelControlClusterMoveToLevelParams) WithServerSideProcessin
 	return mlccmtlp
 }
 
-// Level wraps the corresponding Objective-C method.
+// Level returns the level.
 func (mlccmtlp *MTRLevelControlClusterMoveToLevelParams) Level() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmtlp), objc.RegisterName("level"))
 	return obj.Wrap(_r)
 }
 
-// TransitionTime wraps the corresponding Objective-C method.
+// TransitionTime returns the transition time.
 func (mlccmtlp *MTRLevelControlClusterMoveToLevelParams) TransitionTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmtlp), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)
 }
 
-// OptionsMask wraps the corresponding Objective-C method.
+// OptionsMask returns the options mask.
 func (mlccmtlp *MTRLevelControlClusterMoveToLevelParams) OptionsMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmtlp), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
 }
 
-// OptionsOverride wraps the corresponding Objective-C method.
+// OptionsOverride returns the options override.
 func (mlccmtlp *MTRLevelControlClusterMoveToLevelParams) OptionsOverride() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmtlp), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)

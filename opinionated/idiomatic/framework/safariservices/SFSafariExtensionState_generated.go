@@ -72,7 +72,7 @@ func NewSafariExtensionState() *SafariExtensionState {
 	return safariExtensionStateAdopt(_id)
 }
 
-// IsEnabled wraps the corresponding Objective-C method.
+// IsEnabled reports whether the object is enabled.
 func (ses *SafariExtensionState) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(ses), objc.RegisterName("isEnabled"))
 	return _r

@@ -75,7 +75,7 @@ func (psr *PersistentStoreRequest) WithAffectedStores(items ...PersistentStorePr
 	return psr
 }
 
-// AffectedStores wraps the corresponding Objective-C method.
+// AffectedStores returns the affected stores.
 //
 // AffectedStores returns the collection as a Go slice.
 func (psr *PersistentStoreRequest) AffectedStores() []*PersistentStore {
@@ -83,7 +83,7 @@ func (psr *PersistentStoreRequest) AffectedStores() []*PersistentStore {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersistentStore { return PersistentStoreFromID(_id) })
 }
 
-// RequestType wraps the corresponding Objective-C method.
+// RequestType returns the request type.
 func (psr *PersistentStoreRequest) RequestType() PersistentStoreRequestType {
 	_r := objc.Send[PersistentStoreRequestType](objref.IDOf(psr), objc.RegisterName("requestType"))
 	return _r

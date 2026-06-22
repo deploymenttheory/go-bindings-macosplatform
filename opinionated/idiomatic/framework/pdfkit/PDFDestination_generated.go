@@ -74,25 +74,25 @@ func NewDestinationWithPageAtPoint(page *Page, point corefoundation.CGPoint) *De
 	return destinationAdopt(_id)
 }
 
-// WithZoom sets the property and returns the receiver so calls can be chained.
+// WithZoom sets the zoom.
 func (d *Destination) WithZoom(zoom float64) *Destination {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setZoom:"), zoom)
 	return d
 }
 
-// Page wraps the corresponding Objective-C method.
+// Page returns the page.
 func (d *Destination) Page() *Page {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("page"))
 	return PageFromID(_r)
 }
 
-// Point wraps the corresponding Objective-C method.
+// Point returns the point.
 func (d *Destination) Point() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(d), objc.RegisterName("point"))
 	return _r
 }
 
-// Zoom wraps the corresponding Objective-C method.
+// Zoom returns the zoom.
 func (d *Destination) Zoom() float64 {
 	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("zoom"))
 	return _r

@@ -221,31 +221,31 @@ func (mav *MarkerAnnotationView) WithCollisionMode(collisionMode AnnotationViewC
 	return mav
 }
 
-// TitleVisibility wraps the corresponding Objective-C method.
+// TitleVisibility returns the title visibility.
 func (mav *MarkerAnnotationView) TitleVisibility() FeatureVisibility {
 	_r := objc.Send[FeatureVisibility](objref.IDOf(mav), objc.RegisterName("titleVisibility"))
 	return _r
 }
 
-// SubtitleVisibility wraps the corresponding Objective-C method.
+// SubtitleVisibility returns the subtitle visibility.
 func (mav *MarkerAnnotationView) SubtitleVisibility() FeatureVisibility {
 	_r := objc.Send[FeatureVisibility](objref.IDOf(mav), objc.RegisterName("subtitleVisibility"))
 	return _r
 }
 
-// MarkerTintColor wraps the corresponding Objective-C method.
+// MarkerTintColor returns the marker tint color.
 func (mav *MarkerAnnotationView) MarkerTintColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("markerTintColor"))
 	return obj.Wrap(_r)
 }
 
-// GlyphTintColor wraps the corresponding Objective-C method.
+// GlyphTintColor returns the glyph tint color.
 func (mav *MarkerAnnotationView) GlyphTintColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("glyphTintColor"))
 	return obj.Wrap(_r)
 }
 
-// GlyphText wraps the corresponding Objective-C method.
+// GlyphText returns the glyph text.
 func (mav *MarkerAnnotationView) GlyphText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("glyphText"))
 	if _r == 0 {
@@ -254,13 +254,13 @@ func (mav *MarkerAnnotationView) GlyphText() string {
 	return purego.GoString(_r)
 }
 
-// GlyphImage wraps the corresponding Objective-C method.
+// GlyphImage returns the glyph image.
 func (mav *MarkerAnnotationView) GlyphImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("glyphImage"))
 	return obj.Wrap(_r)
 }
 
-// SelectedGlyphImage wraps the corresponding Objective-C method.
+// SelectedGlyphImage returns the selected glyph image.
 func (mav *MarkerAnnotationView) SelectedGlyphImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mav), objc.RegisterName("selectedGlyphImage"))
 	return obj.Wrap(_r)

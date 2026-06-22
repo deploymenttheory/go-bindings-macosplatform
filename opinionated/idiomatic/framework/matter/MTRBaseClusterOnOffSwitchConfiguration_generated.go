@@ -61,7 +61,7 @@ func NewMTRBaseClusterOnOffSwitchConfigurationWithDeviceEndpointQueue(device *MT
 	return mTRBaseClusterOnOffSwitchConfigurationAdopt(_id)
 }
 
-// ReadAttributeSwitchTypeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSwitchTypeWithCompletion reads attribute switch type with completion.
 //
 // ReadAttributeSwitchTypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) ReadAttributeSwitchTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) SubscribeAttributeSwitchT
 	}
 }
 
-// ReadAttributeSwitchActionsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSwitchActionsWithCompletion reads attribute switch actions with completion.
 //
 // ReadAttributeSwitchActionsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) ReadAttributeSwitchActionsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) SubscribeAttributeSwitchA
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) SubscribeAttributeGenerat
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) SubscribeAttributeAccepte
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) SubscribeAttributeAttribu
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) SubscribeAttributeFeature
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) SubscribeAttributeCluster
 	}
 }
 
-// ReadAttributeSwitchType wraps the corresponding Objective-C method.
+// ReadAttributeSwitchType reads attribute switch type.
 //
 // ReadAttributeSwitchType blocks until the operation completes or ctx is cancelled.
 func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) ReadAttributeSwitchType(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) SubscribeAttributeSwitchT
 	}
 }
 
-// ReadAttributeSwitchActions wraps the corresponding Objective-C method.
+// ReadAttributeSwitchActions reads attribute switch actions.
 //
 // ReadAttributeSwitchActions blocks until the operation completes or ctx is cancelled.
 func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) ReadAttributeSwitchActions(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) SubscribeAttributeSwitchA
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) SubscribeAttributeGenerat
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) SubscribeAttributeAccepte
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) SubscribeAttributeAttribu
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) SubscribeAttributeFeature
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcoosc *MTRBaseClusterOnOffSwitchConfiguration) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

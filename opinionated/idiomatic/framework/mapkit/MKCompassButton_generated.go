@@ -84,13 +84,13 @@ func (cb *CompassButton) WithCompassVisibility(compassVisibility FeatureVisibili
 	return cb
 }
 
-// MapView wraps the corresponding Objective-C method.
+// MapView returns the map view.
 func (cb *CompassButton) MapView() *MapView {
 	_r := objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("mapView"))
 	return MapViewFromID(_r)
 }
 
-// CompassVisibility wraps the corresponding Objective-C method.
+// CompassVisibility returns the compass visibility.
 func (cb *CompassButton) CompassVisibility() FeatureVisibility {
 	_r := objc.Send[FeatureVisibility](objref.IDOf(cb), objc.RegisterName("compassVisibility"))
 	return _r

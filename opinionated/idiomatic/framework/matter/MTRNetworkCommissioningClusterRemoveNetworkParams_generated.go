@@ -70,13 +70,13 @@ func NewMTRNetworkCommissioningClusterRemoveNetworkParams() *MTRNetworkCommissio
 	return mTRNetworkCommissioningClusterRemoveNetworkParamsAdopt(_id)
 }
 
-// WithNetworkID sets the property and returns the receiver so calls can be chained.
+// WithNetworkID sets the network ID.
 func (mnccrnp *MTRNetworkCommissioningClusterRemoveNetworkParams) WithNetworkID(networkID obj.Object) *MTRNetworkCommissioningClusterRemoveNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(mnccrnp), objc.RegisterName("setNetworkID:"), objref.IDOf(networkID))
 	return mnccrnp
 }
 
-// WithBreadcrumb sets the property and returns the receiver so calls can be chained.
+// WithBreadcrumb sets the breadcrumb.
 func (mnccrnp *MTRNetworkCommissioningClusterRemoveNetworkParams) WithBreadcrumb(breadcrumb obj.Object) *MTRNetworkCommissioningClusterRemoveNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(mnccrnp), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 	return mnccrnp
@@ -94,13 +94,13 @@ func (mnccrnp *MTRNetworkCommissioningClusterRemoveNetworkParams) WithServerSide
 	return mnccrnp
 }
 
-// NetworkID wraps the corresponding Objective-C method.
+// NetworkID returns the network ID.
 func (mnccrnp *MTRNetworkCommissioningClusterRemoveNetworkParams) NetworkID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccrnp), objc.RegisterName("networkID"))
 	return obj.Wrap(_r)
 }
 
-// Breadcrumb wraps the corresponding Objective-C method.
+// Breadcrumb returns the breadcrumb.
 func (mnccrnp *MTRNetworkCommissioningClusterRemoveNetworkParams) Breadcrumb() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccrnp), objc.RegisterName("breadcrumb"))
 	return obj.Wrap(_r)

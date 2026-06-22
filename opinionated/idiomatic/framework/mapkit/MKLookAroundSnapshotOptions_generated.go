@@ -73,25 +73,25 @@ func NewLookAroundSnapshotOptions() *LookAroundSnapshotOptions {
 	return lookAroundSnapshotOptionsAdopt(_id)
 }
 
-// WithPointOfInterestFilter sets the property and returns the receiver so calls can be chained.
+// WithPointOfInterestFilter sets the point of interest filter.
 func (laso *LookAroundSnapshotOptions) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LookAroundSnapshotOptions {
 	objc.Send[objc.ID](objref.IDOf(laso), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 	return laso
 }
 
-// WithSize sets the property and returns the receiver so calls can be chained.
+// WithSize sets the size.
 func (laso *LookAroundSnapshotOptions) WithSize(size corefoundation.CGSize) *LookAroundSnapshotOptions {
 	objc.Send[objc.ID](objref.IDOf(laso), objc.RegisterName("setSize:"), size)
 	return laso
 }
 
-// PointOfInterestFilter wraps the corresponding Objective-C method.
+// PointOfInterestFilter returns the point of interest filter.
 func (laso *LookAroundSnapshotOptions) PointOfInterestFilter() *PointOfInterestFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(laso), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
-// Size wraps the corresponding Objective-C method.
+// Size returns the size.
 func (laso *LookAroundSnapshotOptions) Size() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(laso), objc.RegisterName("size"))
 	return _r

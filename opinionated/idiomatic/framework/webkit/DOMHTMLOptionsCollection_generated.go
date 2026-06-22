@@ -49,13 +49,13 @@ func NewDOMHTMLOptionsCollection() *DOMHTMLOptionsCollection {
 	return dOMHTMLOptionsCollectionAdopt(_id)
 }
 
-// WithSelectedIndex sets the property and returns the receiver so calls can be chained.
+// WithSelectedIndex sets the selected index.
 func (doc *DOMHTMLOptionsCollection) WithSelectedIndex(selectedIndex int) *DOMHTMLOptionsCollection {
 	objc.Send[objc.ID](objref.IDOf(doc), objc.RegisterName("setSelectedIndex:"), selectedIndex)
 	return doc
 }
 
-// WithLength sets the property and returns the receiver so calls can be chained.
+// WithLength sets the length.
 func (doc *DOMHTMLOptionsCollection) WithLength(length int) *DOMHTMLOptionsCollection {
 	objc.Send[objc.ID](objref.IDOf(doc), objc.RegisterName("setLength:"), length)
 	return doc
@@ -67,7 +67,7 @@ func (doc *DOMHTMLOptionsCollection) NamedItem(name string) *DOMNode {
 	return DOMNodeFromID(_r)
 }
 
-// AddIndex wraps the corresponding Objective-C method.
+// AddIndex adds index.
 func (doc *DOMHTMLOptionsCollection) AddIndex(option *DOMHTMLOptionElement, index int) {
 	objc.Send[objc.ID](objref.IDOf(doc), objc.RegisterName("add:index:"), objref.IDOf(option), index)
 }
@@ -83,13 +83,13 @@ func (doc *DOMHTMLOptionsCollection) Item(index int) *DOMNode {
 	return DOMNodeFromID(_r)
 }
 
-// SelectedIndex wraps the corresponding Objective-C method.
+// SelectedIndex returns the selected index.
 func (doc *DOMHTMLOptionsCollection) SelectedIndex() int {
 	_r := objc.Send[int](objref.IDOf(doc), objc.RegisterName("selectedIndex"))
 	return _r
 }
 
-// Length wraps the corresponding Objective-C method.
+// Length returns the length.
 func (doc *DOMHTMLOptionsCollection) Length() int {
 	_r := objc.Send[int](objref.IDOf(doc), objc.RegisterName("length"))
 	return _r

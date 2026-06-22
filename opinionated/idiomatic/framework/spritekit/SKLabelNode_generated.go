@@ -277,13 +277,13 @@ func (ln *LabelNode) WithAccessibilityEnabled(accessibilityEnabled bool) *LabelN
 	return ln
 }
 
-// VerticalAlignmentMode wraps the corresponding Objective-C method.
+// VerticalAlignmentMode returns the vertical alignment mode.
 func (ln *LabelNode) VerticalAlignmentMode() LabelVerticalAlignmentMode {
 	_r := objc.Send[LabelVerticalAlignmentMode](objref.IDOf(ln), objc.RegisterName("verticalAlignmentMode"))
 	return _r
 }
 
-// HorizontalAlignmentMode wraps the corresponding Objective-C method.
+// HorizontalAlignmentMode returns the horizontal alignment mode.
 func (ln *LabelNode) HorizontalAlignmentMode() LabelHorizontalAlignmentMode {
 	_r := objc.Send[LabelHorizontalAlignmentMode](objref.IDOf(ln), objc.RegisterName("horizontalAlignmentMode"))
 	return _r
@@ -301,7 +301,7 @@ func (ln *LabelNode) PreferredMaxLayoutWidth() float64 {
 	return _r
 }
 
-// FontName wraps the corresponding Objective-C method.
+// FontName returns the font name.
 func (ln *LabelNode) FontName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("fontName"))
 	if _r == 0 {
@@ -310,7 +310,7 @@ func (ln *LabelNode) FontName() string {
 	return purego.GoString(_r)
 }
 
-// Text wraps the corresponding Objective-C method.
+// Text returns the text.
 func (ln *LabelNode) Text() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("text"))
 	if _r == 0 {
@@ -319,13 +319,13 @@ func (ln *LabelNode) Text() string {
 	return purego.GoString(_r)
 }
 
-// AttributedText wraps the corresponding Objective-C method.
+// AttributedText returns the attributed text.
 func (ln *LabelNode) AttributedText() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("attributedText"))
 	return obj.Wrap(_r)
 }
 
-// FontSize wraps the corresponding Objective-C method.
+// FontSize returns the font size.
 func (ln *LabelNode) FontSize() float64 {
 	_r := objc.Send[float64](objref.IDOf(ln), objc.RegisterName("fontSize"))
 	return _r

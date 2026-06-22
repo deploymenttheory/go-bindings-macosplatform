@@ -51,7 +51,7 @@ func NewTextObservation() *TextObservation {
 	return textObservationAdopt(_id)
 }
 
-// CharacterBoxes wraps the corresponding Objective-C method.
+// CharacterBoxes returns the character boxes.
 //
 // CharacterBoxes returns the collection as a Go slice.
 func (to *TextObservation) CharacterBoxes() []*RectangleObservation {

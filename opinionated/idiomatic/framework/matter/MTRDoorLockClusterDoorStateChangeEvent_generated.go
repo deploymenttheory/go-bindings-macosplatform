@@ -70,13 +70,13 @@ func NewMTRDoorLockClusterDoorStateChangeEvent() *MTRDoorLockClusterDoorStateCha
 	return mTRDoorLockClusterDoorStateChangeEventAdopt(_id)
 }
 
-// WithDoorState sets the property and returns the receiver so calls can be chained.
+// WithDoorState sets the door state.
 func (mdlcdsce *MTRDoorLockClusterDoorStateChangeEvent) WithDoorState(doorState obj.Object) *MTRDoorLockClusterDoorStateChangeEvent {
 	objc.Send[objc.ID](objref.IDOf(mdlcdsce), objc.RegisterName("setDoorState:"), objref.IDOf(doorState))
 	return mdlcdsce
 }
 
-// DoorState wraps the corresponding Objective-C method.
+// DoorState returns the door state.
 func (mdlcdsce *MTRDoorLockClusterDoorStateChangeEvent) DoorState() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcdsce), objc.RegisterName("doorState"))
 	return obj.Wrap(_r)

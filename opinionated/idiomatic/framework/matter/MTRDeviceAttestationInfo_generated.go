@@ -113,7 +113,7 @@ func (mdai *MTRDeviceAttestationInfo) CertificationDeclaration() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// FirmwareInfo wraps the corresponding Objective-C method.
+// FirmwareInfo returns the firmware info.
 func (mdai *MTRDeviceAttestationInfo) FirmwareInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdai), objc.RegisterName("firmwareInfo"))
 	return obj.Wrap(_r)

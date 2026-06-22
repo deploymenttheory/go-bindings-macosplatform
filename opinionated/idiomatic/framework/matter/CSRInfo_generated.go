@@ -71,49 +71,49 @@ func NewCSRInfoWithNonceElementsElementsSignatureCsr(nonce obj.Object, elements 
 	return cSRInfoAdopt(_id)
 }
 
-// WithNonce sets the property and returns the receiver so calls can be chained.
+// WithNonce sets the nonce.
 func (ci *CSRInfo) WithNonce(nonce obj.Object) *CSRInfo {
 	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setNonce:"), objref.IDOf(nonce))
 	return ci
 }
 
-// WithElements sets the property and returns the receiver so calls can be chained.
+// WithElements sets the elements.
 func (ci *CSRInfo) WithElements(elements obj.Object) *CSRInfo {
 	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setElements:"), objref.IDOf(elements))
 	return ci
 }
 
-// WithElementsSignature sets the property and returns the receiver so calls can be chained.
+// WithElementsSignature sets the elements signature.
 func (ci *CSRInfo) WithElementsSignature(elementsSignature obj.Object) *CSRInfo {
 	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setElementsSignature:"), objref.IDOf(elementsSignature))
 	return ci
 }
 
-// WithCsr sets the property and returns the receiver so calls can be chained.
+// WithCsr sets the csr.
 func (ci *CSRInfo) WithCsr(csr obj.Object) *CSRInfo {
 	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setCsr:"), objref.IDOf(csr))
 	return ci
 }
 
-// Nonce wraps the corresponding Objective-C method.
+// Nonce returns the nonce.
 func (ci *CSRInfo) Nonce() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("nonce"))
 	return obj.Wrap(_r)
 }
 
-// Elements wraps the corresponding Objective-C method.
+// Elements returns the elements.
 func (ci *CSRInfo) Elements() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("elements"))
 	return obj.Wrap(_r)
 }
 
-// ElementsSignature wraps the corresponding Objective-C method.
+// ElementsSignature returns the elements signature.
 func (ci *CSRInfo) ElementsSignature() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("elementsSignature"))
 	return obj.Wrap(_r)
 }
 
-// Csr wraps the corresponding Objective-C method.
+// Csr returns the csr.
 func (ci *CSRInfo) Csr() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("csr"))
 	return obj.Wrap(_r)

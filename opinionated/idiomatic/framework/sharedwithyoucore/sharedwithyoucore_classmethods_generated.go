@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// SharedCoordinator wraps the corresponding Objective-C method.
+// SharedCoordinator returns the shared coordinator.
 func SharedCoordinator() *CollaborationCoordinator {
 	_r := objc.Send[objc.ID](objc.ID(_class("SWCollaborationCoordinator")), objc.RegisterName("sharedCoordinator"))
 	return CollaborationCoordinatorFromID(_r)

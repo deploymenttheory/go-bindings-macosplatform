@@ -72,37 +72,37 @@ func NewRenderPipelineReflection() *RenderPipelineReflection {
 	return renderPipelineReflectionAdopt(_id)
 }
 
-// VertexBindings wraps the corresponding Objective-C method.
+// VertexBindings returns the vertex bindings.
 func (rpr *RenderPipelineReflection) VertexBindings() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("vertexBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// FragmentBindings wraps the corresponding Objective-C method.
+// FragmentBindings returns the fragment bindings.
 func (rpr *RenderPipelineReflection) FragmentBindings() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("fragmentBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// TileBindings wraps the corresponding Objective-C method.
+// TileBindings returns the tile bindings.
 func (rpr *RenderPipelineReflection) TileBindings() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("tileBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// ObjectBindings wraps the corresponding Objective-C method.
+// ObjectBindings returns the object bindings.
 func (rpr *RenderPipelineReflection) ObjectBindings() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("objectBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// MeshBindings wraps the corresponding Objective-C method.
+// MeshBindings returns the mesh bindings.
 func (rpr *RenderPipelineReflection) MeshBindings() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rpr), objc.RegisterName("meshBindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// VertexArguments wraps the corresponding Objective-C method.
+// VertexArguments returns the vertex arguments.
 //
 // VertexArguments returns the collection as a Go slice.
 func (rpr *RenderPipelineReflection) VertexArguments() []*Argument {
@@ -110,7 +110,7 @@ func (rpr *RenderPipelineReflection) VertexArguments() []*Argument {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Argument { return ArgumentFromID(_id) })
 }
 
-// FragmentArguments wraps the corresponding Objective-C method.
+// FragmentArguments returns the fragment arguments.
 //
 // FragmentArguments returns the collection as a Go slice.
 func (rpr *RenderPipelineReflection) FragmentArguments() []*Argument {
@@ -118,7 +118,7 @@ func (rpr *RenderPipelineReflection) FragmentArguments() []*Argument {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Argument { return ArgumentFromID(_id) })
 }
 
-// TileArguments wraps the corresponding Objective-C method.
+// TileArguments returns the tile arguments.
 //
 // TileArguments returns the collection as a Go slice.
 func (rpr *RenderPipelineReflection) TileArguments() []*Argument {

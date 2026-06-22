@@ -50,7 +50,7 @@ func NewConstantString() *ConstantString {
 	return constantStringAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (cs *ConstantString) WithScriptingProperties(scriptingProperties obj.Object) *ConstantString {
 	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return cs

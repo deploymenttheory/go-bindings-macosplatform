@@ -70,19 +70,19 @@ func NewMTRMicrowaveOvenModeClusterModeOptionStruct() *MTRMicrowaveOvenModeClust
 	return mTRMicrowaveOvenModeClusterModeOptionStructAdopt(_id)
 }
 
-// WithLabel sets the property and returns the receiver so calls can be chained.
+// WithLabel sets the label.
 func (mmomcmos *MTRMicrowaveOvenModeClusterModeOptionStruct) WithLabel(label string) *MTRMicrowaveOvenModeClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(mmomcmos), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return mmomcmos
 }
 
-// WithMode sets the property and returns the receiver so calls can be chained.
+// WithMode sets the mode.
 func (mmomcmos *MTRMicrowaveOvenModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTRMicrowaveOvenModeClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(mmomcmos), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return mmomcmos
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (mmomcmos *MTRMicrowaveOvenModeClusterModeOptionStruct) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mmomcmos), objc.RegisterName("label"))
 	if _r == 0 {
@@ -91,13 +91,13 @@ func (mmomcmos *MTRMicrowaveOvenModeClusterModeOptionStruct) Label() string {
 	return purego.GoString(_r)
 }
 
-// Mode wraps the corresponding Objective-C method.
+// Mode returns the mode.
 func (mmomcmos *MTRMicrowaveOvenModeClusterModeOptionStruct) Mode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmomcmos), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
-// ModeTags wraps the corresponding Objective-C method.
+// ModeTags returns the mode tags.
 func (mmomcmos *MTRMicrowaveOvenModeClusterModeOptionStruct) ModeTags() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmomcmos), objc.RegisterName("modeTags"))
 	return obj.Wrap(_r)

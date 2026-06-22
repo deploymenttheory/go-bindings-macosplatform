@@ -71,13 +71,13 @@ func NewMessageReactionWithReactionTypeReactionDescriptionEmoji(reactionType Mes
 	return messageReactionAdopt(_id)
 }
 
-// ReactionType wraps the corresponding Objective-C method.
+// ReactionType returns the reaction type.
 func (mr *MessageReaction) ReactionType() MessageReactionType {
 	_r := objc.Send[MessageReactionType](objref.IDOf(mr), objc.RegisterName("reactionType"))
 	return _r
 }
 
-// ReactionDescription wraps the corresponding Objective-C method.
+// ReactionDescription returns the reaction description.
 func (mr *MessageReaction) ReactionDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("reactionDescription"))
 	if _r == 0 {
@@ -86,7 +86,7 @@ func (mr *MessageReaction) ReactionDescription() string {
 	return purego.GoString(_r)
 }
 
-// Emoji wraps the corresponding Objective-C method.
+// Emoji returns the emoji.
 func (mr *MessageReaction) Emoji() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("emoji"))
 	if _r == 0 {

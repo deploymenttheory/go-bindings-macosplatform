@@ -63,7 +63,7 @@ func (sl *StructuredLocation) WithRadius(radius float64) *StructuredLocation {
 	return sl
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (sl *StructuredLocation) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("title"))
 	if _r == 0 {
@@ -72,7 +72,7 @@ func (sl *StructuredLocation) Title() string {
 	return purego.GoString(_r)
 }
 
-// Radius wraps the corresponding Objective-C method.
+// Radius returns the radius.
 func (sl *StructuredLocation) Radius() float64 {
 	_r := objc.Send[float64](objref.IDOf(sl), objc.RegisterName("radius"))
 	return _r

@@ -127,13 +127,13 @@ func (pd *PropertyDescription) SetValidationPredicatesWithValidationWarnings(val
 	objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("setValidationPredicates:withValidationWarnings:"), purego.SliceToNSArray(validationPredicates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(validationWarnings, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// Entity wraps the corresponding Objective-C method.
+// Entity returns the entity.
 func (pd *PropertyDescription) Entity() *EntityDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (pd *PropertyDescription) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("name"))
 	if _r == 0 {
@@ -142,19 +142,19 @@ func (pd *PropertyDescription) Name() string {
 	return purego.GoString(_r)
 }
 
-// IsOptional wraps the corresponding Objective-C method.
+// IsOptional reports whether the object is optional.
 func (pd *PropertyDescription) IsOptional() bool {
 	_r := objc.Send[bool](objref.IDOf(pd), objc.RegisterName("isOptional"))
 	return _r
 }
 
-// IsTransient wraps the corresponding Objective-C method.
+// IsTransient reports whether the object is transient.
 func (pd *PropertyDescription) IsTransient() bool {
 	_r := objc.Send[bool](objref.IDOf(pd), objc.RegisterName("isTransient"))
 	return _r
 }
 
-// ValidationPredicates wraps the corresponding Objective-C method.
+// ValidationPredicates returns the validation predicates.
 //
 // ValidationPredicates returns the collection as a Go slice.
 func (pd *PropertyDescription) ValidationPredicates() []obj.Object {
@@ -162,31 +162,31 @@ func (pd *PropertyDescription) ValidationPredicates() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// ValidationWarnings wraps the corresponding Objective-C method.
+// ValidationWarnings returns the validation warnings.
 func (pd *PropertyDescription) ValidationWarnings() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("validationWarnings"))
 	return obj.Wrap(_r)
 }
 
-// UserInfo wraps the corresponding Objective-C method.
+// UserInfo returns the user info.
 func (pd *PropertyDescription) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
-// IsIndexed wraps the corresponding Objective-C method.
+// IsIndexed reports whether the object is indexed.
 func (pd *PropertyDescription) IsIndexed() bool {
 	_r := objc.Send[bool](objref.IDOf(pd), objc.RegisterName("isIndexed"))
 	return _r
 }
 
-// VersionHash wraps the corresponding Objective-C method.
+// VersionHash returns the version hash.
 func (pd *PropertyDescription) VersionHash() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("versionHash"))
 	return obj.Wrap(_r)
 }
 
-// VersionHashModifier wraps the corresponding Objective-C method.
+// VersionHashModifier returns the version hash modifier.
 func (pd *PropertyDescription) VersionHashModifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("versionHashModifier"))
 	if _r == 0 {
@@ -195,19 +195,19 @@ func (pd *PropertyDescription) VersionHashModifier() string {
 	return purego.GoString(_r)
 }
 
-// IsIndexedBySpotlight wraps the corresponding Objective-C method.
+// IsIndexedBySpotlight reports whether the object is indexed by spotlight.
 func (pd *PropertyDescription) IsIndexedBySpotlight() bool {
 	_r := objc.Send[bool](objref.IDOf(pd), objc.RegisterName("isIndexedBySpotlight"))
 	return _r
 }
 
-// IsStoredInExternalRecord wraps the corresponding Objective-C method.
+// IsStoredInExternalRecord reports whether the object is stored in external record.
 func (pd *PropertyDescription) IsStoredInExternalRecord() bool {
 	_r := objc.Send[bool](objref.IDOf(pd), objc.RegisterName("isStoredInExternalRecord"))
 	return _r
 }
 
-// RenamingIdentifier wraps the corresponding Objective-C method.
+// RenamingIdentifier returns the renaming identifier.
 func (pd *PropertyDescription) RenamingIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("renamingIdentifier"))
 	if _r == 0 {

@@ -64,7 +64,7 @@ func (appkcar *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithLar
 	return appkcar
 }
 
-// WithPrf sets the property and returns the receiver so calls can be chained.
+// WithPrf sets the prf.
 func (appkcar *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithPrf(prf *AuthorizationPublicKeyCredentialPRFAssertionInput) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
 	objc.Send[objc.ID](objref.IDOf(appkcar), objc.RegisterName("setPrf:"), objref.IDOf(prf))
 	return appkcar
@@ -80,13 +80,13 @@ func (appkcar *AuthorizationPlatformPublicKeyCredentialAssertionRequest) Allowed
 	})
 }
 
-// LargeBlob wraps the corresponding Objective-C method.
+// LargeBlob returns the large blob.
 func (appkcar *AuthorizationPlatformPublicKeyCredentialAssertionRequest) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
 	_r := objc.Send[objc.ID](objref.IDOf(appkcar), objc.RegisterName("largeBlob"))
 	return AuthorizationPublicKeyCredentialLargeBlobAssertionInputFromID(_r)
 }
 
-// Prf wraps the corresponding Objective-C method.
+// Prf returns the prf.
 func (appkcar *AuthorizationPlatformPublicKeyCredentialAssertionRequest) Prf() *AuthorizationPublicKeyCredentialPRFAssertionInput {
 	_r := objc.Send[objc.ID](objref.IDOf(appkcar), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFAssertionInputFromID(_r)

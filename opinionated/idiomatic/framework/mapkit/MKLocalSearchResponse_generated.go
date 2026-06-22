@@ -72,7 +72,7 @@ func NewLocalSearchResponse() *LocalSearchResponse {
 	return localSearchResponseAdopt(_id)
 }
 
-// MapItems wraps the corresponding Objective-C method.
+// MapItems returns the map items.
 //
 // MapItems returns the collection as a Go slice.
 func (lsr *LocalSearchResponse) MapItems() []*MapItem {

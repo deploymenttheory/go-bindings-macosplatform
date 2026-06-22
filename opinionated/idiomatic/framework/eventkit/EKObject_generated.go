@@ -84,13 +84,13 @@ func (o *Object) Refresh() bool {
 	return _r
 }
 
-// HasChanges wraps the corresponding Objective-C method.
+// HasChanges reports whether the object has changes.
 func (o *Object) HasChanges() bool {
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("hasChanges"))
 	return _r
 }
 
-// IsNew wraps the corresponding Objective-C method.
+// IsNew reports whether the object is new.
 func (o *Object) IsNew() bool {
 	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("isNew"))
 	return _r

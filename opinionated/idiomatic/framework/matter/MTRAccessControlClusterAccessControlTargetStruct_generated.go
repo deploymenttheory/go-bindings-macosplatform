@@ -66,37 +66,37 @@ func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) String() strin
 	return rt.Description(objref.IDOf(maccacts))
 }
 
-// WithCluster sets the property and returns the receiver so calls can be chained.
+// WithCluster sets the cluster.
 func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) WithCluster(cluster obj.Object) *MTRAccessControlClusterAccessControlTargetStruct {
 	objc.Send[objc.ID](objref.IDOf(maccacts), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
 	return maccacts
 }
 
-// WithEndpoint sets the property and returns the receiver so calls can be chained.
+// WithEndpoint sets the endpoint.
 func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterAccessControlTargetStruct {
 	objc.Send[objc.ID](objref.IDOf(maccacts), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return maccacts
 }
 
-// WithDeviceType sets the property and returns the receiver so calls can be chained.
+// WithDeviceType sets the device type.
 func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) WithDeviceType(deviceType obj.Object) *MTRAccessControlClusterAccessControlTargetStruct {
 	objc.Send[objc.ID](objref.IDOf(maccacts), objc.RegisterName("setDeviceType:"), objref.IDOf(deviceType))
 	return maccacts
 }
 
-// Cluster wraps the corresponding Objective-C method.
+// Cluster returns the cluster.
 func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) Cluster() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccacts), objc.RegisterName("cluster"))
 	return obj.Wrap(_r)
 }
 
-// Endpoint wraps the corresponding Objective-C method.
+// Endpoint returns the endpoint.
 func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) Endpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccacts), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
 }
 
-// DeviceType wraps the corresponding Objective-C method.
+// DeviceType returns the device type.
 func (maccacts *MTRAccessControlClusterAccessControlTargetStruct) DeviceType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccacts), objc.RegisterName("deviceType"))
 	return obj.Wrap(_r)

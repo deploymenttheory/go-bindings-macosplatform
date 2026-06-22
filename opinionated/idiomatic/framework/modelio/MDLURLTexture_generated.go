@@ -72,7 +72,7 @@ func (ut *URLTexture) WithHasAlphaValues(hasAlphaValues bool) *URLTexture {
 	return ut
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (ut *URLTexture) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ut), objc.RegisterName("URL"))
 	return obj.Wrap(_r)

@@ -70,13 +70,13 @@ func NewMTREnergyEVSEClusterEVConnectedEvent() *MTREnergyEVSEClusterEVConnectedE
 	return mTREnergyEVSEClusterEVConnectedEventAdopt(_id)
 }
 
-// WithSessionID sets the property and returns the receiver so calls can be chained.
+// WithSessionID sets the session ID.
 func (meecece *MTREnergyEVSEClusterEVConnectedEvent) WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterEVConnectedEvent {
 	objc.Send[objc.ID](objref.IDOf(meecece), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 	return meecece
 }
 
-// SessionID wraps the corresponding Objective-C method.
+// SessionID returns the session ID.
 func (meecece *MTREnergyEVSEClusterEVConnectedEvent) SessionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecece), objc.RegisterName("sessionID"))
 	return obj.Wrap(_r)

@@ -61,7 +61,7 @@ func NewMTRBaseClusterTimeFormatLocalizationWithDeviceEndpointQueue(device *MTRB
 	return mTRBaseClusterTimeFormatLocalizationAdopt(_id)
 }
 
-// ReadAttributeHourFormatWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeHourFormatWithCompletion reads attribute hour format with completion.
 //
 // ReadAttributeHourFormatWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctfl *MTRBaseClusterTimeFormatLocalization) ReadAttributeHourFormatWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbctfl *MTRBaseClusterTimeFormatLocalization) SubscribeAttributeHourFormat
 	}
 }
 
-// ReadAttributeActiveCalendarTypeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActiveCalendarTypeWithCompletion reads attribute active calendar type with completion.
 //
 // ReadAttributeActiveCalendarTypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctfl *MTRBaseClusterTimeFormatLocalization) ReadAttributeActiveCalendarTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbctfl *MTRBaseClusterTimeFormatLocalization) SubscribeAttributeActiveCale
 	}
 }
 
-// ReadAttributeSupportedCalendarTypesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupportedCalendarTypesWithCompletion reads attribute supported calendar types with completion.
 //
 // ReadAttributeSupportedCalendarTypesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctfl *MTRBaseClusterTimeFormatLocalization) ReadAttributeSupportedCalendarTypesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbctfl *MTRBaseClusterTimeFormatLocalization) SubscribeAttributeSupportedC
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctfl *MTRBaseClusterTimeFormatLocalization) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbctfl *MTRBaseClusterTimeFormatLocalization) SubscribeAttributeGeneratedC
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctfl *MTRBaseClusterTimeFormatLocalization) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbctfl *MTRBaseClusterTimeFormatLocalization) SubscribeAttributeAcceptedCo
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctfl *MTRBaseClusterTimeFormatLocalization) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbctfl *MTRBaseClusterTimeFormatLocalization) SubscribeAttributeAttributeL
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctfl *MTRBaseClusterTimeFormatLocalization) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbctfl *MTRBaseClusterTimeFormatLocalization) SubscribeAttributeFeatureMap
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctfl *MTRBaseClusterTimeFormatLocalization) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbctfl *MTRBaseClusterTimeFormatLocalization) SubscribeAttributeClusterRev
 	}
 }
 
-// ReadAttributeHourFormat wraps the corresponding Objective-C method.
+// ReadAttributeHourFormat reads attribute hour format.
 //
 // ReadAttributeHourFormat blocks until the operation completes or ctx is cancelled.
 func (mbctfl *MTRBaseClusterTimeFormatLocalization) ReadAttributeHourFormat(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbctfl *MTRBaseClusterTimeFormatLocalization) SubscribeAttributeHourFormat
 	}
 }
 
-// ReadAttributeActiveCalendarType wraps the corresponding Objective-C method.
+// ReadAttributeActiveCalendarType reads attribute active calendar type.
 //
 // ReadAttributeActiveCalendarType blocks until the operation completes or ctx is cancelled.
 func (mbctfl *MTRBaseClusterTimeFormatLocalization) ReadAttributeActiveCalendarType(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbctfl *MTRBaseClusterTimeFormatLocalization) SubscribeAttributeActiveCale
 	}
 }
 
-// ReadAttributeSupportedCalendarTypes wraps the corresponding Objective-C method.
+// ReadAttributeSupportedCalendarTypes reads attribute supported calendar types.
 //
 // ReadAttributeSupportedCalendarTypes blocks until the operation completes or ctx is cancelled.
 func (mbctfl *MTRBaseClusterTimeFormatLocalization) ReadAttributeSupportedCalendarTypes(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbctfl *MTRBaseClusterTimeFormatLocalization) SubscribeAttributeSupportedC
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbctfl *MTRBaseClusterTimeFormatLocalization) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbctfl *MTRBaseClusterTimeFormatLocalization) SubscribeAttributeGeneratedC
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbctfl *MTRBaseClusterTimeFormatLocalization) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbctfl *MTRBaseClusterTimeFormatLocalization) SubscribeAttributeAcceptedCo
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbctfl *MTRBaseClusterTimeFormatLocalization) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbctfl *MTRBaseClusterTimeFormatLocalization) SubscribeAttributeAttributeL
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbctfl *MTRBaseClusterTimeFormatLocalization) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbctfl *MTRBaseClusterTimeFormatLocalization) SubscribeAttributeFeatureMap
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbctfl *MTRBaseClusterTimeFormatLocalization) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

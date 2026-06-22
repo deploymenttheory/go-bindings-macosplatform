@@ -94,13 +94,13 @@ func (dc *DeleteCommand) WithScriptErrorString(scriptErrorString StringProvider)
 	return dc
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (dc *DeleteCommand) WithScriptingProperties(scriptingProperties obj.Object) *DeleteCommand {
 	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return dc
 }
 
-// KeySpecifier wraps the corresponding Objective-C method.
+// KeySpecifier returns the key specifier.
 func (dc *DeleteCommand) KeySpecifier() *ScriptObjectSpecifier {
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("keySpecifier"))
 	return ScriptObjectSpecifierFromID(_r)

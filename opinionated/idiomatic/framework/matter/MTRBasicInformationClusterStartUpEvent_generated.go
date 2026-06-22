@@ -66,13 +66,13 @@ func (mbicsue *MTRBasicInformationClusterStartUpEvent) String() string {
 	return rt.Description(objref.IDOf(mbicsue))
 }
 
-// WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
+// WithSoftwareVersion sets the software version.
 func (mbicsue *MTRBasicInformationClusterStartUpEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTRBasicInformationClusterStartUpEvent {
 	objc.Send[objc.ID](objref.IDOf(mbicsue), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return mbicsue
 }
 
-// SoftwareVersion wraps the corresponding Objective-C method.
+// SoftwareVersion returns the software version.
 func (mbicsue *MTRBasicInformationClusterStartUpEvent) SoftwareVersion() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbicsue), objc.RegisterName("softwareVersion"))
 	return obj.Wrap(_r)

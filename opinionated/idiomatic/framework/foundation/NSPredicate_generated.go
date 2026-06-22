@@ -68,7 +68,7 @@ func (p *Predicate) String() string {
 	return rt.Description(objref.IDOf(p))
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (p *Predicate) WithScriptingProperties(scriptingProperties obj.Object) *Predicate {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return p
@@ -97,7 +97,7 @@ func (p *Predicate) AllowEvaluation() {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("allowEvaluation"))
 }
 
-// PredicateFormat wraps the corresponding Objective-C method.
+// PredicateFormat returns the predicate format.
 func (p *Predicate) PredicateFormat() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("predicateFormat"))
 	if _r == 0 {

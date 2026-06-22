@@ -70,7 +70,7 @@ func NewMTRTimeSynchronizationClusterSetDefaultNTPParams() *MTRTimeSynchronizati
 	return mTRTimeSynchronizationClusterSetDefaultNTPParamsAdopt(_id)
 }
 
-// WithDefaultNTP sets the property and returns the receiver so calls can be chained.
+// WithDefaultNTP sets the default ntp.
 func (mtscsdnp *MTRTimeSynchronizationClusterSetDefaultNTPParams) WithDefaultNTP(defaultNTP string) *MTRTimeSynchronizationClusterSetDefaultNTPParams {
 	objc.Send[objc.ID](objref.IDOf(mtscsdnp), objc.RegisterName("setDefaultNTP:"), purego.NSString(defaultNTP))
 	return mtscsdnp
@@ -88,7 +88,7 @@ func (mtscsdnp *MTRTimeSynchronizationClusterSetDefaultNTPParams) WithServerSide
 	return mtscsdnp
 }
 
-// DefaultNTP wraps the corresponding Objective-C method.
+// DefaultNTP returns the default ntp.
 func (mtscsdnp *MTRTimeSynchronizationClusterSetDefaultNTPParams) DefaultNTP() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mtscsdnp), objc.RegisterName("defaultNTP"))
 	if _r == 0 {

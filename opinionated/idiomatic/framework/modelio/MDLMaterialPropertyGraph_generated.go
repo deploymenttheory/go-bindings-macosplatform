@@ -51,7 +51,7 @@ func NewMaterialPropertyGraphWithNodesConnections(nodes []*MaterialPropertyNode,
 	return materialPropertyGraphAdopt(_id)
 }
 
-// WithEvaluationFunction sets the property and returns the receiver so calls can be chained.
+// WithEvaluationFunction sets the evaluation function.
 func (mpg *MaterialPropertyGraph) WithEvaluationFunction(evaluationFunction func(obj.Object)) *MaterialPropertyGraph {
 	objc.Send[objc.ID](objref.IDOf(mpg), objc.RegisterName("setEvaluationFunction:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { evaluationFunction(obj.Wrap(_b0)) }))
 	return mpg
@@ -62,7 +62,7 @@ func (mpg *MaterialPropertyGraph) Evaluate() {
 	objc.Send[objc.ID](objref.IDOf(mpg), objc.RegisterName("evaluate"))
 }
 
-// Nodes wraps the corresponding Objective-C method.
+// Nodes returns the nodes.
 //
 // Nodes returns the collection as a Go slice.
 func (mpg *MaterialPropertyGraph) Nodes() []*MaterialPropertyNode {
@@ -70,7 +70,7 @@ func (mpg *MaterialPropertyGraph) Nodes() []*MaterialPropertyNode {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MaterialPropertyNode { return MaterialPropertyNodeFromID(_id) })
 }
 
-// Connections wraps the corresponding Objective-C method.
+// Connections returns the connections.
 //
 // Connections returns the collection as a Go slice.
 func (mpg *MaterialPropertyGraph) Connections() []*MaterialPropertyConnection {

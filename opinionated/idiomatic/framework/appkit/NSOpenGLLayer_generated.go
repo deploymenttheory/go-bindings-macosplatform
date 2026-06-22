@@ -102,19 +102,19 @@ func (ogl *OpenGLLayer) OpenGLContextForPixelFormat(pixelFormat *OpenGLPixelForm
 	return OpenGLContextFromID(_r)
 }
 
-// View wraps the corresponding Objective-C method.
+// View returns the view.
 func (ogl *OpenGLLayer) View() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
-// OpenGLPixelFormat wraps the corresponding Objective-C method.
+// OpenGLPixelFormat returns the open gl pixel format.
 func (ogl *OpenGLLayer) OpenGLPixelFormat() *OpenGLPixelFormat {
 	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("openGLPixelFormat"))
 	return OpenGLPixelFormatFromID(_r)
 }
 
-// OpenGLContext wraps the corresponding Objective-C method.
+// OpenGLContext returns the open gl context.
 func (ogl *OpenGLLayer) OpenGLContext() *OpenGLContext {
 	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("openGLContext"))
 	return OpenGLContextFromID(_r)

@@ -72,31 +72,31 @@ func NewCollectionLayoutDimension() *CollectionLayoutDimension {
 	return collectionLayoutDimensionAdopt(_id)
 }
 
-// IsFractionalWidth wraps the corresponding Objective-C method.
+// IsFractionalWidth reports whether the object is fractional width.
 func (cld *CollectionLayoutDimension) IsFractionalWidth() bool {
 	_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("isFractionalWidth"))
 	return _r
 }
 
-// IsFractionalHeight wraps the corresponding Objective-C method.
+// IsFractionalHeight reports whether the object is fractional height.
 func (cld *CollectionLayoutDimension) IsFractionalHeight() bool {
 	_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("isFractionalHeight"))
 	return _r
 }
 
-// IsAbsolute wraps the corresponding Objective-C method.
+// IsAbsolute reports whether the object is absolute.
 func (cld *CollectionLayoutDimension) IsAbsolute() bool {
 	_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("isAbsolute"))
 	return _r
 }
 
-// IsEstimated wraps the corresponding Objective-C method.
+// IsEstimated reports whether the object is estimated.
 func (cld *CollectionLayoutDimension) IsEstimated() bool {
 	_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("isEstimated"))
 	return _r
 }
 
-// Dimension wraps the corresponding Objective-C method.
+// Dimension returns the dimension.
 func (cld *CollectionLayoutDimension) Dimension() float64 {
 	_r := objc.Send[float64](objref.IDOf(cld), objc.RegisterName("dimension"))
 	return _r

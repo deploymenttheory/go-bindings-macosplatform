@@ -101,19 +101,19 @@ func (lr *LanguageRecognizer) LanguageHypothesesWithMaximum(maxHypotheses int) o
 	return obj.Wrap(_r)
 }
 
-// DominantLanguage wraps the corresponding Objective-C method.
+// DominantLanguage returns the dominant language.
 func (lr *LanguageRecognizer) DominantLanguage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("dominantLanguage"))
 	return obj.Wrap(_r)
 }
 
-// LanguageHints wraps the corresponding Objective-C method.
+// LanguageHints returns the language hints.
 func (lr *LanguageRecognizer) LanguageHints() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(lr), objc.RegisterName("languageHints"))
 	return obj.Wrap(_r)
 }
 
-// LanguageConstraints wraps the corresponding Objective-C method.
+// LanguageConstraints returns the language constraints.
 //
 // LanguageConstraints returns the collection as a Go slice.
 func (lr *LanguageRecognizer) LanguageConstraints() []obj.Object {

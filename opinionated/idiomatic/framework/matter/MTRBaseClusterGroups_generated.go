@@ -161,7 +161,7 @@ func (mbcg *MTRBaseClusterGroups) RemoveGroupWithParamsCompletion(ctx context.Co
 	}
 }
 
-// ReadAttributeNameSupportWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNameSupportWithCompletion reads attribute name support with completion.
 //
 // ReadAttributeNameSupportWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeNameSupportWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeNameSupportWithParamsSubscri
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeGeneratedCommandListWithPara
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeAcceptedCommandListWithParam
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeAttributeListWithParamsSubsc
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeFeatureMapWithParamsSubscrip
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeClusterRevisionWithParamsSub
 	}
 }
 
-// AddGroupWithParams wraps the corresponding Objective-C method.
+// AddGroupWithParams adds group with params.
 //
 // AddGroupWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) AddGroupWithParams(ctx context.Context, params *MTRGroupsClusterAddGroupParams) (result *MTRGroupsClusterAddGroupResponseParams, err error) {
@@ -536,7 +536,7 @@ func (mbcg *MTRBaseClusterGroups) GetGroupMembershipWithParams(ctx context.Conte
 	}
 }
 
-// RemoveGroupWithParams wraps the corresponding Objective-C method.
+// RemoveGroupWithParams removes group with params.
 //
 // RemoveGroupWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) RemoveGroupWithParams(ctx context.Context, params *MTRGroupsClusterRemoveGroupParams) (result *MTRGroupsClusterRemoveGroupResponseParams, err error) {
@@ -561,7 +561,7 @@ func (mbcg *MTRBaseClusterGroups) RemoveGroupWithParams(ctx context.Context, par
 	}
 }
 
-// ReadAttributeNameSupport wraps the corresponding Objective-C method.
+// ReadAttributeNameSupport reads attribute name support.
 //
 // ReadAttributeNameSupport blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeNameSupport(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeNameSupportWithMinIntervalMa
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeGeneratedCommandListWithMinI
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeAcceptedCommandListWithMinIn
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeAttributeListWithMinInterval
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcg *MTRBaseClusterGroups) SubscribeAttributeFeatureMapWithMinIntervalMax
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcg *MTRBaseClusterGroups) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

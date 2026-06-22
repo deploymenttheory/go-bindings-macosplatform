@@ -126,7 +126,7 @@ func (ar *AssetRegistry) AssetForIdentifier(identifier string) *Asset {
 	return AssetFromID(_r)
 }
 
-// GlobalMetaParameters wraps the corresponding Objective-C method.
+// GlobalMetaParameters returns the global meta parameters.
 func (ar *AssetRegistry) GlobalMetaParameters() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("globalMetaParameters"))
 	return obj.Wrap(_r)

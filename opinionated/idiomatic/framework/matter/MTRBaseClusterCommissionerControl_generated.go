@@ -81,7 +81,7 @@ func (mbccc *MTRBaseClusterCommissionerControl) CommissionNodeWithParamsCompleti
 	}
 }
 
-// ReadAttributeSupportedDeviceCategoriesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupportedDeviceCategoriesWithCompletion reads attribute supported device categories with completion.
 //
 // ReadAttributeSupportedDeviceCategoriesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterCommissionerControl) ReadAttributeSupportedDeviceCategoriesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -131,7 +131,7 @@ func (mbccc *MTRBaseClusterCommissionerControl) SubscribeAttributeSupportedDevic
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterCommissionerControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -181,7 +181,7 @@ func (mbccc *MTRBaseClusterCommissionerControl) SubscribeAttributeGeneratedComma
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterCommissionerControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -231,7 +231,7 @@ func (mbccc *MTRBaseClusterCommissionerControl) SubscribeAttributeAcceptedComman
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterCommissionerControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -281,7 +281,7 @@ func (mbccc *MTRBaseClusterCommissionerControl) SubscribeAttributeAttributeListW
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterCommissionerControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -331,7 +331,7 @@ func (mbccc *MTRBaseClusterCommissionerControl) SubscribeAttributeFeatureMapWith
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccc *MTRBaseClusterCommissionerControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

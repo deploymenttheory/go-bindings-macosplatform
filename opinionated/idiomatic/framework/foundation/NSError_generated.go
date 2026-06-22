@@ -73,31 +73,31 @@ func NewErrorWithDomainCodeUserInfo(domain *String, code int, dict obj.Object) *
 	return errorAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (e *Error) WithScriptingProperties(scriptingProperties obj.Object) *Error {
 	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return e
 }
 
-// Domain wraps the corresponding Objective-C method.
+// Domain returns the domain.
 func (e *Error) Domain() *String {
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("domain"))
 	return StringFromID(_r)
 }
 
-// Code wraps the corresponding Objective-C method.
+// Code returns the code.
 func (e *Error) Code() int {
 	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("code"))
 	return _r
 }
 
-// UserInfo wraps the corresponding Objective-C method.
+// UserInfo returns the user info.
 func (e *Error) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
-// LocalizedDescription wraps the corresponding Objective-C method.
+// LocalizedDescription returns the localized description.
 func (e *Error) LocalizedDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
@@ -106,7 +106,7 @@ func (e *Error) LocalizedDescription() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedFailureReason wraps the corresponding Objective-C method.
+// LocalizedFailureReason returns the localized failure reason.
 func (e *Error) LocalizedFailureReason() string {
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("localizedFailureReason"))
 	if _r == 0 {
@@ -115,7 +115,7 @@ func (e *Error) LocalizedFailureReason() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedRecoverySuggestion wraps the corresponding Objective-C method.
+// LocalizedRecoverySuggestion returns the localized recovery suggestion.
 func (e *Error) LocalizedRecoverySuggestion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("localizedRecoverySuggestion"))
 	if _r == 0 {
@@ -124,7 +124,7 @@ func (e *Error) LocalizedRecoverySuggestion() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedRecoveryOptions wraps the corresponding Objective-C method.
+// LocalizedRecoveryOptions returns the localized recovery options.
 //
 // LocalizedRecoveryOptions returns the collection as a Go slice.
 func (e *Error) LocalizedRecoveryOptions() []string {
@@ -132,13 +132,13 @@ func (e *Error) LocalizedRecoveryOptions() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// RecoveryAttempter wraps the corresponding Objective-C method.
+// RecoveryAttempter returns the recovery attempter.
 func (e *Error) RecoveryAttempter() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("recoveryAttempter"))
 	return obj.Wrap(_r)
 }
 
-// HelpAnchor wraps the corresponding Objective-C method.
+// HelpAnchor returns the help anchor.
 func (e *Error) HelpAnchor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("helpAnchor"))
 	if _r == 0 {
@@ -147,7 +147,7 @@ func (e *Error) HelpAnchor() string {
 	return purego.GoString(_r)
 }
 
-// UnderlyingErrors wraps the corresponding Objective-C method.
+// UnderlyingErrors returns the underlying errors.
 func (e *Error) UnderlyingErrors() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("underlyingErrors"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

@@ -229,7 +229,7 @@ func (pub *PopUpButton) WithKeyEquivalentModifierMask(keyEquivalentModifierMask 
 	return pub
 }
 
-// WithBorderShape sets the property and returns the receiver so calls can be chained.
+// WithBorderShape sets the border shape.
 func (pub *PopUpButton) WithBorderShape(borderShape ControlBorderShape) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setBorderShape:"), borderShape)
 	return pub
@@ -367,38 +367,38 @@ func (pub *PopUpButton) WithAllowsExpansionToolTips(allowsExpansionToolTips bool
 	return pub
 }
 
-// WithCell sets the property and returns the receiver so calls can be chained.
+// WithCell sets the cell.
 func (pub *PopUpButton) WithCell(cell CellProvider) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return pub
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (pub *PopUpButton) WithSubviews(items ...ViewProvider) *PopUpButton {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setSubviews:"), _arr)
 	return pub
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (pub *PopUpButton) WithHidden(hidden bool) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setHidden:"), hidden)
 	return pub
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (pub *PopUpButton) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return pub
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (pub *PopUpButton) WithAutoresizesSubviews(autoresizesSubviews bool) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return pub
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (pub *PopUpButton) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return pub
@@ -410,19 +410,19 @@ func (pub *PopUpButton) WithFrame(frame corefoundation.CGRect) *PopUpButton {
 	return pub
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (pub *PopUpButton) WithFrameRotation(frameRotation float64) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return pub
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (pub *PopUpButton) WithFrameCenterRotation(frameCenterRotation float64) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return pub
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (pub *PopUpButton) WithBoundsRotation(boundsRotation float64) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return pub
@@ -434,7 +434,7 @@ func (pub *PopUpButton) WithBounds(bounds corefoundation.CGRect) *PopUpButton {
 	return pub
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (pub *PopUpButton) WithCanDrawConcurrently(canDrawConcurrently bool) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return pub
@@ -446,148 +446,148 @@ func (pub *PopUpButton) WithNeedsDisplay(needsDisplay bool) *PopUpButton {
 	return pub
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (pub *PopUpButton) WithAcceptsTouchEvents(acceptsTouchEvents bool) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return pub
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (pub *PopUpButton) WithWantsRestingTouches(wantsRestingTouches bool) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return pub
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (pub *PopUpButton) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return pub
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (pub *PopUpButton) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return pub
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (pub *PopUpButton) WithWantsLayer(wantsLayer bool) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return pub
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (pub *PopUpButton) WithLayer(layer obj.Object) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return pub
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (pub *PopUpButton) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return pub
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (pub *PopUpButton) WithNeedsLayout(needsLayout bool) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return pub
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (pub *PopUpButton) WithAlphaValue(alphaValue float64) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return pub
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (pub *PopUpButton) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return pub
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (pub *PopUpButton) WithBackgroundFilters(items ...obj.Object) *PopUpButton {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return pub
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (pub *PopUpButton) WithCompositingFilter(compositingFilter obj.Object) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return pub
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (pub *PopUpButton) WithContentFilters(items ...obj.Object) *PopUpButton {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setContentFilters:"), _arr)
 	return pub
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (pub *PopUpButton) WithShadow(shadow *Shadow) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return pub
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (pub *PopUpButton) WithClipsToBounds(clipsToBounds bool) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return pub
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (pub *PopUpButton) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return pub
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (pub *PopUpButton) WithToolTip(toolTip string) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return pub
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (pub *PopUpButton) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return pub
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (pub *PopUpButton) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return pub
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (pub *PopUpButton) WithNextKeyView(nextKeyView ViewProvider) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return pub
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (pub *PopUpButton) WithFocusRingType(focusRingType FocusRingType) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return pub
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (pub *PopUpButton) WithGestureRecognizers(items ...GestureRecognizerProvider) *PopUpButton {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return pub
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (pub *PopUpButton) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return pub
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (pub *PopUpButton) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return pub
@@ -599,49 +599,49 @@ func (pub *PopUpButton) WithPrefersCompactControlSizeMetrics(prefersCompactContr
 	return pub
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (pub *PopUpButton) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return pub
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (pub *PopUpButton) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return pub
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (pub *PopUpButton) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return pub
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (pub *PopUpButton) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return pub
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (pub *PopUpButton) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return pub
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (pub *PopUpButton) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return pub
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (pub *PopUpButton) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return pub
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (pub *PopUpButton) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PopUpButton {
 	objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return pub
@@ -796,7 +796,7 @@ func (pub *PopUpButton) AltersStateOfSelectedItem() bool {
 	return _r
 }
 
-// ItemArray wraps the corresponding Objective-C method.
+// ItemArray returns the item array.
 //
 // ItemArray returns the collection as a Go slice.
 func (pub *PopUpButton) ItemArray() []*MenuItem {
@@ -804,31 +804,31 @@ func (pub *PopUpButton) ItemArray() []*MenuItem {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MenuItem { return MenuItemFromID(_id) })
 }
 
-// NumberOfItems wraps the corresponding Objective-C method.
+// NumberOfItems returns the number of items.
 func (pub *PopUpButton) NumberOfItems() int {
 	_r := objc.Send[int](objref.IDOf(pub), objc.RegisterName("numberOfItems"))
 	return _r
 }
 
-// LastItem wraps the corresponding Objective-C method.
+// LastItem returns the last item.
 func (pub *PopUpButton) LastItem() *MenuItem {
 	_r := objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("lastItem"))
 	return MenuItemFromID(_r)
 }
 
-// SelectedItem wraps the corresponding Objective-C method.
+// SelectedItem returns the selected item.
 func (pub *PopUpButton) SelectedItem() *MenuItem {
 	_r := objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("selectedItem"))
 	return MenuItemFromID(_r)
 }
 
-// IndexOfSelectedItem wraps the corresponding Objective-C method.
+// IndexOfSelectedItem returns the index of selected item.
 func (pub *PopUpButton) IndexOfSelectedItem() int {
 	_r := objc.Send[int](objref.IDOf(pub), objc.RegisterName("indexOfSelectedItem"))
 	return _r
 }
 
-// ItemTitles wraps the corresponding Objective-C method.
+// ItemTitles returns the item titles.
 //
 // ItemTitles returns the collection as a Go slice.
 func (pub *PopUpButton) ItemTitles() []string {
@@ -836,7 +836,7 @@ func (pub *PopUpButton) ItemTitles() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// TitleOfSelectedItem wraps the corresponding Objective-C method.
+// TitleOfSelectedItem returns the title of selected item.
 func (pub *PopUpButton) TitleOfSelectedItem() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pub), objc.RegisterName("titleOfSelectedItem"))
 	if _r == 0 {

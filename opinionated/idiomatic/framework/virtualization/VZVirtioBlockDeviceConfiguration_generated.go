@@ -58,7 +58,7 @@ func (vbdc *VirtioBlockDeviceConfiguration) WithBlockDeviceIdentifier(blockDevic
 	return vbdc
 }
 
-// BlockDeviceIdentifier wraps the corresponding Objective-C method.
+// BlockDeviceIdentifier returns the block device identifier.
 func (vbdc *VirtioBlockDeviceConfiguration) BlockDeviceIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(vbdc), objc.RegisterName("blockDeviceIdentifier"))
 	if _r == 0 {

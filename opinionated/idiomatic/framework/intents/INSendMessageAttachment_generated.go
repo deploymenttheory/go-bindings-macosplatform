@@ -72,7 +72,7 @@ func NewSendMessageAttachment() *SendMessageAttachment {
 	return sendMessageAttachmentAdopt(_id)
 }
 
-// AudioMessageFile wraps the corresponding Objective-C method.
+// AudioMessageFile returns the audio message file.
 func (sma *SendMessageAttachment) AudioMessageFile() *File {
 	_r := objc.Send[objc.ID](objref.IDOf(sma), objc.RegisterName("audioMessageFile"))
 	return FileFromID(_r)

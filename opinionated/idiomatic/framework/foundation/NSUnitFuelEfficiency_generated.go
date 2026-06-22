@@ -52,7 +52,7 @@ func NewUnitFuelEfficiency() *UnitFuelEfficiency {
 	return unitFuelEfficiencyAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ufe *UnitFuelEfficiency) WithScriptingProperties(scriptingProperties obj.Object) *UnitFuelEfficiency {
 	objc.Send[objc.ID](objref.IDOf(ufe), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ufe

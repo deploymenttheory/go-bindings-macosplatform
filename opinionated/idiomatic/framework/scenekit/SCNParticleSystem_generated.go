@@ -282,13 +282,13 @@ func (ps *ParticleSystem) WithParticleSizeVariation(particleSizeVariation float6
 	return ps
 }
 
-// WithParticleIntensity sets the property and returns the receiver so calls can be chained.
+// WithParticleIntensity sets the particle intensity.
 func (ps *ParticleSystem) WithParticleIntensity(particleIntensity float64) *ParticleSystem {
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setParticleIntensity:"), particleIntensity)
 	return ps
 }
 
-// WithParticleIntensityVariation sets the property and returns the receiver so calls can be chained.
+// WithParticleIntensityVariation sets the particle intensity variation.
 func (ps *ParticleSystem) WithParticleIntensityVariation(particleIntensityVariation float64) *ParticleSystem {
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setParticleIntensityVariation:"), particleIntensityVariation)
 	return ps
@@ -448,25 +448,25 @@ func (ps *ParticleSystem) RemoveAllModifiers() {
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("removeAllModifiers"))
 }
 
-// EmissionDuration wraps the corresponding Objective-C method.
+// EmissionDuration returns the emission duration.
 func (ps *ParticleSystem) EmissionDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("emissionDuration"))
 	return _r
 }
 
-// EmissionDurationVariation wraps the corresponding Objective-C method.
+// EmissionDurationVariation returns the emission duration variation.
 func (ps *ParticleSystem) EmissionDurationVariation() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("emissionDurationVariation"))
 	return _r
 }
 
-// IdleDuration wraps the corresponding Objective-C method.
+// IdleDuration returns the idle duration.
 func (ps *ParticleSystem) IdleDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("idleDuration"))
 	return _r
 }
 
-// IdleDurationVariation wraps the corresponding Objective-C method.
+// IdleDurationVariation returns the idle duration variation.
 func (ps *ParticleSystem) IdleDurationVariation() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("idleDurationVariation"))
 	return _r
@@ -478,223 +478,223 @@ func (ps *ParticleSystem) Loops() bool {
 	return _r
 }
 
-// BirthRate wraps the corresponding Objective-C method.
+// BirthRate returns the birth rate.
 func (ps *ParticleSystem) BirthRate() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("birthRate"))
 	return _r
 }
 
-// BirthRateVariation wraps the corresponding Objective-C method.
+// BirthRateVariation returns the birth rate variation.
 func (ps *ParticleSystem) BirthRateVariation() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("birthRateVariation"))
 	return _r
 }
 
-// WarmupDuration wraps the corresponding Objective-C method.
+// WarmupDuration returns the warmup duration.
 func (ps *ParticleSystem) WarmupDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("warmupDuration"))
 	return _r
 }
 
-// EmitterShape wraps the corresponding Objective-C method.
+// EmitterShape returns the emitter shape.
 func (ps *ParticleSystem) EmitterShape() *Geometry {
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("emitterShape"))
 	return GeometryFromID(_r)
 }
 
-// BirthLocation wraps the corresponding Objective-C method.
+// BirthLocation returns the birth location.
 func (ps *ParticleSystem) BirthLocation() ParticleBirthLocation {
 	_r := objc.Send[ParticleBirthLocation](objref.IDOf(ps), objc.RegisterName("birthLocation"))
 	return _r
 }
 
-// BirthDirection wraps the corresponding Objective-C method.
+// BirthDirection returns the birth direction.
 func (ps *ParticleSystem) BirthDirection() ParticleBirthDirection {
 	_r := objc.Send[ParticleBirthDirection](objref.IDOf(ps), objc.RegisterName("birthDirection"))
 	return _r
 }
 
-// SpreadingAngle wraps the corresponding Objective-C method.
+// SpreadingAngle returns the spreading angle.
 func (ps *ParticleSystem) SpreadingAngle() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("spreadingAngle"))
 	return _r
 }
 
-// IsLocal wraps the corresponding Objective-C method.
+// IsLocal reports whether the object is local.
 func (ps *ParticleSystem) IsLocal() bool {
 	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("isLocal"))
 	return _r
 }
 
-// ParticleAngle wraps the corresponding Objective-C method.
+// ParticleAngle returns the particle angle.
 func (ps *ParticleSystem) ParticleAngle() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleAngle"))
 	return _r
 }
 
-// ParticleAngleVariation wraps the corresponding Objective-C method.
+// ParticleAngleVariation returns the particle angle variation.
 func (ps *ParticleSystem) ParticleAngleVariation() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleAngleVariation"))
 	return _r
 }
 
-// ParticleVelocity wraps the corresponding Objective-C method.
+// ParticleVelocity returns the particle velocity.
 func (ps *ParticleSystem) ParticleVelocity() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleVelocity"))
 	return _r
 }
 
-// ParticleVelocityVariation wraps the corresponding Objective-C method.
+// ParticleVelocityVariation returns the particle velocity variation.
 func (ps *ParticleSystem) ParticleVelocityVariation() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleVelocityVariation"))
 	return _r
 }
 
-// ParticleAngularVelocity wraps the corresponding Objective-C method.
+// ParticleAngularVelocity returns the particle angular velocity.
 func (ps *ParticleSystem) ParticleAngularVelocity() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleAngularVelocity"))
 	return _r
 }
 
-// ParticleAngularVelocityVariation wraps the corresponding Objective-C method.
+// ParticleAngularVelocityVariation returns the particle angular velocity variation.
 func (ps *ParticleSystem) ParticleAngularVelocityVariation() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleAngularVelocityVariation"))
 	return _r
 }
 
-// ParticleLifeSpan wraps the corresponding Objective-C method.
+// ParticleLifeSpan returns the particle life span.
 func (ps *ParticleSystem) ParticleLifeSpan() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleLifeSpan"))
 	return _r
 }
 
-// ParticleLifeSpanVariation wraps the corresponding Objective-C method.
+// ParticleLifeSpanVariation returns the particle life span variation.
 func (ps *ParticleSystem) ParticleLifeSpanVariation() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleLifeSpanVariation"))
 	return _r
 }
 
-// SystemSpawnedOnDying wraps the corresponding Objective-C method.
+// SystemSpawnedOnDying returns the system spawned on dying.
 func (ps *ParticleSystem) SystemSpawnedOnDying() *ParticleSystem {
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("systemSpawnedOnDying"))
 	return ParticleSystemFromID(_r)
 }
 
-// SystemSpawnedOnCollision wraps the corresponding Objective-C method.
+// SystemSpawnedOnCollision returns the system spawned on collision.
 func (ps *ParticleSystem) SystemSpawnedOnCollision() *ParticleSystem {
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("systemSpawnedOnCollision"))
 	return ParticleSystemFromID(_r)
 }
 
-// SystemSpawnedOnLiving wraps the corresponding Objective-C method.
+// SystemSpawnedOnLiving returns the system spawned on living.
 func (ps *ParticleSystem) SystemSpawnedOnLiving() *ParticleSystem {
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("systemSpawnedOnLiving"))
 	return ParticleSystemFromID(_r)
 }
 
-// ParticleImage wraps the corresponding Objective-C method.
+// ParticleImage returns the particle image.
 func (ps *ParticleSystem) ParticleImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("particleImage"))
 	return obj.Wrap(_r)
 }
 
-// ImageSequenceColumnCount wraps the corresponding Objective-C method.
+// ImageSequenceColumnCount returns the image sequence column count.
 func (ps *ParticleSystem) ImageSequenceColumnCount() int {
 	_r := objc.Send[int](objref.IDOf(ps), objc.RegisterName("imageSequenceColumnCount"))
 	return _r
 }
 
-// ImageSequenceRowCount wraps the corresponding Objective-C method.
+// ImageSequenceRowCount returns the image sequence row count.
 func (ps *ParticleSystem) ImageSequenceRowCount() int {
 	_r := objc.Send[int](objref.IDOf(ps), objc.RegisterName("imageSequenceRowCount"))
 	return _r
 }
 
-// ImageSequenceInitialFrame wraps the corresponding Objective-C method.
+// ImageSequenceInitialFrame returns the image sequence initial frame.
 func (ps *ParticleSystem) ImageSequenceInitialFrame() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("imageSequenceInitialFrame"))
 	return _r
 }
 
-// ImageSequenceInitialFrameVariation wraps the corresponding Objective-C method.
+// ImageSequenceInitialFrameVariation returns the image sequence initial frame variation.
 func (ps *ParticleSystem) ImageSequenceInitialFrameVariation() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("imageSequenceInitialFrameVariation"))
 	return _r
 }
 
-// ImageSequenceFrameRate wraps the corresponding Objective-C method.
+// ImageSequenceFrameRate returns the image sequence frame rate.
 func (ps *ParticleSystem) ImageSequenceFrameRate() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("imageSequenceFrameRate"))
 	return _r
 }
 
-// ImageSequenceFrameRateVariation wraps the corresponding Objective-C method.
+// ImageSequenceFrameRateVariation returns the image sequence frame rate variation.
 func (ps *ParticleSystem) ImageSequenceFrameRateVariation() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("imageSequenceFrameRateVariation"))
 	return _r
 }
 
-// ImageSequenceAnimationMode wraps the corresponding Objective-C method.
+// ImageSequenceAnimationMode returns the image sequence animation mode.
 func (ps *ParticleSystem) ImageSequenceAnimationMode() ParticleImageSequenceAnimationMode {
 	_r := objc.Send[ParticleImageSequenceAnimationMode](objref.IDOf(ps), objc.RegisterName("imageSequenceAnimationMode"))
 	return _r
 }
 
-// ParticleColor wraps the corresponding Objective-C method.
+// ParticleColor returns the particle color.
 func (ps *ParticleSystem) ParticleColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("particleColor"))
 	return obj.Wrap(_r)
 }
 
-// ParticleSize wraps the corresponding Objective-C method.
+// ParticleSize returns the particle size.
 func (ps *ParticleSystem) ParticleSize() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleSize"))
 	return _r
 }
 
-// ParticleSizeVariation wraps the corresponding Objective-C method.
+// ParticleSizeVariation returns the particle size variation.
 func (ps *ParticleSystem) ParticleSizeVariation() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleSizeVariation"))
 	return _r
 }
 
-// ParticleIntensity wraps the corresponding Objective-C method.
+// ParticleIntensity returns the particle intensity.
 func (ps *ParticleSystem) ParticleIntensity() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleIntensity"))
 	return _r
 }
 
-// ParticleIntensityVariation wraps the corresponding Objective-C method.
+// ParticleIntensityVariation returns the particle intensity variation.
 func (ps *ParticleSystem) ParticleIntensityVariation() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleIntensityVariation"))
 	return _r
 }
 
-// BlendMode wraps the corresponding Objective-C method.
+// BlendMode returns the blend mode.
 func (ps *ParticleSystem) BlendMode() ParticleBlendMode {
 	_r := objc.Send[ParticleBlendMode](objref.IDOf(ps), objc.RegisterName("blendMode"))
 	return _r
 }
 
-// IsBlackPassEnabled wraps the corresponding Objective-C method.
+// IsBlackPassEnabled reports whether the object is black pass enabled.
 func (ps *ParticleSystem) IsBlackPassEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("isBlackPassEnabled"))
 	return _r
 }
 
-// OrientationMode wraps the corresponding Objective-C method.
+// OrientationMode returns the orientation mode.
 func (ps *ParticleSystem) OrientationMode() ParticleOrientationMode {
 	_r := objc.Send[ParticleOrientationMode](objref.IDOf(ps), objc.RegisterName("orientationMode"))
 	return _r
 }
 
-// SortingMode wraps the corresponding Objective-C method.
+// SortingMode returns the sorting mode.
 func (ps *ParticleSystem) SortingMode() ParticleSortingMode {
 	_r := objc.Send[ParticleSortingMode](objref.IDOf(ps), objc.RegisterName("sortingMode"))
 	return _r
 }
 
-// IsLightingEnabled wraps the corresponding Objective-C method.
+// IsLightingEnabled reports whether the object is lighting enabled.
 func (ps *ParticleSystem) IsLightingEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(ps), objc.RegisterName("isLightingEnabled"))
 	return _r
@@ -718,7 +718,7 @@ func (ps *ParticleSystem) ParticleDiesOnCollision() bool {
 	return _r
 }
 
-// ColliderNodes wraps the corresponding Objective-C method.
+// ColliderNodes returns the collider nodes.
 //
 // ColliderNodes returns the collection as a Go slice.
 func (ps *ParticleSystem) ColliderNodes() []*Node {
@@ -726,73 +726,73 @@ func (ps *ParticleSystem) ColliderNodes() []*Node {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Node { return NodeFromID(_id) })
 }
 
-// ParticleMass wraps the corresponding Objective-C method.
+// ParticleMass returns the particle mass.
 func (ps *ParticleSystem) ParticleMass() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleMass"))
 	return _r
 }
 
-// ParticleMassVariation wraps the corresponding Objective-C method.
+// ParticleMassVariation returns the particle mass variation.
 func (ps *ParticleSystem) ParticleMassVariation() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleMassVariation"))
 	return _r
 }
 
-// ParticleBounce wraps the corresponding Objective-C method.
+// ParticleBounce returns the particle bounce.
 func (ps *ParticleSystem) ParticleBounce() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleBounce"))
 	return _r
 }
 
-// ParticleBounceVariation wraps the corresponding Objective-C method.
+// ParticleBounceVariation returns the particle bounce variation.
 func (ps *ParticleSystem) ParticleBounceVariation() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleBounceVariation"))
 	return _r
 }
 
-// ParticleFriction wraps the corresponding Objective-C method.
+// ParticleFriction returns the particle friction.
 func (ps *ParticleSystem) ParticleFriction() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleFriction"))
 	return _r
 }
 
-// ParticleFrictionVariation wraps the corresponding Objective-C method.
+// ParticleFrictionVariation returns the particle friction variation.
 func (ps *ParticleSystem) ParticleFrictionVariation() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleFrictionVariation"))
 	return _r
 }
 
-// ParticleCharge wraps the corresponding Objective-C method.
+// ParticleCharge returns the particle charge.
 func (ps *ParticleSystem) ParticleCharge() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleCharge"))
 	return _r
 }
 
-// ParticleChargeVariation wraps the corresponding Objective-C method.
+// ParticleChargeVariation returns the particle charge variation.
 func (ps *ParticleSystem) ParticleChargeVariation() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("particleChargeVariation"))
 	return _r
 }
 
-// DampingFactor wraps the corresponding Objective-C method.
+// DampingFactor returns the damping factor.
 func (ps *ParticleSystem) DampingFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("dampingFactor"))
 	return _r
 }
 
-// SpeedFactor wraps the corresponding Objective-C method.
+// SpeedFactor returns the speed factor.
 func (ps *ParticleSystem) SpeedFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("speedFactor"))
 	return _r
 }
 
-// StretchFactor wraps the corresponding Objective-C method.
+// StretchFactor returns the stretch factor.
 func (ps *ParticleSystem) StretchFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("stretchFactor"))
 	return _r
 }
 
-// FresnelExponent wraps the corresponding Objective-C method.
+// FresnelExponent returns the fresnel exponent.
 func (ps *ParticleSystem) FresnelExponent() float64 {
 	_r := objc.Send[float64](objref.IDOf(ps), objc.RegisterName("fresnelExponent"))
 	return _r
@@ -804,7 +804,7 @@ func (ps *ParticleSystem) WritesToDepthBuffer() bool {
 	return _r
 }
 
-// PropertyControllers wraps the corresponding Objective-C method.
+// PropertyControllers returns the property controllers.
 func (ps *ParticleSystem) PropertyControllers() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("propertyControllers"))
 	return obj.Wrap(_r)

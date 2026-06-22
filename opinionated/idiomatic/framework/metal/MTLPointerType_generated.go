@@ -63,25 +63,25 @@ func (pt *PointerType) ElementArrayType() *ArrayType {
 	return ArrayTypeFromID(_r)
 }
 
-// ElementType wraps the corresponding Objective-C method.
+// ElementType returns the element type.
 func (pt *PointerType) ElementType() DataType {
 	_r := objc.Send[DataType](objref.IDOf(pt), objc.RegisterName("elementType"))
 	return _r
 }
 
-// Access wraps the corresponding Objective-C method.
+// Access returns the access.
 func (pt *PointerType) Access() BindingAccess {
 	_r := objc.Send[BindingAccess](objref.IDOf(pt), objc.RegisterName("access"))
 	return _r
 }
 
-// Alignment wraps the corresponding Objective-C method.
+// Alignment returns the alignment.
 func (pt *PointerType) Alignment() int {
 	_r := objc.Send[int](objref.IDOf(pt), objc.RegisterName("alignment"))
 	return _r
 }
 
-// DataSize wraps the corresponding Objective-C method.
+// DataSize returns the data size.
 func (pt *PointerType) DataSize() int {
 	_r := objc.Send[int](objref.IDOf(pt), objc.RegisterName("dataSize"))
 	return _r

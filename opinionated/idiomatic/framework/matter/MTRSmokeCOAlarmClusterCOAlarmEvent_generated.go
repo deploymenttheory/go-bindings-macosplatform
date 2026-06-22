@@ -70,13 +70,13 @@ func NewMTRSmokeCOAlarmClusterCOAlarmEvent() *MTRSmokeCOAlarmClusterCOAlarmEvent
 	return mTRSmokeCOAlarmClusterCOAlarmEventAdopt(_id)
 }
 
-// WithAlarmSeverityLevel sets the property and returns the receiver so calls can be chained.
+// WithAlarmSeverityLevel sets the alarm severity level.
 func (mscaccae *MTRSmokeCOAlarmClusterCOAlarmEvent) WithAlarmSeverityLevel(alarmSeverityLevel obj.Object) *MTRSmokeCOAlarmClusterCOAlarmEvent {
 	objc.Send[objc.ID](objref.IDOf(mscaccae), objc.RegisterName("setAlarmSeverityLevel:"), objref.IDOf(alarmSeverityLevel))
 	return mscaccae
 }
 
-// AlarmSeverityLevel wraps the corresponding Objective-C method.
+// AlarmSeverityLevel returns the alarm severity level.
 func (mscaccae *MTRSmokeCOAlarmClusterCOAlarmEvent) AlarmSeverityLevel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mscaccae), objc.RegisterName("alarmSeverityLevel"))
 	return obj.Wrap(_r)

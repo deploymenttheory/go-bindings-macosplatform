@@ -70,25 +70,25 @@ func NewMTRCommissionerControlClusterRequestCommissioningApprovalParams() *MTRCo
 	return mTRCommissionerControlClusterRequestCommissioningApprovalParamsAdopt(_id)
 }
 
-// WithRequestID sets the property and returns the receiver so calls can be chained.
+// WithRequestID sets the request ID.
 func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithRequestID(requestID obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
 	objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("setRequestID:"), objref.IDOf(requestID))
 	return mcccrcap
 }
 
-// WithVendorID sets the property and returns the receiver so calls can be chained.
+// WithVendorID sets the vendor ID.
 func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithVendorID(vendorID obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
 	objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 	return mcccrcap
 }
 
-// WithProductID sets the property and returns the receiver so calls can be chained.
+// WithProductID sets the product ID.
 func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithProductID(productID obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
 	objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("setProductID:"), objref.IDOf(productID))
 	return mcccrcap
 }
 
-// WithLabel sets the property and returns the receiver so calls can be chained.
+// WithLabel sets the label.
 func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithLabel(label string) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
 	objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return mcccrcap
@@ -106,25 +106,25 @@ func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams)
 	return mcccrcap
 }
 
-// RequestID wraps the corresponding Objective-C method.
+// RequestID returns the request ID.
 func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) RequestID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("requestID"))
 	return obj.Wrap(_r)
 }
 
-// VendorID wraps the corresponding Objective-C method.
+// VendorID returns the vendor ID.
 func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) VendorID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("vendorID"))
 	return obj.Wrap(_r)
 }
 
-// ProductID wraps the corresponding Objective-C method.
+// ProductID returns the product ID.
 func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) ProductID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("productID"))
 	return obj.Wrap(_r)
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("label"))
 	if _r == 0 {

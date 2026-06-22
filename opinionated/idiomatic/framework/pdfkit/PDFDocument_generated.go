@@ -87,7 +87,7 @@ func NewDocumentWithData(data obj.Object) *Document {
 	return documentAdopt(_id)
 }
 
-// WithDocumentAttributes sets the property and returns the receiver so calls can be chained.
+// WithDocumentAttributes sets the document attributes.
 func (d *Document) WithDocumentAttributes(documentAttributes obj.Object) *Document {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setDocumentAttributes:"), objref.IDOf(documentAttributes))
 	return d
@@ -99,7 +99,7 @@ func (d *Document) UnlockWithPassword(password string) bool {
 	return _r
 }
 
-// DataRepresentation wraps the corresponding Objective-C method.
+// DataRepresentation returns the data representation.
 func (d *Document) DataRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)
@@ -111,25 +111,25 @@ func (d *Document) DataRepresentationWithOptions(options obj.Object) obj.Object 
 	return obj.Wrap(_r)
 }
 
-// WriteToFile wraps the corresponding Objective-C method.
+// WriteToFile writes to file.
 func (d *Document) WriteToFile(path string) bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToFile:"), purego.NSString(path))
 	return _r
 }
 
-// WriteToFileWithOptions wraps the corresponding Objective-C method.
+// WriteToFileWithOptions writes to file with options.
 func (d *Document) WriteToFileWithOptions(path string, options obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToFile:withOptions:"), purego.NSString(path), objref.IDOf(options))
 	return _r
 }
 
-// WriteToURL wraps the corresponding Objective-C method.
+// WriteToURL writes to URL.
 func (d *Document) WriteToURL(url string) bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToURL:"), rt.FileURL(url))
 	return _r
 }
 
-// WriteToURLWithOptions wraps the corresponding Objective-C method.
+// WriteToURLWithOptions writes to URL with options.
 func (d *Document) WriteToURLWithOptions(url string, options obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToURL:withOptions:"), rt.FileURL(url), objref.IDOf(options))
 	return _r
@@ -153,12 +153,12 @@ func (d *Document) IndexForPage(page *Page) int {
 	return _r
 }
 
-// InsertPageAtIndex wraps the corresponding Objective-C method.
+// InsertPageAtIndex inserts page at index.
 func (d *Document) InsertPageAtIndex(page *Page, index int) {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("insertPage:atIndex:"), objref.IDOf(page), index)
 }
 
-// RemovePageAtIndex wraps the corresponding Objective-C method.
+// RemovePageAtIndex removes page at index.
 func (d *Document) RemovePageAtIndex(index int) {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("removePageAtIndex:"), index)
 }
@@ -168,7 +168,7 @@ func (d *Document) ExchangePageAtIndexWithPageAtIndex(indexA int, indexB int) {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("exchangePageAtIndex:withPageAtIndex:"), indexA, indexB)
 }
 
-// CancelFindString wraps the corresponding Objective-C method.
+// CancelFindString cancels find string.
 func (d *Document) CancelFindString() {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("cancelFindString"))
 }
@@ -197,43 +197,43 @@ func (d *Document) SelectionFromPageAtCharacterIndexToPageAtCharacterIndex(start
 	return SelectionFromID(_r)
 }
 
-// DocumentURL wraps the corresponding Objective-C method.
+// DocumentURL returns the document URL.
 func (d *Document) DocumentURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("documentURL"))
 	return obj.Wrap(_r)
 }
 
-// DocumentRef wraps the corresponding Objective-C method.
+// DocumentRef returns the document ref.
 func (d *Document) DocumentRef() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("documentRef"))
 	return obj.Wrap(_r)
 }
 
-// DocumentAttributes wraps the corresponding Objective-C method.
+// DocumentAttributes returns the document attributes.
 func (d *Document) DocumentAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("documentAttributes"))
 	return obj.Wrap(_r)
 }
 
-// MajorVersion wraps the corresponding Objective-C method.
+// MajorVersion returns the major version.
 func (d *Document) MajorVersion() int {
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("majorVersion"))
 	return _r
 }
 
-// MinorVersion wraps the corresponding Objective-C method.
+// MinorVersion returns the minor version.
 func (d *Document) MinorVersion() int {
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("minorVersion"))
 	return _r
 }
 
-// IsEncrypted wraps the corresponding Objective-C method.
+// IsEncrypted reports whether the object is encrypted.
 func (d *Document) IsEncrypted() bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isEncrypted"))
 	return _r
 }
 
-// IsLocked wraps the corresponding Objective-C method.
+// IsLocked reports whether the object is locked.
 func (d *Document) IsLocked() bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isLocked"))
 	return _r
@@ -281,31 +281,31 @@ func (d *Document) AllowsFormFieldEntry() bool {
 	return _r
 }
 
-// AccessPermissions wraps the corresponding Objective-C method.
+// AccessPermissions returns the access permissions.
 func (d *Document) AccessPermissions() AccessPermissions {
 	_r := objc.Send[AccessPermissions](objref.IDOf(d), objc.RegisterName("accessPermissions"))
 	return _r
 }
 
-// PermissionsStatus wraps the corresponding Objective-C method.
+// PermissionsStatus returns the permissions status.
 func (d *Document) PermissionsStatus() DocumentPermissions {
 	_r := objc.Send[DocumentPermissions](objref.IDOf(d), objc.RegisterName("permissionsStatus"))
 	return _r
 }
 
-// PageCount wraps the corresponding Objective-C method.
+// PageCount returns the page count.
 func (d *Document) PageCount() int {
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("pageCount"))
 	return _r
 }
 
-// IsFinding wraps the corresponding Objective-C method.
+// IsFinding reports whether the object is finding.
 func (d *Document) IsFinding() bool {
 	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isFinding"))
 	return _r
 }
 
-// SelectionForEntireDocument wraps the corresponding Objective-C method.
+// SelectionForEntireDocument returns the selection for entire document.
 func (d *Document) SelectionForEntireDocument() *Selection {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("selectionForEntireDocument"))
 	return SelectionFromID(_r)

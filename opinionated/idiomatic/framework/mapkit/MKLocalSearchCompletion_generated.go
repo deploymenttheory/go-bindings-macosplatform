@@ -72,7 +72,7 @@ func NewLocalSearchCompletion() *LocalSearchCompletion {
 	return localSearchCompletionAdopt(_id)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (lsc *LocalSearchCompletion) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("title"))
 	if _r == 0 {
@@ -81,7 +81,7 @@ func (lsc *LocalSearchCompletion) Title() string {
 	return purego.GoString(_r)
 }
 
-// TitleHighlightRanges wraps the corresponding Objective-C method.
+// TitleHighlightRanges returns the title highlight ranges.
 //
 // TitleHighlightRanges returns the collection as a Go slice.
 func (lsc *LocalSearchCompletion) TitleHighlightRanges() []obj.Object {
@@ -89,7 +89,7 @@ func (lsc *LocalSearchCompletion) TitleHighlightRanges() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Subtitle wraps the corresponding Objective-C method.
+// Subtitle returns the subtitle.
 func (lsc *LocalSearchCompletion) Subtitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("subtitle"))
 	if _r == 0 {
@@ -98,7 +98,7 @@ func (lsc *LocalSearchCompletion) Subtitle() string {
 	return purego.GoString(_r)
 }
 
-// SubtitleHighlightRanges wraps the corresponding Objective-C method.
+// SubtitleHighlightRanges returns the subtitle highlight ranges.
 //
 // SubtitleHighlightRanges returns the collection as a Go slice.
 func (lsc *LocalSearchCompletion) SubtitleHighlightRanges() []obj.Object {

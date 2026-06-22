@@ -78,7 +78,7 @@ func (mpdssd *MTL4PipelineDataSetSerializerDescriptor) WithConfiguration(configu
 	return mpdssd
 }
 
-// Configuration wraps the corresponding Objective-C method.
+// Configuration returns the configuration.
 func (mpdssd *MTL4PipelineDataSetSerializerDescriptor) Configuration() MTL4PipelineDataSetSerializerConfiguration {
 	_r := objc.Send[MTL4PipelineDataSetSerializerConfiguration](objref.IDOf(mpdssd), objc.RegisterName("configuration"))
 	return _r

@@ -96,13 +96,13 @@ func (smc *StandardMapConfiguration) WithElevationStyle(elevationStyle MapElevat
 	return smc
 }
 
-// EmphasisStyle wraps the corresponding Objective-C method.
+// EmphasisStyle returns the emphasis style.
 func (smc *StandardMapConfiguration) EmphasisStyle() StandardMapEmphasisStyle {
 	_r := objc.Send[StandardMapEmphasisStyle](objref.IDOf(smc), objc.RegisterName("emphasisStyle"))
 	return _r
 }
 
-// PointOfInterestFilter wraps the corresponding Objective-C method.
+// PointOfInterestFilter returns the point of interest filter.
 func (smc *StandardMapConfiguration) PointOfInterestFilter() *PointOfInterestFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(smc), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)

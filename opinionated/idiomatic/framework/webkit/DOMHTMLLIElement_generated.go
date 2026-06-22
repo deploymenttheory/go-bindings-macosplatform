@@ -49,121 +49,121 @@ func NewDOMHTMLLIElement() *DOMHTMLLIElement {
 	return dOMHTMLLIElementAdopt(_id)
 }
 
-// WithType sets the property and returns the receiver so calls can be chained.
+// WithType sets the type.
 func (de *DOMHTMLLIElement) WithType(type_ string) *DOMHTMLLIElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setType:"), purego.NSString(type_))
 	return de
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (de *DOMHTMLLIElement) WithValue(value int) *DOMHTMLLIElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setValue:"), value)
 	return de
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (de *DOMHTMLLIElement) WithTitle(title string) *DOMHTMLLIElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return de
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (de *DOMHTMLLIElement) WithLang(lang string) *DOMHTMLLIElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return de
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (de *DOMHTMLLIElement) WithDir(dir string) *DOMHTMLLIElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return de
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (de *DOMHTMLLIElement) WithTabIndex(tabIndex int) *DOMHTMLLIElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setTabIndex:"), tabIndex)
 	return de
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (de *DOMHTMLLIElement) WithAccessKey(accessKey string) *DOMHTMLLIElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return de
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (de *DOMHTMLLIElement) WithInnerText(innerText string) *DOMHTMLLIElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return de
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (de *DOMHTMLLIElement) WithOuterText(outerText string) *DOMHTMLLIElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return de
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (de *DOMHTMLLIElement) WithContentEditable(contentEditable string) *DOMHTMLLIElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return de
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (de *DOMHTMLLIElement) WithIDName(idName string) *DOMHTMLLIElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return de
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (de *DOMHTMLLIElement) WithScrollLeft(scrollLeft int) *DOMHTMLLIElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return de
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (de *DOMHTMLLIElement) WithScrollTop(scrollTop int) *DOMHTMLLIElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setScrollTop:"), scrollTop)
 	return de
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (de *DOMHTMLLIElement) WithInnerHTML(innerHTML string) *DOMHTMLLIElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return de
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (de *DOMHTMLLIElement) WithOuterHTML(outerHTML string) *DOMHTMLLIElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return de
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (de *DOMHTMLLIElement) WithClassName(className string) *DOMHTMLLIElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return de
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (de *DOMHTMLLIElement) WithNodeValue(nodeValue string) *DOMHTMLLIElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return de
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (de *DOMHTMLLIElement) WithPrefix(prefix string) *DOMHTMLLIElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return de
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (de *DOMHTMLLIElement) WithTextContent(textContent string) *DOMHTMLLIElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return de
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (de *DOMHTMLLIElement) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("type"))
 	if _r == 0 {
@@ -172,7 +172,7 @@ func (de *DOMHTMLLIElement) Type() string {
 	return purego.GoString(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (de *DOMHTMLLIElement) Value() int {
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("value"))
 	return _r

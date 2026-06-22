@@ -68,7 +68,7 @@ func (o *Object) String() string {
 	return rt.Description(objref.IDOf(o))
 }
 
-// LocalIdentifier wraps the corresponding Objective-C method.
+// LocalIdentifier returns the local identifier.
 func (o *Object) LocalIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("localIdentifier"))
 	if _r == 0 {

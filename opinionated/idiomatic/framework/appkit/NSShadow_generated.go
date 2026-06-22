@@ -96,19 +96,19 @@ func (s *Shadow) Set() {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("set"))
 }
 
-// ShadowOffset wraps the corresponding Objective-C method.
+// ShadowOffset returns the shadow offset.
 func (s *Shadow) ShadowOffset() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(s), objc.RegisterName("shadowOffset"))
 	return _r
 }
 
-// ShadowBlurRadius wraps the corresponding Objective-C method.
+// ShadowBlurRadius returns the shadow blur radius.
 func (s *Shadow) ShadowBlurRadius() float64 {
 	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("shadowBlurRadius"))
 	return _r
 }
 
-// ShadowColor wraps the corresponding Objective-C method.
+// ShadowColor returns the shadow color.
 func (s *Shadow) ShadowColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("shadowColor"))
 	return ColorFromID(_r)

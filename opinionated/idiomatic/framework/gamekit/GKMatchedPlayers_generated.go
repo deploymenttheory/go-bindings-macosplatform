@@ -72,7 +72,7 @@ func NewMatchedPlayers() *MatchedPlayers {
 	return matchedPlayersAdopt(_id)
 }
 
-// Players wraps the corresponding Objective-C method.
+// Players returns the players.
 //
 // Players returns the collection as a Go slice.
 func (mp *MatchedPlayers) Players() []*Player {
@@ -80,7 +80,7 @@ func (mp *MatchedPlayers) Players() []*Player {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Player { return PlayerFromID(_id) })
 }
 
-// PlayerProperties wraps the corresponding Objective-C method.
+// PlayerProperties returns the player properties.
 func (mp *MatchedPlayers) PlayerProperties() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("playerProperties"))
 	return obj.Wrap(_r)

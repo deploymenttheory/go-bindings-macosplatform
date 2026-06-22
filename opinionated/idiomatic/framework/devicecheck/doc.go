@@ -3,4 +3,7 @@
 //go:build darwin
 
 // Package devicecheck provides a fluent Go API over the macOS DeviceCheck framework.
+//
+// Each With… method sets one property and returns its receiver, so configuration
+// calls can be chained.
 package devicecheck

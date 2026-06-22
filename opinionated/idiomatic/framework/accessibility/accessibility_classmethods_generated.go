@@ -74,7 +74,7 @@ func Stop() {
 	objc.Send[objc.ID](objc.ID(_class("AXLiveAudioGraph")), objc.RegisterName("stop"))
 }
 
-// CurrentRequest wraps the corresponding Objective-C method.
+// CurrentRequest returns the current request.
 func CurrentRequest() *Request {
 	_r := objc.Send[objc.ID](objc.ID(_class("AXRequest")), objc.RegisterName("currentRequest"))
 	return RequestFromID(_r)

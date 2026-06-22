@@ -120,13 +120,13 @@ func (c *Controller) Gamepad() *Gamepad {
 	return GamepadFromID(_r)
 }
 
-// MicroGamepad wraps the corresponding Objective-C method.
+// MicroGamepad returns the micro gamepad.
 func (c *Controller) MicroGamepad() *MicroGamepad {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("microGamepad"))
 	return MicroGamepadFromID(_r)
 }
 
-// ExtendedGamepad wraps the corresponding Objective-C method.
+// ExtendedGamepad returns the extended gamepad.
 func (c *Controller) ExtendedGamepad() *ExtendedGamepad {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("extendedGamepad"))
 	return ExtendedGamepadFromID(_r)

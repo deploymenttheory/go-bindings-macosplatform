@@ -70,19 +70,19 @@ func NewView() *View {
 	return viewAdopt(_id)
 }
 
-// LoadCompositionFromFile wraps the corresponding Objective-C method.
+// LoadCompositionFromFile loads composition from file.
 func (v_ *View) LoadCompositionFromFile(path string) bool {
 	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("loadCompositionFromFile:"), purego.NSString(path))
 	return _r
 }
 
-// LoadComposition wraps the corresponding Objective-C method.
+// LoadComposition loads composition.
 func (v_ *View) LoadComposition(composition obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("loadComposition:"), objref.IDOf(composition))
 	return _r
 }
 
-// LoadedComposition wraps the corresponding Objective-C method.
+// LoadedComposition returns the loaded composition.
 func (v_ *View) LoadedComposition() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("loadedComposition"))
 	return obj.Wrap(_r)
@@ -109,7 +109,7 @@ func (v_ *View) SetEraseColor(color obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setEraseColor:"), objref.IDOf(color))
 }
 
-// EraseColor wraps the corresponding Objective-C method.
+// EraseColor returns the erase color.
 func (v_ *View) EraseColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("eraseColor"))
 	return obj.Wrap(_r)
@@ -120,7 +120,7 @@ func (v_ *View) SetEventForwardingMask(mask int) {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setEventForwardingMask:"), mask)
 }
 
-// EventForwardingMask wraps the corresponding Objective-C method.
+// EventForwardingMask returns the event forwarding mask.
 func (v_ *View) EventForwardingMask() int {
 	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("eventForwardingMask"))
 	return _r
@@ -131,7 +131,7 @@ func (v_ *View) SetMaxRenderingFrameRate(maxFPS float32) {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setMaxRenderingFrameRate:"), maxFPS)
 }
 
-// MaxRenderingFrameRate wraps the corresponding Objective-C method.
+// MaxRenderingFrameRate returns the max rendering frame rate.
 func (v_ *View) MaxRenderingFrameRate() float32 {
 	_r := objc.Send[float32](objref.IDOf(v_), objc.RegisterName("maxRenderingFrameRate"))
 	return _r
@@ -154,52 +154,52 @@ func (v_ *View) RenderAtTimeArguments(time_ float64, arguments obj.Object) bool 
 	return _r
 }
 
-// PauseRendering wraps the corresponding Objective-C method.
+// PauseRendering pauses rendering.
 func (v_ *View) PauseRendering() {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("pauseRendering"))
 }
 
-// IsPausedRendering wraps the corresponding Objective-C method.
+// IsPausedRendering reports whether the object is paused rendering.
 func (v_ *View) IsPausedRendering() bool {
 	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isPausedRendering"))
 	return _r
 }
 
-// ResumeRendering wraps the corresponding Objective-C method.
+// ResumeRendering resumes rendering.
 func (v_ *View) ResumeRendering() {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("resumeRendering"))
 }
 
-// StopRendering wraps the corresponding Objective-C method.
+// StopRendering stops rendering.
 func (v_ *View) StopRendering() {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("stopRendering"))
 }
 
-// IsRendering wraps the corresponding Objective-C method.
+// IsRendering reports whether the object is rendering.
 func (v_ *View) IsRendering() bool {
 	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isRendering"))
 	return _r
 }
 
-// SnapshotImage wraps the corresponding Objective-C method.
+// SnapshotImage returns the snapshot image.
 func (v_ *View) SnapshotImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("snapshotImage"))
 	return obj.Wrap(_r)
 }
 
-// CreateSnapshotImageOfType wraps the corresponding Objective-C method.
+// CreateSnapshotImageOfType creates snapshot image of type.
 func (v_ *View) CreateSnapshotImageOfType(type_ string) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("createSnapshotImageOfType:"), purego.NSString(type_))
 	return obj.Wrap(_r)
 }
 
-// OpenGLContext wraps the corresponding Objective-C method.
+// OpenGLContext returns the open gl context.
 func (v_ *View) OpenGLContext() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("openGLContext"))
 	return obj.Wrap(_r)
 }
 
-// OpenGLPixelFormat wraps the corresponding Objective-C method.
+// OpenGLPixelFormat returns the open gl pixel format.
 func (v_ *View) OpenGLPixelFormat() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("openGLPixelFormat"))
 	return obj.Wrap(_r)

@@ -49,25 +49,25 @@ func NewDOMCDATASection() *DOMCDATASection {
 	return dOMCDATASectionAdopt(_id)
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (ds *DOMCDATASection) WithData(data string) *DOMCDATASection {
 	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("setData:"), purego.NSString(data))
 	return ds
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (ds *DOMCDATASection) WithNodeValue(nodeValue string) *DOMCDATASection {
 	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return ds
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (ds *DOMCDATASection) WithPrefix(prefix string) *DOMCDATASection {
 	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return ds
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (ds *DOMCDATASection) WithTextContent(textContent string) *DOMCDATASection {
 	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return ds

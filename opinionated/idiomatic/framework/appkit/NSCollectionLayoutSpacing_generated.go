@@ -72,19 +72,19 @@ func NewCollectionLayoutSpacing() *CollectionLayoutSpacing {
 	return collectionLayoutSpacingAdopt(_id)
 }
 
-// Spacing wraps the corresponding Objective-C method.
+// Spacing returns the spacing.
 func (cls *CollectionLayoutSpacing) Spacing() float64 {
 	_r := objc.Send[float64](objref.IDOf(cls), objc.RegisterName("spacing"))
 	return _r
 }
 
-// IsFlexibleSpacing wraps the corresponding Objective-C method.
+// IsFlexibleSpacing reports whether the object is flexible spacing.
 func (cls *CollectionLayoutSpacing) IsFlexibleSpacing() bool {
 	_r := objc.Send[bool](objref.IDOf(cls), objc.RegisterName("isFlexibleSpacing"))
 	return _r
 }
 
-// IsFixedSpacing wraps the corresponding Objective-C method.
+// IsFixedSpacing reports whether the object is fixed spacing.
 func (cls *CollectionLayoutSpacing) IsFixedSpacing() bool {
 	_r := objc.Send[bool](objref.IDOf(cls), objc.RegisterName("isFixedSpacing"))
 	return _r

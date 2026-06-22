@@ -78,37 +78,37 @@ func (tbp *TurnBasedParticipant) WithMatchOutcome(matchOutcome TurnBasedMatchOut
 	return tbp
 }
 
-// Player wraps the corresponding Objective-C method.
+// Player returns the player.
 func (tbp *TurnBasedParticipant) Player() *Player {
 	_r := objc.Send[objc.ID](objref.IDOf(tbp), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
 
-// LastTurnDate wraps the corresponding Objective-C method.
+// LastTurnDate returns the last turn date.
 func (tbp *TurnBasedParticipant) LastTurnDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tbp), objc.RegisterName("lastTurnDate"))
 	return obj.Wrap(_r)
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (tbp *TurnBasedParticipant) Status() TurnBasedParticipantStatus {
 	_r := objc.Send[TurnBasedParticipantStatus](objref.IDOf(tbp), objc.RegisterName("status"))
 	return _r
 }
 
-// MatchOutcome wraps the corresponding Objective-C method.
+// MatchOutcome returns the match outcome.
 func (tbp *TurnBasedParticipant) MatchOutcome() TurnBasedMatchOutcome {
 	_r := objc.Send[TurnBasedMatchOutcome](objref.IDOf(tbp), objc.RegisterName("matchOutcome"))
 	return _r
 }
 
-// TimeoutDate wraps the corresponding Objective-C method.
+// TimeoutDate returns the timeout date.
 func (tbp *TurnBasedParticipant) TimeoutDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tbp), objc.RegisterName("timeoutDate"))
 	return obj.Wrap(_r)
 }
 
-// PlayerID wraps the corresponding Objective-C method.
+// PlayerID returns the player ID.
 func (tbp *TurnBasedParticipant) PlayerID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tbp), objc.RegisterName("playerID"))
 	if _r == 0 {

@@ -109,25 +109,25 @@ func (s *Session) StartStreamWithNameToPeerError(streamName string, peerID *Peer
 	return obj.Wrap(_r), nil
 }
 
-// MyPeerID wraps the corresponding Objective-C method.
+// MyPeerID returns the my peer ID.
 func (s *Session) MyPeerID() *PeerID {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("myPeerID"))
 	return PeerIDFromID(_r)
 }
 
-// SecurityIdentity wraps the corresponding Objective-C method.
+// SecurityIdentity returns the security identity.
 func (s *Session) SecurityIdentity() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("securityIdentity"))
 	return obj.Wrap(_r)
 }
 
-// EncryptionPreference wraps the corresponding Objective-C method.
+// EncryptionPreference returns the encryption preference.
 func (s *Session) EncryptionPreference() EncryptionPreference {
 	_r := objc.Send[EncryptionPreference](objref.IDOf(s), objc.RegisterName("encryptionPreference"))
 	return _r
 }
 
-// ConnectedPeers wraps the corresponding Objective-C method.
+// ConnectedPeers returns the connected peers.
 //
 // ConnectedPeers returns the collection as a Go slice.
 func (s *Session) ConnectedPeers() []*PeerID {

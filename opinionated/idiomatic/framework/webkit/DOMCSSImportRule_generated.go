@@ -49,13 +49,13 @@ func NewDOMCSSImportRule() *DOMCSSImportRule {
 	return dOMCSSImportRuleAdopt(_id)
 }
 
-// WithCSSText sets the property and returns the receiver so calls can be chained.
+// WithCSSText sets the CSS text.
 func (dir *DOMCSSImportRule) WithCSSText(cssText string) *DOMCSSImportRule {
 	objc.Send[objc.ID](objref.IDOf(dir), objc.RegisterName("setCssText:"), purego.NSString(cssText))
 	return dir
 }
 
-// Href wraps the corresponding Objective-C method.
+// Href returns the href.
 func (dir *DOMCSSImportRule) Href() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dir), objc.RegisterName("href"))
 	if _r == 0 {
@@ -64,13 +64,13 @@ func (dir *DOMCSSImportRule) Href() string {
 	return purego.GoString(_r)
 }
 
-// Media wraps the corresponding Objective-C method.
+// Media returns the media.
 func (dir *DOMCSSImportRule) Media() *DOMMediaList {
 	_r := objc.Send[objc.ID](objref.IDOf(dir), objc.RegisterName("media"))
 	return DOMMediaListFromID(_r)
 }
 
-// StyleSheet wraps the corresponding Objective-C method.
+// StyleSheet returns the style sheet.
 func (dir *DOMCSSImportRule) StyleSheet() *DOMCSSStyleSheet {
 	_r := objc.Send[objc.ID](objref.IDOf(dir), objc.RegisterName("styleSheet"))
 	return DOMCSSStyleSheetFromID(_r)

@@ -79,7 +79,7 @@ func (i *Ink) InkType() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Color wraps the corresponding Objective-C method.
+// Color returns the color.
 func (i *Ink) Color() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("color"))
 	return obj.Wrap(_r)

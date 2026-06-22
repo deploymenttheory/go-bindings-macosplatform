@@ -50,7 +50,7 @@ func NewMTRBasicClusterLeaveEvent() *MTRBasicClusterLeaveEvent {
 	return mTRBasicClusterLeaveEventAdopt(_id)
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (mbcle *MTRBasicClusterLeaveEvent) WithFabricIndex(fabricIndex obj.Object) *MTRBasicClusterLeaveEvent {
 	objc.Send[objc.ID](objref.IDOf(mbcle), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mbcle

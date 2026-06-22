@@ -58,13 +58,13 @@ func (sfsi *ShareFocusStatusIntent) WithSuggestedInvocationPhrase(suggestedInvoc
 	return sfsi
 }
 
-// WithDonationMetadata sets the property and returns the receiver so calls can be chained.
+// WithDonationMetadata sets the donation metadata.
 func (sfsi *ShareFocusStatusIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *ShareFocusStatusIntent {
 	objc.Send[objc.ID](objref.IDOf(sfsi), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return sfsi
 }
 
-// FocusStatus wraps the corresponding Objective-C method.
+// FocusStatus returns the focus status.
 func (sfsi *ShareFocusStatusIntent) FocusStatus() *FocusStatus {
 	_r := objc.Send[objc.ID](objref.IDOf(sfsi), objc.RegisterName("focusStatus"))
 	return FocusStatusFromID(_r)

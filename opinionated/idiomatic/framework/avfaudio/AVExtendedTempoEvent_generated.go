@@ -58,7 +58,7 @@ func (ete *ExtendedTempoEvent) WithTempo(tempo float64) *ExtendedTempoEvent {
 	return ete
 }
 
-// Tempo wraps the corresponding Objective-C method.
+// Tempo returns the tempo.
 func (ete *ExtendedTempoEvent) Tempo() float64 {
 	_r := objc.Send[float64](objref.IDOf(ete), objc.RegisterName("tempo"))
 	return _r

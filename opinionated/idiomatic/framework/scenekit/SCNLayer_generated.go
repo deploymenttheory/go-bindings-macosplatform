@@ -78,7 +78,7 @@ func (l *Layer) WithScene(scene *Scene) *Layer {
 	return l
 }
 
-// Scene wraps the corresponding Objective-C method.
+// Scene returns the scene.
 func (l *Layer) Scene() *Scene {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("scene"))
 	return SceneFromID(_r)

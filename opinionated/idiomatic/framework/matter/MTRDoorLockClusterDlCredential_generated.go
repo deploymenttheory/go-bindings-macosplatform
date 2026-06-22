@@ -50,13 +50,13 @@ func NewMTRDoorLockClusterDlCredential() *MTRDoorLockClusterDlCredential {
 	return mTRDoorLockClusterDlCredentialAdopt(_id)
 }
 
-// WithCredentialType sets the property and returns the receiver so calls can be chained.
+// WithCredentialType sets the credential type.
 func (mdlcdc *MTRDoorLockClusterDlCredential) WithCredentialType(credentialType obj.Object) *MTRDoorLockClusterDlCredential {
 	objc.Send[objc.ID](objref.IDOf(mdlcdc), objc.RegisterName("setCredentialType:"), objref.IDOf(credentialType))
 	return mdlcdc
 }
 
-// WithCredentialIndex sets the property and returns the receiver so calls can be chained.
+// WithCredentialIndex sets the credential index.
 func (mdlcdc *MTRDoorLockClusterDlCredential) WithCredentialIndex(credentialIndex obj.Object) *MTRDoorLockClusterDlCredential {
 	objc.Send[objc.ID](objref.IDOf(mdlcdc), objc.RegisterName("setCredentialIndex:"), objref.IDOf(credentialIndex))
 	return mdlcdc

@@ -72,25 +72,25 @@ func NewFHIRVersion() *FHIRVersion {
 	return fHIRVersionAdopt(_id)
 }
 
-// MajorVersion wraps the corresponding Objective-C method.
+// MajorVersion returns the major version.
 func (fv *FHIRVersion) MajorVersion() int {
 	_r := objc.Send[int](objref.IDOf(fv), objc.RegisterName("majorVersion"))
 	return _r
 }
 
-// MinorVersion wraps the corresponding Objective-C method.
+// MinorVersion returns the minor version.
 func (fv *FHIRVersion) MinorVersion() int {
 	_r := objc.Send[int](objref.IDOf(fv), objc.RegisterName("minorVersion"))
 	return _r
 }
 
-// PatchVersion wraps the corresponding Objective-C method.
+// PatchVersion returns the patch version.
 func (fv *FHIRVersion) PatchVersion() int {
 	_r := objc.Send[int](objref.IDOf(fv), objc.RegisterName("patchVersion"))
 	return _r
 }
 
-// FHIRRelease wraps the corresponding Objective-C method.
+// FHIRRelease returns the fhir release.
 func (fv *FHIRVersion) FHIRRelease() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("FHIRRelease"))
 	return obj.Wrap(_r)

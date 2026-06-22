@@ -72,13 +72,13 @@ func NewFileAccessIntent() *FileAccessIntent {
 	return fileAccessIntentAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (fai *FileAccessIntent) WithScriptingProperties(scriptingProperties obj.Object) *FileAccessIntent {
 	objc.Send[objc.ID](objref.IDOf(fai), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return fai
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (fai *FileAccessIntent) URL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(fai), objc.RegisterName("URL"))
 	return URLFromID(_r)

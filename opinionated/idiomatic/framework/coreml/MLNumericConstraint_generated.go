@@ -72,19 +72,19 @@ func NewNumericConstraint() *NumericConstraint {
 	return numericConstraintAdopt(_id)
 }
 
-// MinNumber wraps the corresponding Objective-C method.
+// MinNumber returns the min number.
 func (nc *NumericConstraint) MinNumber() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("minNumber"))
 	return obj.Wrap(_r)
 }
 
-// MaxNumber wraps the corresponding Objective-C method.
+// MaxNumber returns the max number.
 func (nc *NumericConstraint) MaxNumber() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("maxNumber"))
 	return obj.Wrap(_r)
 }
 
-// EnumeratedNumbers wraps the corresponding Objective-C method.
+// EnumeratedNumbers returns the enumerated numbers.
 func (nc *NumericConstraint) EnumeratedNumbers() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("enumeratedNumbers"))
 	return obj.Wrap(_r)

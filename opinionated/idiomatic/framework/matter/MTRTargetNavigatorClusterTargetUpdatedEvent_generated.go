@@ -70,19 +70,19 @@ func NewMTRTargetNavigatorClusterTargetUpdatedEvent() *MTRTargetNavigatorCluster
 	return mTRTargetNavigatorClusterTargetUpdatedEventAdopt(_id)
 }
 
-// WithCurrentTarget sets the property and returns the receiver so calls can be chained.
+// WithCurrentTarget sets the current target.
 func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) WithCurrentTarget(currentTarget obj.Object) *MTRTargetNavigatorClusterTargetUpdatedEvent {
 	objc.Send[objc.ID](objref.IDOf(mtnctue), objc.RegisterName("setCurrentTarget:"), objref.IDOf(currentTarget))
 	return mtnctue
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) WithData(data obj.Object) *MTRTargetNavigatorClusterTargetUpdatedEvent {
 	objc.Send[objc.ID](objref.IDOf(mtnctue), objc.RegisterName("setData:"), objref.IDOf(data))
 	return mtnctue
 }
 
-// TargetList wraps the corresponding Objective-C method.
+// TargetList returns the target list.
 func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) TargetList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtnctue), objc.RegisterName("targetList"))
 	return obj.Wrap(_r)
@@ -93,13 +93,13 @@ func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) SetTargetList(target
 	objc.Send[objc.ID](objref.IDOf(mtnctue), objc.RegisterName("setTargetList:"), objref.IDOf(targetList))
 }
 
-// CurrentTarget wraps the corresponding Objective-C method.
+// CurrentTarget returns the current target.
 func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) CurrentTarget() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtnctue), objc.RegisterName("currentTarget"))
 	return obj.Wrap(_r)
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (mtnctue *MTRTargetNavigatorClusterTargetUpdatedEvent) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtnctue), objc.RegisterName("data"))
 	return obj.Wrap(_r)

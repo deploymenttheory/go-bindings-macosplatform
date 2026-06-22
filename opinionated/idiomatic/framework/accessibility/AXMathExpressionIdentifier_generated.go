@@ -50,7 +50,7 @@ func NewMathExpressionIdentifierWithContent(content string) *MathExpressionIdent
 	return mathExpressionIdentifierAdopt(_id)
 }
 
-// Content wraps the corresponding Objective-C method.
+// Content returns the content.
 func (mei *MathExpressionIdentifier) Content() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mei), objc.RegisterName("content"))
 	if _r == 0 {

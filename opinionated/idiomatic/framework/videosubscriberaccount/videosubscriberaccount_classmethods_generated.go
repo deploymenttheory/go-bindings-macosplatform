@@ -14,7 +14,7 @@ func DefaultSubscriptionRegistrationCenter() *VSSubscriptionRegistrationCenter {
 	return VSSubscriptionRegistrationCenterFromID(_r)
 }
 
-// SharedUserAccountManager wraps the corresponding Objective-C method.
+// SharedUserAccountManager returns the shared user account manager.
 func SharedUserAccountManager() *VSUserAccountManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("VSUserAccountManager")), objc.RegisterName("sharedUserAccountManager"))
 	return VSUserAccountManagerFromID(_r)

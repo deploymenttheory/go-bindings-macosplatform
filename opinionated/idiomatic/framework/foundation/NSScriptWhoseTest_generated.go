@@ -75,7 +75,7 @@ func NewScriptWhoseTestWithCoder(inCoder *Coder) *ScriptWhoseTest {
 	return scriptWhoseTestAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (swt *ScriptWhoseTest) WithScriptingProperties(scriptingProperties obj.Object) *ScriptWhoseTest {
 	objc.Send[objc.ID](objref.IDOf(swt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return swt

@@ -67,7 +67,7 @@ func NewLogicalTestNotTestWithTest(subTest *ScriptWhoseTest) *LogicalTest {
 	return logicalTestAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (lt *LogicalTest) WithScriptingProperties(scriptingProperties obj.Object) *LogicalTest {
 	objc.Send[objc.ID](objref.IDOf(lt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return lt

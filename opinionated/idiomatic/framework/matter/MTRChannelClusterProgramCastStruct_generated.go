@@ -70,19 +70,19 @@ func NewMTRChannelClusterProgramCastStruct() *MTRChannelClusterProgramCastStruct
 	return mTRChannelClusterProgramCastStructAdopt(_id)
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (mccpcs *MTRChannelClusterProgramCastStruct) WithName(name string) *MTRChannelClusterProgramCastStruct {
 	objc.Send[objc.ID](objref.IDOf(mccpcs), objc.RegisterName("setName:"), purego.NSString(name))
 	return mccpcs
 }
 
-// WithRole sets the property and returns the receiver so calls can be chained.
+// WithRole sets the role.
 func (mccpcs *MTRChannelClusterProgramCastStruct) WithRole(role string) *MTRChannelClusterProgramCastStruct {
 	objc.Send[objc.ID](objref.IDOf(mccpcs), objc.RegisterName("setRole:"), purego.NSString(role))
 	return mccpcs
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (mccpcs *MTRChannelClusterProgramCastStruct) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mccpcs), objc.RegisterName("name"))
 	if _r == 0 {
@@ -91,7 +91,7 @@ func (mccpcs *MTRChannelClusterProgramCastStruct) Name() string {
 	return purego.GoString(_r)
 }
 
-// Role wraps the corresponding Objective-C method.
+// Role returns the role.
 func (mccpcs *MTRChannelClusterProgramCastStruct) Role() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mccpcs), objc.RegisterName("role"))
 	if _r == 0 {

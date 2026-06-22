@@ -49,13 +49,13 @@ func NewMTRContentLauncherClusterAdditionalInfo() *MTRContentLauncherClusterAddi
 	return mTRContentLauncherClusterAdditionalInfoAdopt(_id)
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (mclcai *MTRContentLauncherClusterAdditionalInfo) WithName(name string) *MTRContentLauncherClusterAdditionalInfo {
 	objc.Send[objc.ID](objref.IDOf(mclcai), objc.RegisterName("setName:"), purego.NSString(name))
 	return mclcai
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mclcai *MTRContentLauncherClusterAdditionalInfo) WithValue(value string) *MTRContentLauncherClusterAdditionalInfo {
 	objc.Send[objc.ID](objref.IDOf(mclcai), objc.RegisterName("setValue:"), purego.NSString(value))
 	return mclcai

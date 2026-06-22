@@ -99,7 +99,7 @@ func (vc *VoiceChat) SetPlayerMuted(player *Player, isMuted bool) {
 	objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("setPlayer:muted:"), objref.IDOf(player), isMuted)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (vc *VoiceChat) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(vc), objc.RegisterName("name"))
 	if _r == 0 {
@@ -108,19 +108,19 @@ func (vc *VoiceChat) Name() string {
 	return purego.GoString(_r)
 }
 
-// IsActive wraps the corresponding Objective-C method.
+// IsActive reports whether the object is active.
 func (vc *VoiceChat) IsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(vc), objc.RegisterName("isActive"))
 	return _r
 }
 
-// Volume wraps the corresponding Objective-C method.
+// Volume returns the volume.
 func (vc *VoiceChat) Volume() float32 {
 	_r := objc.Send[float32](objref.IDOf(vc), objc.RegisterName("volume"))
 	return _r
 }
 
-// Players wraps the corresponding Objective-C method.
+// Players returns the players.
 //
 // Players returns the collection as a Go slice.
 func (vc *VoiceChat) Players() []*Player {

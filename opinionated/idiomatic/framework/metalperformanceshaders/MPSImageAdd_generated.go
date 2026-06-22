@@ -53,19 +53,19 @@ func NewImageAdd() *ImageAdd {
 	return imageAddAdopt(_id)
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (ia *ImageAdd) WithPrimaryScale(primaryScale float32) *ImageAdd {
 	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return ia
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (ia *ImageAdd) WithSecondaryScale(secondaryScale float32) *ImageAdd {
 	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return ia
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (ia *ImageAdd) WithBias(bias float32) *ImageAdd {
 	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setBias:"), bias)
 	return ia

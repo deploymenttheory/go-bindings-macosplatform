@@ -93,7 +93,7 @@ func (cp *CertificatePresentation) WithHelpURL(helpURL string) *CertificatePrese
 	return cp
 }
 
-// PresentSheetInWindowDismissHandler wraps the corresponding Objective-C method.
+// PresentSheetInWindowDismissHandler presents sheet in window dismiss handler.
 //
 // PresentSheetInWindowDismissHandler blocks until the operation completes or ctx is cancelled.
 func (cp *CertificatePresentation) PresentSheetInWindowDismissHandler(ctx context.Context, window obj.Object) error {

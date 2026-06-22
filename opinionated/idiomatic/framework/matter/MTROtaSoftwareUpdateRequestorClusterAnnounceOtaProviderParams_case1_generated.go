@@ -50,31 +50,31 @@ func NewMTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams() *MTROtaS
 	return mTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParamsAdopt(_id)
 }
 
-// WithProviderNodeID sets the property and returns the receiver so calls can be chained.
+// WithProviderNodeID sets the provider node ID.
 func (mosurcaopp *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithProviderNodeID(providerNodeID obj.Object) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
 	objc.Send[objc.ID](objref.IDOf(mosurcaopp), objc.RegisterName("setProviderNodeID:"), objref.IDOf(providerNodeID))
 	return mosurcaopp
 }
 
-// WithVendorID sets the property and returns the receiver so calls can be chained.
+// WithVendorID sets the vendor ID.
 func (mosurcaopp *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithVendorID(vendorID obj.Object) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
 	objc.Send[objc.ID](objref.IDOf(mosurcaopp), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 	return mosurcaopp
 }
 
-// WithAnnouncementReason sets the property and returns the receiver so calls can be chained.
+// WithAnnouncementReason sets the announcement reason.
 func (mosurcaopp *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithAnnouncementReason(announcementReason obj.Object) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
 	objc.Send[objc.ID](objref.IDOf(mosurcaopp), objc.RegisterName("setAnnouncementReason:"), objref.IDOf(announcementReason))
 	return mosurcaopp
 }
 
-// WithMetadataForNode sets the property and returns the receiver so calls can be chained.
+// WithMetadataForNode sets the metadata for node.
 func (mosurcaopp *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithMetadataForNode(metadataForNode obj.Object) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
 	objc.Send[objc.ID](objref.IDOf(mosurcaopp), objc.RegisterName("setMetadataForNode:"), objref.IDOf(metadataForNode))
 	return mosurcaopp
 }
 
-// WithEndpoint sets the property and returns the receiver so calls can be chained.
+// WithEndpoint sets the endpoint.
 func (mosurcaopp *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams) WithEndpoint(endpoint obj.Object) *MTROtaSoftwareUpdateRequestorClusterAnnounceOtaProviderParams {
 	objc.Send[objc.ID](objref.IDOf(mosurcaopp), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return mosurcaopp

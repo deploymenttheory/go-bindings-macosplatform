@@ -78,13 +78,13 @@ func NewObjectCollectionWithItems(items []obj.Object) *ObjectCollection {
 	return objectCollectionAdopt(_id)
 }
 
-// WithUsesIndexedCollation sets the property and returns the receiver so calls can be chained.
+// WithUsesIndexedCollation sets the uses indexed collation.
 func (oc *ObjectCollection) WithUsesIndexedCollation(usesIndexedCollation bool) *ObjectCollection {
 	objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("setUsesIndexedCollation:"), usesIndexedCollation)
 	return oc
 }
 
-// Sections wraps the corresponding Objective-C method.
+// Sections returns the sections.
 //
 // Sections returns the collection as a Go slice.
 func (oc *ObjectCollection) Sections() []obj.Object {
@@ -92,7 +92,7 @@ func (oc *ObjectCollection) Sections() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// AllItems wraps the corresponding Objective-C method.
+// AllItems returns the all items.
 func (oc *ObjectCollection) AllItems() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(oc), objc.RegisterName("allItems"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

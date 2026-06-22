@@ -72,25 +72,25 @@ func NewHostCIDeviceStateMachine() *HostCIDeviceStateMachine {
 	return hostCIDeviceStateMachineAdopt(_id)
 }
 
-// DeviceState wraps the corresponding Objective-C method.
+// DeviceState returns the device state.
 func (hcdsm *HostCIDeviceStateMachine) DeviceState() HostCIDeviceState {
 	_r := objc.Send[HostCIDeviceState](objref.IDOf(hcdsm), objc.RegisterName("deviceState"))
 	return _r
 }
 
-// CompleteRoute wraps the corresponding Objective-C method.
+// CompleteRoute returns the complete route.
 func (hcdsm *HostCIDeviceStateMachine) CompleteRoute() int {
 	_r := objc.Send[int](objref.IDOf(hcdsm), objc.RegisterName("completeRoute"))
 	return _r
 }
 
-// DeviceAddress wraps the corresponding Objective-C method.
+// DeviceAddress returns the device address.
 func (hcdsm *HostCIDeviceStateMachine) DeviceAddress() int {
 	_r := objc.Send[int](objref.IDOf(hcdsm), objc.RegisterName("deviceAddress"))
 	return _r
 }
 
-// ControllerInterface wraps the corresponding Objective-C method.
+// ControllerInterface returns the controller interface.
 func (hcdsm *HostCIDeviceStateMachine) ControllerInterface() *HostControllerInterface {
 	_r := objc.Send[objc.ID](objref.IDOf(hcdsm), objc.RegisterName("controllerInterface"))
 	return HostControllerInterfaceFromID(_r)

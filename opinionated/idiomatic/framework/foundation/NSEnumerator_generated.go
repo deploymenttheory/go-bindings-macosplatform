@@ -68,7 +68,7 @@ func (e *Enumerator) String() string {
 	return rt.Description(objref.IDOf(e))
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (e *Enumerator) WithScriptingProperties(scriptingProperties obj.Object) *Enumerator {
 	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return e
@@ -80,7 +80,7 @@ func (e *Enumerator) NextObject() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// AllObjects wraps the corresponding Objective-C method.
+// AllObjects returns the all objects.
 func (e *Enumerator) AllObjects() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("allObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

@@ -52,7 +52,7 @@ func NewMutableCharacterSet() *MutableCharacterSet {
 	return mutableCharacterSetAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (mcs *MutableCharacterSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableCharacterSet {
 	objc.Send[objc.ID](objref.IDOf(mcs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return mcs

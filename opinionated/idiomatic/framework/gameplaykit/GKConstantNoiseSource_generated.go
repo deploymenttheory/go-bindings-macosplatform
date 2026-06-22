@@ -58,7 +58,7 @@ func (cns *ConstantNoiseSource) WithValue(value float64) *ConstantNoiseSource {
 	return cns
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (cns *ConstantNoiseSource) Value() float64 {
 	_r := objc.Send[float64](objref.IDOf(cns), objc.RegisterName("value"))
 	return _r

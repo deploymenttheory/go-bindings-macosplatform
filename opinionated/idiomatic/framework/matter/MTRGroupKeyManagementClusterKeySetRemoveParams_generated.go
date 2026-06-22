@@ -70,7 +70,7 @@ func NewMTRGroupKeyManagementClusterKeySetRemoveParams() *MTRGroupKeyManagementC
 	return mTRGroupKeyManagementClusterKeySetRemoveParamsAdopt(_id)
 }
 
-// WithGroupKeySetID sets the property and returns the receiver so calls can be chained.
+// WithGroupKeySetID sets the group key set ID.
 func (mgkmcksrp *MTRGroupKeyManagementClusterKeySetRemoveParams) WithGroupKeySetID(groupKeySetID obj.Object) *MTRGroupKeyManagementClusterKeySetRemoveParams {
 	objc.Send[objc.ID](objref.IDOf(mgkmcksrp), objc.RegisterName("setGroupKeySetID:"), objref.IDOf(groupKeySetID))
 	return mgkmcksrp
@@ -88,7 +88,7 @@ func (mgkmcksrp *MTRGroupKeyManagementClusterKeySetRemoveParams) WithServerSideP
 	return mgkmcksrp
 }
 
-// GroupKeySetID wraps the corresponding Objective-C method.
+// GroupKeySetID returns the group key set ID.
 func (mgkmcksrp *MTRGroupKeyManagementClusterKeySetRemoveParams) GroupKeySetID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcksrp), objc.RegisterName("groupKeySetID"))
 	return obj.Wrap(_r)

@@ -70,13 +70,13 @@ func NewWorkoutEffortRelationship() *WorkoutEffortRelationship {
 	return workoutEffortRelationshipAdopt(_id)
 }
 
-// Workout wraps the corresponding Objective-C method.
+// Workout returns the workout.
 func (wer *WorkoutEffortRelationship) Workout() *Workout {
 	_r := objc.Send[objc.ID](objref.IDOf(wer), objc.RegisterName("workout"))
 	return WorkoutFromID(_r)
 }
 
-// Activity wraps the corresponding Objective-C method.
+// Activity returns the activity.
 func (wer *WorkoutEffortRelationship) Activity() *WorkoutActivity {
 	_r := objc.Send[objc.ID](objref.IDOf(wer), objc.RegisterName("activity"))
 	return WorkoutActivityFromID(_r)

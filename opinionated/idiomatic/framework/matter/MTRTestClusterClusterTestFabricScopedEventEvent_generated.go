@@ -50,7 +50,7 @@ func NewMTRTestClusterClusterTestFabricScopedEventEvent() *MTRTestClusterCluster
 	return mTRTestClusterClusterTestFabricScopedEventEventAdopt(_id)
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (mtcctfsee *MTRTestClusterClusterTestFabricScopedEventEvent) WithFabricIndex(fabricIndex obj.Object) *MTRTestClusterClusterTestFabricScopedEventEvent {
 	objc.Send[objc.ID](objref.IDOf(mtcctfsee), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mtcctfsee

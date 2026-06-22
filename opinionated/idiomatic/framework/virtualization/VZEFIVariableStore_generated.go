@@ -87,7 +87,7 @@ func NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError(uRL string, optio
 	return eFIVariableStoreAdopt(_id), nil
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (evs *EFIVariableStore) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(evs), objc.RegisterName("URL"))
 	return obj.Wrap(_r)

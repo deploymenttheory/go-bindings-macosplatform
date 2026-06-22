@@ -72,13 +72,13 @@ func NewCollectionLayoutSize() *CollectionLayoutSize {
 	return collectionLayoutSizeAdopt(_id)
 }
 
-// WidthDimension wraps the corresponding Objective-C method.
+// WidthDimension returns the width dimension.
 func (cls *CollectionLayoutSize) WidthDimension() *CollectionLayoutDimension {
 	_r := objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("widthDimension"))
 	return CollectionLayoutDimensionFromID(_r)
 }
 
-// HeightDimension wraps the corresponding Objective-C method.
+// HeightDimension returns the height dimension.
 func (cls *CollectionLayoutSize) HeightDimension() *CollectionLayoutDimension {
 	_r := objc.Send[objc.ID](objref.IDOf(cls), objc.RegisterName("heightDimension"))
 	return CollectionLayoutDimensionFromID(_r)

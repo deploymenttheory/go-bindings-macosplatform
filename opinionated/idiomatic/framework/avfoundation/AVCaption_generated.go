@@ -89,7 +89,7 @@ func (c *Caption) TextAlignment() CaptionTextAlignment {
 	return _r
 }
 
-// Animation wraps the corresponding Objective-C method.
+// Animation returns the animation.
 func (c *Caption) Animation() CaptionAnimation {
 	_r := objc.Send[CaptionAnimation](objref.IDOf(c), objc.RegisterName("animation"))
 	return _r

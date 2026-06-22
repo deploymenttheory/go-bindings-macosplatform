@@ -101,7 +101,7 @@ func (prpmu *PaymentRequestPaymentMethodUpdate) WithDeferredPaymentRequest(defer
 	return prpmu
 }
 
-// Errors wraps the corresponding Objective-C method.
+// Errors returns the errors.
 func (prpmu *PaymentRequestPaymentMethodUpdate) Errors() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(prpmu), objc.RegisterName("errors"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

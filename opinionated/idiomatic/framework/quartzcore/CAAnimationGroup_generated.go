@@ -70,7 +70,7 @@ func (ag *AnimationGroup) WithRemovedOnCompletion(removedOnCompletion bool) *Ani
 	return ag
 }
 
-// Animations wraps the corresponding Objective-C method.
+// Animations returns the animations.
 //
 // Animations returns the collection as a Go slice.
 func (ag *AnimationGroup) Animations() []*Animation {

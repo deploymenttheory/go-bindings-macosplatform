@@ -138,26 +138,26 @@ func (stf *SecureTextField) WithLineBreakStrategy(lineBreakStrategy LineBreakStr
 	return stf
 }
 
-// WithAllowsWritingTools sets the property and returns the receiver so calls can be chained.
+// WithAllowsWritingTools sets the allows writing tools.
 func (stf *SecureTextField) WithAllowsWritingTools(allowsWritingTools bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAllowsWritingTools:"), allowsWritingTools)
 	return stf
 }
 
-// WithAllowsWritingToolsAffordance sets the property and returns the receiver so calls can be chained.
+// WithAllowsWritingToolsAffordance sets the allows writing tools affordance.
 func (stf *SecureTextField) WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAllowsWritingToolsAffordance:"), allowsWritingToolsAffordance)
 	return stf
 }
 
-// WithPlaceholderStrings sets the property and returns the receiver so calls can be chained.
+// WithPlaceholderStrings sets the placeholder strings.
 func (stf *SecureTextField) WithPlaceholderStrings(items ...obj.Object) *SecureTextField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPlaceholderStrings:"), _arr)
 	return stf
 }
 
-// WithPlaceholderAttributedStrings sets the property and returns the receiver so calls can be chained.
+// WithPlaceholderAttributedStrings sets the placeholder attributed strings.
 func (stf *SecureTextField) WithPlaceholderAttributedStrings(items ...obj.Object) *SecureTextField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPlaceholderAttributedStrings:"), _arr)
@@ -326,38 +326,38 @@ func (stf *SecureTextField) WithAllowsExpansionToolTips(allowsExpansionToolTips 
 	return stf
 }
 
-// WithCell sets the property and returns the receiver so calls can be chained.
+// WithCell sets the cell.
 func (stf *SecureTextField) WithCell(cell CellProvider) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return stf
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (stf *SecureTextField) WithSubviews(items ...ViewProvider) *SecureTextField {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setSubviews:"), _arr)
 	return stf
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (stf *SecureTextField) WithHidden(hidden bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setHidden:"), hidden)
 	return stf
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (stf *SecureTextField) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return stf
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (stf *SecureTextField) WithAutoresizesSubviews(autoresizesSubviews bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return stf
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (stf *SecureTextField) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return stf
@@ -369,19 +369,19 @@ func (stf *SecureTextField) WithFrame(frame corefoundation.CGRect) *SecureTextFi
 	return stf
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (stf *SecureTextField) WithFrameRotation(frameRotation float64) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return stf
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (stf *SecureTextField) WithFrameCenterRotation(frameCenterRotation float64) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return stf
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (stf *SecureTextField) WithBoundsRotation(boundsRotation float64) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return stf
@@ -393,7 +393,7 @@ func (stf *SecureTextField) WithBounds(bounds corefoundation.CGRect) *SecureText
 	return stf
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (stf *SecureTextField) WithCanDrawConcurrently(canDrawConcurrently bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return stf
@@ -405,148 +405,148 @@ func (stf *SecureTextField) WithNeedsDisplay(needsDisplay bool) *SecureTextField
 	return stf
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (stf *SecureTextField) WithAcceptsTouchEvents(acceptsTouchEvents bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return stf
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (stf *SecureTextField) WithWantsRestingTouches(wantsRestingTouches bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return stf
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (stf *SecureTextField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return stf
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (stf *SecureTextField) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return stf
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (stf *SecureTextField) WithWantsLayer(wantsLayer bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return stf
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (stf *SecureTextField) WithLayer(layer obj.Object) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return stf
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (stf *SecureTextField) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return stf
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (stf *SecureTextField) WithNeedsLayout(needsLayout bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return stf
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (stf *SecureTextField) WithAlphaValue(alphaValue float64) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return stf
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (stf *SecureTextField) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return stf
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (stf *SecureTextField) WithBackgroundFilters(items ...obj.Object) *SecureTextField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return stf
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (stf *SecureTextField) WithCompositingFilter(compositingFilter obj.Object) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return stf
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (stf *SecureTextField) WithContentFilters(items ...obj.Object) *SecureTextField {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setContentFilters:"), _arr)
 	return stf
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (stf *SecureTextField) WithShadow(shadow *Shadow) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return stf
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (stf *SecureTextField) WithClipsToBounds(clipsToBounds bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return stf
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (stf *SecureTextField) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return stf
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (stf *SecureTextField) WithToolTip(toolTip string) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return stf
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (stf *SecureTextField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return stf
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (stf *SecureTextField) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return stf
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (stf *SecureTextField) WithNextKeyView(nextKeyView ViewProvider) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return stf
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (stf *SecureTextField) WithFocusRingType(focusRingType FocusRingType) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return stf
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (stf *SecureTextField) WithGestureRecognizers(items ...GestureRecognizerProvider) *SecureTextField {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return stf
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (stf *SecureTextField) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return stf
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (stf *SecureTextField) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return stf
@@ -558,49 +558,49 @@ func (stf *SecureTextField) WithPrefersCompactControlSizeMetrics(prefersCompactC
 	return stf
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (stf *SecureTextField) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return stf
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (stf *SecureTextField) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return stf
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (stf *SecureTextField) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return stf
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (stf *SecureTextField) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return stf
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (stf *SecureTextField) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return stf
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (stf *SecureTextField) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return stf
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (stf *SecureTextField) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return stf
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (stf *SecureTextField) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SecureTextField {
 	objc.Send[objc.ID](objref.IDOf(stf), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return stf

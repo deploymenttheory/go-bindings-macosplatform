@@ -80,7 +80,7 @@ func NewMTRUnitTestingClusterTestSimpleArgumentResponseParamsWithResponseValueEr
 	return mTRUnitTestingClusterTestSimpleArgumentResponseParamsAdopt(_id), nil
 }
 
-// WithReturnValue sets the property and returns the receiver so calls can be chained.
+// WithReturnValue sets the return value.
 func (mutctsarp *MTRUnitTestingClusterTestSimpleArgumentResponseParams) WithReturnValue(returnValue obj.Object) *MTRUnitTestingClusterTestSimpleArgumentResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mutctsarp), objc.RegisterName("setReturnValue:"), objref.IDOf(returnValue))
 	return mutctsarp
@@ -92,7 +92,7 @@ func (mutctsarp *MTRUnitTestingClusterTestSimpleArgumentResponseParams) WithTime
 	return mutctsarp
 }
 
-// ReturnValue wraps the corresponding Objective-C method.
+// ReturnValue returns the return value.
 func (mutctsarp *MTRUnitTestingClusterTestSimpleArgumentResponseParams) ReturnValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctsarp), objc.RegisterName("returnValue"))
 	return obj.Wrap(_r)

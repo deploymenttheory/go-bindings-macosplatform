@@ -118,7 +118,7 @@ func (r *Region) ContainsPoint(point corefoundation.CGPoint) bool {
 	return _r
 }
 
-// Path wraps the corresponding Objective-C method.
+// Path returns the path.
 func (r *Region) Path() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("path"))
 	return obj.Wrap(_r)

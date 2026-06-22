@@ -57,31 +57,31 @@ func (appkcrr *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) With
 	return appkcrr
 }
 
-// WithPrf sets the property and returns the receiver so calls can be chained.
+// WithPrf sets the prf.
 func (appkcrr *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) WithPrf(prf *AuthorizationPublicKeyCredentialPRFRegistrationInput) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
 	objc.Send[objc.ID](objref.IDOf(appkcrr), objc.RegisterName("setPrf:"), objref.IDOf(prf))
 	return appkcrr
 }
 
-// WithRequestStyle sets the property and returns the receiver so calls can be chained.
+// WithRequestStyle sets the request style.
 func (appkcrr *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) WithRequestStyle(requestStyle AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
 	objc.Send[objc.ID](objref.IDOf(appkcrr), objc.RegisterName("setRequestStyle:"), requestStyle)
 	return appkcrr
 }
 
-// LargeBlob wraps the corresponding Objective-C method.
+// LargeBlob returns the large blob.
 func (appkcrr *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationInput {
 	_r := objc.Send[objc.ID](objref.IDOf(appkcrr), objc.RegisterName("largeBlob"))
 	return AuthorizationPublicKeyCredentialLargeBlobRegistrationInputFromID(_r)
 }
 
-// Prf wraps the corresponding Objective-C method.
+// Prf returns the prf.
 func (appkcrr *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationInput {
 	_r := objc.Send[objc.ID](objref.IDOf(appkcrr), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFRegistrationInputFromID(_r)
 }
 
-// RequestStyle wraps the corresponding Objective-C method.
+// RequestStyle returns the request style.
 func (appkcrr *AuthorizationPlatformPublicKeyCredentialRegistrationRequest) RequestStyle() AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle {
 	_r := objc.Send[AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle](objref.IDOf(appkcrr), objc.RegisterName("requestStyle"))
 	return _r

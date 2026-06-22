@@ -85,7 +85,7 @@ func (ku *KeyedUnarchiver) WithDecodingFailurePolicy(decodingFailurePolicy Decod
 	return ku
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ku *KeyedUnarchiver) WithScriptingProperties(scriptingProperties obj.Object) *KeyedUnarchiver {
 	objc.Send[objc.ID](objref.IDOf(ku), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ku

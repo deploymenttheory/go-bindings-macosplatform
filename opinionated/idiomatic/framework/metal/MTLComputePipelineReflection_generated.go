@@ -72,13 +72,13 @@ func NewComputePipelineReflection() *ComputePipelineReflection {
 	return computePipelineReflectionAdopt(_id)
 }
 
-// Bindings wraps the corresponding Objective-C method.
+// Bindings returns the bindings.
 func (cpr *ComputePipelineReflection) Bindings() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cpr), objc.RegisterName("bindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Arguments wraps the corresponding Objective-C method.
+// Arguments returns the arguments.
 //
 // Arguments returns the collection as a Go slice.
 func (cpr *ComputePipelineReflection) Arguments() []*Argument {

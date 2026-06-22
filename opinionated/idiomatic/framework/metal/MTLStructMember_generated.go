@@ -102,7 +102,7 @@ func (sm *StructMember) TensorReferenceType() *TensorReferenceType {
 	return TensorReferenceTypeFromID(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (sm *StructMember) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("name"))
 	if _r == 0 {
@@ -111,19 +111,19 @@ func (sm *StructMember) Name() string {
 	return purego.GoString(_r)
 }
 
-// Offset wraps the corresponding Objective-C method.
+// Offset returns the offset.
 func (sm *StructMember) Offset() int {
 	_r := objc.Send[int](objref.IDOf(sm), objc.RegisterName("offset"))
 	return _r
 }
 
-// DataType wraps the corresponding Objective-C method.
+// DataType returns the data type.
 func (sm *StructMember) DataType() DataType {
 	_r := objc.Send[DataType](objref.IDOf(sm), objc.RegisterName("dataType"))
 	return _r
 }
 
-// ArgumentIndex wraps the corresponding Objective-C method.
+// ArgumentIndex returns the argument index.
 func (sm *StructMember) ArgumentIndex() int {
 	_r := objc.Send[int](objref.IDOf(sm), objc.RegisterName("argumentIndex"))
 	return _r

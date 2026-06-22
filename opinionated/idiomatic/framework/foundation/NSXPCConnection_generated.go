@@ -119,7 +119,7 @@ func (xc *XPCConnection) WithInvalidationHandler(invalidationHandler func()) *XP
 	return xc
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (xc *XPCConnection) WithScriptingProperties(scriptingProperties obj.Object) *XPCConnection {
 	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return xc
@@ -167,7 +167,7 @@ func (xc *XPCConnection) SetCodeSigningRequirement(requirement string) {
 	objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("setCodeSigningRequirement:"), purego.NSString(requirement))
 }
 
-// ServiceName wraps the corresponding Objective-C method.
+// ServiceName returns the service name.
 func (xc *XPCConnection) ServiceName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("serviceName"))
 	if _r == 0 {
@@ -176,55 +176,55 @@ func (xc *XPCConnection) ServiceName() string {
 	return purego.GoString(_r)
 }
 
-// Endpoint wraps the corresponding Objective-C method.
+// Endpoint returns the endpoint.
 func (xc *XPCConnection) Endpoint() *XPCListenerEndpoint {
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("endpoint"))
 	return XPCListenerEndpointFromID(_r)
 }
 
-// ExportedInterface wraps the corresponding Objective-C method.
+// ExportedInterface returns the exported interface.
 func (xc *XPCConnection) ExportedInterface() *XPCInterface {
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("exportedInterface"))
 	return XPCInterfaceFromID(_r)
 }
 
-// ExportedObject wraps the corresponding Objective-C method.
+// ExportedObject returns the exported object.
 func (xc *XPCConnection) ExportedObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("exportedObject"))
 	return obj.Wrap(_r)
 }
 
-// RemoteObjectInterface wraps the corresponding Objective-C method.
+// RemoteObjectInterface returns the remote object interface.
 func (xc *XPCConnection) RemoteObjectInterface() *XPCInterface {
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("remoteObjectInterface"))
 	return XPCInterfaceFromID(_r)
 }
 
-// RemoteObjectProxy wraps the corresponding Objective-C method.
+// RemoteObjectProxy returns the remote object proxy.
 func (xc *XPCConnection) RemoteObjectProxy() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(xc), objc.RegisterName("remoteObjectProxy"))
 	return obj.Wrap(_r)
 }
 
-// AuditSessionIdentifier wraps the corresponding Objective-C method.
+// AuditSessionIdentifier returns the audit session identifier.
 func (xc *XPCConnection) AuditSessionIdentifier() int {
 	_r := objc.Send[int](objref.IDOf(xc), objc.RegisterName("auditSessionIdentifier"))
 	return _r
 }
 
-// ProcessIdentifier wraps the corresponding Objective-C method.
+// ProcessIdentifier returns the process identifier.
 func (xc *XPCConnection) ProcessIdentifier() int {
 	_r := objc.Send[int](objref.IDOf(xc), objc.RegisterName("processIdentifier"))
 	return _r
 }
 
-// EffectiveUserIdentifier wraps the corresponding Objective-C method.
+// EffectiveUserIdentifier returns the effective user identifier.
 func (xc *XPCConnection) EffectiveUserIdentifier() int {
 	_r := objc.Send[int](objref.IDOf(xc), objc.RegisterName("effectiveUserIdentifier"))
 	return _r
 }
 
-// EffectiveGroupIdentifier wraps the corresponding Objective-C method.
+// EffectiveGroupIdentifier returns the effective group identifier.
 func (xc *XPCConnection) EffectiveGroupIdentifier() int {
 	_r := objc.Send[int](objref.IDOf(xc), objc.RegisterName("effectiveGroupIdentifier"))
 	return _r

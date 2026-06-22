@@ -58,474 +58,474 @@ func NewMTRClusterColorControlWithDeviceEndpointQueue(device *MTRDevice, endpoin
 	return mTRClusterColorControlAdopt(_id)
 }
 
-// ReadAttributeCurrentHueWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCurrentHueWithParams reads attribute current hue with params.
 func (mccc *MTRClusterColorControl) ReadAttributeCurrentHueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeCurrentHueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentSaturationWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCurrentSaturationWithParams reads attribute current saturation with params.
 func (mccc *MTRClusterColorControl) ReadAttributeCurrentSaturationWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeCurrentSaturationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeRemainingTimeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeRemainingTimeWithParams reads attribute remaining time with params.
 func (mccc *MTRClusterColorControl) ReadAttributeRemainingTimeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeRemainingTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentXWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCurrentXWithParams reads attribute current x with params.
 func (mccc *MTRClusterColorControl) ReadAttributeCurrentXWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeCurrentXWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentYWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCurrentYWithParams reads attribute current y with params.
 func (mccc *MTRClusterColorControl) ReadAttributeCurrentYWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeCurrentYWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeDriftCompensationWithParams wraps the corresponding Objective-C method.
+// ReadAttributeDriftCompensationWithParams reads attribute drift compensation with params.
 func (mccc *MTRClusterColorControl) ReadAttributeDriftCompensationWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeDriftCompensationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCompensationTextWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCompensationTextWithParams reads attribute compensation text with params.
 func (mccc *MTRClusterColorControl) ReadAttributeCompensationTextWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeCompensationTextWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeColorTemperatureMiredsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeColorTemperatureMiredsWithParams reads attribute color temperature mireds with params.
 func (mccc *MTRClusterColorControl) ReadAttributeColorTemperatureMiredsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeColorTemperatureMiredsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeColorModeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeColorModeWithParams reads attribute color mode with params.
 func (mccc *MTRClusterColorControl) ReadAttributeColorModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeColorModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeOptionsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeOptionsWithParams reads attribute options with params.
 func (mccc *MTRClusterColorControl) ReadAttributeOptionsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeOptionsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeOptionsWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeOptionsWithValueExpectedValueInterval writes attribute options with value expected value interval.
 func (mccc *MTRClusterColorControl) WriteAttributeOptionsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeOptionsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeOptionsWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeOptionsWithValueExpectedValueIntervalParams writes attribute options with value expected value interval params.
 func (mccc *MTRClusterColorControl) WriteAttributeOptionsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeOptionsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeNumberOfPrimariesWithParams wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfPrimariesWithParams reads attribute number of primaries with params.
 func (mccc *MTRClusterColorControl) ReadAttributeNumberOfPrimariesWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeNumberOfPrimariesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePrimary1XWithParams wraps the corresponding Objective-C method.
+// ReadAttributePrimary1XWithParams reads attribute primary1 x with params.
 func (mccc *MTRClusterColorControl) ReadAttributePrimary1XWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributePrimary1XWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePrimary1YWithParams wraps the corresponding Objective-C method.
+// ReadAttributePrimary1YWithParams reads attribute primary1 y with params.
 func (mccc *MTRClusterColorControl) ReadAttributePrimary1YWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributePrimary1YWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePrimary1IntensityWithParams wraps the corresponding Objective-C method.
+// ReadAttributePrimary1IntensityWithParams reads attribute primary1 intensity with params.
 func (mccc *MTRClusterColorControl) ReadAttributePrimary1IntensityWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributePrimary1IntensityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePrimary2XWithParams wraps the corresponding Objective-C method.
+// ReadAttributePrimary2XWithParams reads attribute primary2 x with params.
 func (mccc *MTRClusterColorControl) ReadAttributePrimary2XWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributePrimary2XWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePrimary2YWithParams wraps the corresponding Objective-C method.
+// ReadAttributePrimary2YWithParams reads attribute primary2 y with params.
 func (mccc *MTRClusterColorControl) ReadAttributePrimary2YWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributePrimary2YWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePrimary2IntensityWithParams wraps the corresponding Objective-C method.
+// ReadAttributePrimary2IntensityWithParams reads attribute primary2 intensity with params.
 func (mccc *MTRClusterColorControl) ReadAttributePrimary2IntensityWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributePrimary2IntensityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePrimary3XWithParams wraps the corresponding Objective-C method.
+// ReadAttributePrimary3XWithParams reads attribute primary3 x with params.
 func (mccc *MTRClusterColorControl) ReadAttributePrimary3XWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributePrimary3XWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePrimary3YWithParams wraps the corresponding Objective-C method.
+// ReadAttributePrimary3YWithParams reads attribute primary3 y with params.
 func (mccc *MTRClusterColorControl) ReadAttributePrimary3YWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributePrimary3YWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePrimary3IntensityWithParams wraps the corresponding Objective-C method.
+// ReadAttributePrimary3IntensityWithParams reads attribute primary3 intensity with params.
 func (mccc *MTRClusterColorControl) ReadAttributePrimary3IntensityWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributePrimary3IntensityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePrimary4XWithParams wraps the corresponding Objective-C method.
+// ReadAttributePrimary4XWithParams reads attribute primary4 x with params.
 func (mccc *MTRClusterColorControl) ReadAttributePrimary4XWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributePrimary4XWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePrimary4YWithParams wraps the corresponding Objective-C method.
+// ReadAttributePrimary4YWithParams reads attribute primary4 y with params.
 func (mccc *MTRClusterColorControl) ReadAttributePrimary4YWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributePrimary4YWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePrimary4IntensityWithParams wraps the corresponding Objective-C method.
+// ReadAttributePrimary4IntensityWithParams reads attribute primary4 intensity with params.
 func (mccc *MTRClusterColorControl) ReadAttributePrimary4IntensityWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributePrimary4IntensityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePrimary5XWithParams wraps the corresponding Objective-C method.
+// ReadAttributePrimary5XWithParams reads attribute primary5 x with params.
 func (mccc *MTRClusterColorControl) ReadAttributePrimary5XWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributePrimary5XWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePrimary5YWithParams wraps the corresponding Objective-C method.
+// ReadAttributePrimary5YWithParams reads attribute primary5 y with params.
 func (mccc *MTRClusterColorControl) ReadAttributePrimary5YWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributePrimary5YWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePrimary5IntensityWithParams wraps the corresponding Objective-C method.
+// ReadAttributePrimary5IntensityWithParams reads attribute primary5 intensity with params.
 func (mccc *MTRClusterColorControl) ReadAttributePrimary5IntensityWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributePrimary5IntensityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePrimary6XWithParams wraps the corresponding Objective-C method.
+// ReadAttributePrimary6XWithParams reads attribute primary6 x with params.
 func (mccc *MTRClusterColorControl) ReadAttributePrimary6XWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributePrimary6XWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePrimary6YWithParams wraps the corresponding Objective-C method.
+// ReadAttributePrimary6YWithParams reads attribute primary6 y with params.
 func (mccc *MTRClusterColorControl) ReadAttributePrimary6YWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributePrimary6YWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePrimary6IntensityWithParams wraps the corresponding Objective-C method.
+// ReadAttributePrimary6IntensityWithParams reads attribute primary6 intensity with params.
 func (mccc *MTRClusterColorControl) ReadAttributePrimary6IntensityWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributePrimary6IntensityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeWhitePointXWithParams wraps the corresponding Objective-C method.
+// ReadAttributeWhitePointXWithParams reads attribute white point x with params.
 func (mccc *MTRClusterColorControl) ReadAttributeWhitePointXWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeWhitePointXWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeWhitePointYWithParams wraps the corresponding Objective-C method.
+// ReadAttributeWhitePointYWithParams reads attribute white point y with params.
 func (mccc *MTRClusterColorControl) ReadAttributeWhitePointYWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeWhitePointYWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeColorPointRXWithParams wraps the corresponding Objective-C method.
+// ReadAttributeColorPointRXWithParams reads attribute color point rx with params.
 func (mccc *MTRClusterColorControl) ReadAttributeColorPointRXWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeColorPointRXWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeColorPointRYWithParams wraps the corresponding Objective-C method.
+// ReadAttributeColorPointRYWithParams reads attribute color point ry with params.
 func (mccc *MTRClusterColorControl) ReadAttributeColorPointRYWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeColorPointRYWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeColorPointRIntensityWithParams wraps the corresponding Objective-C method.
+// ReadAttributeColorPointRIntensityWithParams reads attribute color point r intensity with params.
 func (mccc *MTRClusterColorControl) ReadAttributeColorPointRIntensityWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeColorPointRIntensityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeColorPointGXWithParams wraps the corresponding Objective-C method.
+// ReadAttributeColorPointGXWithParams reads attribute color point gx with params.
 func (mccc *MTRClusterColorControl) ReadAttributeColorPointGXWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeColorPointGXWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeColorPointGYWithParams wraps the corresponding Objective-C method.
+// ReadAttributeColorPointGYWithParams reads attribute color point gy with params.
 func (mccc *MTRClusterColorControl) ReadAttributeColorPointGYWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeColorPointGYWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeColorPointGIntensityWithParams wraps the corresponding Objective-C method.
+// ReadAttributeColorPointGIntensityWithParams reads attribute color point g intensity with params.
 func (mccc *MTRClusterColorControl) ReadAttributeColorPointGIntensityWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeColorPointGIntensityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeColorPointBXWithParams wraps the corresponding Objective-C method.
+// ReadAttributeColorPointBXWithParams reads attribute color point bx with params.
 func (mccc *MTRClusterColorControl) ReadAttributeColorPointBXWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeColorPointBXWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeColorPointBYWithParams wraps the corresponding Objective-C method.
+// ReadAttributeColorPointBYWithParams reads attribute color point by with params.
 func (mccc *MTRClusterColorControl) ReadAttributeColorPointBYWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeColorPointBYWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeColorPointBIntensityWithParams wraps the corresponding Objective-C method.
+// ReadAttributeColorPointBIntensityWithParams reads attribute color point b intensity with params.
 func (mccc *MTRClusterColorControl) ReadAttributeColorPointBIntensityWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeColorPointBIntensityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeEnhancedCurrentHueWithParams wraps the corresponding Objective-C method.
+// ReadAttributeEnhancedCurrentHueWithParams reads attribute enhanced current hue with params.
 func (mccc *MTRClusterColorControl) ReadAttributeEnhancedCurrentHueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeEnhancedCurrentHueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeEnhancedColorModeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeEnhancedColorModeWithParams reads attribute enhanced color mode with params.
 func (mccc *MTRClusterColorControl) ReadAttributeEnhancedColorModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeEnhancedColorModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeColorLoopActiveWithParams wraps the corresponding Objective-C method.
+// ReadAttributeColorLoopActiveWithParams reads attribute color loop active with params.
 func (mccc *MTRClusterColorControl) ReadAttributeColorLoopActiveWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeColorLoopActiveWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeColorLoopDirectionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeColorLoopDirectionWithParams reads attribute color loop direction with params.
 func (mccc *MTRClusterColorControl) ReadAttributeColorLoopDirectionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeColorLoopDirectionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeColorLoopTimeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeColorLoopTimeWithParams reads attribute color loop time with params.
 func (mccc *MTRClusterColorControl) ReadAttributeColorLoopTimeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeColorLoopTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeColorLoopStartEnhancedHueWithParams wraps the corresponding Objective-C method.
+// ReadAttributeColorLoopStartEnhancedHueWithParams reads attribute color loop start enhanced hue with params.
 func (mccc *MTRClusterColorControl) ReadAttributeColorLoopStartEnhancedHueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeColorLoopStartEnhancedHueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeColorLoopStoredEnhancedHueWithParams wraps the corresponding Objective-C method.
+// ReadAttributeColorLoopStoredEnhancedHueWithParams reads attribute color loop stored enhanced hue with params.
 func (mccc *MTRClusterColorControl) ReadAttributeColorLoopStoredEnhancedHueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeColorLoopStoredEnhancedHueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeColorCapabilitiesWithParams wraps the corresponding Objective-C method.
+// ReadAttributeColorCapabilitiesWithParams reads attribute color capabilities with params.
 func (mccc *MTRClusterColorControl) ReadAttributeColorCapabilitiesWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeColorCapabilitiesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeColorTempPhysicalMinMiredsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeColorTempPhysicalMinMiredsWithParams reads attribute color temp physical min mireds with params.
 func (mccc *MTRClusterColorControl) ReadAttributeColorTempPhysicalMinMiredsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeColorTempPhysicalMinMiredsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeColorTempPhysicalMaxMiredsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeColorTempPhysicalMaxMiredsWithParams reads attribute color temp physical max mireds with params.
 func (mccc *MTRClusterColorControl) ReadAttributeColorTempPhysicalMaxMiredsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeColorTempPhysicalMaxMiredsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCoupleColorTempToLevelMinMiredsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCoupleColorTempToLevelMinMiredsWithParams reads attribute couple color temp to level min mireds with params.
 func (mccc *MTRClusterColorControl) ReadAttributeCoupleColorTempToLevelMinMiredsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeCoupleColorTempToLevelMinMiredsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeStartUpColorTemperatureMiredsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeStartUpColorTemperatureMiredsWithParams reads attribute start up color temperature mireds with params.
 func (mccc *MTRClusterColorControl) ReadAttributeStartUpColorTemperatureMiredsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeStartUpColorTemperatureMiredsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeStartUpColorTemperatureMiredsWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeStartUpColorTemperatureMiredsWithValueExpectedValueInterval writes attribute start up color temperature mireds with value expected value interval.
 func (mccc *MTRClusterColorControl) WriteAttributeStartUpColorTemperatureMiredsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeStartUpColorTemperatureMiredsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeStartUpColorTemperatureMiredsWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeStartUpColorTemperatureMiredsWithValueExpectedValueIntervalParams writes attribute start up color temperature mireds with value expected value interval params.
 func (mccc *MTRClusterColorControl) WriteAttributeStartUpColorTemperatureMiredsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeStartUpColorTemperatureMiredsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mccc *MTRClusterColorControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mccc *MTRClusterColorControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mccc *MTRClusterColorControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mccc *MTRClusterColorControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mccc *MTRClusterColorControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeWhitePointXWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeWhitePointXWithValueExpectedValueInterval writes attribute white point x with value expected value interval.
 func (mccc *MTRClusterColorControl) WriteAttributeWhitePointXWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeWhitePointXWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeWhitePointXWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeWhitePointXWithValueExpectedValueIntervalParams writes attribute white point x with value expected value interval params.
 func (mccc *MTRClusterColorControl) WriteAttributeWhitePointXWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeWhitePointXWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeWhitePointYWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeWhitePointYWithValueExpectedValueInterval writes attribute white point y with value expected value interval.
 func (mccc *MTRClusterColorControl) WriteAttributeWhitePointYWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeWhitePointYWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeWhitePointYWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeWhitePointYWithValueExpectedValueIntervalParams writes attribute white point y with value expected value interval params.
 func (mccc *MTRClusterColorControl) WriteAttributeWhitePointYWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeWhitePointYWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeColorPointRXWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeColorPointRXWithValueExpectedValueInterval writes attribute color point rx with value expected value interval.
 func (mccc *MTRClusterColorControl) WriteAttributeColorPointRXWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeColorPointRXWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeColorPointRXWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeColorPointRXWithValueExpectedValueIntervalParams writes attribute color point rx with value expected value interval params.
 func (mccc *MTRClusterColorControl) WriteAttributeColorPointRXWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeColorPointRXWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeColorPointRYWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeColorPointRYWithValueExpectedValueInterval writes attribute color point ry with value expected value interval.
 func (mccc *MTRClusterColorControl) WriteAttributeColorPointRYWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeColorPointRYWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeColorPointRYWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeColorPointRYWithValueExpectedValueIntervalParams writes attribute color point ry with value expected value interval params.
 func (mccc *MTRClusterColorControl) WriteAttributeColorPointRYWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeColorPointRYWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeColorPointRIntensityWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeColorPointRIntensityWithValueExpectedValueInterval writes attribute color point r intensity with value expected value interval.
 func (mccc *MTRClusterColorControl) WriteAttributeColorPointRIntensityWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeColorPointRIntensityWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeColorPointRIntensityWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeColorPointRIntensityWithValueExpectedValueIntervalParams writes attribute color point r intensity with value expected value interval params.
 func (mccc *MTRClusterColorControl) WriteAttributeColorPointRIntensityWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeColorPointRIntensityWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeColorPointGXWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeColorPointGXWithValueExpectedValueInterval writes attribute color point gx with value expected value interval.
 func (mccc *MTRClusterColorControl) WriteAttributeColorPointGXWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeColorPointGXWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeColorPointGXWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeColorPointGXWithValueExpectedValueIntervalParams writes attribute color point gx with value expected value interval params.
 func (mccc *MTRClusterColorControl) WriteAttributeColorPointGXWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeColorPointGXWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeColorPointGYWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeColorPointGYWithValueExpectedValueInterval writes attribute color point gy with value expected value interval.
 func (mccc *MTRClusterColorControl) WriteAttributeColorPointGYWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeColorPointGYWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeColorPointGYWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeColorPointGYWithValueExpectedValueIntervalParams writes attribute color point gy with value expected value interval params.
 func (mccc *MTRClusterColorControl) WriteAttributeColorPointGYWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeColorPointGYWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeColorPointGIntensityWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeColorPointGIntensityWithValueExpectedValueInterval writes attribute color point g intensity with value expected value interval.
 func (mccc *MTRClusterColorControl) WriteAttributeColorPointGIntensityWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeColorPointGIntensityWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeColorPointGIntensityWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeColorPointGIntensityWithValueExpectedValueIntervalParams writes attribute color point g intensity with value expected value interval params.
 func (mccc *MTRClusterColorControl) WriteAttributeColorPointGIntensityWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeColorPointGIntensityWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeColorPointBXWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeColorPointBXWithValueExpectedValueInterval writes attribute color point bx with value expected value interval.
 func (mccc *MTRClusterColorControl) WriteAttributeColorPointBXWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeColorPointBXWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeColorPointBXWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeColorPointBXWithValueExpectedValueIntervalParams writes attribute color point bx with value expected value interval params.
 func (mccc *MTRClusterColorControl) WriteAttributeColorPointBXWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeColorPointBXWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeColorPointBYWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeColorPointBYWithValueExpectedValueInterval writes attribute color point by with value expected value interval.
 func (mccc *MTRClusterColorControl) WriteAttributeColorPointBYWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeColorPointBYWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeColorPointBYWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeColorPointBYWithValueExpectedValueIntervalParams writes attribute color point by with value expected value interval params.
 func (mccc *MTRClusterColorControl) WriteAttributeColorPointBYWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeColorPointBYWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeColorPointBIntensityWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeColorPointBIntensityWithValueExpectedValueInterval writes attribute color point b intensity with value expected value interval.
 func (mccc *MTRClusterColorControl) WriteAttributeColorPointBIntensityWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeColorPointBIntensityWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeColorPointBIntensityWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeColorPointBIntensityWithValueExpectedValueIntervalParams writes attribute color point b intensity with value expected value interval params.
 func (mccc *MTRClusterColorControl) WriteAttributeColorPointBIntensityWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mccc), objc.RegisterName("writeAttributeColorPointBIntensityWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }

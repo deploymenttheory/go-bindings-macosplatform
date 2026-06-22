@@ -56,7 +56,7 @@ func (cccngn *CNNCrossChannelNormalizationGradientNode) WithLabel(label string) 
 	return cccngn
 }
 
-// KernelSize wraps the corresponding Objective-C method.
+// KernelSize returns the kernel size.
 func (cccngn *CNNCrossChannelNormalizationGradientNode) KernelSize() int {
 	_r := objc.Send[int](objref.IDOf(cccngn), objc.RegisterName("kernelSize"))
 	return _r

@@ -49,7 +49,7 @@ func NewAnimatedVector2() *AnimatedVector2 {
 	return animatedVector2Adopt(_id)
 }
 
-// WithInterpolation sets the property and returns the receiver so calls can be chained.
+// WithInterpolation sets the interpolation.
 func (av *AnimatedVector2) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector2 {
 	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setInterpolation:"), interpolation)
 	return av

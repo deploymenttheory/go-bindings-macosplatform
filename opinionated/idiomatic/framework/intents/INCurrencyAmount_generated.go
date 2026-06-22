@@ -73,13 +73,13 @@ func NewCurrencyAmountWithAmountCurrencyCode(amount obj.Object, currencyCode str
 	return currencyAmountAdopt(_id)
 }
 
-// Amount wraps the corresponding Objective-C method.
+// Amount returns the amount.
 func (ca *CurrencyAmount) Amount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("amount"))
 	return obj.Wrap(_r)
 }
 
-// CurrencyCode wraps the corresponding Objective-C method.
+// CurrencyCode returns the currency code.
 func (ca *CurrencyAmount) CurrencyCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("currencyCode"))
 	if _r == 0 {

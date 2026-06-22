@@ -78,25 +78,25 @@ func NewMTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeRes
 	return mTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mratccmcctmrp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mratccmcctmrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mratccmcctmrp
 }
 
-// WithStatusText sets the property and returns the receiver so calls can be chained.
+// WithStatusText sets the status text.
 func (mratccmcctmrp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) WithStatusText(statusText string) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mratccmcctmrp), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
 	return mratccmcctmrp
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (mratccmcctmrp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mratccmcctmrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// StatusText wraps the corresponding Objective-C method.
+// StatusText returns the status text.
 func (mratccmcctmrp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeResponseParams) StatusText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mratccmcctmrp), objc.RegisterName("statusText"))
 	if _r == 0 {

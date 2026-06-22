@@ -102,13 +102,13 @@ func (mcp *MorphologyCustomPronoun) WithReflexiveForm(reflexiveForm StringProvid
 	return mcp
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (mcp *MorphologyCustomPronoun) WithScriptingProperties(scriptingProperties obj.Object) *MorphologyCustomPronoun {
 	objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return mcp
 }
 
-// SubjectForm wraps the corresponding Objective-C method.
+// SubjectForm returns the subject form.
 func (mcp *MorphologyCustomPronoun) SubjectForm() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("subjectForm"))
 	if _r == 0 {
@@ -117,7 +117,7 @@ func (mcp *MorphologyCustomPronoun) SubjectForm() string {
 	return purego.GoString(_r)
 }
 
-// ObjectForm wraps the corresponding Objective-C method.
+// ObjectForm returns the object form.
 func (mcp *MorphologyCustomPronoun) ObjectForm() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("objectForm"))
 	if _r == 0 {
@@ -126,7 +126,7 @@ func (mcp *MorphologyCustomPronoun) ObjectForm() string {
 	return purego.GoString(_r)
 }
 
-// PossessiveForm wraps the corresponding Objective-C method.
+// PossessiveForm returns the possessive form.
 func (mcp *MorphologyCustomPronoun) PossessiveForm() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("possessiveForm"))
 	if _r == 0 {
@@ -135,7 +135,7 @@ func (mcp *MorphologyCustomPronoun) PossessiveForm() string {
 	return purego.GoString(_r)
 }
 
-// PossessiveAdjectiveForm wraps the corresponding Objective-C method.
+// PossessiveAdjectiveForm returns the possessive adjective form.
 func (mcp *MorphologyCustomPronoun) PossessiveAdjectiveForm() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("possessiveAdjectiveForm"))
 	if _r == 0 {
@@ -144,7 +144,7 @@ func (mcp *MorphologyCustomPronoun) PossessiveAdjectiveForm() string {
 	return purego.GoString(_r)
 }
 
-// ReflexiveForm wraps the corresponding Objective-C method.
+// ReflexiveForm returns the reflexive form.
 func (mcp *MorphologyCustomPronoun) ReflexiveForm() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("reflexiveForm"))
 	if _r == 0 {

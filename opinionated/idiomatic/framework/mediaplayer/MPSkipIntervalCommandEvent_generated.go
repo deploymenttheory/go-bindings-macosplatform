@@ -51,7 +51,7 @@ func NewSkipIntervalCommandEvent() *SkipIntervalCommandEvent {
 	return skipIntervalCommandEventAdopt(_id)
 }
 
-// Interval wraps the corresponding Objective-C method.
+// Interval returns the interval.
 func (sice *SkipIntervalCommandEvent) Interval() float64 {
 	_r := objc.Send[float64](objref.IDOf(sice), objc.RegisterName("interval"))
 	return _r

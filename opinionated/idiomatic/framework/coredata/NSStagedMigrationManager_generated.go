@@ -73,7 +73,7 @@ func NewStagedMigrationManagerWithMigrationStages(stages []*MigrationStage) *Sta
 	return stagedMigrationManagerAdopt(_id)
 }
 
-// Stages wraps the corresponding Objective-C method.
+// Stages returns the stages.
 //
 // Stages returns the collection as a Go slice.
 func (smm *StagedMigrationManager) Stages() []*MigrationStage {
@@ -81,7 +81,7 @@ func (smm *StagedMigrationManager) Stages() []*MigrationStage {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MigrationStage { return MigrationStageFromID(_id) })
 }
 
-// Container wraps the corresponding Objective-C method.
+// Container returns the container.
 func (smm *StagedMigrationManager) Container() *PersistentContainer {
 	_r := objc.Send[objc.ID](objref.IDOf(smm), objc.RegisterName("container"))
 	return PersistentContainerFromID(_r)

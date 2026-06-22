@@ -70,49 +70,49 @@ func NewMTREnergyEVSEClusterEnergyTransferStoppedEvent() *MTREnergyEVSEClusterEn
 	return mTREnergyEVSEClusterEnergyTransferStoppedEventAdopt(_id)
 }
 
-// WithSessionID sets the property and returns the receiver so calls can be chained.
+// WithSessionID sets the session ID.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStoppedEvent) WithSessionID(sessionID obj.Object) *MTREnergyEVSEClusterEnergyTransferStoppedEvent {
 	objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("setSessionID:"), objref.IDOf(sessionID))
 	return meecetse
 }
 
-// WithState sets the property and returns the receiver so calls can be chained.
+// WithState sets the state.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStoppedEvent) WithState(state obj.Object) *MTREnergyEVSEClusterEnergyTransferStoppedEvent {
 	objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("setState:"), objref.IDOf(state))
 	return meecetse
 }
 
-// WithReason sets the property and returns the receiver so calls can be chained.
+// WithReason sets the reason.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStoppedEvent) WithReason(reason obj.Object) *MTREnergyEVSEClusterEnergyTransferStoppedEvent {
 	objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("setReason:"), objref.IDOf(reason))
 	return meecetse
 }
 
-// WithEnergyTransferred sets the property and returns the receiver so calls can be chained.
+// WithEnergyTransferred sets the energy transferred.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStoppedEvent) WithEnergyTransferred(energyTransferred obj.Object) *MTREnergyEVSEClusterEnergyTransferStoppedEvent {
 	objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("setEnergyTransferred:"), objref.IDOf(energyTransferred))
 	return meecetse
 }
 
-// SessionID wraps the corresponding Objective-C method.
+// SessionID returns the session ID.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStoppedEvent) SessionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("sessionID"))
 	return obj.Wrap(_r)
 }
 
-// State wraps the corresponding Objective-C method.
+// State returns the state.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStoppedEvent) State() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("state"))
 	return obj.Wrap(_r)
 }
 
-// Reason wraps the corresponding Objective-C method.
+// Reason returns the reason.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStoppedEvent) Reason() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("reason"))
 	return obj.Wrap(_r)
 }
 
-// EnergyTransferred wraps the corresponding Objective-C method.
+// EnergyTransferred returns the energy transferred.
 func (meecetse *MTREnergyEVSEClusterEnergyTransferStoppedEvent) EnergyTransferred() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecetse), objc.RegisterName("energyTransferred"))
 	return obj.Wrap(_r)

@@ -50,7 +50,7 @@ func NewMTREventPath() *MTREventPath {
 	return mTREventPathAdopt(_id)
 }
 
-// Event wraps the corresponding Objective-C method.
+// Event returns the event.
 func (mep *MTREventPath) Event() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mep), objc.RegisterName("event"))
 	return obj.Wrap(_r)

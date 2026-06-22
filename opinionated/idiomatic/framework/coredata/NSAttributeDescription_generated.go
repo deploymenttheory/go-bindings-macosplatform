@@ -142,13 +142,13 @@ func (ad *AttributeDescription) WithRenamingIdentifier(renamingIdentifier string
 	return ad
 }
 
-// AttributeType wraps the corresponding Objective-C method.
+// AttributeType returns the attribute type.
 func (ad *AttributeDescription) AttributeType() AttributeType {
 	_r := objc.Send[AttributeType](objref.IDOf(ad), objc.RegisterName("attributeType"))
 	return _r
 }
 
-// AttributeValueClassName wraps the corresponding Objective-C method.
+// AttributeValueClassName returns the attribute value class name.
 func (ad *AttributeDescription) AttributeValueClassName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("attributeValueClassName"))
 	if _r == 0 {
@@ -157,13 +157,13 @@ func (ad *AttributeDescription) AttributeValueClassName() string {
 	return purego.GoString(_r)
 }
 
-// DefaultValue wraps the corresponding Objective-C method.
+// DefaultValue returns the default value.
 func (ad *AttributeDescription) DefaultValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("defaultValue"))
 	return obj.Wrap(_r)
 }
 
-// ValueTransformerName wraps the corresponding Objective-C method.
+// ValueTransformerName returns the value transformer name.
 func (ad *AttributeDescription) ValueTransformerName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("valueTransformerName"))
 	if _r == 0 {

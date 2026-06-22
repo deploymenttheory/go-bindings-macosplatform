@@ -4,6 +4,9 @@
 
 // Package cloudkit provides a fluent Go API over the macOS CloudKit framework.
 //
+// Each With… method sets one property and returns its receiver, so configuration
+// calls can be chained.
+//
 // # Types
 //
 // Each base type below lists the concrete types you construct and pass where the

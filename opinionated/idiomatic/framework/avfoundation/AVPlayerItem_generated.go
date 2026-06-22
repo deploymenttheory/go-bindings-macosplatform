@@ -414,7 +414,7 @@ func (pi *PlayerItem) IsPlaybackBufferFull() bool {
 	return _r
 }
 
-// IsPlaybackBufferEmpty wraps the corresponding Objective-C method.
+// IsPlaybackBufferEmpty reports whether the object is playback buffer empty.
 func (pi *PlayerItem) IsPlaybackBufferEmpty() bool {
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isPlaybackBufferEmpty"))
 	return _r
@@ -478,7 +478,7 @@ func (pi *PlayerItem) SelectMediaOptionAutomaticallyInMediaSelectionGroup(mediaS
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("selectMediaOptionAutomaticallyInMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
 }
 
-// CurrentMediaSelection wraps the corresponding Objective-C method.
+// CurrentMediaSelection returns the current media selection.
 func (pi *PlayerItem) CurrentMediaSelection() *MediaSelection {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("currentMediaSelection"))
 	return MediaSelectionFromID(_r)
@@ -545,7 +545,7 @@ func (pi *PlayerItem) RemoveOutput(output *PlayerItemOutput) {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("removeOutput:"), objref.IDOf(output))
 }
 
-// Outputs wraps the corresponding Objective-C method.
+// Outputs returns the outputs.
 //
 // Outputs returns the collection as a Go slice.
 func (pi *PlayerItem) Outputs() []*PlayerItemOutput {
@@ -563,7 +563,7 @@ func (pi *PlayerItem) RemoveMediaDataCollector(collector *PlayerItemMediaDataCol
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("removeMediaDataCollector:"), objref.IDOf(collector))
 }
 
-// MediaDataCollectors wraps the corresponding Objective-C method.
+// MediaDataCollectors returns the media data collectors.
 //
 // MediaDataCollectors returns the collection as a Go slice.
 func (pi *PlayerItem) MediaDataCollectors() []*PlayerItemMediaDataCollector {
@@ -650,7 +650,7 @@ func (pi *PlayerItem) InterstitialEventIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// IntegratedTimeline wraps the corresponding Objective-C method.
+// IntegratedTimeline returns the integrated timeline.
 func (pi *PlayerItem) IntegratedTimeline() *PlayerItemIntegratedTimeline {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("integratedTimeline"))
 	return PlayerItemIntegratedTimelineFromID(_r)

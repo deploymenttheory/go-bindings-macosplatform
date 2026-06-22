@@ -51,19 +51,19 @@ func NewCNNAdd() *CNNAdd {
 	return cNNAddAdopt(_id)
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (ca *CNNAdd) WithPrimaryScale(primaryScale float32) *CNNAdd {
 	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return ca
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (ca *CNNAdd) WithSecondaryScale(secondaryScale float32) *CNNAdd {
 	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return ca
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (ca *CNNAdd) WithBias(bias float32) *CNNAdd {
 	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setBias:"), bias)
 	return ca

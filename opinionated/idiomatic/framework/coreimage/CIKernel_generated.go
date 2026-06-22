@@ -68,7 +68,7 @@ func (k *Kernel) String() string {
 	return rt.Description(objref.IDOf(k))
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (k *Kernel) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(k), objc.RegisterName("name"))
 	if _r == 0 {

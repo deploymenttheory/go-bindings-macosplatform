@@ -85,19 +85,19 @@ func (hdp *HapticDynamicParameter) WithRelativeTime(relativeTime float64) *Hapti
 	return hdp
 }
 
-// ParameterID wraps the corresponding Objective-C method.
+// ParameterID returns the parameter ID.
 func (hdp *HapticDynamicParameter) ParameterID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(hdp), objc.RegisterName("parameterID"))
 	return obj.Wrap(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (hdp *HapticDynamicParameter) Value() float32 {
 	_r := objc.Send[float32](objref.IDOf(hdp), objc.RegisterName("value"))
 	return _r
 }
 
-// RelativeTime wraps the corresponding Objective-C method.
+// RelativeTime returns the relative time.
 func (hdp *HapticDynamicParameter) RelativeTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(hdp), objc.RegisterName("relativeTime"))
 	return _r

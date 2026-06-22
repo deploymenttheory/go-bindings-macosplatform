@@ -73,7 +73,7 @@ func NewVirtualConferenceDescriptorWithTitleURLDescriptorsConferenceDetails(titl
 	return virtualConferenceDescriptorAdopt(_id)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (vcd *VirtualConferenceDescriptor) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(vcd), objc.RegisterName("title"))
 	if _r == 0 {
@@ -82,7 +82,7 @@ func (vcd *VirtualConferenceDescriptor) Title() string {
 	return purego.GoString(_r)
 }
 
-// URLDescriptors wraps the corresponding Objective-C method.
+// URLDescriptors returns the URL descriptors.
 //
 // URLDescriptors returns the collection as a Go slice.
 func (vcd *VirtualConferenceDescriptor) URLDescriptors() []*VirtualConferenceURLDescriptor {
@@ -90,7 +90,7 @@ func (vcd *VirtualConferenceDescriptor) URLDescriptors() []*VirtualConferenceURL
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *VirtualConferenceURLDescriptor { return VirtualConferenceURLDescriptorFromID(_id) })
 }
 
-// ConferenceDetails wraps the corresponding Objective-C method.
+// ConferenceDetails returns the conference details.
 func (vcd *VirtualConferenceDescriptor) ConferenceDetails() string {
 	_r := objc.Send[objc.ID](objref.IDOf(vcd), objc.RegisterName("conferenceDetails"))
 	if _r == 0 {

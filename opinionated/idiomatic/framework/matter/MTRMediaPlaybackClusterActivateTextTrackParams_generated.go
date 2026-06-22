@@ -70,7 +70,7 @@ func NewMTRMediaPlaybackClusterActivateTextTrackParams() *MTRMediaPlaybackCluste
 	return mTRMediaPlaybackClusterActivateTextTrackParamsAdopt(_id)
 }
 
-// WithTrackID sets the property and returns the receiver so calls can be chained.
+// WithTrackID sets the track ID.
 func (mmpcattp *MTRMediaPlaybackClusterActivateTextTrackParams) WithTrackID(trackID string) *MTRMediaPlaybackClusterActivateTextTrackParams {
 	objc.Send[objc.ID](objref.IDOf(mmpcattp), objc.RegisterName("setTrackID:"), purego.NSString(trackID))
 	return mmpcattp
@@ -88,7 +88,7 @@ func (mmpcattp *MTRMediaPlaybackClusterActivateTextTrackParams) WithServerSidePr
 	return mmpcattp
 }
 
-// TrackID wraps the corresponding Objective-C method.
+// TrackID returns the track ID.
 func (mmpcattp *MTRMediaPlaybackClusterActivateTextTrackParams) TrackID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mmpcattp), objc.RegisterName("trackID"))
 	if _r == 0 {

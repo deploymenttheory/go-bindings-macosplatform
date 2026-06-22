@@ -99,7 +99,7 @@ func (u *Uniform) WithFloatValue(floatValue float32) *Uniform {
 	return u
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (u *Uniform) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("name"))
 	if _r == 0 {
@@ -108,19 +108,19 @@ func (u *Uniform) Name() string {
 	return purego.GoString(_r)
 }
 
-// UniformType wraps the corresponding Objective-C method.
+// UniformType returns the uniform type.
 func (u *Uniform) UniformType() UniformType {
 	_r := objc.Send[UniformType](objref.IDOf(u), objc.RegisterName("uniformType"))
 	return _r
 }
 
-// TextureValue wraps the corresponding Objective-C method.
+// TextureValue returns the texture value.
 func (u *Uniform) TextureValue() *Texture {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("textureValue"))
 	return TextureFromID(_r)
 }
 
-// FloatValue wraps the corresponding Objective-C method.
+// FloatValue returns the float value.
 func (u *Uniform) FloatValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(u), objc.RegisterName("floatValue"))
 	return _r

@@ -150,7 +150,7 @@ func (xd *XMLDocument) WithURI(uRI StringProvider) *XMLDocument {
 	return xd
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (xd *XMLDocument) WithScriptingProperties(scriptingProperties obj.Object) *XMLDocument {
 	objc.Send[objc.ID](objref.IDOf(xd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return xd
@@ -233,7 +233,7 @@ func (xd *XMLDocument) ObjectByApplyingXSLTAtURLArgumentsError(xsltURL string, a
 	return obj.Wrap(_r), nil
 }
 
-// ValidateAndReturnError wraps the corresponding Objective-C method.
+// ValidateAndReturnError validates and return error.
 //
 // ValidateAndReturnError returns an error if the operation did not succeed.
 func (xd *XMLDocument) ValidateAndReturnError() error {

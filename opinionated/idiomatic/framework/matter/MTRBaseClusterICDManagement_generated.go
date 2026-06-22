@@ -106,7 +106,7 @@ func (mbcim *MTRBaseClusterICDManagement) StayActiveRequestWithParamsCompletion(
 	}
 }
 
-// ReadAttributeIdleModeDurationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeIdleModeDurationWithCompletion reads attribute idle mode duration with completion.
 //
 // ReadAttributeIdleModeDurationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeIdleModeDurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -156,7 +156,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeIdleModeDurationWith
 	}
 }
 
-// ReadAttributeActiveModeDurationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActiveModeDurationWithCompletion reads attribute active mode duration with completion.
 //
 // ReadAttributeActiveModeDurationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeActiveModeDurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -206,7 +206,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeActiveModeDurationWi
 	}
 }
 
-// ReadAttributeActiveModeThresholdWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActiveModeThresholdWithCompletion reads attribute active mode threshold with completion.
 //
 // ReadAttributeActiveModeThresholdWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeActiveModeThresholdWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -256,7 +256,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeActiveModeThresholdW
 	}
 }
 
-// ReadAttributeRegisteredClientsWithParamsCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRegisteredClientsWithParamsCompletion reads attribute registered clients with params completion.
 //
 // ReadAttributeRegisteredClientsWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeRegisteredClientsWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
@@ -306,7 +306,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeRegisteredClientsWit
 	}
 }
 
-// ReadAttributeICDCounterWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeICDCounterWithCompletion reads attribute icd counter with completion.
 //
 // ReadAttributeICDCounterWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeICDCounterWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -356,7 +356,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeICDCounterWithParams
 	}
 }
 
-// ReadAttributeClientsSupportedPerFabricWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClientsSupportedPerFabricWithCompletion reads attribute clients supported per fabric with completion.
 //
 // ReadAttributeClientsSupportedPerFabricWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeClientsSupportedPerFabricWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -406,7 +406,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeClientsSupportedPerF
 	}
 }
 
-// ReadAttributeUserActiveModeTriggerHintWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUserActiveModeTriggerHintWithCompletion reads attribute user active mode trigger hint with completion.
 //
 // ReadAttributeUserActiveModeTriggerHintWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeUserActiveModeTriggerHintWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -456,7 +456,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeUserActiveModeTrigge
 	}
 }
 
-// ReadAttributeUserActiveModeTriggerInstructionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUserActiveModeTriggerInstructionWithCompletion reads attribute user active mode trigger instruction with completion.
 //
 // ReadAttributeUserActiveModeTriggerInstructionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeUserActiveModeTriggerInstructionWithCompletion(ctx context.Context) (result string, err error) {
@@ -506,7 +506,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeUserActiveModeTrigge
 	}
 }
 
-// ReadAttributeOperatingModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOperatingModeWithCompletion reads attribute operating mode with completion.
 //
 // ReadAttributeOperatingModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeOperatingModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -556,7 +556,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeOperatingModeWithPar
 	}
 }
 
-// ReadAttributeMaximumCheckInBackOffWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaximumCheckInBackOffWithCompletion reads attribute maximum check in back off with completion.
 //
 // ReadAttributeMaximumCheckInBackOffWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeMaximumCheckInBackOffWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -606,7 +606,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeMaximumCheckInBackOf
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -656,7 +656,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeGeneratedCommandList
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -706,7 +706,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeAcceptedCommandListW
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -756,7 +756,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeAttributeListWithPar
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -806,7 +806,7 @@ func (mbcim *MTRBaseClusterICDManagement) SubscribeAttributeFeatureMapWithParams
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcim *MTRBaseClusterICDManagement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

@@ -60,13 +60,13 @@ func NewDataDetectorWithTypesError(checkingTypes uint64) (result *DataDetector, 
 	return dataDetectorAdopt(_id), nil
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (dd *DataDetector) WithScriptingProperties(scriptingProperties obj.Object) *DataDetector {
 	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return dd
 }
 
-// CheckingTypes wraps the corresponding Objective-C method.
+// CheckingTypes returns the checking types.
 func (dd *DataDetector) CheckingTypes() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(dd), objc.RegisterName("checkingTypes"))
 	return _r

@@ -50,19 +50,19 @@ func NewDOMOverflowEventOverflowEventHorizontalOverflowVerticalOverflow(orient u
 	return dOMOverflowEventAdopt(_id)
 }
 
-// WithReturnValue sets the property and returns the receiver so calls can be chained.
+// WithReturnValue sets the return value.
 func (doe *DOMOverflowEvent) WithReturnValue(returnValue bool) *DOMOverflowEvent {
 	objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("setReturnValue:"), returnValue)
 	return doe
 }
 
-// WithCancelBubble sets the property and returns the receiver so calls can be chained.
+// WithCancelBubble sets the cancel bubble.
 func (doe *DOMOverflowEvent) WithCancelBubble(cancelBubble bool) *DOMOverflowEvent {
 	objc.Send[objc.ID](objref.IDOf(doe), objc.RegisterName("setCancelBubble:"), cancelBubble)
 	return doe
 }
 
-// Orient wraps the corresponding Objective-C method.
+// Orient returns the orient.
 func (doe *DOMOverflowEvent) Orient() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(doe), objc.RegisterName("orient"))
 	return _r

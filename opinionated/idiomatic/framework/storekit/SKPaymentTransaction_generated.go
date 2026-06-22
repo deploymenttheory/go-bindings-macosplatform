@@ -72,19 +72,19 @@ func NewPaymentTransaction() *PaymentTransaction {
 	return paymentTransactionAdopt(_id)
 }
 
-// OriginalTransaction wraps the corresponding Objective-C method.
+// OriginalTransaction returns the original transaction.
 func (pt *PaymentTransaction) OriginalTransaction() *PaymentTransaction {
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("originalTransaction"))
 	return PaymentTransactionFromID(_r)
 }
 
-// Payment wraps the corresponding Objective-C method.
+// Payment returns the payment.
 func (pt *PaymentTransaction) Payment() *Payment {
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("payment"))
 	return PaymentFromID(_r)
 }
 
-// Downloads wraps the corresponding Objective-C method.
+// Downloads returns the downloads.
 //
 // Downloads returns the collection as a Go slice.
 func (pt *PaymentTransaction) Downloads() []*Download {
@@ -92,13 +92,13 @@ func (pt *PaymentTransaction) Downloads() []*Download {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Download { return DownloadFromID(_id) })
 }
 
-// TransactionDate wraps the corresponding Objective-C method.
+// TransactionDate returns the transaction date.
 func (pt *PaymentTransaction) TransactionDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("transactionDate"))
 	return obj.Wrap(_r)
 }
 
-// TransactionIdentifier wraps the corresponding Objective-C method.
+// TransactionIdentifier returns the transaction identifier.
 func (pt *PaymentTransaction) TransactionIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("transactionIdentifier"))
 	if _r == 0 {

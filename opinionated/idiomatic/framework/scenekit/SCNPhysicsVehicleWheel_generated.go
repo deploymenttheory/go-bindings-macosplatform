@@ -120,55 +120,55 @@ func (pvw *PhysicsVehicleWheel) WithSuspensionRestLength(suspensionRestLength fl
 	return pvw
 }
 
-// Node wraps the corresponding Objective-C method.
+// Node returns the node.
 func (pvw *PhysicsVehicleWheel) Node() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(pvw), objc.RegisterName("node"))
 	return NodeFromID(_r)
 }
 
-// SuspensionStiffness wraps the corresponding Objective-C method.
+// SuspensionStiffness returns the suspension stiffness.
 func (pvw *PhysicsVehicleWheel) SuspensionStiffness() float64 {
 	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("suspensionStiffness"))
 	return _r
 }
 
-// SuspensionCompression wraps the corresponding Objective-C method.
+// SuspensionCompression returns the suspension compression.
 func (pvw *PhysicsVehicleWheel) SuspensionCompression() float64 {
 	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("suspensionCompression"))
 	return _r
 }
 
-// SuspensionDamping wraps the corresponding Objective-C method.
+// SuspensionDamping returns the suspension damping.
 func (pvw *PhysicsVehicleWheel) SuspensionDamping() float64 {
 	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("suspensionDamping"))
 	return _r
 }
 
-// MaximumSuspensionTravel wraps the corresponding Objective-C method.
+// MaximumSuspensionTravel returns the maximum suspension travel.
 func (pvw *PhysicsVehicleWheel) MaximumSuspensionTravel() float64 {
 	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("maximumSuspensionTravel"))
 	return _r
 }
 
-// FrictionSlip wraps the corresponding Objective-C method.
+// FrictionSlip returns the friction slip.
 func (pvw *PhysicsVehicleWheel) FrictionSlip() float64 {
 	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("frictionSlip"))
 	return _r
 }
 
-// MaximumSuspensionForce wraps the corresponding Objective-C method.
+// MaximumSuspensionForce returns the maximum suspension force.
 func (pvw *PhysicsVehicleWheel) MaximumSuspensionForce() float64 {
 	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("maximumSuspensionForce"))
 	return _r
 }
 
-// Radius wraps the corresponding Objective-C method.
+// Radius returns the radius.
 func (pvw *PhysicsVehicleWheel) Radius() float64 {
 	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("radius"))
 	return _r
 }
 
-// SuspensionRestLength wraps the corresponding Objective-C method.
+// SuspensionRestLength returns the suspension rest length.
 func (pvw *PhysicsVehicleWheel) SuspensionRestLength() float64 {
 	_r := objc.Send[float64](objref.IDOf(pvw), objc.RegisterName("suspensionRestLength"))
 	return _r

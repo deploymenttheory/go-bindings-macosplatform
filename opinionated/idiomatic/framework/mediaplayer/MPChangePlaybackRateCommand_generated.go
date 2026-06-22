@@ -65,7 +65,7 @@ func (cprc *ChangePlaybackRateCommand) WithEnabled(enabled bool) *ChangePlayback
 	return cprc
 }
 
-// SupportedPlaybackRates wraps the corresponding Objective-C method.
+// SupportedPlaybackRates returns the supported playback rates.
 //
 // SupportedPlaybackRates returns the collection as a Go slice.
 func (cprc *ChangePlaybackRateCommand) SupportedPlaybackRates() []obj.Object {

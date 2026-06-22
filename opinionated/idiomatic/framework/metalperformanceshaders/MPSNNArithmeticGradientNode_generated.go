@@ -60,49 +60,49 @@ func NewNNArithmeticGradientNodeWithGradientImagesForwardFilterIsSecondarySource
 	return nNArithmeticGradientNodeAdopt(_id)
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (nagn *NNArithmeticGradientNode) WithPrimaryScale(primaryScale float32) *NNArithmeticGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return nagn
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (nagn *NNArithmeticGradientNode) WithSecondaryScale(secondaryScale float32) *NNArithmeticGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return nagn
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (nagn *NNArithmeticGradientNode) WithBias(bias float32) *NNArithmeticGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setBias:"), bias)
 	return nagn
 }
 
-// WithSecondaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsX sets the secondary stride in pixels x.
 func (nagn *NNArithmeticGradientNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNArithmeticGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return nagn
 }
 
-// WithSecondaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsY sets the secondary stride in pixels y.
 func (nagn *NNArithmeticGradientNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNArithmeticGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return nagn
 }
 
-// WithSecondaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInFeatureChannels sets the secondary stride in feature channels.
 func (nagn *NNArithmeticGradientNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNArithmeticGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
 	return nagn
 }
 
-// WithMinimumValue sets the property and returns the receiver so calls can be chained.
+// WithMinimumValue sets the minimum value.
 func (nagn *NNArithmeticGradientNode) WithMinimumValue(minimumValue float32) *NNArithmeticGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return nagn
 }
 
-// WithMaximumValue sets the property and returns the receiver so calls can be chained.
+// WithMaximumValue sets the maximum value.
 func (nagn *NNArithmeticGradientNode) WithMaximumValue(maximumValue float32) *NNArithmeticGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return nagn
@@ -114,55 +114,55 @@ func (nagn *NNArithmeticGradientNode) WithLabel(label string) *NNArithmeticGradi
 	return nagn
 }
 
-// PrimaryScale wraps the corresponding Objective-C method.
+// PrimaryScale returns the primary scale.
 func (nagn *NNArithmeticGradientNode) PrimaryScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(nagn), objc.RegisterName("primaryScale"))
 	return _r
 }
 
-// SecondaryScale wraps the corresponding Objective-C method.
+// SecondaryScale returns the secondary scale.
 func (nagn *NNArithmeticGradientNode) SecondaryScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(nagn), objc.RegisterName("secondaryScale"))
 	return _r
 }
 
-// Bias wraps the corresponding Objective-C method.
+// Bias returns the bias.
 func (nagn *NNArithmeticGradientNode) Bias() float32 {
 	_r := objc.Send[float32](objref.IDOf(nagn), objc.RegisterName("bias"))
 	return _r
 }
 
-// SecondaryStrideInPixelsX wraps the corresponding Objective-C method.
+// SecondaryStrideInPixelsX returns the secondary stride in pixels x.
 func (nagn *NNArithmeticGradientNode) SecondaryStrideInPixelsX() int {
 	_r := objc.Send[int](objref.IDOf(nagn), objc.RegisterName("secondaryStrideInPixelsX"))
 	return _r
 }
 
-// SecondaryStrideInPixelsY wraps the corresponding Objective-C method.
+// SecondaryStrideInPixelsY returns the secondary stride in pixels y.
 func (nagn *NNArithmeticGradientNode) SecondaryStrideInPixelsY() int {
 	_r := objc.Send[int](objref.IDOf(nagn), objc.RegisterName("secondaryStrideInPixelsY"))
 	return _r
 }
 
-// SecondaryStrideInFeatureChannels wraps the corresponding Objective-C method.
+// SecondaryStrideInFeatureChannels returns the secondary stride in feature channels.
 func (nagn *NNArithmeticGradientNode) SecondaryStrideInFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(nagn), objc.RegisterName("secondaryStrideInFeatureChannels"))
 	return _r
 }
 
-// MinimumValue wraps the corresponding Objective-C method.
+// MinimumValue returns the minimum value.
 func (nagn *NNArithmeticGradientNode) MinimumValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(nagn), objc.RegisterName("minimumValue"))
 	return _r
 }
 
-// MaximumValue wraps the corresponding Objective-C method.
+// MaximumValue returns the maximum value.
 func (nagn *NNArithmeticGradientNode) MaximumValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(nagn), objc.RegisterName("maximumValue"))
 	return _r
 }
 
-// IsSecondarySourceFilter wraps the corresponding Objective-C method.
+// IsSecondarySourceFilter reports whether the object is secondary source filter.
 func (nagn *NNArithmeticGradientNode) IsSecondarySourceFilter() bool {
 	_r := objc.Send[bool](objref.IDOf(nagn), objc.RegisterName("isSecondarySourceFilter"))
 	return _r

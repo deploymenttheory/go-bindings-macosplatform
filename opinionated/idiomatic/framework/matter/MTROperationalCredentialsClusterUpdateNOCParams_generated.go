@@ -70,13 +70,13 @@ func NewMTROperationalCredentialsClusterUpdateNOCParams() *MTROperationalCredent
 	return mTROperationalCredentialsClusterUpdateNOCParamsAdopt(_id)
 }
 
-// WithNocValue sets the property and returns the receiver so calls can be chained.
+// WithNocValue sets the noc value.
 func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) WithNocValue(nocValue obj.Object) *MTROperationalCredentialsClusterUpdateNOCParams {
 	objc.Send[objc.ID](objref.IDOf(moccunp), objc.RegisterName("setNocValue:"), objref.IDOf(nocValue))
 	return moccunp
 }
 
-// WithIcacValue sets the property and returns the receiver so calls can be chained.
+// WithIcacValue sets the icac value.
 func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) WithIcacValue(icacValue obj.Object) *MTROperationalCredentialsClusterUpdateNOCParams {
 	objc.Send[objc.ID](objref.IDOf(moccunp), objc.RegisterName("setIcacValue:"), objref.IDOf(icacValue))
 	return moccunp
@@ -94,13 +94,13 @@ func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) WithServerSidePr
 	return moccunp
 }
 
-// NocValue wraps the corresponding Objective-C method.
+// NocValue returns the noc value.
 func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) NocValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccunp), objc.RegisterName("nocValue"))
 	return obj.Wrap(_r)
 }
 
-// IcacValue wraps the corresponding Objective-C method.
+// IcacValue returns the icac value.
 func (moccunp *MTROperationalCredentialsClusterUpdateNOCParams) IcacValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccunp), objc.RegisterName("icacValue"))
 	return obj.Wrap(_r)

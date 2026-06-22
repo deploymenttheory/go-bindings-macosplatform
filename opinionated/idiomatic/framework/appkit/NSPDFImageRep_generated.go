@@ -108,25 +108,25 @@ func (pir *PDFImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection
 	return pir
 }
 
-// PDFRepresentation wraps the corresponding Objective-C method.
+// PDFRepresentation returns the pdf representation.
 func (pir *PDFImageRep) PDFRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pir), objc.RegisterName("PDFRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// Bounds wraps the corresponding Objective-C method.
+// Bounds returns the bounds.
 func (pir *PDFImageRep) Bounds() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(pir), objc.RegisterName("bounds"))
 	return _r
 }
 
-// CurrentPage wraps the corresponding Objective-C method.
+// CurrentPage returns the current page.
 func (pir *PDFImageRep) CurrentPage() int {
 	_r := objc.Send[int](objref.IDOf(pir), objc.RegisterName("currentPage"))
 	return _r
 }
 
-// PageCount wraps the corresponding Objective-C method.
+// PageCount returns the page count.
 func (pir *PDFImageRep) PageCount() int {
 	_r := objc.Send[int](objref.IDOf(pir), objc.RegisterName("pageCount"))
 	return _r

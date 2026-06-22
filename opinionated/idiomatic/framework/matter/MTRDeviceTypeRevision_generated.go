@@ -78,13 +78,13 @@ func NewMTRDeviceTypeRevisionWithDeviceTypeStruct(deviceTypeStruct *MTRDescripto
 	return mTRDeviceTypeRevisionAdopt(_id)
 }
 
-// DeviceTypeID wraps the corresponding Objective-C method.
+// DeviceTypeID returns the device type ID.
 func (mdtr *MTRDeviceTypeRevision) DeviceTypeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdtr), objc.RegisterName("deviceTypeID"))
 	return obj.Wrap(_r)
 }
 
-// DeviceTypeRevision wraps the corresponding Objective-C method.
+// DeviceTypeRevision returns the device type revision.
 func (mdtr *MTRDeviceTypeRevision) DeviceTypeRevision() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdtr), objc.RegisterName("deviceTypeRevision"))
 	return obj.Wrap(_r)

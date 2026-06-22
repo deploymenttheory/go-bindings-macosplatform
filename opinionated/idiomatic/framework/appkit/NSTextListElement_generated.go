@@ -65,19 +65,19 @@ func (tle *TextListElement) WithElementRange(elementRange *TextRange) *TextListE
 	return tle
 }
 
-// TextList wraps the corresponding Objective-C method.
+// TextList returns the text list.
 func (tle *TextListElement) TextList() *TextList {
 	_r := objc.Send[objc.ID](objref.IDOf(tle), objc.RegisterName("textList"))
 	return TextListFromID(_r)
 }
 
-// Contents wraps the corresponding Objective-C method.
+// Contents returns the contents.
 func (tle *TextListElement) Contents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tle), objc.RegisterName("contents"))
 	return obj.Wrap(_r)
 }
 
-// MarkerAttributes wraps the corresponding Objective-C method.
+// MarkerAttributes returns the marker attributes.
 func (tle *TextListElement) MarkerAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tle), objc.RegisterName("markerAttributes"))
 	return obj.Wrap(_r)

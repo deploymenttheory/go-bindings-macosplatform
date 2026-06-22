@@ -73,19 +73,19 @@ func NewColorWithRedGreenBlue(red float32, green float32, blue float32) *Color {
 	return colorAdopt(_id)
 }
 
-// Red wraps the corresponding Objective-C method.
+// Red returns the red.
 func (c *Color) Red() float32 {
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("red"))
 	return _r
 }
 
-// Green wraps the corresponding Objective-C method.
+// Green returns the green.
 func (c *Color) Green() float32 {
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("green"))
 	return _r
 }
 
-// Blue wraps the corresponding Objective-C method.
+// Blue returns the blue.
 func (c *Color) Blue() float32 {
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("blue"))
 	return _r

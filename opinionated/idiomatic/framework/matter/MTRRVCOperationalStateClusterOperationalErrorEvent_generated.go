@@ -70,13 +70,13 @@ func NewMTRRVCOperationalStateClusterOperationalErrorEvent() *MTRRVCOperationalS
 	return mTRRVCOperationalStateClusterOperationalErrorEventAdopt(_id)
 }
 
-// WithErrorState sets the property and returns the receiver so calls can be chained.
+// WithErrorState sets the error state.
 func (moscoee *MTRRVCOperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *MTRRVCOperationalStateClusterErrorStateStruct) *MTRRVCOperationalStateClusterOperationalErrorEvent {
 	objc.Send[objc.ID](objref.IDOf(moscoee), objc.RegisterName("setErrorState:"), objref.IDOf(errorState))
 	return moscoee
 }
 
-// ErrorState wraps the corresponding Objective-C method.
+// ErrorState returns the error state.
 func (moscoee *MTRRVCOperationalStateClusterOperationalErrorEvent) ErrorState() *MTRRVCOperationalStateClusterErrorStateStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(moscoee), objc.RegisterName("errorState"))
 	return MTRRVCOperationalStateClusterErrorStateStructFromID(_r)

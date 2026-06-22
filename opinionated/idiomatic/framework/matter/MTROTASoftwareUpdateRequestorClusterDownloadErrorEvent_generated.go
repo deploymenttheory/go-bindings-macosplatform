@@ -66,49 +66,49 @@ func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) String()
 	return rt.Description(objref.IDOf(msurcdee))
 }
 
-// WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
+// WithSoftwareVersion sets the software version.
 func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent {
 	objc.Send[objc.ID](objref.IDOf(msurcdee), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return msurcdee
 }
 
-// WithBytesDownloaded sets the property and returns the receiver so calls can be chained.
+// WithBytesDownloaded sets the bytes downloaded.
 func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) WithBytesDownloaded(bytesDownloaded obj.Object) *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent {
 	objc.Send[objc.ID](objref.IDOf(msurcdee), objc.RegisterName("setBytesDownloaded:"), objref.IDOf(bytesDownloaded))
 	return msurcdee
 }
 
-// WithProgressPercent sets the property and returns the receiver so calls can be chained.
+// WithProgressPercent sets the progress percent.
 func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) WithProgressPercent(progressPercent obj.Object) *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent {
 	objc.Send[objc.ID](objref.IDOf(msurcdee), objc.RegisterName("setProgressPercent:"), objref.IDOf(progressPercent))
 	return msurcdee
 }
 
-// WithPlatformCode sets the property and returns the receiver so calls can be chained.
+// WithPlatformCode sets the platform code.
 func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) WithPlatformCode(platformCode obj.Object) *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent {
 	objc.Send[objc.ID](objref.IDOf(msurcdee), objc.RegisterName("setPlatformCode:"), objref.IDOf(platformCode))
 	return msurcdee
 }
 
-// SoftwareVersion wraps the corresponding Objective-C method.
+// SoftwareVersion returns the software version.
 func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) SoftwareVersion() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msurcdee), objc.RegisterName("softwareVersion"))
 	return obj.Wrap(_r)
 }
 
-// BytesDownloaded wraps the corresponding Objective-C method.
+// BytesDownloaded returns the bytes downloaded.
 func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) BytesDownloaded() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msurcdee), objc.RegisterName("bytesDownloaded"))
 	return obj.Wrap(_r)
 }
 
-// ProgressPercent wraps the corresponding Objective-C method.
+// ProgressPercent returns the progress percent.
 func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) ProgressPercent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msurcdee), objc.RegisterName("progressPercent"))
 	return obj.Wrap(_r)
 }
 
-// PlatformCode wraps the corresponding Objective-C method.
+// PlatformCode returns the platform code.
 func (msurcdee *MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent) PlatformCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msurcdee), objc.RegisterName("platformCode"))
 	return obj.Wrap(_r)

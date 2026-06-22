@@ -94,13 +94,13 @@ func NewManagedObjectModelReferenceWithNameInBundleVersionChecksum(modelName str
 	return managedObjectModelReferenceAdopt(_id)
 }
 
-// ResolvedModel wraps the corresponding Objective-C method.
+// ResolvedModel returns the resolved model.
 func (momr *ManagedObjectModelReference) ResolvedModel() *ManagedObjectModel {
 	_r := objc.Send[objc.ID](objref.IDOf(momr), objc.RegisterName("resolvedModel"))
 	return ManagedObjectModelFromID(_r)
 }
 
-// VersionChecksum wraps the corresponding Objective-C method.
+// VersionChecksum returns the version checksum.
 func (momr *ManagedObjectModelReference) VersionChecksum() string {
 	_r := objc.Send[objc.ID](objref.IDOf(momr), objc.RegisterName("versionChecksum"))
 	if _r == 0 {

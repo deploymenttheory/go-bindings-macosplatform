@@ -88,7 +88,7 @@ func (mp *MutablePayment) WithSimulatesAskToBuyInSandbox(simulatesAskToBuyInSand
 	return mp
 }
 
-// ProductIdentifier wraps the corresponding Objective-C method.
+// ProductIdentifier returns the product identifier.
 func (mp *MutablePayment) ProductIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("productIdentifier"))
 	if _r == 0 {

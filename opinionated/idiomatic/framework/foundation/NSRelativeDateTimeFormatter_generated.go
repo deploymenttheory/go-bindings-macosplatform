@@ -52,37 +52,37 @@ func NewRelativeDateTimeFormatter() *RelativeDateTimeFormatter {
 	return relativeDateTimeFormatterAdopt(_id)
 }
 
-// WithDateTimeStyle sets the property and returns the receiver so calls can be chained.
+// WithDateTimeStyle sets the date time style.
 func (rdtf *RelativeDateTimeFormatter) WithDateTimeStyle(dateTimeStyle RelativeDateTimeFormatterStyle) *RelativeDateTimeFormatter {
 	objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("setDateTimeStyle:"), dateTimeStyle)
 	return rdtf
 }
 
-// WithUnitsStyle sets the property and returns the receiver so calls can be chained.
+// WithUnitsStyle sets the units style.
 func (rdtf *RelativeDateTimeFormatter) WithUnitsStyle(unitsStyle RelativeDateTimeFormatterUnitsStyle) *RelativeDateTimeFormatter {
 	objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("setUnitsStyle:"), unitsStyle)
 	return rdtf
 }
 
-// WithFormattingContext sets the property and returns the receiver so calls can be chained.
+// WithFormattingContext sets the formatting context.
 func (rdtf *RelativeDateTimeFormatter) WithFormattingContext(formattingContext FormattingContext) *RelativeDateTimeFormatter {
 	objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("setFormattingContext:"), formattingContext)
 	return rdtf
 }
 
-// WithCalendar sets the property and returns the receiver so calls can be chained.
+// WithCalendar sets the calendar.
 func (rdtf *RelativeDateTimeFormatter) WithCalendar(calendar *Calendar) *RelativeDateTimeFormatter {
 	objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return rdtf
 }
 
-// WithLocale sets the property and returns the receiver so calls can be chained.
+// WithLocale sets the locale.
 func (rdtf *RelativeDateTimeFormatter) WithLocale(locale *Locale) *RelativeDateTimeFormatter {
 	objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return rdtf
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (rdtf *RelativeDateTimeFormatter) WithScriptingProperties(scriptingProperties obj.Object) *RelativeDateTimeFormatter {
 	objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return rdtf
@@ -115,31 +115,31 @@ func (rdtf *RelativeDateTimeFormatter) LocalizedStringForDateRelativeToDate(date
 	return purego.GoString(_r)
 }
 
-// DateTimeStyle wraps the corresponding Objective-C method.
+// DateTimeStyle returns the date time style.
 func (rdtf *RelativeDateTimeFormatter) DateTimeStyle() RelativeDateTimeFormatterStyle {
 	_r := objc.Send[RelativeDateTimeFormatterStyle](objref.IDOf(rdtf), objc.RegisterName("dateTimeStyle"))
 	return _r
 }
 
-// UnitsStyle wraps the corresponding Objective-C method.
+// UnitsStyle returns the units style.
 func (rdtf *RelativeDateTimeFormatter) UnitsStyle() RelativeDateTimeFormatterUnitsStyle {
 	_r := objc.Send[RelativeDateTimeFormatterUnitsStyle](objref.IDOf(rdtf), objc.RegisterName("unitsStyle"))
 	return _r
 }
 
-// FormattingContext wraps the corresponding Objective-C method.
+// FormattingContext returns the formatting context.
 func (rdtf *RelativeDateTimeFormatter) FormattingContext() FormattingContext {
 	_r := objc.Send[FormattingContext](objref.IDOf(rdtf), objc.RegisterName("formattingContext"))
 	return _r
 }
 
-// Calendar wraps the corresponding Objective-C method.
+// Calendar returns the calendar.
 func (rdtf *RelativeDateTimeFormatter) Calendar() *Calendar {
 	_r := objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("calendar"))
 	return CalendarFromID(_r)
 }
 
-// Locale wraps the corresponding Objective-C method.
+// Locale returns the locale.
 func (rdtf *RelativeDateTimeFormatter) Locale() *Locale {
 	_r := objc.Send[objc.ID](objref.IDOf(rdtf), objc.RegisterName("locale"))
 	return LocaleFromID(_r)

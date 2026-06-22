@@ -82,7 +82,7 @@ func (cr *CompositionRepository) CompositionsWithProtocolsAndAttributes(protocol
 	return obj.Wrap(_r)
 }
 
-// AllCompositions wraps the corresponding Objective-C method.
+// AllCompositions returns the all compositions.
 func (cr *CompositionRepository) AllCompositions() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("allCompositions"))
 	return obj.Wrap(_r)

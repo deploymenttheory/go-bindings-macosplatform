@@ -72,13 +72,13 @@ func NewAssetResource() *AssetResource {
 	return assetResourceAdopt(_id)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (ar *AssetResource) Type() AssetResourceType {
 	_r := objc.Send[AssetResourceType](objref.IDOf(ar), objc.RegisterName("type"))
 	return _r
 }
 
-// AssetLocalIdentifier wraps the corresponding Objective-C method.
+// AssetLocalIdentifier returns the asset local identifier.
 func (ar *AssetResource) AssetLocalIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("assetLocalIdentifier"))
 	if _r == 0 {
@@ -87,7 +87,7 @@ func (ar *AssetResource) AssetLocalIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// OriginalFilename wraps the corresponding Objective-C method.
+// OriginalFilename returns the original filename.
 func (ar *AssetResource) OriginalFilename() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("originalFilename"))
 	if _r == 0 {
@@ -102,7 +102,7 @@ func (ar *AssetResource) ContentType() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// UniformTypeIdentifier wraps the corresponding Objective-C method.
+// UniformTypeIdentifier returns the uniform type identifier.
 func (ar *AssetResource) UniformTypeIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("uniformTypeIdentifier"))
 	if _r == 0 {
@@ -111,13 +111,13 @@ func (ar *AssetResource) UniformTypeIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// PixelWidth wraps the corresponding Objective-C method.
+// PixelWidth returns the pixel width.
 func (ar *AssetResource) PixelWidth() int {
 	_r := objc.Send[int](objref.IDOf(ar), objc.RegisterName("pixelWidth"))
 	return _r
 }
 
-// PixelHeight wraps the corresponding Objective-C method.
+// PixelHeight returns the pixel height.
 func (ar *AssetResource) PixelHeight() int {
 	_r := objc.Send[int](objref.IDOf(ar), objc.RegisterName("pixelHeight"))
 	return _r

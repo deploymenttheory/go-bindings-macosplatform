@@ -58,7 +58,7 @@ func (c *Correlation) ObjectsForType(objectType *ObjectType) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// CorrelationType wraps the corresponding Objective-C method.
+// CorrelationType returns the correlation type.
 func (c *Correlation) CorrelationType() *CorrelationType {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("correlationType"))
 	return CorrelationTypeFromID(_r)

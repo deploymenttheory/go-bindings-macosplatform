@@ -70,13 +70,13 @@ func NewMTRActionsClusterEnableActionParams() *MTRActionsClusterEnableActionPara
 	return mTRActionsClusterEnableActionParamsAdopt(_id)
 }
 
-// WithActionID sets the property and returns the receiver so calls can be chained.
+// WithActionID sets the action ID.
 func (maceap *MTRActionsClusterEnableActionParams) WithActionID(actionID obj.Object) *MTRActionsClusterEnableActionParams {
 	objc.Send[objc.ID](objref.IDOf(maceap), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 	return maceap
 }
 
-// WithInvokeID sets the property and returns the receiver so calls can be chained.
+// WithInvokeID sets the invoke ID.
 func (maceap *MTRActionsClusterEnableActionParams) WithInvokeID(invokeID obj.Object) *MTRActionsClusterEnableActionParams {
 	objc.Send[objc.ID](objref.IDOf(maceap), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 	return maceap
@@ -94,13 +94,13 @@ func (maceap *MTRActionsClusterEnableActionParams) WithServerSideProcessingTimeo
 	return maceap
 }
 
-// ActionID wraps the corresponding Objective-C method.
+// ActionID returns the action ID.
 func (maceap *MTRActionsClusterEnableActionParams) ActionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maceap), objc.RegisterName("actionID"))
 	return obj.Wrap(_r)
 }
 
-// InvokeID wraps the corresponding Objective-C method.
+// InvokeID returns the invoke ID.
 func (maceap *MTRActionsClusterEnableActionParams) InvokeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maceap), objc.RegisterName("invokeID"))
 	return obj.Wrap(_r)

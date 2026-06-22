@@ -201,7 +201,7 @@ func (sbdl *SampleBufferDisplayLayer) OutputObscuredDueToInsufficientExternalPro
 	return _r
 }
 
-// SampleBufferRenderer wraps the corresponding Objective-C method.
+// SampleBufferRenderer returns the sample buffer renderer.
 func (sbdl *SampleBufferDisplayLayer) SampleBufferRenderer() *SampleBufferVideoRenderer {
 	_r := objc.Send[objc.ID](objref.IDOf(sbdl), objc.RegisterName("sampleBufferRenderer"))
 	return SampleBufferVideoRendererFromID(_r)

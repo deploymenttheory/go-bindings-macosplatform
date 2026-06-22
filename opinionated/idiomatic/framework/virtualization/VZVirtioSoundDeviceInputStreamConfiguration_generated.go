@@ -57,7 +57,7 @@ func (vsdisc *VirtioSoundDeviceInputStreamConfiguration) WithSource(source Audio
 	return vsdisc
 }
 
-// Source wraps the corresponding Objective-C method.
+// Source returns the source.
 func (vsdisc *VirtioSoundDeviceInputStreamConfiguration) Source() *AudioInputStreamSource {
 	_r := objc.Send[objc.ID](objref.IDOf(vsdisc), objc.RegisterName("source"))
 	return AudioInputStreamSourceFromID(_r)

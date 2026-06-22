@@ -50,19 +50,19 @@ func NewMTRThermostatClusterThermostatScheduleTransition() *MTRThermostatCluster
 	return mTRThermostatClusterThermostatScheduleTransitionAdopt(_id)
 }
 
-// WithTransitionTime sets the property and returns the receiver so calls can be chained.
+// WithTransitionTime sets the transition time.
 func (mtctst *MTRThermostatClusterThermostatScheduleTransition) WithTransitionTime(transitionTime obj.Object) *MTRThermostatClusterThermostatScheduleTransition {
 	objc.Send[objc.ID](objref.IDOf(mtctst), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return mtctst
 }
 
-// WithHeatSetpoint sets the property and returns the receiver so calls can be chained.
+// WithHeatSetpoint sets the heat setpoint.
 func (mtctst *MTRThermostatClusterThermostatScheduleTransition) WithHeatSetpoint(heatSetpoint obj.Object) *MTRThermostatClusterThermostatScheduleTransition {
 	objc.Send[objc.ID](objref.IDOf(mtctst), objc.RegisterName("setHeatSetpoint:"), objref.IDOf(heatSetpoint))
 	return mtctst
 }
 
-// WithCoolSetpoint sets the property and returns the receiver so calls can be chained.
+// WithCoolSetpoint sets the cool setpoint.
 func (mtctst *MTRThermostatClusterThermostatScheduleTransition) WithCoolSetpoint(coolSetpoint obj.Object) *MTRThermostatClusterThermostatScheduleTransition {
 	objc.Send[objc.ID](objref.IDOf(mtctst), objc.RegisterName("setCoolSetpoint:"), objref.IDOf(coolSetpoint))
 	return mtctst

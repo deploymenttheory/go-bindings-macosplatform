@@ -235,25 +235,25 @@ func (sl *ShapeLayer) WithContentsFormat(contentsFormat obj.Object) *ShapeLayer 
 	return sl
 }
 
-// WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeContent sets the wants extended dynamic range content.
 func (sl *ShapeLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *ShapeLayer {
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
 	return sl
 }
 
-// WithToneMapMode sets the property and returns the receiver so calls can be chained.
+// WithToneMapMode sets the tone map mode.
 func (sl *ShapeLayer) WithToneMapMode(toneMapMode obj.Object) *ShapeLayer {
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return sl
 }
 
-// WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
+// WithPreferredDynamicRange sets the preferred dynamic range.
 func (sl *ShapeLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *ShapeLayer {
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return sl
 }
 
-// WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
+// WithContentsHeadroom sets the contents headroom.
 func (sl *ShapeLayer) WithContentsHeadroom(contentsHeadroom float64) *ShapeLayer {
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
 	return sl
@@ -319,13 +319,13 @@ func (sl *ShapeLayer) WithCornerRadius(cornerRadius float64) *ShapeLayer {
 	return sl
 }
 
-// WithMaskedCorners sets the property and returns the receiver so calls can be chained.
+// WithMaskedCorners sets the masked corners.
 func (sl *ShapeLayer) WithMaskedCorners(maskedCorners CornerMask) *ShapeLayer {
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMaskedCorners:"), maskedCorners)
 	return sl
 }
 
-// WithCornerCurve sets the property and returns the receiver so calls can be chained.
+// WithCornerCurve sets the corner curve.
 func (sl *ShapeLayer) WithCornerCurve(cornerCurve obj.Object) *ShapeLayer {
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return sl
@@ -434,73 +434,73 @@ func (sl *ShapeLayer) WithConstraints(items ...*Constraint) *ShapeLayer {
 	return sl
 }
 
-// Path wraps the corresponding Objective-C method.
+// Path returns the path.
 func (sl *ShapeLayer) Path() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("path"))
 	return obj.Wrap(_r)
 }
 
-// FillColor wraps the corresponding Objective-C method.
+// FillColor returns the fill color.
 func (sl *ShapeLayer) FillColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("fillColor"))
 	return obj.Wrap(_r)
 }
 
-// FillRule wraps the corresponding Objective-C method.
+// FillRule returns the fill rule.
 func (sl *ShapeLayer) FillRule() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("fillRule"))
 	return obj.Wrap(_r)
 }
 
-// StrokeColor wraps the corresponding Objective-C method.
+// StrokeColor returns the stroke color.
 func (sl *ShapeLayer) StrokeColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("strokeColor"))
 	return obj.Wrap(_r)
 }
 
-// StrokeStart wraps the corresponding Objective-C method.
+// StrokeStart returns the stroke start.
 func (sl *ShapeLayer) StrokeStart() float64 {
 	_r := objc.Send[float64](objref.IDOf(sl), objc.RegisterName("strokeStart"))
 	return _r
 }
 
-// StrokeEnd wraps the corresponding Objective-C method.
+// StrokeEnd returns the stroke end.
 func (sl *ShapeLayer) StrokeEnd() float64 {
 	_r := objc.Send[float64](objref.IDOf(sl), objc.RegisterName("strokeEnd"))
 	return _r
 }
 
-// LineWidth wraps the corresponding Objective-C method.
+// LineWidth returns the line width.
 func (sl *ShapeLayer) LineWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(sl), objc.RegisterName("lineWidth"))
 	return _r
 }
 
-// MiterLimit wraps the corresponding Objective-C method.
+// MiterLimit returns the miter limit.
 func (sl *ShapeLayer) MiterLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(sl), objc.RegisterName("miterLimit"))
 	return _r
 }
 
-// LineCap wraps the corresponding Objective-C method.
+// LineCap returns the line cap.
 func (sl *ShapeLayer) LineCap() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("lineCap"))
 	return obj.Wrap(_r)
 }
 
-// LineJoin wraps the corresponding Objective-C method.
+// LineJoin returns the line join.
 func (sl *ShapeLayer) LineJoin() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("lineJoin"))
 	return obj.Wrap(_r)
 }
 
-// LineDashPhase wraps the corresponding Objective-C method.
+// LineDashPhase returns the line dash phase.
 func (sl *ShapeLayer) LineDashPhase() float64 {
 	_r := objc.Send[float64](objref.IDOf(sl), objc.RegisterName("lineDashPhase"))
 	return _r
 }
 
-// LineDashPattern wraps the corresponding Objective-C method.
+// LineDashPattern returns the line dash pattern.
 //
 // LineDashPattern returns the collection as a Go slice.
 func (sl *ShapeLayer) LineDashPattern() []obj.Object {

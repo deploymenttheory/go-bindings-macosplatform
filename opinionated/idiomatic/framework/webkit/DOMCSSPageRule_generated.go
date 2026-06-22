@@ -49,19 +49,19 @@ func NewDOMCSSPageRule() *DOMCSSPageRule {
 	return dOMCSSPageRuleAdopt(_id)
 }
 
-// WithSelectorText sets the property and returns the receiver so calls can be chained.
+// WithSelectorText sets the selector text.
 func (dpr *DOMCSSPageRule) WithSelectorText(selectorText string) *DOMCSSPageRule {
 	objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("setSelectorText:"), purego.NSString(selectorText))
 	return dpr
 }
 
-// WithCSSText sets the property and returns the receiver so calls can be chained.
+// WithCSSText sets the CSS text.
 func (dpr *DOMCSSPageRule) WithCSSText(cssText string) *DOMCSSPageRule {
 	objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("setCssText:"), purego.NSString(cssText))
 	return dpr
 }
 
-// SelectorText wraps the corresponding Objective-C method.
+// SelectorText returns the selector text.
 func (dpr *DOMCSSPageRule) SelectorText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("selectorText"))
 	if _r == 0 {
@@ -70,7 +70,7 @@ func (dpr *DOMCSSPageRule) SelectorText() string {
 	return purego.GoString(_r)
 }
 
-// Style wraps the corresponding Objective-C method.
+// Style returns the style.
 func (dpr *DOMCSSPageRule) Style() *DOMCSSStyleDeclaration {
 	_r := objc.Send[objc.ID](objref.IDOf(dpr), objc.RegisterName("style"))
 	return DOMCSSStyleDeclarationFromID(_r)

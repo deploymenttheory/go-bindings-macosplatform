@@ -64,19 +64,19 @@ func (xg *XboxGamepad) PaddleButton1() *ControllerButtonInput {
 	return ControllerButtonInputFromID(_r)
 }
 
-// PaddleButton2 wraps the corresponding Objective-C method.
+// PaddleButton2 returns the paddle button2.
 func (xg *XboxGamepad) PaddleButton2() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(xg), objc.RegisterName("paddleButton2"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// PaddleButton3 wraps the corresponding Objective-C method.
+// PaddleButton3 returns the paddle button3.
 func (xg *XboxGamepad) PaddleButton3() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(xg), objc.RegisterName("paddleButton3"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// PaddleButton4 wraps the corresponding Objective-C method.
+// PaddleButton4 returns the paddle button4.
 func (xg *XboxGamepad) PaddleButton4() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(xg), objc.RegisterName("paddleButton4"))
 	return ControllerButtonInputFromID(_r)

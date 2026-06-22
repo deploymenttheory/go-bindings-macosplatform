@@ -72,19 +72,19 @@ func NewModelConfiguration() *ModelConfiguration {
 	return modelConfigurationAdopt(_id)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (mc *ModelConfiguration) Type() ModelType {
 	_r := objc.Send[ModelType](objref.IDOf(mc), objc.RegisterName("type"))
 	return _r
 }
 
-// Language wraps the corresponding Objective-C method.
+// Language returns the language.
 func (mc *ModelConfiguration) Language() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("language"))
 	return obj.Wrap(_r)
 }
 
-// Revision wraps the corresponding Objective-C method.
+// Revision returns the revision.
 func (mc *ModelConfiguration) Revision() int {
 	_r := objc.Send[int](objref.IDOf(mc), objc.RegisterName("revision"))
 	return _r

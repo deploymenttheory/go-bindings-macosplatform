@@ -78,7 +78,7 @@ func (we *WorkoutEvent) Type() WorkoutEventType {
 	return _r
 }
 
-// Date wraps the corresponding Objective-C method.
+// Date returns the date.
 func (we *WorkoutEvent) Date() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(we), objc.RegisterName("date"))
 	return obj.Wrap(_r)

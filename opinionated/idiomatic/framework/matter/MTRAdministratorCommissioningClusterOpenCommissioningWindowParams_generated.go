@@ -70,31 +70,31 @@ func NewMTRAdministratorCommissioningClusterOpenCommissioningWindowParams() *MTR
 	return mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsAdopt(_id)
 }
 
-// WithCommissioningTimeout sets the property and returns the receiver so calls can be chained.
+// WithCommissioningTimeout sets the commissioning timeout.
 func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithCommissioningTimeout(commissioningTimeout obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
 	objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("setCommissioningTimeout:"), objref.IDOf(commissioningTimeout))
 	return maccocwp
 }
 
-// WithPakePasscodeVerifier sets the property and returns the receiver so calls can be chained.
+// WithPakePasscodeVerifier sets the pake passcode verifier.
 func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithPakePasscodeVerifier(pakePasscodeVerifier obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
 	objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("setPakePasscodeVerifier:"), objref.IDOf(pakePasscodeVerifier))
 	return maccocwp
 }
 
-// WithDiscriminator sets the property and returns the receiver so calls can be chained.
+// WithDiscriminator sets the discriminator.
 func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithDiscriminator(discriminator obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
 	objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("setDiscriminator:"), objref.IDOf(discriminator))
 	return maccocwp
 }
 
-// WithIterations sets the property and returns the receiver so calls can be chained.
+// WithIterations sets the iterations.
 func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithIterations(iterations obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
 	objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("setIterations:"), objref.IDOf(iterations))
 	return maccocwp
 }
 
-// WithSalt sets the property and returns the receiver so calls can be chained.
+// WithSalt sets the salt.
 func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithSalt(salt obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
 	objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("setSalt:"), objref.IDOf(salt))
 	return maccocwp
@@ -112,37 +112,37 @@ func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParam
 	return maccocwp
 }
 
-// WithPakeVerifier sets the property and returns the receiver so calls can be chained.
+// WithPakeVerifier sets the pake verifier.
 func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithPakeVerifier(pakeVerifier obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
 	objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("setPakeVerifier:"), objref.IDOf(pakeVerifier))
 	return maccocwp
 }
 
-// CommissioningTimeout wraps the corresponding Objective-C method.
+// CommissioningTimeout returns the commissioning timeout.
 func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) CommissioningTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("commissioningTimeout"))
 	return obj.Wrap(_r)
 }
 
-// PakePasscodeVerifier wraps the corresponding Objective-C method.
+// PakePasscodeVerifier returns the pake passcode verifier.
 func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) PakePasscodeVerifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("pakePasscodeVerifier"))
 	return obj.Wrap(_r)
 }
 
-// Discriminator wraps the corresponding Objective-C method.
+// Discriminator returns the discriminator.
 func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Discriminator() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("discriminator"))
 	return obj.Wrap(_r)
 }
 
-// Iterations wraps the corresponding Objective-C method.
+// Iterations returns the iterations.
 func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Iterations() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("iterations"))
 	return obj.Wrap(_r)
 }
 
-// Salt wraps the corresponding Objective-C method.
+// Salt returns the salt.
 func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Salt() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("salt"))
 	return obj.Wrap(_r)
@@ -160,7 +160,7 @@ func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParam
 	return obj.Wrap(_r)
 }
 
-// PakeVerifier wraps the corresponding Objective-C method.
+// PakeVerifier returns the pake verifier.
 func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) PakeVerifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("pakeVerifier"))
 	return obj.Wrap(_r)

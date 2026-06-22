@@ -60,7 +60,7 @@ func NewCNNCrossChannelNormalizationNodeWithSource(sourceNode obj.Object) *CNNCr
 	return cNNCrossChannelNormalizationNodeAdopt(_id)
 }
 
-// WithKernelSizeInFeatureChannels sets the property and returns the receiver so calls can be chained.
+// WithKernelSizeInFeatureChannels sets the kernel size in feature channels.
 func (cccnn *CNNCrossChannelNormalizationNode) WithKernelSizeInFeatureChannels(kernelSizeInFeatureChannels int) *CNNCrossChannelNormalizationNode {
 	objc.Send[objc.ID](objref.IDOf(cccnn), objc.RegisterName("setKernelSizeInFeatureChannels:"), kernelSizeInFeatureChannels)
 	return cccnn
@@ -90,7 +90,7 @@ func (cccnn *CNNCrossChannelNormalizationNode) WithLabel(label string) *CNNCross
 	return cccnn
 }
 
-// KernelSizeInFeatureChannels wraps the corresponding Objective-C method.
+// KernelSizeInFeatureChannels returns the kernel size in feature channels.
 func (cccnn *CNNCrossChannelNormalizationNode) KernelSizeInFeatureChannels() int {
 	_r := objc.Send[int](objref.IDOf(cccnn), objc.RegisterName("kernelSizeInFeatureChannels"))
 	return _r

@@ -249,37 +249,37 @@ func (sr *ScreenRecorder) ExportClipToURLDuration(ctx context.Context, url strin
 	}
 }
 
-// IsAvailable wraps the corresponding Objective-C method.
+// IsAvailable reports whether the object is available.
 func (sr *ScreenRecorder) IsAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(sr), objc.RegisterName("isAvailable"))
 	return _r
 }
 
-// IsRecording wraps the corresponding Objective-C method.
+// IsRecording reports whether the object is recording.
 func (sr *ScreenRecorder) IsRecording() bool {
 	_r := objc.Send[bool](objref.IDOf(sr), objc.RegisterName("isRecording"))
 	return _r
 }
 
-// IsMicrophoneEnabled wraps the corresponding Objective-C method.
+// IsMicrophoneEnabled reports whether the object is microphone enabled.
 func (sr *ScreenRecorder) IsMicrophoneEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(sr), objc.RegisterName("isMicrophoneEnabled"))
 	return _r
 }
 
-// IsCameraEnabled wraps the corresponding Objective-C method.
+// IsCameraEnabled reports whether the object is camera enabled.
 func (sr *ScreenRecorder) IsCameraEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(sr), objc.RegisterName("isCameraEnabled"))
 	return _r
 }
 
-// CameraPosition wraps the corresponding Objective-C method.
+// CameraPosition returns the camera position.
 func (sr *ScreenRecorder) CameraPosition() CameraPosition {
 	_r := objc.Send[CameraPosition](objref.IDOf(sr), objc.RegisterName("cameraPosition"))
 	return _r
 }
 
-// CameraPreviewView wraps the corresponding Objective-C method.
+// CameraPreviewView returns the camera preview view.
 func (sr *ScreenRecorder) CameraPreviewView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("cameraPreviewView"))
 	return obj.Wrap(_r)

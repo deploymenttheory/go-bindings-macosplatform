@@ -97,7 +97,7 @@ func (a *Account) WithCredential(credential *AccountCredential) *Account {
 	return a
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (a *Account) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -106,13 +106,13 @@ func (a *Account) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// AccountType wraps the corresponding Objective-C method.
+// AccountType returns the account type.
 func (a *Account) AccountType() *AccountType {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("accountType"))
 	return AccountTypeFromID(_r)
 }
 
-// AccountDescription wraps the corresponding Objective-C method.
+// AccountDescription returns the account description.
 func (a *Account) AccountDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("accountDescription"))
 	if _r == 0 {
@@ -121,7 +121,7 @@ func (a *Account) AccountDescription() string {
 	return purego.GoString(_r)
 }
 
-// Username wraps the corresponding Objective-C method.
+// Username returns the username.
 func (a *Account) Username() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("username"))
 	if _r == 0 {
@@ -130,7 +130,7 @@ func (a *Account) Username() string {
 	return purego.GoString(_r)
 }
 
-// Credential wraps the corresponding Objective-C method.
+// Credential returns the credential.
 func (a *Account) Credential() *AccountCredential {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("credential"))
 	return AccountCredentialFromID(_r)

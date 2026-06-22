@@ -72,19 +72,19 @@ func NewContentEditingInput() *ContentEditingInput {
 	return contentEditingInputAdopt(_id)
 }
 
-// MediaType wraps the corresponding Objective-C method.
+// MediaType returns the media type.
 func (cei *ContentEditingInput) MediaType() AssetMediaType {
 	_r := objc.Send[AssetMediaType](objref.IDOf(cei), objc.RegisterName("mediaType"))
 	return _r
 }
 
-// MediaSubtypes wraps the corresponding Objective-C method.
+// MediaSubtypes returns the media subtypes.
 func (cei *ContentEditingInput) MediaSubtypes() AssetMediaSubtype {
 	_r := objc.Send[AssetMediaSubtype](objref.IDOf(cei), objc.RegisterName("mediaSubtypes"))
 	return _r
 }
 
-// CreationDate wraps the corresponding Objective-C method.
+// CreationDate returns the creation date.
 func (cei *ContentEditingInput) CreationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("creationDate"))
 	return obj.Wrap(_r)
@@ -96,7 +96,7 @@ func (cei *ContentEditingInput) ContentType() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// UniformTypeIdentifier wraps the corresponding Objective-C method.
+// UniformTypeIdentifier returns the uniform type identifier.
 func (cei *ContentEditingInput) UniformTypeIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("uniformTypeIdentifier"))
 	if _r == 0 {
@@ -105,43 +105,43 @@ func (cei *ContentEditingInput) UniformTypeIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// PlaybackStyle wraps the corresponding Objective-C method.
+// PlaybackStyle returns the playback style.
 func (cei *ContentEditingInput) PlaybackStyle() AssetPlaybackStyle {
 	_r := objc.Send[AssetPlaybackStyle](objref.IDOf(cei), objc.RegisterName("playbackStyle"))
 	return _r
 }
 
-// AdjustmentData wraps the corresponding Objective-C method.
+// AdjustmentData returns the adjustment data.
 func (cei *ContentEditingInput) AdjustmentData() *AdjustmentData {
 	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("adjustmentData"))
 	return AdjustmentDataFromID(_r)
 }
 
-// DisplaySizeImage wraps the corresponding Objective-C method.
+// DisplaySizeImage returns the display size image.
 func (cei *ContentEditingInput) DisplaySizeImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("displaySizeImage"))
 	return obj.Wrap(_r)
 }
 
-// FullSizeImageURL wraps the corresponding Objective-C method.
+// FullSizeImageURL returns the full size image URL.
 func (cei *ContentEditingInput) FullSizeImageURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("fullSizeImageURL"))
 	return obj.Wrap(_r)
 }
 
-// FullSizeImageOrientation wraps the corresponding Objective-C method.
+// FullSizeImageOrientation returns the full size image orientation.
 func (cei *ContentEditingInput) FullSizeImageOrientation() int {
 	_r := objc.Send[int](objref.IDOf(cei), objc.RegisterName("fullSizeImageOrientation"))
 	return _r
 }
 
-// AudiovisualAsset wraps the corresponding Objective-C method.
+// AudiovisualAsset returns the audiovisual asset.
 func (cei *ContentEditingInput) AudiovisualAsset() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("audiovisualAsset"))
 	return obj.Wrap(_r)
 }
 
-// LivePhoto wraps the corresponding Objective-C method.
+// LivePhoto returns the live photo.
 func (cei *ContentEditingInput) LivePhoto() *LivePhoto {
 	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("livePhoto"))
 	return LivePhotoFromID(_r)

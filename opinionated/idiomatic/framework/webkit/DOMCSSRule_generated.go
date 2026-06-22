@@ -43,19 +43,19 @@ func dOMCSSRuleAdopt(id objc.ID) *DOMCSSRule {
 	return x
 }
 
-// WithCSSText sets the property and returns the receiver so calls can be chained.
+// WithCSSText sets the CSS text.
 func (dr *DOMCSSRule) WithCSSText(cssText string) *DOMCSSRule {
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setCssText:"), purego.NSString(cssText))
 	return dr
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (dr *DOMCSSRule) Type() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(dr), objc.RegisterName("type"))
 	return _r
 }
 
-// CSSText wraps the corresponding Objective-C method.
+// CSSText returns the CSS text.
 func (dr *DOMCSSRule) CSSText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("cssText"))
 	if _r == 0 {
@@ -64,13 +64,13 @@ func (dr *DOMCSSRule) CSSText() string {
 	return purego.GoString(_r)
 }
 
-// ParentStyleSheet wraps the corresponding Objective-C method.
+// ParentStyleSheet returns the parent style sheet.
 func (dr *DOMCSSRule) ParentStyleSheet() *DOMCSSStyleSheet {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("parentStyleSheet"))
 	return DOMCSSStyleSheetFromID(_r)
 }
 
-// ParentRule wraps the corresponding Objective-C method.
+// ParentRule returns the parent rule.
 func (dr *DOMCSSRule) ParentRule() *DOMCSSRule {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("parentRule"))
 	return DOMCSSRuleFromID(_r)

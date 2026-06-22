@@ -85,13 +85,13 @@ func (prmsu *PaymentRequestMerchantSessionUpdate) WithSession(session *PaymentMe
 	return prmsu
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (prmsu *PaymentRequestMerchantSessionUpdate) Status() PaymentAuthorizationStatus {
 	_r := objc.Send[PaymentAuthorizationStatus](objref.IDOf(prmsu), objc.RegisterName("status"))
 	return _r
 }
 
-// Session wraps the corresponding Objective-C method.
+// Session returns the session.
 func (prmsu *PaymentRequestMerchantSessionUpdate) Session() *PaymentMerchantSession {
 	_r := objc.Send[objc.ID](objref.IDOf(prmsu), objc.RegisterName("session"))
 	return PaymentMerchantSessionFromID(_r)

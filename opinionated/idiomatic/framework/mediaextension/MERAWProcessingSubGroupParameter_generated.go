@@ -56,7 +56,7 @@ func (rpsgp *RAWProcessingSubGroupParameter) WithEnabled(enabled bool) *RAWProce
 	return rpsgp
 }
 
-// SubGroupParameters wraps the corresponding Objective-C method.
+// SubGroupParameters returns the sub group parameters.
 //
 // SubGroupParameters returns the collection as a Go slice.
 func (rpsgp *RAWProcessingSubGroupParameter) SubGroupParameters() []*RAWProcessingParameter {

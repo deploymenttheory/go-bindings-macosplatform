@@ -114,13 +114,13 @@ func (pnc *PersonNameComponents) WithPhoneticRepresentation(phoneticRepresentati
 	return pnc
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (pnc *PersonNameComponents) WithScriptingProperties(scriptingProperties obj.Object) *PersonNameComponents {
 	objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return pnc
 }
 
-// NamePrefix wraps the corresponding Objective-C method.
+// NamePrefix returns the name prefix.
 func (pnc *PersonNameComponents) NamePrefix() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("namePrefix"))
 	if _r == 0 {
@@ -129,7 +129,7 @@ func (pnc *PersonNameComponents) NamePrefix() string {
 	return purego.GoString(_r)
 }
 
-// GivenName wraps the corresponding Objective-C method.
+// GivenName returns the given name.
 func (pnc *PersonNameComponents) GivenName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("givenName"))
 	if _r == 0 {
@@ -138,7 +138,7 @@ func (pnc *PersonNameComponents) GivenName() string {
 	return purego.GoString(_r)
 }
 
-// MiddleName wraps the corresponding Objective-C method.
+// MiddleName returns the middle name.
 func (pnc *PersonNameComponents) MiddleName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("middleName"))
 	if _r == 0 {
@@ -147,7 +147,7 @@ func (pnc *PersonNameComponents) MiddleName() string {
 	return purego.GoString(_r)
 }
 
-// FamilyName wraps the corresponding Objective-C method.
+// FamilyName returns the family name.
 func (pnc *PersonNameComponents) FamilyName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("familyName"))
 	if _r == 0 {
@@ -156,7 +156,7 @@ func (pnc *PersonNameComponents) FamilyName() string {
 	return purego.GoString(_r)
 }
 
-// NameSuffix wraps the corresponding Objective-C method.
+// NameSuffix returns the name suffix.
 func (pnc *PersonNameComponents) NameSuffix() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("nameSuffix"))
 	if _r == 0 {
@@ -165,7 +165,7 @@ func (pnc *PersonNameComponents) NameSuffix() string {
 	return purego.GoString(_r)
 }
 
-// Nickname wraps the corresponding Objective-C method.
+// Nickname returns the nickname.
 func (pnc *PersonNameComponents) Nickname() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("nickname"))
 	if _r == 0 {
@@ -174,7 +174,7 @@ func (pnc *PersonNameComponents) Nickname() string {
 	return purego.GoString(_r)
 }
 
-// PhoneticRepresentation wraps the corresponding Objective-C method.
+// PhoneticRepresentation returns the phonetic representation.
 func (pnc *PersonNameComponents) PhoneticRepresentation() *PersonNameComponents {
 	_r := objc.Send[objc.ID](objref.IDOf(pnc), objc.RegisterName("phoneticRepresentation"))
 	return PersonNameComponentsFromID(_r)

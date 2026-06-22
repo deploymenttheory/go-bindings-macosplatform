@@ -91,7 +91,7 @@ func (tbmvc *TurnBasedMatchmakerViewController) ShowExistingMatches() bool {
 	return _r
 }
 
-// MatchmakingMode wraps the corresponding Objective-C method.
+// MatchmakingMode returns the matchmaking mode.
 func (tbmvc *TurnBasedMatchmakerViewController) MatchmakingMode() MatchmakingMode {
 	_r := objc.Send[MatchmakingMode](objref.IDOf(tbmvc), objc.RegisterName("matchmakingMode"))
 	return _r

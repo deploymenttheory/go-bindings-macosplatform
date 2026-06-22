@@ -72,7 +72,7 @@ func NewScriptCoercionHandler() *ScriptCoercionHandler {
 	return scriptCoercionHandlerAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (sch *ScriptCoercionHandler) WithScriptingProperties(scriptingProperties obj.Object) *ScriptCoercionHandler {
 	objc.Send[objc.ID](objref.IDOf(sch), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return sch

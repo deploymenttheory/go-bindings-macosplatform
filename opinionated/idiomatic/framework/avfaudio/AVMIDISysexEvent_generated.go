@@ -53,7 +53,7 @@ func NewMIDISysexEventWithData(data obj.Object) *MIDISysexEvent {
 	return mIDISysexEventAdopt(_id)
 }
 
-// SizeInBytes wraps the corresponding Objective-C method.
+// SizeInBytes returns the size in bytes.
 func (mse *MIDISysexEvent) SizeInBytes() int {
 	_r := objc.Send[int](objref.IDOf(mse), objc.RegisterName("sizeInBytes"))
 	return _r

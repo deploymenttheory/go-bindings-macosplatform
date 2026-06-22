@@ -51,67 +51,67 @@ func NewNNDivisionNode() *NNDivisionNode {
 	return nNDivisionNodeAdopt(_id)
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (ndn *NNDivisionNode) WithPrimaryScale(primaryScale float32) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(ndn), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return ndn
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (ndn *NNDivisionNode) WithSecondaryScale(secondaryScale float32) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(ndn), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return ndn
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (ndn *NNDivisionNode) WithBias(bias float32) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(ndn), objc.RegisterName("setBias:"), bias)
 	return ndn
 }
 
-// WithPrimaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
+// WithPrimaryStrideInPixelsX sets the primary stride in pixels x.
 func (ndn *NNDivisionNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(ndn), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
 	return ndn
 }
 
-// WithPrimaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
+// WithPrimaryStrideInPixelsY sets the primary stride in pixels y.
 func (ndn *NNDivisionNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(ndn), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
 	return ndn
 }
 
-// WithPrimaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
+// WithPrimaryStrideInFeatureChannels sets the primary stride in feature channels.
 func (ndn *NNDivisionNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(ndn), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
 	return ndn
 }
 
-// WithSecondaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsX sets the secondary stride in pixels x.
 func (ndn *NNDivisionNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(ndn), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return ndn
 }
 
-// WithSecondaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsY sets the secondary stride in pixels y.
 func (ndn *NNDivisionNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(ndn), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return ndn
 }
 
-// WithSecondaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInFeatureChannels sets the secondary stride in feature channels.
 func (ndn *NNDivisionNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(ndn), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
 	return ndn
 }
 
-// WithMinimumValue sets the property and returns the receiver so calls can be chained.
+// WithMinimumValue sets the minimum value.
 func (ndn *NNDivisionNode) WithMinimumValue(minimumValue float32) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(ndn), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return ndn
 }
 
-// WithMaximumValue sets the property and returns the receiver so calls can be chained.
+// WithMaximumValue sets the maximum value.
 func (ndn *NNDivisionNode) WithMaximumValue(maximumValue float32) *NNDivisionNode {
 	objc.Send[objc.ID](objref.IDOf(ndn), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return ndn

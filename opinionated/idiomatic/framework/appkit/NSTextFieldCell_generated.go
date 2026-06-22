@@ -372,7 +372,7 @@ func (tfc *TextFieldCell) SetWantsNotificationForMarkedText(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setWantsNotificationForMarkedText:"), flag)
 }
 
-// BackgroundColor wraps the corresponding Objective-C method.
+// BackgroundColor returns the background color.
 func (tfc *TextFieldCell) BackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
@@ -384,19 +384,19 @@ func (tfc *TextFieldCell) DrawsBackground() bool {
 	return _r
 }
 
-// TextColor wraps the corresponding Objective-C method.
+// TextColor returns the text color.
 func (tfc *TextFieldCell) TextColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("textColor"))
 	return ColorFromID(_r)
 }
 
-// BezelStyle wraps the corresponding Objective-C method.
+// BezelStyle returns the bezel style.
 func (tfc *TextFieldCell) BezelStyle() TextFieldBezelStyle {
 	_r := objc.Send[TextFieldBezelStyle](objref.IDOf(tfc), objc.RegisterName("bezelStyle"))
 	return _r
 }
 
-// PlaceholderString wraps the corresponding Objective-C method.
+// PlaceholderString returns the placeholder string.
 func (tfc *TextFieldCell) PlaceholderString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("placeholderString"))
 	if _r == 0 {
@@ -405,13 +405,13 @@ func (tfc *TextFieldCell) PlaceholderString() string {
 	return purego.GoString(_r)
 }
 
-// PlaceholderAttributedString wraps the corresponding Objective-C method.
+// PlaceholderAttributedString returns the placeholder attributed string.
 func (tfc *TextFieldCell) PlaceholderAttributedString() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("placeholderAttributedString"))
 	return obj.Wrap(_r)
 }
 
-// AllowedInputSourceLocales wraps the corresponding Objective-C method.
+// AllowedInputSourceLocales returns the allowed input source locales.
 //
 // AllowedInputSourceLocales returns the collection as a Go slice.
 func (tfc *TextFieldCell) AllowedInputSourceLocales() []string {

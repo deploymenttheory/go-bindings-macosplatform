@@ -49,121 +49,121 @@ func NewDOMHTMLBaseElement() *DOMHTMLBaseElement {
 	return dOMHTMLBaseElementAdopt(_id)
 }
 
-// WithHref sets the property and returns the receiver so calls can be chained.
+// WithHref sets the href.
 func (dbe *DOMHTMLBaseElement) WithHref(href string) *DOMHTMLBaseElement {
 	objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("setHref:"), purego.NSString(href))
 	return dbe
 }
 
-// WithTarget sets the property and returns the receiver so calls can be chained.
+// WithTarget sets the target.
 func (dbe *DOMHTMLBaseElement) WithTarget(target string) *DOMHTMLBaseElement {
 	objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("setTarget:"), purego.NSString(target))
 	return dbe
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (dbe *DOMHTMLBaseElement) WithTitle(title string) *DOMHTMLBaseElement {
 	objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return dbe
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (dbe *DOMHTMLBaseElement) WithLang(lang string) *DOMHTMLBaseElement {
 	objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return dbe
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (dbe *DOMHTMLBaseElement) WithDir(dir string) *DOMHTMLBaseElement {
 	objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return dbe
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (dbe *DOMHTMLBaseElement) WithTabIndex(tabIndex int) *DOMHTMLBaseElement {
 	objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("setTabIndex:"), tabIndex)
 	return dbe
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (dbe *DOMHTMLBaseElement) WithAccessKey(accessKey string) *DOMHTMLBaseElement {
 	objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return dbe
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (dbe *DOMHTMLBaseElement) WithInnerText(innerText string) *DOMHTMLBaseElement {
 	objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return dbe
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (dbe *DOMHTMLBaseElement) WithOuterText(outerText string) *DOMHTMLBaseElement {
 	objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return dbe
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (dbe *DOMHTMLBaseElement) WithContentEditable(contentEditable string) *DOMHTMLBaseElement {
 	objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return dbe
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (dbe *DOMHTMLBaseElement) WithIDName(idName string) *DOMHTMLBaseElement {
 	objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return dbe
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (dbe *DOMHTMLBaseElement) WithScrollLeft(scrollLeft int) *DOMHTMLBaseElement {
 	objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return dbe
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (dbe *DOMHTMLBaseElement) WithScrollTop(scrollTop int) *DOMHTMLBaseElement {
 	objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("setScrollTop:"), scrollTop)
 	return dbe
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (dbe *DOMHTMLBaseElement) WithInnerHTML(innerHTML string) *DOMHTMLBaseElement {
 	objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return dbe
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (dbe *DOMHTMLBaseElement) WithOuterHTML(outerHTML string) *DOMHTMLBaseElement {
 	objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return dbe
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (dbe *DOMHTMLBaseElement) WithClassName(className string) *DOMHTMLBaseElement {
 	objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return dbe
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dbe *DOMHTMLBaseElement) WithNodeValue(nodeValue string) *DOMHTMLBaseElement {
 	objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dbe
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dbe *DOMHTMLBaseElement) WithPrefix(prefix string) *DOMHTMLBaseElement {
 	objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dbe
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dbe *DOMHTMLBaseElement) WithTextContent(textContent string) *DOMHTMLBaseElement {
 	objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dbe
 }
 
-// Href wraps the corresponding Objective-C method.
+// Href returns the href.
 func (dbe *DOMHTMLBaseElement) Href() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("href"))
 	if _r == 0 {
@@ -172,7 +172,7 @@ func (dbe *DOMHTMLBaseElement) Href() string {
 	return purego.GoString(_r)
 }
 
-// Target wraps the corresponding Objective-C method.
+// Target returns the target.
 func (dbe *DOMHTMLBaseElement) Target() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dbe), objc.RegisterName("target"))
 	if _r == 0 {

@@ -86,7 +86,7 @@ func (mbctn *MTRBaseClusterTargetNavigator) NavigateTargetWithParamsCompletion(c
 	}
 }
 
-// ReadAttributeTargetListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTargetListWithCompletion reads attribute target list with completion.
 //
 // ReadAttributeTargetListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctn *MTRBaseClusterTargetNavigator) ReadAttributeTargetListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -136,7 +136,7 @@ func (mbctn *MTRBaseClusterTargetNavigator) SubscribeAttributeTargetListWithPara
 	}
 }
 
-// ReadAttributeCurrentTargetWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentTargetWithCompletion reads attribute current target with completion.
 //
 // ReadAttributeCurrentTargetWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctn *MTRBaseClusterTargetNavigator) ReadAttributeCurrentTargetWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -186,7 +186,7 @@ func (mbctn *MTRBaseClusterTargetNavigator) SubscribeAttributeCurrentTargetWithP
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctn *MTRBaseClusterTargetNavigator) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -236,7 +236,7 @@ func (mbctn *MTRBaseClusterTargetNavigator) SubscribeAttributeGeneratedCommandLi
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctn *MTRBaseClusterTargetNavigator) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -286,7 +286,7 @@ func (mbctn *MTRBaseClusterTargetNavigator) SubscribeAttributeAcceptedCommandLis
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctn *MTRBaseClusterTargetNavigator) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -336,7 +336,7 @@ func (mbctn *MTRBaseClusterTargetNavigator) SubscribeAttributeAttributeListWithP
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctn *MTRBaseClusterTargetNavigator) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -386,7 +386,7 @@ func (mbctn *MTRBaseClusterTargetNavigator) SubscribeAttributeFeatureMapWithPara
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbctn *MTRBaseClusterTargetNavigator) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbctn *MTRBaseClusterTargetNavigator) NavigateTargetWithParams(ctx context
 	}
 }
 
-// ReadAttributeTargetList wraps the corresponding Objective-C method.
+// ReadAttributeTargetList reads attribute target list.
 //
 // ReadAttributeTargetList blocks until the operation completes or ctx is cancelled.
 func (mbctn *MTRBaseClusterTargetNavigator) ReadAttributeTargetList(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbctn *MTRBaseClusterTargetNavigator) SubscribeAttributeTargetListWithMinI
 	}
 }
 
-// ReadAttributeCurrentTarget wraps the corresponding Objective-C method.
+// ReadAttributeCurrentTarget reads attribute current target.
 //
 // ReadAttributeCurrentTarget blocks until the operation completes or ctx is cancelled.
 func (mbctn *MTRBaseClusterTargetNavigator) ReadAttributeCurrentTarget(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbctn *MTRBaseClusterTargetNavigator) SubscribeAttributeCurrentTargetWithM
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbctn *MTRBaseClusterTargetNavigator) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbctn *MTRBaseClusterTargetNavigator) SubscribeAttributeGeneratedCommandLi
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbctn *MTRBaseClusterTargetNavigator) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbctn *MTRBaseClusterTargetNavigator) SubscribeAttributeAcceptedCommandLis
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbctn *MTRBaseClusterTargetNavigator) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbctn *MTRBaseClusterTargetNavigator) SubscribeAttributeAttributeListWithM
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbctn *MTRBaseClusterTargetNavigator) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbctn *MTRBaseClusterTargetNavigator) SubscribeAttributeFeatureMapWithMinI
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbctn *MTRBaseClusterTargetNavigator) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

@@ -100,7 +100,7 @@ func (sg *SavedGame) LoadData(ctx context.Context) (result obj.Object, err error
 	}
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (sg *SavedGame) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sg), objc.RegisterName("name"))
 	if _r == 0 {
@@ -109,7 +109,7 @@ func (sg *SavedGame) Name() string {
 	return purego.GoString(_r)
 }
 
-// DeviceName wraps the corresponding Objective-C method.
+// DeviceName returns the device name.
 func (sg *SavedGame) DeviceName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sg), objc.RegisterName("deviceName"))
 	if _r == 0 {
@@ -118,7 +118,7 @@ func (sg *SavedGame) DeviceName() string {
 	return purego.GoString(_r)
 }
 
-// ModificationDate wraps the corresponding Objective-C method.
+// ModificationDate returns the modification date.
 func (sg *SavedGame) ModificationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sg), objc.RegisterName("modificationDate"))
 	return obj.Wrap(_r)

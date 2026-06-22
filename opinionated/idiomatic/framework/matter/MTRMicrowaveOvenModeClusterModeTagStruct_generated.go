@@ -70,25 +70,25 @@ func NewMTRMicrowaveOvenModeClusterModeTagStruct() *MTRMicrowaveOvenModeClusterM
 	return mTRMicrowaveOvenModeClusterModeTagStructAdopt(_id)
 }
 
-// WithMfgCode sets the property and returns the receiver so calls can be chained.
+// WithMfgCode sets the mfg code.
 func (mmomcmts *MTRMicrowaveOvenModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRMicrowaveOvenModeClusterModeTagStruct {
 	objc.Send[objc.ID](objref.IDOf(mmomcmts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return mmomcmts
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mmomcmts *MTRMicrowaveOvenModeClusterModeTagStruct) WithValue(value obj.Object) *MTRMicrowaveOvenModeClusterModeTagStruct {
 	objc.Send[objc.ID](objref.IDOf(mmomcmts), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mmomcmts
 }
 
-// MfgCode wraps the corresponding Objective-C method.
+// MfgCode returns the mfg code.
 func (mmomcmts *MTRMicrowaveOvenModeClusterModeTagStruct) MfgCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmomcmts), objc.RegisterName("mfgCode"))
 	return obj.Wrap(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mmomcmts *MTRMicrowaveOvenModeClusterModeTagStruct) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmomcmts), objc.RegisterName("value"))
 	return obj.Wrap(_r)

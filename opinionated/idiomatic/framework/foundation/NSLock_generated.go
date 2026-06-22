@@ -78,7 +78,7 @@ func (l *Lock) WithName(name StringProvider) *Lock {
 	return l
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (l *Lock) WithScriptingProperties(scriptingProperties obj.Object) *Lock {
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return l
@@ -96,7 +96,7 @@ func (l *Lock) LockBeforeDate(limit *Date) bool {
 	return _r
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (l *Lock) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("name"))
 	if _r == 0 {

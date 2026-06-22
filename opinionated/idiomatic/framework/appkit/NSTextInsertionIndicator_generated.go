@@ -78,32 +78,32 @@ func (tii *TextInsertionIndicator) WithEffectsViewInserter(effectsViewInserter f
 	return tii
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (tii *TextInsertionIndicator) WithSubviews(items ...ViewProvider) *TextInsertionIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setSubviews:"), _arr)
 	return tii
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (tii *TextInsertionIndicator) WithHidden(hidden bool) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setHidden:"), hidden)
 	return tii
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (tii *TextInsertionIndicator) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return tii
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (tii *TextInsertionIndicator) WithAutoresizesSubviews(autoresizesSubviews bool) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return tii
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (tii *TextInsertionIndicator) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return tii
@@ -115,19 +115,19 @@ func (tii *TextInsertionIndicator) WithFrame(frame corefoundation.CGRect) *TextI
 	return tii
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (tii *TextInsertionIndicator) WithFrameRotation(frameRotation float64) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return tii
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (tii *TextInsertionIndicator) WithFrameCenterRotation(frameCenterRotation float64) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return tii
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (tii *TextInsertionIndicator) WithBoundsRotation(boundsRotation float64) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return tii
@@ -139,7 +139,7 @@ func (tii *TextInsertionIndicator) WithBounds(bounds corefoundation.CGRect) *Tex
 	return tii
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (tii *TextInsertionIndicator) WithCanDrawConcurrently(canDrawConcurrently bool) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return tii
@@ -151,148 +151,148 @@ func (tii *TextInsertionIndicator) WithNeedsDisplay(needsDisplay bool) *TextInse
 	return tii
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (tii *TextInsertionIndicator) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return tii
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (tii *TextInsertionIndicator) WithWantsRestingTouches(wantsRestingTouches bool) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return tii
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (tii *TextInsertionIndicator) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return tii
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (tii *TextInsertionIndicator) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return tii
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (tii *TextInsertionIndicator) WithWantsLayer(wantsLayer bool) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return tii
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (tii *TextInsertionIndicator) WithLayer(layer obj.Object) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return tii
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (tii *TextInsertionIndicator) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return tii
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (tii *TextInsertionIndicator) WithNeedsLayout(needsLayout bool) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return tii
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (tii *TextInsertionIndicator) WithAlphaValue(alphaValue float64) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return tii
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (tii *TextInsertionIndicator) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return tii
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (tii *TextInsertionIndicator) WithBackgroundFilters(items ...obj.Object) *TextInsertionIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return tii
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (tii *TextInsertionIndicator) WithCompositingFilter(compositingFilter obj.Object) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return tii
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (tii *TextInsertionIndicator) WithContentFilters(items ...obj.Object) *TextInsertionIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setContentFilters:"), _arr)
 	return tii
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (tii *TextInsertionIndicator) WithShadow(shadow *Shadow) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return tii
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (tii *TextInsertionIndicator) WithClipsToBounds(clipsToBounds bool) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return tii
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (tii *TextInsertionIndicator) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return tii
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (tii *TextInsertionIndicator) WithToolTip(toolTip string) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return tii
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (tii *TextInsertionIndicator) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return tii
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (tii *TextInsertionIndicator) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return tii
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (tii *TextInsertionIndicator) WithNextKeyView(nextKeyView ViewProvider) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return tii
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (tii *TextInsertionIndicator) WithFocusRingType(focusRingType FocusRingType) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return tii
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (tii *TextInsertionIndicator) WithGestureRecognizers(items ...GestureRecognizerProvider) *TextInsertionIndicator {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return tii
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (tii *TextInsertionIndicator) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return tii
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (tii *TextInsertionIndicator) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return tii
@@ -304,49 +304,49 @@ func (tii *TextInsertionIndicator) WithPrefersCompactControlSizeMetrics(prefersC
 	return tii
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (tii *TextInsertionIndicator) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return tii
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (tii *TextInsertionIndicator) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return tii
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (tii *TextInsertionIndicator) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return tii
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (tii *TextInsertionIndicator) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return tii
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (tii *TextInsertionIndicator) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return tii
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (tii *TextInsertionIndicator) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return tii
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (tii *TextInsertionIndicator) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return tii
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (tii *TextInsertionIndicator) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TextInsertionIndicator {
 	objc.Send[objc.ID](objref.IDOf(tii), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return tii

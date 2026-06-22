@@ -235,13 +235,13 @@ func (wp *WebPreferences) WithSuppressesIncrementalRendering(suppressesIncrement
 	return wp
 }
 
-// WithAllowsAirPlayForMediaPlayback sets the property and returns the receiver so calls can be chained.
+// WithAllowsAirPlayForMediaPlayback sets the allows air play for media playback.
 func (wp *WebPreferences) WithAllowsAirPlayForMediaPlayback(allowsAirPlayForMediaPlayback bool) *WebPreferences {
 	objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("setAllowsAirPlayForMediaPlayback:"), allowsAirPlayForMediaPlayback)
 	return wp
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (wp *WebPreferences) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -250,7 +250,7 @@ func (wp *WebPreferences) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// StandardFontFamily wraps the corresponding Objective-C method.
+// StandardFontFamily returns the standard font family.
 func (wp *WebPreferences) StandardFontFamily() string {
 	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("standardFontFamily"))
 	if _r == 0 {
@@ -259,7 +259,7 @@ func (wp *WebPreferences) StandardFontFamily() string {
 	return purego.GoString(_r)
 }
 
-// FixedFontFamily wraps the corresponding Objective-C method.
+// FixedFontFamily returns the fixed font family.
 func (wp *WebPreferences) FixedFontFamily() string {
 	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("fixedFontFamily"))
 	if _r == 0 {
@@ -268,7 +268,7 @@ func (wp *WebPreferences) FixedFontFamily() string {
 	return purego.GoString(_r)
 }
 
-// SerifFontFamily wraps the corresponding Objective-C method.
+// SerifFontFamily returns the serif font family.
 func (wp *WebPreferences) SerifFontFamily() string {
 	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("serifFontFamily"))
 	if _r == 0 {
@@ -277,7 +277,7 @@ func (wp *WebPreferences) SerifFontFamily() string {
 	return purego.GoString(_r)
 }
 
-// SansSerifFontFamily wraps the corresponding Objective-C method.
+// SansSerifFontFamily returns the sans serif font family.
 func (wp *WebPreferences) SansSerifFontFamily() string {
 	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("sansSerifFontFamily"))
 	if _r == 0 {
@@ -286,7 +286,7 @@ func (wp *WebPreferences) SansSerifFontFamily() string {
 	return purego.GoString(_r)
 }
 
-// CursiveFontFamily wraps the corresponding Objective-C method.
+// CursiveFontFamily returns the cursive font family.
 func (wp *WebPreferences) CursiveFontFamily() string {
 	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("cursiveFontFamily"))
 	if _r == 0 {
@@ -295,7 +295,7 @@ func (wp *WebPreferences) CursiveFontFamily() string {
 	return purego.GoString(_r)
 }
 
-// FantasyFontFamily wraps the corresponding Objective-C method.
+// FantasyFontFamily returns the fantasy font family.
 func (wp *WebPreferences) FantasyFontFamily() string {
 	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("fantasyFontFamily"))
 	if _r == 0 {
@@ -304,31 +304,31 @@ func (wp *WebPreferences) FantasyFontFamily() string {
 	return purego.GoString(_r)
 }
 
-// DefaultFontSize wraps the corresponding Objective-C method.
+// DefaultFontSize returns the default font size.
 func (wp *WebPreferences) DefaultFontSize() int {
 	_r := objc.Send[int](objref.IDOf(wp), objc.RegisterName("defaultFontSize"))
 	return _r
 }
 
-// DefaultFixedFontSize wraps the corresponding Objective-C method.
+// DefaultFixedFontSize returns the default fixed font size.
 func (wp *WebPreferences) DefaultFixedFontSize() int {
 	_r := objc.Send[int](objref.IDOf(wp), objc.RegisterName("defaultFixedFontSize"))
 	return _r
 }
 
-// MinimumFontSize wraps the corresponding Objective-C method.
+// MinimumFontSize returns the minimum font size.
 func (wp *WebPreferences) MinimumFontSize() int {
 	_r := objc.Send[int](objref.IDOf(wp), objc.RegisterName("minimumFontSize"))
 	return _r
 }
 
-// MinimumLogicalFontSize wraps the corresponding Objective-C method.
+// MinimumLogicalFontSize returns the minimum logical font size.
 func (wp *WebPreferences) MinimumLogicalFontSize() int {
 	_r := objc.Send[int](objref.IDOf(wp), objc.RegisterName("minimumLogicalFontSize"))
 	return _r
 }
 
-// DefaultTextEncodingName wraps the corresponding Objective-C method.
+// DefaultTextEncodingName returns the default text encoding name.
 func (wp *WebPreferences) DefaultTextEncodingName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(wp), objc.RegisterName("defaultTextEncodingName"))
 	if _r == 0 {
@@ -355,7 +355,7 @@ func (wp *WebPreferences) IsJavaEnabled() bool {
 	return _r
 }
 
-// IsJavaScriptEnabled wraps the corresponding Objective-C method.
+// IsJavaScriptEnabled reports whether the object is java script enabled.
 func (wp *WebPreferences) IsJavaScriptEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(wp), objc.RegisterName("isJavaScriptEnabled"))
 	return _r

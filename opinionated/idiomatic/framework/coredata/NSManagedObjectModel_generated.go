@@ -132,13 +132,13 @@ func (mom *ManagedObjectModel) IsConfigurationCompatibleWithStoreMetadata(config
 	return _r
 }
 
-// EntitiesByName wraps the corresponding Objective-C method.
+// EntitiesByName returns the entities by name.
 func (mom *ManagedObjectModel) EntitiesByName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("entitiesByName"))
 	return obj.Wrap(_r)
 }
 
-// Entities wraps the corresponding Objective-C method.
+// Entities returns the entities.
 //
 // Entities returns the collection as a Go slice.
 func (mom *ManagedObjectModel) Entities() []*EntityDescription {
@@ -146,7 +146,7 @@ func (mom *ManagedObjectModel) Entities() []*EntityDescription {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EntityDescription { return EntityDescriptionFromID(_id) })
 }
 
-// Configurations wraps the corresponding Objective-C method.
+// Configurations returns the configurations.
 //
 // Configurations returns the collection as a Go slice.
 func (mom *ManagedObjectModel) Configurations() []string {
@@ -154,31 +154,31 @@ func (mom *ManagedObjectModel) Configurations() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// LocalizationDictionary wraps the corresponding Objective-C method.
+// LocalizationDictionary returns the localization dictionary.
 func (mom *ManagedObjectModel) LocalizationDictionary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("localizationDictionary"))
 	return obj.Wrap(_r)
 }
 
-// FetchRequestTemplatesByName wraps the corresponding Objective-C method.
+// FetchRequestTemplatesByName returns the fetch request templates by name.
 func (mom *ManagedObjectModel) FetchRequestTemplatesByName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("fetchRequestTemplatesByName"))
 	return obj.Wrap(_r)
 }
 
-// VersionIdentifiers wraps the corresponding Objective-C method.
+// VersionIdentifiers returns the version identifiers.
 func (mom *ManagedObjectModel) VersionIdentifiers() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("versionIdentifiers"))
 	return obj.Wrap(_r)
 }
 
-// EntityVersionHashesByName wraps the corresponding Objective-C method.
+// EntityVersionHashesByName returns the entity version hashes by name.
 func (mom *ManagedObjectModel) EntityVersionHashesByName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("entityVersionHashesByName"))
 	return obj.Wrap(_r)
 }
 
-// VersionChecksum wraps the corresponding Objective-C method.
+// VersionChecksum returns the version checksum.
 func (mom *ManagedObjectModel) VersionChecksum() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mom), objc.RegisterName("versionChecksum"))
 	if _r == 0 {

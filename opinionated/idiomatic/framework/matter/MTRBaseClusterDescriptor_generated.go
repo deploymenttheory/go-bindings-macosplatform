@@ -61,7 +61,7 @@ func NewMTRBaseClusterDescriptorWithDeviceEndpointQueue(device *MTRBaseDevice, e
 	return mTRBaseClusterDescriptorAdopt(_id)
 }
 
-// ReadAttributeDeviceTypeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDeviceTypeListWithCompletion reads attribute device type list with completion.
 //
 // ReadAttributeDeviceTypeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcd *MTRBaseClusterDescriptor) ReadAttributeDeviceTypeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcd *MTRBaseClusterDescriptor) SubscribeAttributeDeviceTypeListWithParams
 	}
 }
 
-// ReadAttributeServerListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeServerListWithCompletion reads attribute server list with completion.
 //
 // ReadAttributeServerListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcd *MTRBaseClusterDescriptor) ReadAttributeServerListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcd *MTRBaseClusterDescriptor) SubscribeAttributeServerListWithParamsSubs
 	}
 }
 
-// ReadAttributeClientListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClientListWithCompletion reads attribute client list with completion.
 //
 // ReadAttributeClientListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcd *MTRBaseClusterDescriptor) ReadAttributeClientListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcd *MTRBaseClusterDescriptor) SubscribeAttributeClientListWithParamsSubs
 	}
 }
 
-// ReadAttributePartsListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePartsListWithCompletion reads attribute parts list with completion.
 //
 // ReadAttributePartsListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcd *MTRBaseClusterDescriptor) ReadAttributePartsListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcd *MTRBaseClusterDescriptor) SubscribeAttributePartsListWithParamsSubsc
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcd *MTRBaseClusterDescriptor) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcd *MTRBaseClusterDescriptor) SubscribeAttributeGeneratedCommandListWith
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcd *MTRBaseClusterDescriptor) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcd *MTRBaseClusterDescriptor) SubscribeAttributeAcceptedCommandListWithP
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcd *MTRBaseClusterDescriptor) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcd *MTRBaseClusterDescriptor) SubscribeAttributeAttributeListWithParamsS
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcd *MTRBaseClusterDescriptor) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcd *MTRBaseClusterDescriptor) SubscribeAttributeFeatureMapWithParamsSubs
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcd *MTRBaseClusterDescriptor) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcd *MTRBaseClusterDescriptor) SubscribeAttributeClusterRevisionWithParam
 	}
 }
 
-// ReadAttributeDeviceList wraps the corresponding Objective-C method.
+// ReadAttributeDeviceList reads attribute device list.
 //
 // ReadAttributeDeviceList blocks until the operation completes or ctx is cancelled.
 func (mbcd *MTRBaseClusterDescriptor) ReadAttributeDeviceList(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcd *MTRBaseClusterDescriptor) SubscribeAttributeDeviceListWithMinInterva
 	}
 }
 
-// ReadAttributeServerList wraps the corresponding Objective-C method.
+// ReadAttributeServerList reads attribute server list.
 //
 // ReadAttributeServerList blocks until the operation completes or ctx is cancelled.
 func (mbcd *MTRBaseClusterDescriptor) ReadAttributeServerList(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcd *MTRBaseClusterDescriptor) SubscribeAttributeServerListWithMinInterva
 	}
 }
 
-// ReadAttributeClientList wraps the corresponding Objective-C method.
+// ReadAttributeClientList reads attribute client list.
 //
 // ReadAttributeClientList blocks until the operation completes or ctx is cancelled.
 func (mbcd *MTRBaseClusterDescriptor) ReadAttributeClientList(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcd *MTRBaseClusterDescriptor) SubscribeAttributeClientListWithMinInterva
 	}
 }
 
-// ReadAttributePartsList wraps the corresponding Objective-C method.
+// ReadAttributePartsList reads attribute parts list.
 //
 // ReadAttributePartsList blocks until the operation completes or ctx is cancelled.
 func (mbcd *MTRBaseClusterDescriptor) ReadAttributePartsList(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcd *MTRBaseClusterDescriptor) SubscribeAttributePartsListWithMinInterval
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcd *MTRBaseClusterDescriptor) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcd *MTRBaseClusterDescriptor) SubscribeAttributeGeneratedCommandListWith
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcd *MTRBaseClusterDescriptor) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcd *MTRBaseClusterDescriptor) SubscribeAttributeAcceptedCommandListWithM
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcd *MTRBaseClusterDescriptor) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbcd *MTRBaseClusterDescriptor) SubscribeAttributeAttributeListWithMinInte
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcd *MTRBaseClusterDescriptor) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbcd *MTRBaseClusterDescriptor) SubscribeAttributeFeatureMapWithMinInterva
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcd *MTRBaseClusterDescriptor) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

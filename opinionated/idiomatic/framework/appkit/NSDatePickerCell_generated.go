@@ -402,7 +402,7 @@ func (dpc *DatePickerCell) WithControlTint(controlTint ControlTint) *DatePickerC
 	return dpc
 }
 
-// DatePickerStyle wraps the corresponding Objective-C method.
+// DatePickerStyle returns the date picker style.
 func (dpc *DatePickerCell) DatePickerStyle() DatePickerStyle {
 	_r := objc.Send[DatePickerStyle](objref.IDOf(dpc), objc.RegisterName("datePickerStyle"))
 	return _r
@@ -414,67 +414,67 @@ func (dpc *DatePickerCell) DrawsBackground() bool {
 	return _r
 }
 
-// BackgroundColor wraps the corresponding Objective-C method.
+// BackgroundColor returns the background color.
 func (dpc *DatePickerCell) BackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
 }
 
-// TextColor wraps the corresponding Objective-C method.
+// TextColor returns the text color.
 func (dpc *DatePickerCell) TextColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("textColor"))
 	return ColorFromID(_r)
 }
 
-// DatePickerMode wraps the corresponding Objective-C method.
+// DatePickerMode returns the date picker mode.
 func (dpc *DatePickerCell) DatePickerMode() DatePickerMode {
 	_r := objc.Send[DatePickerMode](objref.IDOf(dpc), objc.RegisterName("datePickerMode"))
 	return _r
 }
 
-// DatePickerElements wraps the corresponding Objective-C method.
+// DatePickerElements returns the date picker elements.
 func (dpc *DatePickerCell) DatePickerElements() DatePickerElementFlags {
 	_r := objc.Send[DatePickerElementFlags](objref.IDOf(dpc), objc.RegisterName("datePickerElements"))
 	return _r
 }
 
-// Calendar wraps the corresponding Objective-C method.
+// Calendar returns the calendar.
 func (dpc *DatePickerCell) Calendar() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("calendar"))
 	return obj.Wrap(_r)
 }
 
-// Locale wraps the corresponding Objective-C method.
+// Locale returns the locale.
 func (dpc *DatePickerCell) Locale() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("locale"))
 	return obj.Wrap(_r)
 }
 
-// TimeZone wraps the corresponding Objective-C method.
+// TimeZone returns the time zone.
 func (dpc *DatePickerCell) TimeZone() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("timeZone"))
 	return obj.Wrap(_r)
 }
 
-// DateValue wraps the corresponding Objective-C method.
+// DateValue returns the date value.
 func (dpc *DatePickerCell) DateValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("dateValue"))
 	return obj.Wrap(_r)
 }
 
-// TimeInterval wraps the corresponding Objective-C method.
+// TimeInterval returns the time interval.
 func (dpc *DatePickerCell) TimeInterval() float64 {
 	_r := objc.Send[float64](objref.IDOf(dpc), objc.RegisterName("timeInterval"))
 	return _r
 }
 
-// MinDate wraps the corresponding Objective-C method.
+// MinDate returns the min date.
 func (dpc *DatePickerCell) MinDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("minDate"))
 	return obj.Wrap(_r)
 }
 
-// MaxDate wraps the corresponding Objective-C method.
+// MaxDate returns the max date.
 func (dpc *DatePickerCell) MaxDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("maxDate"))
 	return obj.Wrap(_r)

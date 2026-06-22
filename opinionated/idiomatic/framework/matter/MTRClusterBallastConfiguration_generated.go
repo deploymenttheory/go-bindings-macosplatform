@@ -58,232 +58,232 @@ func NewMTRClusterBallastConfigurationWithDeviceEndpointQueue(device *MTRDevice,
 	return mTRClusterBallastConfigurationAdopt(_id)
 }
 
-// ReadAttributePhysicalMinLevelWithParams wraps the corresponding Objective-C method.
+// ReadAttributePhysicalMinLevelWithParams reads attribute physical min level with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributePhysicalMinLevelWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributePhysicalMinLevelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePhysicalMaxLevelWithParams wraps the corresponding Objective-C method.
+// ReadAttributePhysicalMaxLevelWithParams reads attribute physical max level with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributePhysicalMaxLevelWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributePhysicalMaxLevelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBallastStatusWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBallastStatusWithParams reads attribute ballast status with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributeBallastStatusWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeBallastStatusWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinLevelWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMinLevelWithParams reads attribute min level with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributeMinLevelWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeMinLevelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeMinLevelWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeMinLevelWithValueExpectedValueInterval writes attribute min level with value expected value interval.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeMinLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeMinLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeMinLevelWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeMinLevelWithValueExpectedValueIntervalParams writes attribute min level with value expected value interval params.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeMinLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeMinLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeMaxLevelWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMaxLevelWithParams reads attribute max level with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributeMaxLevelWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeMaxLevelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeMaxLevelWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeMaxLevelWithValueExpectedValueInterval writes attribute max level with value expected value interval.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeMaxLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeMaxLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeMaxLevelWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeMaxLevelWithValueExpectedValueIntervalParams writes attribute max level with value expected value interval params.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeMaxLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeMaxLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeIntrinsicBallastFactorWithParams wraps the corresponding Objective-C method.
+// ReadAttributeIntrinsicBallastFactorWithParams reads attribute intrinsic ballast factor with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributeIntrinsicBallastFactorWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeIntrinsicBallastFactorWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeIntrinsicBallastFactorWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeIntrinsicBallastFactorWithValueExpectedValueInterval writes attribute intrinsic ballast factor with value expected value interval.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeIntrinsicBallastFactorWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeIntrinsicBallastFactorWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeIntrinsicBallastFactorWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeIntrinsicBallastFactorWithValueExpectedValueIntervalParams writes attribute intrinsic ballast factor with value expected value interval params.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeIntrinsicBallastFactorWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeIntrinsicBallastFactorWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeBallastFactorAdjustmentWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBallastFactorAdjustmentWithParams reads attribute ballast factor adjustment with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributeBallastFactorAdjustmentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeBallastFactorAdjustmentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeBallastFactorAdjustmentWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeBallastFactorAdjustmentWithValueExpectedValueInterval writes attribute ballast factor adjustment with value expected value interval.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeBallastFactorAdjustmentWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeBallastFactorAdjustmentWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeBallastFactorAdjustmentWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeBallastFactorAdjustmentWithValueExpectedValueIntervalParams writes attribute ballast factor adjustment with value expected value interval params.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeBallastFactorAdjustmentWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeBallastFactorAdjustmentWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeLampQuantityWithParams wraps the corresponding Objective-C method.
+// ReadAttributeLampQuantityWithParams reads attribute lamp quantity with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributeLampQuantityWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeLampQuantityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeLampTypeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeLampTypeWithParams reads attribute lamp type with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributeLampTypeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeLampTypeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeLampTypeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeLampTypeWithValueExpectedValueInterval writes attribute lamp type with value expected value interval.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeLampTypeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeLampTypeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeLampTypeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeLampTypeWithValueExpectedValueIntervalParams writes attribute lamp type with value expected value interval params.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeLampTypeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeLampTypeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeLampManufacturerWithParams wraps the corresponding Objective-C method.
+// ReadAttributeLampManufacturerWithParams reads attribute lamp manufacturer with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributeLampManufacturerWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeLampManufacturerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeLampManufacturerWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeLampManufacturerWithValueExpectedValueInterval writes attribute lamp manufacturer with value expected value interval.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeLampManufacturerWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeLampManufacturerWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeLampManufacturerWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeLampManufacturerWithValueExpectedValueIntervalParams writes attribute lamp manufacturer with value expected value interval params.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeLampManufacturerWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeLampManufacturerWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeLampRatedHoursWithParams wraps the corresponding Objective-C method.
+// ReadAttributeLampRatedHoursWithParams reads attribute lamp rated hours with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributeLampRatedHoursWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeLampRatedHoursWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeLampRatedHoursWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeLampRatedHoursWithValueExpectedValueInterval writes attribute lamp rated hours with value expected value interval.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeLampRatedHoursWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeLampRatedHoursWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeLampRatedHoursWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeLampRatedHoursWithValueExpectedValueIntervalParams writes attribute lamp rated hours with value expected value interval params.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeLampRatedHoursWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeLampRatedHoursWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeLampBurnHoursWithParams wraps the corresponding Objective-C method.
+// ReadAttributeLampBurnHoursWithParams reads attribute lamp burn hours with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributeLampBurnHoursWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeLampBurnHoursWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeLampBurnHoursWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeLampBurnHoursWithValueExpectedValueInterval writes attribute lamp burn hours with value expected value interval.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeLampBurnHoursWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeLampBurnHoursWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeLampBurnHoursWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeLampBurnHoursWithValueExpectedValueIntervalParams writes attribute lamp burn hours with value expected value interval params.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeLampBurnHoursWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeLampBurnHoursWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeLampAlarmModeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeLampAlarmModeWithParams reads attribute lamp alarm mode with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributeLampAlarmModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeLampAlarmModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeLampAlarmModeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeLampAlarmModeWithValueExpectedValueInterval writes attribute lamp alarm mode with value expected value interval.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeLampAlarmModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeLampAlarmModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeLampAlarmModeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeLampAlarmModeWithValueExpectedValueIntervalParams writes attribute lamp alarm mode with value expected value interval params.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeLampAlarmModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeLampAlarmModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeLampBurnHoursTripPointWithParams wraps the corresponding Objective-C method.
+// ReadAttributeLampBurnHoursTripPointWithParams reads attribute lamp burn hours trip point with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributeLampBurnHoursTripPointWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeLampBurnHoursTripPointWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeLampBurnHoursTripPointWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeLampBurnHoursTripPointWithValueExpectedValueInterval writes attribute lamp burn hours trip point with value expected value interval.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeLampBurnHoursTripPointWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeLampBurnHoursTripPointWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeLampBurnHoursTripPointWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeLampBurnHoursTripPointWithValueExpectedValueIntervalParams writes attribute lamp burn hours trip point with value expected value interval params.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeLampBurnHoursTripPointWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeLampBurnHoursTripPointWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeIntrinsicBalanceFactorWithParams wraps the corresponding Objective-C method.
+// ReadAttributeIntrinsicBalanceFactorWithParams reads attribute intrinsic balance factor with params.
 func (mcbc *MTRClusterBallastConfiguration) ReadAttributeIntrinsicBalanceFactorWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("readAttributeIntrinsicBalanceFactorWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueInterval writes attribute intrinsic balance factor with value expected value interval.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeIntrinsicBalanceFactorWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueIntervalParams writes attribute intrinsic balance factor with value expected value interval params.
 func (mcbc *MTRClusterBallastConfiguration) WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcbc), objc.RegisterName("writeAttributeIntrinsicBalanceFactorWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }

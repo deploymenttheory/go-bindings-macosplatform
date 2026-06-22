@@ -58,13 +58,13 @@ func (cubgn *CNNUpsamplingBilinearGradientNode) WithLabel(label string) *CNNUpsa
 	return cubgn
 }
 
-// ScaleFactorX wraps the corresponding Objective-C method.
+// ScaleFactorX returns the scale factor x.
 func (cubgn *CNNUpsamplingBilinearGradientNode) ScaleFactorX() float64 {
 	_r := objc.Send[float64](objref.IDOf(cubgn), objc.RegisterName("scaleFactorX"))
 	return _r
 }
 
-// ScaleFactorY wraps the corresponding Objective-C method.
+// ScaleFactorY returns the scale factor y.
 func (cubgn *CNNUpsamplingBilinearGradientNode) ScaleFactorY() float64 {
 	_r := objc.Send[float64](objref.IDOf(cubgn), objc.RegisterName("scaleFactorY"))
 	return _r

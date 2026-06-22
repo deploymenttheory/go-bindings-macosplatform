@@ -53,67 +53,67 @@ func NewMTRClusterTemperatureControlWithDeviceEndpointIDQueue(device *MTRDevice,
 	return mTRClusterTemperatureControlAdopt(_id)
 }
 
-// ReadAttributeTemperatureSetpointWithParams wraps the corresponding Objective-C method.
+// ReadAttributeTemperatureSetpointWithParams reads attribute temperature setpoint with params.
 func (mctc *MTRClusterTemperatureControl) ReadAttributeTemperatureSetpointWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeTemperatureSetpointWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinTemperatureWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMinTemperatureWithParams reads attribute min temperature with params.
 func (mctc *MTRClusterTemperatureControl) ReadAttributeMinTemperatureWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeMinTemperatureWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxTemperatureWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMaxTemperatureWithParams reads attribute max temperature with params.
 func (mctc *MTRClusterTemperatureControl) ReadAttributeMaxTemperatureWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeMaxTemperatureWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeStepWithParams wraps the corresponding Objective-C method.
+// ReadAttributeStepWithParams reads attribute step with params.
 func (mctc *MTRClusterTemperatureControl) ReadAttributeStepWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeStepWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeSelectedTemperatureLevelWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSelectedTemperatureLevelWithParams reads attribute selected temperature level with params.
 func (mctc *MTRClusterTemperatureControl) ReadAttributeSelectedTemperatureLevelWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeSelectedTemperatureLevelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeSupportedTemperatureLevelsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSupportedTemperatureLevelsWithParams reads attribute supported temperature levels with params.
 func (mctc *MTRClusterTemperatureControl) ReadAttributeSupportedTemperatureLevelsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeSupportedTemperatureLevelsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mctc *MTRClusterTemperatureControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mctc *MTRClusterTemperatureControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mctc *MTRClusterTemperatureControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mctc *MTRClusterTemperatureControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mctc *MTRClusterTemperatureControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

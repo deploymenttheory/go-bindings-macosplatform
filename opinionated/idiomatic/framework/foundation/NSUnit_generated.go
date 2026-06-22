@@ -68,13 +68,13 @@ func (u *Unit) String() string {
 	return rt.Description(objref.IDOf(u))
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (u *Unit) WithScriptingProperties(scriptingProperties obj.Object) *Unit {
 	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return u
 }
 
-// Symbol wraps the corresponding Objective-C method.
+// Symbol returns the symbol.
 func (u *Unit) Symbol() string {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("symbol"))
 	if _r == 0 {

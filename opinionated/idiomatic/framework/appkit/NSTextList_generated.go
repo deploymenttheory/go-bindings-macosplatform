@@ -102,25 +102,25 @@ func (tl *TextList) MarkerForItemNumber(itemNumber int) string {
 	return purego.GoString(_r)
 }
 
-// MarkerFormat wraps the corresponding Objective-C method.
+// MarkerFormat returns the marker format.
 func (tl *TextList) MarkerFormat() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("markerFormat"))
 	return obj.Wrap(_r)
 }
 
-// ListOptions wraps the corresponding Objective-C method.
+// ListOptions returns the list options.
 func (tl *TextList) ListOptions() TextListOptions {
 	_r := objc.Send[TextListOptions](objref.IDOf(tl), objc.RegisterName("listOptions"))
 	return _r
 }
 
-// StartingItemNumber wraps the corresponding Objective-C method.
+// StartingItemNumber returns the starting item number.
 func (tl *TextList) StartingItemNumber() int {
 	_r := objc.Send[int](objref.IDOf(tl), objc.RegisterName("startingItemNumber"))
 	return _r
 }
 
-// IsOrdered wraps the corresponding Objective-C method.
+// IsOrdered reports whether the object is ordered.
 func (tl *TextList) IsOrdered() bool {
 	_r := objc.Send[bool](objref.IDOf(tl), objc.RegisterName("isOrdered"))
 	return _r

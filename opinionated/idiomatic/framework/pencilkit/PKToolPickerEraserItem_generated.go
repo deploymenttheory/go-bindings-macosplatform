@@ -59,7 +59,7 @@ func NewToolPickerEraserItemWithEraserTypeWidth(eraserType EraserType, width flo
 	return toolPickerEraserItemAdopt(_id)
 }
 
-// EraserTool wraps the corresponding Objective-C method.
+// EraserTool returns the eraser tool.
 func (tpei *ToolPickerEraserItem) EraserTool() *EraserTool {
 	_r := objc.Send[objc.ID](objref.IDOf(tpei), objc.RegisterName("eraserTool"))
 	return EraserToolFromID(_r)

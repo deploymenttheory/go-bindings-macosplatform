@@ -70,25 +70,25 @@ func NewMTRLevelControlClusterMoveWithOnOffParams() *MTRLevelControlClusterMoveW
 	return mTRLevelControlClusterMoveWithOnOffParamsAdopt(_id)
 }
 
-// WithMoveMode sets the property and returns the receiver so calls can be chained.
+// WithMoveMode sets the move mode.
 func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) WithMoveMode(moveMode obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
 	objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("setMoveMode:"), objref.IDOf(moveMode))
 	return mlccmwoop
 }
 
-// WithRate sets the property and returns the receiver so calls can be chained.
+// WithRate sets the rate.
 func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) WithRate(rate obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
 	objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("setRate:"), objref.IDOf(rate))
 	return mlccmwoop
 }
 
-// WithOptionsMask sets the property and returns the receiver so calls can be chained.
+// WithOptionsMask sets the options mask.
 func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) WithOptionsMask(optionsMask obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
 	objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mlccmwoop
 }
 
-// WithOptionsOverride sets the property and returns the receiver so calls can be chained.
+// WithOptionsOverride sets the options override.
 func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) WithOptionsOverride(optionsOverride obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
 	objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mlccmwoop
@@ -106,25 +106,25 @@ func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) WithServerSideProces
 	return mlccmwoop
 }
 
-// MoveMode wraps the corresponding Objective-C method.
+// MoveMode returns the move mode.
 func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) MoveMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("moveMode"))
 	return obj.Wrap(_r)
 }
 
-// Rate wraps the corresponding Objective-C method.
+// Rate returns the rate.
 func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) Rate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("rate"))
 	return obj.Wrap(_r)
 }
 
-// OptionsMask wraps the corresponding Objective-C method.
+// OptionsMask returns the options mask.
 func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) OptionsMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
 }
 
-// OptionsOverride wraps the corresponding Objective-C method.
+// OptionsOverride returns the options override.
 func (mlccmwoop *MTRLevelControlClusterMoveWithOnOffParams) OptionsOverride() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlccmwoop), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)

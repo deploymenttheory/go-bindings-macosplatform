@@ -79,19 +79,19 @@ func (hpc *HapticParameterCurve) WithRelativeTime(relativeTime float64) *HapticP
 	return hpc
 }
 
-// ParameterID wraps the corresponding Objective-C method.
+// ParameterID returns the parameter ID.
 func (hpc *HapticParameterCurve) ParameterID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(hpc), objc.RegisterName("parameterID"))
 	return obj.Wrap(_r)
 }
 
-// RelativeTime wraps the corresponding Objective-C method.
+// RelativeTime returns the relative time.
 func (hpc *HapticParameterCurve) RelativeTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(hpc), objc.RegisterName("relativeTime"))
 	return _r
 }
 
-// ControlPoints wraps the corresponding Objective-C method.
+// ControlPoints returns the control points.
 //
 // ControlPoints returns the collection as a Go slice.
 func (hpc *HapticParameterCurve) ControlPoints() []*HapticParameterCurveControlPoint {

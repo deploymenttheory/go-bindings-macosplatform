@@ -70,7 +70,7 @@ func NewMTRGroupsClusterRemoveGroupParams() *MTRGroupsClusterRemoveGroupParams {
 	return mTRGroupsClusterRemoveGroupParamsAdopt(_id)
 }
 
-// WithGroupID sets the property and returns the receiver so calls can be chained.
+// WithGroupID sets the group ID.
 func (mgcrgp *MTRGroupsClusterRemoveGroupParams) WithGroupID(groupID obj.Object) *MTRGroupsClusterRemoveGroupParams {
 	objc.Send[objc.ID](objref.IDOf(mgcrgp), objc.RegisterName("setGroupID:"), objref.IDOf(groupID))
 	return mgcrgp
@@ -88,7 +88,7 @@ func (mgcrgp *MTRGroupsClusterRemoveGroupParams) WithServerSideProcessingTimeout
 	return mgcrgp
 }
 
-// GroupID wraps the corresponding Objective-C method.
+// GroupID returns the group ID.
 func (mgcrgp *MTRGroupsClusterRemoveGroupParams) GroupID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgcrgp), objc.RegisterName("groupID"))
 	return obj.Wrap(_r)

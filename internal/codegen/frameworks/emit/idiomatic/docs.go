@@ -79,6 +79,116 @@ func docLead(goName, apple, fallback string) string {
 	return docLeadKind(goName, apple, fallback, docMethod)
 }
 
+// docMethodFiller is the historical post-name clause used when a method has no
+// Apple/header prose and no confident phrase can be synthesised from its name.
+// It is retained as the safe fallback so a generated comment never regresses to
+// something misleading.
+const docMethodFiller = "wraps the corresponding Objective-C method."
+
+// thirdPersonVerbs maps the lower-cased leading word of an action method's name
+// to its third-person singular form, so a method with no documentation gets a
+// readable sentence synthesised from its own name ("RemoveAllObjects" →
+// "RemoveAllObjects removes all objects."). Only the well-known Objective-C
+// method verbs are listed; an unrecognised lead word leaves the method on the
+// safe filler (docMethodFiller) rather than risk an ungrammatical sentence. The
+// table is a plain lookup — no regular expressions, no inflection rules.
+var thirdPersonVerbs = map[string]string{
+	"add": "adds", "append": "appends", "apply": "applies", "attach": "attaches",
+	"begin": "begins", "bind": "binds", "cancel": "cancels", "clear": "clears",
+	"close": "closes", "commit": "commits", "configure": "configures",
+	"connect": "connects", "copy": "copies", "create": "creates",
+	"deactivate": "deactivates", "decode": "decodes", "delete": "deletes",
+	"deselect": "deselects", "detach": "detaches", "disable": "disables",
+	"disconnect": "disconnects", "dismiss": "dismisses", "draw": "draws",
+	"enable": "enables", "encode": "encodes", "end": "ends", "enumerate": "enumerates",
+	"fetch": "fetches", "flush": "flushes", "hide": "hides", "insert": "inserts",
+	"invalidate": "invalidates", "load": "loads", "lock": "locks", "make": "makes",
+	"move": "moves", "open": "opens", "pause": "pauses", "perform": "performs",
+	"pop": "pops", "post": "posts", "prepare": "prepares", "present": "presents",
+	"push": "pushes", "read": "reads", "register": "registers", "reload": "reloads",
+	"remove": "removes", "replace": "replaces", "request": "requests",
+	"reset": "resets", "resume": "resumes", "run": "runs", "save": "saves",
+	"scroll": "scrolls", "select": "selects", "send": "sends", "show": "shows",
+	"start": "starts", "stop": "stops", "synchronize": "synchronizes",
+	"toggle": "toggles", "unbind": "unbinds", "unlock": "unlocks",
+	"unregister": "unregisters", "update": "updates", "validate": "validates",
+	"write": "writes",
+}
+
+// recaseWords renders a slice of identifier words as a lower-cased,
+// space-separated phrase, preserving the all-caps form of any word that names a
+// known initialism ("USB", "URL"). It is the building block for synthesising a
+// human-readable doc phrase from an exported Go name, and uses only the
+// initialisms table — no regular expressions.
+func recaseWords(words []string) string {
+	out := make([]string, 0, len(words))
+	for _, w := range words {
+		if w == "" {
+			continue
+		}
+		if up := strings.ToUpper(w); commonInitialisms[up] {
+			out = append(out, up)
+			continue
+		}
+		out = append(out, strings.ToLower(w))
+	}
+	return strings.Join(out, " ")
+}
+
+// synthFallback builds the post-name clause for a doc comment when a construct
+// has no Apple/header prose, deriving a readable phrase from the exported Go name
+// so the generated documentation says something rather than restating that the
+// method exists (E2). docLeadKind prepends the name, so the returned text begins
+// with a lower-case verb and ends with a period ("returns the title."). Synthesis
+// uses splitWords + the initialisms table (and, for action methods, the
+// thirdPersonVerbs lookup) — no regular expressions. When the name does not yield
+// a confident phrase, the historical filler is returned so a comment never
+// regresses to something misleading.
+func synthFallback(goName string, kind docKind) string {
+	words := splitWords(goName)
+	switch kind {
+	case docSetter:
+		if len(words) > 0 && words[0] == "With" {
+			words = words[1:]
+		}
+		phrase := recaseWords(words)
+		if phrase == "" {
+			return "sets the property."
+		}
+		return "sets the " + phrase + "."
+	case docGetter:
+		phrase := recaseWords(words)
+		if phrase == "" {
+			return docMethodFiller
+		}
+		return "returns the " + phrase + "."
+	case docBoolGetter:
+		// Only the Is*/Has* shapes synthesise cleanly into a "reports whether"
+		// predicate; any other boolean accessor name would read ungrammatically,
+		// so it stays on the safe filler.
+		if len(words) > 1 && words[0] == "Is" {
+			return "reports whether the object is " + recaseWords(words[1:]) + "."
+		}
+		if len(words) > 1 && words[0] == "Has" {
+			return "reports whether the object has " + recaseWords(words[1:]) + "."
+		}
+		return docMethodFiller
+	default: // docMethod
+		if len(words) == 0 {
+			return docMethodFiller
+		}
+		verb, ok := thirdPersonVerbs[strings.ToLower(words[0])]
+		if !ok {
+			return docMethodFiller
+		}
+		rest := recaseWords(words[1:])
+		if rest == "" {
+			return docMethodFiller
+		}
+		return verb + " " + rest + "."
+	}
+}
+
 // docLeadKind renders a name-first doc comment block (E2) whose first sentence
 // starts with the exported symbol name followed by a kind-appropriate verb and
 // the cleaned Apple prose. When there is no Apple documentation it falls back to

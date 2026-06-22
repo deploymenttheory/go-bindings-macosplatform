@@ -51,13 +51,13 @@ func NewPhysicsBallSocketJoint() *PhysicsBallSocketJoint {
 	return physicsBallSocketJointAdopt(_id)
 }
 
-// BodyA wraps the corresponding Objective-C method.
+// BodyA returns the body a.
 func (pbsj *PhysicsBallSocketJoint) BodyA() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(pbsj), objc.RegisterName("bodyA"))
 	return PhysicsBodyFromID(_r)
 }
 
-// BodyB wraps the corresponding Objective-C method.
+// BodyB returns the body b.
 func (pbsj *PhysicsBallSocketJoint) BodyB() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(pbsj), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)

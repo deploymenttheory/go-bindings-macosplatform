@@ -50,13 +50,13 @@ func NewMTRModeSelectClusterSemanticTag() *MTRModeSelectClusterSemanticTag {
 	return mTRModeSelectClusterSemanticTagAdopt(_id)
 }
 
-// WithMfgCode sets the property and returns the receiver so calls can be chained.
+// WithMfgCode sets the mfg code.
 func (mmscst *MTRModeSelectClusterSemanticTag) WithMfgCode(mfgCode obj.Object) *MTRModeSelectClusterSemanticTag {
 	objc.Send[objc.ID](objref.IDOf(mmscst), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return mmscst
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mmscst *MTRModeSelectClusterSemanticTag) WithValue(value obj.Object) *MTRModeSelectClusterSemanticTag {
 	objc.Send[objc.ID](objref.IDOf(mmscst), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mmscst

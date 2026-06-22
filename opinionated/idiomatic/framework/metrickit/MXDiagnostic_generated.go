@@ -80,7 +80,7 @@ func (d *Diagnostic) DictionaryRepresentation() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// MetaData wraps the corresponding Objective-C method.
+// MetaData returns the meta data.
 func (d *Diagnostic) MetaData() *MetaData {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("metaData"))
 	return MetaDataFromID(_r)
@@ -95,7 +95,7 @@ func (d *Diagnostic) ApplicationVersion() string {
 	return purego.GoString(_r)
 }
 
-// SignpostData wraps the corresponding Objective-C method.
+// SignpostData returns the signpost data.
 //
 // SignpostData returns the collection as a Go slice.
 func (d *Diagnostic) SignpostData() []*SignpostRecord {

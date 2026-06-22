@@ -49,7 +49,7 @@ func NewDOMFile() *DOMFile {
 	return dOMFileAdopt(_id)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (df *DOMFile) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("name"))
 	if _r == 0 {

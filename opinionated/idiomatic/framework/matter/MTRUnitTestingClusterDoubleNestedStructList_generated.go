@@ -66,7 +66,7 @@ func (mutcdnsl *MTRUnitTestingClusterDoubleNestedStructList) String() string {
 	return rt.Description(objref.IDOf(mutcdnsl))
 }
 
-// A wraps the corresponding Objective-C method.
+// A returns the a.
 func (mutcdnsl *MTRUnitTestingClusterDoubleNestedStructList) A() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcdnsl), objc.RegisterName("a"))
 	return obj.Wrap(_r)

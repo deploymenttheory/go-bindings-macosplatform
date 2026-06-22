@@ -79,7 +79,7 @@ func (mbcrrm *MTRBaseClusterRVCRunMode) ChangeToModeWithParamsCompletion(ctx con
 	}
 }
 
-// ReadAttributeSupportedModesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupportedModesWithCompletion reads attribute supported modes with completion.
 //
 // ReadAttributeSupportedModesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcrrm *MTRBaseClusterRVCRunMode) ReadAttributeSupportedModesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -129,7 +129,7 @@ func (mbcrrm *MTRBaseClusterRVCRunMode) SubscribeAttributeSupportedModesWithPara
 	}
 }
 
-// ReadAttributeCurrentModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentModeWithCompletion reads attribute current mode with completion.
 //
 // ReadAttributeCurrentModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcrrm *MTRBaseClusterRVCRunMode) ReadAttributeCurrentModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -179,7 +179,7 @@ func (mbcrrm *MTRBaseClusterRVCRunMode) SubscribeAttributeCurrentModeWithParamsS
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcrrm *MTRBaseClusterRVCRunMode) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -229,7 +229,7 @@ func (mbcrrm *MTRBaseClusterRVCRunMode) SubscribeAttributeGeneratedCommandListWi
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcrrm *MTRBaseClusterRVCRunMode) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -279,7 +279,7 @@ func (mbcrrm *MTRBaseClusterRVCRunMode) SubscribeAttributeAcceptedCommandListWit
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcrrm *MTRBaseClusterRVCRunMode) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -329,7 +329,7 @@ func (mbcrrm *MTRBaseClusterRVCRunMode) SubscribeAttributeAttributeListWithParam
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcrrm *MTRBaseClusterRVCRunMode) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -379,7 +379,7 @@ func (mbcrrm *MTRBaseClusterRVCRunMode) SubscribeAttributeFeatureMapWithParamsSu
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcrrm *MTRBaseClusterRVCRunMode) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

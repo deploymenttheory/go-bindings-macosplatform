@@ -70,7 +70,7 @@ func NewMTRBooleanStateConfigurationClusterSuppressAlarmParams() *MTRBooleanStat
 	return mTRBooleanStateConfigurationClusterSuppressAlarmParamsAdopt(_id)
 }
 
-// WithAlarmsToSuppress sets the property and returns the receiver so calls can be chained.
+// WithAlarmsToSuppress sets the alarms to suppress.
 func (mbsccsap *MTRBooleanStateConfigurationClusterSuppressAlarmParams) WithAlarmsToSuppress(alarmsToSuppress obj.Object) *MTRBooleanStateConfigurationClusterSuppressAlarmParams {
 	objc.Send[objc.ID](objref.IDOf(mbsccsap), objc.RegisterName("setAlarmsToSuppress:"), objref.IDOf(alarmsToSuppress))
 	return mbsccsap
@@ -88,7 +88,7 @@ func (mbsccsap *MTRBooleanStateConfigurationClusterSuppressAlarmParams) WithServ
 	return mbsccsap
 }
 
-// AlarmsToSuppress wraps the corresponding Objective-C method.
+// AlarmsToSuppress returns the alarms to suppress.
 func (mbsccsap *MTRBooleanStateConfigurationClusterSuppressAlarmParams) AlarmsToSuppress() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbsccsap), objc.RegisterName("alarmsToSuppress"))
 	return obj.Wrap(_r)

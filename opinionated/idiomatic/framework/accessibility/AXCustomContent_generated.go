@@ -78,7 +78,7 @@ func (cc *CustomContent) WithImportance(importance CustomContentImportance) *Cus
 	return cc
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (cc *CustomContent) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("label"))
 	if _r == 0 {
@@ -87,13 +87,13 @@ func (cc *CustomContent) Label() string {
 	return purego.GoString(_r)
 }
 
-// AttributedLabel wraps the corresponding Objective-C method.
+// AttributedLabel returns the attributed label.
 func (cc *CustomContent) AttributedLabel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("attributedLabel"))
 	return obj.Wrap(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (cc *CustomContent) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("value"))
 	if _r == 0 {
@@ -102,13 +102,13 @@ func (cc *CustomContent) Value() string {
 	return purego.GoString(_r)
 }
 
-// AttributedValue wraps the corresponding Objective-C method.
+// AttributedValue returns the attributed value.
 func (cc *CustomContent) AttributedValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("attributedValue"))
 	return obj.Wrap(_r)
 }
 
-// Importance wraps the corresponding Objective-C method.
+// Importance returns the importance.
 func (cc *CustomContent) Importance() CustomContentImportance {
 	_r := objc.Send[CustomContentImportance](objref.IDOf(cc), objc.RegisterName("importance"))
 	return _r

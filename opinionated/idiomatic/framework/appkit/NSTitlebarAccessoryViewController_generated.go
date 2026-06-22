@@ -65,13 +65,13 @@ func (tavc *TitlebarAccessoryViewController) WithFullScreenMinHeight(fullScreenM
 	return tavc
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (tavc *TitlebarAccessoryViewController) WithHidden(hidden bool) *TitlebarAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setHidden:"), hidden)
 	return tavc
 }
 
-// WithAutomaticallyAdjustsSize sets the property and returns the receiver so calls can be chained.
+// WithAutomaticallyAdjustsSize sets the automatically adjusts size.
 func (tavc *TitlebarAccessoryViewController) WithAutomaticallyAdjustsSize(automaticallyAdjustsSize bool) *TitlebarAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setAutomaticallyAdjustsSize:"), automaticallyAdjustsSize)
 	return tavc
@@ -114,7 +114,7 @@ func (tavc *TitlebarAccessoryViewController) WithChildViewControllers(items ...V
 	return tavc
 }
 
-// WithSourceItemView sets the property and returns the receiver so calls can be chained.
+// WithSourceItemView sets the source item view.
 func (tavc *TitlebarAccessoryViewController) WithSourceItemView(sourceItemView ViewProvider) *TitlebarAccessoryViewController {
 	objc.Send[objc.ID](objref.IDOf(tavc), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
 	return tavc
@@ -150,19 +150,19 @@ func (tavc *TitlebarAccessoryViewController) WithTouchBar(touchBar *TouchBar) *T
 	return tavc
 }
 
-// LayoutAttribute wraps the corresponding Objective-C method.
+// LayoutAttribute returns the layout attribute.
 func (tavc *TitlebarAccessoryViewController) LayoutAttribute() LayoutAttribute {
 	_r := objc.Send[LayoutAttribute](objref.IDOf(tavc), objc.RegisterName("layoutAttribute"))
 	return _r
 }
 
-// FullScreenMinHeight wraps the corresponding Objective-C method.
+// FullScreenMinHeight returns the full screen min height.
 func (tavc *TitlebarAccessoryViewController) FullScreenMinHeight() float64 {
 	_r := objc.Send[float64](objref.IDOf(tavc), objc.RegisterName("fullScreenMinHeight"))
 	return _r
 }
 
-// IsHidden wraps the corresponding Objective-C method.
+// IsHidden reports whether the object is hidden.
 func (tavc *TitlebarAccessoryViewController) IsHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(tavc), objc.RegisterName("isHidden"))
 	return _r

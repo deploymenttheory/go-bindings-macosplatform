@@ -124,25 +124,25 @@ func (pip *PhysicalInputProfile) Elements() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Buttons wraps the corresponding Objective-C method.
+// Buttons returns the buttons.
 func (pip *PhysicalInputProfile) Buttons() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("buttons"))
 	return obj.Wrap(_r)
 }
 
-// Axes wraps the corresponding Objective-C method.
+// Axes returns the axes.
 func (pip *PhysicalInputProfile) Axes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("axes"))
 	return obj.Wrap(_r)
 }
 
-// Dpads wraps the corresponding Objective-C method.
+// Dpads returns the dpads.
 func (pip *PhysicalInputProfile) Dpads() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("dpads"))
 	return obj.Wrap(_r)
 }
 
-// Touchpads wraps the corresponding Objective-C method.
+// Touchpads returns the touchpads.
 func (pip *PhysicalInputProfile) Touchpads() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("touchpads"))
 	return obj.Wrap(_r)
@@ -154,25 +154,25 @@ func (pip *PhysicalInputProfile) AllElements() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// AllButtons wraps the corresponding Objective-C method.
+// AllButtons returns the all buttons.
 func (pip *PhysicalInputProfile) AllButtons() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("allButtons"))
 	return obj.Wrap(_r)
 }
 
-// AllAxes wraps the corresponding Objective-C method.
+// AllAxes returns the all axes.
 func (pip *PhysicalInputProfile) AllAxes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("allAxes"))
 	return obj.Wrap(_r)
 }
 
-// AllDpads wraps the corresponding Objective-C method.
+// AllDpads returns the all dpads.
 func (pip *PhysicalInputProfile) AllDpads() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("allDpads"))
 	return obj.Wrap(_r)
 }
 
-// AllTouchpads wraps the corresponding Objective-C method.
+// AllTouchpads returns the all touchpads.
 func (pip *PhysicalInputProfile) AllTouchpads() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("allTouchpads"))
 	return obj.Wrap(_r)

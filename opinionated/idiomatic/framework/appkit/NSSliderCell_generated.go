@@ -398,43 +398,43 @@ func (sc *SliderCell) DrawBarInsideFlipped(rect corefoundation.CGRect, flipped b
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("drawBarInside:flipped:"), rect, flipped)
 }
 
-// MinValue wraps the corresponding Objective-C method.
+// MinValue returns the min value.
 func (sc *SliderCell) MinValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("minValue"))
 	return _r
 }
 
-// MaxValue wraps the corresponding Objective-C method.
+// MaxValue returns the max value.
 func (sc *SliderCell) MaxValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("maxValue"))
 	return _r
 }
 
-// AltIncrementValue wraps the corresponding Objective-C method.
+// AltIncrementValue returns the alt increment value.
 func (sc *SliderCell) AltIncrementValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("altIncrementValue"))
 	return _r
 }
 
-// SliderType wraps the corresponding Objective-C method.
+// SliderType returns the slider type.
 func (sc *SliderCell) SliderType() SliderType {
 	_r := objc.Send[SliderType](objref.IDOf(sc), objc.RegisterName("sliderType"))
 	return _r
 }
 
-// IsVertical wraps the corresponding Objective-C method.
+// IsVertical reports whether the object is vertical.
 func (sc *SliderCell) IsVertical() bool {
 	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("isVertical"))
 	return _r
 }
 
-// TrackRect wraps the corresponding Objective-C method.
+// TrackRect returns the track rect.
 func (sc *SliderCell) TrackRect() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sc), objc.RegisterName("trackRect"))
 	return _r
 }
 
-// KnobThickness wraps the corresponding Objective-C method.
+// KnobThickness returns the knob thickness.
 func (sc *SliderCell) KnobThickness() float64 {
 	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("knobThickness"))
 	return _r
@@ -469,13 +469,13 @@ func (sc *SliderCell) DrawTickMarks() {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("drawTickMarks"))
 }
 
-// NumberOfTickMarks wraps the corresponding Objective-C method.
+// NumberOfTickMarks returns the number of tick marks.
 func (sc *SliderCell) NumberOfTickMarks() int {
 	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("numberOfTickMarks"))
 	return _r
 }
 
-// TickMarkPosition wraps the corresponding Objective-C method.
+// TickMarkPosition returns the tick mark position.
 func (sc *SliderCell) TickMarkPosition() TickMarkPosition {
 	_r := objc.Send[TickMarkPosition](objref.IDOf(sc), objc.RegisterName("tickMarkPosition"))
 	return _r

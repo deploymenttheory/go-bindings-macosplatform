@@ -84,19 +84,19 @@ func (ul *UserLocation) WithSubtitle(subtitle string) *UserLocation {
 	return ul
 }
 
-// IsUpdating wraps the corresponding Objective-C method.
+// IsUpdating reports whether the object is updating.
 func (ul *UserLocation) IsUpdating() bool {
 	_r := objc.Send[bool](objref.IDOf(ul), objc.RegisterName("isUpdating"))
 	return _r
 }
 
-// Heading wraps the corresponding Objective-C method.
+// Heading returns the heading.
 func (ul *UserLocation) Heading() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("heading"))
 	return obj.Wrap(_r)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (ul *UserLocation) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("title"))
 	if _r == 0 {
@@ -105,7 +105,7 @@ func (ul *UserLocation) Title() string {
 	return purego.GoString(_r)
 }
 
-// Subtitle wraps the corresponding Objective-C method.
+// Subtitle returns the subtitle.
 func (ul *UserLocation) Subtitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("subtitle"))
 	if _r == 0 {

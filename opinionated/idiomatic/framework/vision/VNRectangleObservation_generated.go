@@ -46,25 +46,25 @@ func rectangleObservationAdopt(id objc.ID) *RectangleObservation {
 	return x
 }
 
-// TopLeft wraps the corresponding Objective-C method.
+// TopLeft returns the top left.
 func (ro *RectangleObservation) TopLeft() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(ro), objc.RegisterName("topLeft"))
 	return _r
 }
 
-// TopRight wraps the corresponding Objective-C method.
+// TopRight returns the top right.
 func (ro *RectangleObservation) TopRight() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(ro), objc.RegisterName("topRight"))
 	return _r
 }
 
-// BottomLeft wraps the corresponding Objective-C method.
+// BottomLeft returns the bottom left.
 func (ro *RectangleObservation) BottomLeft() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(ro), objc.RegisterName("bottomLeft"))
 	return _r
 }
 
-// BottomRight wraps the corresponding Objective-C method.
+// BottomRight returns the bottom right.
 func (ro *RectangleObservation) BottomRight() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(ro), objc.RegisterName("bottomRight"))
 	return _r

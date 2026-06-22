@@ -70,14 +70,14 @@ func NewMTRSwitchClusterSwitchLatchedEvent() *MTRSwitchClusterSwitchLatchedEvent
 	return mTRSwitchClusterSwitchLatchedEventAdopt(_id)
 }
 
-// WithNewPosition sets the property and returns the receiver so calls can be chained.
+// WithNewPosition sets the new position.
 func (mscsle *MTRSwitchClusterSwitchLatchedEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterSwitchLatchedEvent {
 	objc.Send[objc.ID](objref.IDOf(mscsle), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
 	return mscsle
 }
 
-// GetNewPosition wraps the corresponding Objective-C method.
-func (mscsle *MTRSwitchClusterSwitchLatchedEvent) GetNewPosition() obj.Object {
+// NewPosition returns the new position.
+func (mscsle *MTRSwitchClusterSwitchLatchedEvent) NewPosition() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mscsle), objc.RegisterName("getNewPosition"))
 	return obj.Wrap(_r)
 }

@@ -50,19 +50,19 @@ func NewMTRTimeSynchronizationClusterDstOffsetType() *MTRTimeSynchronizationClus
 	return mTRTimeSynchronizationClusterDstOffsetTypeAdopt(_id)
 }
 
-// WithOffset sets the property and returns the receiver so calls can be chained.
+// WithOffset sets the offset.
 func (mtscdot *MTRTimeSynchronizationClusterDstOffsetType) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterDstOffsetType {
 	objc.Send[objc.ID](objref.IDOf(mtscdot), objc.RegisterName("setOffset:"), objref.IDOf(offset))
 	return mtscdot
 }
 
-// WithValidStarting sets the property and returns the receiver so calls can be chained.
+// WithValidStarting sets the valid starting.
 func (mtscdot *MTRTimeSynchronizationClusterDstOffsetType) WithValidStarting(validStarting obj.Object) *MTRTimeSynchronizationClusterDstOffsetType {
 	objc.Send[objc.ID](objref.IDOf(mtscdot), objc.RegisterName("setValidStarting:"), objref.IDOf(validStarting))
 	return mtscdot
 }
 
-// WithValidUntil sets the property and returns the receiver so calls can be chained.
+// WithValidUntil sets the valid until.
 func (mtscdot *MTRTimeSynchronizationClusterDstOffsetType) WithValidUntil(validUntil obj.Object) *MTRTimeSynchronizationClusterDstOffsetType {
 	objc.Send[objc.ID](objref.IDOf(mtscdot), objc.RegisterName("setValidUntil:"), objref.IDOf(validUntil))
 	return mtscdot

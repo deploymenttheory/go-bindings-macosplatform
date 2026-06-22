@@ -70,19 +70,19 @@ func NewMTREventRequestPath() *MTREventRequestPath {
 	return mTREventRequestPathAdopt(_id)
 }
 
-// Endpoint wraps the corresponding Objective-C method.
+// Endpoint returns the endpoint.
 func (merp *MTREventRequestPath) Endpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(merp), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
 }
 
-// Cluster wraps the corresponding Objective-C method.
+// Cluster returns the cluster.
 func (merp *MTREventRequestPath) Cluster() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(merp), objc.RegisterName("cluster"))
 	return obj.Wrap(_r)
 }
 
-// Event wraps the corresponding Objective-C method.
+// Event returns the event.
 func (merp *MTREventRequestPath) Event() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(merp), objc.RegisterName("event"))
 	return obj.Wrap(_r)

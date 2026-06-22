@@ -79,7 +79,7 @@ func (pb *PaymentButton) WithCornerRadius(cornerRadius float64) *PaymentButton {
 	return pb
 }
 
-// CornerRadius wraps the corresponding Objective-C method.
+// CornerRadius returns the corner radius.
 func (pb *PaymentButton) CornerRadius() float64 {
 	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("cornerRadius"))
 	return _r

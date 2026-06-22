@@ -108,7 +108,7 @@ func (mpr *MultiPolygonRenderer) WithAlpha(alpha float64) *MultiPolygonRenderer 
 	return mpr
 }
 
-// MultiPolygon wraps the corresponding Objective-C method.
+// MultiPolygon returns the multi polygon.
 func (mpr *MultiPolygonRenderer) MultiPolygon() *MultiPolygon {
 	_r := objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("multiPolygon"))
 	return MultiPolygonFromID(_r)

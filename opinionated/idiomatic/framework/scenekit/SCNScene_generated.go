@@ -231,7 +231,7 @@ func (s *Scene) RemoveParticleSystem(system *ParticleSystem) {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("removeParticleSystem:"), objref.IDOf(system))
 }
 
-// ParticleSystems wraps the corresponding Objective-C method.
+// ParticleSystems returns the particle systems.
 //
 // ParticleSystems returns the collection as a Go slice.
 func (s *Scene) ParticleSystems() []*ParticleSystem {

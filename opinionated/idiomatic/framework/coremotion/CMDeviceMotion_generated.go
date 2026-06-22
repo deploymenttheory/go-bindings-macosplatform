@@ -51,19 +51,19 @@ func NewDeviceMotion() *DeviceMotion {
 	return deviceMotionAdopt(_id)
 }
 
-// Attitude wraps the corresponding Objective-C method.
+// Attitude returns the attitude.
 func (dm *DeviceMotion) Attitude() *Attitude {
 	_r := objc.Send[objc.ID](objref.IDOf(dm), objc.RegisterName("attitude"))
 	return AttitudeFromID(_r)
 }
 
-// Heading wraps the corresponding Objective-C method.
+// Heading returns the heading.
 func (dm *DeviceMotion) Heading() float64 {
 	_r := objc.Send[float64](objref.IDOf(dm), objc.RegisterName("heading"))
 	return _r
 }
 
-// SensorLocation wraps the corresponding Objective-C method.
+// SensorLocation returns the sensor location.
 func (dm *DeviceMotion) SensorLocation() DeviceMotionSensorLocation {
 	_r := objc.Send[DeviceMotionSensorLocation](objref.IDOf(dm), objc.RegisterName("sensorLocation"))
 	return _r

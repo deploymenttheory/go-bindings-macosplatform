@@ -68,7 +68,7 @@ func (k *Key) String() string {
 	return rt.Description(objref.IDOf(k))
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (k *Key) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(k), objc.RegisterName("name"))
 	if _r == 0 {
@@ -77,7 +77,7 @@ func (k *Key) Name() string {
 	return purego.GoString(_r)
 }
 
-// Scope wraps the corresponding Objective-C method.
+// Scope returns the scope.
 func (k *Key) Scope() string {
 	_r := objc.Send[objc.ID](objref.IDOf(k), objc.RegisterName("scope"))
 	if _r == 0 {

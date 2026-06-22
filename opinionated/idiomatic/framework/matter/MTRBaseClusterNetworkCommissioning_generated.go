@@ -236,7 +236,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReorderNetworkWithParamsComplet
 	}
 }
 
-// ReadAttributeMaxNetworksWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxNetworksWithCompletion reads attribute max networks with completion.
 //
 // ReadAttributeMaxNetworksWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeMaxNetworksWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -286,7 +286,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeMaxNetworksWi
 	}
 }
 
-// ReadAttributeNetworksWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNetworksWithCompletion reads attribute networks with completion.
 //
 // ReadAttributeNetworksWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeNetworksWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -336,7 +336,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeNetworksWithP
 	}
 }
 
-// ReadAttributeScanMaxTimeSecondsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeScanMaxTimeSecondsWithCompletion reads attribute scan max time seconds with completion.
 //
 // ReadAttributeScanMaxTimeSecondsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeScanMaxTimeSecondsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -386,7 +386,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeScanMaxTimeSe
 	}
 }
 
-// ReadAttributeConnectMaxTimeSecondsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeConnectMaxTimeSecondsWithCompletion reads attribute connect max time seconds with completion.
 //
 // ReadAttributeConnectMaxTimeSecondsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeConnectMaxTimeSecondsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -436,7 +436,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeConnectMaxTim
 	}
 }
 
-// ReadAttributeInterfaceEnabledWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInterfaceEnabledWithCompletion reads attribute interface enabled with completion.
 //
 // ReadAttributeInterfaceEnabledWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeInterfaceEnabledWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -486,7 +486,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeInterfaceEnab
 	}
 }
 
-// ReadAttributeLastNetworkingStatusWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLastNetworkingStatusWithCompletion reads attribute last networking status with completion.
 //
 // ReadAttributeLastNetworkingStatusWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeLastNetworkingStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -536,7 +536,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeLastNetworkin
 	}
 }
 
-// ReadAttributeLastNetworkIDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLastNetworkIDWithCompletion reads attribute last network ID with completion.
 //
 // ReadAttributeLastNetworkIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeLastNetworkIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -586,7 +586,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeLastNetworkID
 	}
 }
 
-// ReadAttributeLastConnectErrorValueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLastConnectErrorValueWithCompletion reads attribute last connect error value with completion.
 //
 // ReadAttributeLastConnectErrorValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeLastConnectErrorValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -636,7 +636,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeLastConnectEr
 	}
 }
 
-// ReadAttributeSupportedWiFiBandsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupportedWiFiBandsWithCompletion reads attribute supported wi fi bands with completion.
 //
 // ReadAttributeSupportedWiFiBandsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeSupportedWiFiBandsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -686,7 +686,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeSupportedWiFi
 	}
 }
 
-// ReadAttributeSupportedThreadFeaturesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupportedThreadFeaturesWithCompletion reads attribute supported thread features with completion.
 //
 // ReadAttributeSupportedThreadFeaturesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeSupportedThreadFeaturesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -736,7 +736,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeSupportedThre
 	}
 }
 
-// ReadAttributeThreadVersionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeThreadVersionWithCompletion reads attribute thread version with completion.
 //
 // ReadAttributeThreadVersionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeThreadVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -786,7 +786,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeThreadVersion
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -836,7 +836,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeGeneratedComm
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -886,7 +886,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeAcceptedComma
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -936,7 +936,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeAttributeList
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -986,7 +986,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeFeatureMapWit
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1061,7 +1061,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ScanNetworksWithParams(ctx cont
 	}
 }
 
-// AddOrUpdateWiFiNetworkWithParams wraps the corresponding Objective-C method.
+// AddOrUpdateWiFiNetworkWithParams adds or update wi fi network with params.
 //
 // AddOrUpdateWiFiNetworkWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParams(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
@@ -1086,7 +1086,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParam
 	}
 }
 
-// AddOrUpdateThreadNetworkWithParams wraps the corresponding Objective-C method.
+// AddOrUpdateThreadNetworkWithParams adds or update thread network with params.
 //
 // AddOrUpdateThreadNetworkWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParams(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
@@ -1111,7 +1111,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithPar
 	}
 }
 
-// RemoveNetworkWithParams wraps the corresponding Objective-C method.
+// RemoveNetworkWithParams removes network with params.
 //
 // RemoveNetworkWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) RemoveNetworkWithParams(ctx context.Context, params *MTRNetworkCommissioningClusterRemoveNetworkParams) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
@@ -1136,7 +1136,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) RemoveNetworkWithParams(ctx con
 	}
 }
 
-// ConnectNetworkWithParams wraps the corresponding Objective-C method.
+// ConnectNetworkWithParams connects network with params.
 //
 // ConnectNetworkWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ConnectNetworkWithParams(ctx context.Context, params *MTRNetworkCommissioningClusterConnectNetworkParams) (result *MTRNetworkCommissioningClusterConnectNetworkResponseParams, err error) {
@@ -1186,7 +1186,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) ReorderNetworkWithParams(ctx co
 	}
 }
 
-// ReadAttributeMaxNetworks wraps the corresponding Objective-C method.
+// ReadAttributeMaxNetworks reads attribute max networks.
 //
 // ReadAttributeMaxNetworks blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeMaxNetworks(ctx context.Context) (result obj.Object, err error) {
@@ -1236,7 +1236,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeMaxNetworksWi
 	}
 }
 
-// ReadAttributeNetworks wraps the corresponding Objective-C method.
+// ReadAttributeNetworks reads attribute networks.
 //
 // ReadAttributeNetworks blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeNetworks(ctx context.Context) (result obj.Object, err error) {
@@ -1286,7 +1286,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeNetworksWithM
 	}
 }
 
-// ReadAttributeScanMaxTimeSeconds wraps the corresponding Objective-C method.
+// ReadAttributeScanMaxTimeSeconds reads attribute scan max time seconds.
 //
 // ReadAttributeScanMaxTimeSeconds blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeScanMaxTimeSeconds(ctx context.Context) (result obj.Object, err error) {
@@ -1336,7 +1336,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeScanMaxTimeSe
 	}
 }
 
-// ReadAttributeConnectMaxTimeSeconds wraps the corresponding Objective-C method.
+// ReadAttributeConnectMaxTimeSeconds reads attribute connect max time seconds.
 //
 // ReadAttributeConnectMaxTimeSeconds blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeConnectMaxTimeSeconds(ctx context.Context) (result obj.Object, err error) {
@@ -1386,7 +1386,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeConnectMaxTim
 	}
 }
 
-// ReadAttributeInterfaceEnabled wraps the corresponding Objective-C method.
+// ReadAttributeInterfaceEnabled reads attribute interface enabled.
 //
 // ReadAttributeInterfaceEnabled blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeInterfaceEnabled(ctx context.Context) (result obj.Object, err error) {
@@ -1436,7 +1436,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeInterfaceEnab
 	}
 }
 
-// ReadAttributeLastNetworkingStatus wraps the corresponding Objective-C method.
+// ReadAttributeLastNetworkingStatus reads attribute last networking status.
 //
 // ReadAttributeLastNetworkingStatus blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeLastNetworkingStatus(ctx context.Context) (result obj.Object, err error) {
@@ -1486,7 +1486,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeLastNetworkin
 	}
 }
 
-// ReadAttributeLastNetworkID wraps the corresponding Objective-C method.
+// ReadAttributeLastNetworkID reads attribute last network ID.
 //
 // ReadAttributeLastNetworkID blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeLastNetworkID(ctx context.Context) (result obj.Object, err error) {
@@ -1536,7 +1536,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeLastNetworkID
 	}
 }
 
-// ReadAttributeLastConnectErrorValue wraps the corresponding Objective-C method.
+// ReadAttributeLastConnectErrorValue reads attribute last connect error value.
 //
 // ReadAttributeLastConnectErrorValue blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeLastConnectErrorValue(ctx context.Context) (result obj.Object, err error) {
@@ -1586,7 +1586,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeLastConnectEr
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1636,7 +1636,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeGeneratedComm
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1686,7 +1686,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeAcceptedComma
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -1736,7 +1736,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeAttributeList
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -1786,7 +1786,7 @@ func (mbcnc *MTRBaseClusterNetworkCommissioning) SubscribeAttributeFeatureMapWit
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcnc *MTRBaseClusterNetworkCommissioning) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

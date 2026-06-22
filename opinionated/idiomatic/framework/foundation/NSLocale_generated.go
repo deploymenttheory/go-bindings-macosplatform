@@ -80,7 +80,7 @@ func NewLocaleWithCoder(coder *Coder) *Locale {
 	return localeAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (l *Locale) WithScriptingProperties(scriptingProperties obj.Object) *Locale {
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return l
@@ -182,7 +182,7 @@ func (l *Locale) LocalizedStringForCollatorIdentifier(collatorIdentifier string)
 	return purego.GoString(_r)
 }
 
-// LocaleIdentifier wraps the corresponding Objective-C method.
+// LocaleIdentifier returns the locale identifier.
 func (l *Locale) LocaleIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("localeIdentifier"))
 	if _r == 0 {
@@ -191,7 +191,7 @@ func (l *Locale) LocaleIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// LanguageCode wraps the corresponding Objective-C method.
+// LanguageCode returns the language code.
 func (l *Locale) LanguageCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("languageCode"))
 	if _r == 0 {
@@ -209,7 +209,7 @@ func (l *Locale) LanguageIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// CountryCode wraps the corresponding Objective-C method.
+// CountryCode returns the country code.
 func (l *Locale) CountryCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("countryCode"))
 	if _r == 0 {
@@ -227,7 +227,7 @@ func (l *Locale) RegionCode() string {
 	return purego.GoString(_r)
 }
 
-// ScriptCode wraps the corresponding Objective-C method.
+// ScriptCode returns the script code.
 func (l *Locale) ScriptCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("scriptCode"))
 	if _r == 0 {
@@ -236,7 +236,7 @@ func (l *Locale) ScriptCode() string {
 	return purego.GoString(_r)
 }
 
-// VariantCode wraps the corresponding Objective-C method.
+// VariantCode returns the variant code.
 func (l *Locale) VariantCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("variantCode"))
 	if _r == 0 {
@@ -245,13 +245,13 @@ func (l *Locale) VariantCode() string {
 	return purego.GoString(_r)
 }
 
-// ExemplarCharacterSet wraps the corresponding Objective-C method.
+// ExemplarCharacterSet returns the exemplar character set.
 func (l *Locale) ExemplarCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("exemplarCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// CalendarIdentifier wraps the corresponding Objective-C method.
+// CalendarIdentifier returns the calendar identifier.
 func (l *Locale) CalendarIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("calendarIdentifier"))
 	if _r == 0 {
@@ -260,7 +260,7 @@ func (l *Locale) CalendarIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// CollationIdentifier wraps the corresponding Objective-C method.
+// CollationIdentifier returns the collation identifier.
 func (l *Locale) CollationIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("collationIdentifier"))
 	if _r == 0 {
@@ -275,7 +275,7 @@ func (l *Locale) UsesMetricSystem() bool {
 	return _r
 }
 
-// DecimalSeparator wraps the corresponding Objective-C method.
+// DecimalSeparator returns the decimal separator.
 func (l *Locale) DecimalSeparator() string {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("decimalSeparator"))
 	if _r == 0 {
@@ -284,7 +284,7 @@ func (l *Locale) DecimalSeparator() string {
 	return purego.GoString(_r)
 }
 
-// GroupingSeparator wraps the corresponding Objective-C method.
+// GroupingSeparator returns the grouping separator.
 func (l *Locale) GroupingSeparator() string {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("groupingSeparator"))
 	if _r == 0 {
@@ -293,7 +293,7 @@ func (l *Locale) GroupingSeparator() string {
 	return purego.GoString(_r)
 }
 
-// CurrencySymbol wraps the corresponding Objective-C method.
+// CurrencySymbol returns the currency symbol.
 func (l *Locale) CurrencySymbol() string {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("currencySymbol"))
 	if _r == 0 {
@@ -302,7 +302,7 @@ func (l *Locale) CurrencySymbol() string {
 	return purego.GoString(_r)
 }
 
-// CurrencyCode wraps the corresponding Objective-C method.
+// CurrencyCode returns the currency code.
 func (l *Locale) CurrencyCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("currencyCode"))
 	if _r == 0 {
@@ -311,7 +311,7 @@ func (l *Locale) CurrencyCode() string {
 	return purego.GoString(_r)
 }
 
-// CollatorIdentifier wraps the corresponding Objective-C method.
+// CollatorIdentifier returns the collator identifier.
 func (l *Locale) CollatorIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("collatorIdentifier"))
 	if _r == 0 {
@@ -320,7 +320,7 @@ func (l *Locale) CollatorIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// QuotationBeginDelimiter wraps the corresponding Objective-C method.
+// QuotationBeginDelimiter returns the quotation begin delimiter.
 func (l *Locale) QuotationBeginDelimiter() string {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("quotationBeginDelimiter"))
 	if _r == 0 {
@@ -329,7 +329,7 @@ func (l *Locale) QuotationBeginDelimiter() string {
 	return purego.GoString(_r)
 }
 
-// QuotationEndDelimiter wraps the corresponding Objective-C method.
+// QuotationEndDelimiter returns the quotation end delimiter.
 func (l *Locale) QuotationEndDelimiter() string {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("quotationEndDelimiter"))
 	if _r == 0 {
@@ -338,7 +338,7 @@ func (l *Locale) QuotationEndDelimiter() string {
 	return purego.GoString(_r)
 }
 
-// AlternateQuotationBeginDelimiter wraps the corresponding Objective-C method.
+// AlternateQuotationBeginDelimiter returns the alternate quotation begin delimiter.
 func (l *Locale) AlternateQuotationBeginDelimiter() string {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("alternateQuotationBeginDelimiter"))
 	if _r == 0 {
@@ -347,7 +347,7 @@ func (l *Locale) AlternateQuotationBeginDelimiter() string {
 	return purego.GoString(_r)
 }
 
-// AlternateQuotationEndDelimiter wraps the corresponding Objective-C method.
+// AlternateQuotationEndDelimiter returns the alternate quotation end delimiter.
 func (l *Locale) AlternateQuotationEndDelimiter() string {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("alternateQuotationEndDelimiter"))
 	if _r == 0 {

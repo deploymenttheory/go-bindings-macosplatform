@@ -70,13 +70,13 @@ func NewMTRDoorLockClusterUnlockWithTimeoutParams() *MTRDoorLockClusterUnlockWit
 	return mTRDoorLockClusterUnlockWithTimeoutParamsAdopt(_id)
 }
 
-// WithTimeout sets the property and returns the receiver so calls can be chained.
+// WithTimeout sets the timeout.
 func (mdlcuwtp *MTRDoorLockClusterUnlockWithTimeoutParams) WithTimeout(timeout obj.Object) *MTRDoorLockClusterUnlockWithTimeoutParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcuwtp), objc.RegisterName("setTimeout:"), objref.IDOf(timeout))
 	return mdlcuwtp
 }
 
-// WithPinCode sets the property and returns the receiver so calls can be chained.
+// WithPinCode sets the pin code.
 func (mdlcuwtp *MTRDoorLockClusterUnlockWithTimeoutParams) WithPinCode(pinCode obj.Object) *MTRDoorLockClusterUnlockWithTimeoutParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcuwtp), objc.RegisterName("setPinCode:"), objref.IDOf(pinCode))
 	return mdlcuwtp
@@ -94,13 +94,13 @@ func (mdlcuwtp *MTRDoorLockClusterUnlockWithTimeoutParams) WithServerSideProcess
 	return mdlcuwtp
 }
 
-// Timeout wraps the corresponding Objective-C method.
+// Timeout returns the timeout.
 func (mdlcuwtp *MTRDoorLockClusterUnlockWithTimeoutParams) Timeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcuwtp), objc.RegisterName("timeout"))
 	return obj.Wrap(_r)
 }
 
-// PinCode wraps the corresponding Objective-C method.
+// PinCode returns the pin code.
 func (mdlcuwtp *MTRDoorLockClusterUnlockWithTimeoutParams) PinCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcuwtp), objc.RegisterName("pinCode"))
 	return obj.Wrap(_r)

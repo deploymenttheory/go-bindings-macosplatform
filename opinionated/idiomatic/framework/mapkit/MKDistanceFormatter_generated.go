@@ -90,19 +90,19 @@ func (df *DistanceFormatter) WithUnitStyle(unitStyle DistanceFormatterUnitStyle)
 	return df
 }
 
-// Locale wraps the corresponding Objective-C method.
+// Locale returns the locale.
 func (df *DistanceFormatter) Locale() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(df), objc.RegisterName("locale"))
 	return obj.Wrap(_r)
 }
 
-// Units wraps the corresponding Objective-C method.
+// Units returns the units.
 func (df *DistanceFormatter) Units() DistanceFormatterUnits {
 	_r := objc.Send[DistanceFormatterUnits](objref.IDOf(df), objc.RegisterName("units"))
 	return _r
 }
 
-// UnitStyle wraps the corresponding Objective-C method.
+// UnitStyle returns the unit style.
 func (df *DistanceFormatter) UnitStyle() DistanceFormatterUnitStyle {
 	_r := objc.Send[DistanceFormatterUnitStyle](objref.IDOf(df), objc.RegisterName("unitStyle"))
 	return _r

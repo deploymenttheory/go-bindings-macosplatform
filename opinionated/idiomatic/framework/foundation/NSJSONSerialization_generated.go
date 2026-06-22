@@ -72,7 +72,7 @@ func NewJSONSerialization() *JSONSerialization {
 	return jSONSerializationAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (js *JSONSerialization) WithScriptingProperties(scriptingProperties obj.Object) *JSONSerialization {
 	objc.Send[objc.ID](objref.IDOf(js), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return js

@@ -83,19 +83,19 @@ func (nsa *NearbyServiceAdvertiser) StopAdvertisingPeer() {
 	objc.Send[objc.ID](objref.IDOf(nsa), objc.RegisterName("stopAdvertisingPeer"))
 }
 
-// MyPeerID wraps the corresponding Objective-C method.
+// MyPeerID returns the my peer ID.
 func (nsa *NearbyServiceAdvertiser) MyPeerID() *PeerID {
 	_r := objc.Send[objc.ID](objref.IDOf(nsa), objc.RegisterName("myPeerID"))
 	return PeerIDFromID(_r)
 }
 
-// DiscoveryInfo wraps the corresponding Objective-C method.
+// DiscoveryInfo returns the discovery info.
 func (nsa *NearbyServiceAdvertiser) DiscoveryInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(nsa), objc.RegisterName("discoveryInfo"))
 	return obj.Wrap(_r)
 }
 
-// ServiceType wraps the corresponding Objective-C method.
+// ServiceType returns the service type.
 func (nsa *NearbyServiceAdvertiser) ServiceType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(nsa), objc.RegisterName("serviceType"))
 	if _r == 0 {

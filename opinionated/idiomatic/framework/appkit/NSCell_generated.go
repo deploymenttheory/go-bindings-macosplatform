@@ -528,37 +528,37 @@ func (c *Cell) DraggingImageComponentsWithFrameInView(frame corefoundation.CGRec
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *DraggingImageComponent { return DraggingImageComponentFromID(_id) })
 }
 
-// ControlView wraps the corresponding Objective-C method.
+// ControlView returns the control view.
 func (c *Cell) ControlView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("controlView"))
 	return ViewFromID(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (c *Cell) Type() CellType {
 	_r := objc.Send[CellType](objref.IDOf(c), objc.RegisterName("type"))
 	return _r
 }
 
-// State wraps the corresponding Objective-C method.
+// State returns the state.
 func (c *Cell) State() int {
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("state"))
 	return _r
 }
 
-// Target wraps the corresponding Objective-C method.
+// Target returns the target.
 func (c *Cell) Target() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("target"))
 	return obj.Wrap(_r)
 }
 
-// Tag wraps the corresponding Objective-C method.
+// Tag returns the tag.
 func (c *Cell) Tag() int {
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("tag"))
 	return _r
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (c *Cell) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("title"))
 	if _r == 0 {
@@ -567,61 +567,61 @@ func (c *Cell) Title() string {
 	return purego.GoString(_r)
 }
 
-// IsOpaque wraps the corresponding Objective-C method.
+// IsOpaque reports whether the object is opaque.
 func (c *Cell) IsOpaque() bool {
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isOpaque"))
 	return _r
 }
 
-// IsEnabled wraps the corresponding Objective-C method.
+// IsEnabled reports whether the object is enabled.
 func (c *Cell) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isEnabled"))
 	return _r
 }
 
-// IsContinuous wraps the corresponding Objective-C method.
+// IsContinuous reports whether the object is continuous.
 func (c *Cell) IsContinuous() bool {
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isContinuous"))
 	return _r
 }
 
-// IsEditable wraps the corresponding Objective-C method.
+// IsEditable reports whether the object is editable.
 func (c *Cell) IsEditable() bool {
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isEditable"))
 	return _r
 }
 
-// IsSelectable wraps the corresponding Objective-C method.
+// IsSelectable reports whether the object is selectable.
 func (c *Cell) IsSelectable() bool {
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isSelectable"))
 	return _r
 }
 
-// IsBordered wraps the corresponding Objective-C method.
+// IsBordered reports whether the object is bordered.
 func (c *Cell) IsBordered() bool {
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isBordered"))
 	return _r
 }
 
-// IsBezeled wraps the corresponding Objective-C method.
+// IsBezeled reports whether the object is bezeled.
 func (c *Cell) IsBezeled() bool {
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isBezeled"))
 	return _r
 }
 
-// IsScrollable wraps the corresponding Objective-C method.
+// IsScrollable reports whether the object is scrollable.
 func (c *Cell) IsScrollable() bool {
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isScrollable"))
 	return _r
 }
 
-// IsHighlighted wraps the corresponding Objective-C method.
+// IsHighlighted reports whether the object is highlighted.
 func (c *Cell) IsHighlighted() bool {
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isHighlighted"))
 	return _r
 }
 
-// Alignment wraps the corresponding Objective-C method.
+// Alignment returns the alignment.
 func (c *Cell) Alignment() TextAlignment {
 	_r := objc.Send[TextAlignment](objref.IDOf(c), objc.RegisterName("alignment"))
 	return _r
@@ -633,13 +633,13 @@ func (c *Cell) Wraps() bool {
 	return _r
 }
 
-// Font wraps the corresponding Objective-C method.
+// Font returns the font.
 func (c *Cell) Font() *Font {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("font"))
 	return FontFromID(_r)
 }
 
-// KeyEquivalent wraps the corresponding Objective-C method.
+// KeyEquivalent returns the key equivalent.
 func (c *Cell) KeyEquivalent() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("keyEquivalent"))
 	if _r == 0 {
@@ -648,25 +648,25 @@ func (c *Cell) KeyEquivalent() string {
 	return purego.GoString(_r)
 }
 
-// Formatter wraps the corresponding Objective-C method.
+// Formatter returns the formatter.
 func (c *Cell) Formatter() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("formatter"))
 	return obj.Wrap(_r)
 }
 
-// ObjectValue wraps the corresponding Objective-C method.
+// ObjectValue returns the object value.
 func (c *Cell) ObjectValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("objectValue"))
 	return obj.Wrap(_r)
 }
 
-// HasValidObjectValue wraps the corresponding Objective-C method.
+// HasValidObjectValue reports whether the object has valid object value.
 func (c *Cell) HasValidObjectValue() bool {
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("hasValidObjectValue"))
 	return _r
 }
 
-// StringValue wraps the corresponding Objective-C method.
+// StringValue returns the string value.
 func (c *Cell) StringValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("stringValue"))
 	if _r == 0 {
@@ -675,61 +675,61 @@ func (c *Cell) StringValue() string {
 	return purego.GoString(_r)
 }
 
-// IntValue wraps the corresponding Objective-C method.
+// IntValue returns the int value.
 func (c *Cell) IntValue() int {
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("intValue"))
 	return _r
 }
 
-// FloatValue wraps the corresponding Objective-C method.
+// FloatValue returns the float value.
 func (c *Cell) FloatValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("floatValue"))
 	return _r
 }
 
-// DoubleValue wraps the corresponding Objective-C method.
+// DoubleValue returns the double value.
 func (c *Cell) DoubleValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("doubleValue"))
 	return _r
 }
 
-// IntegerValue wraps the corresponding Objective-C method.
+// IntegerValue returns the integer value.
 func (c *Cell) IntegerValue() int {
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("integerValue"))
 	return _r
 }
 
-// Image wraps the corresponding Objective-C method.
+// Image returns the image.
 func (c *Cell) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
-// ControlSize wraps the corresponding Objective-C method.
+// ControlSize returns the control size.
 func (c *Cell) ControlSize() ControlSize {
 	_r := objc.Send[ControlSize](objref.IDOf(c), objc.RegisterName("controlSize"))
 	return _r
 }
 
-// RepresentedObject wraps the corresponding Objective-C method.
+// RepresentedObject returns the represented object.
 func (c *Cell) RepresentedObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("representedObject"))
 	return obj.Wrap(_r)
 }
 
-// CellSize wraps the corresponding Objective-C method.
+// CellSize returns the cell size.
 func (c *Cell) CellSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(c), objc.RegisterName("cellSize"))
 	return _r
 }
 
-// MouseDownFlags wraps the corresponding Objective-C method.
+// MouseDownFlags returns the mouse down flags.
 func (c *Cell) MouseDownFlags() int {
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("mouseDownFlags"))
 	return _r
 }
 
-// Menu wraps the corresponding Objective-C method.
+// Menu returns the menu.
 func (c *Cell) Menu() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("menu"))
 	return MenuFromID(_r)
@@ -741,13 +741,13 @@ func (c *Cell) SendsActionOnEndEditing() bool {
 	return _r
 }
 
-// BaseWritingDirection wraps the corresponding Objective-C method.
+// BaseWritingDirection returns the base writing direction.
 func (c *Cell) BaseWritingDirection() WritingDirection {
 	_r := objc.Send[WritingDirection](objref.IDOf(c), objc.RegisterName("baseWritingDirection"))
 	return _r
 }
 
-// LineBreakMode wraps the corresponding Objective-C method.
+// LineBreakMode returns the line break mode.
 func (c *Cell) LineBreakMode() LineBreakMode {
 	_r := objc.Send[LineBreakMode](objref.IDOf(c), objc.RegisterName("lineBreakMode"))
 	return _r
@@ -765,7 +765,7 @@ func (c *Cell) TruncatesLastVisibleLine() bool {
 	return _r
 }
 
-// UserInterfaceLayoutDirection wraps the corresponding Objective-C method.
+// UserInterfaceLayoutDirection returns the user interface layout direction.
 func (c *Cell) UserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
 	_r := objc.Send[UserInterfaceLayoutDirection](objref.IDOf(c), objc.RegisterName("userInterfaceLayoutDirection"))
 	return _r
@@ -811,7 +811,7 @@ func (c *Cell) ShowsFirstResponder() bool {
 	return _r
 }
 
-// FocusRingType wraps the corresponding Objective-C method.
+// FocusRingType returns the focus ring type.
 func (c *Cell) FocusRingType() FocusRingType {
 	_r := objc.Send[FocusRingType](objref.IDOf(c), objc.RegisterName("focusRingType"))
 	return _r
@@ -823,7 +823,7 @@ func (c *Cell) WantsNotificationForMarkedText() bool {
 	return _r
 }
 
-// AttributedStringValue wraps the corresponding Objective-C method.
+// AttributedStringValue returns the attributed string value.
 func (c *Cell) AttributedStringValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("attributedStringValue"))
 	return obj.Wrap(_r)
@@ -852,7 +852,7 @@ func (c *Cell) AllowsMixedState() bool {
 	return _r
 }
 
-// NextState wraps the corresponding Objective-C method.
+// NextState returns the next state.
 func (c *Cell) NextState() int {
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("nextState"))
 	return _r
@@ -875,13 +875,13 @@ func (c *Cell) DrawWithExpansionFrameInView(cellFrame corefoundation.CGRect, vie
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("drawWithExpansionFrame:inView:"), cellFrame, objref.IDOf(view))
 }
 
-// BackgroundStyle wraps the corresponding Objective-C method.
+// BackgroundStyle returns the background style.
 func (c *Cell) BackgroundStyle() BackgroundStyle {
 	_r := objc.Send[BackgroundStyle](objref.IDOf(c), objc.RegisterName("backgroundStyle"))
 	return _r
 }
 
-// InteriorBackgroundStyle wraps the corresponding Objective-C method.
+// InteriorBackgroundStyle returns the interior background style.
 func (c *Cell) InteriorBackgroundStyle() BackgroundStyle {
 	_r := objc.Send[BackgroundStyle](objref.IDOf(c), objc.RegisterName("interiorBackgroundStyle"))
 	return _r
@@ -934,7 +934,7 @@ func (c *Cell) SetTitleWithMnemonic(stringWithAmpersand string) {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
 }
 
-// ControlTint wraps the corresponding Objective-C method.
+// ControlTint returns the control tint.
 func (c *Cell) ControlTint() ControlTint {
 	_r := objc.Send[ControlTint](objref.IDOf(c), objc.RegisterName("controlTint"))
 	return _r

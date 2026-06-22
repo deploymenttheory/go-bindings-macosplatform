@@ -70,7 +70,7 @@ func NewMTRDeviceEnergyManagementModeClusterChangeToModeParams() *MTRDeviceEnerg
 	return mTRDeviceEnergyManagementModeClusterChangeToModeParamsAdopt(_id)
 }
 
-// WithNewMode sets the property and returns the receiver so calls can be chained.
+// WithNewMode sets the new mode.
 func (mdemmcctmp *MTRDeviceEnergyManagementModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTRDeviceEnergyManagementModeClusterChangeToModeParams {
 	objc.Send[objc.ID](objref.IDOf(mdemmcctmp), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
 	return mdemmcctmp
@@ -88,8 +88,8 @@ func (mdemmcctmp *MTRDeviceEnergyManagementModeClusterChangeToModeParams) WithSe
 	return mdemmcctmp
 }
 
-// GetNewMode wraps the corresponding Objective-C method.
-func (mdemmcctmp *MTRDeviceEnergyManagementModeClusterChangeToModeParams) GetNewMode() obj.Object {
+// NewMode returns the new mode.
+func (mdemmcctmp *MTRDeviceEnergyManagementModeClusterChangeToModeParams) NewMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemmcctmp), objc.RegisterName("getNewMode"))
 	return obj.Wrap(_r)
 }

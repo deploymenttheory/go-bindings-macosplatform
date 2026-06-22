@@ -123,19 +123,19 @@ func (pw *PhysicsWorld) UpdateCollisionPairs() {
 	objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("updateCollisionPairs"))
 }
 
-// Speed wraps the corresponding Objective-C method.
+// Speed returns the speed.
 func (pw *PhysicsWorld) Speed() float64 {
 	_r := objc.Send[float64](objref.IDOf(pw), objc.RegisterName("speed"))
 	return _r
 }
 
-// TimeStep wraps the corresponding Objective-C method.
+// TimeStep returns the time step.
 func (pw *PhysicsWorld) TimeStep() float64 {
 	_r := objc.Send[float64](objref.IDOf(pw), objc.RegisterName("timeStep"))
 	return _r
 }
 
-// AllBehaviors wraps the corresponding Objective-C method.
+// AllBehaviors returns the all behaviors.
 //
 // AllBehaviors returns the collection as a Go slice.
 func (pw *PhysicsWorld) AllBehaviors() []*PhysicsBehavior {

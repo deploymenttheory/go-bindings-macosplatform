@@ -51,67 +51,67 @@ func NewCalEvent() *CalEvent {
 	return calEventAdopt(_id)
 }
 
-// WithIsAllDay sets the property and returns the receiver so calls can be chained.
+// WithIsAllDay sets the is all day.
 func (ce *CalEvent) WithIsAllDay(isAllDay bool) *CalEvent {
 	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("setIsAllDay:"), isAllDay)
 	return ce
 }
 
-// WithLocation sets the property and returns the receiver so calls can be chained.
+// WithLocation sets the location.
 func (ce *CalEvent) WithLocation(location string) *CalEvent {
 	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("setLocation:"), purego.NSString(location))
 	return ce
 }
 
-// WithRecurrenceRule sets the property and returns the receiver so calls can be chained.
+// WithRecurrenceRule sets the recurrence rule.
 func (ce *CalEvent) WithRecurrenceRule(recurrenceRule *CalRecurrenceRule) *CalEvent {
 	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("setRecurrenceRule:"), objref.IDOf(recurrenceRule))
 	return ce
 }
 
-// WithStartDate sets the property and returns the receiver so calls can be chained.
+// WithStartDate sets the start date.
 func (ce *CalEvent) WithStartDate(startDate obj.Object) *CalEvent {
 	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
 	return ce
 }
 
-// WithEndDate sets the property and returns the receiver so calls can be chained.
+// WithEndDate sets the end date.
 func (ce *CalEvent) WithEndDate(endDate obj.Object) *CalEvent {
 	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
 	return ce
 }
 
-// WithCalendar sets the property and returns the receiver so calls can be chained.
+// WithCalendar sets the calendar.
 func (ce *CalEvent) WithCalendar(calendar *CalCalendar) *CalEvent {
 	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return ce
 }
 
-// WithNotes sets the property and returns the receiver so calls can be chained.
+// WithNotes sets the notes.
 func (ce *CalEvent) WithNotes(notes string) *CalEvent {
 	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("setNotes:"), purego.NSString(notes))
 	return ce
 }
 
-// WithURL sets the property and returns the receiver so calls can be chained.
+// WithURL sets the URL.
 func (ce *CalEvent) WithURL(url string) *CalEvent {
 	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("setUrl:"), rt.FileURL(url))
 	return ce
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (ce *CalEvent) WithTitle(title string) *CalEvent {
 	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return ce
 }
 
-// IsAllDay wraps the corresponding Objective-C method.
+// IsAllDay reports whether the object is all day.
 func (ce *CalEvent) IsAllDay() bool {
 	_r := objc.Send[bool](objref.IDOf(ce), objc.RegisterName("isAllDay"))
 	return _r
 }
 
-// Location wraps the corresponding Objective-C method.
+// Location returns the location.
 func (ce *CalEvent) Location() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("location"))
 	if _r == 0 {
@@ -120,37 +120,37 @@ func (ce *CalEvent) Location() string {
 	return purego.GoString(_r)
 }
 
-// RecurrenceRule wraps the corresponding Objective-C method.
+// RecurrenceRule returns the recurrence rule.
 func (ce *CalEvent) RecurrenceRule() *CalRecurrenceRule {
 	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("recurrenceRule"))
 	return CalRecurrenceRuleFromID(_r)
 }
 
-// StartDate wraps the corresponding Objective-C method.
+// StartDate returns the start date.
 func (ce *CalEvent) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// EndDate wraps the corresponding Objective-C method.
+// EndDate returns the end date.
 func (ce *CalEvent) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
-// Attendees wraps the corresponding Objective-C method.
+// Attendees returns the attendees.
 func (ce *CalEvent) Attendees() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("attendees"))
 	return obj.Wrap(_r)
 }
 
-// IsDetached wraps the corresponding Objective-C method.
+// IsDetached reports whether the object is detached.
 func (ce *CalEvent) IsDetached() bool {
 	_r := objc.Send[bool](objref.IDOf(ce), objc.RegisterName("isDetached"))
 	return _r
 }
 
-// Occurrence wraps the corresponding Objective-C method.
+// Occurrence returns the occurrence.
 func (ce *CalEvent) Occurrence() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("occurrence"))
 	return obj.Wrap(_r)

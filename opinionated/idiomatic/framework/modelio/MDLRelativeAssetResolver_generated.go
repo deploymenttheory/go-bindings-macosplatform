@@ -71,13 +71,13 @@ func NewRelativeAssetResolverWithAsset(asset *Asset) *RelativeAssetResolver {
 	return relativeAssetResolverAdopt(_id)
 }
 
-// WithAsset sets the property and returns the receiver so calls can be chained.
+// WithAsset sets the asset.
 func (rar *RelativeAssetResolver) WithAsset(asset *Asset) *RelativeAssetResolver {
 	objc.Send[objc.ID](objref.IDOf(rar), objc.RegisterName("setAsset:"), objref.IDOf(asset))
 	return rar
 }
 
-// Asset wraps the corresponding Objective-C method.
+// Asset returns the asset.
 func (rar *RelativeAssetResolver) Asset() *Asset {
 	_r := objc.Send[objc.ID](objref.IDOf(rar), objc.RegisterName("asset"))
 	return AssetFromID(_r)

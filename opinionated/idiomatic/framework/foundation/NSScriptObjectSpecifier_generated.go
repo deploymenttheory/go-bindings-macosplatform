@@ -131,7 +131,7 @@ func (sos *ScriptObjectSpecifier) WithEvaluationErrorNumber(evaluationErrorNumbe
 	return sos
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (sos *ScriptObjectSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *ScriptObjectSpecifier {
 	objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return sos
@@ -143,13 +143,13 @@ func (sos *ScriptObjectSpecifier) ObjectsByEvaluatingWithContainers(containers o
 	return obj.Wrap(_r)
 }
 
-// ChildSpecifier wraps the corresponding Objective-C method.
+// ChildSpecifier returns the child specifier.
 func (sos *ScriptObjectSpecifier) ChildSpecifier() *ScriptObjectSpecifier {
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("childSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
 
-// ContainerSpecifier wraps the corresponding Objective-C method.
+// ContainerSpecifier returns the container specifier.
 func (sos *ScriptObjectSpecifier) ContainerSpecifier() *ScriptObjectSpecifier {
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("containerSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
@@ -167,7 +167,7 @@ func (sos *ScriptObjectSpecifier) ContainerIsRangeContainerObject() bool {
 	return _r
 }
 
-// Key wraps the corresponding Objective-C method.
+// Key returns the key.
 func (sos *ScriptObjectSpecifier) Key() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("key"))
 	if _r == 0 {
@@ -176,37 +176,37 @@ func (sos *ScriptObjectSpecifier) Key() string {
 	return purego.GoString(_r)
 }
 
-// ContainerClassDescription wraps the corresponding Objective-C method.
+// ContainerClassDescription returns the container class description.
 func (sos *ScriptObjectSpecifier) ContainerClassDescription() *ScriptClassDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("containerClassDescription"))
 	return ScriptClassDescriptionFromID(_r)
 }
 
-// KeyClassDescription wraps the corresponding Objective-C method.
+// KeyClassDescription returns the key class description.
 func (sos *ScriptObjectSpecifier) KeyClassDescription() *ScriptClassDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("keyClassDescription"))
 	return ScriptClassDescriptionFromID(_r)
 }
 
-// ObjectsByEvaluatingSpecifier wraps the corresponding Objective-C method.
+// ObjectsByEvaluatingSpecifier returns the objects by evaluating specifier.
 func (sos *ScriptObjectSpecifier) ObjectsByEvaluatingSpecifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("objectsByEvaluatingSpecifier"))
 	return obj.Wrap(_r)
 }
 
-// EvaluationErrorNumber wraps the corresponding Objective-C method.
+// EvaluationErrorNumber returns the evaluation error number.
 func (sos *ScriptObjectSpecifier) EvaluationErrorNumber() int {
 	_r := objc.Send[int](objref.IDOf(sos), objc.RegisterName("evaluationErrorNumber"))
 	return _r
 }
 
-// EvaluationErrorSpecifier wraps the corresponding Objective-C method.
+// EvaluationErrorSpecifier returns the evaluation error specifier.
 func (sos *ScriptObjectSpecifier) EvaluationErrorSpecifier() *ScriptObjectSpecifier {
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("evaluationErrorSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
 
-// Descriptor wraps the corresponding Objective-C method.
+// Descriptor returns the descriptor.
 func (sos *ScriptObjectSpecifier) Descriptor() *AppleEventDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(sos), objc.RegisterName("descriptor"))
 	return AppleEventDescriptorFromID(_r)

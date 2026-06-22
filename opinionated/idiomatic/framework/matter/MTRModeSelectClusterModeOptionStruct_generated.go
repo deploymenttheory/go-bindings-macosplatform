@@ -70,19 +70,19 @@ func NewMTRModeSelectClusterModeOptionStruct() *MTRModeSelectClusterModeOptionSt
 	return mTRModeSelectClusterModeOptionStructAdopt(_id)
 }
 
-// WithLabel sets the property and returns the receiver so calls can be chained.
+// WithLabel sets the label.
 func (mmscmos *MTRModeSelectClusterModeOptionStruct) WithLabel(label string) *MTRModeSelectClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(mmscmos), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return mmscmos
 }
 
-// WithMode sets the property and returns the receiver so calls can be chained.
+// WithMode sets the mode.
 func (mmscmos *MTRModeSelectClusterModeOptionStruct) WithMode(mode obj.Object) *MTRModeSelectClusterModeOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(mmscmos), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return mmscmos
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (mmscmos *MTRModeSelectClusterModeOptionStruct) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mmscmos), objc.RegisterName("label"))
 	if _r == 0 {
@@ -91,13 +91,13 @@ func (mmscmos *MTRModeSelectClusterModeOptionStruct) Label() string {
 	return purego.GoString(_r)
 }
 
-// Mode wraps the corresponding Objective-C method.
+// Mode returns the mode.
 func (mmscmos *MTRModeSelectClusterModeOptionStruct) Mode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmscmos), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
-// SemanticTags wraps the corresponding Objective-C method.
+// SemanticTags returns the semantic tags.
 func (mmscmos *MTRModeSelectClusterModeOptionStruct) SemanticTags() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmscmos), objc.RegisterName("semanticTags"))
 	return obj.Wrap(_r)

@@ -71,7 +71,7 @@ func NewFontAssetRequestWithFontDescriptorsOptions(fontDescriptors []*FontDescri
 	return fontAssetRequestAdopt(_id)
 }
 
-// DownloadedFontDescriptors wraps the corresponding Objective-C method.
+// DownloadedFontDescriptors returns the downloaded font descriptors.
 //
 // DownloadedFontDescriptors returns the collection as a Go slice.
 func (far *FontAssetRequest) DownloadedFontDescriptors() []*FontDescriptor {
@@ -79,7 +79,7 @@ func (far *FontAssetRequest) DownloadedFontDescriptors() []*FontDescriptor {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FontDescriptor { return FontDescriptorFromID(_id) })
 }
 
-// Progress wraps the corresponding Objective-C method.
+// Progress returns the progress.
 func (far *FontAssetRequest) Progress() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(far), objc.RegisterName("progress"))
 	return obj.Wrap(_r)

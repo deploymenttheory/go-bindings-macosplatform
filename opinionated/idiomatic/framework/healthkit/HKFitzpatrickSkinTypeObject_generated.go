@@ -72,7 +72,7 @@ func NewFitzpatrickSkinTypeObject() *FitzpatrickSkinTypeObject {
 	return fitzpatrickSkinTypeObjectAdopt(_id)
 }
 
-// SkinType wraps the corresponding Objective-C method.
+// SkinType returns the skin type.
 func (fsto *FitzpatrickSkinTypeObject) SkinType() FitzpatrickSkinType {
 	_r := objc.Send[FitzpatrickSkinType](objref.IDOf(fsto), objc.RegisterName("skinType"))
 	return _r

@@ -50,7 +50,7 @@ func NewMTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams() *MTRTe
 	return mTRTestClusterClusterTestEmitTestFabricScopedEventRequestParamsAdopt(_id)
 }
 
-// WithArg1 sets the property and returns the receiver so calls can be chained.
+// WithArg1 sets the arg1.
 func (mtcctetfserp *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mtcctetfserp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mtcctetfserp

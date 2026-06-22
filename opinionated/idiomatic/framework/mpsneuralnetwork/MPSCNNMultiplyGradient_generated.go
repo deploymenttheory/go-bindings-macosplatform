@@ -51,19 +51,19 @@ func NewCNNMultiplyGradient() *CNNMultiplyGradient {
 	return cNNMultiplyGradientAdopt(_id)
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (cmg *CNNMultiplyGradient) WithPrimaryScale(primaryScale float32) *CNNMultiplyGradient {
 	objc.Send[objc.ID](objref.IDOf(cmg), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return cmg
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (cmg *CNNMultiplyGradient) WithSecondaryScale(secondaryScale float32) *CNNMultiplyGradient {
 	objc.Send[objc.ID](objref.IDOf(cmg), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return cmg
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (cmg *CNNMultiplyGradient) WithBias(bias float32) *CNNMultiplyGradient {
 	objc.Send[objc.ID](objref.IDOf(cmg), objc.RegisterName("setBias:"), bias)
 	return cmg

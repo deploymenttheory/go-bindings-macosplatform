@@ -529,7 +529,7 @@ func (mbcut *MTRBaseClusterUnitTesting) TestEmitTestFabricScopedEventRequestWith
 	}
 }
 
-// ReadAttributeBooleanWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBooleanWithCompletion reads attribute boolean with completion.
 //
 // ReadAttributeBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -579,7 +579,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBooleanWithParamsSubsc
 	}
 }
 
-// ReadAttributeBitmap8WithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBitmap8WithCompletion reads attribute bitmap8 with completion.
 //
 // ReadAttributeBitmap8WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap8WithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -629,7 +629,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap8WithParamsSubsc
 	}
 }
 
-// ReadAttributeBitmap16WithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBitmap16WithCompletion reads attribute bitmap16 with completion.
 //
 // ReadAttributeBitmap16WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap16WithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -679,7 +679,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap16WithParamsSubs
 	}
 }
 
-// ReadAttributeBitmap32WithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBitmap32WithCompletion reads attribute bitmap32 with completion.
 //
 // ReadAttributeBitmap32WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap32WithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -729,7 +729,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap32WithParamsSubs
 	}
 }
 
-// ReadAttributeBitmap64WithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBitmap64WithCompletion reads attribute bitmap64 with completion.
 //
 // ReadAttributeBitmap64WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeBitmap64WithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -779,7 +779,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeBitmap64WithParamsSubs
 	}
 }
 
-// ReadAttributeInt8uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInt8uWithCompletion reads attribute int8u with completion.
 //
 // ReadAttributeInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -829,7 +829,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt8uWithParamsSubscri
 	}
 }
 
-// ReadAttributeInt16uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInt16uWithCompletion reads attribute int16u with completion.
 //
 // ReadAttributeInt16uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt16uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -879,7 +879,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt16uWithParamsSubscr
 	}
 }
 
-// ReadAttributeInt24uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInt24uWithCompletion reads attribute int24u with completion.
 //
 // ReadAttributeInt24uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt24uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -929,7 +929,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt24uWithParamsSubscr
 	}
 }
 
-// ReadAttributeInt32uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInt32uWithCompletion reads attribute int32u with completion.
 //
 // ReadAttributeInt32uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt32uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -979,7 +979,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt32uWithParamsSubscr
 	}
 }
 
-// ReadAttributeInt40uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInt40uWithCompletion reads attribute int40u with completion.
 //
 // ReadAttributeInt40uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt40uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1029,7 +1029,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt40uWithParamsSubscr
 	}
 }
 
-// ReadAttributeInt48uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInt48uWithCompletion reads attribute int48u with completion.
 //
 // ReadAttributeInt48uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt48uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1079,7 +1079,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt48uWithParamsSubscr
 	}
 }
 
-// ReadAttributeInt56uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInt56uWithCompletion reads attribute int56u with completion.
 //
 // ReadAttributeInt56uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt56uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1129,7 +1129,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt56uWithParamsSubscr
 	}
 }
 
-// ReadAttributeInt64uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInt64uWithCompletion reads attribute int64u with completion.
 //
 // ReadAttributeInt64uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt64uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1179,7 +1179,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt64uWithParamsSubscr
 	}
 }
 
-// ReadAttributeInt8sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInt8sWithCompletion reads attribute int8s with completion.
 //
 // ReadAttributeInt8sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt8sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1229,7 +1229,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt8sWithParamsSubscri
 	}
 }
 
-// ReadAttributeInt16sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInt16sWithCompletion reads attribute int16s with completion.
 //
 // ReadAttributeInt16sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt16sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1279,7 +1279,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt16sWithParamsSubscr
 	}
 }
 
-// ReadAttributeInt24sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInt24sWithCompletion reads attribute int24s with completion.
 //
 // ReadAttributeInt24sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt24sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1329,7 +1329,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt24sWithParamsSubscr
 	}
 }
 
-// ReadAttributeInt32sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInt32sWithCompletion reads attribute int32s with completion.
 //
 // ReadAttributeInt32sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt32sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1379,7 +1379,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt32sWithParamsSubscr
 	}
 }
 
-// ReadAttributeInt40sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInt40sWithCompletion reads attribute int40s with completion.
 //
 // ReadAttributeInt40sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt40sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1429,7 +1429,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt40sWithParamsSubscr
 	}
 }
 
-// ReadAttributeInt48sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInt48sWithCompletion reads attribute int48s with completion.
 //
 // ReadAttributeInt48sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt48sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1479,7 +1479,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt48sWithParamsSubscr
 	}
 }
 
-// ReadAttributeInt56sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInt56sWithCompletion reads attribute int56s with completion.
 //
 // ReadAttributeInt56sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt56sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1529,7 +1529,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt56sWithParamsSubscr
 	}
 }
 
-// ReadAttributeInt64sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInt64sWithCompletion reads attribute int64s with completion.
 //
 // ReadAttributeInt64sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeInt64sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1579,7 +1579,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeInt64sWithParamsSubscr
 	}
 }
 
-// ReadAttributeEnum8WithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEnum8WithCompletion reads attribute enum8 with completion.
 //
 // ReadAttributeEnum8WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEnum8WithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1629,7 +1629,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEnum8WithParamsSubscri
 	}
 }
 
-// ReadAttributeEnum16WithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEnum16WithCompletion reads attribute enum16 with completion.
 //
 // ReadAttributeEnum16WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEnum16WithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1679,7 +1679,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEnum16WithParamsSubscr
 	}
 }
 
-// ReadAttributeFloatSingleWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFloatSingleWithCompletion reads attribute float single with completion.
 //
 // ReadAttributeFloatSingleWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeFloatSingleWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1729,7 +1729,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeFloatSingleWithParamsS
 	}
 }
 
-// ReadAttributeFloatDoubleWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFloatDoubleWithCompletion reads attribute float double with completion.
 //
 // ReadAttributeFloatDoubleWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeFloatDoubleWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1779,7 +1779,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeFloatDoubleWithParamsS
 	}
 }
 
-// ReadAttributeOctetStringWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOctetStringWithCompletion reads attribute octet string with completion.
 //
 // ReadAttributeOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1829,7 +1829,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeOctetStringWithParamsS
 	}
 }
 
-// ReadAttributeListInt8uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeListInt8uWithCompletion reads attribute list int8u with completion.
 //
 // ReadAttributeListInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1879,7 +1879,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListInt8uWithParamsSub
 	}
 }
 
-// ReadAttributeListOctetStringWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeListOctetStringWithCompletion reads attribute list octet string with completion.
 //
 // ReadAttributeListOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1929,7 +1929,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListOctetStringWithPar
 	}
 }
 
-// ReadAttributeListStructOctetStringWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeListStructOctetStringWithCompletion reads attribute list struct octet string with completion.
 //
 // ReadAttributeListStructOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListStructOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1979,7 +1979,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListStructOctetStringW
 	}
 }
 
-// ReadAttributeLongOctetStringWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLongOctetStringWithCompletion reads attribute long octet string with completion.
 //
 // ReadAttributeLongOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeLongOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2029,7 +2029,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeLongOctetStringWithPar
 	}
 }
 
-// ReadAttributeCharStringWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCharStringWithCompletion reads attribute char string with completion.
 //
 // ReadAttributeCharStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeCharStringWithCompletion(ctx context.Context) (result string, err error) {
@@ -2079,7 +2079,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeCharStringWithParamsSu
 	}
 }
 
-// ReadAttributeLongCharStringWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLongCharStringWithCompletion reads attribute long char string with completion.
 //
 // ReadAttributeLongCharStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeLongCharStringWithCompletion(ctx context.Context) (result string, err error) {
@@ -2129,7 +2129,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeLongCharStringWithPara
 	}
 }
 
-// ReadAttributeEpochUsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEpochUsWithCompletion reads attribute epoch us with completion.
 //
 // ReadAttributeEpochUsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEpochUsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2179,7 +2179,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEpochUsWithParamsSubsc
 	}
 }
 
-// ReadAttributeEpochSWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEpochSWithCompletion reads attribute epoch s with completion.
 //
 // ReadAttributeEpochSWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEpochSWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2229,7 +2229,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEpochSWithParamsSubscr
 	}
 }
 
-// ReadAttributeVendorIDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeVendorIDWithCompletion reads attribute vendor ID with completion.
 //
 // ReadAttributeVendorIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeVendorIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2279,7 +2279,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeVendorIDWithParamsSubs
 	}
 }
 
-// ReadAttributeListNullablesAndOptionalsStructWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeListNullablesAndOptionalsStructWithCompletion reads attribute list nullables and optionals struct with completion.
 //
 // ReadAttributeListNullablesAndOptionalsStructWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListNullablesAndOptionalsStructWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2329,7 +2329,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListNullablesAndOption
 	}
 }
 
-// ReadAttributeEnumAttrWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEnumAttrWithCompletion reads attribute enum attr with completion.
 //
 // ReadAttributeEnumAttrWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeEnumAttrWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2379,7 +2379,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeEnumAttrWithParamsSubs
 	}
 }
 
-// ReadAttributeStructAttrWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeStructAttrWithCompletion reads attribute struct attr with completion.
 //
 // ReadAttributeStructAttrWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeStructAttrWithCompletion(ctx context.Context) (result *MTRUnitTestingClusterSimpleStruct, err error) {
@@ -2429,7 +2429,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeStructAttrWithParamsSu
 	}
 }
 
-// ReadAttributeRangeRestrictedInt8uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRangeRestrictedInt8uWithCompletion reads attribute range restricted int8u with completion.
 //
 // ReadAttributeRangeRestrictedInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2479,7 +2479,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt8uWi
 	}
 }
 
-// ReadAttributeRangeRestrictedInt8sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRangeRestrictedInt8sWithCompletion reads attribute range restricted int8s with completion.
 //
 // ReadAttributeRangeRestrictedInt8sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt8sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2529,7 +2529,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt8sWi
 	}
 }
 
-// ReadAttributeRangeRestrictedInt16uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRangeRestrictedInt16uWithCompletion reads attribute range restricted int16u with completion.
 //
 // ReadAttributeRangeRestrictedInt16uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt16uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2579,7 +2579,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt16uW
 	}
 }
 
-// ReadAttributeRangeRestrictedInt16sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRangeRestrictedInt16sWithCompletion reads attribute range restricted int16s with completion.
 //
 // ReadAttributeRangeRestrictedInt16sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeRangeRestrictedInt16sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2629,7 +2629,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeRangeRestrictedInt16sW
 	}
 }
 
-// ReadAttributeListLongOctetStringWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeListLongOctetStringWithCompletion reads attribute list long octet string with completion.
 //
 // ReadAttributeListLongOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListLongOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2679,7 +2679,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListLongOctetStringWit
 	}
 }
 
-// ReadAttributeListFabricScopedWithParamsCompletion wraps the corresponding Objective-C method.
+// ReadAttributeListFabricScopedWithParamsCompletion reads attribute list fabric scoped with params completion.
 //
 // ReadAttributeListFabricScopedWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeListFabricScopedWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
@@ -2729,7 +2729,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeListFabricScopedWithPa
 	}
 }
 
-// ReadAttributeTimedWriteBooleanWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTimedWriteBooleanWithCompletion reads attribute timed write boolean with completion.
 //
 // ReadAttributeTimedWriteBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeTimedWriteBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2779,7 +2779,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeTimedWriteBooleanWithP
 	}
 }
 
-// ReadAttributeGeneralErrorBooleanWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneralErrorBooleanWithCompletion reads attribute general error boolean with completion.
 //
 // ReadAttributeGeneralErrorBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeGeneralErrorBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2829,7 +2829,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeGeneralErrorBooleanWit
 	}
 }
 
-// ReadAttributeClusterErrorBooleanWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterErrorBooleanWithCompletion reads attribute cluster error boolean with completion.
 //
 // ReadAttributeClusterErrorBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeClusterErrorBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2879,7 +2879,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeClusterErrorBooleanWit
 	}
 }
 
-// ReadAttributeUnsupportedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUnsupportedWithCompletion reads attribute unsupported with completion.
 //
 // ReadAttributeUnsupportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeUnsupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2929,7 +2929,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeUnsupportedWithParamsS
 	}
 }
 
-// ReadAttributeNullableBooleanWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableBooleanWithCompletion reads attribute nullable boolean with completion.
 //
 // ReadAttributeNullableBooleanWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBooleanWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2979,7 +2979,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBooleanWithPar
 	}
 }
 
-// ReadAttributeNullableBitmap8WithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableBitmap8WithCompletion reads attribute nullable bitmap8 with completion.
 //
 // ReadAttributeNullableBitmap8WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap8WithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3029,7 +3029,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap8WithPar
 	}
 }
 
-// ReadAttributeNullableBitmap16WithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableBitmap16WithCompletion reads attribute nullable bitmap16 with completion.
 //
 // ReadAttributeNullableBitmap16WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap16WithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3079,7 +3079,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap16WithPa
 	}
 }
 
-// ReadAttributeNullableBitmap32WithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableBitmap32WithCompletion reads attribute nullable bitmap32 with completion.
 //
 // ReadAttributeNullableBitmap32WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap32WithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3129,7 +3129,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap32WithPa
 	}
 }
 
-// ReadAttributeNullableBitmap64WithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableBitmap64WithCompletion reads attribute nullable bitmap64 with completion.
 //
 // ReadAttributeNullableBitmap64WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableBitmap64WithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3179,7 +3179,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableBitmap64WithPa
 	}
 }
 
-// ReadAttributeNullableInt8uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt8uWithCompletion reads attribute nullable int8u with completion.
 //
 // ReadAttributeNullableInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3229,7 +3229,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt8uWithParam
 	}
 }
 
-// ReadAttributeNullableInt16uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt16uWithCompletion reads attribute nullable int16u with completion.
 //
 // ReadAttributeNullableInt16uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt16uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3279,7 +3279,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt16uWithPara
 	}
 }
 
-// ReadAttributeNullableInt24uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt24uWithCompletion reads attribute nullable int24u with completion.
 //
 // ReadAttributeNullableInt24uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt24uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3329,7 +3329,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt24uWithPara
 	}
 }
 
-// ReadAttributeNullableInt32uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt32uWithCompletion reads attribute nullable int32u with completion.
 //
 // ReadAttributeNullableInt32uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt32uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3379,7 +3379,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt32uWithPara
 	}
 }
 
-// ReadAttributeNullableInt40uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt40uWithCompletion reads attribute nullable int40u with completion.
 //
 // ReadAttributeNullableInt40uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt40uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3429,7 +3429,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt40uWithPara
 	}
 }
 
-// ReadAttributeNullableInt48uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt48uWithCompletion reads attribute nullable int48u with completion.
 //
 // ReadAttributeNullableInt48uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt48uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3479,7 +3479,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt48uWithPara
 	}
 }
 
-// ReadAttributeNullableInt56uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt56uWithCompletion reads attribute nullable int56u with completion.
 //
 // ReadAttributeNullableInt56uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt56uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3529,7 +3529,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt56uWithPara
 	}
 }
 
-// ReadAttributeNullableInt64uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt64uWithCompletion reads attribute nullable int64u with completion.
 //
 // ReadAttributeNullableInt64uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt64uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3579,7 +3579,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt64uWithPara
 	}
 }
 
-// ReadAttributeNullableInt8sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt8sWithCompletion reads attribute nullable int8s with completion.
 //
 // ReadAttributeNullableInt8sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt8sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3629,7 +3629,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt8sWithParam
 	}
 }
 
-// ReadAttributeNullableInt16sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt16sWithCompletion reads attribute nullable int16s with completion.
 //
 // ReadAttributeNullableInt16sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt16sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3679,7 +3679,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt16sWithPara
 	}
 }
 
-// ReadAttributeNullableInt24sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt24sWithCompletion reads attribute nullable int24s with completion.
 //
 // ReadAttributeNullableInt24sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt24sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3729,7 +3729,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt24sWithPara
 	}
 }
 
-// ReadAttributeNullableInt32sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt32sWithCompletion reads attribute nullable int32s with completion.
 //
 // ReadAttributeNullableInt32sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt32sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3779,7 +3779,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt32sWithPara
 	}
 }
 
-// ReadAttributeNullableInt40sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt40sWithCompletion reads attribute nullable int40s with completion.
 //
 // ReadAttributeNullableInt40sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt40sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3829,7 +3829,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt40sWithPara
 	}
 }
 
-// ReadAttributeNullableInt48sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt48sWithCompletion reads attribute nullable int48s with completion.
 //
 // ReadAttributeNullableInt48sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt48sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3879,7 +3879,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt48sWithPara
 	}
 }
 
-// ReadAttributeNullableInt56sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt56sWithCompletion reads attribute nullable int56s with completion.
 //
 // ReadAttributeNullableInt56sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt56sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3929,7 +3929,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt56sWithPara
 	}
 }
 
-// ReadAttributeNullableInt64sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableInt64sWithCompletion reads attribute nullable int64s with completion.
 //
 // ReadAttributeNullableInt64sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableInt64sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -3979,7 +3979,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableInt64sWithPara
 	}
 }
 
-// ReadAttributeNullableEnum8WithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableEnum8WithCompletion reads attribute nullable enum8 with completion.
 //
 // ReadAttributeNullableEnum8WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableEnum8WithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4029,7 +4029,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnum8WithParam
 	}
 }
 
-// ReadAttributeNullableEnum16WithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableEnum16WithCompletion reads attribute nullable enum16 with completion.
 //
 // ReadAttributeNullableEnum16WithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableEnum16WithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4079,7 +4079,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnum16WithPara
 	}
 }
 
-// ReadAttributeNullableFloatSingleWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableFloatSingleWithCompletion reads attribute nullable float single with completion.
 //
 // ReadAttributeNullableFloatSingleWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableFloatSingleWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4129,7 +4129,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableFloatSingleWit
 	}
 }
 
-// ReadAttributeNullableFloatDoubleWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableFloatDoubleWithCompletion reads attribute nullable float double with completion.
 //
 // ReadAttributeNullableFloatDoubleWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableFloatDoubleWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4179,7 +4179,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableFloatDoubleWit
 	}
 }
 
-// ReadAttributeNullableOctetStringWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableOctetStringWithCompletion reads attribute nullable octet string with completion.
 //
 // ReadAttributeNullableOctetStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableOctetStringWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4229,7 +4229,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableOctetStringWit
 	}
 }
 
-// ReadAttributeNullableCharStringWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableCharStringWithCompletion reads attribute nullable char string with completion.
 //
 // ReadAttributeNullableCharStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableCharStringWithCompletion(ctx context.Context) (result string, err error) {
@@ -4279,7 +4279,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableCharStringWith
 	}
 }
 
-// ReadAttributeNullableEnumAttrWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableEnumAttrWithCompletion reads attribute nullable enum attr with completion.
 //
 // ReadAttributeNullableEnumAttrWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableEnumAttrWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4329,7 +4329,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableEnumAttrWithPa
 	}
 }
 
-// ReadAttributeNullableStructWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableStructWithCompletion reads attribute nullable struct with completion.
 //
 // ReadAttributeNullableStructWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableStructWithCompletion(ctx context.Context) (result *MTRUnitTestingClusterSimpleStruct, err error) {
@@ -4379,7 +4379,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableStructWithPara
 	}
 }
 
-// ReadAttributeNullableRangeRestrictedInt8uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableRangeRestrictedInt8uWithCompletion reads attribute nullable range restricted int8u with completion.
 //
 // ReadAttributeNullableRangeRestrictedInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4429,7 +4429,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestricte
 	}
 }
 
-// ReadAttributeNullableRangeRestrictedInt8sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableRangeRestrictedInt8sWithCompletion reads attribute nullable range restricted int8s with completion.
 //
 // ReadAttributeNullableRangeRestrictedInt8sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4479,7 +4479,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestricte
 	}
 }
 
-// ReadAttributeNullableRangeRestrictedInt16uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableRangeRestrictedInt16uWithCompletion reads attribute nullable range restricted int16u with completion.
 //
 // ReadAttributeNullableRangeRestrictedInt16uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt16uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4529,7 +4529,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestricte
 	}
 }
 
-// ReadAttributeNullableRangeRestrictedInt16sWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNullableRangeRestrictedInt16sWithCompletion reads attribute nullable range restricted int16s with completion.
 //
 // ReadAttributeNullableRangeRestrictedInt16sWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt16sWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4579,7 +4579,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeNullableRangeRestricte
 	}
 }
 
-// ReadAttributeWriteOnlyInt8uWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeWriteOnlyInt8uWithCompletion reads attribute write only int8u with completion.
 //
 // ReadAttributeWriteOnlyInt8uWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeWriteOnlyInt8uWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4629,7 +4629,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeWriteOnlyInt8uWithPara
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4679,7 +4679,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeGeneratedCommandListWi
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4729,7 +4729,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeAcceptedCommandListWit
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4779,7 +4779,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeAttributeListWithParam
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -4829,7 +4829,7 @@ func (mbcut *MTRBaseClusterUnitTesting) SubscribeAttributeFeatureMapWithParamsSu
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcut *MTRBaseClusterUnitTesting) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

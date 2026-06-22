@@ -58,19 +58,19 @@ func (a *Asset) CanPerformEditOperation(editOperation AssetEditOperation) bool {
 	return _r
 }
 
-// PlaybackStyle wraps the corresponding Objective-C method.
+// PlaybackStyle returns the playback style.
 func (a *Asset) PlaybackStyle() AssetPlaybackStyle {
 	_r := objc.Send[AssetPlaybackStyle](objref.IDOf(a), objc.RegisterName("playbackStyle"))
 	return _r
 }
 
-// MediaType wraps the corresponding Objective-C method.
+// MediaType returns the media type.
 func (a *Asset) MediaType() AssetMediaType {
 	_r := objc.Send[AssetMediaType](objref.IDOf(a), objc.RegisterName("mediaType"))
 	return _r
 }
 
-// MediaSubtypes wraps the corresponding Objective-C method.
+// MediaSubtypes returns the media subtypes.
 func (a *Asset) MediaSubtypes() AssetMediaSubtype {
 	_r := objc.Send[AssetMediaSubtype](objref.IDOf(a), objc.RegisterName("mediaSubtypes"))
 	return _r
@@ -82,13 +82,13 @@ func (a *Asset) ContentType() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// PixelWidth wraps the corresponding Objective-C method.
+// PixelWidth returns the pixel width.
 func (a *Asset) PixelWidth() int {
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("pixelWidth"))
 	return _r
 }
 
-// PixelHeight wraps the corresponding Objective-C method.
+// PixelHeight returns the pixel height.
 func (a *Asset) PixelHeight() int {
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("pixelHeight"))
 	return _r
@@ -112,31 +112,31 @@ func (a *Asset) AddedDate() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (a *Asset) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("duration"))
 	return _r
 }
 
-// IsHidden wraps the corresponding Objective-C method.
+// IsHidden reports whether the object is hidden.
 func (a *Asset) IsHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isHidden"))
 	return _r
 }
 
-// IsFavorite wraps the corresponding Objective-C method.
+// IsFavorite reports whether the object is favorite.
 func (a *Asset) IsFavorite() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isFavorite"))
 	return _r
 }
 
-// IsSyncFailureHidden wraps the corresponding Objective-C method.
+// IsSyncFailureHidden reports whether the object is sync failure hidden.
 func (a *Asset) IsSyncFailureHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isSyncFailureHidden"))
 	return _r
 }
 
-// BurstIdentifier wraps the corresponding Objective-C method.
+// BurstIdentifier returns the burst identifier.
 func (a *Asset) BurstIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("burstIdentifier"))
 	if _r == 0 {
@@ -145,7 +145,7 @@ func (a *Asset) BurstIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// BurstSelectionTypes wraps the corresponding Objective-C method.
+// BurstSelectionTypes returns the burst selection types.
 func (a *Asset) BurstSelectionTypes() AssetBurstSelectionType {
 	_r := objc.Send[AssetBurstSelectionType](objref.IDOf(a), objc.RegisterName("burstSelectionTypes"))
 	return _r
@@ -157,19 +157,19 @@ func (a *Asset) RepresentsBurst() bool {
 	return _r
 }
 
-// SourceType wraps the corresponding Objective-C method.
+// SourceType returns the source type.
 func (a *Asset) SourceType() AssetSourceType {
 	_r := objc.Send[AssetSourceType](objref.IDOf(a), objc.RegisterName("sourceType"))
 	return _r
 }
 
-// HasAdjustments wraps the corresponding Objective-C method.
+// HasAdjustments reports whether the object has adjustments.
 func (a *Asset) HasAdjustments() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("hasAdjustments"))
 	return _r
 }
 
-// AdjustmentFormatIdentifier wraps the corresponding Objective-C method.
+// AdjustmentFormatIdentifier returns the adjustment format identifier.
 func (a *Asset) AdjustmentFormatIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("adjustmentFormatIdentifier"))
 	if _r == 0 {

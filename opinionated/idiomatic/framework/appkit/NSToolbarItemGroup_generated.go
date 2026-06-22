@@ -144,7 +144,7 @@ func (tig *ToolbarItemGroup) WithBordered(bordered bool) *ToolbarItemGroup {
 	return tig
 }
 
-// WithBackgroundTintColor sets the property and returns the receiver so calls can be chained.
+// WithBackgroundTintColor sets the background tint color.
 func (tig *ToolbarItemGroup) WithBackgroundTintColor(backgroundTintColor *Color) *ToolbarItemGroup {
 	objc.Send[objc.ID](objref.IDOf(tig), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
 	return tig

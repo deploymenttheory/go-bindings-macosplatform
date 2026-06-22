@@ -152,7 +152,7 @@ func (wbfl *WebBackForwardList) BackListCount() int {
 	return _r
 }
 
-// ForwardListCount wraps the corresponding Objective-C method.
+// ForwardListCount returns the forward list count.
 func (wbfl *WebBackForwardList) ForwardListCount() int {
 	_r := objc.Send[int](objref.IDOf(wbfl), objc.RegisterName("forwardListCount"))
 	return _r

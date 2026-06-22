@@ -58,7 +58,7 @@ func (cns *CheckerboardNoiseSource) WithSquareSize(squareSize float64) *Checkerb
 	return cns
 }
 
-// SquareSize wraps the corresponding Objective-C method.
+// SquareSize returns the square size.
 func (cns *CheckerboardNoiseSource) SquareSize() float64 {
 	_r := objc.Send[float64](objref.IDOf(cns), objc.RegisterName("squareSize"))
 	return _r

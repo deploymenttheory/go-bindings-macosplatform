@@ -92,13 +92,13 @@ func (par *PaymentAuthorizationResult) WithOrderDetails(orderDetails *PaymentOrd
 	return par
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (par *PaymentAuthorizationResult) Status() PaymentAuthorizationStatus {
 	_r := objc.Send[PaymentAuthorizationStatus](objref.IDOf(par), objc.RegisterName("status"))
 	return _r
 }
 
-// Errors wraps the corresponding Objective-C method.
+// Errors returns the errors.
 func (par *PaymentAuthorizationResult) Errors() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(par), objc.RegisterName("errors"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
@@ -114,7 +114,7 @@ func (par *PaymentAuthorizationResult) SetErrors() error {
 	return nil
 }
 
-// OrderDetails wraps the corresponding Objective-C method.
+// OrderDetails returns the order details.
 func (par *PaymentAuthorizationResult) OrderDetails() *PaymentOrderDetails {
 	_r := objc.Send[objc.ID](objref.IDOf(par), objc.RegisterName("orderDetails"))
 	return PaymentOrderDetailsFromID(_r)

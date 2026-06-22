@@ -73,31 +73,31 @@ func NewCIDeviceInfoWithDestinationManufacturerFamilyModelRevision(midiDestinati
 	return cIDeviceInfoAdopt(_id)
 }
 
-// ManufacturerID wraps the corresponding Objective-C method.
+// ManufacturerID returns the manufacturer ID.
 func (cdi *CIDeviceInfo) ManufacturerID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("manufacturerID"))
 	return obj.Wrap(_r)
 }
 
-// Family wraps the corresponding Objective-C method.
+// Family returns the family.
 func (cdi *CIDeviceInfo) Family() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("family"))
 	return obj.Wrap(_r)
 }
 
-// ModelNumber wraps the corresponding Objective-C method.
+// ModelNumber returns the model number.
 func (cdi *CIDeviceInfo) ModelNumber() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("modelNumber"))
 	return obj.Wrap(_r)
 }
 
-// RevisionLevel wraps the corresponding Objective-C method.
+// RevisionLevel returns the revision level.
 func (cdi *CIDeviceInfo) RevisionLevel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("revisionLevel"))
 	return obj.Wrap(_r)
 }
 
-// MidiDestination wraps the corresponding Objective-C method.
+// MidiDestination returns the midi destination.
 func (cdi *CIDeviceInfo) MidiDestination() int {
 	_r := objc.Send[int](objref.IDOf(cdi), objc.RegisterName("midiDestination"))
 	return _r

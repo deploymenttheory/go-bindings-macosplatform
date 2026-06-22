@@ -168,25 +168,25 @@ func (sl *ScrollLayer) WithContentsFormat(contentsFormat obj.Object) *ScrollLaye
 	return sl
 }
 
-// WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeContent sets the wants extended dynamic range content.
 func (sl *ScrollLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *ScrollLayer {
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
 	return sl
 }
 
-// WithToneMapMode sets the property and returns the receiver so calls can be chained.
+// WithToneMapMode sets the tone map mode.
 func (sl *ScrollLayer) WithToneMapMode(toneMapMode obj.Object) *ScrollLayer {
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return sl
 }
 
-// WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
+// WithPreferredDynamicRange sets the preferred dynamic range.
 func (sl *ScrollLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *ScrollLayer {
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return sl
 }
 
-// WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
+// WithContentsHeadroom sets the contents headroom.
 func (sl *ScrollLayer) WithContentsHeadroom(contentsHeadroom float64) *ScrollLayer {
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
 	return sl
@@ -252,13 +252,13 @@ func (sl *ScrollLayer) WithCornerRadius(cornerRadius float64) *ScrollLayer {
 	return sl
 }
 
-// WithMaskedCorners sets the property and returns the receiver so calls can be chained.
+// WithMaskedCorners sets the masked corners.
 func (sl *ScrollLayer) WithMaskedCorners(maskedCorners CornerMask) *ScrollLayer {
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setMaskedCorners:"), maskedCorners)
 	return sl
 }
 
-// WithCornerCurve sets the property and returns the receiver so calls can be chained.
+// WithCornerCurve sets the corner curve.
 func (sl *ScrollLayer) WithCornerCurve(cornerCurve obj.Object) *ScrollLayer {
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return sl
@@ -377,7 +377,7 @@ func (sl *ScrollLayer) ScrollToRect(r corefoundation.CGRect) {
 	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("scrollToRect:"), r)
 }
 
-// ScrollMode wraps the corresponding Objective-C method.
+// ScrollMode returns the scroll mode.
 func (sl *ScrollLayer) ScrollMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("scrollMode"))
 	return obj.Wrap(_r)

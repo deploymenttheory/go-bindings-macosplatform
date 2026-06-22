@@ -91,19 +91,19 @@ func (cvclc *CollectionViewCompositionalLayoutConfiguration) WithBoundarySupplem
 	return cvclc
 }
 
-// ScrollDirection wraps the corresponding Objective-C method.
+// ScrollDirection returns the scroll direction.
 func (cvclc *CollectionViewCompositionalLayoutConfiguration) ScrollDirection() CollectionViewScrollDirection {
 	_r := objc.Send[CollectionViewScrollDirection](objref.IDOf(cvclc), objc.RegisterName("scrollDirection"))
 	return _r
 }
 
-// InterSectionSpacing wraps the corresponding Objective-C method.
+// InterSectionSpacing returns the inter section spacing.
 func (cvclc *CollectionViewCompositionalLayoutConfiguration) InterSectionSpacing() float64 {
 	_r := objc.Send[float64](objref.IDOf(cvclc), objc.RegisterName("interSectionSpacing"))
 	return _r
 }
 
-// BoundarySupplementaryItems wraps the corresponding Objective-C method.
+// BoundarySupplementaryItems returns the boundary supplementary items.
 //
 // BoundarySupplementaryItems returns the collection as a Go slice.
 func (cvclc *CollectionViewCompositionalLayoutConfiguration) BoundarySupplementaryItems() []*CollectionLayoutBoundarySupplementaryItem {

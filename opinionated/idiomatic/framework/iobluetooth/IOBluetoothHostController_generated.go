@@ -72,7 +72,7 @@ func NewIOBluetoothHostController() *IOBluetoothHostController {
 	return iOBluetoothHostControllerAdopt(_id)
 }
 
-// WithDelegate sets the property and returns the receiver so calls can be chained.
+// WithDelegate sets the delegate.
 func (ibhc *IOBluetoothHostController) WithDelegate(delegate obj.Object) *IOBluetoothHostController {
 	objc.Send[objc.ID](objref.IDOf(ibhc), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return ibhc
@@ -108,7 +108,7 @@ func (ibhc *IOBluetoothHostController) NameAsString() string {
 	return purego.GoString(_r)
 }
 
-// Delegate wraps the corresponding Objective-C method.
+// Delegate returns the delegate.
 func (ibhc *IOBluetoothHostController) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ibhc), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)

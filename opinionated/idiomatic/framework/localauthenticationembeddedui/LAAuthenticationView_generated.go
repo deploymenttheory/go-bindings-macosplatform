@@ -73,7 +73,7 @@ func NewAuthenticationViewWithContext(context_ obj.Object) *AuthenticationView {
 	return authenticationViewAdopt(_id)
 }
 
-// Context wraps the corresponding Objective-C method.
+// Context returns the context.
 func (av *AuthenticationView) Context() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("context"))
 	return obj.Wrap(_r)

@@ -80,8 +80,8 @@ func (os *OBEXSession) GetAvailableCommandResponsePayloadLength(inOpCode uint8) 
 	return _r
 }
 
-// GetMaxPacketLength gets current max packet length.
-func (os *OBEXSession) GetMaxPacketLength() uint16 {
+// MaxPacketLength gets current max packet length.
+func (os *OBEXSession) MaxPacketLength() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(os), objc.RegisterName("getMaxPacketLength"))
 	return _r
 }

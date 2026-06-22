@@ -57,7 +57,7 @@ func (emir *EditMessageIntentResponse) WithUserActivity(userActivity obj.Object)
 	return emir
 }
 
-// Code wraps the corresponding Objective-C method.
+// Code returns the code.
 func (emir *EditMessageIntentResponse) Code() EditMessageIntentResponseCode {
 	_r := objc.Send[EditMessageIntentResponseCode](objref.IDOf(emir), objc.RegisterName("code"))
 	return _r

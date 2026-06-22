@@ -130,13 +130,13 @@ func (tb *TouchBar) ItemForIdentifier(identifier obj.Object) *TouchBarItem {
 	return TouchBarItemFromID(_r)
 }
 
-// CustomizationIdentifier wraps the corresponding Objective-C method.
+// CustomizationIdentifier returns the customization identifier.
 func (tb *TouchBar) CustomizationIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("customizationIdentifier"))
 	return obj.Wrap(_r)
 }
 
-// CustomizationAllowedItemIdentifiers wraps the corresponding Objective-C method.
+// CustomizationAllowedItemIdentifiers returns the customization allowed item identifiers.
 //
 // CustomizationAllowedItemIdentifiers returns the collection as a Go slice.
 func (tb *TouchBar) CustomizationAllowedItemIdentifiers() []obj.Object {
@@ -144,7 +144,7 @@ func (tb *TouchBar) CustomizationAllowedItemIdentifiers() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// CustomizationRequiredItemIdentifiers wraps the corresponding Objective-C method.
+// CustomizationRequiredItemIdentifiers returns the customization required item identifiers.
 //
 // CustomizationRequiredItemIdentifiers returns the collection as a Go slice.
 func (tb *TouchBar) CustomizationRequiredItemIdentifiers() []obj.Object {
@@ -152,7 +152,7 @@ func (tb *TouchBar) CustomizationRequiredItemIdentifiers() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// DefaultItemIdentifiers wraps the corresponding Objective-C method.
+// DefaultItemIdentifiers returns the default item identifiers.
 //
 // DefaultItemIdentifiers returns the collection as a Go slice.
 func (tb *TouchBar) DefaultItemIdentifiers() []obj.Object {
@@ -160,7 +160,7 @@ func (tb *TouchBar) DefaultItemIdentifiers() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// ItemIdentifiers wraps the corresponding Objective-C method.
+// ItemIdentifiers returns the item identifiers.
 //
 // ItemIdentifiers returns the collection as a Go slice.
 func (tb *TouchBar) ItemIdentifiers() []obj.Object {
@@ -168,25 +168,25 @@ func (tb *TouchBar) ItemIdentifiers() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// PrincipalItemIdentifier wraps the corresponding Objective-C method.
+// PrincipalItemIdentifier returns the principal item identifier.
 func (tb *TouchBar) PrincipalItemIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("principalItemIdentifier"))
 	return obj.Wrap(_r)
 }
 
-// EscapeKeyReplacementItemIdentifier wraps the corresponding Objective-C method.
+// EscapeKeyReplacementItemIdentifier returns the escape key replacement item identifier.
 func (tb *TouchBar) EscapeKeyReplacementItemIdentifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("escapeKeyReplacementItemIdentifier"))
 	return obj.Wrap(_r)
 }
 
-// TemplateItems wraps the corresponding Objective-C method.
+// TemplateItems returns the template items.
 func (tb *TouchBar) TemplateItems() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("templateItems"))
 	return obj.Wrap(_r)
 }
 
-// IsVisible wraps the corresponding Objective-C method.
+// IsVisible reports whether the object is visible.
 func (tb *TouchBar) IsVisible() bool {
 	_r := objc.Send[bool](objref.IDOf(tb), objc.RegisterName("isVisible"))
 	return _r

@@ -100,13 +100,13 @@ func (ogpf *OpenGLPixelFormat) GetValuesForAttributeForVirtualScreen(attrib uint
 	return _out0
 }
 
-// NumberOfVirtualScreens wraps the corresponding Objective-C method.
+// NumberOfVirtualScreens returns the number of virtual screens.
 func (ogpf *OpenGLPixelFormat) NumberOfVirtualScreens() int32 {
 	_r := objc.Send[int32](objref.IDOf(ogpf), objc.RegisterName("numberOfVirtualScreens"))
 	return _r
 }
 
-// CGLPixelFormatObj wraps the corresponding Objective-C method.
+// CGLPixelFormatObj returns the cgl pixel format obj.
 func (ogpf *OpenGLPixelFormat) CGLPixelFormatObj() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ogpf), objc.RegisterName("CGLPixelFormatObj"))
 	return obj.Wrap(_r)

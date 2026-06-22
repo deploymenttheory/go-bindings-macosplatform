@@ -70,13 +70,13 @@ func NewAUGenericViewController() *AUGenericViewController {
 	return aUGenericViewControllerAdopt(_id)
 }
 
-// WithAuAudioUnit sets the property and returns the receiver so calls can be chained.
+// WithAuAudioUnit sets the au audio unit.
 func (agvc *AUGenericViewController) WithAuAudioUnit(auAudioUnit obj.Object) *AUGenericViewController {
 	objc.Send[objc.ID](objref.IDOf(agvc), objc.RegisterName("setAuAudioUnit:"), objref.IDOf(auAudioUnit))
 	return agvc
 }
 
-// AuAudioUnit wraps the corresponding Objective-C method.
+// AuAudioUnit returns the au audio unit.
 func (agvc *AUGenericViewController) AuAudioUnit() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(agvc), objc.RegisterName("auAudioUnit"))
 	return obj.Wrap(_r)

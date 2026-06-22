@@ -70,37 +70,37 @@ func NewMTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent() *MTRWiFiNetwor
 	return mTRWiFiNetworkDiagnosticsClusterAssociationFailureEventAdopt(_id)
 }
 
-// WithAssociationFailureCause sets the property and returns the receiver so calls can be chained.
+// WithAssociationFailureCause sets the association failure cause.
 func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) WithAssociationFailureCause(associationFailureCause obj.Object) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent {
 	objc.Send[objc.ID](objref.IDOf(mwfndcafe), objc.RegisterName("setAssociationFailureCause:"), objref.IDOf(associationFailureCause))
 	return mwfndcafe
 }
 
-// WithAssociationFailure sets the property and returns the receiver so calls can be chained.
+// WithAssociationFailure sets the association failure.
 func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) WithAssociationFailure(associationFailure obj.Object) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent {
 	objc.Send[objc.ID](objref.IDOf(mwfndcafe), objc.RegisterName("setAssociationFailure:"), objref.IDOf(associationFailure))
 	return mwfndcafe
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) WithStatus(status obj.Object) *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent {
 	objc.Send[objc.ID](objref.IDOf(mwfndcafe), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mwfndcafe
 }
 
-// AssociationFailureCause wraps the corresponding Objective-C method.
+// AssociationFailureCause returns the association failure cause.
 func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) AssociationFailureCause() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwfndcafe), objc.RegisterName("associationFailureCause"))
 	return obj.Wrap(_r)
 }
 
-// AssociationFailure wraps the corresponding Objective-C method.
+// AssociationFailure returns the association failure.
 func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) AssociationFailure() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwfndcafe), objc.RegisterName("associationFailure"))
 	return obj.Wrap(_r)
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (mwfndcafe *MTRWiFiNetworkDiagnosticsClusterAssociationFailureEvent) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwfndcafe), objc.RegisterName("status"))
 	return obj.Wrap(_r)

@@ -86,7 +86,7 @@ func (aa *AssessmentApplication) WithRequiresSignatureValidation(requiresSignatu
 	return aa
 }
 
-// BundleIdentifier wraps the corresponding Objective-C method.
+// BundleIdentifier returns the bundle identifier.
 func (aa *AssessmentApplication) BundleIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
@@ -95,7 +95,7 @@ func (aa *AssessmentApplication) BundleIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// TeamIdentifier wraps the corresponding Objective-C method.
+// TeamIdentifier returns the team identifier.
 func (aa *AssessmentApplication) TeamIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("teamIdentifier"))
 	if _r == 0 {

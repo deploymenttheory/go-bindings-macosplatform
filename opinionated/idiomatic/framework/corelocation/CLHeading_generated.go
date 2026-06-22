@@ -72,25 +72,25 @@ func NewHeading() *Heading {
 	return headingAdopt(_id)
 }
 
-// X wraps the corresponding Objective-C method.
+// X returns the x.
 func (h *Heading) X() float64 {
 	_r := objc.Send[float64](objref.IDOf(h), objc.RegisterName("x"))
 	return _r
 }
 
-// Y wraps the corresponding Objective-C method.
+// Y returns the y.
 func (h *Heading) Y() float64 {
 	_r := objc.Send[float64](objref.IDOf(h), objc.RegisterName("y"))
 	return _r
 }
 
-// Z wraps the corresponding Objective-C method.
+// Z returns the z.
 func (h *Heading) Z() float64 {
 	_r := objc.Send[float64](objref.IDOf(h), objc.RegisterName("z"))
 	return _r
 }
 
-// Timestamp wraps the corresponding Objective-C method.
+// Timestamp returns the timestamp.
 func (h *Heading) Timestamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("timestamp"))
 	return obj.Wrap(_r)

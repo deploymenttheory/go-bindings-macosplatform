@@ -97,7 +97,7 @@ func (pod *PaymentOrderDetails) WithAuthenticationToken(authenticationToken stri
 	return pod
 }
 
-// OrderTypeIdentifier wraps the corresponding Objective-C method.
+// OrderTypeIdentifier returns the order type identifier.
 func (pod *PaymentOrderDetails) OrderTypeIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pod), objc.RegisterName("orderTypeIdentifier"))
 	if _r == 0 {
@@ -106,7 +106,7 @@ func (pod *PaymentOrderDetails) OrderTypeIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// OrderIdentifier wraps the corresponding Objective-C method.
+// OrderIdentifier returns the order identifier.
 func (pod *PaymentOrderDetails) OrderIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pod), objc.RegisterName("orderIdentifier"))
 	if _r == 0 {
@@ -115,13 +115,13 @@ func (pod *PaymentOrderDetails) OrderIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// WebServiceURL wraps the corresponding Objective-C method.
+// WebServiceURL returns the web service URL.
 func (pod *PaymentOrderDetails) WebServiceURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pod), objc.RegisterName("webServiceURL"))
 	return obj.Wrap(_r)
 }
 
-// AuthenticationToken wraps the corresponding Objective-C method.
+// AuthenticationToken returns the authentication token.
 func (pod *PaymentOrderDetails) AuthenticationToken() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pod), objc.RegisterName("authenticationToken"))
 	if _r == 0 {

@@ -170,7 +170,7 @@ func (cdcsd *CoreDataCoreSpotlightDelegate) SearchableIndexReindexSearchableItem
 	}
 }
 
-// IsIndexingEnabled wraps the corresponding Objective-C method.
+// IsIndexingEnabled reports whether the object is indexing enabled.
 func (cdcsd *CoreDataCoreSpotlightDelegate) IsIndexingEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(cdcsd), objc.RegisterName("isIndexingEnabled"))
 	return _r

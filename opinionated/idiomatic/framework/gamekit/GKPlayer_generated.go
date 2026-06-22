@@ -82,7 +82,7 @@ func (p *Player) Alias() string {
 	return purego.GoString(_r)
 }
 
-// GuestIdentifier wraps the corresponding Objective-C method.
+// GuestIdentifier returns the guest identifier.
 func (p *Player) GuestIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("guestIdentifier"))
 	if _r == 0 {
@@ -91,7 +91,7 @@ func (p *Player) GuestIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// IsInvitable wraps the corresponding Objective-C method.
+// IsInvitable reports whether the object is invitable.
 func (p *Player) IsInvitable() bool {
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isInvitable"))
 	return _r
@@ -122,7 +122,7 @@ func (p *Player) LoadPhotoForSize(ctx context.Context, size PhotoSize) (result o
 	}
 }
 
-// IsFriend wraps the corresponding Objective-C method.
+// IsFriend reports whether the object is friend.
 func (p *Player) IsFriend() bool {
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isFriend"))
 	return _r

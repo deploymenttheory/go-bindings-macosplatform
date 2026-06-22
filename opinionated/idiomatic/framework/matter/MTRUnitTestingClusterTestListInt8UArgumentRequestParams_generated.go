@@ -78,7 +78,7 @@ func (mutctliuarp *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) With
 	return mutctliuarp
 }
 
-// Arg1 wraps the corresponding Objective-C method.
+// Arg1 returns the arg1.
 func (mutctliuarp *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) Arg1() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctliuarp), objc.RegisterName("arg1"))
 	return obj.Wrap(_r)

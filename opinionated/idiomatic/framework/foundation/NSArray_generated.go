@@ -124,7 +124,7 @@ func NewArrayWithContentsOfURL(url string) *Array {
 	return arrayAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (a *Array) WithScriptingProperties(scriptingProperties obj.Object) *Array {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return a
@@ -137,7 +137,7 @@ func (a *Array) ObjectAtIndex(index int) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Count wraps the corresponding Objective-C method.
+// Count returns the count.
 func (a *Array) Count() int {
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("count"))
 	return _r
@@ -224,7 +224,7 @@ func (a *Array) ReverseObjectEnumerator() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// WriteToURL wraps the corresponding Objective-C method.
+// WriteToURL writes to URL.
 func (a *Array) WriteToURL(url string) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(a), objc.RegisterName("writeToURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
@@ -310,19 +310,19 @@ func (a *Array) IndexesOfObjectsAtIndexesOptionsPassingTest(s *IndexSet, opts En
 	return IndexSetFromID(_r)
 }
 
-// FirstObject wraps the corresponding Objective-C method.
+// FirstObject returns the first object.
 func (a *Array) FirstObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("firstObject"))
 	return obj.Wrap(_r)
 }
 
-// LastObject wraps the corresponding Objective-C method.
+// LastObject returns the last object.
 func (a *Array) LastObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("lastObject"))
 	return obj.Wrap(_r)
 }
 
-// SortedArrayHint wraps the corresponding Objective-C method.
+// SortedArrayHint returns the sorted array hint.
 func (a *Array) SortedArrayHint() *Data {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("sortedArrayHint"))
 	return DataFromID(_r)

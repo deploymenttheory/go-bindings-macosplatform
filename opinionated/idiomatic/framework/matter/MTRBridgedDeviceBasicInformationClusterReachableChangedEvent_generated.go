@@ -66,13 +66,13 @@ func (mbdbicrce *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) S
 	return rt.Description(objref.IDOf(mbdbicrce))
 }
 
-// WithReachableNewValue sets the property and returns the receiver so calls can be chained.
+// WithReachableNewValue sets the reachable new value.
 func (mbdbicrce *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) WithReachableNewValue(reachableNewValue obj.Object) *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(mbdbicrce), objc.RegisterName("setReachableNewValue:"), objref.IDOf(reachableNewValue))
 	return mbdbicrce
 }
 
-// ReachableNewValue wraps the corresponding Objective-C method.
+// ReachableNewValue returns the reachable new value.
 func (mbdbicrce *MTRBridgedDeviceBasicInformationClusterReachableChangedEvent) ReachableNewValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbdbicrce), objc.RegisterName("reachableNewValue"))
 	return obj.Wrap(_r)

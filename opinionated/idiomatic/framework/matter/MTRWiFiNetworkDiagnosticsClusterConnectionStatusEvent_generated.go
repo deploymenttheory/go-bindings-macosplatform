@@ -70,13 +70,13 @@ func NewMTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent() *MTRWiFiNetworkD
 	return mTRWiFiNetworkDiagnosticsClusterConnectionStatusEventAdopt(_id)
 }
 
-// WithConnectionStatus sets the property and returns the receiver so calls can be chained.
+// WithConnectionStatus sets the connection status.
 func (mwfndccse *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) WithConnectionStatus(connectionStatus obj.Object) *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent {
 	objc.Send[objc.ID](objref.IDOf(mwfndccse), objc.RegisterName("setConnectionStatus:"), objref.IDOf(connectionStatus))
 	return mwfndccse
 }
 
-// ConnectionStatus wraps the corresponding Objective-C method.
+// ConnectionStatus returns the connection status.
 func (mwfndccse *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) ConnectionStatus() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwfndccse), objc.RegisterName("connectionStatus"))
 	return obj.Wrap(_r)

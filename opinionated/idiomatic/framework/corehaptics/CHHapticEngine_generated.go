@@ -174,7 +174,7 @@ func (he *HapticEngine) PlayPatternFromData(data obj.Object) error {
 	return nil
 }
 
-// CurrentTime wraps the corresponding Objective-C method.
+// CurrentTime returns the current time.
 func (he *HapticEngine) CurrentTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(he), objc.RegisterName("currentTime"))
 	return _r

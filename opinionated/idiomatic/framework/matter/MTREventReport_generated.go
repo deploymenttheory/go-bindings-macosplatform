@@ -78,7 +78,7 @@ func NewMTREventReportWithResponseValueError(responseValue obj.Object) (result *
 	return mTREventReportAdopt(_id), nil
 }
 
-// Path wraps the corresponding Objective-C method.
+// Path returns the path.
 func (mer *MTREventReport) Path() *MTREventPath {
 	_r := objc.Send[objc.ID](objref.IDOf(mer), objc.RegisterName("path"))
 	return MTREventPathFromID(_r)
@@ -102,13 +102,13 @@ func (mer *MTREventReport) EventTimeType() MTREventTimeType {
 	return _r
 }
 
-// SystemUpTime wraps the corresponding Objective-C method.
+// SystemUpTime returns the system up time.
 func (mer *MTREventReport) SystemUpTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(mer), objc.RegisterName("systemUpTime"))
 	return _r
 }
 
-// TimestampDate wraps the corresponding Objective-C method.
+// TimestampDate returns the timestamp date.
 func (mer *MTREventReport) TimestampDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mer), objc.RegisterName("timestampDate"))
 	return obj.Wrap(_r)
@@ -120,7 +120,7 @@ func (mer *MTREventReport) Value() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Timestamp wraps the corresponding Objective-C method.
+// Timestamp returns the timestamp.
 func (mer *MTREventReport) Timestamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mer), objc.RegisterName("timestamp"))
 	return obj.Wrap(_r)

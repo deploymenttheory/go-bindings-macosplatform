@@ -108,7 +108,7 @@ func (wlvc *WidgetListViewController) RowForViewController(viewController obj.Ob
 	return _r
 }
 
-// Contents wraps the corresponding Objective-C method.
+// Contents returns the contents.
 func (wlvc *WidgetListViewController) Contents() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("contents"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
@@ -119,13 +119,13 @@ func (wlvc *WidgetListViewController) SetContents(contents []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wlvc), objc.RegisterName("setContents:"), purego.SliceToNSArray(contents, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// MinimumVisibleRowCount wraps the corresponding Objective-C method.
+// MinimumVisibleRowCount returns the minimum visible row count.
 func (wlvc *WidgetListViewController) MinimumVisibleRowCount() int {
 	_r := objc.Send[int](objref.IDOf(wlvc), objc.RegisterName("minimumVisibleRowCount"))
 	return _r
 }
 
-// HasDividerLines wraps the corresponding Objective-C method.
+// HasDividerLines reports whether the object has divider lines.
 func (wlvc *WidgetListViewController) HasDividerLines() bool {
 	_r := objc.Send[bool](objref.IDOf(wlvc), objc.RegisterName("hasDividerLines"))
 	return _r

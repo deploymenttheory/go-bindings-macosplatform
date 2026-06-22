@@ -70,37 +70,37 @@ func NewMTRMessagesClusterPresentMessagesRequestParams() *MTRMessagesClusterPres
 	return mTRMessagesClusterPresentMessagesRequestParamsAdopt(_id)
 }
 
-// WithMessageID sets the property and returns the receiver so calls can be chained.
+// WithMessageID sets the message ID.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithMessageID(messageID obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
 	return mmcpmrp
 }
 
-// WithPriority sets the property and returns the receiver so calls can be chained.
+// WithPriority sets the priority.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithPriority(priority obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setPriority:"), objref.IDOf(priority))
 	return mmcpmrp
 }
 
-// WithMessageControl sets the property and returns the receiver so calls can be chained.
+// WithMessageControl sets the message control.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithMessageControl(messageControl obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setMessageControl:"), objref.IDOf(messageControl))
 	return mmcpmrp
 }
 
-// WithStartTime sets the property and returns the receiver so calls can be chained.
+// WithStartTime sets the start time.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithStartTime(startTime obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return mmcpmrp
 }
 
-// WithDuration sets the property and returns the receiver so calls can be chained.
+// WithDuration sets the duration.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithDuration(duration obj.Object) *MTRMessagesClusterPresentMessagesRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return mmcpmrp
 }
 
-// WithMessageText sets the property and returns the receiver so calls can be chained.
+// WithMessageText sets the message text.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithMessageText(messageText string) *MTRMessagesClusterPresentMessagesRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("setMessageText:"), purego.NSString(messageText))
 	return mmcpmrp
@@ -118,37 +118,37 @@ func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) WithServerSidePro
 	return mmcpmrp
 }
 
-// MessageID wraps the corresponding Objective-C method.
+// MessageID returns the message ID.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) MessageID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("messageID"))
 	return obj.Wrap(_r)
 }
 
-// Priority wraps the corresponding Objective-C method.
+// Priority returns the priority.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) Priority() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("priority"))
 	return obj.Wrap(_r)
 }
 
-// MessageControl wraps the corresponding Objective-C method.
+// MessageControl returns the message control.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) MessageControl() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("messageControl"))
 	return obj.Wrap(_r)
 }
 
-// StartTime wraps the corresponding Objective-C method.
+// StartTime returns the start time.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) StartTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("startTime"))
 	return obj.Wrap(_r)
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) Duration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
 
-// MessageText wraps the corresponding Objective-C method.
+// MessageText returns the message text.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) MessageText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("messageText"))
 	if _r == 0 {
@@ -157,7 +157,7 @@ func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) MessageText() str
 	return purego.GoString(_r)
 }
 
-// Responses wraps the corresponding Objective-C method.
+// Responses returns the responses.
 func (mmcpmrp *MTRMessagesClusterPresentMessagesRequestParams) Responses() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcpmrp), objc.RegisterName("responses"))
 	return obj.Wrap(_r)

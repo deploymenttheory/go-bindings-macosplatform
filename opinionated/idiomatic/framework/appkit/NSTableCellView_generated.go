@@ -84,32 +84,32 @@ func (tcv *TableCellView) WithRowSizeStyle(rowSizeStyle TableViewRowSizeStyle) *
 	return tcv
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (tcv *TableCellView) WithSubviews(items ...ViewProvider) *TableCellView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setSubviews:"), _arr)
 	return tcv
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (tcv *TableCellView) WithHidden(hidden bool) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setHidden:"), hidden)
 	return tcv
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (tcv *TableCellView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return tcv
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (tcv *TableCellView) WithAutoresizesSubviews(autoresizesSubviews bool) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return tcv
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (tcv *TableCellView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return tcv
@@ -121,19 +121,19 @@ func (tcv *TableCellView) WithFrame(frame corefoundation.CGRect) *TableCellView 
 	return tcv
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (tcv *TableCellView) WithFrameRotation(frameRotation float64) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return tcv
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (tcv *TableCellView) WithFrameCenterRotation(frameCenterRotation float64) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return tcv
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (tcv *TableCellView) WithBoundsRotation(boundsRotation float64) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return tcv
@@ -145,7 +145,7 @@ func (tcv *TableCellView) WithBounds(bounds corefoundation.CGRect) *TableCellVie
 	return tcv
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (tcv *TableCellView) WithCanDrawConcurrently(canDrawConcurrently bool) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return tcv
@@ -157,148 +157,148 @@ func (tcv *TableCellView) WithNeedsDisplay(needsDisplay bool) *TableCellView {
 	return tcv
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (tcv *TableCellView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return tcv
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (tcv *TableCellView) WithWantsRestingTouches(wantsRestingTouches bool) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return tcv
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (tcv *TableCellView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return tcv
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (tcv *TableCellView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return tcv
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (tcv *TableCellView) WithWantsLayer(wantsLayer bool) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return tcv
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (tcv *TableCellView) WithLayer(layer obj.Object) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return tcv
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (tcv *TableCellView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return tcv
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (tcv *TableCellView) WithNeedsLayout(needsLayout bool) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return tcv
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (tcv *TableCellView) WithAlphaValue(alphaValue float64) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return tcv
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (tcv *TableCellView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return tcv
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (tcv *TableCellView) WithBackgroundFilters(items ...obj.Object) *TableCellView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return tcv
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (tcv *TableCellView) WithCompositingFilter(compositingFilter obj.Object) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return tcv
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (tcv *TableCellView) WithContentFilters(items ...obj.Object) *TableCellView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setContentFilters:"), _arr)
 	return tcv
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (tcv *TableCellView) WithShadow(shadow *Shadow) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return tcv
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (tcv *TableCellView) WithClipsToBounds(clipsToBounds bool) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return tcv
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (tcv *TableCellView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return tcv
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (tcv *TableCellView) WithToolTip(toolTip string) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return tcv
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (tcv *TableCellView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return tcv
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (tcv *TableCellView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return tcv
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (tcv *TableCellView) WithNextKeyView(nextKeyView ViewProvider) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return tcv
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (tcv *TableCellView) WithFocusRingType(focusRingType FocusRingType) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return tcv
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (tcv *TableCellView) WithGestureRecognizers(items ...GestureRecognizerProvider) *TableCellView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return tcv
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (tcv *TableCellView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return tcv
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (tcv *TableCellView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return tcv
@@ -310,49 +310,49 @@ func (tcv *TableCellView) WithPrefersCompactControlSizeMetrics(prefersCompactCon
 	return tcv
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (tcv *TableCellView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return tcv
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (tcv *TableCellView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return tcv
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (tcv *TableCellView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return tcv
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (tcv *TableCellView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return tcv
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (tcv *TableCellView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return tcv
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (tcv *TableCellView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return tcv
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (tcv *TableCellView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return tcv
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (tcv *TableCellView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *TableCellView {
 	objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return tcv
@@ -382,37 +382,37 @@ func (tcv *TableCellView) WithTouchBar(touchBar *TouchBar) *TableCellView {
 	return tcv
 }
 
-// ObjectValue wraps the corresponding Objective-C method.
+// ObjectValue returns the object value.
 func (tcv *TableCellView) ObjectValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("objectValue"))
 	return obj.Wrap(_r)
 }
 
-// TextField wraps the corresponding Objective-C method.
+// TextField returns the text field.
 func (tcv *TableCellView) TextField() *TextField {
 	_r := objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("textField"))
 	return TextFieldFromID(_r)
 }
 
-// ImageView wraps the corresponding Objective-C method.
+// ImageView returns the image view.
 func (tcv *TableCellView) ImageView() *ImageView {
 	_r := objc.Send[objc.ID](objref.IDOf(tcv), objc.RegisterName("imageView"))
 	return ImageViewFromID(_r)
 }
 
-// BackgroundStyle wraps the corresponding Objective-C method.
+// BackgroundStyle returns the background style.
 func (tcv *TableCellView) BackgroundStyle() BackgroundStyle {
 	_r := objc.Send[BackgroundStyle](objref.IDOf(tcv), objc.RegisterName("backgroundStyle"))
 	return _r
 }
 
-// RowSizeStyle wraps the corresponding Objective-C method.
+// RowSizeStyle returns the row size style.
 func (tcv *TableCellView) RowSizeStyle() TableViewRowSizeStyle {
 	_r := objc.Send[TableViewRowSizeStyle](objref.IDOf(tcv), objc.RegisterName("rowSizeStyle"))
 	return _r
 }
 
-// DraggingImageComponents wraps the corresponding Objective-C method.
+// DraggingImageComponents returns the dragging image components.
 //
 // DraggingImageComponents returns the collection as a Go slice.
 func (tcv *TableCellView) DraggingImageComponents() []*DraggingImageComponent {

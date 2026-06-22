@@ -96,13 +96,13 @@ func (ms *MediaSource) MediaObjectsForIdentifiers(mediaObjectIdentifiers []strin
 	return obj.Wrap(_r)
 }
 
-// MediaLibrary wraps the corresponding Objective-C method.
+// MediaLibrary returns the media library.
 func (ms *MediaSource) MediaLibrary() *MediaLibrary {
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("mediaLibrary"))
 	return MediaLibraryFromID(_r)
 }
 
-// MediaSourceIdentifier wraps the corresponding Objective-C method.
+// MediaSourceIdentifier returns the media source identifier.
 func (ms *MediaSource) MediaSourceIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("mediaSourceIdentifier"))
 	if _r == 0 {
@@ -111,13 +111,13 @@ func (ms *MediaSource) MediaSourceIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Attributes wraps the corresponding Objective-C method.
+// Attributes returns the attributes.
 func (ms *MediaSource) Attributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
-// RootMediaGroup wraps the corresponding Objective-C method.
+// RootMediaGroup returns the root media group.
 func (ms *MediaSource) RootMediaGroup() *MediaGroup {
 	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("rootMediaGroup"))
 	return MediaGroupFromID(_r)

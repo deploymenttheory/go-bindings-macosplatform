@@ -11,19 +11,19 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Alarm wraps the corresponding Objective-C method.
+// Alarm returns the alarm.
 func Alarm() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CalAlarm")), objc.RegisterName("alarm"))
 	return obj.Wrap(_r)
 }
 
-// Calendar wraps the corresponding Objective-C method.
+// Calendar returns the calendar.
 func Calendar() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CalCalendar")), objc.RegisterName("calendar"))
 	return obj.Wrap(_r)
 }
 
-// DefaultCalendarStore wraps the corresponding Objective-C method.
+// DefaultCalendarStore returns the default calendar store.
 func DefaultCalendarStore() *CalCalendarStore {
 	_r := objc.Send[objc.ID](objc.ID(_class("CalCalendarStore")), objc.RegisterName("defaultCalendarStore"))
 	return CalCalendarStoreFromID(_r)
@@ -65,7 +65,7 @@ func TaskPredicateWithTasksCompletedSinceCalendars(completedSince obj.Object, ca
 	return obj.Wrap(_r)
 }
 
-// Event wraps the corresponding Objective-C method.
+// Event returns the event.
 func Event() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CalEvent")), objc.RegisterName("event"))
 	return obj.Wrap(_r)
@@ -83,7 +83,7 @@ func RecurrenceEndWithOccurrenceCount(occurrenceCount int) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Task wraps the corresponding Objective-C method.
+// Task returns the task.
 func Task() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("CalTask")), objc.RegisterName("task"))
 	return obj.Wrap(_r)

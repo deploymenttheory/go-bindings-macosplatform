@@ -79,7 +79,7 @@ func (unc *UserNotificationCenter) WithScheduledNotifications(items ...*UserNoti
 	return unc
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (unc *UserNotificationCenter) WithScriptingProperties(scriptingProperties obj.Object) *UserNotificationCenter {
 	objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return unc
@@ -110,7 +110,7 @@ func (unc *UserNotificationCenter) RemoveAllDeliveredNotifications() {
 	objc.Send[objc.ID](objref.IDOf(unc), objc.RegisterName("removeAllDeliveredNotifications"))
 }
 
-// ScheduledNotifications wraps the corresponding Objective-C method.
+// ScheduledNotifications returns the scheduled notifications.
 //
 // ScheduledNotifications returns the collection as a Go slice.
 func (unc *UserNotificationCenter) ScheduledNotifications() []*UserNotification {
@@ -118,7 +118,7 @@ func (unc *UserNotificationCenter) ScheduledNotifications() []*UserNotification 
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UserNotification { return UserNotificationFromID(_id) })
 }
 
-// DeliveredNotifications wraps the corresponding Objective-C method.
+// DeliveredNotifications returns the delivered notifications.
 //
 // DeliveredNotifications returns the collection as a Go slice.
 func (unc *UserNotificationCenter) DeliveredNotifications() []*UserNotification {

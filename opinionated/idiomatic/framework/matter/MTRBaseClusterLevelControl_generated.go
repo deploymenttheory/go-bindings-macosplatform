@@ -61,7 +61,7 @@ func NewMTRBaseClusterLevelControlWithDeviceEndpointQueue(device *MTRBaseDevice,
 	return mTRBaseClusterLevelControlAdopt(_id)
 }
 
-// ReadAttributeCurrentLevelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentLevelWithCompletion reads attribute current level with completion.
 //
 // ReadAttributeCurrentLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeCurrentLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeCurrentLevelWithParam
 	}
 }
 
-// ReadAttributeRemainingTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRemainingTimeWithCompletion reads attribute remaining time with completion.
 //
 // ReadAttributeRemainingTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeRemainingTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeRemainingTimeWithPara
 	}
 }
 
-// ReadAttributeMinLevelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinLevelWithCompletion reads attribute min level with completion.
 //
 // ReadAttributeMinLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMinLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMinLevelWithParamsSub
 	}
 }
 
-// ReadAttributeMaxLevelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxLevelWithCompletion reads attribute max level with completion.
 //
 // ReadAttributeMaxLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMaxLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMaxLevelWithParamsSub
 	}
 }
 
-// ReadAttributeCurrentFrequencyWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentFrequencyWithCompletion reads attribute current frequency with completion.
 //
 // ReadAttributeCurrentFrequencyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeCurrentFrequencyWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeCurrentFrequencyWithP
 	}
 }
 
-// ReadAttributeMinFrequencyWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinFrequencyWithCompletion reads attribute min frequency with completion.
 //
 // ReadAttributeMinFrequencyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMinFrequencyWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMinFrequencyWithParam
 	}
 }
 
-// ReadAttributeMaxFrequencyWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxFrequencyWithCompletion reads attribute max frequency with completion.
 //
 // ReadAttributeMaxFrequencyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMaxFrequencyWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMaxFrequencyWithParam
 	}
 }
 
-// ReadAttributeOptionsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOptionsWithCompletion reads attribute options with completion.
 //
 // ReadAttributeOptionsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOptionsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOptionsWithParamsSubs
 	}
 }
 
-// ReadAttributeOnOffTransitionTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOnOffTransitionTimeWithCompletion reads attribute on off transition time with completion.
 //
 // ReadAttributeOnOffTransitionTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOnOffTransitionTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOnOffTransitionTimeWi
 	}
 }
 
-// ReadAttributeOnLevelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOnLevelWithCompletion reads attribute on level with completion.
 //
 // ReadAttributeOnLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOnLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOnLevelWithParamsSubs
 	}
 }
 
-// ReadAttributeOnTransitionTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOnTransitionTimeWithCompletion reads attribute on transition time with completion.
 //
 // ReadAttributeOnTransitionTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOnTransitionTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOnTransitionTimeWithP
 	}
 }
 
-// ReadAttributeOffTransitionTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOffTransitionTimeWithCompletion reads attribute off transition time with completion.
 //
 // ReadAttributeOffTransitionTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOffTransitionTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOffTransitionTimeWith
 	}
 }
 
-// ReadAttributeDefaultMoveRateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDefaultMoveRateWithCompletion reads attribute default move rate with completion.
 //
 // ReadAttributeDefaultMoveRateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeDefaultMoveRateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeDefaultMoveRateWithPa
 	}
 }
 
-// ReadAttributeStartUpCurrentLevelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeStartUpCurrentLevelWithCompletion reads attribute start up current level with completion.
 //
 // ReadAttributeStartUpCurrentLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeStartUpCurrentLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeStartUpCurrentLevelWi
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeGeneratedCommandListW
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeAcceptedCommandListWi
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeAttributeListWithPara
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -961,7 +961,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeFeatureMapWithParamsS
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeClusterRevisionWithPa
 	}
 }
 
-// ReadAttributeCurrentLevel wraps the corresponding Objective-C method.
+// ReadAttributeCurrentLevel reads attribute current level.
 //
 // ReadAttributeCurrentLevel blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeCurrentLevel(ctx context.Context) (result obj.Object, err error) {
@@ -1061,7 +1061,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeCurrentLevelWithMinIn
 	}
 }
 
-// ReadAttributeRemainingTime wraps the corresponding Objective-C method.
+// ReadAttributeRemainingTime reads attribute remaining time.
 //
 // ReadAttributeRemainingTime blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeRemainingTime(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeRemainingTimeWithMinI
 	}
 }
 
-// ReadAttributeMinLevel wraps the corresponding Objective-C method.
+// ReadAttributeMinLevel reads attribute min level.
 //
 // ReadAttributeMinLevel blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMinLevel(ctx context.Context) (result obj.Object, err error) {
@@ -1161,7 +1161,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMinLevelWithMinInterv
 	}
 }
 
-// ReadAttributeMaxLevel wraps the corresponding Objective-C method.
+// ReadAttributeMaxLevel reads attribute max level.
 //
 // ReadAttributeMaxLevel blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMaxLevel(ctx context.Context) (result obj.Object, err error) {
@@ -1211,7 +1211,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMaxLevelWithMinInterv
 	}
 }
 
-// ReadAttributeCurrentFrequency wraps the corresponding Objective-C method.
+// ReadAttributeCurrentFrequency reads attribute current frequency.
 //
 // ReadAttributeCurrentFrequency blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeCurrentFrequency(ctx context.Context) (result obj.Object, err error) {
@@ -1261,7 +1261,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeCurrentFrequencyWithM
 	}
 }
 
-// ReadAttributeMinFrequency wraps the corresponding Objective-C method.
+// ReadAttributeMinFrequency reads attribute min frequency.
 //
 // ReadAttributeMinFrequency blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMinFrequency(ctx context.Context) (result obj.Object, err error) {
@@ -1311,7 +1311,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMinFrequencyWithMinIn
 	}
 }
 
-// ReadAttributeMaxFrequency wraps the corresponding Objective-C method.
+// ReadAttributeMaxFrequency reads attribute max frequency.
 //
 // ReadAttributeMaxFrequency blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeMaxFrequency(ctx context.Context) (result obj.Object, err error) {
@@ -1361,7 +1361,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeMaxFrequencyWithMinIn
 	}
 }
 
-// ReadAttributeOptions wraps the corresponding Objective-C method.
+// ReadAttributeOptions reads attribute options.
 //
 // ReadAttributeOptions blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOptions(ctx context.Context) (result obj.Object, err error) {
@@ -1411,7 +1411,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOptionsWithMinInterva
 	}
 }
 
-// ReadAttributeOnOffTransitionTime wraps the corresponding Objective-C method.
+// ReadAttributeOnOffTransitionTime reads attribute on off transition time.
 //
 // ReadAttributeOnOffTransitionTime blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOnOffTransitionTime(ctx context.Context) (result obj.Object, err error) {
@@ -1461,7 +1461,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOnOffTransitionTimeWi
 	}
 }
 
-// ReadAttributeOnLevel wraps the corresponding Objective-C method.
+// ReadAttributeOnLevel reads attribute on level.
 //
 // ReadAttributeOnLevel blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOnLevel(ctx context.Context) (result obj.Object, err error) {
@@ -1511,7 +1511,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOnLevelWithMinInterva
 	}
 }
 
-// ReadAttributeOnTransitionTime wraps the corresponding Objective-C method.
+// ReadAttributeOnTransitionTime reads attribute on transition time.
 //
 // ReadAttributeOnTransitionTime blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOnTransitionTime(ctx context.Context) (result obj.Object, err error) {
@@ -1561,7 +1561,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOnTransitionTimeWithM
 	}
 }
 
-// ReadAttributeOffTransitionTime wraps the corresponding Objective-C method.
+// ReadAttributeOffTransitionTime reads attribute off transition time.
 //
 // ReadAttributeOffTransitionTime blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeOffTransitionTime(ctx context.Context) (result obj.Object, err error) {
@@ -1611,7 +1611,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeOffTransitionTimeWith
 	}
 }
 
-// ReadAttributeDefaultMoveRate wraps the corresponding Objective-C method.
+// ReadAttributeDefaultMoveRate reads attribute default move rate.
 //
 // ReadAttributeDefaultMoveRate blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeDefaultMoveRate(ctx context.Context) (result obj.Object, err error) {
@@ -1661,7 +1661,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeDefaultMoveRateWithMi
 	}
 }
 
-// ReadAttributeStartUpCurrentLevel wraps the corresponding Objective-C method.
+// ReadAttributeStartUpCurrentLevel reads attribute start up current level.
 //
 // ReadAttributeStartUpCurrentLevel blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeStartUpCurrentLevel(ctx context.Context) (result obj.Object, err error) {
@@ -1711,7 +1711,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeStartUpCurrentLevelWi
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1761,7 +1761,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeGeneratedCommandListW
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1811,7 +1811,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeAcceptedCommandListWi
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -1861,7 +1861,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeAttributeListWithMinI
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -1911,7 +1911,7 @@ func (mbclc *MTRBaseClusterLevelControl) SubscribeAttributeFeatureMapWithMinInte
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbclc *MTRBaseClusterLevelControl) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

@@ -72,7 +72,7 @@ func (c *Coder) String() string {
 	return rt.Description(objref.IDOf(c))
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (c *Coder) WithScriptingProperties(scriptingProperties obj.Object) *Coder {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return c
@@ -297,7 +297,7 @@ func (c *Coder) DecodePropertyListForKey(key string) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// SystemVersion wraps the corresponding Objective-C method.
+// SystemVersion returns the system version.
 func (c *Coder) SystemVersion() int {
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("systemVersion"))
 	return _r
@@ -315,7 +315,7 @@ func (c *Coder) RequiresSecureCoding() bool {
 	return _r
 }
 
-// AllowedClasses wraps the corresponding Objective-C method.
+// AllowedClasses returns the allowed classes.
 func (c *Coder) AllowedClasses() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("allowedClasses"))
 	return obj.Wrap(_r)

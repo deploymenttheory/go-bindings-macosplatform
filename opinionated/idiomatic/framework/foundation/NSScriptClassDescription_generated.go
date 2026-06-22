@@ -53,7 +53,7 @@ func NewScriptClassDescriptionWithSuiteNameClassNameDictionary(suiteName string,
 	return scriptClassDescriptionAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (scd *ScriptClassDescription) WithScriptingProperties(scriptingProperties obj.Object) *ScriptClassDescription {
 	objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return scd
@@ -131,7 +131,7 @@ func (scd *ScriptClassDescription) HasWritablePropertyForKey(key string) bool {
 	return _r
 }
 
-// SuiteName wraps the corresponding Objective-C method.
+// SuiteName returns the suite name.
 func (scd *ScriptClassDescription) SuiteName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("suiteName"))
 	if _r == 0 {
@@ -140,7 +140,7 @@ func (scd *ScriptClassDescription) SuiteName() string {
 	return purego.GoString(_r)
 }
 
-// ImplementationClassName wraps the corresponding Objective-C method.
+// ImplementationClassName returns the implementation class name.
 func (scd *ScriptClassDescription) ImplementationClassName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("implementationClassName"))
 	if _r == 0 {
@@ -149,19 +149,19 @@ func (scd *ScriptClassDescription) ImplementationClassName() string {
 	return purego.GoString(_r)
 }
 
-// SuperclassDescription wraps the corresponding Objective-C method.
+// SuperclassDescription returns the superclass description.
 func (scd *ScriptClassDescription) SuperclassDescription() *ScriptClassDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("superclassDescription"))
 	return ScriptClassDescriptionFromID(_r)
 }
 
-// AppleEventCode wraps the corresponding Objective-C method.
+// AppleEventCode returns the apple event code.
 func (scd *ScriptClassDescription) AppleEventCode() int {
 	_r := objc.Send[int](objref.IDOf(scd), objc.RegisterName("appleEventCode"))
 	return _r
 }
 
-// DefaultSubcontainerAttributeKey wraps the corresponding Objective-C method.
+// DefaultSubcontainerAttributeKey returns the default subcontainer attribute key.
 func (scd *ScriptClassDescription) DefaultSubcontainerAttributeKey() string {
 	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("defaultSubcontainerAttributeKey"))
 	if _r == 0 {

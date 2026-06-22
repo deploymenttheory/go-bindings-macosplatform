@@ -51,13 +51,13 @@ func NewPhysicsHingeJoint() *PhysicsHingeJoint {
 	return physicsHingeJointAdopt(_id)
 }
 
-// BodyA wraps the corresponding Objective-C method.
+// BodyA returns the body a.
 func (phj *PhysicsHingeJoint) BodyA() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(phj), objc.RegisterName("bodyA"))
 	return PhysicsBodyFromID(_r)
 }
 
-// BodyB wraps the corresponding Objective-C method.
+// BodyB returns the body b.
 func (phj *PhysicsHingeJoint) BodyB() *PhysicsBody {
 	_r := objc.Send[objc.ID](objref.IDOf(phj), objc.RegisterName("bodyB"))
 	return PhysicsBodyFromID(_r)

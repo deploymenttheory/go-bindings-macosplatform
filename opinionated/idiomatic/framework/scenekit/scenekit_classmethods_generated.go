@@ -683,7 +683,7 @@ func SetValueForKey(value obj.Object, key string) {
 	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("setValue:forKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
-// AnimationDuration wraps the corresponding Objective-C method.
+// AnimationDuration returns the animation duration.
 func AnimationDuration() float64 {
 	_r := objc.Send[float64](objc.ID(_class("SCNTransaction")), objc.RegisterName("animationDuration"))
 	return _r
@@ -694,7 +694,7 @@ func SetAnimationDuration(animationDuration float64) {
 	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("setAnimationDuration:"), animationDuration)
 }
 
-// AnimationTimingFunction wraps the corresponding Objective-C method.
+// AnimationTimingFunction returns the animation timing function.
 func AnimationTimingFunction() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("animationTimingFunction"))
 	return obj.Wrap(_r)

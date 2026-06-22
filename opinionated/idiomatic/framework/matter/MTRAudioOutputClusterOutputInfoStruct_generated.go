@@ -66,37 +66,37 @@ func (maocois *MTRAudioOutputClusterOutputInfoStruct) String() string {
 	return rt.Description(objref.IDOf(maocois))
 }
 
-// WithIndex sets the property and returns the receiver so calls can be chained.
+// WithIndex sets the index.
 func (maocois *MTRAudioOutputClusterOutputInfoStruct) WithIndex(index obj.Object) *MTRAudioOutputClusterOutputInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(maocois), objc.RegisterName("setIndex:"), objref.IDOf(index))
 	return maocois
 }
 
-// WithOutputType sets the property and returns the receiver so calls can be chained.
+// WithOutputType sets the output type.
 func (maocois *MTRAudioOutputClusterOutputInfoStruct) WithOutputType(outputType obj.Object) *MTRAudioOutputClusterOutputInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(maocois), objc.RegisterName("setOutputType:"), objref.IDOf(outputType))
 	return maocois
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (maocois *MTRAudioOutputClusterOutputInfoStruct) WithName(name string) *MTRAudioOutputClusterOutputInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(maocois), objc.RegisterName("setName:"), purego.NSString(name))
 	return maocois
 }
 
-// Index wraps the corresponding Objective-C method.
+// Index returns the index.
 func (maocois *MTRAudioOutputClusterOutputInfoStruct) Index() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maocois), objc.RegisterName("index"))
 	return obj.Wrap(_r)
 }
 
-// OutputType wraps the corresponding Objective-C method.
+// OutputType returns the output type.
 func (maocois *MTRAudioOutputClusterOutputInfoStruct) OutputType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maocois), objc.RegisterName("outputType"))
 	return obj.Wrap(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (maocois *MTRAudioOutputClusterOutputInfoStruct) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(maocois), objc.RegisterName("name"))
 	if _r == 0 {

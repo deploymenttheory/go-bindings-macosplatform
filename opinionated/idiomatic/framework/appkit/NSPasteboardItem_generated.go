@@ -145,7 +145,7 @@ func (pi *PasteboardItem) DetectPatternsForPatterns(ctx context.Context, pattern
 	}
 }
 
-// Types wraps the corresponding Objective-C method.
+// Types returns the types.
 //
 // Types returns the collection as a Go slice.
 func (pi *PasteboardItem) Types() []obj.Object {

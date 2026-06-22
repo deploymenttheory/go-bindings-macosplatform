@@ -49,7 +49,7 @@ func NewDOMMediaList() *DOMMediaList {
 	return dOMMediaListAdopt(_id)
 }
 
-// WithMediaText sets the property and returns the receiver so calls can be chained.
+// WithMediaText sets the media text.
 func (dml *DOMMediaList) WithMediaText(mediaText string) *DOMMediaList {
 	objc.Send[objc.ID](objref.IDOf(dml), objc.RegisterName("setMediaText:"), purego.NSString(mediaText))
 	return dml
@@ -64,17 +64,17 @@ func (dml *DOMMediaList) Item(index int) string {
 	return purego.GoString(_r)
 }
 
-// DeleteMedium wraps the corresponding Objective-C method.
+// DeleteMedium deletes medium.
 func (dml *DOMMediaList) DeleteMedium(oldMedium string) {
 	objc.Send[objc.ID](objref.IDOf(dml), objc.RegisterName("deleteMedium:"), purego.NSString(oldMedium))
 }
 
-// AppendMedium wraps the corresponding Objective-C method.
+// AppendMedium appends medium.
 func (dml *DOMMediaList) AppendMedium(newMedium string) {
 	objc.Send[objc.ID](objref.IDOf(dml), objc.RegisterName("appendMedium:"), purego.NSString(newMedium))
 }
 
-// MediaText wraps the corresponding Objective-C method.
+// MediaText returns the media text.
 func (dml *DOMMediaList) MediaText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dml), objc.RegisterName("mediaText"))
 	if _r == 0 {
@@ -83,7 +83,7 @@ func (dml *DOMMediaList) MediaText() string {
 	return purego.GoString(_r)
 }
 
-// Length wraps the corresponding Objective-C method.
+// Length returns the length.
 func (dml *DOMMediaList) Length() int {
 	_r := objc.Send[int](objref.IDOf(dml), objc.RegisterName("length"))
 	return _r

@@ -73,7 +73,7 @@ func NewVehicleConnectionSession() *VehicleConnectionSession {
 	return vehicleConnectionSessionAdopt(_id)
 }
 
-// SendData wraps the corresponding Objective-C method.
+// SendData sends data.
 func (vcs *VehicleConnectionSession) SendData(message obj.Object) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(vcs), objc.RegisterName("sendData:error:"), objref.IDOf(message), unsafe.Pointer(&_nsErr))
@@ -88,7 +88,7 @@ func (vcs *VehicleConnectionSession) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(vcs), objc.RegisterName("invalidate"))
 }
 
-// ConnectionStatus wraps the corresponding Objective-C method.
+// ConnectionStatus returns the connection status.
 func (vcs *VehicleConnectionSession) ConnectionStatus() VehicleConnectionSessionConnectionState {
 	_r := objc.Send[VehicleConnectionSessionConnectionState](objref.IDOf(vcs), objc.RegisterName("connectionStatus"))
 	return _r

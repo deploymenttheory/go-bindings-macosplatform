@@ -51,7 +51,7 @@ func NewCNNNormalizationGammaAndBetaState() *CNNNormalizationGammaAndBetaState {
 	return cNNNormalizationGammaAndBetaStateAdopt(_id)
 }
 
-// WithReadCount sets the property and returns the receiver so calls can be chained.
+// WithReadCount sets the read count.
 func (cngabs *CNNNormalizationGammaAndBetaState) WithReadCount(readCount int) *CNNNormalizationGammaAndBetaState {
 	objc.Send[objc.ID](objref.IDOf(cngabs), objc.RegisterName("setReadCount:"), readCount)
 	return cngabs

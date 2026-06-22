@@ -191,7 +191,7 @@ func (pav *PinAnnotationView) WithCollisionMode(collisionMode AnnotationViewColl
 	return pav
 }
 
-// PinTintColor wraps the corresponding Objective-C method.
+// PinTintColor returns the pin tint color.
 func (pav *PinAnnotationView) PinTintColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pav), objc.RegisterName("pinTintColor"))
 	return obj.Wrap(_r)
@@ -203,7 +203,7 @@ func (pav *PinAnnotationView) AnimatesDrop() bool {
 	return _r
 }
 
-// PinColor wraps the corresponding Objective-C method.
+// PinColor returns the pin color.
 func (pav *PinAnnotationView) PinColor() PinAnnotationColor {
 	_r := objc.Send[PinAnnotationColor](objref.IDOf(pav), objc.RegisterName("pinColor"))
 	return _r

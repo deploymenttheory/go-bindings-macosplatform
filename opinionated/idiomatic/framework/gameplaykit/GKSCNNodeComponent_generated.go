@@ -53,7 +53,7 @@ func NewSCNNodeComponentWithNode(node obj.Object) *SCNNodeComponent {
 	return sCNNodeComponentAdopt(_id)
 }
 
-// Node wraps the corresponding Objective-C method.
+// Node returns the node.
 func (snc *SCNNodeComponent) Node() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(snc), objc.RegisterName("node"))
 	return obj.Wrap(_r)

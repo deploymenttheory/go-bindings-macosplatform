@@ -360,7 +360,7 @@ func (v_ *Value) SetObjectAtIndexedSubscript(object obj.Object, index int) {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(object), index)
 }
 
-// JSValueRef wraps the corresponding Objective-C method.
+// JSValueRef returns the js value ref.
 func (v_ *Value) JSValueRef() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("JSValueRef"))
 	return obj.Wrap(_r)

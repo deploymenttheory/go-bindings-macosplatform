@@ -72,7 +72,7 @@ func NewSteeringWheelElement() *SteeringWheelElement {
 	return steeringWheelElementAdopt(_id)
 }
 
-// MaximumDegreesOfRotation wraps the corresponding Objective-C method.
+// MaximumDegreesOfRotation returns the maximum degrees of rotation.
 func (swe *SteeringWheelElement) MaximumDegreesOfRotation() float32 {
 	_r := objc.Send[float32](objref.IDOf(swe), objc.RegisterName("maximumDegreesOfRotation"))
 	return _r

@@ -109,7 +109,7 @@ func (xn *XMLNode) WithURI(uRI StringProvider) *XMLNode {
 	return xn
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (xn *XMLNode) WithScriptingProperties(scriptingProperties obj.Object) *XMLNode {
 	objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return xn

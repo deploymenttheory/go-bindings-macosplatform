@@ -70,13 +70,13 @@ func NewMTRThermostatClusterGetWeeklyScheduleParams() *MTRThermostatClusterGetWe
 	return mTRThermostatClusterGetWeeklyScheduleParamsAdopt(_id)
 }
 
-// WithDaysToReturn sets the property and returns the receiver so calls can be chained.
+// WithDaysToReturn sets the days to return.
 func (mtcgwsp *MTRThermostatClusterGetWeeklyScheduleParams) WithDaysToReturn(daysToReturn obj.Object) *MTRThermostatClusterGetWeeklyScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(mtcgwsp), objc.RegisterName("setDaysToReturn:"), objref.IDOf(daysToReturn))
 	return mtcgwsp
 }
 
-// WithModeToReturn sets the property and returns the receiver so calls can be chained.
+// WithModeToReturn sets the mode to return.
 func (mtcgwsp *MTRThermostatClusterGetWeeklyScheduleParams) WithModeToReturn(modeToReturn obj.Object) *MTRThermostatClusterGetWeeklyScheduleParams {
 	objc.Send[objc.ID](objref.IDOf(mtcgwsp), objc.RegisterName("setModeToReturn:"), objref.IDOf(modeToReturn))
 	return mtcgwsp
@@ -94,13 +94,13 @@ func (mtcgwsp *MTRThermostatClusterGetWeeklyScheduleParams) WithServerSideProces
 	return mtcgwsp
 }
 
-// DaysToReturn wraps the corresponding Objective-C method.
+// DaysToReturn returns the days to return.
 func (mtcgwsp *MTRThermostatClusterGetWeeklyScheduleParams) DaysToReturn() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcgwsp), objc.RegisterName("daysToReturn"))
 	return obj.Wrap(_r)
 }
 
-// ModeToReturn wraps the corresponding Objective-C method.
+// ModeToReturn returns the mode to return.
 func (mtcgwsp *MTRThermostatClusterGetWeeklyScheduleParams) ModeToReturn() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtcgwsp), objc.RegisterName("modeToReturn"))
 	return obj.Wrap(_r)

@@ -71,19 +71,19 @@ func (cdn *CNNDropoutNode) WithLabel(label string) *CNNDropoutNode {
 	return cdn
 }
 
-// KeepProbability wraps the corresponding Objective-C method.
+// KeepProbability returns the keep probability.
 func (cdn *CNNDropoutNode) KeepProbability() float32 {
 	_r := objc.Send[float32](objref.IDOf(cdn), objc.RegisterName("keepProbability"))
 	return _r
 }
 
-// Seed wraps the corresponding Objective-C method.
+// Seed returns the seed.
 func (cdn *CNNDropoutNode) Seed() int {
 	_r := objc.Send[int](objref.IDOf(cdn), objc.RegisterName("seed"))
 	return _r
 }
 
-// MaskStrideInPixels wraps the corresponding Objective-C method.
+// MaskStrideInPixels returns the mask stride in pixels.
 func (cdn *CNNDropoutNode) MaskStrideInPixels() metal.MTLSize {
 	_r := objc.Send[metal.MTLSize](objref.IDOf(cdn), objc.RegisterName("maskStrideInPixels"))
 	return _r

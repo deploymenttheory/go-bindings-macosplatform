@@ -51,25 +51,25 @@ func NewNNLossGradient() *NNLossGradient {
 	return nNLossGradientAdopt(_id)
 }
 
-// WithWeight sets the property and returns the receiver so calls can be chained.
+// WithWeight sets the weight.
 func (nlg *NNLossGradient) WithWeight(weight float32) *NNLossGradient {
 	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setWeight:"), weight)
 	return nlg
 }
 
-// WithLabelSmoothing sets the property and returns the receiver so calls can be chained.
+// WithLabelSmoothing sets the label smoothing.
 func (nlg *NNLossGradient) WithLabelSmoothing(labelSmoothing float32) *NNLossGradient {
 	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setLabelSmoothing:"), labelSmoothing)
 	return nlg
 }
 
-// WithEpsilon sets the property and returns the receiver so calls can be chained.
+// WithEpsilon sets the epsilon.
 func (nlg *NNLossGradient) WithEpsilon(epsilon float32) *NNLossGradient {
 	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setEpsilon:"), epsilon)
 	return nlg
 }
 
-// WithDelta sets the property and returns the receiver so calls can be chained.
+// WithDelta sets the delta.
 func (nlg *NNLossGradient) WithDelta(delta float32) *NNLossGradient {
 	objc.Send[objc.ID](objref.IDOf(nlg), objc.RegisterName("setDelta:"), delta)
 	return nlg
@@ -159,7 +159,7 @@ func (nlg *NNLossGradient) LossType() CNNLossType {
 	return _r
 }
 
-// ReductionType wraps the corresponding Objective-C method.
+// ReductionType returns the reduction type.
 func (nlg *NNLossGradient) ReductionType() CNNReductionType {
 	_r := objc.Send[CNNReductionType](objref.IDOf(nlg), objc.RegisterName("reductionType"))
 	return _r
@@ -171,31 +171,31 @@ func (nlg *NNLossGradient) ReduceAcrossBatch() bool {
 	return _r
 }
 
-// NumberOfClasses wraps the corresponding Objective-C method.
+// NumberOfClasses returns the number of classes.
 func (nlg *NNLossGradient) NumberOfClasses() int {
 	_r := objc.Send[int](objref.IDOf(nlg), objc.RegisterName("numberOfClasses"))
 	return _r
 }
 
-// Weight wraps the corresponding Objective-C method.
+// Weight returns the weight.
 func (nlg *NNLossGradient) Weight() float32 {
 	_r := objc.Send[float32](objref.IDOf(nlg), objc.RegisterName("weight"))
 	return _r
 }
 
-// LabelSmoothing wraps the corresponding Objective-C method.
+// LabelSmoothing returns the label smoothing.
 func (nlg *NNLossGradient) LabelSmoothing() float32 {
 	_r := objc.Send[float32](objref.IDOf(nlg), objc.RegisterName("labelSmoothing"))
 	return _r
 }
 
-// Epsilon wraps the corresponding Objective-C method.
+// Epsilon returns the epsilon.
 func (nlg *NNLossGradient) Epsilon() float32 {
 	_r := objc.Send[float32](objref.IDOf(nlg), objc.RegisterName("epsilon"))
 	return _r
 }
 
-// Delta wraps the corresponding Objective-C method.
+// Delta returns the delta.
 func (nlg *NNLossGradient) Delta() float32 {
 	_r := objc.Send[float32](objref.IDOf(nlg), objc.RegisterName("delta"))
 	return _r

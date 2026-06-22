@@ -50,19 +50,19 @@ func NewMTRTestClusterClusterNestedStruct() *MTRTestClusterClusterNestedStruct {
 	return mTRTestClusterClusterNestedStructAdopt(_id)
 }
 
-// WithA sets the property and returns the receiver so calls can be chained.
+// WithA sets the a.
 func (mtccns *MTRTestClusterClusterNestedStruct) WithA(a obj.Object) *MTRTestClusterClusterNestedStruct {
 	objc.Send[objc.ID](objref.IDOf(mtccns), objc.RegisterName("setA:"), objref.IDOf(a))
 	return mtccns
 }
 
-// WithB sets the property and returns the receiver so calls can be chained.
+// WithB sets the b.
 func (mtccns *MTRTestClusterClusterNestedStruct) WithB(b obj.Object) *MTRTestClusterClusterNestedStruct {
 	objc.Send[objc.ID](objref.IDOf(mtccns), objc.RegisterName("setB:"), objref.IDOf(b))
 	return mtccns
 }
 
-// WithC sets the property and returns the receiver so calls can be chained.
+// WithC sets the c.
 func (mtccns *MTRTestClusterClusterNestedStruct) WithC(c MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterNestedStruct {
 	objc.Send[objc.ID](objref.IDOf(mtccns), objc.RegisterName("setC:"), objref.IDOf(c))
 	return mtccns

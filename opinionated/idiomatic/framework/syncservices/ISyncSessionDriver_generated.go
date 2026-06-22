@@ -79,7 +79,7 @@ func (issd *ISyncSessionDriver) Sync() bool {
 	return _r
 }
 
-// StartAsynchronousSync wraps the corresponding Objective-C method.
+// StartAsynchronousSync starts asynchronous sync.
 //
 // StartAsynchronousSync returns an error if the operation did not succeed.
 func (issd *ISyncSessionDriver) StartAsynchronousSync() error {
@@ -96,7 +96,7 @@ func (issd *ISyncSessionDriver) SetDelegate(delegate obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(issd), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
-// Delegate wraps the corresponding Objective-C method.
+// Delegate returns the delegate.
 func (issd *ISyncSessionDriver) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(issd), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
@@ -113,13 +113,13 @@ func (issd *ISyncSessionDriver) HandlesSyncAlerts() bool {
 	return _r
 }
 
-// Client wraps the corresponding Objective-C method.
+// Client returns the client.
 func (issd *ISyncSessionDriver) Client() *ISyncClient {
 	_r := objc.Send[objc.ID](objref.IDOf(issd), objc.RegisterName("client"))
 	return ISyncClientFromID(_r)
 }
 
-// Session wraps the corresponding Objective-C method.
+// Session returns the session.
 func (issd *ISyncSessionDriver) Session() *ISyncSession {
 	_r := objc.Send[objc.ID](objref.IDOf(issd), objc.RegisterName("session"))
 	return ISyncSessionFromID(_r)

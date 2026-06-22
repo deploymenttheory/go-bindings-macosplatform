@@ -81,31 +81,31 @@ func (epf *EffectPropertyFog) WithEnd(end float32) *EffectPropertyFog {
 	return epf
 }
 
-// Enabled wraps the corresponding Objective-C method.
+// Enabled returns the enabled.
 func (epf *EffectPropertyFog) Enabled() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(epf), objc.RegisterName("enabled"))
 	return _r
 }
 
-// Mode wraps the corresponding Objective-C method.
+// Mode returns the mode.
 func (epf *EffectPropertyFog) Mode() int32 {
 	_r := objc.Send[int32](objref.IDOf(epf), objc.RegisterName("mode"))
 	return _r
 }
 
-// Density wraps the corresponding Objective-C method.
+// Density returns the density.
 func (epf *EffectPropertyFog) Density() float32 {
 	_r := objc.Send[float32](objref.IDOf(epf), objc.RegisterName("density"))
 	return _r
 }
 
-// Start wraps the corresponding Objective-C method.
+// Start returns the start.
 func (epf *EffectPropertyFog) Start() float32 {
 	_r := objc.Send[float32](objref.IDOf(epf), objc.RegisterName("start"))
 	return _r
 }
 
-// End wraps the corresponding Objective-C method.
+// End returns the end.
 func (epf *EffectPropertyFog) End() float32 {
 	_r := objc.Send[float32](objref.IDOf(epf), objc.RegisterName("end"))
 	return _r

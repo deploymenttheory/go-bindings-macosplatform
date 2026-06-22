@@ -176,7 +176,7 @@ func (aes *AssetExportSession) CancelExport() {
 	objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("cancelExport"))
 }
 
-// PresetName wraps the corresponding Objective-C method.
+// PresetName returns the preset name.
 func (aes *AssetExportSession) PresetName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("presetName"))
 	if _r == 0 {
@@ -185,19 +185,19 @@ func (aes *AssetExportSession) PresetName() string {
 	return purego.GoString(_r)
 }
 
-// Asset wraps the corresponding Objective-C method.
+// Asset returns the asset.
 func (aes *AssetExportSession) Asset() *Asset {
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("asset"))
 	return AssetFromID(_r)
 }
 
-// OutputFileType wraps the corresponding Objective-C method.
+// OutputFileType returns the output file type.
 func (aes *AssetExportSession) OutputFileType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("outputFileType"))
 	return obj.Wrap(_r)
 }
 
-// OutputURL wraps the corresponding Objective-C method.
+// OutputURL returns the output URL.
 func (aes *AssetExportSession) OutputURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("outputURL"))
 	return obj.Wrap(_r)
@@ -215,13 +215,13 @@ func (aes *AssetExportSession) AllowsParallelizedExport() bool {
 	return _r
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (aes *AssetExportSession) Status() AssetExportSessionStatus {
 	_r := objc.Send[AssetExportSessionStatus](objref.IDOf(aes), objc.RegisterName("status"))
 	return _r
 }
 
-// Progress wraps the corresponding Objective-C method.
+// Progress returns the progress.
 func (aes *AssetExportSession) Progress() float32 {
 	_r := objc.Send[float32](objref.IDOf(aes), objc.RegisterName("progress"))
 	return _r
@@ -251,7 +251,7 @@ func (aes *AssetExportSession) DetermineCompatibleFileTypes(ctx context.Context)
 	}
 }
 
-// SupportedFileTypes wraps the corresponding Objective-C method.
+// SupportedFileTypes returns the supported file types.
 //
 // SupportedFileTypes returns the collection as a Go slice.
 func (aes *AssetExportSession) SupportedFileTypes() []obj.Object {
@@ -259,19 +259,19 @@ func (aes *AssetExportSession) SupportedFileTypes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// EstimatedOutputFileLength wraps the corresponding Objective-C method.
+// EstimatedOutputFileLength returns the estimated output file length.
 func (aes *AssetExportSession) EstimatedOutputFileLength() int64 {
 	_r := objc.Send[int64](objref.IDOf(aes), objc.RegisterName("estimatedOutputFileLength"))
 	return _r
 }
 
-// FileLengthLimit wraps the corresponding Objective-C method.
+// FileLengthLimit returns the file length limit.
 func (aes *AssetExportSession) FileLengthLimit() int64 {
 	_r := objc.Send[int64](objref.IDOf(aes), objc.RegisterName("fileLengthLimit"))
 	return _r
 }
 
-// Metadata wraps the corresponding Objective-C method.
+// Metadata returns the metadata.
 //
 // Metadata returns the collection as a Go slice.
 func (aes *AssetExportSession) Metadata() []*MetadataItem {
@@ -279,25 +279,25 @@ func (aes *AssetExportSession) Metadata() []*MetadataItem {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
-// MetadataItemFilter wraps the corresponding Objective-C method.
+// MetadataItemFilter returns the metadata item filter.
 func (aes *AssetExportSession) MetadataItemFilter() *MetadataItemFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("metadataItemFilter"))
 	return MetadataItemFilterFromID(_r)
 }
 
-// AudioTimePitchAlgorithm wraps the corresponding Objective-C method.
+// AudioTimePitchAlgorithm returns the audio time pitch algorithm.
 func (aes *AssetExportSession) AudioTimePitchAlgorithm() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("audioTimePitchAlgorithm"))
 	return obj.Wrap(_r)
 }
 
-// AudioMix wraps the corresponding Objective-C method.
+// AudioMix returns the audio mix.
 func (aes *AssetExportSession) AudioMix() *AudioMix {
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("audioMix"))
 	return AudioMixFromID(_r)
 }
 
-// VideoComposition wraps the corresponding Objective-C method.
+// VideoComposition returns the video composition.
 func (aes *AssetExportSession) VideoComposition() *VideoComposition {
 	_r := objc.Send[objc.ID](objref.IDOf(aes), objc.RegisterName("videoComposition"))
 	return VideoCompositionFromID(_r)

@@ -68,7 +68,7 @@ func (flr *FaceLandmarkRegion) String() string {
 	return rt.Description(objref.IDOf(flr))
 }
 
-// PointCount wraps the corresponding Objective-C method.
+// PointCount returns the point count.
 func (flr *FaceLandmarkRegion) PointCount() int {
 	_r := objc.Send[int](objref.IDOf(flr), objc.RegisterName("pointCount"))
 	return _r

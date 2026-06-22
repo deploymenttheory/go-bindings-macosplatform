@@ -70,19 +70,19 @@ func NewMTRAttributeRequestPath() *MTRAttributeRequestPath {
 	return mTRAttributeRequestPathAdopt(_id)
 }
 
-// Endpoint wraps the corresponding Objective-C method.
+// Endpoint returns the endpoint.
 func (marp *MTRAttributeRequestPath) Endpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(marp), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
 }
 
-// Cluster wraps the corresponding Objective-C method.
+// Cluster returns the cluster.
 func (marp *MTRAttributeRequestPath) Cluster() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(marp), objc.RegisterName("cluster"))
 	return obj.Wrap(_r)
 }
 
-// Attribute wraps the corresponding Objective-C method.
+// Attribute returns the attribute.
 func (marp *MTRAttributeRequestPath) Attribute() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(marp), objc.RegisterName("attribute"))
 	return obj.Wrap(_r)

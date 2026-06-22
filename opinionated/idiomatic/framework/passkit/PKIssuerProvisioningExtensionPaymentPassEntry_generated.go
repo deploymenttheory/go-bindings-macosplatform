@@ -53,7 +53,7 @@ func NewIssuerProvisioningExtensionPaymentPassEntryWithIdentifierTitleArtAddRequ
 	return issuerProvisioningExtensionPaymentPassEntryAdopt(_id)
 }
 
-// AddRequestConfiguration wraps the corresponding Objective-C method.
+// AddRequestConfiguration returns the add request configuration.
 func (ipeppe *IssuerProvisioningExtensionPaymentPassEntry) AddRequestConfiguration() *AddPaymentPassRequestConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(ipeppe), objc.RegisterName("addRequestConfiguration"))
 	return AddPaymentPassRequestConfigurationFromID(_r)

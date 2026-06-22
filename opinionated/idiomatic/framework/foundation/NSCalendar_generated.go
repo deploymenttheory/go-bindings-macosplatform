@@ -99,7 +99,7 @@ func (c *Calendar) WithMinimumDaysInFirstWeek(minimumDaysInFirstWeek int) *Calen
 	return c
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (c *Calendar) WithScriptingProperties(scriptingProperties obj.Object) *Calendar {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return c
@@ -311,37 +311,37 @@ func (c *Calendar) DateMatchesComponents(date *Date, components *DateComponents)
 	return _r
 }
 
-// CalendarIdentifier wraps the corresponding Objective-C method.
+// CalendarIdentifier returns the calendar identifier.
 func (c *Calendar) CalendarIdentifier() *String {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("calendarIdentifier"))
 	return StringFromID(_r)
 }
 
-// Locale wraps the corresponding Objective-C method.
+// Locale returns the locale.
 func (c *Calendar) Locale() *Locale {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
 }
 
-// TimeZone wraps the corresponding Objective-C method.
+// TimeZone returns the time zone.
 func (c *Calendar) TimeZone() *TimeZone {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
-// FirstWeekday wraps the corresponding Objective-C method.
+// FirstWeekday returns the first weekday.
 func (c *Calendar) FirstWeekday() int {
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("firstWeekday"))
 	return _r
 }
 
-// MinimumDaysInFirstWeek wraps the corresponding Objective-C method.
+// MinimumDaysInFirstWeek returns the minimum days in first week.
 func (c *Calendar) MinimumDaysInFirstWeek() int {
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("minimumDaysInFirstWeek"))
 	return _r
 }
 
-// EraSymbols wraps the corresponding Objective-C method.
+// EraSymbols returns the era symbols.
 //
 // EraSymbols returns the collection as a Go slice.
 func (c *Calendar) EraSymbols() []string {
@@ -349,7 +349,7 @@ func (c *Calendar) EraSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// LongEraSymbols wraps the corresponding Objective-C method.
+// LongEraSymbols returns the long era symbols.
 //
 // LongEraSymbols returns the collection as a Go slice.
 func (c *Calendar) LongEraSymbols() []string {
@@ -357,7 +357,7 @@ func (c *Calendar) LongEraSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// MonthSymbols wraps the corresponding Objective-C method.
+// MonthSymbols returns the month symbols.
 //
 // MonthSymbols returns the collection as a Go slice.
 func (c *Calendar) MonthSymbols() []string {
@@ -365,7 +365,7 @@ func (c *Calendar) MonthSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ShortMonthSymbols wraps the corresponding Objective-C method.
+// ShortMonthSymbols returns the short month symbols.
 //
 // ShortMonthSymbols returns the collection as a Go slice.
 func (c *Calendar) ShortMonthSymbols() []string {
@@ -373,7 +373,7 @@ func (c *Calendar) ShortMonthSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// VeryShortMonthSymbols wraps the corresponding Objective-C method.
+// VeryShortMonthSymbols returns the very short month symbols.
 //
 // VeryShortMonthSymbols returns the collection as a Go slice.
 func (c *Calendar) VeryShortMonthSymbols() []string {
@@ -381,7 +381,7 @@ func (c *Calendar) VeryShortMonthSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// StandaloneMonthSymbols wraps the corresponding Objective-C method.
+// StandaloneMonthSymbols returns the standalone month symbols.
 //
 // StandaloneMonthSymbols returns the collection as a Go slice.
 func (c *Calendar) StandaloneMonthSymbols() []string {
@@ -389,7 +389,7 @@ func (c *Calendar) StandaloneMonthSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ShortStandaloneMonthSymbols wraps the corresponding Objective-C method.
+// ShortStandaloneMonthSymbols returns the short standalone month symbols.
 //
 // ShortStandaloneMonthSymbols returns the collection as a Go slice.
 func (c *Calendar) ShortStandaloneMonthSymbols() []string {
@@ -397,7 +397,7 @@ func (c *Calendar) ShortStandaloneMonthSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// VeryShortStandaloneMonthSymbols wraps the corresponding Objective-C method.
+// VeryShortStandaloneMonthSymbols returns the very short standalone month symbols.
 //
 // VeryShortStandaloneMonthSymbols returns the collection as a Go slice.
 func (c *Calendar) VeryShortStandaloneMonthSymbols() []string {
@@ -405,7 +405,7 @@ func (c *Calendar) VeryShortStandaloneMonthSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// WeekdaySymbols wraps the corresponding Objective-C method.
+// WeekdaySymbols returns the weekday symbols.
 //
 // WeekdaySymbols returns the collection as a Go slice.
 func (c *Calendar) WeekdaySymbols() []string {
@@ -413,7 +413,7 @@ func (c *Calendar) WeekdaySymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ShortWeekdaySymbols wraps the corresponding Objective-C method.
+// ShortWeekdaySymbols returns the short weekday symbols.
 //
 // ShortWeekdaySymbols returns the collection as a Go slice.
 func (c *Calendar) ShortWeekdaySymbols() []string {
@@ -421,7 +421,7 @@ func (c *Calendar) ShortWeekdaySymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// VeryShortWeekdaySymbols wraps the corresponding Objective-C method.
+// VeryShortWeekdaySymbols returns the very short weekday symbols.
 //
 // VeryShortWeekdaySymbols returns the collection as a Go slice.
 func (c *Calendar) VeryShortWeekdaySymbols() []string {
@@ -429,7 +429,7 @@ func (c *Calendar) VeryShortWeekdaySymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// StandaloneWeekdaySymbols wraps the corresponding Objective-C method.
+// StandaloneWeekdaySymbols returns the standalone weekday symbols.
 //
 // StandaloneWeekdaySymbols returns the collection as a Go slice.
 func (c *Calendar) StandaloneWeekdaySymbols() []string {
@@ -437,7 +437,7 @@ func (c *Calendar) StandaloneWeekdaySymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ShortStandaloneWeekdaySymbols wraps the corresponding Objective-C method.
+// ShortStandaloneWeekdaySymbols returns the short standalone weekday symbols.
 //
 // ShortStandaloneWeekdaySymbols returns the collection as a Go slice.
 func (c *Calendar) ShortStandaloneWeekdaySymbols() []string {
@@ -445,7 +445,7 @@ func (c *Calendar) ShortStandaloneWeekdaySymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// VeryShortStandaloneWeekdaySymbols wraps the corresponding Objective-C method.
+// VeryShortStandaloneWeekdaySymbols returns the very short standalone weekday symbols.
 //
 // VeryShortStandaloneWeekdaySymbols returns the collection as a Go slice.
 func (c *Calendar) VeryShortStandaloneWeekdaySymbols() []string {
@@ -453,7 +453,7 @@ func (c *Calendar) VeryShortStandaloneWeekdaySymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// QuarterSymbols wraps the corresponding Objective-C method.
+// QuarterSymbols returns the quarter symbols.
 //
 // QuarterSymbols returns the collection as a Go slice.
 func (c *Calendar) QuarterSymbols() []string {
@@ -461,7 +461,7 @@ func (c *Calendar) QuarterSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ShortQuarterSymbols wraps the corresponding Objective-C method.
+// ShortQuarterSymbols returns the short quarter symbols.
 //
 // ShortQuarterSymbols returns the collection as a Go slice.
 func (c *Calendar) ShortQuarterSymbols() []string {
@@ -469,7 +469,7 @@ func (c *Calendar) ShortQuarterSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// StandaloneQuarterSymbols wraps the corresponding Objective-C method.
+// StandaloneQuarterSymbols returns the standalone quarter symbols.
 //
 // StandaloneQuarterSymbols returns the collection as a Go slice.
 func (c *Calendar) StandaloneQuarterSymbols() []string {
@@ -477,7 +477,7 @@ func (c *Calendar) StandaloneQuarterSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ShortStandaloneQuarterSymbols wraps the corresponding Objective-C method.
+// ShortStandaloneQuarterSymbols returns the short standalone quarter symbols.
 //
 // ShortStandaloneQuarterSymbols returns the collection as a Go slice.
 func (c *Calendar) ShortStandaloneQuarterSymbols() []string {
@@ -485,7 +485,7 @@ func (c *Calendar) ShortStandaloneQuarterSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// AMSymbol wraps the corresponding Objective-C method.
+// AMSymbol returns the am symbol.
 func (c *Calendar) AMSymbol() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("AMSymbol"))
 	if _r == 0 {
@@ -494,7 +494,7 @@ func (c *Calendar) AMSymbol() string {
 	return purego.GoString(_r)
 }
 
-// PMSymbol wraps the corresponding Objective-C method.
+// PMSymbol returns the pm symbol.
 func (c *Calendar) PMSymbol() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("PMSymbol"))
 	if _r == 0 {

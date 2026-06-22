@@ -57,7 +57,7 @@ func (vtmbd *VirtioTraditionalMemoryBalloonDevice) WithTargetVirtualMachineMemor
 	return vtmbd
 }
 
-// TargetVirtualMachineMemorySize wraps the corresponding Objective-C method.
+// TargetVirtualMachineMemorySize returns the target virtual machine memory size.
 func (vtmbd *VirtioTraditionalMemoryBalloonDevice) TargetVirtualMachineMemorySize() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(vtmbd), objc.RegisterName("targetVirtualMachineMemorySize"))
 	return _r

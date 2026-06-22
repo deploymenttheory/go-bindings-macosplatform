@@ -82,13 +82,13 @@ func NewRegularExpressionWithPatternOptionsError(pattern string, options Regular
 	return regularExpressionAdopt(_id), nil
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (re *RegularExpression) WithScriptingProperties(scriptingProperties obj.Object) *RegularExpression {
 	objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return re
 }
 
-// Pattern wraps the corresponding Objective-C method.
+// Pattern returns the pattern.
 func (re *RegularExpression) Pattern() string {
 	_r := objc.Send[objc.ID](objref.IDOf(re), objc.RegisterName("pattern"))
 	if _r == 0 {
@@ -97,13 +97,13 @@ func (re *RegularExpression) Pattern() string {
 	return purego.GoString(_r)
 }
 
-// Options wraps the corresponding Objective-C method.
+// Options returns the options.
 func (re *RegularExpression) Options() RegularExpressionOptions {
 	_r := objc.Send[RegularExpressionOptions](objref.IDOf(re), objc.RegisterName("options"))
 	return _r
 }
 
-// NumberOfCaptureGroups wraps the corresponding Objective-C method.
+// NumberOfCaptureGroups returns the number of capture groups.
 func (re *RegularExpression) NumberOfCaptureGroups() int {
 	_r := objc.Send[int](objref.IDOf(re), objc.RegisterName("numberOfCaptureGroups"))
 	return _r

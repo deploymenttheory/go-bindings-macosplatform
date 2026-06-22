@@ -92,7 +92,7 @@ func (aam *AVB17221AECPAVCMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB1722
 	return aam
 }
 
-// CommandResponse wraps the corresponding Objective-C method.
+// CommandResponse returns the command response.
 func (aam *AVB17221AECPAVCMessage) CommandResponse() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("commandResponse"))
 	return obj.Wrap(_r)

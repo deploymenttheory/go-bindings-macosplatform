@@ -70,7 +70,7 @@ func NewMTROperationalCredentialsClusterAttestationRequestParams() *MTROperation
 	return mTROperationalCredentialsClusterAttestationRequestParamsAdopt(_id)
 }
 
-// WithAttestationNonce sets the property and returns the receiver so calls can be chained.
+// WithAttestationNonce sets the attestation nonce.
 func (moccarp *MTROperationalCredentialsClusterAttestationRequestParams) WithAttestationNonce(attestationNonce obj.Object) *MTROperationalCredentialsClusterAttestationRequestParams {
 	objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("setAttestationNonce:"), objref.IDOf(attestationNonce))
 	return moccarp
@@ -88,7 +88,7 @@ func (moccarp *MTROperationalCredentialsClusterAttestationRequestParams) WithSer
 	return moccarp
 }
 
-// AttestationNonce wraps the corresponding Objective-C method.
+// AttestationNonce returns the attestation nonce.
 func (moccarp *MTROperationalCredentialsClusterAttestationRequestParams) AttestationNonce() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("attestationNonce"))
 	return obj.Wrap(_r)

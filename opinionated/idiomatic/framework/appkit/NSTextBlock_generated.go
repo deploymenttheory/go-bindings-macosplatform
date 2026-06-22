@@ -131,25 +131,25 @@ func (tb *TextBlock) DrawBackgroundWithFrameInViewCharacterRangeLayoutManager(fr
 	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("drawBackgroundWithFrame:inView:characterRange:layoutManager:"), frameRect, objref.IDOf(controlView), charRange, objref.IDOf(layoutManager))
 }
 
-// ContentWidth wraps the corresponding Objective-C method.
+// ContentWidth returns the content width.
 func (tb *TextBlock) ContentWidth() float64 {
 	_r := objc.Send[float64](objref.IDOf(tb), objc.RegisterName("contentWidth"))
 	return _r
 }
 
-// ContentWidthValueType wraps the corresponding Objective-C method.
+// ContentWidthValueType returns the content width value type.
 func (tb *TextBlock) ContentWidthValueType() TextBlockValueType {
 	_r := objc.Send[TextBlockValueType](objref.IDOf(tb), objc.RegisterName("contentWidthValueType"))
 	return _r
 }
 
-// VerticalAlignment wraps the corresponding Objective-C method.
+// VerticalAlignment returns the vertical alignment.
 func (tb *TextBlock) VerticalAlignment() TextBlockVerticalAlignment {
 	_r := objc.Send[TextBlockVerticalAlignment](objref.IDOf(tb), objc.RegisterName("verticalAlignment"))
 	return _r
 }
 
-// BackgroundColor wraps the corresponding Objective-C method.
+// BackgroundColor returns the background color.
 func (tb *TextBlock) BackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)

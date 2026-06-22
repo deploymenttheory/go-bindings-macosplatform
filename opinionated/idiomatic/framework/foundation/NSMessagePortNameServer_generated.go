@@ -52,7 +52,7 @@ func NewMessagePortNameServer() *MessagePortNameServer {
 	return messagePortNameServerAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (mpns *MessagePortNameServer) WithScriptingProperties(scriptingProperties obj.Object) *MessagePortNameServer {
 	objc.Send[objc.ID](objref.IDOf(mpns), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return mpns

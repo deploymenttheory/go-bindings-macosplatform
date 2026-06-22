@@ -105,7 +105,7 @@ func NewSetWithArray(array []obj.Object) *Set {
 	return setAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (s *Set) WithScriptingProperties(scriptingProperties obj.Object) *Set {
 	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return s
@@ -123,7 +123,7 @@ func (s *Set) ObjectEnumerator() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Count wraps the corresponding Objective-C method.
+// Count returns the count.
 func (s *Set) Count() int {
 	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("count"))
 	return _r
@@ -212,7 +212,7 @@ func (s *Set) ObjectsWithOptionsPassingTest(opts EnumerationOptions, predicate f
 	return obj.Wrap(_r)
 }
 
-// AllObjects wraps the corresponding Objective-C method.
+// AllObjects returns the all objects.
 func (s *Set) AllObjects() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("allObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

@@ -138,13 +138,13 @@ func (m *Material) ObjectForKeyedSubscript(name string) *MaterialProperty {
 	return MaterialPropertyFromID(_r)
 }
 
-// ScatteringFunction wraps the corresponding Objective-C method.
+// ScatteringFunction returns the scattering function.
 func (m *Material) ScatteringFunction() *ScatteringFunction {
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("scatteringFunction"))
 	return ScatteringFunctionFromID(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (m *Material) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("name"))
 	if _r == 0 {
@@ -153,19 +153,19 @@ func (m *Material) Name() string {
 	return purego.GoString(_r)
 }
 
-// BaseMaterial wraps the corresponding Objective-C method.
+// BaseMaterial returns the base material.
 func (m *Material) BaseMaterial() *Material {
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("baseMaterial"))
 	return MaterialFromID(_r)
 }
 
-// Count wraps the corresponding Objective-C method.
+// Count returns the count.
 func (m *Material) Count() int {
 	_r := objc.Send[int](objref.IDOf(m), objc.RegisterName("count"))
 	return _r
 }
 
-// MaterialFace wraps the corresponding Objective-C method.
+// MaterialFace returns the material face.
 func (m *Material) MaterialFace() MaterialFace {
 	_r := objc.Send[MaterialFace](objref.IDOf(m), objc.RegisterName("materialFace"))
 	return _r

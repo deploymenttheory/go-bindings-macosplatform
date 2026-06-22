@@ -80,127 +80,127 @@ func (v_ *View) WithDocument(document *Document) *View {
 	return v_
 }
 
-// WithDisplayMode sets the property and returns the receiver so calls can be chained.
+// WithDisplayMode sets the display mode.
 func (v_ *View) WithDisplayMode(displayMode DisplayMode) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setDisplayMode:"), displayMode)
 	return v_
 }
 
-// WithDisplayDirection sets the property and returns the receiver so calls can be chained.
+// WithDisplayDirection sets the display direction.
 func (v_ *View) WithDisplayDirection(displayDirection DisplayDirection) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setDisplayDirection:"), displayDirection)
 	return v_
 }
 
-// WithDisplaysPageBreaks sets the property and returns the receiver so calls can be chained.
+// WithDisplaysPageBreaks sets the displays page breaks.
 func (v_ *View) WithDisplaysPageBreaks(displaysPageBreaks bool) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setDisplaysPageBreaks:"), displaysPageBreaks)
 	return v_
 }
 
-// WithPageBreakMargins sets the property and returns the receiver so calls can be chained.
+// WithPageBreakMargins sets the page break margins.
 func (v_ *View) WithPageBreakMargins(pageBreakMargins foundation.NSEdgeInsets) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPageBreakMargins:"), pageBreakMargins)
 	return v_
 }
 
-// WithDisplayBox sets the property and returns the receiver so calls can be chained.
+// WithDisplayBox sets the display box.
 func (v_ *View) WithDisplayBox(displayBox DisplayBox) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setDisplayBox:"), displayBox)
 	return v_
 }
 
-// WithDisplaysAsBook sets the property and returns the receiver so calls can be chained.
+// WithDisplaysAsBook sets the displays as book.
 func (v_ *View) WithDisplaysAsBook(displaysAsBook bool) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setDisplaysAsBook:"), displaysAsBook)
 	return v_
 }
 
-// WithDisplaysRTL sets the property and returns the receiver so calls can be chained.
+// WithDisplaysRTL sets the displays rtl.
 func (v_ *View) WithDisplaysRTL(displaysRTL bool) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setDisplaysRTL:"), displaysRTL)
 	return v_
 }
 
-// WithBackgroundColor sets the property and returns the receiver so calls can be chained.
+// WithBackgroundColor sets the background color.
 func (v_ *View) WithBackgroundColor(backgroundColor obj.Object) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return v_
 }
 
-// WithInterpolationQuality sets the property and returns the receiver so calls can be chained.
+// WithInterpolationQuality sets the interpolation quality.
 func (v_ *View) WithInterpolationQuality(interpolationQuality InterpolationQuality) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setInterpolationQuality:"), interpolationQuality)
 	return v_
 }
 
-// WithPageShadowsEnabled sets the property and returns the receiver so calls can be chained.
+// WithPageShadowsEnabled sets the page shadows enabled.
 func (v_ *View) WithPageShadowsEnabled(pageShadowsEnabled bool) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("enablePageShadows:"), pageShadowsEnabled)
 	return v_
 }
 
-// WithScaleFactor sets the property and returns the receiver so calls can be chained.
+// WithScaleFactor sets the scale factor.
 func (v_ *View) WithScaleFactor(scaleFactor float64) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setScaleFactor:"), scaleFactor)
 	return v_
 }
 
-// WithMinScaleFactor sets the property and returns the receiver so calls can be chained.
+// WithMinScaleFactor sets the min scale factor.
 func (v_ *View) WithMinScaleFactor(minScaleFactor float64) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setMinScaleFactor:"), minScaleFactor)
 	return v_
 }
 
-// WithMaxScaleFactor sets the property and returns the receiver so calls can be chained.
+// WithMaxScaleFactor sets the max scale factor.
 func (v_ *View) WithMaxScaleFactor(maxScaleFactor float64) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setMaxScaleFactor:"), maxScaleFactor)
 	return v_
 }
 
-// WithAutoScales sets the property and returns the receiver so calls can be chained.
+// WithAutoScales sets the auto scales.
 func (v_ *View) WithAutoScales(autoScales bool) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAutoScales:"), autoScales)
 	return v_
 }
 
-// WithCurrentSelection sets the property and returns the receiver so calls can be chained.
+// WithCurrentSelection sets the current selection.
 func (v_ *View) WithCurrentSelection(currentSelection *Selection) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setCurrentSelection:"), objref.IDOf(currentSelection))
 	return v_
 }
 
-// WithAcceptsDraggedFiles sets the property and returns the receiver so calls can be chained.
+// WithAcceptsDraggedFiles sets the accepts dragged files.
 func (v_ *View) WithAcceptsDraggedFiles(acceptsDraggedFiles bool) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAcceptsDraggedFiles:"), acceptsDraggedFiles)
 	return v_
 }
 
-// WithEnableDataDetectors sets the property and returns the receiver so calls can be chained.
+// WithEnableDataDetectors sets the enable data detectors.
 func (v_ *View) WithEnableDataDetectors(enableDataDetectors bool) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setEnableDataDetectors:"), enableDataDetectors)
 	return v_
 }
 
-// WithInMarkupMode sets the property and returns the receiver so calls can be chained.
+// WithInMarkupMode sets the in markup mode.
 func (v_ *View) WithInMarkupMode(inMarkupMode bool) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setInMarkupMode:"), inMarkupMode)
 	return v_
 }
 
-// WithShouldAntiAlias sets the property and returns the receiver so calls can be chained.
+// WithShouldAntiAlias sets the should anti alias.
 func (v_ *View) WithShouldAntiAlias(shouldAntiAlias bool) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setShouldAntiAlias:"), shouldAntiAlias)
 	return v_
 }
 
-// WithGreekingThreshold sets the property and returns the receiver so calls can be chained.
+// WithGreekingThreshold sets the greeking threshold.
 func (v_ *View) WithGreekingThreshold(greekingThreshold float64) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setGreekingThreshold:"), greekingThreshold)
 	return v_
 }
 
-// WithAllowsDragging sets the property and returns the receiver so calls can be chained.
+// WithAllowsDragging sets the allows dragging.
 func (v_ *View) WithAllowsDragging(allowsDragging bool) *View {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAllowsDragging:"), allowsDragging)
 	return v_
@@ -283,7 +283,7 @@ func (v_ *View) SetCursorForAreaOfInterest(area AreaOfInterest) {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setCursorForAreaOfInterest:"), area)
 }
 
-// PerformAction wraps the corresponding Objective-C method.
+// PerformAction performs action.
 func (v_ *View) PerformAction(action *Action) {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("performAction:"), objref.IDOf(action))
 }
@@ -293,27 +293,27 @@ func (v_ *View) SetCurrentSelectionAnimate(selection *Selection, animate bool) {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setCurrentSelection:animate:"), objref.IDOf(selection), animate)
 }
 
-// ClearSelection wraps the corresponding Objective-C method.
+// ClearSelection clears selection.
 func (v_ *View) ClearSelection() {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("clearSelection"))
 }
 
-// SelectAll wraps the corresponding Objective-C method.
+// SelectAll selects all.
 func (v_ *View) SelectAll(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("selectAll:"), objref.IDOf(sender))
 }
 
-// ScrollSelectionToVisible wraps the corresponding Objective-C method.
+// ScrollSelectionToVisible scrolls selection to visible.
 func (v_ *View) ScrollSelectionToVisible(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("scrollSelectionToVisible:"), objref.IDOf(sender))
 }
 
-// DrawPageToContext wraps the corresponding Objective-C method.
+// DrawPageToContext draws page to context.
 func (v_ *View) DrawPageToContext(page *Page, context_ obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawPage:toContext:"), objref.IDOf(page), objref.IDOf(context_))
 }
 
-// DrawPagePostToContext wraps the corresponding Objective-C method.
+// DrawPagePostToContext draws page post to context.
 func (v_ *View) DrawPagePostToContext(page *Page, context_ obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawPagePost:toContext:"), objref.IDOf(page), objref.IDOf(context_))
 }
@@ -379,7 +379,7 @@ func (v_ *View) RowSizeForPage(page *Page) corefoundation.CGSize {
 	return _r
 }
 
-// Document wraps the corresponding Objective-C method.
+// Document returns the document.
 func (v_ *View) Document() *Document {
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("document"))
 	return DocumentFromID(_r)
@@ -421,25 +421,25 @@ func (v_ *View) CanGoForward() bool {
 	return _r
 }
 
-// CurrentPage wraps the corresponding Objective-C method.
+// CurrentPage returns the current page.
 func (v_ *View) CurrentPage() *Page {
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("currentPage"))
 	return PageFromID(_r)
 }
 
-// CurrentDestination wraps the corresponding Objective-C method.
+// CurrentDestination returns the current destination.
 func (v_ *View) CurrentDestination() *Destination {
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("currentDestination"))
 	return DestinationFromID(_r)
 }
 
-// DisplayMode wraps the corresponding Objective-C method.
+// DisplayMode returns the display mode.
 func (v_ *View) DisplayMode() DisplayMode {
 	_r := objc.Send[DisplayMode](objref.IDOf(v_), objc.RegisterName("displayMode"))
 	return _r
 }
 
-// DisplayDirection wraps the corresponding Objective-C method.
+// DisplayDirection returns the display direction.
 func (v_ *View) DisplayDirection() DisplayDirection {
 	_r := objc.Send[DisplayDirection](objref.IDOf(v_), objc.RegisterName("displayDirection"))
 	return _r
@@ -451,13 +451,13 @@ func (v_ *View) DisplaysPageBreaks() bool {
 	return _r
 }
 
-// PageBreakMargins wraps the corresponding Objective-C method.
+// PageBreakMargins returns the page break margins.
 func (v_ *View) PageBreakMargins() foundation.NSEdgeInsets {
 	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(v_), objc.RegisterName("pageBreakMargins"))
 	return _r
 }
 
-// DisplayBox wraps the corresponding Objective-C method.
+// DisplayBox returns the display box.
 func (v_ *View) DisplayBox() DisplayBox {
 	_r := objc.Send[DisplayBox](objref.IDOf(v_), objc.RegisterName("displayBox"))
 	return _r
@@ -475,13 +475,13 @@ func (v_ *View) DisplaysRTL() bool {
 	return _r
 }
 
-// BackgroundColor wraps the corresponding Objective-C method.
+// BackgroundColor returns the background color.
 func (v_ *View) BackgroundColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
 }
 
-// InterpolationQuality wraps the corresponding Objective-C method.
+// InterpolationQuality returns the interpolation quality.
 func (v_ *View) InterpolationQuality() InterpolationQuality {
 	_r := objc.Send[InterpolationQuality](objref.IDOf(v_), objc.RegisterName("interpolationQuality"))
 	return _r
@@ -493,19 +493,19 @@ func (v_ *View) PageShadowsEnabled() bool {
 	return _r
 }
 
-// ScaleFactor wraps the corresponding Objective-C method.
+// ScaleFactor returns the scale factor.
 func (v_ *View) ScaleFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("scaleFactor"))
 	return _r
 }
 
-// MinScaleFactor wraps the corresponding Objective-C method.
+// MinScaleFactor returns the min scale factor.
 func (v_ *View) MinScaleFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("minScaleFactor"))
 	return _r
 }
 
-// MaxScaleFactor wraps the corresponding Objective-C method.
+// MaxScaleFactor returns the max scale factor.
 func (v_ *View) MaxScaleFactor() float64 {
 	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("maxScaleFactor"))
 	return _r
@@ -517,7 +517,7 @@ func (v_ *View) AutoScales() bool {
 	return _r
 }
 
-// ScaleFactorForSizeToFit wraps the corresponding Objective-C method.
+// ScaleFactorForSizeToFit returns the scale factor for size to fit.
 func (v_ *View) ScaleFactorForSizeToFit() float64 {
 	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("scaleFactorForSizeToFit"))
 	return _r
@@ -535,13 +535,13 @@ func (v_ *View) CanZoomOut() bool {
 	return _r
 }
 
-// CurrentSelection wraps the corresponding Objective-C method.
+// CurrentSelection returns the current selection.
 func (v_ *View) CurrentSelection() *Selection {
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("currentSelection"))
 	return SelectionFromID(_r)
 }
 
-// DocumentView wraps the corresponding Objective-C method.
+// DocumentView returns the document view.
 func (v_ *View) DocumentView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("documentView"))
 	return obj.Wrap(_r)
@@ -559,7 +559,7 @@ func (v_ *View) EnableDataDetectors() bool {
 	return _r
 }
 
-// IsInMarkupMode wraps the corresponding Objective-C method.
+// IsInMarkupMode reports whether the object is in markup mode.
 func (v_ *View) IsInMarkupMode() bool {
 	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isInMarkupMode"))
 	return _r
@@ -570,12 +570,12 @@ func (v_ *View) TakePasswordFrom(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("takePasswordFrom:"), objref.IDOf(sender))
 }
 
-// DrawPage wraps the corresponding Objective-C method.
+// DrawPage draws page.
 func (v_ *View) DrawPage(page *Page) {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawPage:"), objref.IDOf(page))
 }
 
-// DrawPagePost wraps the corresponding Objective-C method.
+// DrawPagePost draws page post.
 func (v_ *View) DrawPagePost(page *Page) {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("drawPagePost:"), objref.IDOf(page))
 }
@@ -591,7 +591,7 @@ func (v_ *View) ShouldAntiAlias() bool {
 	return _r
 }
 
-// GreekingThreshold wraps the corresponding Objective-C method.
+// GreekingThreshold returns the greeking threshold.
 func (v_ *View) GreekingThreshold() float64 {
 	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("greekingThreshold"))
 	return _r

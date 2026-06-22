@@ -54,7 +54,7 @@ func NewMTRBaseClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue(dev
 	return mTRBaseClusterBridgedDeviceBasicInformationAdopt(_id)
 }
 
-// ReadAttributeVendorNameWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeVendorNameWithCompletion reads attribute vendor name with completion.
 //
 // ReadAttributeVendorNameWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeVendorNameWithCompletion(ctx context.Context) (result string, err error) {
@@ -104,7 +104,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeVe
 	}
 }
 
-// ReadAttributeVendorIDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeVendorIDWithCompletion reads attribute vendor ID with completion.
 //
 // ReadAttributeVendorIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeVendorIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -154,7 +154,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeVe
 	}
 }
 
-// ReadAttributeProductNameWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeProductNameWithCompletion reads attribute product name with completion.
 //
 // ReadAttributeProductNameWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductNameWithCompletion(ctx context.Context) (result string, err error) {
@@ -204,7 +204,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributePr
 	}
 }
 
-// ReadAttributeProductIDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeProductIDWithCompletion reads attribute product ID with completion.
 //
 // ReadAttributeProductIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -254,7 +254,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributePr
 	}
 }
 
-// ReadAttributeNodeLabelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNodeLabelWithCompletion reads attribute node label with completion.
 //
 // ReadAttributeNodeLabelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeNodeLabelWithCompletion(ctx context.Context) (result string, err error) {
@@ -304,7 +304,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeNo
 	}
 }
 
-// ReadAttributeHardwareVersionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeHardwareVersionWithCompletion reads attribute hardware version with completion.
 //
 // ReadAttributeHardwareVersionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -354,7 +354,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeHa
 	}
 }
 
-// ReadAttributeHardwareVersionStringWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeHardwareVersionStringWithCompletion reads attribute hardware version string with completion.
 //
 // ReadAttributeHardwareVersionStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionStringWithCompletion(ctx context.Context) (result string, err error) {
@@ -404,7 +404,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeHa
 	}
 }
 
-// ReadAttributeSoftwareVersionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSoftwareVersionWithCompletion reads attribute software version with completion.
 //
 // ReadAttributeSoftwareVersionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -454,7 +454,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSo
 	}
 }
 
-// ReadAttributeSoftwareVersionStringWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSoftwareVersionStringWithCompletion reads attribute software version string with completion.
 //
 // ReadAttributeSoftwareVersionStringWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionStringWithCompletion(ctx context.Context) (result string, err error) {
@@ -504,7 +504,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSo
 	}
 }
 
-// ReadAttributeManufacturingDateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeManufacturingDateWithCompletion reads attribute manufacturing date with completion.
 //
 // ReadAttributeManufacturingDateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeManufacturingDateWithCompletion(ctx context.Context) (result string, err error) {
@@ -554,7 +554,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeMa
 	}
 }
 
-// ReadAttributePartNumberWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePartNumberWithCompletion reads attribute part number with completion.
 //
 // ReadAttributePartNumberWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributePartNumberWithCompletion(ctx context.Context) (result string, err error) {
@@ -604,7 +604,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributePa
 	}
 }
 
-// ReadAttributeProductURLWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeProductURLWithCompletion reads attribute product URL with completion.
 //
 // ReadAttributeProductURLWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductURLWithCompletion(ctx context.Context) (result string, err error) {
@@ -654,7 +654,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributePr
 	}
 }
 
-// ReadAttributeProductLabelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeProductLabelWithCompletion reads attribute product label with completion.
 //
 // ReadAttributeProductLabelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductLabelWithCompletion(ctx context.Context) (result string, err error) {
@@ -704,7 +704,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributePr
 	}
 }
 
-// ReadAttributeSerialNumberWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSerialNumberWithCompletion reads attribute serial number with completion.
 //
 // ReadAttributeSerialNumberWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSerialNumberWithCompletion(ctx context.Context) (result string, err error) {
@@ -754,7 +754,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSe
 	}
 }
 
-// ReadAttributeReachableWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeReachableWithCompletion reads attribute reachable with completion.
 //
 // ReadAttributeReachableWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeReachableWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -804,7 +804,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeRe
 	}
 }
 
-// ReadAttributeUniqueIDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUniqueIDWithCompletion reads attribute unique ID with completion.
 //
 // ReadAttributeUniqueIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeUniqueIDWithCompletion(ctx context.Context) (result string, err error) {
@@ -854,7 +854,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeUn
 	}
 }
 
-// ReadAttributeProductAppearanceWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeProductAppearanceWithCompletion reads attribute product appearance with completion.
 //
 // ReadAttributeProductAppearanceWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductAppearanceWithCompletion(ctx context.Context) (result *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct, err error) {
@@ -904,7 +904,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributePr
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -954,7 +954,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeGe
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1004,7 +1004,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeAc
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1054,7 +1054,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeAt
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1104,7 +1104,7 @@ func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeFe
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcbdbi *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

@@ -99,7 +99,7 @@ func (ceo *ContentEditingOutput) RenderedContentURLForTypeError(type_ obj.Object
 	return obj.Wrap(_r), nil
 }
 
-// AdjustmentData wraps the corresponding Objective-C method.
+// AdjustmentData returns the adjustment data.
 func (ceo *ContentEditingOutput) AdjustmentData() *AdjustmentData {
 	_r := objc.Send[objc.ID](objref.IDOf(ceo), objc.RegisterName("adjustmentData"))
 	return AdjustmentDataFromID(_r)

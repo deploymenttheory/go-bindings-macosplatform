@@ -58,7 +58,7 @@ func (bk *BlendKernel) ApplyWithForegroundBackground(foreground *Image, backgrou
 	return ImageFromID(_r)
 }
 
-// ApplyWithForegroundBackgroundColorSpace wraps the corresponding Objective-C method.
+// ApplyWithForegroundBackgroundColorSpace applies with foreground background color space.
 func (bk *BlendKernel) ApplyWithForegroundBackgroundColorSpace(foreground *Image, background *Image, colorSpace obj.Object) *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(bk), objc.RegisterName("applyWithForeground:background:colorSpace:"), objref.IDOf(foreground), objref.IDOf(background), objref.IDOf(colorSpace))
 	return ImageFromID(_r)

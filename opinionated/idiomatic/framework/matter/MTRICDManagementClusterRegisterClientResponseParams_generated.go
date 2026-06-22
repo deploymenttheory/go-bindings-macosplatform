@@ -78,13 +78,13 @@ func NewMTRICDManagementClusterRegisterClientResponseParamsWithResponseValueErro
 	return mTRICDManagementClusterRegisterClientResponseParamsAdopt(_id), nil
 }
 
-// WithIcdCounter sets the property and returns the receiver so calls can be chained.
+// WithIcdCounter sets the icd counter.
 func (mmcrcrp *MTRICDManagementClusterRegisterClientResponseParams) WithIcdCounter(icdCounter obj.Object) *MTRICDManagementClusterRegisterClientResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mmcrcrp), objc.RegisterName("setIcdCounter:"), objref.IDOf(icdCounter))
 	return mmcrcrp
 }
 
-// IcdCounter wraps the corresponding Objective-C method.
+// IcdCounter returns the icd counter.
 func (mmcrcrp *MTRICDManagementClusterRegisterClientResponseParams) IcdCounter() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcrcrp), objc.RegisterName("icdCounter"))
 	return obj.Wrap(_r)

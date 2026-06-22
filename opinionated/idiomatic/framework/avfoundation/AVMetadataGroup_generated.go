@@ -68,7 +68,7 @@ func (mg *MetadataGroup) String() string {
 	return rt.Description(objref.IDOf(mg))
 }
 
-// Items wraps the corresponding Objective-C method.
+// Items returns the items.
 //
 // Items returns the collection as a Go slice.
 func (mg *MetadataGroup) Items() []*MetadataItem {
@@ -76,7 +76,7 @@ func (mg *MetadataGroup) Items() []*MetadataItem {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
-// ClassifyingLabel wraps the corresponding Objective-C method.
+// ClassifyingLabel returns the classifying label.
 func (mg *MetadataGroup) ClassifyingLabel() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("classifyingLabel"))
 	if _r == 0 {
@@ -85,7 +85,7 @@ func (mg *MetadataGroup) ClassifyingLabel() string {
 	return purego.GoString(_r)
 }
 
-// UniqueID wraps the corresponding Objective-C method.
+// UniqueID returns the unique ID.
 func (mg *MetadataGroup) UniqueID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mg), objc.RegisterName("uniqueID"))
 	if _r == 0 {

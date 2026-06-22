@@ -53,49 +53,49 @@ func NewInvocationOperationWithInvocation(inv *Invocation) *InvocationOperation 
 	return invocationOperationAdopt(_id)
 }
 
-// WithQueuePriority sets the property and returns the receiver so calls can be chained.
+// WithQueuePriority sets the queue priority.
 func (io *InvocationOperation) WithQueuePriority(queuePriority OperationQueuePriority) *InvocationOperation {
 	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setQueuePriority:"), queuePriority)
 	return io
 }
 
-// WithCompletionBlock sets the property and returns the receiver so calls can be chained.
+// WithCompletionBlock sets the completion block.
 func (io *InvocationOperation) WithCompletionBlock(completionBlock func()) *InvocationOperation {
 	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setCompletionBlock:"), objc.NewBlock(func(_ objc.Block) { completionBlock() }))
 	return io
 }
 
-// WithThreadPriority sets the property and returns the receiver so calls can be chained.
+// WithThreadPriority sets the thread priority.
 func (io *InvocationOperation) WithThreadPriority(threadPriority float64) *InvocationOperation {
 	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setThreadPriority:"), threadPriority)
 	return io
 }
 
-// WithQualityOfService sets the property and returns the receiver so calls can be chained.
+// WithQualityOfService sets the quality of service.
 func (io *InvocationOperation) WithQualityOfService(qualityOfService QualityOfService) *InvocationOperation {
 	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setQualityOfService:"), qualityOfService)
 	return io
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (io *InvocationOperation) WithName(name StringProvider) *InvocationOperation {
 	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setName:"), objref.IDOf(name))
 	return io
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (io *InvocationOperation) WithScriptingProperties(scriptingProperties obj.Object) *InvocationOperation {
 	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return io
 }
 
-// Invocation wraps the corresponding Objective-C method.
+// Invocation returns the invocation.
 func (io *InvocationOperation) Invocation() *Invocation {
 	_r := objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("invocation"))
 	return InvocationFromID(_r)
 }
 
-// Result wraps the corresponding Objective-C method.
+// Result returns the result.
 func (io *InvocationOperation) Result() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("result"))
 	return obj.Wrap(_r)

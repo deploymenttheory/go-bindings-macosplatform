@@ -53,7 +53,7 @@ func NewVmnetNetworkDeviceAttachmentWithNetwork(network obj.Object) *VmnetNetwor
 	return vmnetNetworkDeviceAttachmentAdopt(_id)
 }
 
-// Network wraps the corresponding Objective-C method.
+// Network returns the network.
 func (vnda *VmnetNetworkDeviceAttachment) Network() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(vnda), objc.RegisterName("network"))
 	return obj.Wrap(_r)

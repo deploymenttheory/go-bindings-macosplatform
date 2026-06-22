@@ -78,13 +78,13 @@ func NewMTRAccessControlClusterReviewFabricRestrictionsResponseParamsWithRespons
 	return mTRAccessControlClusterReviewFabricRestrictionsResponseParamsAdopt(_id), nil
 }
 
-// WithToken sets the property and returns the receiver so calls can be chained.
+// WithToken sets the token.
 func (maccrfrrp *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) WithToken(token obj.Object) *MTRAccessControlClusterReviewFabricRestrictionsResponseParams {
 	objc.Send[objc.ID](objref.IDOf(maccrfrrp), objc.RegisterName("setToken:"), objref.IDOf(token))
 	return maccrfrrp
 }
 
-// Token wraps the corresponding Objective-C method.
+// Token returns the token.
 func (maccrfrrp *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) Token() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccrfrrp), objc.RegisterName("token"))
 	return obj.Wrap(_r)

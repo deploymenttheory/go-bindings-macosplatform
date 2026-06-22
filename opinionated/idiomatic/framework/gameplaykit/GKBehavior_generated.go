@@ -106,7 +106,7 @@ func (b *Behavior) ObjectForKeyedSubscript(goal *Goal) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// GoalCount wraps the corresponding Objective-C method.
+// GoalCount returns the goal count.
 func (b *Behavior) GoalCount() int {
 	_r := objc.Send[int](objref.IDOf(b), objc.RegisterName("goalCount"))
 	return _r

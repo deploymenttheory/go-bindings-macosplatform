@@ -110,13 +110,13 @@ func NewDateWithString(description string) *Date {
 	return dateAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (d *Date) WithScriptingProperties(scriptingProperties obj.Object) *Date {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return d
 }
 
-// TimeIntervalSinceReferenceDate wraps the corresponding Objective-C method.
+// TimeIntervalSinceReferenceDate returns the time interval since reference date.
 func (d *Date) TimeIntervalSinceReferenceDate() float64 {
 	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("timeIntervalSinceReferenceDate"))
 	return _r
@@ -173,13 +173,13 @@ func (d *Date) DescriptionWithLocale(locale obj.Object) string {
 	return purego.GoString(_r)
 }
 
-// TimeIntervalSinceNow wraps the corresponding Objective-C method.
+// TimeIntervalSinceNow returns the time interval since now.
 func (d *Date) TimeIntervalSinceNow() float64 {
 	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("timeIntervalSinceNow"))
 	return _r
 }
 
-// TimeIntervalSince1970 wraps the corresponding Objective-C method.
+// TimeIntervalSince1970 returns the time interval since1970.
 func (d *Date) TimeIntervalSince1970() float64 {
 	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("timeIntervalSince1970"))
 	return _r

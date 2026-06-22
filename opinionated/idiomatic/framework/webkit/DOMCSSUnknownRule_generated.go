@@ -49,7 +49,7 @@ func NewDOMCSSUnknownRule() *DOMCSSUnknownRule {
 	return dOMCSSUnknownRuleAdopt(_id)
 }
 
-// WithCSSText sets the property and returns the receiver so calls can be chained.
+// WithCSSText sets the CSS text.
 func (dur *DOMCSSUnknownRule) WithCSSText(cssText string) *DOMCSSUnknownRule {
 	objc.Send[objc.ID](objref.IDOf(dur), objc.RegisterName("setCssText:"), purego.NSString(cssText))
 	return dur

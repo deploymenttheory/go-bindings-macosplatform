@@ -73,13 +73,13 @@ func (bdr *BatchDeleteRequest) WithAffectedStores(items ...PersistentStoreProvid
 	return bdr
 }
 
-// ResultType wraps the corresponding Objective-C method.
+// ResultType returns the result type.
 func (bdr *BatchDeleteRequest) ResultType() BatchDeleteRequestResultType {
 	_r := objc.Send[BatchDeleteRequestResultType](objref.IDOf(bdr), objc.RegisterName("resultType"))
 	return _r
 }
 
-// FetchRequest wraps the corresponding Objective-C method.
+// FetchRequest returns the fetch request.
 func (bdr *BatchDeleteRequest) FetchRequest() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bdr), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)

@@ -66,37 +66,37 @@ func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) String() string
 	return rt.Description(objref.IDOf(maccaces))
 }
 
-// WithPrivilege sets the property and returns the receiver so calls can be chained.
+// WithPrivilege sets the privilege.
 func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) WithPrivilege(privilege obj.Object) *MTRAccessControlClusterAccessControlEntryStruct {
 	objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("setPrivilege:"), objref.IDOf(privilege))
 	return maccaces
 }
 
-// WithAuthMode sets the property and returns the receiver so calls can be chained.
+// WithAuthMode sets the auth mode.
 func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) WithAuthMode(authMode obj.Object) *MTRAccessControlClusterAccessControlEntryStruct {
 	objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("setAuthMode:"), objref.IDOf(authMode))
 	return maccaces
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlEntryStruct {
 	objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return maccaces
 }
 
-// Privilege wraps the corresponding Objective-C method.
+// Privilege returns the privilege.
 func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) Privilege() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("privilege"))
 	return obj.Wrap(_r)
 }
 
-// AuthMode wraps the corresponding Objective-C method.
+// AuthMode returns the auth mode.
 func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) AuthMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("authMode"))
 	return obj.Wrap(_r)
 }
 
-// Subjects wraps the corresponding Objective-C method.
+// Subjects returns the subjects.
 func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) Subjects() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("subjects"))
 	return obj.Wrap(_r)
@@ -107,7 +107,7 @@ func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) SetSubjects(sub
 	objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("setSubjects:"), objref.IDOf(subjects))
 }
 
-// Targets wraps the corresponding Objective-C method.
+// Targets returns the targets.
 func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) Targets() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("targets"))
 	return obj.Wrap(_r)
@@ -118,7 +118,7 @@ func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) SetTargets(targ
 	objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("setTargets:"), objref.IDOf(targets))
 }
 
-// FabricIndex wraps the corresponding Objective-C method.
+// FabricIndex returns the fabric index.
 func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)

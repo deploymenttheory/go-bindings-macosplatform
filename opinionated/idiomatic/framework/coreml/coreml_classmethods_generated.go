@@ -152,19 +152,19 @@ func FeatureValueWithCGImageConstraintOptionsError(cgImage obj.Object, constrain
 	return FeatureValueFromID(_r), nil
 }
 
-// LossValue wraps the corresponding Objective-C method.
+// LossValue returns the loss value.
 func LossValue() *MetricKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLMetricKey")), objc.RegisterName("lossValue"))
 	return MetricKeyFromID(_r)
 }
 
-// EpochIndex wraps the corresponding Objective-C method.
+// EpochIndex returns the epoch index.
 func EpochIndex() *MetricKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLMetricKey")), objc.RegisterName("epochIndex"))
 	return MetricKeyFromID(_r)
 }
 
-// MiniBatchIndex wraps the corresponding Objective-C method.
+// MiniBatchIndex returns the mini batch index.
 func MiniBatchIndex() *MetricKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLMetricKey")), objc.RegisterName("miniBatchIndex"))
 	return MetricKeyFromID(_r)
@@ -275,7 +275,7 @@ func CompileModelAtURL(ctx context.Context, modelURL string) (result obj.Object,
 	}
 }
 
-// AvailableComputeDevices wraps the corresponding Objective-C method.
+// AvailableComputeDevices returns the available compute devices.
 func AvailableComputeDevices() []obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLModel")), objc.RegisterName("availableComputeDevices"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
@@ -367,85 +367,85 @@ func MultiArrayByConcatenatingMultiArraysAlongAxisDataType(multiArrays []*MultiA
 	return MultiArrayFromID(_r)
 }
 
-// LearningRate wraps the corresponding Objective-C method.
+// LearningRate returns the learning rate.
 func LearningRate() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("learningRate"))
 	return ParameterKeyFromID(_r)
 }
 
-// Momentum wraps the corresponding Objective-C method.
+// Momentum returns the momentum.
 func Momentum() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("momentum"))
 	return ParameterKeyFromID(_r)
 }
 
-// MiniBatchSize wraps the corresponding Objective-C method.
+// MiniBatchSize returns the mini batch size.
 func MiniBatchSize() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("miniBatchSize"))
 	return ParameterKeyFromID(_r)
 }
 
-// Beta1 wraps the corresponding Objective-C method.
+// Beta1 returns the beta1.
 func Beta1() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("beta1"))
 	return ParameterKeyFromID(_r)
 }
 
-// Beta2 wraps the corresponding Objective-C method.
+// Beta2 returns the beta2.
 func Beta2() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("beta2"))
 	return ParameterKeyFromID(_r)
 }
 
-// Eps wraps the corresponding Objective-C method.
+// Eps returns the eps.
 func Eps() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("eps"))
 	return ParameterKeyFromID(_r)
 }
 
-// Epochs wraps the corresponding Objective-C method.
+// Epochs returns the epochs.
 func Epochs() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("epochs"))
 	return ParameterKeyFromID(_r)
 }
 
-// Shuffle wraps the corresponding Objective-C method.
+// Shuffle returns the shuffle.
 func Shuffle() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("shuffle"))
 	return ParameterKeyFromID(_r)
 }
 
-// Seed wraps the corresponding Objective-C method.
+// Seed returns the seed.
 func Seed() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("seed"))
 	return ParameterKeyFromID(_r)
 }
 
-// NumberOfNeighbors wraps the corresponding Objective-C method.
+// NumberOfNeighbors returns the number of neighbors.
 func NumberOfNeighbors() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("numberOfNeighbors"))
 	return ParameterKeyFromID(_r)
 }
 
-// LinkedModelFileName wraps the corresponding Objective-C method.
+// LinkedModelFileName returns the linked model file name.
 func LinkedModelFileName() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("linkedModelFileName"))
 	return ParameterKeyFromID(_r)
 }
 
-// LinkedModelSearchPath wraps the corresponding Objective-C method.
+// LinkedModelSearchPath returns the linked model search path.
 func LinkedModelSearchPath() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("linkedModelSearchPath"))
 	return ParameterKeyFromID(_r)
 }
 
-// Weights wraps the corresponding Objective-C method.
+// Weights returns the weights.
 func Weights() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("weights"))
 	return ParameterKeyFromID(_r)
 }
 
-// Biases wraps the corresponding Objective-C method.
+// Biases returns the biases.
 func Biases() *ParameterKey {
 	_r := objc.Send[objc.ID](objc.ID(_class("MLParameterKey")), objc.RegisterName("biases"))
 	return ParameterKeyFromID(_r)

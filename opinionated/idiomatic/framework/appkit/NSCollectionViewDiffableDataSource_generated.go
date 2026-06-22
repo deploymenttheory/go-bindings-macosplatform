@@ -72,13 +72,13 @@ func NewCollectionViewDiffableDataSource() *CollectionViewDiffableDataSource {
 	return collectionViewDiffableDataSourceAdopt(_id)
 }
 
-// Snapshot wraps the corresponding Objective-C method.
+// Snapshot returns the snapshot.
 func (cvdds *CollectionViewDiffableDataSource) Snapshot() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cvdds), objc.RegisterName("snapshot"))
 	return obj.Wrap(_r)
 }
 
-// ApplySnapshotAnimatingDifferences wraps the corresponding Objective-C method.
+// ApplySnapshotAnimatingDifferences applies snapshot animating differences.
 func (cvdds *CollectionViewDiffableDataSource) ApplySnapshotAnimatingDifferences(snapshot obj.Object, animatingDifferences bool) {
 	objc.Send[objc.ID](objref.IDOf(cvdds), objc.RegisterName("applySnapshot:animatingDifferences:"), objref.IDOf(snapshot), animatingDifferences)
 }

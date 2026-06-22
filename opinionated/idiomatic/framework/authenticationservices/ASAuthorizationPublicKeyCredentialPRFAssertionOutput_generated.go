@@ -72,13 +72,13 @@ func NewAuthorizationPublicKeyCredentialPRFAssertionOutput() *AuthorizationPubli
 	return authorizationPublicKeyCredentialPRFAssertionOutputAdopt(_id)
 }
 
-// First wraps the corresponding Objective-C method.
+// First returns the first.
 func (apkcpao *AuthorizationPublicKeyCredentialPRFAssertionOutput) First() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(apkcpao), objc.RegisterName("first"))
 	return obj.Wrap(_r)
 }
 
-// Second wraps the corresponding Objective-C method.
+// Second returns the second.
 func (apkcpao *AuthorizationPublicKeyCredentialPRFAssertionOutput) Second() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(apkcpao), objc.RegisterName("second"))
 	return obj.Wrap(_r)

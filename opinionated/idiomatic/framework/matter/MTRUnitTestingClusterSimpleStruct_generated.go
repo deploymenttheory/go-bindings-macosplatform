@@ -66,79 +66,79 @@ func (mutcss *MTRUnitTestingClusterSimpleStruct) String() string {
 	return rt.Description(objref.IDOf(mutcss))
 }
 
-// WithA sets the property and returns the receiver so calls can be chained.
+// WithA sets the a.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) WithA(a obj.Object) *MTRUnitTestingClusterSimpleStruct {
 	objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("setA:"), objref.IDOf(a))
 	return mutcss
 }
 
-// WithB sets the property and returns the receiver so calls can be chained.
+// WithB sets the b.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) WithB(b obj.Object) *MTRUnitTestingClusterSimpleStruct {
 	objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("setB:"), objref.IDOf(b))
 	return mutcss
 }
 
-// WithC sets the property and returns the receiver so calls can be chained.
+// WithC sets the c.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) WithC(c obj.Object) *MTRUnitTestingClusterSimpleStruct {
 	objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("setC:"), objref.IDOf(c))
 	return mutcss
 }
 
-// WithD sets the property and returns the receiver so calls can be chained.
+// WithD sets the d.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) WithD(d obj.Object) *MTRUnitTestingClusterSimpleStruct {
 	objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("setD:"), objref.IDOf(d))
 	return mutcss
 }
 
-// WithE sets the property and returns the receiver so calls can be chained.
+// WithE sets the e.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) WithE(e string) *MTRUnitTestingClusterSimpleStruct {
 	objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("setE:"), purego.NSString(e))
 	return mutcss
 }
 
-// WithF sets the property and returns the receiver so calls can be chained.
+// WithF sets the f.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) WithF(f obj.Object) *MTRUnitTestingClusterSimpleStruct {
 	objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("setF:"), objref.IDOf(f))
 	return mutcss
 }
 
-// WithG sets the property and returns the receiver so calls can be chained.
+// WithG sets the g.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) WithG(g obj.Object) *MTRUnitTestingClusterSimpleStruct {
 	objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("setG:"), objref.IDOf(g))
 	return mutcss
 }
 
-// WithH sets the property and returns the receiver so calls can be chained.
+// WithH sets the h.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) WithH(h obj.Object) *MTRUnitTestingClusterSimpleStruct {
 	objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("setH:"), objref.IDOf(h))
 	return mutcss
 }
 
-// A wraps the corresponding Objective-C method.
+// A returns the a.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) A() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("a"))
 	return obj.Wrap(_r)
 }
 
-// B wraps the corresponding Objective-C method.
+// B returns the b.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) B() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("b"))
 	return obj.Wrap(_r)
 }
 
-// C wraps the corresponding Objective-C method.
+// C returns the c.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) C() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("c"))
 	return obj.Wrap(_r)
 }
 
-// D wraps the corresponding Objective-C method.
+// D returns the d.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) D() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("d"))
 	return obj.Wrap(_r)
 }
 
-// E wraps the corresponding Objective-C method.
+// E returns the e.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) E() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("e"))
 	if _r == 0 {
@@ -147,19 +147,19 @@ func (mutcss *MTRUnitTestingClusterSimpleStruct) E() string {
 	return purego.GoString(_r)
 }
 
-// F wraps the corresponding Objective-C method.
+// F returns the f.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) F() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("f"))
 	return obj.Wrap(_r)
 }
 
-// G wraps the corresponding Objective-C method.
+// G returns the g.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) G() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("g"))
 	return obj.Wrap(_r)
 }
 
-// H wraps the corresponding Objective-C method.
+// H returns the h.
 func (mutcss *MTRUnitTestingClusterSimpleStruct) H() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutcss), objc.RegisterName("h"))
 	return obj.Wrap(_r)

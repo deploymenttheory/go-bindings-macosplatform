@@ -70,25 +70,25 @@ func NewMTRColorControlClusterMoveToColorTemperatureParams() *MTRColorControlClu
 	return mTRColorControlClusterMoveToColorTemperatureParamsAdopt(_id)
 }
 
-// WithColorTemperatureMireds sets the property and returns the receiver so calls can be chained.
+// WithColorTemperatureMireds sets the color temperature mireds.
 func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) WithColorTemperatureMireds(colorTemperatureMireds obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("setColorTemperatureMireds:"), objref.IDOf(colorTemperatureMireds))
 	return mcccmtctp
 }
 
-// WithTransitionTime sets the property and returns the receiver so calls can be chained.
+// WithTransitionTime sets the transition time.
 func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return mcccmtctp
 }
 
-// WithOptionsMask sets the property and returns the receiver so calls can be chained.
+// WithOptionsMask sets the options mask.
 func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mcccmtctp
 }
 
-// WithOptionsOverride sets the property and returns the receiver so calls can be chained.
+// WithOptionsOverride sets the options override.
 func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mcccmtctp
@@ -106,31 +106,31 @@ func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) WithServerS
 	return mcccmtctp
 }
 
-// WithColorTemperature sets the property and returns the receiver so calls can be chained.
+// WithColorTemperature sets the color temperature.
 func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) WithColorTemperature(colorTemperature obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("setColorTemperature:"), objref.IDOf(colorTemperature))
 	return mcccmtctp
 }
 
-// ColorTemperatureMireds wraps the corresponding Objective-C method.
+// ColorTemperatureMireds returns the color temperature mireds.
 func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) ColorTemperatureMireds() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("colorTemperatureMireds"))
 	return obj.Wrap(_r)
 }
 
-// TransitionTime wraps the corresponding Objective-C method.
+// TransitionTime returns the transition time.
 func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) TransitionTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)
 }
 
-// OptionsMask wraps the corresponding Objective-C method.
+// OptionsMask returns the options mask.
 func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) OptionsMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
 }
 
-// OptionsOverride wraps the corresponding Objective-C method.
+// OptionsOverride returns the options override.
 func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) OptionsOverride() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)
@@ -148,7 +148,7 @@ func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) ServerSideP
 	return obj.Wrap(_r)
 }
 
-// ColorTemperature wraps the corresponding Objective-C method.
+// ColorTemperature returns the color temperature.
 func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) ColorTemperature() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("colorTemperature"))
 	return obj.Wrap(_r)

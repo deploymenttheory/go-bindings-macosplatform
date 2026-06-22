@@ -72,19 +72,19 @@ func NewCollectionViewUpdateItem() *CollectionViewUpdateItem {
 	return collectionViewUpdateItemAdopt(_id)
 }
 
-// IndexPathBeforeUpdate wraps the corresponding Objective-C method.
+// IndexPathBeforeUpdate returns the index path before update.
 func (cvui *CollectionViewUpdateItem) IndexPathBeforeUpdate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cvui), objc.RegisterName("indexPathBeforeUpdate"))
 	return obj.Wrap(_r)
 }
 
-// IndexPathAfterUpdate wraps the corresponding Objective-C method.
+// IndexPathAfterUpdate returns the index path after update.
 func (cvui *CollectionViewUpdateItem) IndexPathAfterUpdate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cvui), objc.RegisterName("indexPathAfterUpdate"))
 	return obj.Wrap(_r)
 }
 
-// UpdateAction wraps the corresponding Objective-C method.
+// UpdateAction returns the update action.
 func (cvui *CollectionViewUpdateItem) UpdateAction() CollectionUpdateAction {
 	_r := objc.Send[CollectionUpdateAction](objref.IDOf(cvui), objc.RegisterName("updateAction"))
 	return _r

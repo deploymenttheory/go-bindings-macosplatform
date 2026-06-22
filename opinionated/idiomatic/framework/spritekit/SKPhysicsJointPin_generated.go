@@ -99,25 +99,25 @@ func (pjp *PhysicsJointPin) ShouldEnableLimits() bool {
 	return _r
 }
 
-// LowerAngleLimit wraps the corresponding Objective-C method.
+// LowerAngleLimit returns the lower angle limit.
 func (pjp *PhysicsJointPin) LowerAngleLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(pjp), objc.RegisterName("lowerAngleLimit"))
 	return _r
 }
 
-// UpperAngleLimit wraps the corresponding Objective-C method.
+// UpperAngleLimit returns the upper angle limit.
 func (pjp *PhysicsJointPin) UpperAngleLimit() float64 {
 	_r := objc.Send[float64](objref.IDOf(pjp), objc.RegisterName("upperAngleLimit"))
 	return _r
 }
 
-// FrictionTorque wraps the corresponding Objective-C method.
+// FrictionTorque returns the friction torque.
 func (pjp *PhysicsJointPin) FrictionTorque() float64 {
 	_r := objc.Send[float64](objref.IDOf(pjp), objc.RegisterName("frictionTorque"))
 	return _r
 }
 
-// RotationSpeed wraps the corresponding Objective-C method.
+// RotationSpeed returns the rotation speed.
 func (pjp *PhysicsJointPin) RotationSpeed() float64 {
 	_r := objc.Send[float64](objref.IDOf(pjp), objc.RegisterName("rotationSpeed"))
 	return _r

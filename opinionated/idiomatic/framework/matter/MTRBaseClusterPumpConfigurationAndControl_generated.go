@@ -61,7 +61,7 @@ func NewMTRBaseClusterPumpConfigurationAndControlWithDeviceEndpointQueue(device 
 	return mTRBaseClusterPumpConfigurationAndControlAdopt(_id)
 }
 
-// ReadAttributeMaxPressureWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxPressureWithCompletion reads attribute max pressure with completion.
 //
 // ReadAttributeMaxPressureWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMaxPressureWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMaxP
 	}
 }
 
-// ReadAttributeMaxSpeedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxSpeedWithCompletion reads attribute max speed with completion.
 //
 // ReadAttributeMaxSpeedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMaxSpeedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMaxS
 	}
 }
 
-// ReadAttributeMaxFlowWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxFlowWithCompletion reads attribute max flow with completion.
 //
 // ReadAttributeMaxFlowWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMaxFlowWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMaxF
 	}
 }
 
-// ReadAttributeMinConstPressureWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinConstPressureWithCompletion reads attribute min const pressure with completion.
 //
 // ReadAttributeMinConstPressureWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMinConstPressureWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMinC
 	}
 }
 
-// ReadAttributeMaxConstPressureWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxConstPressureWithCompletion reads attribute max const pressure with completion.
 //
 // ReadAttributeMaxConstPressureWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMaxConstPressureWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMaxC
 	}
 }
 
-// ReadAttributeMinCompPressureWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinCompPressureWithCompletion reads attribute min comp pressure with completion.
 //
 // ReadAttributeMinCompPressureWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMinCompPressureWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMinC
 	}
 }
 
-// ReadAttributeMaxCompPressureWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxCompPressureWithCompletion reads attribute max comp pressure with completion.
 //
 // ReadAttributeMaxCompPressureWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMaxCompPressureWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMaxC
 	}
 }
 
-// ReadAttributeMinConstSpeedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinConstSpeedWithCompletion reads attribute min const speed with completion.
 //
 // ReadAttributeMinConstSpeedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMinConstSpeedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMinC
 	}
 }
 
-// ReadAttributeMaxConstSpeedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxConstSpeedWithCompletion reads attribute max const speed with completion.
 //
 // ReadAttributeMaxConstSpeedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMaxConstSpeedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMaxC
 	}
 }
 
-// ReadAttributeMinConstFlowWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinConstFlowWithCompletion reads attribute min const flow with completion.
 //
 // ReadAttributeMinConstFlowWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMinConstFlowWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMinC
 	}
 }
 
-// ReadAttributeMaxConstFlowWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxConstFlowWithCompletion reads attribute max const flow with completion.
 //
 // ReadAttributeMaxConstFlowWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMaxConstFlowWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMaxC
 	}
 }
 
-// ReadAttributeMinConstTempWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinConstTempWithCompletion reads attribute min const temp with completion.
 //
 // ReadAttributeMinConstTempWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMinConstTempWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMinC
 	}
 }
 
-// ReadAttributeMaxConstTempWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxConstTempWithCompletion reads attribute max const temp with completion.
 //
 // ReadAttributeMaxConstTempWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMaxConstTempWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMaxC
 	}
 }
 
-// ReadAttributePumpStatusWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePumpStatusWithCompletion reads attribute pump status with completion.
 //
 // ReadAttributePumpStatusWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributePumpStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributePump
 	}
 }
 
-// ReadAttributeEffectiveOperationModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEffectiveOperationModeWithCompletion reads attribute effective operation mode with completion.
 //
 // ReadAttributeEffectiveOperationModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeEffectiveOperationModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeEffe
 	}
 }
 
-// ReadAttributeEffectiveControlModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEffectiveControlModeWithCompletion reads attribute effective control mode with completion.
 //
 // ReadAttributeEffectiveControlModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeEffectiveControlModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeEffe
 	}
 }
 
-// ReadAttributeCapacityWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCapacityWithCompletion reads attribute capacity with completion.
 //
 // ReadAttributeCapacityWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeCapacityWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeCapa
 	}
 }
 
-// ReadAttributeSpeedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSpeedWithCompletion reads attribute speed with completion.
 //
 // ReadAttributeSpeedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeSpeedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -961,7 +961,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeSpee
 	}
 }
 
-// ReadAttributeLifetimeRunningHoursWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLifetimeRunningHoursWithCompletion reads attribute lifetime running hours with completion.
 //
 // ReadAttributeLifetimeRunningHoursWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeLifetimeRunningHoursWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeLife
 	}
 }
 
-// ReadAttributePowerWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePowerWithCompletion reads attribute power with completion.
 //
 // ReadAttributePowerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributePowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1061,7 +1061,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributePowe
 	}
 }
 
-// ReadAttributeLifetimeEnergyConsumedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLifetimeEnergyConsumedWithCompletion reads attribute lifetime energy consumed with completion.
 //
 // ReadAttributeLifetimeEnergyConsumedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeLifetimeEnergyConsumedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeLife
 	}
 }
 
-// ReadAttributeOperationModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOperationModeWithCompletion reads attribute operation mode with completion.
 //
 // ReadAttributeOperationModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeOperationModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1161,7 +1161,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeOper
 	}
 }
 
-// ReadAttributeControlModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeControlModeWithCompletion reads attribute control mode with completion.
 //
 // ReadAttributeControlModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeControlModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1211,7 +1211,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeCont
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1261,7 +1261,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeGene
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1311,7 +1311,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeAcce
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1361,7 +1361,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeAttr
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1411,7 +1411,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeFeat
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1461,7 +1461,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeClus
 	}
 }
 
-// ReadAttributeMaxPressure wraps the corresponding Objective-C method.
+// ReadAttributeMaxPressure reads attribute max pressure.
 //
 // ReadAttributeMaxPressure blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMaxPressure(ctx context.Context) (result obj.Object, err error) {
@@ -1511,7 +1511,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMaxP
 	}
 }
 
-// ReadAttributeMaxSpeed wraps the corresponding Objective-C method.
+// ReadAttributeMaxSpeed reads attribute max speed.
 //
 // ReadAttributeMaxSpeed blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMaxSpeed(ctx context.Context) (result obj.Object, err error) {
@@ -1561,7 +1561,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMaxS
 	}
 }
 
-// ReadAttributeMaxFlow wraps the corresponding Objective-C method.
+// ReadAttributeMaxFlow reads attribute max flow.
 //
 // ReadAttributeMaxFlow blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMaxFlow(ctx context.Context) (result obj.Object, err error) {
@@ -1611,7 +1611,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMaxF
 	}
 }
 
-// ReadAttributeMinConstPressure wraps the corresponding Objective-C method.
+// ReadAttributeMinConstPressure reads attribute min const pressure.
 //
 // ReadAttributeMinConstPressure blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMinConstPressure(ctx context.Context) (result obj.Object, err error) {
@@ -1661,7 +1661,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMinC
 	}
 }
 
-// ReadAttributeMaxConstPressure wraps the corresponding Objective-C method.
+// ReadAttributeMaxConstPressure reads attribute max const pressure.
 //
 // ReadAttributeMaxConstPressure blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMaxConstPressure(ctx context.Context) (result obj.Object, err error) {
@@ -1711,7 +1711,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMaxC
 	}
 }
 
-// ReadAttributeMinCompPressure wraps the corresponding Objective-C method.
+// ReadAttributeMinCompPressure reads attribute min comp pressure.
 //
 // ReadAttributeMinCompPressure blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMinCompPressure(ctx context.Context) (result obj.Object, err error) {
@@ -1761,7 +1761,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMinC
 	}
 }
 
-// ReadAttributeMaxCompPressure wraps the corresponding Objective-C method.
+// ReadAttributeMaxCompPressure reads attribute max comp pressure.
 //
 // ReadAttributeMaxCompPressure blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMaxCompPressure(ctx context.Context) (result obj.Object, err error) {
@@ -1811,7 +1811,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMaxC
 	}
 }
 
-// ReadAttributeMinConstSpeed wraps the corresponding Objective-C method.
+// ReadAttributeMinConstSpeed reads attribute min const speed.
 //
 // ReadAttributeMinConstSpeed blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMinConstSpeed(ctx context.Context) (result obj.Object, err error) {
@@ -1861,7 +1861,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMinC
 	}
 }
 
-// ReadAttributeMaxConstSpeed wraps the corresponding Objective-C method.
+// ReadAttributeMaxConstSpeed reads attribute max const speed.
 //
 // ReadAttributeMaxConstSpeed blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMaxConstSpeed(ctx context.Context) (result obj.Object, err error) {
@@ -1911,7 +1911,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMaxC
 	}
 }
 
-// ReadAttributeMinConstFlow wraps the corresponding Objective-C method.
+// ReadAttributeMinConstFlow reads attribute min const flow.
 //
 // ReadAttributeMinConstFlow blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMinConstFlow(ctx context.Context) (result obj.Object, err error) {
@@ -1961,7 +1961,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMinC
 	}
 }
 
-// ReadAttributeMaxConstFlow wraps the corresponding Objective-C method.
+// ReadAttributeMaxConstFlow reads attribute max const flow.
 //
 // ReadAttributeMaxConstFlow blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMaxConstFlow(ctx context.Context) (result obj.Object, err error) {
@@ -2011,7 +2011,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMaxC
 	}
 }
 
-// ReadAttributeMinConstTemp wraps the corresponding Objective-C method.
+// ReadAttributeMinConstTemp reads attribute min const temp.
 //
 // ReadAttributeMinConstTemp blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMinConstTemp(ctx context.Context) (result obj.Object, err error) {
@@ -2061,7 +2061,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMinC
 	}
 }
 
-// ReadAttributeMaxConstTemp wraps the corresponding Objective-C method.
+// ReadAttributeMaxConstTemp reads attribute max const temp.
 //
 // ReadAttributeMaxConstTemp blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeMaxConstTemp(ctx context.Context) (result obj.Object, err error) {
@@ -2111,7 +2111,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeMaxC
 	}
 }
 
-// ReadAttributePumpStatus wraps the corresponding Objective-C method.
+// ReadAttributePumpStatus reads attribute pump status.
 //
 // ReadAttributePumpStatus blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributePumpStatus(ctx context.Context) (result obj.Object, err error) {
@@ -2161,7 +2161,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributePump
 	}
 }
 
-// ReadAttributeEffectiveOperationMode wraps the corresponding Objective-C method.
+// ReadAttributeEffectiveOperationMode reads attribute effective operation mode.
 //
 // ReadAttributeEffectiveOperationMode blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeEffectiveOperationMode(ctx context.Context) (result obj.Object, err error) {
@@ -2211,7 +2211,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeEffe
 	}
 }
 
-// ReadAttributeEffectiveControlMode wraps the corresponding Objective-C method.
+// ReadAttributeEffectiveControlMode reads attribute effective control mode.
 //
 // ReadAttributeEffectiveControlMode blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeEffectiveControlMode(ctx context.Context) (result obj.Object, err error) {
@@ -2261,7 +2261,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeEffe
 	}
 }
 
-// ReadAttributeCapacity wraps the corresponding Objective-C method.
+// ReadAttributeCapacity reads attribute capacity.
 //
 // ReadAttributeCapacity blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeCapacity(ctx context.Context) (result obj.Object, err error) {
@@ -2311,7 +2311,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeCapa
 	}
 }
 
-// ReadAttributeSpeed wraps the corresponding Objective-C method.
+// ReadAttributeSpeed reads attribute speed.
 //
 // ReadAttributeSpeed blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeSpeed(ctx context.Context) (result obj.Object, err error) {
@@ -2361,7 +2361,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeSpee
 	}
 }
 
-// ReadAttributeLifetimeRunningHours wraps the corresponding Objective-C method.
+// ReadAttributeLifetimeRunningHours reads attribute lifetime running hours.
 //
 // ReadAttributeLifetimeRunningHours blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeLifetimeRunningHours(ctx context.Context) (result obj.Object, err error) {
@@ -2411,7 +2411,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeLife
 	}
 }
 
-// ReadAttributePower wraps the corresponding Objective-C method.
+// ReadAttributePower reads attribute power.
 //
 // ReadAttributePower blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributePower(ctx context.Context) (result obj.Object, err error) {
@@ -2461,7 +2461,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributePowe
 	}
 }
 
-// ReadAttributeLifetimeEnergyConsumed wraps the corresponding Objective-C method.
+// ReadAttributeLifetimeEnergyConsumed reads attribute lifetime energy consumed.
 //
 // ReadAttributeLifetimeEnergyConsumed blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeLifetimeEnergyConsumed(ctx context.Context) (result obj.Object, err error) {
@@ -2511,7 +2511,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeLife
 	}
 }
 
-// ReadAttributeOperationMode wraps the corresponding Objective-C method.
+// ReadAttributeOperationMode reads attribute operation mode.
 //
 // ReadAttributeOperationMode blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeOperationMode(ctx context.Context) (result obj.Object, err error) {
@@ -2561,7 +2561,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeOper
 	}
 }
 
-// ReadAttributeControlMode wraps the corresponding Objective-C method.
+// ReadAttributeControlMode reads attribute control mode.
 //
 // ReadAttributeControlMode blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeControlMode(ctx context.Context) (result obj.Object, err error) {
@@ -2611,7 +2611,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeCont
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -2661,7 +2661,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeGene
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -2711,7 +2711,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeAcce
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -2761,7 +2761,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeAttr
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -2811,7 +2811,7 @@ func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) SubscribeAttributeFeat
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcpcac *MTRBaseClusterPumpConfigurationAndControl) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

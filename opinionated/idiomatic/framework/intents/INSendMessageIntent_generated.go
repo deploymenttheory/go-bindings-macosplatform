@@ -79,13 +79,13 @@ func (smi *SendMessageIntent) WithSuggestedInvocationPhrase(suggestedInvocationP
 	return smi
 }
 
-// WithDonationMetadata sets the property and returns the receiver so calls can be chained.
+// WithDonationMetadata sets the donation metadata.
 func (smi *SendMessageIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *SendMessageIntent {
 	objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return smi
 }
 
-// Recipients wraps the corresponding Objective-C method.
+// Recipients returns the recipients.
 //
 // Recipients returns the collection as a Go slice.
 func (smi *SendMessageIntent) Recipients() []*Person {
@@ -93,13 +93,13 @@ func (smi *SendMessageIntent) Recipients() []*Person {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
-// OutgoingMessageType wraps the corresponding Objective-C method.
+// OutgoingMessageType returns the outgoing message type.
 func (smi *SendMessageIntent) OutgoingMessageType() OutgoingMessageType {
 	_r := objc.Send[OutgoingMessageType](objref.IDOf(smi), objc.RegisterName("outgoingMessageType"))
 	return _r
 }
 
-// Content wraps the corresponding Objective-C method.
+// Content returns the content.
 func (smi *SendMessageIntent) Content() string {
 	_r := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("content"))
 	if _r == 0 {
@@ -108,13 +108,13 @@ func (smi *SendMessageIntent) Content() string {
 	return purego.GoString(_r)
 }
 
-// SpeakableGroupName wraps the corresponding Objective-C method.
+// SpeakableGroupName returns the speakable group name.
 func (smi *SendMessageIntent) SpeakableGroupName() *SpeakableString {
 	_r := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("speakableGroupName"))
 	return SpeakableStringFromID(_r)
 }
 
-// ConversationIdentifier wraps the corresponding Objective-C method.
+// ConversationIdentifier returns the conversation identifier.
 func (smi *SendMessageIntent) ConversationIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("conversationIdentifier"))
 	if _r == 0 {
@@ -123,7 +123,7 @@ func (smi *SendMessageIntent) ConversationIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// ServiceName wraps the corresponding Objective-C method.
+// ServiceName returns the service name.
 func (smi *SendMessageIntent) ServiceName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("serviceName"))
 	if _r == 0 {
@@ -132,13 +132,13 @@ func (smi *SendMessageIntent) ServiceName() string {
 	return purego.GoString(_r)
 }
 
-// Sender wraps the corresponding Objective-C method.
+// Sender returns the sender.
 func (smi *SendMessageIntent) Sender() *Person {
 	_r := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("sender"))
 	return PersonFromID(_r)
 }
 
-// Attachments wraps the corresponding Objective-C method.
+// Attachments returns the attachments.
 //
 // Attachments returns the collection as a Go slice.
 func (smi *SendMessageIntent) Attachments() []*SendMessageAttachment {
@@ -146,7 +146,7 @@ func (smi *SendMessageIntent) Attachments() []*SendMessageAttachment {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SendMessageAttachment { return SendMessageAttachmentFromID(_id) })
 }
 
-// GroupName wraps the corresponding Objective-C method.
+// GroupName returns the group name.
 func (smi *SendMessageIntent) GroupName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("groupName"))
 	if _r == 0 {

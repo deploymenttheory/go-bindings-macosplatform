@@ -80,7 +80,7 @@ func (asepc *AddSecureElementPassConfiguration) WithLocalizedDescription(localiz
 	return asepc
 }
 
-// IssuerIdentifier wraps the corresponding Objective-C method.
+// IssuerIdentifier returns the issuer identifier.
 func (asepc *AddSecureElementPassConfiguration) IssuerIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(asepc), objc.RegisterName("issuerIdentifier"))
 	if _r == 0 {
@@ -89,7 +89,7 @@ func (asepc *AddSecureElementPassConfiguration) IssuerIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedDescription wraps the corresponding Objective-C method.
+// LocalizedDescription returns the localized description.
 func (asepc *AddSecureElementPassConfiguration) LocalizedDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(asepc), objc.RegisterName("localizedDescription"))
 	if _r == 0 {

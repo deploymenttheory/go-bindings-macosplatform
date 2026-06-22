@@ -78,7 +78,7 @@ func (sl *SynchronizedLayer) WithPlayerItem(playerItem *PlayerItem) *Synchronize
 	return sl
 }
 
-// PlayerItem wraps the corresponding Objective-C method.
+// PlayerItem returns the player item.
 func (sl *SynchronizedLayer) PlayerItem() *PlayerItem {
 	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("playerItem"))
 	return PlayerItemFromID(_r)

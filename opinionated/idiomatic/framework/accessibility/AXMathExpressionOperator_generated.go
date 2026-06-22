@@ -50,7 +50,7 @@ func NewMathExpressionOperatorWithContent(content string) *MathExpressionOperato
 	return mathExpressionOperatorAdopt(_id)
 }
 
-// Content wraps the corresponding Objective-C method.
+// Content returns the content.
 func (meo *MathExpressionOperator) Content() string {
 	_r := objc.Send[objc.ID](objref.IDOf(meo), objc.RegisterName("content"))
 	if _r == 0 {

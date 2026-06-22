@@ -94,31 +94,31 @@ func (t *Transition) WithRemovedOnCompletion(removedOnCompletion bool) *Transiti
 	return t
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (t *Transition) Type() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
 
-// Subtype wraps the corresponding Objective-C method.
+// Subtype returns the subtype.
 func (t *Transition) Subtype() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("subtype"))
 	return obj.Wrap(_r)
 }
 
-// StartProgress wraps the corresponding Objective-C method.
+// StartProgress returns the start progress.
 func (t *Transition) StartProgress() float32 {
 	_r := objc.Send[float32](objref.IDOf(t), objc.RegisterName("startProgress"))
 	return _r
 }
 
-// EndProgress wraps the corresponding Objective-C method.
+// EndProgress returns the end progress.
 func (t *Transition) EndProgress() float32 {
 	_r := objc.Send[float32](objref.IDOf(t), objc.RegisterName("endProgress"))
 	return _r
 }
 
-// Filter wraps the corresponding Objective-C method.
+// Filter returns the filter.
 func (t *Transition) Filter() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("filter"))
 	return obj.Wrap(_r)

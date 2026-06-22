@@ -91,19 +91,19 @@ func (sla *ScrubberLayoutAttributes) WithAlpha(alpha float64) *ScrubberLayoutAtt
 	return sla
 }
 
-// ItemIndex wraps the corresponding Objective-C method.
+// ItemIndex returns the item index.
 func (sla *ScrubberLayoutAttributes) ItemIndex() int {
 	_r := objc.Send[int](objref.IDOf(sla), objc.RegisterName("itemIndex"))
 	return _r
 }
 
-// Frame wraps the corresponding Objective-C method.
+// Frame returns the frame.
 func (sla *ScrubberLayoutAttributes) Frame() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sla), objc.RegisterName("frame"))
 	return _r
 }
 
-// Alpha wraps the corresponding Objective-C method.
+// Alpha returns the alpha.
 func (sla *ScrubberLayoutAttributes) Alpha() float64 {
 	_r := objc.Send[float64](objref.IDOf(sla), objc.RegisterName("alpha"))
 	return _r

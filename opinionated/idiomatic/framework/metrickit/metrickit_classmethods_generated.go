@@ -22,13 +22,13 @@ func SharedManager() *MetricManager {
 	return MetricManagerFromID(_r)
 }
 
-// Apl wraps the corresponding Objective-C method.
+// Apl returns the apl.
 func Apl() *UnitAveragePixelLuminance {
 	_r := objc.Send[objc.ID](objc.ID(_class("MXUnitAveragePixelLuminance")), objc.RegisterName("apl"))
 	return UnitAveragePixelLuminanceFromID(_r)
 }
 
-// Bars wraps the corresponding Objective-C method.
+// Bars returns the bars.
 func Bars() *UnitSignalBars {
 	_r := objc.Send[objc.ID](objc.ID(_class("MXUnitSignalBars")), objc.RegisterName("bars"))
 	return UnitSignalBarsFromID(_r)

@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// SharedManager wraps the corresponding Objective-C method.
+// SharedManager returns the shared manager.
 func SharedManager() *SystemExtensionManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionManager")), objc.RegisterName("sharedManager"))
 	return SystemExtensionManagerFromID(_r)
@@ -35,7 +35,7 @@ func PropertiesRequestForExtensionQueue(identifier string, queue obj.Object) *Sy
 	return SystemExtensionRequestFromID(_r)
 }
 
-// SharedWorkspace wraps the corresponding Objective-C method.
+// SharedWorkspace returns the shared workspace.
 func SharedWorkspace() *SystemExtensionsWorkspace {
 	_r := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionsWorkspace")), objc.RegisterName("sharedWorkspace"))
 	return SystemExtensionsWorkspaceFromID(_r)

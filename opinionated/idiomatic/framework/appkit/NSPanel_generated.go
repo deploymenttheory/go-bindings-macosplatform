@@ -439,25 +439,25 @@ func (p *Panel) WithIgnoresMouseEvents(ignoresMouseEvents bool) *Panel {
 	return p
 }
 
-// WithAutodisplay sets the property and returns the receiver so calls can be chained.
+// WithAutodisplay sets the autodisplay.
 func (p *Panel) WithAutodisplay(autodisplay bool) *Panel {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAutodisplay:"), autodisplay)
 	return p
 }
 
-// WithOneShot sets the property and returns the receiver so calls can be chained.
+// WithOneShot sets the one shot.
 func (p *Panel) WithOneShot(oneShot bool) *Panel {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setOneShot:"), oneShot)
 	return p
 }
 
-// WithPreferredBackingLocation sets the property and returns the receiver so calls can be chained.
+// WithPreferredBackingLocation sets the preferred backing location.
 func (p *Panel) WithPreferredBackingLocation(preferredBackingLocation WindowBackingLocation) *Panel {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setPreferredBackingLocation:"), preferredBackingLocation)
 	return p
 }
 
-// WithShowsResizeIndicator sets the property and returns the receiver so calls can be chained.
+// WithShowsResizeIndicator sets the shows resize indicator.
 func (p *Panel) WithShowsResizeIndicator(showsResizeIndicator bool) *Panel {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setShowsResizeIndicator:"), showsResizeIndicator)
 	return p

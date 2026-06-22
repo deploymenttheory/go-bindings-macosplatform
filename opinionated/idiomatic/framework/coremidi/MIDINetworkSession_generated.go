@@ -132,19 +132,19 @@ func (ns *NetworkSession) DestinationEndpoint() int {
 	return _r
 }
 
-// IsEnabled wraps the corresponding Objective-C method.
+// IsEnabled reports whether the object is enabled.
 func (ns *NetworkSession) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("isEnabled"))
 	return _r
 }
 
-// NetworkPort wraps the corresponding Objective-C method.
+// NetworkPort returns the network port.
 func (ns *NetworkSession) NetworkPort() int {
 	_r := objc.Send[int](objref.IDOf(ns), objc.RegisterName("networkPort"))
 	return _r
 }
 
-// NetworkName wraps the corresponding Objective-C method.
+// NetworkName returns the network name.
 func (ns *NetworkSession) NetworkName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("networkName"))
 	if _r == 0 {
@@ -153,7 +153,7 @@ func (ns *NetworkSession) NetworkName() string {
 	return purego.GoString(_r)
 }
 
-// LocalName wraps the corresponding Objective-C method.
+// LocalName returns the local name.
 func (ns *NetworkSession) LocalName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("localName"))
 	if _r == 0 {
@@ -162,7 +162,7 @@ func (ns *NetworkSession) LocalName() string {
 	return purego.GoString(_r)
 }
 
-// ConnectionPolicy wraps the corresponding Objective-C method.
+// ConnectionPolicy returns the connection policy.
 func (ns *NetworkSession) ConnectionPolicy() NetworkConnectionPolicy {
 	_r := objc.Send[NetworkConnectionPolicy](objref.IDOf(ns), objc.RegisterName("connectionPolicy"))
 	return _r

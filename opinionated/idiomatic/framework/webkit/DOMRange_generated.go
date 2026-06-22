@@ -84,12 +84,12 @@ func (dr *DOMRange) Collapse(toStart bool) {
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("collapse:"), toStart)
 }
 
-// SelectNode wraps the corresponding Objective-C method.
+// SelectNode selects node.
 func (dr *DOMRange) SelectNode(refNode *DOMNode) {
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("selectNode:"), objref.IDOf(refNode))
 }
 
-// SelectNodeContents wraps the corresponding Objective-C method.
+// SelectNodeContents selects node contents.
 func (dr *DOMRange) SelectNodeContents(refNode *DOMNode) {
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("selectNodeContents:"), objref.IDOf(refNode))
 }
@@ -100,24 +100,24 @@ func (dr *DOMRange) CompareBoundaryPointsSourceRange(how uint16, sourceRange *DO
 	return _r
 }
 
-// DeleteContents wraps the corresponding Objective-C method.
+// DeleteContents deletes contents.
 func (dr *DOMRange) DeleteContents() {
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("deleteContents"))
 }
 
-// ExtractContents wraps the corresponding Objective-C method.
+// ExtractContents returns the extract contents.
 func (dr *DOMRange) ExtractContents() *DOMDocumentFragment {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("extractContents"))
 	return DOMDocumentFragmentFromID(_r)
 }
 
-// CloneContents wraps the corresponding Objective-C method.
+// CloneContents returns the clone contents.
 func (dr *DOMRange) CloneContents() *DOMDocumentFragment {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("cloneContents"))
 	return DOMDocumentFragmentFromID(_r)
 }
 
-// InsertNode wraps the corresponding Objective-C method.
+// InsertNode inserts node.
 func (dr *DOMRange) InsertNode(newNode *DOMNode) {
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("insertNode:"), objref.IDOf(newNode))
 }
@@ -127,13 +127,13 @@ func (dr *DOMRange) SurroundContents(newParent *DOMNode) {
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("surroundContents:"), objref.IDOf(newParent))
 }
 
-// CloneRange wraps the corresponding Objective-C method.
+// CloneRange returns the clone range.
 func (dr *DOMRange) CloneRange() *DOMRange {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("cloneRange"))
 	return DOMRangeFromID(_r)
 }
 
-// ToString wraps the corresponding Objective-C method.
+// ToString returns the to string.
 func (dr *DOMRange) ToString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("toString"))
 	if _r == 0 {
@@ -147,7 +147,7 @@ func (dr *DOMRange) Detach() {
 	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("detach"))
 }
 
-// CreateContextualFragment wraps the corresponding Objective-C method.
+// CreateContextualFragment creates contextual fragment.
 func (dr *DOMRange) CreateContextualFragment(html string) *DOMDocumentFragment {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("createContextualFragment:"), purego.NSString(html))
 	return DOMDocumentFragmentFromID(_r)
@@ -177,25 +177,25 @@ func (dr *DOMRange) IsPointInRangeOffset(refNode *DOMNode, offset int) bool {
 	return _r
 }
 
-// StartContainer wraps the corresponding Objective-C method.
+// StartContainer returns the start container.
 func (dr *DOMRange) StartContainer() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("startContainer"))
 	return DOMNodeFromID(_r)
 }
 
-// StartOffset wraps the corresponding Objective-C method.
+// StartOffset returns the start offset.
 func (dr *DOMRange) StartOffset() int {
 	_r := objc.Send[int](objref.IDOf(dr), objc.RegisterName("startOffset"))
 	return _r
 }
 
-// EndContainer wraps the corresponding Objective-C method.
+// EndContainer returns the end container.
 func (dr *DOMRange) EndContainer() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("endContainer"))
 	return DOMNodeFromID(_r)
 }
 
-// EndOffset wraps the corresponding Objective-C method.
+// EndOffset returns the end offset.
 func (dr *DOMRange) EndOffset() int {
 	_r := objc.Send[int](objref.IDOf(dr), objc.RegisterName("endOffset"))
 	return _r
@@ -207,13 +207,13 @@ func (dr *DOMRange) Collapsed() bool {
 	return _r
 }
 
-// CommonAncestorContainer wraps the corresponding Objective-C method.
+// CommonAncestorContainer returns the common ancestor container.
 func (dr *DOMRange) CommonAncestorContainer() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("commonAncestorContainer"))
 	return DOMNodeFromID(_r)
 }
 
-// Text wraps the corresponding Objective-C method.
+// Text returns the text.
 func (dr *DOMRange) Text() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("text"))
 	if _r == 0 {

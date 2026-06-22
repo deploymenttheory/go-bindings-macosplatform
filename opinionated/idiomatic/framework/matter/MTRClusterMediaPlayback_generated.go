@@ -111,7 +111,7 @@ func (mcmp *MTRClusterMediaPlayback) PlayWithExpectedValuesExpectedValueInterval
 	}
 }
 
-// PauseWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// PauseWithParamsExpectedValuesExpectedValueIntervalCompletion pauses with params expected values expected value interval completion.
 //
 // PauseWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcmp *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPauseParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -136,7 +136,7 @@ func (mcmp *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueI
 	}
 }
 
-// PauseWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// PauseWithExpectedValuesExpectedValueIntervalCompletion pauses with expected values expected value interval completion.
 //
 // PauseWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcmp *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -161,7 +161,7 @@ func (mcmp *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueInterva
 	}
 }
 
-// StopWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// StopWithParamsExpectedValuesExpectedValueIntervalCompletion stops with params expected values expected value interval completion.
 //
 // StopWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcmp *MTRClusterMediaPlayback) StopWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterStopParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -186,7 +186,7 @@ func (mcmp *MTRClusterMediaPlayback) StopWithParamsExpectedValuesExpectedValueIn
 	}
 }
 
-// StopWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// StopWithExpectedValuesExpectedValueIntervalCompletion stops with expected values expected value interval completion.
 //
 // StopWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcmp *MTRClusterMediaPlayback) StopWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -211,7 +211,7 @@ func (mcmp *MTRClusterMediaPlayback) StopWithExpectedValuesExpectedValueInterval
 	}
 }
 
-// StartOverWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// StartOverWithParamsExpectedValuesExpectedValueIntervalCompletion starts over with params expected values expected value interval completion.
 //
 // StartOverWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcmp *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterStartOverParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -236,7 +236,7 @@ func (mcmp *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedVa
 	}
 }
 
-// StartOverWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// StartOverWithExpectedValuesExpectedValueIntervalCompletion starts over with expected values expected value interval completion.
 //
 // StartOverWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcmp *MTRClusterMediaPlayback) StartOverWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -536,73 +536,73 @@ func (mcmp *MTRClusterMediaPlayback) SeekWithParamsExpectedValuesExpectedValueIn
 	}
 }
 
-// ReadAttributeCurrentStateWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCurrentStateWithParams reads attribute current state with params.
 func (mcmp *MTRClusterMediaPlayback) ReadAttributeCurrentStateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmp), objc.RegisterName("readAttributeCurrentStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeStartTimeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeStartTimeWithParams reads attribute start time with params.
 func (mcmp *MTRClusterMediaPlayback) ReadAttributeStartTimeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmp), objc.RegisterName("readAttributeStartTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeDurationWithParams wraps the corresponding Objective-C method.
+// ReadAttributeDurationWithParams reads attribute duration with params.
 func (mcmp *MTRClusterMediaPlayback) ReadAttributeDurationWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmp), objc.RegisterName("readAttributeDurationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeSampledPositionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSampledPositionWithParams reads attribute sampled position with params.
 func (mcmp *MTRClusterMediaPlayback) ReadAttributeSampledPositionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmp), objc.RegisterName("readAttributeSampledPositionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePlaybackSpeedWithParams wraps the corresponding Objective-C method.
+// ReadAttributePlaybackSpeedWithParams reads attribute playback speed with params.
 func (mcmp *MTRClusterMediaPlayback) ReadAttributePlaybackSpeedWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmp), objc.RegisterName("readAttributePlaybackSpeedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeSeekRangeEndWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSeekRangeEndWithParams reads attribute seek range end with params.
 func (mcmp *MTRClusterMediaPlayback) ReadAttributeSeekRangeEndWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmp), objc.RegisterName("readAttributeSeekRangeEndWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeSeekRangeStartWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSeekRangeStartWithParams reads attribute seek range start with params.
 func (mcmp *MTRClusterMediaPlayback) ReadAttributeSeekRangeStartWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmp), objc.RegisterName("readAttributeSeekRangeStartWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcmp *MTRClusterMediaPlayback) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmp), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcmp *MTRClusterMediaPlayback) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmp), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcmp *MTRClusterMediaPlayback) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmp), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcmp *MTRClusterMediaPlayback) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmp), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcmp *MTRClusterMediaPlayback) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcmp), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -658,7 +658,7 @@ func (mcmp *MTRClusterMediaPlayback) PlayWithExpectedValuesExpectedValueInterval
 	}
 }
 
-// PauseWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+// PauseWithParamsExpectedValuesExpectedValueInterval pauses with params expected values expected value interval.
 //
 // PauseWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcmp *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterPauseParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -683,7 +683,7 @@ func (mcmp *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueI
 	}
 }
 
-// PauseWithExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+// PauseWithExpectedValuesExpectedValueInterval pauses with expected values expected value interval.
 //
 // PauseWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcmp *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -708,7 +708,7 @@ func (mcmp *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueInterva
 	}
 }
 
-// StopPlaybackWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+// StopPlaybackWithParamsExpectedValuesExpectedValueInterval stops playback with params expected values expected value interval.
 //
 // StopPlaybackWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcmp *MTRClusterMediaPlayback) StopPlaybackWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterStopPlaybackParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -733,7 +733,7 @@ func (mcmp *MTRClusterMediaPlayback) StopPlaybackWithParamsExpectedValuesExpecte
 	}
 }
 
-// StopPlaybackWithExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+// StopPlaybackWithExpectedValuesExpectedValueInterval stops playback with expected values expected value interval.
 //
 // StopPlaybackWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcmp *MTRClusterMediaPlayback) StopPlaybackWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -758,7 +758,7 @@ func (mcmp *MTRClusterMediaPlayback) StopPlaybackWithExpectedValuesExpectedValue
 	}
 }
 
-// StartOverWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+// StartOverWithParamsExpectedValuesExpectedValueInterval starts over with params expected values expected value interval.
 //
 // StartOverWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcmp *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterStartOverParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {
@@ -783,7 +783,7 @@ func (mcmp *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedVa
 	}
 }
 
-// StartOverWithExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+// StartOverWithExpectedValuesExpectedValueInterval starts over with expected values expected value interval.
 //
 // StartOverWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcmp *MTRClusterMediaPlayback) StartOverWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRMediaPlaybackClusterPlaybackResponseParams, err error) {

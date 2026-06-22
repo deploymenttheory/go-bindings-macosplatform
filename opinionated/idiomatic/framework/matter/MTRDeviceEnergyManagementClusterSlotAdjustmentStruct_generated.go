@@ -70,37 +70,37 @@ func NewMTRDeviceEnergyManagementClusterSlotAdjustmentStruct() *MTRDeviceEnergyM
 	return mTRDeviceEnergyManagementClusterSlotAdjustmentStructAdopt(_id)
 }
 
-// WithSlotIndex sets the property and returns the receiver so calls can be chained.
+// WithSlotIndex sets the slot index.
 func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithSlotIndex(slotIndex obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
 	objc.Send[objc.ID](objref.IDOf(mdemcsas), objc.RegisterName("setSlotIndex:"), objref.IDOf(slotIndex))
 	return mdemcsas
 }
 
-// WithNominalPower sets the property and returns the receiver so calls can be chained.
+// WithNominalPower sets the nominal power.
 func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithNominalPower(nominalPower obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
 	objc.Send[objc.ID](objref.IDOf(mdemcsas), objc.RegisterName("setNominalPower:"), objref.IDOf(nominalPower))
 	return mdemcsas
 }
 
-// WithDuration sets the property and returns the receiver so calls can be chained.
+// WithDuration sets the duration.
 func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct {
 	objc.Send[objc.ID](objref.IDOf(mdemcsas), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return mdemcsas
 }
 
-// SlotIndex wraps the corresponding Objective-C method.
+// SlotIndex returns the slot index.
 func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) SlotIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcsas), objc.RegisterName("slotIndex"))
 	return obj.Wrap(_r)
 }
 
-// NominalPower wraps the corresponding Objective-C method.
+// NominalPower returns the nominal power.
 func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) NominalPower() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcsas), objc.RegisterName("nominalPower"))
 	return obj.Wrap(_r)
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (mdemcsas *MTRDeviceEnergyManagementClusterSlotAdjustmentStruct) Duration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdemcsas), objc.RegisterName("duration"))
 	return obj.Wrap(_r)

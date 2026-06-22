@@ -72,7 +72,7 @@ func NewModelStructureProgramArgument() *ModelStructureProgramArgument {
 	return modelStructureProgramArgumentAdopt(_id)
 }
 
-// Bindings wraps the corresponding Objective-C method.
+// Bindings returns the bindings.
 //
 // Bindings returns the collection as a Go slice.
 func (mspa *ModelStructureProgramArgument) Bindings() []*ModelStructureProgramBinding {

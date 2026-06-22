@@ -51,7 +51,7 @@ func NewRecognizedObjectObservation() *RecognizedObjectObservation {
 	return recognizedObjectObservationAdopt(_id)
 }
 
-// Labels wraps the corresponding Objective-C method.
+// Labels returns the labels.
 //
 // Labels returns the collection as a Go slice.
 func (roo *RecognizedObjectObservation) Labels() []*ClassificationObservation {

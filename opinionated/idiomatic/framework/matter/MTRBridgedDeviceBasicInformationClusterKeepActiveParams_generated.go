@@ -70,13 +70,13 @@ func NewMTRBridgedDeviceBasicInformationClusterKeepActiveParams() *MTRBridgedDev
 	return mTRBridgedDeviceBasicInformationClusterKeepActiveParamsAdopt(_id)
 }
 
-// WithStayActiveDuration sets the property and returns the receiver so calls can be chained.
+// WithStayActiveDuration sets the stay active duration.
 func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) WithStayActiveDuration(stayActiveDuration obj.Object) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams {
 	objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("setStayActiveDuration:"), objref.IDOf(stayActiveDuration))
 	return mbdbickap
 }
 
-// WithTimeoutMs sets the property and returns the receiver so calls can be chained.
+// WithTimeoutMs sets the timeout ms.
 func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) WithTimeoutMs(timeoutMs obj.Object) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams {
 	objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("setTimeoutMs:"), objref.IDOf(timeoutMs))
 	return mbdbickap
@@ -94,13 +94,13 @@ func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) WithSe
 	return mbdbickap
 }
 
-// StayActiveDuration wraps the corresponding Objective-C method.
+// StayActiveDuration returns the stay active duration.
 func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) StayActiveDuration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("stayActiveDuration"))
 	return obj.Wrap(_r)
 }
 
-// TimeoutMs wraps the corresponding Objective-C method.
+// TimeoutMs returns the timeout ms.
 func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) TimeoutMs() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("timeoutMs"))
 	return obj.Wrap(_r)

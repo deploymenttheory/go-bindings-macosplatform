@@ -70,7 +70,7 @@ func NewMTRGroupsClusterViewGroupParams() *MTRGroupsClusterViewGroupParams {
 	return mTRGroupsClusterViewGroupParamsAdopt(_id)
 }
 
-// WithGroupID sets the property and returns the receiver so calls can be chained.
+// WithGroupID sets the group ID.
 func (mgcvgp *MTRGroupsClusterViewGroupParams) WithGroupID(groupID obj.Object) *MTRGroupsClusterViewGroupParams {
 	objc.Send[objc.ID](objref.IDOf(mgcvgp), objc.RegisterName("setGroupID:"), objref.IDOf(groupID))
 	return mgcvgp
@@ -88,7 +88,7 @@ func (mgcvgp *MTRGroupsClusterViewGroupParams) WithServerSideProcessingTimeout(s
 	return mgcvgp
 }
 
-// GroupID wraps the corresponding Objective-C method.
+// GroupID returns the group ID.
 func (mgcvgp *MTRGroupsClusterViewGroupParams) GroupID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgcvgp), objc.RegisterName("groupID"))
 	return obj.Wrap(_r)

@@ -51,67 +51,67 @@ func NewNNSubtractionNode() *NNSubtractionNode {
 	return nNSubtractionNodeAdopt(_id)
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (nsn *NNSubtractionNode) WithPrimaryScale(primaryScale float32) *NNSubtractionNode {
 	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return nsn
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (nsn *NNSubtractionNode) WithSecondaryScale(secondaryScale float32) *NNSubtractionNode {
 	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return nsn
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (nsn *NNSubtractionNode) WithBias(bias float32) *NNSubtractionNode {
 	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setBias:"), bias)
 	return nsn
 }
 
-// WithPrimaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
+// WithPrimaryStrideInPixelsX sets the primary stride in pixels x.
 func (nsn *NNSubtractionNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNSubtractionNode {
 	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
 	return nsn
 }
 
-// WithPrimaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
+// WithPrimaryStrideInPixelsY sets the primary stride in pixels y.
 func (nsn *NNSubtractionNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNSubtractionNode {
 	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
 	return nsn
 }
 
-// WithPrimaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
+// WithPrimaryStrideInFeatureChannels sets the primary stride in feature channels.
 func (nsn *NNSubtractionNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNSubtractionNode {
 	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
 	return nsn
 }
 
-// WithSecondaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsX sets the secondary stride in pixels x.
 func (nsn *NNSubtractionNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNSubtractionNode {
 	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return nsn
 }
 
-// WithSecondaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsY sets the secondary stride in pixels y.
 func (nsn *NNSubtractionNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNSubtractionNode {
 	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return nsn
 }
 
-// WithSecondaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInFeatureChannels sets the secondary stride in feature channels.
 func (nsn *NNSubtractionNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNSubtractionNode {
 	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
 	return nsn
 }
 
-// WithMinimumValue sets the property and returns the receiver so calls can be chained.
+// WithMinimumValue sets the minimum value.
 func (nsn *NNSubtractionNode) WithMinimumValue(minimumValue float32) *NNSubtractionNode {
 	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return nsn
 }
 
-// WithMaximumValue sets the property and returns the receiver so calls can be chained.
+// WithMaximumValue sets the maximum value.
 func (nsn *NNSubtractionNode) WithMaximumValue(maximumValue float32) *NNSubtractionNode {
 	objc.Send[objc.ID](objref.IDOf(nsn), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return nsn

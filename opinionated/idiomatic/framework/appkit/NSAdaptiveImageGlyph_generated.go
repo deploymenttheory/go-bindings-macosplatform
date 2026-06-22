@@ -80,13 +80,13 @@ func NewAdaptiveImageGlyphWithCoder(coder obj.Object) *AdaptiveImageGlyph {
 	return adaptiveImageGlyphAdopt(_id)
 }
 
-// ImageContent wraps the corresponding Objective-C method.
+// ImageContent returns the image content.
 func (aig *AdaptiveImageGlyph) ImageContent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("imageContent"))
 	return obj.Wrap(_r)
 }
 
-// ContentIdentifier wraps the corresponding Objective-C method.
+// ContentIdentifier returns the content identifier.
 func (aig *AdaptiveImageGlyph) ContentIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("contentIdentifier"))
 	if _r == 0 {
@@ -95,7 +95,7 @@ func (aig *AdaptiveImageGlyph) ContentIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// ContentDescription wraps the corresponding Objective-C method.
+// ContentDescription returns the content description.
 func (aig *AdaptiveImageGlyph) ContentDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(aig), objc.RegisterName("contentDescription"))
 	if _r == 0 {

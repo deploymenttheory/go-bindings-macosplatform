@@ -88,13 +88,13 @@ func (clbsi *CollectionLayoutBoundarySupplementaryItem) PinToVisibleBounds() boo
 	return _r
 }
 
-// Alignment wraps the corresponding Objective-C method.
+// Alignment returns the alignment.
 func (clbsi *CollectionLayoutBoundarySupplementaryItem) Alignment() RectAlignment {
 	_r := objc.Send[RectAlignment](objref.IDOf(clbsi), objc.RegisterName("alignment"))
 	return _r
 }
 
-// Offset wraps the corresponding Objective-C method.
+// Offset returns the offset.
 func (clbsi *CollectionLayoutBoundarySupplementaryItem) Offset() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(clbsi), objc.RegisterName("offset"))
 	return _r

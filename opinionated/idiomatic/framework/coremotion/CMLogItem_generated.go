@@ -68,7 +68,7 @@ func (li *LogItem) String() string {
 	return rt.Description(objref.IDOf(li))
 }
 
-// Timestamp wraps the corresponding Objective-C method.
+// Timestamp returns the timestamp.
 func (li *LogItem) Timestamp() float64 {
 	_r := objc.Send[float64](objref.IDOf(li), objc.RegisterName("timestamp"))
 	return _r

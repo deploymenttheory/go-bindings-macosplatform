@@ -86,7 +86,7 @@ func (c *Controller) CommitEditing() bool {
 	return _r
 }
 
-// IsEditing wraps the corresponding Objective-C method.
+// IsEditing reports whether the object is editing.
 func (c *Controller) IsEditing() bool {
 	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isEditing"))
 	return _r

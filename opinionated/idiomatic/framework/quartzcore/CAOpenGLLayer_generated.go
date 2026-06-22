@@ -174,25 +174,25 @@ func (ogl *OpenGLLayer) WithContentsFormat(contentsFormat obj.Object) *OpenGLLay
 	return ogl
 }
 
-// WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeContent sets the wants extended dynamic range content.
 func (ogl *OpenGLLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *OpenGLLayer {
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
 	return ogl
 }
 
-// WithToneMapMode sets the property and returns the receiver so calls can be chained.
+// WithToneMapMode sets the tone map mode.
 func (ogl *OpenGLLayer) WithToneMapMode(toneMapMode obj.Object) *OpenGLLayer {
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return ogl
 }
 
-// WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
+// WithPreferredDynamicRange sets the preferred dynamic range.
 func (ogl *OpenGLLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *OpenGLLayer {
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return ogl
 }
 
-// WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
+// WithContentsHeadroom sets the contents headroom.
 func (ogl *OpenGLLayer) WithContentsHeadroom(contentsHeadroom float64) *OpenGLLayer {
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
 	return ogl
@@ -258,13 +258,13 @@ func (ogl *OpenGLLayer) WithCornerRadius(cornerRadius float64) *OpenGLLayer {
 	return ogl
 }
 
-// WithMaskedCorners sets the property and returns the receiver so calls can be chained.
+// WithMaskedCorners sets the masked corners.
 func (ogl *OpenGLLayer) WithMaskedCorners(maskedCorners CornerMask) *OpenGLLayer {
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setMaskedCorners:"), maskedCorners)
 	return ogl
 }
 
-// WithCornerCurve sets the property and returns the receiver so calls can be chained.
+// WithCornerCurve sets the corner curve.
 func (ogl *OpenGLLayer) WithCornerCurve(cornerCurve obj.Object) *OpenGLLayer {
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return ogl
@@ -395,13 +395,13 @@ func (ogl *OpenGLLayer) ReleaseCGLContext(ctx obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("releaseCGLContext:"), objref.IDOf(ctx))
 }
 
-// IsAsynchronous wraps the corresponding Objective-C method.
+// IsAsynchronous reports whether the object is asynchronous.
 func (ogl *OpenGLLayer) IsAsynchronous() bool {
 	_r := objc.Send[bool](objref.IDOf(ogl), objc.RegisterName("isAsynchronous"))
 	return _r
 }
 
-// Colorspace wraps the corresponding Objective-C method.
+// Colorspace returns the colorspace.
 func (ogl *OpenGLLayer) Colorspace() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("colorspace"))
 	return obj.Wrap(_r)

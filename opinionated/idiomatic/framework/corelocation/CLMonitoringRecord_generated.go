@@ -72,13 +72,13 @@ func NewMonitoringRecord() *MonitoringRecord {
 	return monitoringRecordAdopt(_id)
 }
 
-// Condition wraps the corresponding Objective-C method.
+// Condition returns the condition.
 func (mr *MonitoringRecord) Condition() *Condition {
 	_r := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("condition"))
 	return ConditionFromID(_r)
 }
 
-// LastEvent wraps the corresponding Objective-C method.
+// LastEvent returns the last event.
 func (mr *MonitoringRecord) LastEvent() *MonitoringEvent {
 	_r := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("lastEvent"))
 	return MonitoringEventFromID(_r)

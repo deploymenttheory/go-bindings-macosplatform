@@ -73,19 +73,19 @@ func NewAuthorizationPublicKeyCredentialLargeBlobAssertionInputWithOperation(ope
 	return authorizationPublicKeyCredentialLargeBlobAssertionInputAdopt(_id)
 }
 
-// WithDataToWrite sets the property and returns the receiver so calls can be chained.
+// WithDataToWrite sets the data to write.
 func (apkclbai *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) WithDataToWrite(dataToWrite obj.Object) *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
 	objc.Send[objc.ID](objref.IDOf(apkclbai), objc.RegisterName("setDataToWrite:"), objref.IDOf(dataToWrite))
 	return apkclbai
 }
 
-// Operation wraps the corresponding Objective-C method.
+// Operation returns the operation.
 func (apkclbai *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) Operation() AuthorizationPublicKeyCredentialLargeBlobAssertionOperation {
 	_r := objc.Send[AuthorizationPublicKeyCredentialLargeBlobAssertionOperation](objref.IDOf(apkclbai), objc.RegisterName("operation"))
 	return _r
 }
 
-// DataToWrite wraps the corresponding Objective-C method.
+// DataToWrite returns the data to write.
 func (apkclbai *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) DataToWrite() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(apkclbai), objc.RegisterName("dataToWrite"))
 	return obj.Wrap(_r)

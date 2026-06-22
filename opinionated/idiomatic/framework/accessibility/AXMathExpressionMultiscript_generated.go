@@ -50,13 +50,13 @@ func NewMathExpressionMultiscriptWithBaseExpressionPrescriptExpressionsPostscrip
 	return mathExpressionMultiscriptAdopt(_id)
 }
 
-// BaseExpression wraps the corresponding Objective-C method.
+// BaseExpression returns the base expression.
 func (mem *MathExpressionMultiscript) BaseExpression() *MathExpression {
 	_r := objc.Send[objc.ID](objref.IDOf(mem), objc.RegisterName("baseExpression"))
 	return MathExpressionFromID(_r)
 }
 
-// PrescriptExpressions wraps the corresponding Objective-C method.
+// PrescriptExpressions returns the prescript expressions.
 //
 // PrescriptExpressions returns the collection as a Go slice.
 func (mem *MathExpressionMultiscript) PrescriptExpressions() []*MathExpressionSubSuperscript {
@@ -64,7 +64,7 @@ func (mem *MathExpressionMultiscript) PrescriptExpressions() []*MathExpressionSu
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpressionSubSuperscript { return MathExpressionSubSuperscriptFromID(_id) })
 }
 
-// PostscriptExpressions wraps the corresponding Objective-C method.
+// PostscriptExpressions returns the postscript expressions.
 //
 // PostscriptExpressions returns the collection as a Go slice.
 func (mem *MathExpressionMultiscript) PostscriptExpressions() []*MathExpressionSubSuperscript {

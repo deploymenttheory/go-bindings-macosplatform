@@ -52,25 +52,25 @@ func NewPersonNameComponentsFormatter() *PersonNameComponentsFormatter {
 	return personNameComponentsFormatterAdopt(_id)
 }
 
-// WithStyle sets the property and returns the receiver so calls can be chained.
+// WithStyle sets the style.
 func (pncf *PersonNameComponentsFormatter) WithStyle(style PersonNameComponentsFormatterStyle) *PersonNameComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("setStyle:"), style)
 	return pncf
 }
 
-// WithPhonetic sets the property and returns the receiver so calls can be chained.
+// WithPhonetic sets the phonetic.
 func (pncf *PersonNameComponentsFormatter) WithPhonetic(phonetic bool) *PersonNameComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("setPhonetic:"), phonetic)
 	return pncf
 }
 
-// WithLocale sets the property and returns the receiver so calls can be chained.
+// WithLocale sets the locale.
 func (pncf *PersonNameComponentsFormatter) WithLocale(locale *Locale) *PersonNameComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return pncf
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (pncf *PersonNameComponentsFormatter) WithScriptingProperties(scriptingProperties obj.Object) *PersonNameComponentsFormatter {
 	objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return pncf
@@ -97,19 +97,19 @@ func (pncf *PersonNameComponentsFormatter) PersonNameComponentsFromString(string
 	return PersonNameComponentsFromID(_r)
 }
 
-// Style wraps the corresponding Objective-C method.
+// Style returns the style.
 func (pncf *PersonNameComponentsFormatter) Style() PersonNameComponentsFormatterStyle {
 	_r := objc.Send[PersonNameComponentsFormatterStyle](objref.IDOf(pncf), objc.RegisterName("style"))
 	return _r
 }
 
-// IsPhonetic wraps the corresponding Objective-C method.
+// IsPhonetic reports whether the object is phonetic.
 func (pncf *PersonNameComponentsFormatter) IsPhonetic() bool {
 	_r := objc.Send[bool](objref.IDOf(pncf), objc.RegisterName("isPhonetic"))
 	return _r
 }
 
-// Locale wraps the corresponding Objective-C method.
+// Locale returns the locale.
 func (pncf *PersonNameComponentsFormatter) Locale() *Locale {
 	_r := objc.Send[objc.ID](objref.IDOf(pncf), objc.RegisterName("locale"))
 	return LocaleFromID(_r)

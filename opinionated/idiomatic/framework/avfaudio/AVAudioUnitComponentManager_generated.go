@@ -102,7 +102,7 @@ func (aucm *AudioUnitComponentManager) TagNames() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// StandardLocalizedTagNames wraps the corresponding Objective-C method.
+// StandardLocalizedTagNames returns the standard localized tag names.
 //
 // StandardLocalizedTagNames returns the collection as a Go slice.
 func (aucm *AudioUnitComponentManager) StandardLocalizedTagNames() []string {

@@ -51,7 +51,7 @@ func NewTextInputNotificationAction() *TextInputNotificationAction {
 	return textInputNotificationActionAdopt(_id)
 }
 
-// TextInputButtonTitle wraps the corresponding Objective-C method.
+// TextInputButtonTitle returns the text input button title.
 func (tina *TextInputNotificationAction) TextInputButtonTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tina), objc.RegisterName("textInputButtonTitle"))
 	if _r == 0 {
@@ -60,7 +60,7 @@ func (tina *TextInputNotificationAction) TextInputButtonTitle() string {
 	return purego.GoString(_r)
 }
 
-// TextInputPlaceholder wraps the corresponding Objective-C method.
+// TextInputPlaceholder returns the text input placeholder.
 func (tina *TextInputNotificationAction) TextInputPlaceholder() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tina), objc.RegisterName("textInputPlaceholder"))
 	if _r == 0 {

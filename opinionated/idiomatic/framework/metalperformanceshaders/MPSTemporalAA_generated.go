@@ -62,7 +62,7 @@ func (ta *TemporalAA) WithLabel(label string) *TemporalAA {
 	return ta
 }
 
-// EncodeWithCoder wraps the corresponding Objective-C method.
+// EncodeWithCoder encodes with coder.
 func (ta *TemporalAA) EncodeWithCoder(coder obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }

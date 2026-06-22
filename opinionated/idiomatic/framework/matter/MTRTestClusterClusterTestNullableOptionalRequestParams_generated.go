@@ -50,7 +50,7 @@ func NewMTRTestClusterClusterTestNullableOptionalRequestParams() *MTRTestCluster
 	return mTRTestClusterClusterTestNullableOptionalRequestParamsAdopt(_id)
 }
 
-// WithArg1 sets the property and returns the receiver so calls can be chained.
+// WithArg1 sets the arg1.
 func (mtcctnorp *MTRTestClusterClusterTestNullableOptionalRequestParams) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestNullableOptionalRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mtcctnorp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mtcctnorp

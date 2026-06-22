@@ -72,19 +72,19 @@ func (nfln *NNForwardLossNode) WithLabel(label string) *NNForwardLossNode {
 	return nfln
 }
 
-// LossType wraps the corresponding Objective-C method.
+// LossType returns the loss type.
 func (nfln *NNForwardLossNode) LossType() CNNLossType {
 	_r := objc.Send[CNNLossType](objref.IDOf(nfln), objc.RegisterName("lossType"))
 	return _r
 }
 
-// ReductionType wraps the corresponding Objective-C method.
+// ReductionType returns the reduction type.
 func (nfln *NNForwardLossNode) ReductionType() CNNReductionType {
 	_r := objc.Send[CNNReductionType](objref.IDOf(nfln), objc.RegisterName("reductionType"))
 	return _r
 }
 
-// NumberOfClasses wraps the corresponding Objective-C method.
+// NumberOfClasses returns the number of classes.
 func (nfln *NNForwardLossNode) NumberOfClasses() int {
 	_r := objc.Send[int](objref.IDOf(nfln), objc.RegisterName("numberOfClasses"))
 	return _r
@@ -96,25 +96,25 @@ func (nfln *NNForwardLossNode) ReduceAcrossBatch() bool {
 	return _r
 }
 
-// Weight wraps the corresponding Objective-C method.
+// Weight returns the weight.
 func (nfln *NNForwardLossNode) Weight() float32 {
 	_r := objc.Send[float32](objref.IDOf(nfln), objc.RegisterName("weight"))
 	return _r
 }
 
-// LabelSmoothing wraps the corresponding Objective-C method.
+// LabelSmoothing returns the label smoothing.
 func (nfln *NNForwardLossNode) LabelSmoothing() float32 {
 	_r := objc.Send[float32](objref.IDOf(nfln), objc.RegisterName("labelSmoothing"))
 	return _r
 }
 
-// Epsilon wraps the corresponding Objective-C method.
+// Epsilon returns the epsilon.
 func (nfln *NNForwardLossNode) Epsilon() float32 {
 	_r := objc.Send[float32](objref.IDOf(nfln), objc.RegisterName("epsilon"))
 	return _r
 }
 
-// Delta wraps the corresponding Objective-C method.
+// Delta returns the delta.
 func (nfln *NNForwardLossNode) Delta() float32 {
 	_r := objc.Send[float32](objref.IDOf(nfln), objc.RegisterName("delta"))
 	return _r

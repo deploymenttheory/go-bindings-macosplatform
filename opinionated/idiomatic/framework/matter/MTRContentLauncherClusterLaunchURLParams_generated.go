@@ -70,19 +70,19 @@ func NewMTRContentLauncherClusterLaunchURLParams() *MTRContentLauncherClusterLau
 	return mTRContentLauncherClusterLaunchURLParamsAdopt(_id)
 }
 
-// WithContentURL sets the property and returns the receiver so calls can be chained.
+// WithContentURL sets the content URL.
 func (mclclup *MTRContentLauncherClusterLaunchURLParams) WithContentURL(contentURL string) *MTRContentLauncherClusterLaunchURLParams {
 	objc.Send[objc.ID](objref.IDOf(mclclup), objc.RegisterName("setContentURL:"), purego.NSString(contentURL))
 	return mclclup
 }
 
-// WithDisplayString sets the property and returns the receiver so calls can be chained.
+// WithDisplayString sets the display string.
 func (mclclup *MTRContentLauncherClusterLaunchURLParams) WithDisplayString(displayString string) *MTRContentLauncherClusterLaunchURLParams {
 	objc.Send[objc.ID](objref.IDOf(mclclup), objc.RegisterName("setDisplayString:"), purego.NSString(displayString))
 	return mclclup
 }
 
-// WithBrandingInformation sets the property and returns the receiver so calls can be chained.
+// WithBrandingInformation sets the branding information.
 func (mclclup *MTRContentLauncherClusterLaunchURLParams) WithBrandingInformation(brandingInformation MTRContentLauncherClusterBrandingInformationStructProvider) *MTRContentLauncherClusterLaunchURLParams {
 	objc.Send[objc.ID](objref.IDOf(mclclup), objc.RegisterName("setBrandingInformation:"), objref.IDOf(brandingInformation))
 	return mclclup
@@ -100,7 +100,7 @@ func (mclclup *MTRContentLauncherClusterLaunchURLParams) WithServerSideProcessin
 	return mclclup
 }
 
-// ContentURL wraps the corresponding Objective-C method.
+// ContentURL returns the content URL.
 func (mclclup *MTRContentLauncherClusterLaunchURLParams) ContentURL() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mclclup), objc.RegisterName("contentURL"))
 	if _r == 0 {
@@ -109,7 +109,7 @@ func (mclclup *MTRContentLauncherClusterLaunchURLParams) ContentURL() string {
 	return purego.GoString(_r)
 }
 
-// DisplayString wraps the corresponding Objective-C method.
+// DisplayString returns the display string.
 func (mclclup *MTRContentLauncherClusterLaunchURLParams) DisplayString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mclclup), objc.RegisterName("displayString"))
 	if _r == 0 {
@@ -118,7 +118,7 @@ func (mclclup *MTRContentLauncherClusterLaunchURLParams) DisplayString() string 
 	return purego.GoString(_r)
 }
 
-// BrandingInformation wraps the corresponding Objective-C method.
+// BrandingInformation returns the branding information.
 func (mclclup *MTRContentLauncherClusterLaunchURLParams) BrandingInformation() *MTRContentLauncherClusterBrandingInformationStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(mclclup), objc.RegisterName("brandingInformation"))
 	return MTRContentLauncherClusterBrandingInformationStructFromID(_r)

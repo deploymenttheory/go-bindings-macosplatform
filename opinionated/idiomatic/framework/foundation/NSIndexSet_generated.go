@@ -84,7 +84,7 @@ func NewIndexSetWithIndex(value int) *IndexSet {
 	return indexSetAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (is *IndexSet) WithScriptingProperties(scriptingProperties obj.Object) *IndexSet {
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return is
@@ -166,19 +166,19 @@ func (is *IndexSet) IndexesWithOptionsPassingTest(opts EnumerationOptions, predi
 	return IndexSetFromID(_r)
 }
 
-// Count wraps the corresponding Objective-C method.
+// Count returns the count.
 func (is *IndexSet) Count() int {
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("count"))
 	return _r
 }
 
-// FirstIndex wraps the corresponding Objective-C method.
+// FirstIndex returns the first index.
 func (is *IndexSet) FirstIndex() int {
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("firstIndex"))
 	return _r
 }
 
-// LastIndex wraps the corresponding Objective-C method.
+// LastIndex returns the last index.
 func (is *IndexSet) LastIndex() int {
 	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("lastIndex"))
 	return _r

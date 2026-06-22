@@ -53,13 +53,13 @@ func NewDimensionWithSymbolConverter(symbol string, converter *UnitConverter) *D
 	return dimensionAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (d *Dimension) WithScriptingProperties(scriptingProperties obj.Object) *Dimension {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return d
 }
 
-// Converter wraps the corresponding Objective-C method.
+// Converter returns the converter.
 func (d *Dimension) Converter() *UnitConverter {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("converter"))
 	return UnitConverterFromID(_r)

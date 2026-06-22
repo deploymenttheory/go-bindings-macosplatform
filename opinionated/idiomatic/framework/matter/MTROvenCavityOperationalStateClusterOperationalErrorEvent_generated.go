@@ -70,13 +70,13 @@ func NewMTROvenCavityOperationalStateClusterOperationalErrorEvent() *MTROvenCavi
 	return mTROvenCavityOperationalStateClusterOperationalErrorEventAdopt(_id)
 }
 
-// WithErrorState sets the property and returns the receiver so calls can be chained.
+// WithErrorState sets the error state.
 func (mocoscoee *MTROvenCavityOperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *MTROvenCavityOperationalStateClusterErrorStateStruct) *MTROvenCavityOperationalStateClusterOperationalErrorEvent {
 	objc.Send[objc.ID](objref.IDOf(mocoscoee), objc.RegisterName("setErrorState:"), objref.IDOf(errorState))
 	return mocoscoee
 }
 
-// ErrorState wraps the corresponding Objective-C method.
+// ErrorState returns the error state.
 func (mocoscoee *MTROvenCavityOperationalStateClusterOperationalErrorEvent) ErrorState() *MTROvenCavityOperationalStateClusterErrorStateStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(mocoscoee), objc.RegisterName("errorState"))
 	return MTROvenCavityOperationalStateClusterErrorStateStructFromID(_r)

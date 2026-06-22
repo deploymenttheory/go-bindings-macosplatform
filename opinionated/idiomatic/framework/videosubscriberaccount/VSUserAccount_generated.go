@@ -73,74 +73,74 @@ func NewVSUserAccountWithAccountTypeUpdateURL(accountType VSUserAccountType, url
 	return vSUserAccountAdopt(_id)
 }
 
-// WithUpdateURL sets the property and returns the receiver so calls can be chained.
+// WithUpdateURL sets the update URL.
 func (vua *VSUserAccount) WithUpdateURL(updateURL string) *VSUserAccount {
 	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setUpdateURL:"), rt.FileURL(updateURL))
 	return vua
 }
 
-// WithRequiresSystemTrust sets the property and returns the receiver so calls can be chained.
+// WithRequiresSystemTrust sets the requires system trust.
 func (vua *VSUserAccount) WithRequiresSystemTrust(requiresSystemTrust bool) *VSUserAccount {
 	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setRequiresSystemTrust:"), requiresSystemTrust)
 	return vua
 }
 
-// WithAccountProviderIdentifier sets the property and returns the receiver so calls can be chained.
+// WithAccountProviderIdentifier sets the account provider identifier.
 func (vua *VSUserAccount) WithAccountProviderIdentifier(accountProviderIdentifier string) *VSUserAccount {
 	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setAccountProviderIdentifier:"), purego.NSString(accountProviderIdentifier))
 	return vua
 }
 
-// WithIdentifier sets the property and returns the receiver so calls can be chained.
+// WithIdentifier sets the identifier.
 func (vua *VSUserAccount) WithIdentifier(identifier string) *VSUserAccount {
 	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 	return vua
 }
 
-// WithAccountType sets the property and returns the receiver so calls can be chained.
+// WithAccountType sets the account type.
 func (vua *VSUserAccount) WithAccountType(accountType VSUserAccountType) *VSUserAccount {
 	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setAccountType:"), accountType)
 	return vua
 }
 
-// WithSignedOut sets the property and returns the receiver so calls can be chained.
+// WithSignedOut sets the signed out.
 func (vua *VSUserAccount) WithSignedOut(signedOut bool) *VSUserAccount {
 	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setSignedOut:"), signedOut)
 	return vua
 }
 
-// WithSubscriptionBillingCycleEndDate sets the property and returns the receiver so calls can be chained.
+// WithSubscriptionBillingCycleEndDate sets the subscription billing cycle end date.
 func (vua *VSUserAccount) WithSubscriptionBillingCycleEndDate(subscriptionBillingCycleEndDate obj.Object) *VSUserAccount {
 	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setSubscriptionBillingCycleEndDate:"), objref.IDOf(subscriptionBillingCycleEndDate))
 	return vua
 }
 
-// WithTierIdentifiers sets the property and returns the receiver so calls can be chained.
+// WithTierIdentifiers sets the tier identifiers.
 func (vua *VSUserAccount) WithTierIdentifiers(items ...obj.Object) *VSUserAccount {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setTierIdentifiers:"), _arr)
 	return vua
 }
 
-// WithBillingIdentifier sets the property and returns the receiver so calls can be chained.
+// WithBillingIdentifier sets the billing identifier.
 func (vua *VSUserAccount) WithBillingIdentifier(billingIdentifier string) *VSUserAccount {
 	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setBillingIdentifier:"), purego.NSString(billingIdentifier))
 	return vua
 }
 
-// WithAuthenticationData sets the property and returns the receiver so calls can be chained.
+// WithAuthenticationData sets the authentication data.
 func (vua *VSUserAccount) WithAuthenticationData(authenticationData string) *VSUserAccount {
 	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setAuthenticationData:"), purego.NSString(authenticationData))
 	return vua
 }
 
-// WithAppleSubscription sets the property and returns the receiver so calls can be chained.
+// WithAppleSubscription sets the apple subscription.
 func (vua *VSUserAccount) WithAppleSubscription(appleSubscription *VSAppleSubscription) *VSUserAccount {
 	objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("setAppleSubscription:"), objref.IDOf(appleSubscription))
 	return vua
 }
 
-// UpdateURL wraps the corresponding Objective-C method.
+// UpdateURL returns the update URL.
 func (vua *VSUserAccount) UpdateURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("updateURL"))
 	return obj.Wrap(_r)
@@ -152,7 +152,7 @@ func (vua *VSUserAccount) RequiresSystemTrust() bool {
 	return _r
 }
 
-// AccountProviderIdentifier wraps the corresponding Objective-C method.
+// AccountProviderIdentifier returns the account provider identifier.
 func (vua *VSUserAccount) AccountProviderIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("accountProviderIdentifier"))
 	if _r == 0 {
@@ -161,7 +161,7 @@ func (vua *VSUserAccount) AccountProviderIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (vua *VSUserAccount) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -170,25 +170,25 @@ func (vua *VSUserAccount) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// AccountType wraps the corresponding Objective-C method.
+// AccountType returns the account type.
 func (vua *VSUserAccount) AccountType() VSUserAccountType {
 	_r := objc.Send[VSUserAccountType](objref.IDOf(vua), objc.RegisterName("accountType"))
 	return _r
 }
 
-// IsSignedOut wraps the corresponding Objective-C method.
+// IsSignedOut reports whether the object is signed out.
 func (vua *VSUserAccount) IsSignedOut() bool {
 	_r := objc.Send[bool](objref.IDOf(vua), objc.RegisterName("isSignedOut"))
 	return _r
 }
 
-// SubscriptionBillingCycleEndDate wraps the corresponding Objective-C method.
+// SubscriptionBillingCycleEndDate returns the subscription billing cycle end date.
 func (vua *VSUserAccount) SubscriptionBillingCycleEndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("subscriptionBillingCycleEndDate"))
 	return obj.Wrap(_r)
 }
 
-// TierIdentifiers wraps the corresponding Objective-C method.
+// TierIdentifiers returns the tier identifiers.
 //
 // TierIdentifiers returns the collection as a Go slice.
 func (vua *VSUserAccount) TierIdentifiers() []string {
@@ -196,7 +196,7 @@ func (vua *VSUserAccount) TierIdentifiers() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// BillingIdentifier wraps the corresponding Objective-C method.
+// BillingIdentifier returns the billing identifier.
 func (vua *VSUserAccount) BillingIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("billingIdentifier"))
 	if _r == 0 {
@@ -205,7 +205,7 @@ func (vua *VSUserAccount) BillingIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// AuthenticationData wraps the corresponding Objective-C method.
+// AuthenticationData returns the authentication data.
 func (vua *VSUserAccount) AuthenticationData() string {
 	_r := objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("authenticationData"))
 	if _r == 0 {
@@ -214,19 +214,19 @@ func (vua *VSUserAccount) AuthenticationData() string {
 	return purego.GoString(_r)
 }
 
-// IsFromCurrentDevice wraps the corresponding Objective-C method.
+// IsFromCurrentDevice reports whether the object is from current device.
 func (vua *VSUserAccount) IsFromCurrentDevice() bool {
 	_r := objc.Send[bool](objref.IDOf(vua), objc.RegisterName("isFromCurrentDevice"))
 	return _r
 }
 
-// DeviceCategory wraps the corresponding Objective-C method.
+// DeviceCategory returns the device category.
 func (vua *VSUserAccount) DeviceCategory() VSOriginatingDeviceCategory {
 	_r := objc.Send[VSOriginatingDeviceCategory](objref.IDOf(vua), objc.RegisterName("deviceCategory"))
 	return _r
 }
 
-// AppleSubscription wraps the corresponding Objective-C method.
+// AppleSubscription returns the apple subscription.
 func (vua *VSUserAccount) AppleSubscription() *VSAppleSubscription {
 	_r := objc.Send[objc.ID](objref.IDOf(vua), objc.RegisterName("appleSubscription"))
 	return VSAppleSubscriptionFromID(_r)

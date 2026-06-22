@@ -51,13 +51,13 @@ func NewChangeHistoryAddSubgroupToGroupEvent() *ChangeHistoryAddSubgroupToGroupE
 	return changeHistoryAddSubgroupToGroupEventAdopt(_id)
 }
 
-// Subgroup wraps the corresponding Objective-C method.
+// Subgroup returns the subgroup.
 func (chastge *ChangeHistoryAddSubgroupToGroupEvent) Subgroup() *Group {
 	_r := objc.Send[objc.ID](objref.IDOf(chastge), objc.RegisterName("subgroup"))
 	return GroupFromID(_r)
 }
 
-// Group wraps the corresponding Objective-C method.
+// Group returns the group.
 func (chastge *ChangeHistoryAddSubgroupToGroupEvent) Group() *Group {
 	_r := objc.Send[objc.ID](objref.IDOf(chastge), objc.RegisterName("group"))
 	return GroupFromID(_r)

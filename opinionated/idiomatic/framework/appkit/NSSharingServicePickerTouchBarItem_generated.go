@@ -75,13 +75,13 @@ func (ssptbi *SharingServicePickerTouchBarItem) WithVisibilityPriority(visibilit
 	return ssptbi
 }
 
-// IsEnabled wraps the corresponding Objective-C method.
+// IsEnabled reports whether the object is enabled.
 func (ssptbi *SharingServicePickerTouchBarItem) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(ssptbi), objc.RegisterName("isEnabled"))
 	return _r
 }
 
-// ButtonTitle wraps the corresponding Objective-C method.
+// ButtonTitle returns the button title.
 func (ssptbi *SharingServicePickerTouchBarItem) ButtonTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("buttonTitle"))
 	if _r == 0 {
@@ -90,7 +90,7 @@ func (ssptbi *SharingServicePickerTouchBarItem) ButtonTitle() string {
 	return purego.GoString(_r)
 }
 
-// ButtonImage wraps the corresponding Objective-C method.
+// ButtonImage returns the button image.
 func (ssptbi *SharingServicePickerTouchBarItem) ButtonImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(ssptbi), objc.RegisterName("buttonImage"))
 	return ImageFromID(_r)

@@ -78,7 +78,7 @@ func NewMTRGroupsClusterGetGroupMembershipResponseParamsWithResponseValueError(r
 	return mTRGroupsClusterGetGroupMembershipResponseParamsAdopt(_id), nil
 }
 
-// WithCapacity sets the property and returns the receiver so calls can be chained.
+// WithCapacity sets the capacity.
 func (mgcggmrp *MTRGroupsClusterGetGroupMembershipResponseParams) WithCapacity(capacity obj.Object) *MTRGroupsClusterGetGroupMembershipResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mgcggmrp), objc.RegisterName("setCapacity:"), objref.IDOf(capacity))
 	return mgcggmrp
@@ -90,13 +90,13 @@ func (mgcggmrp *MTRGroupsClusterGetGroupMembershipResponseParams) WithTimedInvok
 	return mgcggmrp
 }
 
-// Capacity wraps the corresponding Objective-C method.
+// Capacity returns the capacity.
 func (mgcggmrp *MTRGroupsClusterGetGroupMembershipResponseParams) Capacity() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgcggmrp), objc.RegisterName("capacity"))
 	return obj.Wrap(_r)
 }
 
-// GroupList wraps the corresponding Objective-C method.
+// GroupList returns the group list.
 func (mgcggmrp *MTRGroupsClusterGetGroupMembershipResponseParams) GroupList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgcggmrp), objc.RegisterName("groupList"))
 	return obj.Wrap(_r)

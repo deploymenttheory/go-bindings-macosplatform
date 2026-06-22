@@ -45,49 +45,49 @@ func dOMNodeAdopt(id objc.ID) *DOMNode {
 	return x
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dn *DOMNode) WithNodeValue(nodeValue string) *DOMNode {
 	objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dn
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dn *DOMNode) WithPrefix(prefix string) *DOMNode {
 	objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dn
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dn *DOMNode) WithTextContent(textContent string) *DOMNode {
 	objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dn
 }
 
-// InsertBeforeRefChild wraps the corresponding Objective-C method.
+// InsertBeforeRefChild inserts before ref child.
 func (dn *DOMNode) InsertBeforeRefChild(newChild *DOMNode, refChild *DOMNode) *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("insertBefore:refChild:"), objref.IDOf(newChild), objref.IDOf(refChild))
 	return DOMNodeFromID(_r)
 }
 
-// ReplaceChildOldChild wraps the corresponding Objective-C method.
+// ReplaceChildOldChild replaces child old child.
 func (dn *DOMNode) ReplaceChildOldChild(newChild *DOMNode, oldChild *DOMNode) *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("replaceChild:oldChild:"), objref.IDOf(newChild), objref.IDOf(oldChild))
 	return DOMNodeFromID(_r)
 }
 
-// RemoveChild wraps the corresponding Objective-C method.
+// RemoveChild removes child.
 func (dn *DOMNode) RemoveChild(oldChild *DOMNode) *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("removeChild:"), objref.IDOf(oldChild))
 	return DOMNodeFromID(_r)
 }
 
-// AppendChild wraps the corresponding Objective-C method.
+// AppendChild appends child.
 func (dn *DOMNode) AppendChild(newChild *DOMNode) *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("appendChild:"), objref.IDOf(newChild))
 	return DOMNodeFromID(_r)
 }
 
-// HasChildNodes wraps the corresponding Objective-C method.
+// HasChildNodes reports whether the object has child nodes.
 func (dn *DOMNode) HasChildNodes() bool {
 	_r := objc.Send[bool](objref.IDOf(dn), objc.RegisterName("hasChildNodes"))
 	return _r
@@ -110,7 +110,7 @@ func (dn *DOMNode) IsSupportedVersion(feature string, version string) bool {
 	return _r
 }
 
-// HasAttributes wraps the corresponding Objective-C method.
+// HasAttributes reports whether the object has attributes.
 func (dn *DOMNode) HasAttributes() bool {
 	_r := objc.Send[bool](objref.IDOf(dn), objc.RegisterName("hasAttributes"))
 	return _r
@@ -164,7 +164,7 @@ func (dn *DOMNode) Contains(other *DOMNode) bool {
 	return _r
 }
 
-// NodeName wraps the corresponding Objective-C method.
+// NodeName returns the node name.
 func (dn *DOMNode) NodeName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("nodeName"))
 	if _r == 0 {
@@ -173,7 +173,7 @@ func (dn *DOMNode) NodeName() string {
 	return purego.GoString(_r)
 }
 
-// NodeValue wraps the corresponding Objective-C method.
+// NodeValue returns the node value.
 func (dn *DOMNode) NodeValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("nodeValue"))
 	if _r == 0 {
@@ -182,55 +182,55 @@ func (dn *DOMNode) NodeValue() string {
 	return purego.GoString(_r)
 }
 
-// NodeType wraps the corresponding Objective-C method.
+// NodeType returns the node type.
 func (dn *DOMNode) NodeType() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(dn), objc.RegisterName("nodeType"))
 	return _r
 }
 
-// ParentNode wraps the corresponding Objective-C method.
+// ParentNode returns the parent node.
 func (dn *DOMNode) ParentNode() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("parentNode"))
 	return DOMNodeFromID(_r)
 }
 
-// ChildNodes wraps the corresponding Objective-C method.
+// ChildNodes returns the child nodes.
 func (dn *DOMNode) ChildNodes() *DOMNodeList {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("childNodes"))
 	return DOMNodeListFromID(_r)
 }
 
-// FirstChild wraps the corresponding Objective-C method.
+// FirstChild returns the first child.
 func (dn *DOMNode) FirstChild() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("firstChild"))
 	return DOMNodeFromID(_r)
 }
 
-// LastChild wraps the corresponding Objective-C method.
+// LastChild returns the last child.
 func (dn *DOMNode) LastChild() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("lastChild"))
 	return DOMNodeFromID(_r)
 }
 
-// PreviousSibling wraps the corresponding Objective-C method.
+// PreviousSibling returns the previous sibling.
 func (dn *DOMNode) PreviousSibling() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("previousSibling"))
 	return DOMNodeFromID(_r)
 }
 
-// NextSibling wraps the corresponding Objective-C method.
+// NextSibling returns the next sibling.
 func (dn *DOMNode) NextSibling() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("nextSibling"))
 	return DOMNodeFromID(_r)
 }
 
-// OwnerDocument wraps the corresponding Objective-C method.
+// OwnerDocument returns the owner document.
 func (dn *DOMNode) OwnerDocument() *DOMDocument {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("ownerDocument"))
 	return DOMDocumentFromID(_r)
 }
 
-// NamespaceURI wraps the corresponding Objective-C method.
+// NamespaceURI returns the namespace URI.
 func (dn *DOMNode) NamespaceURI() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("namespaceURI"))
 	if _r == 0 {
@@ -239,7 +239,7 @@ func (dn *DOMNode) NamespaceURI() string {
 	return purego.GoString(_r)
 }
 
-// Prefix wraps the corresponding Objective-C method.
+// Prefix returns the prefix.
 func (dn *DOMNode) Prefix() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("prefix"))
 	if _r == 0 {
@@ -248,7 +248,7 @@ func (dn *DOMNode) Prefix() string {
 	return purego.GoString(_r)
 }
 
-// LocalName wraps the corresponding Objective-C method.
+// LocalName returns the local name.
 func (dn *DOMNode) LocalName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("localName"))
 	if _r == 0 {
@@ -257,13 +257,13 @@ func (dn *DOMNode) LocalName() string {
 	return purego.GoString(_r)
 }
 
-// Attributes wraps the corresponding Objective-C method.
+// Attributes returns the attributes.
 func (dn *DOMNode) Attributes() *DOMNamedNodeMap {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("attributes"))
 	return DOMNamedNodeMapFromID(_r)
 }
 
-// BaseURI wraps the corresponding Objective-C method.
+// BaseURI returns the base URI.
 func (dn *DOMNode) BaseURI() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("baseURI"))
 	if _r == 0 {
@@ -272,7 +272,7 @@ func (dn *DOMNode) BaseURI() string {
 	return purego.GoString(_r)
 }
 
-// TextContent wraps the corresponding Objective-C method.
+// TextContent returns the text content.
 func (dn *DOMNode) TextContent() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("textContent"))
 	if _r == 0 {
@@ -281,25 +281,25 @@ func (dn *DOMNode) TextContent() string {
 	return purego.GoString(_r)
 }
 
-// ParentElement wraps the corresponding Objective-C method.
+// ParentElement returns the parent element.
 func (dn *DOMNode) ParentElement() *DOMElement {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("parentElement"))
 	return DOMElementFromID(_r)
 }
 
-// IsContentEditable wraps the corresponding Objective-C method.
+// IsContentEditable reports whether the object is content editable.
 func (dn *DOMNode) IsContentEditable() bool {
 	_r := objc.Send[bool](objref.IDOf(dn), objc.RegisterName("isContentEditable"))
 	return _r
 }
 
-// InsertBefore wraps the corresponding Objective-C method.
+// InsertBefore inserts before.
 func (dn *DOMNode) InsertBefore(newChild *DOMNode, refChild *DOMNode) *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("insertBefore::"), objref.IDOf(newChild), objref.IDOf(refChild))
 	return DOMNodeFromID(_r)
 }
 
-// ReplaceChild wraps the corresponding Objective-C method.
+// ReplaceChild replaces child.
 func (dn *DOMNode) ReplaceChild(newChild *DOMNode, oldChild *DOMNode) *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("replaceChild::"), objref.IDOf(newChild), objref.IDOf(oldChild))
 	return DOMNodeFromID(_r)
@@ -323,7 +323,7 @@ func (dn *DOMNode) LineBoxRects() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// WebArchive wraps the corresponding Objective-C method.
+// WebArchive returns the web archive.
 func (dn *DOMNode) WebArchive() *WebArchive {
 	_r := objc.Send[objc.ID](objref.IDOf(dn), objc.RegisterName("webArchive"))
 	return WebArchiveFromID(_r)

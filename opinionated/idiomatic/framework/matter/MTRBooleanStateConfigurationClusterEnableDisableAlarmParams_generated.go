@@ -70,7 +70,7 @@ func NewMTRBooleanStateConfigurationClusterEnableDisableAlarmParams() *MTRBoolea
 	return mTRBooleanStateConfigurationClusterEnableDisableAlarmParamsAdopt(_id)
 }
 
-// WithAlarmsToEnableDisable sets the property and returns the receiver so calls can be chained.
+// WithAlarmsToEnableDisable sets the alarms to enable disable.
 func (mbsccedap *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) WithAlarmsToEnableDisable(alarmsToEnableDisable obj.Object) *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams {
 	objc.Send[objc.ID](objref.IDOf(mbsccedap), objc.RegisterName("setAlarmsToEnableDisable:"), objref.IDOf(alarmsToEnableDisable))
 	return mbsccedap
@@ -88,7 +88,7 @@ func (mbsccedap *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) Wi
 	return mbsccedap
 }
 
-// AlarmsToEnableDisable wraps the corresponding Objective-C method.
+// AlarmsToEnableDisable returns the alarms to enable disable.
 func (mbsccedap *MTRBooleanStateConfigurationClusterEnableDisableAlarmParams) AlarmsToEnableDisable() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbsccedap), objc.RegisterName("alarmsToEnableDisable"))
 	return obj.Wrap(_r)

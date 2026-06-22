@@ -78,13 +78,13 @@ func NewMTRGeneralCommissioningClusterArmFailSafeResponseParamsWithResponseValue
 	return mTRGeneralCommissioningClusterArmFailSafeResponseParamsAdopt(_id), nil
 }
 
-// WithErrorCode sets the property and returns the receiver so calls can be chained.
+// WithErrorCode sets the error code.
 func (mgccafsrp *MTRGeneralCommissioningClusterArmFailSafeResponseParams) WithErrorCode(errorCode obj.Object) *MTRGeneralCommissioningClusterArmFailSafeResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mgccafsrp), objc.RegisterName("setErrorCode:"), objref.IDOf(errorCode))
 	return mgccafsrp
 }
 
-// WithDebugText sets the property and returns the receiver so calls can be chained.
+// WithDebugText sets the debug text.
 func (mgccafsrp *MTRGeneralCommissioningClusterArmFailSafeResponseParams) WithDebugText(debugText string) *MTRGeneralCommissioningClusterArmFailSafeResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mgccafsrp), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
 	return mgccafsrp
@@ -96,13 +96,13 @@ func (mgccafsrp *MTRGeneralCommissioningClusterArmFailSafeResponseParams) WithTi
 	return mgccafsrp
 }
 
-// ErrorCode wraps the corresponding Objective-C method.
+// ErrorCode returns the error code.
 func (mgccafsrp *MTRGeneralCommissioningClusterArmFailSafeResponseParams) ErrorCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgccafsrp), objc.RegisterName("errorCode"))
 	return obj.Wrap(_r)
 }
 
-// DebugText wraps the corresponding Objective-C method.
+// DebugText returns the debug text.
 func (mgccafsrp *MTRGeneralCommissioningClusterArmFailSafeResponseParams) DebugText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mgccafsrp), objc.RegisterName("debugText"))
 	if _r == 0 {

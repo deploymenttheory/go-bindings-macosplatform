@@ -246,38 +246,38 @@ func (iv *ImageView) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *
 	return iv
 }
 
-// WithCell sets the property and returns the receiver so calls can be chained.
+// WithCell sets the cell.
 func (iv *ImageView) WithCell(cell CellProvider) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return iv
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (iv *ImageView) WithSubviews(items ...ViewProvider) *ImageView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setSubviews:"), _arr)
 	return iv
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (iv *ImageView) WithHidden(hidden bool) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setHidden:"), hidden)
 	return iv
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (iv *ImageView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return iv
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (iv *ImageView) WithAutoresizesSubviews(autoresizesSubviews bool) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return iv
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (iv *ImageView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return iv
@@ -289,19 +289,19 @@ func (iv *ImageView) WithFrame(frame corefoundation.CGRect) *ImageView {
 	return iv
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (iv *ImageView) WithFrameRotation(frameRotation float64) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return iv
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (iv *ImageView) WithFrameCenterRotation(frameCenterRotation float64) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return iv
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (iv *ImageView) WithBoundsRotation(boundsRotation float64) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return iv
@@ -313,7 +313,7 @@ func (iv *ImageView) WithBounds(bounds corefoundation.CGRect) *ImageView {
 	return iv
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (iv *ImageView) WithCanDrawConcurrently(canDrawConcurrently bool) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return iv
@@ -325,148 +325,148 @@ func (iv *ImageView) WithNeedsDisplay(needsDisplay bool) *ImageView {
 	return iv
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (iv *ImageView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return iv
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (iv *ImageView) WithWantsRestingTouches(wantsRestingTouches bool) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return iv
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (iv *ImageView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return iv
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (iv *ImageView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return iv
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (iv *ImageView) WithWantsLayer(wantsLayer bool) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return iv
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (iv *ImageView) WithLayer(layer obj.Object) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return iv
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (iv *ImageView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return iv
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (iv *ImageView) WithNeedsLayout(needsLayout bool) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return iv
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (iv *ImageView) WithAlphaValue(alphaValue float64) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return iv
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (iv *ImageView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return iv
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (iv *ImageView) WithBackgroundFilters(items ...obj.Object) *ImageView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return iv
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (iv *ImageView) WithCompositingFilter(compositingFilter obj.Object) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return iv
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (iv *ImageView) WithContentFilters(items ...obj.Object) *ImageView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setContentFilters:"), _arr)
 	return iv
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (iv *ImageView) WithShadow(shadow *Shadow) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return iv
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (iv *ImageView) WithClipsToBounds(clipsToBounds bool) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return iv
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (iv *ImageView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return iv
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (iv *ImageView) WithToolTip(toolTip string) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return iv
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (iv *ImageView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return iv
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (iv *ImageView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return iv
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (iv *ImageView) WithNextKeyView(nextKeyView ViewProvider) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return iv
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (iv *ImageView) WithFocusRingType(focusRingType FocusRingType) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return iv
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (iv *ImageView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ImageView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return iv
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (iv *ImageView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return iv
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (iv *ImageView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return iv
@@ -478,49 +478,49 @@ func (iv *ImageView) WithPrefersCompactControlSizeMetrics(prefersCompactControlS
 	return iv
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (iv *ImageView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return iv
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (iv *ImageView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return iv
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (iv *ImageView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return iv
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (iv *ImageView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return iv
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (iv *ImageView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return iv
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (iv *ImageView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return iv
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (iv *ImageView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return iv
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (iv *ImageView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ImageView {
 	objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return iv
@@ -550,31 +550,31 @@ func (iv *ImageView) WithTouchBar(touchBar *TouchBar) *ImageView {
 	return iv
 }
 
-// Image wraps the corresponding Objective-C method.
+// Image returns the image.
 func (iv *ImageView) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(iv), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
-// IsEditable wraps the corresponding Objective-C method.
+// IsEditable reports whether the object is editable.
 func (iv *ImageView) IsEditable() bool {
 	_r := objc.Send[bool](objref.IDOf(iv), objc.RegisterName("isEditable"))
 	return _r
 }
 
-// ImageAlignment wraps the corresponding Objective-C method.
+// ImageAlignment returns the image alignment.
 func (iv *ImageView) ImageAlignment() ImageAlignment {
 	_r := objc.Send[ImageAlignment](objref.IDOf(iv), objc.RegisterName("imageAlignment"))
 	return _r
 }
 
-// ImageScaling wraps the corresponding Objective-C method.
+// ImageScaling returns the image scaling.
 func (iv *ImageView) ImageScaling() ImageScaling {
 	_r := objc.Send[ImageScaling](objref.IDOf(iv), objc.RegisterName("imageScaling"))
 	return _r
 }
 
-// ImageFrameStyle wraps the corresponding Objective-C method.
+// ImageFrameStyle returns the image frame style.
 func (iv *ImageView) ImageFrameStyle() ImageFrameStyle {
 	_r := objc.Send[ImageFrameStyle](objref.IDOf(iv), objc.RegisterName("imageFrameStyle"))
 	return _r

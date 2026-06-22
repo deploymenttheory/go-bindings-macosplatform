@@ -136,7 +136,7 @@ func (mcoc *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValues
 	}
 }
 
-// AddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// AddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion adds noc with params expected values expected value interval completion.
 //
 // AddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
@@ -161,7 +161,7 @@ func (mcoc *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpe
 	}
 }
 
-// UpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// UpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion updates noc with params expected values expected value interval completion.
 //
 // UpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
@@ -186,7 +186,7 @@ func (mcoc *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesE
 	}
 }
 
-// UpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// UpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion updates fabric label with params expected values expected value interval completion.
 //
 // UpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
@@ -211,7 +211,7 @@ func (mcoc *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpecte
 	}
 }
 
-// RemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// RemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion removes fabric with params expected values expected value interval completion.
 //
 // RemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
@@ -236,67 +236,67 @@ func (mcoc *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValu
 	}
 }
 
-// ReadAttributeNOCsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeNOCsWithParams reads attribute no cs with params.
 func (mcoc *MTRClusterOperationalCredentials) ReadAttributeNOCsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeNOCsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFabricsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFabricsWithParams reads attribute fabrics with params.
 func (mcoc *MTRClusterOperationalCredentials) ReadAttributeFabricsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeFabricsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeSupportedFabricsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSupportedFabricsWithParams reads attribute supported fabrics with params.
 func (mcoc *MTRClusterOperationalCredentials) ReadAttributeSupportedFabricsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeSupportedFabricsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCommissionedFabricsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCommissionedFabricsWithParams reads attribute commissioned fabrics with params.
 func (mcoc *MTRClusterOperationalCredentials) ReadAttributeCommissionedFabricsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeCommissionedFabricsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeTrustedRootCertificatesWithParams wraps the corresponding Objective-C method.
+// ReadAttributeTrustedRootCertificatesWithParams reads attribute trusted root certificates with params.
 func (mcoc *MTRClusterOperationalCredentials) ReadAttributeTrustedRootCertificatesWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeTrustedRootCertificatesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentFabricIndexWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCurrentFabricIndexWithParams reads attribute current fabric index with params.
 func (mcoc *MTRClusterOperationalCredentials) ReadAttributeCurrentFabricIndexWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeCurrentFabricIndexWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcoc *MTRClusterOperationalCredentials) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcoc *MTRClusterOperationalCredentials) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcoc *MTRClusterOperationalCredentials) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcoc *MTRClusterOperationalCredentials) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcoc *MTRClusterOperationalCredentials) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcoc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -377,7 +377,7 @@ func (mcoc *MTRClusterOperationalCredentials) CSRRequestWithParamsExpectedValues
 	}
 }
 
-// AddNOCWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+// AddNOCWithParamsExpectedValuesExpectedValueInterval adds noc with params expected values expected value interval.
 //
 // AddNOCWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
@@ -402,7 +402,7 @@ func (mcoc *MTRClusterOperationalCredentials) AddNOCWithParamsExpectedValuesExpe
 	}
 }
 
-// UpdateNOCWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+// UpdateNOCWithParamsExpectedValuesExpectedValueInterval updates noc with params expected values expected value interval.
 //
 // UpdateNOCWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
@@ -427,7 +427,7 @@ func (mcoc *MTRClusterOperationalCredentials) UpdateNOCWithParamsExpectedValuesE
 	}
 }
 
-// UpdateFabricLabelWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+// UpdateFabricLabelWithParamsExpectedValuesExpectedValueInterval updates fabric label with params expected values expected value interval.
 //
 // UpdateFabricLabelWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
@@ -452,7 +452,7 @@ func (mcoc *MTRClusterOperationalCredentials) UpdateFabricLabelWithParamsExpecte
 	}
 }
 
-// RemoveFabricWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+// RemoveFabricWithParamsExpectedValuesExpectedValueInterval removes fabric with params expected values expected value interval.
 //
 // RemoveFabricWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcoc *MTRClusterOperationalCredentials) RemoveFabricWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {

@@ -330,25 +330,25 @@ func (sn *ShapeNode) LineLength() float64 {
 	return _r
 }
 
-// FillTexture wraps the corresponding Objective-C method.
+// FillTexture returns the fill texture.
 func (sn *ShapeNode) FillTexture() *Texture {
 	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("fillTexture"))
 	return TextureFromID(_r)
 }
 
-// FillShader wraps the corresponding Objective-C method.
+// FillShader returns the fill shader.
 func (sn *ShapeNode) FillShader() *Shader {
 	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("fillShader"))
 	return ShaderFromID(_r)
 }
 
-// StrokeTexture wraps the corresponding Objective-C method.
+// StrokeTexture returns the stroke texture.
 func (sn *ShapeNode) StrokeTexture() *Texture {
 	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("strokeTexture"))
 	return TextureFromID(_r)
 }
 
-// StrokeShader wraps the corresponding Objective-C method.
+// StrokeShader returns the stroke shader.
 func (sn *ShapeNode) StrokeShader() *Shader {
 	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("strokeShader"))
 	return ShaderFromID(_r)

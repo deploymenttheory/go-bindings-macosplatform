@@ -90,7 +90,7 @@ func (pm *PropertyMapping) WithUserInfo(userInfo obj.Object) *PropertyMapping {
 	return pm
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (pm *PropertyMapping) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("name"))
 	if _r == 0 {
@@ -99,13 +99,13 @@ func (pm *PropertyMapping) Name() string {
 	return purego.GoString(_r)
 }
 
-// ValueExpression wraps the corresponding Objective-C method.
+// ValueExpression returns the value expression.
 func (pm *PropertyMapping) ValueExpression() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("valueExpression"))
 	return obj.Wrap(_r)
 }
 
-// UserInfo wraps the corresponding Objective-C method.
+// UserInfo returns the user info.
 func (pm *PropertyMapping) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)

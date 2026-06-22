@@ -70,7 +70,7 @@ func NewMTRDoorLockClusterClearUserParams() *MTRDoorLockClusterClearUserParams {
 	return mTRDoorLockClusterClearUserParamsAdopt(_id)
 }
 
-// WithUserIndex sets the property and returns the receiver so calls can be chained.
+// WithUserIndex sets the user index.
 func (mdlccup *MTRDoorLockClusterClearUserParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterClearUserParams {
 	objc.Send[objc.ID](objref.IDOf(mdlccup), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlccup
@@ -88,7 +88,7 @@ func (mdlccup *MTRDoorLockClusterClearUserParams) WithServerSideProcessingTimeou
 	return mdlccup
 }
 
-// UserIndex wraps the corresponding Objective-C method.
+// UserIndex returns the user index.
 func (mdlccup *MTRDoorLockClusterClearUserParams) UserIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlccup), objc.RegisterName("userIndex"))
 	return obj.Wrap(_r)

@@ -110,7 +110,7 @@ func (fs *FilterShape) IntersectWithRect(r corefoundation.CGRect) *FilterShape {
 	return FilterShapeFromID(_r)
 }
 
-// Extent wraps the corresponding Objective-C method.
+// Extent returns the extent.
 func (fs *FilterShape) Extent() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(fs), objc.RegisterName("extent"))
 	return _r

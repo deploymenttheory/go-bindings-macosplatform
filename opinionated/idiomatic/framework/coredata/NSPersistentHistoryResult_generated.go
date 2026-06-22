@@ -52,13 +52,13 @@ func NewPersistentHistoryResult() *PersistentHistoryResult {
 	return persistentHistoryResultAdopt(_id)
 }
 
-// Result wraps the corresponding Objective-C method.
+// Result returns the result.
 func (phr *PersistentHistoryResult) Result() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(phr), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }
 
-// ResultType wraps the corresponding Objective-C method.
+// ResultType returns the result type.
 func (phr *PersistentHistoryResult) ResultType() PersistentHistoryResultType {
 	_r := objc.Send[PersistentHistoryResultType](objref.IDOf(phr), objc.RegisterName("resultType"))
 	return _r

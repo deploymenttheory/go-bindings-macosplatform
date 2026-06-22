@@ -110,7 +110,7 @@ func (asgd *AccelerationStructureGeometryDescriptor) WithPrimitiveDataElementSiz
 	return asgd
 }
 
-// IntersectionFunctionTableOffset wraps the corresponding Objective-C method.
+// IntersectionFunctionTableOffset returns the intersection function table offset.
 func (asgd *AccelerationStructureGeometryDescriptor) IntersectionFunctionTableOffset() int {
 	_r := objc.Send[int](objref.IDOf(asgd), objc.RegisterName("intersectionFunctionTableOffset"))
 	return _r

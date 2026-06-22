@@ -72,7 +72,7 @@ func NewMTL4MachineLearningPipelineReflection() *MTL4MachineLearningPipelineRefl
 	return mTL4MachineLearningPipelineReflectionAdopt(_id)
 }
 
-// Bindings wraps the corresponding Objective-C method.
+// Bindings returns the bindings.
 func (mmlpr *MTL4MachineLearningPipelineReflection) Bindings() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmlpr), objc.RegisterName("bindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

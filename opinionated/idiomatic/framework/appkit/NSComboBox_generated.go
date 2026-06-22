@@ -180,26 +180,26 @@ func (cb *ComboBox) WithLineBreakStrategy(lineBreakStrategy LineBreakStrategy) *
 	return cb
 }
 
-// WithAllowsWritingTools sets the property and returns the receiver so calls can be chained.
+// WithAllowsWritingTools sets the allows writing tools.
 func (cb *ComboBox) WithAllowsWritingTools(allowsWritingTools bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowsWritingTools:"), allowsWritingTools)
 	return cb
 }
 
-// WithAllowsWritingToolsAffordance sets the property and returns the receiver so calls can be chained.
+// WithAllowsWritingToolsAffordance sets the allows writing tools affordance.
 func (cb *ComboBox) WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowsWritingToolsAffordance:"), allowsWritingToolsAffordance)
 	return cb
 }
 
-// WithPlaceholderStrings sets the property and returns the receiver so calls can be chained.
+// WithPlaceholderStrings sets the placeholder strings.
 func (cb *ComboBox) WithPlaceholderStrings(items ...obj.Object) *ComboBox {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPlaceholderStrings:"), _arr)
 	return cb
 }
 
-// WithPlaceholderAttributedStrings sets the property and returns the receiver so calls can be chained.
+// WithPlaceholderAttributedStrings sets the placeholder attributed strings.
 func (cb *ComboBox) WithPlaceholderAttributedStrings(items ...obj.Object) *ComboBox {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPlaceholderAttributedStrings:"), _arr)
@@ -368,38 +368,38 @@ func (cb *ComboBox) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *C
 	return cb
 }
 
-// WithCell sets the property and returns the receiver so calls can be chained.
+// WithCell sets the cell.
 func (cb *ComboBox) WithCell(cell CellProvider) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return cb
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (cb *ComboBox) WithSubviews(items ...ViewProvider) *ComboBox {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setSubviews:"), _arr)
 	return cb
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (cb *ComboBox) WithHidden(hidden bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setHidden:"), hidden)
 	return cb
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (cb *ComboBox) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return cb
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (cb *ComboBox) WithAutoresizesSubviews(autoresizesSubviews bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return cb
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (cb *ComboBox) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return cb
@@ -411,19 +411,19 @@ func (cb *ComboBox) WithFrame(frame corefoundation.CGRect) *ComboBox {
 	return cb
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (cb *ComboBox) WithFrameRotation(frameRotation float64) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return cb
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (cb *ComboBox) WithFrameCenterRotation(frameCenterRotation float64) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return cb
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (cb *ComboBox) WithBoundsRotation(boundsRotation float64) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return cb
@@ -435,7 +435,7 @@ func (cb *ComboBox) WithBounds(bounds corefoundation.CGRect) *ComboBox {
 	return cb
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (cb *ComboBox) WithCanDrawConcurrently(canDrawConcurrently bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return cb
@@ -447,148 +447,148 @@ func (cb *ComboBox) WithNeedsDisplay(needsDisplay bool) *ComboBox {
 	return cb
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (cb *ComboBox) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return cb
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (cb *ComboBox) WithWantsRestingTouches(wantsRestingTouches bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return cb
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (cb *ComboBox) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return cb
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (cb *ComboBox) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return cb
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (cb *ComboBox) WithWantsLayer(wantsLayer bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return cb
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (cb *ComboBox) WithLayer(layer obj.Object) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return cb
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (cb *ComboBox) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return cb
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (cb *ComboBox) WithNeedsLayout(needsLayout bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return cb
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (cb *ComboBox) WithAlphaValue(alphaValue float64) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return cb
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (cb *ComboBox) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return cb
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (cb *ComboBox) WithBackgroundFilters(items ...obj.Object) *ComboBox {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return cb
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (cb *ComboBox) WithCompositingFilter(compositingFilter obj.Object) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return cb
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (cb *ComboBox) WithContentFilters(items ...obj.Object) *ComboBox {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setContentFilters:"), _arr)
 	return cb
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (cb *ComboBox) WithShadow(shadow *Shadow) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return cb
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (cb *ComboBox) WithClipsToBounds(clipsToBounds bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return cb
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (cb *ComboBox) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return cb
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (cb *ComboBox) WithToolTip(toolTip string) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return cb
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (cb *ComboBox) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return cb
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (cb *ComboBox) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return cb
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (cb *ComboBox) WithNextKeyView(nextKeyView ViewProvider) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return cb
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (cb *ComboBox) WithFocusRingType(focusRingType FocusRingType) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return cb
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (cb *ComboBox) WithGestureRecognizers(items ...GestureRecognizerProvider) *ComboBox {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return cb
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (cb *ComboBox) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return cb
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (cb *ComboBox) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return cb
@@ -600,49 +600,49 @@ func (cb *ComboBox) WithPrefersCompactControlSizeMetrics(prefersCompactControlSi
 	return cb
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (cb *ComboBox) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return cb
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (cb *ComboBox) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return cb
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (cb *ComboBox) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return cb
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (cb *ComboBox) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return cb
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (cb *ComboBox) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return cb
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (cb *ComboBox) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return cb
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (cb *ComboBox) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return cb
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (cb *ComboBox) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ComboBox {
 	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return cb
@@ -749,31 +749,31 @@ func (cb *ComboBox) IndexOfItemWithObjectValue(object obj.Object) int {
 	return _r
 }
 
-// HasVerticalScroller wraps the corresponding Objective-C method.
+// HasVerticalScroller reports whether the object has vertical scroller.
 func (cb *ComboBox) HasVerticalScroller() bool {
 	_r := objc.Send[bool](objref.IDOf(cb), objc.RegisterName("hasVerticalScroller"))
 	return _r
 }
 
-// IntercellSpacing wraps the corresponding Objective-C method.
+// IntercellSpacing returns the intercell spacing.
 func (cb *ComboBox) IntercellSpacing() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cb), objc.RegisterName("intercellSpacing"))
 	return _r
 }
 
-// ItemHeight wraps the corresponding Objective-C method.
+// ItemHeight returns the item height.
 func (cb *ComboBox) ItemHeight() float64 {
 	_r := objc.Send[float64](objref.IDOf(cb), objc.RegisterName("itemHeight"))
 	return _r
 }
 
-// NumberOfVisibleItems wraps the corresponding Objective-C method.
+// NumberOfVisibleItems returns the number of visible items.
 func (cb *ComboBox) NumberOfVisibleItems() int {
 	_r := objc.Send[int](objref.IDOf(cb), objc.RegisterName("numberOfVisibleItems"))
 	return _r
 }
 
-// IsButtonBordered wraps the corresponding Objective-C method.
+// IsButtonBordered reports whether the object is button bordered.
 func (cb *ComboBox) IsButtonBordered() bool {
 	_r := objc.Send[bool](objref.IDOf(cb), objc.RegisterName("isButtonBordered"))
 	return _r
@@ -785,13 +785,13 @@ func (cb *ComboBox) UsesDataSource() bool {
 	return _r
 }
 
-// IndexOfSelectedItem wraps the corresponding Objective-C method.
+// IndexOfSelectedItem returns the index of selected item.
 func (cb *ComboBox) IndexOfSelectedItem() int {
 	_r := objc.Send[int](objref.IDOf(cb), objc.RegisterName("indexOfSelectedItem"))
 	return _r
 }
 
-// NumberOfItems wraps the corresponding Objective-C method.
+// NumberOfItems returns the number of items.
 func (cb *ComboBox) NumberOfItems() int {
 	_r := objc.Send[int](objref.IDOf(cb), objc.RegisterName("numberOfItems"))
 	return _r
@@ -803,13 +803,13 @@ func (cb *ComboBox) Completes() bool {
 	return _r
 }
 
-// ObjectValueOfSelectedItem wraps the corresponding Objective-C method.
+// ObjectValueOfSelectedItem returns the object value of selected item.
 func (cb *ComboBox) ObjectValueOfSelectedItem() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("objectValueOfSelectedItem"))
 	return obj.Wrap(_r)
 }
 
-// ObjectValues wraps the corresponding Objective-C method.
+// ObjectValues returns the object values.
 func (cb *ComboBox) ObjectValues() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("objectValues"))
 	return obj.Wrap(_r)

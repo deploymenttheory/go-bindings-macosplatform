@@ -111,7 +111,7 @@ func (mcal *MTRClusterApplicationLauncher) LaunchAppWithExpectedValuesExpectedVa
 	}
 }
 
-// StopAppWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// StopAppWithParamsExpectedValuesExpectedValueIntervalCompletion stops app with params expected values expected value interval completion.
 //
 // StopAppWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcal *MTRClusterApplicationLauncher) StopAppWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRApplicationLauncherClusterStopAppParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
@@ -136,7 +136,7 @@ func (mcal *MTRClusterApplicationLauncher) StopAppWithParamsExpectedValuesExpect
 	}
 }
 
-// StopAppWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// StopAppWithExpectedValuesExpectedValueIntervalCompletion stops app with expected values expected value interval completion.
 //
 // StopAppWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcal *MTRClusterApplicationLauncher) StopAppWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
@@ -161,7 +161,7 @@ func (mcal *MTRClusterApplicationLauncher) StopAppWithExpectedValuesExpectedValu
 	}
 }
 
-// HideAppWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// HideAppWithParamsExpectedValuesExpectedValueIntervalCompletion hides app with params expected values expected value interval completion.
 //
 // HideAppWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcal *MTRClusterApplicationLauncher) HideAppWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRApplicationLauncherClusterHideAppParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
@@ -186,7 +186,7 @@ func (mcal *MTRClusterApplicationLauncher) HideAppWithParamsExpectedValuesExpect
 	}
 }
 
-// HideAppWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
+// HideAppWithExpectedValuesExpectedValueIntervalCompletion hides app with expected values expected value interval completion.
 //
 // HideAppWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
 func (mcal *MTRClusterApplicationLauncher) HideAppWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
@@ -211,53 +211,53 @@ func (mcal *MTRClusterApplicationLauncher) HideAppWithExpectedValuesExpectedValu
 	}
 }
 
-// ReadAttributeCatalogListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCatalogListWithParams reads attribute catalog list with params.
 func (mcal *MTRClusterApplicationLauncher) ReadAttributeCatalogListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcal), objc.RegisterName("readAttributeCatalogListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentAppWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCurrentAppWithParams reads attribute current app with params.
 func (mcal *MTRClusterApplicationLauncher) ReadAttributeCurrentAppWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcal), objc.RegisterName("readAttributeCurrentAppWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeCurrentAppWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeCurrentAppWithValueExpectedValueInterval writes attribute current app with value expected value interval.
 func (mcal *MTRClusterApplicationLauncher) WriteAttributeCurrentAppWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcal), objc.RegisterName("writeAttributeCurrentAppWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeCurrentAppWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeCurrentAppWithValueExpectedValueIntervalParams writes attribute current app with value expected value interval params.
 func (mcal *MTRClusterApplicationLauncher) WriteAttributeCurrentAppWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcal), objc.RegisterName("writeAttributeCurrentAppWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcal *MTRClusterApplicationLauncher) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcal), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcal *MTRClusterApplicationLauncher) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcal), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcal *MTRClusterApplicationLauncher) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcal), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcal *MTRClusterApplicationLauncher) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcal), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcal *MTRClusterApplicationLauncher) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcal), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
@@ -288,7 +288,7 @@ func (mcal *MTRClusterApplicationLauncher) LaunchAppWithParamsExpectedValuesExpe
 	}
 }
 
-// StopAppWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+// StopAppWithParamsExpectedValuesExpectedValueInterval stops app with params expected values expected value interval.
 //
 // StopAppWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcal *MTRClusterApplicationLauncher) StopAppWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRApplicationLauncherClusterStopAppParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {
@@ -313,7 +313,7 @@ func (mcal *MTRClusterApplicationLauncher) StopAppWithParamsExpectedValuesExpect
 	}
 }
 
-// HideAppWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+// HideAppWithParamsExpectedValuesExpectedValueInterval hides app with params expected values expected value interval.
 //
 // HideAppWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcal *MTRClusterApplicationLauncher) HideAppWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRApplicationLauncherClusterHideAppParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRApplicationLauncherClusterLauncherResponseParams, err error) {

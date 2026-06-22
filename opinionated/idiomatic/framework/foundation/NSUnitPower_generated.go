@@ -52,7 +52,7 @@ func NewUnitPower() *UnitPower {
 	return unitPowerAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (up *UnitPower) WithScriptingProperties(scriptingProperties obj.Object) *UnitPower {
 	objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return up

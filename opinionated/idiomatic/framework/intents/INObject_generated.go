@@ -113,7 +113,7 @@ func (o *Object) WithAlternativeSpeakableMatches(items ...*SpeakableString) *Obj
 	return o
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (o *Object) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -122,7 +122,7 @@ func (o *Object) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// DisplayString wraps the corresponding Objective-C method.
+// DisplayString returns the display string.
 func (o *Object) DisplayString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("displayString"))
 	if _r == 0 {
@@ -131,7 +131,7 @@ func (o *Object) DisplayString() string {
 	return purego.GoString(_r)
 }
 
-// PronunciationHint wraps the corresponding Objective-C method.
+// PronunciationHint returns the pronunciation hint.
 func (o *Object) PronunciationHint() string {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("pronunciationHint"))
 	if _r == 0 {
@@ -140,7 +140,7 @@ func (o *Object) PronunciationHint() string {
 	return purego.GoString(_r)
 }
 
-// SubtitleString wraps the corresponding Objective-C method.
+// SubtitleString returns the subtitle string.
 func (o *Object) SubtitleString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("subtitleString"))
 	if _r == 0 {
@@ -149,13 +149,13 @@ func (o *Object) SubtitleString() string {
 	return purego.GoString(_r)
 }
 
-// DisplayImage wraps the corresponding Objective-C method.
+// DisplayImage returns the display image.
 func (o *Object) DisplayImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("displayImage"))
 	return ImageFromID(_r)
 }
 
-// AlternativeSpeakableMatches wraps the corresponding Objective-C method.
+// AlternativeSpeakableMatches returns the alternative speakable matches.
 //
 // AlternativeSpeakableMatches returns the collection as a Go slice.
 func (o *Object) AlternativeSpeakableMatches() []*SpeakableString {

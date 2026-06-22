@@ -50,31 +50,31 @@ func NewMTRSoftwareDiagnosticsClusterThreadMetrics() *MTRSoftwareDiagnosticsClus
 	return mTRSoftwareDiagnosticsClusterThreadMetricsAdopt(_id)
 }
 
-// WithID sets the property and returns the receiver so calls can be chained.
+// WithID sets the ID.
 func (msdctm *MTRSoftwareDiagnosticsClusterThreadMetrics) WithID(id_ obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics {
 	objc.Send[objc.ID](objref.IDOf(msdctm), objc.RegisterName("setId:"), objref.IDOf(id_))
 	return msdctm
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (msdctm *MTRSoftwareDiagnosticsClusterThreadMetrics) WithName(name string) *MTRSoftwareDiagnosticsClusterThreadMetrics {
 	objc.Send[objc.ID](objref.IDOf(msdctm), objc.RegisterName("setName:"), purego.NSString(name))
 	return msdctm
 }
 
-// WithStackFreeCurrent sets the property and returns the receiver so calls can be chained.
+// WithStackFreeCurrent sets the stack free current.
 func (msdctm *MTRSoftwareDiagnosticsClusterThreadMetrics) WithStackFreeCurrent(stackFreeCurrent obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics {
 	objc.Send[objc.ID](objref.IDOf(msdctm), objc.RegisterName("setStackFreeCurrent:"), objref.IDOf(stackFreeCurrent))
 	return msdctm
 }
 
-// WithStackFreeMinimum sets the property and returns the receiver so calls can be chained.
+// WithStackFreeMinimum sets the stack free minimum.
 func (msdctm *MTRSoftwareDiagnosticsClusterThreadMetrics) WithStackFreeMinimum(stackFreeMinimum obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics {
 	objc.Send[objc.ID](objref.IDOf(msdctm), objc.RegisterName("setStackFreeMinimum:"), objref.IDOf(stackFreeMinimum))
 	return msdctm
 }
 
-// WithStackSize sets the property and returns the receiver so calls can be chained.
+// WithStackSize sets the stack size.
 func (msdctm *MTRSoftwareDiagnosticsClusterThreadMetrics) WithStackSize(stackSize obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetrics {
 	objc.Send[objc.ID](objref.IDOf(msdctm), objc.RegisterName("setStackSize:"), objref.IDOf(stackSize))
 	return msdctm

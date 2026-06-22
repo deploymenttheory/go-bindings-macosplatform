@@ -125,19 +125,19 @@ func (fr *FetchResult) CountOfAssetsWithMediaType(mediaType AssetMediaType) int 
 	return _r
 }
 
-// Count wraps the corresponding Objective-C method.
+// Count returns the count.
 func (fr *FetchResult) Count() int {
 	_r := objc.Send[int](objref.IDOf(fr), objc.RegisterName("count"))
 	return _r
 }
 
-// FirstObject wraps the corresponding Objective-C method.
+// FirstObject returns the first object.
 func (fr *FetchResult) FirstObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("firstObject"))
 	return obj.Wrap(_r)
 }
 
-// LastObject wraps the corresponding Objective-C method.
+// LastObject returns the last object.
 func (fr *FetchResult) LastObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("lastObject"))
 	return obj.Wrap(_r)

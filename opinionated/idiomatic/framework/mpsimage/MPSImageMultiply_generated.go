@@ -51,19 +51,19 @@ func NewImageMultiply() *ImageMultiply {
 	return imageMultiplyAdopt(_id)
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (im *ImageMultiply) WithPrimaryScale(primaryScale float32) *ImageMultiply {
 	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return im
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (im *ImageMultiply) WithSecondaryScale(secondaryScale float32) *ImageMultiply {
 	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return im
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (im *ImageMultiply) WithBias(bias float32) *ImageMultiply {
 	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("setBias:"), bias)
 	return im

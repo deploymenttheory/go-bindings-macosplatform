@@ -171,13 +171,13 @@ func (fr *FetchRequest) Execute() (result []obj.Object, err error) {
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// Entity wraps the corresponding Objective-C method.
+// Entity returns the entity.
 func (fr *FetchRequest) Entity() *EntityDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
-// EntityName wraps the corresponding Objective-C method.
+// EntityName returns the entity name.
 func (fr *FetchRequest) EntityName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("entityName"))
 	if _r == 0 {
@@ -186,13 +186,13 @@ func (fr *FetchRequest) EntityName() string {
 	return purego.GoString(_r)
 }
 
-// Predicate wraps the corresponding Objective-C method.
+// Predicate returns the predicate.
 func (fr *FetchRequest) Predicate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("predicate"))
 	return obj.Wrap(_r)
 }
 
-// SortDescriptors wraps the corresponding Objective-C method.
+// SortDescriptors returns the sort descriptors.
 //
 // SortDescriptors returns the collection as a Go slice.
 func (fr *FetchRequest) SortDescriptors() []obj.Object {
@@ -200,13 +200,13 @@ func (fr *FetchRequest) SortDescriptors() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// FetchLimit wraps the corresponding Objective-C method.
+// FetchLimit returns the fetch limit.
 func (fr *FetchRequest) FetchLimit() int {
 	_r := objc.Send[int](objref.IDOf(fr), objc.RegisterName("fetchLimit"))
 	return _r
 }
 
-// ResultType wraps the corresponding Objective-C method.
+// ResultType returns the result type.
 func (fr *FetchRequest) ResultType() FetchRequestResultType {
 	_r := objc.Send[FetchRequestResultType](objref.IDOf(fr), objc.RegisterName("resultType"))
 	return _r
@@ -230,7 +230,7 @@ func (fr *FetchRequest) ReturnsObjectsAsFaults() bool {
 	return _r
 }
 
-// RelationshipKeyPathsForPrefetching wraps the corresponding Objective-C method.
+// RelationshipKeyPathsForPrefetching returns the relationship key paths for prefetching.
 //
 // RelationshipKeyPathsForPrefetching returns the collection as a Go slice.
 func (fr *FetchRequest) RelationshipKeyPathsForPrefetching() []string {
@@ -250,7 +250,7 @@ func (fr *FetchRequest) ReturnsDistinctResults() bool {
 	return _r
 }
 
-// PropertiesToFetch wraps the corresponding Objective-C method.
+// PropertiesToFetch returns the properties to fetch.
 func (fr *FetchRequest) PropertiesToFetch() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("propertiesToFetch"))
 	return obj.Wrap(_r)
@@ -261,13 +261,13 @@ func (fr *FetchRequest) SetPropertiesToFetch(propertiesToFetch obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setPropertiesToFetch:"), objref.IDOf(propertiesToFetch))
 }
 
-// FetchOffset wraps the corresponding Objective-C method.
+// FetchOffset returns the fetch offset.
 func (fr *FetchRequest) FetchOffset() int {
 	_r := objc.Send[int](objref.IDOf(fr), objc.RegisterName("fetchOffset"))
 	return _r
 }
 
-// FetchBatchSize wraps the corresponding Objective-C method.
+// FetchBatchSize returns the fetch batch size.
 func (fr *FetchRequest) FetchBatchSize() int {
 	_r := objc.Send[int](objref.IDOf(fr), objc.RegisterName("fetchBatchSize"))
 	return _r
@@ -279,7 +279,7 @@ func (fr *FetchRequest) ShouldRefreshRefetchedObjects() bool {
 	return _r
 }
 
-// PropertiesToGroupBy wraps the corresponding Objective-C method.
+// PropertiesToGroupBy returns the properties to group by.
 func (fr *FetchRequest) PropertiesToGroupBy() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("propertiesToGroupBy"))
 	return obj.Wrap(_r)
@@ -290,7 +290,7 @@ func (fr *FetchRequest) SetPropertiesToGroupBy(propertiesToGroupBy obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setPropertiesToGroupBy:"), objref.IDOf(propertiesToGroupBy))
 }
 
-// HavingPredicate wraps the corresponding Objective-C method.
+// HavingPredicate returns the having predicate.
 func (fr *FetchRequest) HavingPredicate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("havingPredicate"))
 	return obj.Wrap(_r)

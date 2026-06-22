@@ -72,7 +72,7 @@ func NewComputePlanCost() *ComputePlanCost {
 	return computePlanCostAdopt(_id)
 }
 
-// Weight wraps the corresponding Objective-C method.
+// Weight returns the weight.
 func (cpc *ComputePlanCost) Weight() float64 {
 	_r := objc.Send[float64](objref.IDOf(cpc), objc.RegisterName("weight"))
 	return _r

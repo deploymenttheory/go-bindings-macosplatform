@@ -58,223 +58,223 @@ func NewMTRClusterPowerSourceWithDeviceEndpointQueue(device *MTRDevice, endpoint
 	return mTRClusterPowerSourceAdopt(_id)
 }
 
-// ReadAttributeStatusWithParams wraps the corresponding Objective-C method.
+// ReadAttributeStatusWithParams reads attribute status with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeStatusWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeStatusWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeOrderWithParams wraps the corresponding Objective-C method.
+// ReadAttributeOrderWithParams reads attribute order with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeOrderWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeOrderWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeDescriptionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeDescriptionWithParams reads attribute description with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeDescriptionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeDescriptionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeWiredAssessedInputVoltageWithParams wraps the corresponding Objective-C method.
+// ReadAttributeWiredAssessedInputVoltageWithParams reads attribute wired assessed input voltage with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeWiredAssessedInputVoltageWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeWiredAssessedInputVoltageWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeWiredAssessedInputFrequencyWithParams wraps the corresponding Objective-C method.
+// ReadAttributeWiredAssessedInputFrequencyWithParams reads attribute wired assessed input frequency with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeWiredAssessedInputFrequencyWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeWiredAssessedInputFrequencyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeWiredCurrentTypeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeWiredCurrentTypeWithParams reads attribute wired current type with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeWiredCurrentTypeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeWiredCurrentTypeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeWiredAssessedCurrentWithParams wraps the corresponding Objective-C method.
+// ReadAttributeWiredAssessedCurrentWithParams reads attribute wired assessed current with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeWiredAssessedCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeWiredAssessedCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeWiredNominalVoltageWithParams wraps the corresponding Objective-C method.
+// ReadAttributeWiredNominalVoltageWithParams reads attribute wired nominal voltage with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeWiredNominalVoltageWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeWiredNominalVoltageWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeWiredMaximumCurrentWithParams wraps the corresponding Objective-C method.
+// ReadAttributeWiredMaximumCurrentWithParams reads attribute wired maximum current with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeWiredMaximumCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeWiredMaximumCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeWiredPresentWithParams wraps the corresponding Objective-C method.
+// ReadAttributeWiredPresentWithParams reads attribute wired present with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeWiredPresentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeWiredPresentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveWiredFaultsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeActiveWiredFaultsWithParams reads attribute active wired faults with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeActiveWiredFaultsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeActiveWiredFaultsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatVoltageWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBatVoltageWithParams reads attribute bat voltage with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeBatVoltageWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatVoltageWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatPercentRemainingWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBatPercentRemainingWithParams reads attribute bat percent remaining with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeBatPercentRemainingWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatPercentRemainingWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatTimeRemainingWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBatTimeRemainingWithParams reads attribute bat time remaining with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeBatTimeRemainingWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatTimeRemainingWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatChargeLevelWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBatChargeLevelWithParams reads attribute bat charge level with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeBatChargeLevelWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatChargeLevelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatReplacementNeededWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBatReplacementNeededWithParams reads attribute bat replacement needed with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeBatReplacementNeededWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatReplacementNeededWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatReplaceabilityWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBatReplaceabilityWithParams reads attribute bat replaceability with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeBatReplaceabilityWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatReplaceabilityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatPresentWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBatPresentWithParams reads attribute bat present with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeBatPresentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatPresentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveBatFaultsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeActiveBatFaultsWithParams reads attribute active bat faults with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeActiveBatFaultsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeActiveBatFaultsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatReplacementDescriptionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBatReplacementDescriptionWithParams reads attribute bat replacement description with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeBatReplacementDescriptionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatReplacementDescriptionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatCommonDesignationWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBatCommonDesignationWithParams reads attribute bat common designation with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeBatCommonDesignationWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatCommonDesignationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatANSIDesignationWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBatANSIDesignationWithParams reads attribute bat ansi designation with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeBatANSIDesignationWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatANSIDesignationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatIECDesignationWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBatIECDesignationWithParams reads attribute bat iec designation with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeBatIECDesignationWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatIECDesignationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatApprovedChemistryWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBatApprovedChemistryWithParams reads attribute bat approved chemistry with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeBatApprovedChemistryWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatApprovedChemistryWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatCapacityWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBatCapacityWithParams reads attribute bat capacity with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeBatCapacityWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatCapacityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatQuantityWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBatQuantityWithParams reads attribute bat quantity with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeBatQuantityWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatQuantityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatChargeStateWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBatChargeStateWithParams reads attribute bat charge state with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeBatChargeStateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatChargeStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatTimeToFullChargeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBatTimeToFullChargeWithParams reads attribute bat time to full charge with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeBatTimeToFullChargeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatTimeToFullChargeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatFunctionalWhileChargingWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBatFunctionalWhileChargingWithParams reads attribute bat functional while charging with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeBatFunctionalWhileChargingWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatFunctionalWhileChargingWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBatChargingCurrentWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBatChargingCurrentWithParams reads attribute bat charging current with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeBatChargingCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeBatChargingCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveBatChargeFaultsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeActiveBatChargeFaultsWithParams reads attribute active bat charge faults with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeActiveBatChargeFaultsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeActiveBatChargeFaultsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeEndpointListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeEndpointListWithParams reads attribute endpoint list with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeEndpointListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeEndpointListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcps *MTRClusterPowerSource) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcps), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

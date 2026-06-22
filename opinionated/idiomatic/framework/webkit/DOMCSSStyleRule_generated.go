@@ -49,19 +49,19 @@ func NewDOMCSSStyleRule() *DOMCSSStyleRule {
 	return dOMCSSStyleRuleAdopt(_id)
 }
 
-// WithSelectorText sets the property and returns the receiver so calls can be chained.
+// WithSelectorText sets the selector text.
 func (dsr *DOMCSSStyleRule) WithSelectorText(selectorText string) *DOMCSSStyleRule {
 	objc.Send[objc.ID](objref.IDOf(dsr), objc.RegisterName("setSelectorText:"), purego.NSString(selectorText))
 	return dsr
 }
 
-// WithCSSText sets the property and returns the receiver so calls can be chained.
+// WithCSSText sets the CSS text.
 func (dsr *DOMCSSStyleRule) WithCSSText(cssText string) *DOMCSSStyleRule {
 	objc.Send[objc.ID](objref.IDOf(dsr), objc.RegisterName("setCssText:"), purego.NSString(cssText))
 	return dsr
 }
 
-// SelectorText wraps the corresponding Objective-C method.
+// SelectorText returns the selector text.
 func (dsr *DOMCSSStyleRule) SelectorText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dsr), objc.RegisterName("selectorText"))
 	if _r == 0 {
@@ -70,7 +70,7 @@ func (dsr *DOMCSSStyleRule) SelectorText() string {
 	return purego.GoString(_r)
 }
 
-// Style wraps the corresponding Objective-C method.
+// Style returns the style.
 func (dsr *DOMCSSStyleRule) Style() *DOMCSSStyleDeclaration {
 	_r := objc.Send[objc.ID](objref.IDOf(dsr), objc.RegisterName("style"))
 	return DOMCSSStyleDeclarationFromID(_r)

@@ -89,7 +89,7 @@ func (cmr *CoreMLRequest) Model() *CoreMLModel {
 	return CoreMLModelFromID(_r)
 }
 
-// ImageCropAndScaleOption wraps the corresponding Objective-C method.
+// ImageCropAndScaleOption returns the image crop and scale option.
 func (cmr *CoreMLRequest) ImageCropAndScaleOption() ImageCropAndScaleOption {
 	_r := objc.Send[ImageCropAndScaleOption](objref.IDOf(cmr), objc.RegisterName("imageCropAndScaleOption"))
 	return _r

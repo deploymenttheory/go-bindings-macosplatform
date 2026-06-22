@@ -96,13 +96,13 @@ func (ac *AnimationContext) WithAllowsImplicitAnimation(allowsImplicitAnimation 
 	return ac
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (ac *AnimationContext) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(ac), objc.RegisterName("duration"))
 	return _r
 }
 
-// TimingFunction wraps the corresponding Objective-C method.
+// TimingFunction returns the timing function.
 func (ac *AnimationContext) TimingFunction() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("timingFunction"))
 	return obj.Wrap(_r)

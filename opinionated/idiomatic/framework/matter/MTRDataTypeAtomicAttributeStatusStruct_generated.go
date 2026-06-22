@@ -70,25 +70,25 @@ func NewMTRDataTypeAtomicAttributeStatusStruct() *MTRDataTypeAtomicAttributeStat
 	return mTRDataTypeAtomicAttributeStatusStructAdopt(_id)
 }
 
-// WithAttributeID sets the property and returns the receiver so calls can be chained.
+// WithAttributeID sets the attribute ID.
 func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) WithAttributeID(attributeID obj.Object) *MTRDataTypeAtomicAttributeStatusStruct {
 	objc.Send[objc.ID](objref.IDOf(mdtaass), objc.RegisterName("setAttributeID:"), objref.IDOf(attributeID))
 	return mdtaass
 }
 
-// WithStatusCode sets the property and returns the receiver so calls can be chained.
+// WithStatusCode sets the status code.
 func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) WithStatusCode(statusCode obj.Object) *MTRDataTypeAtomicAttributeStatusStruct {
 	objc.Send[objc.ID](objref.IDOf(mdtaass), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
 	return mdtaass
 }
 
-// AttributeID wraps the corresponding Objective-C method.
+// AttributeID returns the attribute ID.
 func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) AttributeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdtaass), objc.RegisterName("attributeID"))
 	return obj.Wrap(_r)
 }
 
-// StatusCode wraps the corresponding Objective-C method.
+// StatusCode returns the status code.
 func (mdtaass *MTRDataTypeAtomicAttributeStatusStruct) StatusCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdtaass), objc.RegisterName("statusCode"))
 	return obj.Wrap(_r)

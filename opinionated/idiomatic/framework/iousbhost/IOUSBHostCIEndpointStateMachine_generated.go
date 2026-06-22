@@ -85,25 +85,25 @@ func (hcesm *HostCIEndpointStateMachine) ProcessDoorbell(doorbell uint32) error 
 	return nil
 }
 
-// EndpointState wraps the corresponding Objective-C method.
+// EndpointState returns the endpoint state.
 func (hcesm *HostCIEndpointStateMachine) EndpointState() HostCIEndpointState {
 	_r := objc.Send[HostCIEndpointState](objref.IDOf(hcesm), objc.RegisterName("endpointState"))
 	return _r
 }
 
-// DeviceAddress wraps the corresponding Objective-C method.
+// DeviceAddress returns the device address.
 func (hcesm *HostCIEndpointStateMachine) DeviceAddress() int {
 	_r := objc.Send[int](objref.IDOf(hcesm), objc.RegisterName("deviceAddress"))
 	return _r
 }
 
-// EndpointAddress wraps the corresponding Objective-C method.
+// EndpointAddress returns the endpoint address.
 func (hcesm *HostCIEndpointStateMachine) EndpointAddress() int {
 	_r := objc.Send[int](objref.IDOf(hcesm), objc.RegisterName("endpointAddress"))
 	return _r
 }
 
-// ControllerInterface wraps the corresponding Objective-C method.
+// ControllerInterface returns the controller interface.
 func (hcesm *HostCIEndpointStateMachine) ControllerInterface() *HostControllerInterface {
 	_r := objc.Send[objc.ID](objref.IDOf(hcesm), objc.RegisterName("controllerInterface"))
 	return HostControllerInterfaceFromID(_r)

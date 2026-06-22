@@ -66,25 +66,25 @@ func (maccaces *MTRAccessControlClusterAccessControlExtensionStruct) String() st
 	return rt.Description(objref.IDOf(maccaces))
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (maccaces *MTRAccessControlClusterAccessControlExtensionStruct) WithData(data obj.Object) *MTRAccessControlClusterAccessControlExtensionStruct {
 	objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("setData:"), objref.IDOf(data))
 	return maccaces
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (maccaces *MTRAccessControlClusterAccessControlExtensionStruct) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlExtensionStruct {
 	objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return maccaces
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (maccaces *MTRAccessControlClusterAccessControlExtensionStruct) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// FabricIndex wraps the corresponding Objective-C method.
+// FabricIndex returns the fabric index.
 func (maccaces *MTRAccessControlClusterAccessControlExtensionStruct) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)

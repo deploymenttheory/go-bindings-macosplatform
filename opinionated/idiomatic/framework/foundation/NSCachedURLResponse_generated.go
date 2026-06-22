@@ -80,7 +80,7 @@ func NewCachedURLResponseWithResponseDataUserInfoStoragePolicy(response *URLResp
 	return cachedURLResponseAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (cur *CachedURLResponse) WithScriptingProperties(scriptingProperties obj.Object) *CachedURLResponse {
 	objc.Send[objc.ID](objref.IDOf(cur), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return cur

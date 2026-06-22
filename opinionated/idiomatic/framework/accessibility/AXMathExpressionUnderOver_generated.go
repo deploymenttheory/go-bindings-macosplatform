@@ -50,19 +50,19 @@ func NewMathExpressionUnderOverWithBaseExpressionUnderExpressionOverExpression(b
 	return mathExpressionUnderOverAdopt(_id)
 }
 
-// BaseExpression wraps the corresponding Objective-C method.
+// BaseExpression returns the base expression.
 func (meuo *MathExpressionUnderOver) BaseExpression() *MathExpression {
 	_r := objc.Send[objc.ID](objref.IDOf(meuo), objc.RegisterName("baseExpression"))
 	return MathExpressionFromID(_r)
 }
 
-// UnderExpression wraps the corresponding Objective-C method.
+// UnderExpression returns the under expression.
 func (meuo *MathExpressionUnderOver) UnderExpression() *MathExpression {
 	_r := objc.Send[objc.ID](objref.IDOf(meuo), objc.RegisterName("underExpression"))
 	return MathExpressionFromID(_r)
 }
 
-// OverExpression wraps the corresponding Objective-C method.
+// OverExpression returns the over expression.
 func (meuo *MathExpressionUnderOver) OverExpression() *MathExpression {
 	_r := objc.Send[objc.ID](objref.IDOf(meuo), objc.RegisterName("overExpression"))
 	return MathExpressionFromID(_r)

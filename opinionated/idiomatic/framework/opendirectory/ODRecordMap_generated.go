@@ -70,13 +70,13 @@ func NewRecordMap() *RecordMap {
 	return recordMapAdopt(_id)
 }
 
-// WithNative sets the property and returns the receiver so calls can be chained.
+// WithNative sets the native.
 func (rm *RecordMap) WithNative(native string) *RecordMap {
 	objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("setNative:"), purego.NSString(native))
 	return rm
 }
 
-// WithOdPredicate sets the property and returns the receiver so calls can be chained.
+// WithOdPredicate sets the od predicate.
 func (rm *RecordMap) WithOdPredicate(odPredicate obj.Object) *RecordMap {
 	objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("setOdPredicate:"), objref.IDOf(odPredicate))
 	return rm
@@ -93,7 +93,7 @@ func (rm *RecordMap) SetAttributeMapForStandardAttribute(attributeMap *Attribute
 	objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("setAttributeMap:forStandardAttribute:"), objref.IDOf(attributeMap), purego.NSString(standardAttribute))
 }
 
-// Native wraps the corresponding Objective-C method.
+// Native returns the native.
 func (rm *RecordMap) Native() string {
 	_r := objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("native"))
 	if _r == 0 {
@@ -102,19 +102,19 @@ func (rm *RecordMap) Native() string {
 	return purego.GoString(_r)
 }
 
-// OdPredicate wraps the corresponding Objective-C method.
+// OdPredicate returns the od predicate.
 func (rm *RecordMap) OdPredicate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("odPredicate"))
 	return obj.Wrap(_r)
 }
 
-// Attributes wraps the corresponding Objective-C method.
+// Attributes returns the attributes.
 func (rm *RecordMap) Attributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
-// StandardAttributeTypes wraps the corresponding Objective-C method.
+// StandardAttributeTypes returns the standard attribute types.
 func (rm *RecordMap) StandardAttributeTypes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("standardAttributeTypes"))
 	return obj.Wrap(_r)

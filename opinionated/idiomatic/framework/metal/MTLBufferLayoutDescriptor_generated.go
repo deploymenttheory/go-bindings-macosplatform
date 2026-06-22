@@ -90,19 +90,19 @@ func (bld *BufferLayoutDescriptor) WithStepRate(stepRate int) *BufferLayoutDescr
 	return bld
 }
 
-// Stride wraps the corresponding Objective-C method.
+// Stride returns the stride.
 func (bld *BufferLayoutDescriptor) Stride() int {
 	_r := objc.Send[int](objref.IDOf(bld), objc.RegisterName("stride"))
 	return _r
 }
 
-// StepFunction wraps the corresponding Objective-C method.
+// StepFunction returns the step function.
 func (bld *BufferLayoutDescriptor) StepFunction() StepFunction {
 	_r := objc.Send[StepFunction](objref.IDOf(bld), objc.RegisterName("stepFunction"))
 	return _r
 }
 
-// StepRate wraps the corresponding Objective-C method.
+// StepRate returns the step rate.
 func (bld *BufferLayoutDescriptor) StepRate() int {
 	_r := objc.Send[int](objref.IDOf(bld), objc.RegisterName("stepRate"))
 	return _r

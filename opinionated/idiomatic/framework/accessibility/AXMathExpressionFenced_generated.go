@@ -50,7 +50,7 @@ func NewMathExpressionFencedWithExpressionsOpenStringCloseString(expressions []*
 	return mathExpressionFencedAdopt(_id)
 }
 
-// Expressions wraps the corresponding Objective-C method.
+// Expressions returns the expressions.
 //
 // Expressions returns the collection as a Go slice.
 func (mef *MathExpressionFenced) Expressions() []*MathExpression {
@@ -58,7 +58,7 @@ func (mef *MathExpressionFenced) Expressions() []*MathExpression {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }
 
-// OpenString wraps the corresponding Objective-C method.
+// OpenString returns the open string.
 func (mef *MathExpressionFenced) OpenString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mef), objc.RegisterName("openString"))
 	if _r == 0 {
@@ -67,7 +67,7 @@ func (mef *MathExpressionFenced) OpenString() string {
 	return purego.GoString(_r)
 }
 
-// CloseString wraps the corresponding Objective-C method.
+// CloseString returns the close string.
 func (mef *MathExpressionFenced) CloseString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mef), objc.RegisterName("closeString"))
 	if _r == 0 {

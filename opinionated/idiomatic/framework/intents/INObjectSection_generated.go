@@ -71,7 +71,7 @@ func NewObjectSectionWithTitleItems(title string, items []obj.Object) *ObjectSec
 	return objectSectionAdopt(_id)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (os *ObjectSection) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("title"))
 	if _r == 0 {
@@ -80,7 +80,7 @@ func (os *ObjectSection) Title() string {
 	return purego.GoString(_r)
 }
 
-// Items wraps the corresponding Objective-C method.
+// Items returns the items.
 func (os *ObjectSection) Items() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("items"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

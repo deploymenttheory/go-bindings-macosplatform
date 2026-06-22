@@ -70,13 +70,13 @@ func NewMTRBridgedDeviceBasicInformationClusterActiveChangedEvent() *MTRBridgedD
 	return mTRBridgedDeviceBasicInformationClusterActiveChangedEventAdopt(_id)
 }
 
-// WithPromisedActiveDuration sets the property and returns the receiver so calls can be chained.
+// WithPromisedActiveDuration sets the promised active duration.
 func (mbdbicace *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) WithPromisedActiveDuration(promisedActiveDuration obj.Object) *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(mbdbicace), objc.RegisterName("setPromisedActiveDuration:"), objref.IDOf(promisedActiveDuration))
 	return mbdbicace
 }
 
-// PromisedActiveDuration wraps the corresponding Objective-C method.
+// PromisedActiveDuration returns the promised active duration.
 func (mbdbicace *MTRBridgedDeviceBasicInformationClusterActiveChangedEvent) PromisedActiveDuration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbdbicace), objc.RegisterName("promisedActiveDuration"))
 	return obj.Wrap(_r)

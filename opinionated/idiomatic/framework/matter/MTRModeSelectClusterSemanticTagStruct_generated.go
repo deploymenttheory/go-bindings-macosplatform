@@ -66,25 +66,25 @@ func (mmscsts *MTRModeSelectClusterSemanticTagStruct) String() string {
 	return rt.Description(objref.IDOf(mmscsts))
 }
 
-// WithMfgCode sets the property and returns the receiver so calls can be chained.
+// WithMfgCode sets the mfg code.
 func (mmscsts *MTRModeSelectClusterSemanticTagStruct) WithMfgCode(mfgCode obj.Object) *MTRModeSelectClusterSemanticTagStruct {
 	objc.Send[objc.ID](objref.IDOf(mmscsts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return mmscsts
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mmscsts *MTRModeSelectClusterSemanticTagStruct) WithValue(value obj.Object) *MTRModeSelectClusterSemanticTagStruct {
 	objc.Send[objc.ID](objref.IDOf(mmscsts), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mmscsts
 }
 
-// MfgCode wraps the corresponding Objective-C method.
+// MfgCode returns the mfg code.
 func (mmscsts *MTRModeSelectClusterSemanticTagStruct) MfgCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmscsts), objc.RegisterName("mfgCode"))
 	return obj.Wrap(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mmscsts *MTRModeSelectClusterSemanticTagStruct) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmscsts), objc.RegisterName("value"))
 	return obj.Wrap(_r)

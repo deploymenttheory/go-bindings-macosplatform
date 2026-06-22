@@ -132,13 +132,13 @@ func (cv *CollaborationView) SetShowManageButton(showManageButton bool) {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setShowManageButton:"), showManageButton)
 }
 
-// ActiveParticipantCount wraps the corresponding Objective-C method.
+// ActiveParticipantCount returns the active participant count.
 func (cv *CollaborationView) ActiveParticipantCount() int {
 	_r := objc.Send[int](objref.IDOf(cv), objc.RegisterName("activeParticipantCount"))
 	return _r
 }
 
-// HeaderTitle wraps the corresponding Objective-C method.
+// HeaderTitle returns the header title.
 func (cv *CollaborationView) HeaderTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("headerTitle"))
 	if _r == 0 {
@@ -147,7 +147,7 @@ func (cv *CollaborationView) HeaderTitle() string {
 	return purego.GoString(_r)
 }
 
-// HeaderSubtitle wraps the corresponding Objective-C method.
+// HeaderSubtitle returns the header subtitle.
 func (cv *CollaborationView) HeaderSubtitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("headerSubtitle"))
 	if _r == 0 {
@@ -156,13 +156,13 @@ func (cv *CollaborationView) HeaderSubtitle() string {
 	return purego.GoString(_r)
 }
 
-// HeaderImage wraps the corresponding Objective-C method.
+// HeaderImage returns the header image.
 func (cv *CollaborationView) HeaderImage() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("headerImage"))
 	return obj.Wrap(_r)
 }
 
-// MenuFormRepresentation wraps the corresponding Objective-C method.
+// MenuFormRepresentation returns the menu form representation.
 func (cv *CollaborationView) MenuFormRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("menuFormRepresentation"))
 	return obj.Wrap(_r)

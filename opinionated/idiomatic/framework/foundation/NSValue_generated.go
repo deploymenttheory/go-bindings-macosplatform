@@ -76,7 +76,7 @@ func NewValueWithCoder(coder *Coder) *Value {
 	return valueAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (v_ *Value) WithScriptingProperties(scriptingProperties obj.Object) *Value {
 	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return v_
@@ -88,25 +88,25 @@ func (v_ *Value) IsEqualToValue(value *Value) bool {
 	return _r
 }
 
-// NonretainedObjectValue wraps the corresponding Objective-C method.
+// NonretainedObjectValue returns the nonretained object value.
 func (v_ *Value) NonretainedObjectValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("nonretainedObjectValue"))
 	return obj.Wrap(_r)
 }
 
-// PointValue wraps the corresponding Objective-C method.
+// PointValue returns the point value.
 func (v_ *Value) PointValue() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("pointValue"))
 	return _r
 }
 
-// SizeValue wraps the corresponding Objective-C method.
+// SizeValue returns the size value.
 func (v_ *Value) SizeValue() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(v_), objc.RegisterName("sizeValue"))
 	return _r
 }
 
-// RectValue wraps the corresponding Objective-C method.
+// RectValue returns the rect value.
 func (v_ *Value) RectValue() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("rectValue"))
 	return _r

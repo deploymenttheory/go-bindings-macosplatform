@@ -63,13 +63,13 @@ func (cldi *CollectionLayoutDecorationItem) WithEdgeSpacing(edgeSpacing *Collect
 	return cldi
 }
 
-// ZIndex wraps the corresponding Objective-C method.
+// ZIndex returns the z index.
 func (cldi *CollectionLayoutDecorationItem) ZIndex() int {
 	_r := objc.Send[int](objref.IDOf(cldi), objc.RegisterName("zIndex"))
 	return _r
 }
 
-// ElementKind wraps the corresponding Objective-C method.
+// ElementKind returns the element kind.
 func (cldi *CollectionLayoutDecorationItem) ElementKind() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cldi), objc.RegisterName("elementKind"))
 	if _r == 0 {

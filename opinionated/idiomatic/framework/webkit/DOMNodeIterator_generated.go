@@ -49,13 +49,13 @@ func NewDOMNodeIterator() *DOMNodeIterator {
 	return dOMNodeIteratorAdopt(_id)
 }
 
-// NextNode wraps the corresponding Objective-C method.
+// NextNode returns the next node.
 func (dni *DOMNodeIterator) NextNode() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dni), objc.RegisterName("nextNode"))
 	return DOMNodeFromID(_r)
 }
 
-// PreviousNode wraps the corresponding Objective-C method.
+// PreviousNode returns the previous node.
 func (dni *DOMNodeIterator) PreviousNode() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dni), objc.RegisterName("previousNode"))
 	return DOMNodeFromID(_r)
@@ -66,13 +66,13 @@ func (dni *DOMNodeIterator) Detach() {
 	objc.Send[objc.ID](objref.IDOf(dni), objc.RegisterName("detach"))
 }
 
-// Root wraps the corresponding Objective-C method.
+// Root returns the root.
 func (dni *DOMNodeIterator) Root() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dni), objc.RegisterName("root"))
 	return DOMNodeFromID(_r)
 }
 
-// WhatToShow wraps the corresponding Objective-C method.
+// WhatToShow returns the what to show.
 func (dni *DOMNodeIterator) WhatToShow() int {
 	_r := objc.Send[int](objref.IDOf(dni), objc.RegisterName("whatToShow"))
 	return _r
@@ -84,7 +84,7 @@ func (dni *DOMNodeIterator) ExpandEntityReferences() bool {
 	return _r
 }
 
-// ReferenceNode wraps the corresponding Objective-C method.
+// ReferenceNode returns the reference node.
 func (dni *DOMNodeIterator) ReferenceNode() *DOMNode {
 	_r := objc.Send[objc.ID](objref.IDOf(dni), objc.RegisterName("referenceNode"))
 	return DOMNodeFromID(_r)

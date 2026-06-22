@@ -86,13 +86,13 @@ func (a *Animation) ShouldArchiveValueForKey(key string) bool {
 	return _r
 }
 
-// TimingFunction wraps the corresponding Objective-C method.
+// TimingFunction returns the timing function.
 func (a *Animation) TimingFunction() *MediaTimingFunction {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("timingFunction"))
 	return MediaTimingFunctionFromID(_r)
 }
 
-// IsRemovedOnCompletion wraps the corresponding Objective-C method.
+// IsRemovedOnCompletion reports whether the object is removed on completion.
 func (a *Animation) IsRemovedOnCompletion() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isRemovedOnCompletion"))
 	return _r

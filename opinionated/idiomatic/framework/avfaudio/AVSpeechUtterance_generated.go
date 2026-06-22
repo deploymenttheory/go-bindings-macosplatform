@@ -129,13 +129,13 @@ func (su *SpeechUtterance) WithPostUtteranceDelay(postUtteranceDelay float64) *S
 	return su
 }
 
-// Voice wraps the corresponding Objective-C method.
+// Voice returns the voice.
 func (su *SpeechUtterance) Voice() *SpeechSynthesisVoice {
 	_r := objc.Send[objc.ID](objref.IDOf(su), objc.RegisterName("voice"))
 	return SpeechSynthesisVoiceFromID(_r)
 }
 
-// SpeechString wraps the corresponding Objective-C method.
+// SpeechString returns the speech string.
 func (su *SpeechUtterance) SpeechString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(su), objc.RegisterName("speechString"))
 	if _r == 0 {
@@ -144,25 +144,25 @@ func (su *SpeechUtterance) SpeechString() string {
 	return purego.GoString(_r)
 }
 
-// AttributedSpeechString wraps the corresponding Objective-C method.
+// AttributedSpeechString returns the attributed speech string.
 func (su *SpeechUtterance) AttributedSpeechString() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(su), objc.RegisterName("attributedSpeechString"))
 	return obj.Wrap(_r)
 }
 
-// Rate wraps the corresponding Objective-C method.
+// Rate returns the rate.
 func (su *SpeechUtterance) Rate() float32 {
 	_r := objc.Send[float32](objref.IDOf(su), objc.RegisterName("rate"))
 	return _r
 }
 
-// PitchMultiplier wraps the corresponding Objective-C method.
+// PitchMultiplier returns the pitch multiplier.
 func (su *SpeechUtterance) PitchMultiplier() float32 {
 	_r := objc.Send[float32](objref.IDOf(su), objc.RegisterName("pitchMultiplier"))
 	return _r
 }
 
-// Volume wraps the corresponding Objective-C method.
+// Volume returns the volume.
 func (su *SpeechUtterance) Volume() float32 {
 	_r := objc.Send[float32](objref.IDOf(su), objc.RegisterName("volume"))
 	return _r
@@ -174,13 +174,13 @@ func (su *SpeechUtterance) PrefersAssistiveTechnologySettings() bool {
 	return _r
 }
 
-// PreUtteranceDelay wraps the corresponding Objective-C method.
+// PreUtteranceDelay returns the pre utterance delay.
 func (su *SpeechUtterance) PreUtteranceDelay() float64 {
 	_r := objc.Send[float64](objref.IDOf(su), objc.RegisterName("preUtteranceDelay"))
 	return _r
 }
 
-// PostUtteranceDelay wraps the corresponding Objective-C method.
+// PostUtteranceDelay returns the post utterance delay.
 func (su *SpeechUtterance) PostUtteranceDelay() float64 {
 	_r := objc.Send[float64](objref.IDOf(su), objc.RegisterName("postUtteranceDelay"))
 	return _r

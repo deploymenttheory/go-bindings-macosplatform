@@ -136,13 +136,13 @@ func (gr *GestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool)
 	return gr
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (gr *GestureRecognizer) WithName(name string) *GestureRecognizer {
 	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setName:"), purego.NSString(name))
 	return gr
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (gr *GestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *GestureRecognizer {
 	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return gr
@@ -154,31 +154,31 @@ func (gr *GestureRecognizer) LocationInView(view *View) corefoundation.CGPoint {
 	return _r
 }
 
-// Target wraps the corresponding Objective-C method.
+// Target returns the target.
 func (gr *GestureRecognizer) Target() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("target"))
 	return obj.Wrap(_r)
 }
 
-// State wraps the corresponding Objective-C method.
+// State returns the state.
 func (gr *GestureRecognizer) State() GestureRecognizerState {
 	_r := objc.Send[GestureRecognizerState](objref.IDOf(gr), objc.RegisterName("state"))
 	return _r
 }
 
-// IsEnabled wraps the corresponding Objective-C method.
+// IsEnabled reports whether the object is enabled.
 func (gr *GestureRecognizer) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("isEnabled"))
 	return _r
 }
 
-// View wraps the corresponding Objective-C method.
+// View returns the view.
 func (gr *GestureRecognizer) View() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
-// PressureConfiguration wraps the corresponding Objective-C method.
+// PressureConfiguration returns the pressure configuration.
 func (gr *GestureRecognizer) PressureConfiguration() *PressureConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("pressureConfiguration"))
 	return PressureConfigurationFromID(_r)
@@ -220,7 +220,7 @@ func (gr *GestureRecognizer) DelaysRotationEvents() bool {
 	return _r
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (gr *GestureRecognizer) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("name"))
 	if _r == 0 {
@@ -229,13 +229,13 @@ func (gr *GestureRecognizer) Name() string {
 	return purego.GoString(_r)
 }
 
-// ModifierFlags wraps the corresponding Objective-C method.
+// ModifierFlags returns the modifier flags.
 func (gr *GestureRecognizer) ModifierFlags() EventModifierFlags {
 	_r := objc.Send[EventModifierFlags](objref.IDOf(gr), objc.RegisterName("modifierFlags"))
 	return _r
 }
 
-// AllowedTouchTypes wraps the corresponding Objective-C method.
+// AllowedTouchTypes returns the allowed touch types.
 func (gr *GestureRecognizer) AllowedTouchTypes() TouchTypeMask {
 	_r := objc.Send[TouchTypeMask](objref.IDOf(gr), objc.RegisterName("allowedTouchTypes"))
 	return _r

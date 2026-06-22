@@ -82,13 +82,13 @@ func NewUserScriptTaskWithURLError(url string) (result *UserScriptTask, err erro
 	return userScriptTaskAdopt(_id), nil
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ust *UserScriptTask) WithScriptingProperties(scriptingProperties obj.Object) *UserScriptTask {
 	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ust
 }
 
-// ScriptURL wraps the corresponding Objective-C method.
+// ScriptURL returns the script URL.
 func (ust *UserScriptTask) ScriptURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("scriptURL"))
 	return URLFromID(_r)

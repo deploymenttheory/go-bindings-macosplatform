@@ -101,7 +101,7 @@ func (cir *CustomImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirect
 	return cir
 }
 
-// Delegate wraps the corresponding Objective-C method.
+// Delegate returns the delegate.
 func (cir *CustomImageRep) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)

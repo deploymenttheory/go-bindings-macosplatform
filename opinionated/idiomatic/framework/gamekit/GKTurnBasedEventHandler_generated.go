@@ -78,7 +78,7 @@ func (tbeh *TurnBasedEventHandler) WithDelegate(delegate obj.Object) *TurnBasedE
 	return tbeh
 }
 
-// Delegate wraps the corresponding Objective-C method.
+// Delegate returns the delegate.
 func (tbeh *TurnBasedEventHandler) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tbeh), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)

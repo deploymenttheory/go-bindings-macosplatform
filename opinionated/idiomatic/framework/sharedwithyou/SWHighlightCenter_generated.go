@@ -166,7 +166,7 @@ func (hc *HighlightCenter) GetSignedIdentityProofForCollaborationHighlightUsingD
 	}
 }
 
-// Highlights wraps the corresponding Objective-C method.
+// Highlights returns the highlights.
 //
 // Highlights returns the collection as a Go slice.
 func (hc *HighlightCenter) Highlights() []*Highlight {

@@ -52,7 +52,7 @@ func NewUnitLength() *UnitLength {
 	return unitLengthAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ul *UnitLength) WithScriptingProperties(scriptingProperties obj.Object) *UnitLength {
 	objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ul

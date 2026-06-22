@@ -78,13 +78,13 @@ func (pht *PersistentHistoryTransaction) ObjectIDNotification() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Timestamp wraps the corresponding Objective-C method.
+// Timestamp returns the timestamp.
 func (pht *PersistentHistoryTransaction) Timestamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("timestamp"))
 	return obj.Wrap(_r)
 }
 
-// Changes wraps the corresponding Objective-C method.
+// Changes returns the changes.
 //
 // Changes returns the collection as a Go slice.
 func (pht *PersistentHistoryTransaction) Changes() []*PersistentHistoryChange {
@@ -92,13 +92,13 @@ func (pht *PersistentHistoryTransaction) Changes() []*PersistentHistoryChange {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersistentHistoryChange { return PersistentHistoryChangeFromID(_id) })
 }
 
-// TransactionNumber wraps the corresponding Objective-C method.
+// TransactionNumber returns the transaction number.
 func (pht *PersistentHistoryTransaction) TransactionNumber() int64 {
 	_r := objc.Send[int64](objref.IDOf(pht), objc.RegisterName("transactionNumber"))
 	return _r
 }
 
-// StoreID wraps the corresponding Objective-C method.
+// StoreID returns the store ID.
 func (pht *PersistentHistoryTransaction) StoreID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("storeID"))
 	if _r == 0 {
@@ -107,7 +107,7 @@ func (pht *PersistentHistoryTransaction) StoreID() string {
 	return purego.GoString(_r)
 }
 
-// BundleID wraps the corresponding Objective-C method.
+// BundleID returns the bundle ID.
 func (pht *PersistentHistoryTransaction) BundleID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("bundleID"))
 	if _r == 0 {
@@ -116,7 +116,7 @@ func (pht *PersistentHistoryTransaction) BundleID() string {
 	return purego.GoString(_r)
 }
 
-// ProcessID wraps the corresponding Objective-C method.
+// ProcessID returns the process ID.
 func (pht *PersistentHistoryTransaction) ProcessID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("processID"))
 	if _r == 0 {
@@ -125,7 +125,7 @@ func (pht *PersistentHistoryTransaction) ProcessID() string {
 	return purego.GoString(_r)
 }
 
-// ContextName wraps the corresponding Objective-C method.
+// ContextName returns the context name.
 func (pht *PersistentHistoryTransaction) ContextName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("contextName"))
 	if _r == 0 {
@@ -134,7 +134,7 @@ func (pht *PersistentHistoryTransaction) ContextName() string {
 	return purego.GoString(_r)
 }
 
-// Author wraps the corresponding Objective-C method.
+// Author returns the author.
 func (pht *PersistentHistoryTransaction) Author() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("author"))
 	if _r == 0 {
@@ -143,7 +143,7 @@ func (pht *PersistentHistoryTransaction) Author() string {
 	return purego.GoString(_r)
 }
 
-// Token wraps the corresponding Objective-C method.
+// Token returns the token.
 func (pht *PersistentHistoryTransaction) Token() *PersistentHistoryToken {
 	_r := objc.Send[objc.ID](objref.IDOf(pht), objc.RegisterName("token"))
 	return PersistentHistoryTokenFromID(_r)

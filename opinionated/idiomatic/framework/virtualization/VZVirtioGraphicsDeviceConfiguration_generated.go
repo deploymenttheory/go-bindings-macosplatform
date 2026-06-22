@@ -58,7 +58,7 @@ func (vgdc *VirtioGraphicsDeviceConfiguration) WithScanouts(items ...*VirtioGrap
 	return vgdc
 }
 
-// Scanouts wraps the corresponding Objective-C method.
+// Scanouts returns the scanouts.
 //
 // Scanouts returns the collection as a Go slice.
 func (vgdc *VirtioGraphicsDeviceConfiguration) Scanouts() []*VirtioGraphicsScanoutConfiguration {

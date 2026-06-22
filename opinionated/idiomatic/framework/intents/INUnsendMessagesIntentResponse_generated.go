@@ -57,7 +57,7 @@ func (umir *UnsendMessagesIntentResponse) WithUserActivity(userActivity obj.Obje
 	return umir
 }
 
-// Code wraps the corresponding Objective-C method.
+// Code returns the code.
 func (umir *UnsendMessagesIntentResponse) Code() UnsendMessagesIntentResponseCode {
 	_r := objc.Send[UnsendMessagesIntentResponseCode](objref.IDOf(umir), objc.RegisterName("code"))
 	return _r

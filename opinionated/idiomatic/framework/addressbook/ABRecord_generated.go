@@ -106,7 +106,7 @@ func (r *Record) IsReadOnly() bool {
 	return _r
 }
 
-// UniqueID wraps the corresponding Objective-C method.
+// UniqueID returns the unique ID.
 func (r *Record) UniqueID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("uniqueId"))
 	if _r == 0 {
@@ -115,7 +115,7 @@ func (r *Record) UniqueID() string {
 	return purego.GoString(_r)
 }
 
-// DisplayName wraps the corresponding Objective-C method.
+// DisplayName returns the display name.
 func (r *Record) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("displayName"))
 	if _r == 0 {

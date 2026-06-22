@@ -73,7 +73,7 @@ func NewVirtualConferenceURLDescriptorWithTitleURL(title string, uRL string) *Vi
 	return virtualConferenceURLDescriptorAdopt(_id)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (vcud *VirtualConferenceURLDescriptor) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(vcud), objc.RegisterName("title"))
 	if _r == 0 {
@@ -82,7 +82,7 @@ func (vcud *VirtualConferenceURLDescriptor) Title() string {
 	return purego.GoString(_r)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (vcud *VirtualConferenceURLDescriptor) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(vcud), objc.RegisterName("URL"))
 	return obj.Wrap(_r)

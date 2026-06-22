@@ -58,61 +58,61 @@ func NewMTRClusterDescriptorWithDeviceEndpointQueue(device *MTRDevice, endpoint 
 	return mTRClusterDescriptorAdopt(_id)
 }
 
-// ReadAttributeDeviceTypeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeDeviceTypeListWithParams reads attribute device type list with params.
 func (mcd *MTRClusterDescriptor) ReadAttributeDeviceTypeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributeDeviceTypeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeServerListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeServerListWithParams reads attribute server list with params.
 func (mcd *MTRClusterDescriptor) ReadAttributeServerListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributeServerListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClientListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClientListWithParams reads attribute client list with params.
 func (mcd *MTRClusterDescriptor) ReadAttributeClientListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributeClientListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePartsListWithParams wraps the corresponding Objective-C method.
+// ReadAttributePartsListWithParams reads attribute parts list with params.
 func (mcd *MTRClusterDescriptor) ReadAttributePartsListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributePartsListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcd *MTRClusterDescriptor) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcd *MTRClusterDescriptor) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcd *MTRClusterDescriptor) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcd *MTRClusterDescriptor) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcd *MTRClusterDescriptor) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeDeviceListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeDeviceListWithParams reads attribute device list with params.
 func (mcd *MTRClusterDescriptor) ReadAttributeDeviceListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcd), objc.RegisterName("readAttributeDeviceListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

@@ -51,49 +51,49 @@ func NewNNSubtractionGradientNode() *NNSubtractionGradientNode {
 	return nNSubtractionGradientNodeAdopt(_id)
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (nsgn *NNSubtractionGradientNode) WithPrimaryScale(primaryScale float32) *NNSubtractionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nsgn), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return nsgn
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (nsgn *NNSubtractionGradientNode) WithSecondaryScale(secondaryScale float32) *NNSubtractionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nsgn), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return nsgn
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (nsgn *NNSubtractionGradientNode) WithBias(bias float32) *NNSubtractionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nsgn), objc.RegisterName("setBias:"), bias)
 	return nsgn
 }
 
-// WithSecondaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsX sets the secondary stride in pixels x.
 func (nsgn *NNSubtractionGradientNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNSubtractionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nsgn), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return nsgn
 }
 
-// WithSecondaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsY sets the secondary stride in pixels y.
 func (nsgn *NNSubtractionGradientNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNSubtractionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nsgn), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return nsgn
 }
 
-// WithSecondaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInFeatureChannels sets the secondary stride in feature channels.
 func (nsgn *NNSubtractionGradientNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNSubtractionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nsgn), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
 	return nsgn
 }
 
-// WithMinimumValue sets the property and returns the receiver so calls can be chained.
+// WithMinimumValue sets the minimum value.
 func (nsgn *NNSubtractionGradientNode) WithMinimumValue(minimumValue float32) *NNSubtractionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nsgn), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return nsgn
 }
 
-// WithMaximumValue sets the property and returns the receiver so calls can be chained.
+// WithMaximumValue sets the maximum value.
 func (nsgn *NNSubtractionGradientNode) WithMaximumValue(maximumValue float32) *NNSubtractionGradientNode {
 	objc.Send[objc.ID](objref.IDOf(nsgn), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return nsgn

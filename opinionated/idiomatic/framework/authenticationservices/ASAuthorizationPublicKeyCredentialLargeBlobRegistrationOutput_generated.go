@@ -72,7 +72,7 @@ func NewAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput() *Authoriza
 	return authorizationPublicKeyCredentialLargeBlobRegistrationOutputAdopt(_id)
 }
 
-// IsSupported wraps the corresponding Objective-C method.
+// IsSupported reports whether the object is supported.
 func (apkclbro *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) IsSupported() bool {
 	_r := objc.Send[bool](objref.IDOf(apkclbro), objc.RegisterName("isSupported"))
 	return _r

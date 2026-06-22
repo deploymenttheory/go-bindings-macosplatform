@@ -107,7 +107,7 @@ func (bdr *BlockDeviceResource) BSDName() string {
 	return purego.GoString(_r)
 }
 
-// IsWritable wraps the corresponding Objective-C method.
+// IsWritable reports whether the object is writable.
 func (bdr *BlockDeviceResource) IsWritable() bool {
 	_r := objc.Send[bool](objref.IDOf(bdr), objc.RegisterName("isWritable"))
 	return _r

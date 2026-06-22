@@ -72,25 +72,25 @@ func NewRenderInfo() *RenderInfo {
 	return renderInfoAdopt(_id)
 }
 
-// KernelExecutionTime wraps the corresponding Objective-C method.
+// KernelExecutionTime returns the kernel execution time.
 func (ri *RenderInfo) KernelExecutionTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(ri), objc.RegisterName("kernelExecutionTime"))
 	return _r
 }
 
-// KernelCompileTime wraps the corresponding Objective-C method.
+// KernelCompileTime returns the kernel compile time.
 func (ri *RenderInfo) KernelCompileTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(ri), objc.RegisterName("kernelCompileTime"))
 	return _r
 }
 
-// PassCount wraps the corresponding Objective-C method.
+// PassCount returns the pass count.
 func (ri *RenderInfo) PassCount() int {
 	_r := objc.Send[int](objref.IDOf(ri), objc.RegisterName("passCount"))
 	return _r
 }
 
-// PixelsProcessed wraps the corresponding Objective-C method.
+// PixelsProcessed returns the pixels processed.
 func (ri *RenderInfo) PixelsProcessed() int {
 	_r := objc.Send[int](objref.IDOf(ri), objc.RegisterName("pixelsProcessed"))
 	return _r

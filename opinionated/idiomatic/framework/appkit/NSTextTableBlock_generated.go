@@ -64,31 +64,31 @@ func (ttb *TextTableBlock) WithBackgroundColor(backgroundColor *Color) *TextTabl
 	return ttb
 }
 
-// Table wraps the corresponding Objective-C method.
+// Table returns the table.
 func (ttb *TextTableBlock) Table() *TextTable {
 	_r := objc.Send[objc.ID](objref.IDOf(ttb), objc.RegisterName("table"))
 	return TextTableFromID(_r)
 }
 
-// StartingRow wraps the corresponding Objective-C method.
+// StartingRow returns the starting row.
 func (ttb *TextTableBlock) StartingRow() int {
 	_r := objc.Send[int](objref.IDOf(ttb), objc.RegisterName("startingRow"))
 	return _r
 }
 
-// RowSpan wraps the corresponding Objective-C method.
+// RowSpan returns the row span.
 func (ttb *TextTableBlock) RowSpan() int {
 	_r := objc.Send[int](objref.IDOf(ttb), objc.RegisterName("rowSpan"))
 	return _r
 }
 
-// StartingColumn wraps the corresponding Objective-C method.
+// StartingColumn returns the starting column.
 func (ttb *TextTableBlock) StartingColumn() int {
 	_r := objc.Send[int](objref.IDOf(ttb), objc.RegisterName("startingColumn"))
 	return _r
 }
 
-// ColumnSpan wraps the corresponding Objective-C method.
+// ColumnSpan returns the column span.
 func (ttb *TextTableBlock) ColumnSpan() int {
 	_r := objc.Send[int](objref.IDOf(ttb), objc.RegisterName("columnSpan"))
 	return _r

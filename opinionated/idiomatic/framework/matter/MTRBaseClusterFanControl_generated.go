@@ -61,7 +61,7 @@ func NewMTRBaseClusterFanControlWithDeviceEndpointQueue(device *MTRBaseDevice, e
 	return mTRBaseClusterFanControlAdopt(_id)
 }
 
-// ReadAttributeFanModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFanModeWithCompletion reads attribute fan mode with completion.
 //
 // ReadAttributeFanModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeFanModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeFanModeWithParamsSubscr
 	}
 }
 
-// ReadAttributeFanModeSequenceWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFanModeSequenceWithCompletion reads attribute fan mode sequence with completion.
 //
 // ReadAttributeFanModeSequenceWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeFanModeSequenceWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeFanModeSequenceWithPara
 	}
 }
 
-// ReadAttributePercentSettingWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePercentSettingWithCompletion reads attribute percent setting with completion.
 //
 // ReadAttributePercentSettingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributePercentSettingWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributePercentSettingWithParam
 	}
 }
 
-// ReadAttributePercentCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePercentCurrentWithCompletion reads attribute percent current with completion.
 //
 // ReadAttributePercentCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributePercentCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributePercentCurrentWithParam
 	}
 }
 
-// ReadAttributeSpeedMaxWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSpeedMaxWithCompletion reads attribute speed max with completion.
 //
 // ReadAttributeSpeedMaxWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeSpeedMaxWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeSpeedMaxWithParamsSubsc
 	}
 }
 
-// ReadAttributeSpeedSettingWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSpeedSettingWithCompletion reads attribute speed setting with completion.
 //
 // ReadAttributeSpeedSettingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeSpeedSettingWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeSpeedSettingWithParamsS
 	}
 }
 
-// ReadAttributeSpeedCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSpeedCurrentWithCompletion reads attribute speed current with completion.
 //
 // ReadAttributeSpeedCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeSpeedCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeSpeedCurrentWithParamsS
 	}
 }
 
-// ReadAttributeRockSupportWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRockSupportWithCompletion reads attribute rock support with completion.
 //
 // ReadAttributeRockSupportWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeRockSupportWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeRockSupportWithParamsSu
 	}
 }
 
-// ReadAttributeRockSettingWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRockSettingWithCompletion reads attribute rock setting with completion.
 //
 // ReadAttributeRockSettingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeRockSettingWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeRockSettingWithParamsSu
 	}
 }
 
-// ReadAttributeWindSupportWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeWindSupportWithCompletion reads attribute wind support with completion.
 //
 // ReadAttributeWindSupportWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeWindSupportWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeWindSupportWithParamsSu
 	}
 }
 
-// ReadAttributeWindSettingWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeWindSettingWithCompletion reads attribute wind setting with completion.
 //
 // ReadAttributeWindSettingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeWindSettingWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeWindSettingWithParamsSu
 	}
 }
 
-// ReadAttributeAirflowDirectionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAirflowDirectionWithCompletion reads attribute airflow direction with completion.
 //
 // ReadAttributeAirflowDirectionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeAirflowDirectionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeAirflowDirectionWithPar
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeGeneratedCommandListWit
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeAcceptedCommandListWith
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeAttributeListWithParams
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeFeatureMapWithParamsSub
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeClusterRevisionWithPara
 	}
 }
 
-// ReadAttributeFanMode wraps the corresponding Objective-C method.
+// ReadAttributeFanMode reads attribute fan mode.
 //
 // ReadAttributeFanMode blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeFanMode(ctx context.Context) (result obj.Object, err error) {
@@ -961,7 +961,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeFanModeWithMinIntervalM
 	}
 }
 
-// ReadAttributeFanModeSequence wraps the corresponding Objective-C method.
+// ReadAttributeFanModeSequence reads attribute fan mode sequence.
 //
 // ReadAttributeFanModeSequence blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeFanModeSequence(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeFanModeSequenceWithMinI
 	}
 }
 
-// ReadAttributePercentSetting wraps the corresponding Objective-C method.
+// ReadAttributePercentSetting reads attribute percent setting.
 //
 // ReadAttributePercentSetting blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributePercentSetting(ctx context.Context) (result obj.Object, err error) {
@@ -1061,7 +1061,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributePercentSettingWithMinIn
 	}
 }
 
-// ReadAttributePercentCurrent wraps the corresponding Objective-C method.
+// ReadAttributePercentCurrent reads attribute percent current.
 //
 // ReadAttributePercentCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributePercentCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributePercentCurrentWithMinIn
 	}
 }
 
-// ReadAttributeSpeedMax wraps the corresponding Objective-C method.
+// ReadAttributeSpeedMax reads attribute speed max.
 //
 // ReadAttributeSpeedMax blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeSpeedMax(ctx context.Context) (result obj.Object, err error) {
@@ -1161,7 +1161,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeSpeedMaxWithMinInterval
 	}
 }
 
-// ReadAttributeSpeedSetting wraps the corresponding Objective-C method.
+// ReadAttributeSpeedSetting reads attribute speed setting.
 //
 // ReadAttributeSpeedSetting blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeSpeedSetting(ctx context.Context) (result obj.Object, err error) {
@@ -1211,7 +1211,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeSpeedSettingWithMinInte
 	}
 }
 
-// ReadAttributeSpeedCurrent wraps the corresponding Objective-C method.
+// ReadAttributeSpeedCurrent reads attribute speed current.
 //
 // ReadAttributeSpeedCurrent blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeSpeedCurrent(ctx context.Context) (result obj.Object, err error) {
@@ -1261,7 +1261,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeSpeedCurrentWithMinInte
 	}
 }
 
-// ReadAttributeRockSupport wraps the corresponding Objective-C method.
+// ReadAttributeRockSupport reads attribute rock support.
 //
 // ReadAttributeRockSupport blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeRockSupport(ctx context.Context) (result obj.Object, err error) {
@@ -1311,7 +1311,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeRockSupportWithMinInter
 	}
 }
 
-// ReadAttributeRockSetting wraps the corresponding Objective-C method.
+// ReadAttributeRockSetting reads attribute rock setting.
 //
 // ReadAttributeRockSetting blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeRockSetting(ctx context.Context) (result obj.Object, err error) {
@@ -1361,7 +1361,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeRockSettingWithMinInter
 	}
 }
 
-// ReadAttributeWindSupport wraps the corresponding Objective-C method.
+// ReadAttributeWindSupport reads attribute wind support.
 //
 // ReadAttributeWindSupport blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeWindSupport(ctx context.Context) (result obj.Object, err error) {
@@ -1411,7 +1411,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeWindSupportWithMinInter
 	}
 }
 
-// ReadAttributeWindSetting wraps the corresponding Objective-C method.
+// ReadAttributeWindSetting reads attribute wind setting.
 //
 // ReadAttributeWindSetting blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeWindSetting(ctx context.Context) (result obj.Object, err error) {
@@ -1461,7 +1461,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeWindSettingWithMinInter
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1511,7 +1511,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeGeneratedCommandListWit
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1561,7 +1561,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeAcceptedCommandListWith
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -1611,7 +1611,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeAttributeListWithMinInt
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -1661,7 +1661,7 @@ func (mbcfc *MTRBaseClusterFanControl) SubscribeAttributeFeatureMapWithMinInterv
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcfc *MTRBaseClusterFanControl) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

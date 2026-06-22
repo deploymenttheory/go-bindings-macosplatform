@@ -96,19 +96,19 @@ func (mlbc *MediaLibraryBrowserController) TogglePanel(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mlbc), objc.RegisterName("togglePanel:"), objref.IDOf(sender))
 }
 
-// IsVisible wraps the corresponding Objective-C method.
+// IsVisible reports whether the object is visible.
 func (mlbc *MediaLibraryBrowserController) IsVisible() bool {
 	_r := objc.Send[bool](objref.IDOf(mlbc), objc.RegisterName("isVisible"))
 	return _r
 }
 
-// Frame wraps the corresponding Objective-C method.
+// Frame returns the frame.
 func (mlbc *MediaLibraryBrowserController) Frame() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(mlbc), objc.RegisterName("frame"))
 	return _r
 }
 
-// MediaLibraries wraps the corresponding Objective-C method.
+// MediaLibraries returns the media libraries.
 func (mlbc *MediaLibraryBrowserController) MediaLibraries() MediaLibrary {
 	_r := objc.Send[MediaLibrary](objref.IDOf(mlbc), objc.RegisterName("mediaLibraries"))
 	return _r

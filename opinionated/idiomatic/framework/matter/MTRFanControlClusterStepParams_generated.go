@@ -70,19 +70,19 @@ func NewMTRFanControlClusterStepParams() *MTRFanControlClusterStepParams {
 	return mTRFanControlClusterStepParamsAdopt(_id)
 }
 
-// WithDirection sets the property and returns the receiver so calls can be chained.
+// WithDirection sets the direction.
 func (mfccsp *MTRFanControlClusterStepParams) WithDirection(direction obj.Object) *MTRFanControlClusterStepParams {
 	objc.Send[objc.ID](objref.IDOf(mfccsp), objc.RegisterName("setDirection:"), objref.IDOf(direction))
 	return mfccsp
 }
 
-// WithWrap sets the property and returns the receiver so calls can be chained.
+// WithWrap sets the wrap.
 func (mfccsp *MTRFanControlClusterStepParams) WithWrap(wrap obj.Object) *MTRFanControlClusterStepParams {
 	objc.Send[objc.ID](objref.IDOf(mfccsp), objc.RegisterName("setWrap:"), objref.IDOf(wrap))
 	return mfccsp
 }
 
-// WithLowestOff sets the property and returns the receiver so calls can be chained.
+// WithLowestOff sets the lowest off.
 func (mfccsp *MTRFanControlClusterStepParams) WithLowestOff(lowestOff obj.Object) *MTRFanControlClusterStepParams {
 	objc.Send[objc.ID](objref.IDOf(mfccsp), objc.RegisterName("setLowestOff:"), objref.IDOf(lowestOff))
 	return mfccsp
@@ -100,19 +100,19 @@ func (mfccsp *MTRFanControlClusterStepParams) WithServerSideProcessingTimeout(se
 	return mfccsp
 }
 
-// Direction wraps the corresponding Objective-C method.
+// Direction returns the direction.
 func (mfccsp *MTRFanControlClusterStepParams) Direction() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mfccsp), objc.RegisterName("direction"))
 	return obj.Wrap(_r)
 }
 
-// Wrap wraps the corresponding Objective-C method.
+// Wrap returns the wrap.
 func (mfccsp *MTRFanControlClusterStepParams) Wrap() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mfccsp), objc.RegisterName("wrap"))
 	return obj.Wrap(_r)
 }
 
-// LowestOff wraps the corresponding Objective-C method.
+// LowestOff returns the lowest off.
 func (mfccsp *MTRFanControlClusterStepParams) LowestOff() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mfccsp), objc.RegisterName("lowestOff"))
 	return obj.Wrap(_r)

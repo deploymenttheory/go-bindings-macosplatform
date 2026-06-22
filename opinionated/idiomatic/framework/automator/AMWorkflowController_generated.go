@@ -109,13 +109,13 @@ func (wc *WorkflowController) Reset(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("reset:"), objref.IDOf(sender))
 }
 
-// Workflow wraps the corresponding Objective-C method.
+// Workflow returns the workflow.
 func (wc *WorkflowController) Workflow() *Workflow {
 	_r := objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("workflow"))
 	return WorkflowFromID(_r)
 }
 
-// WorkflowView wraps the corresponding Objective-C method.
+// WorkflowView returns the workflow view.
 func (wc *WorkflowController) WorkflowView() *WorkflowView {
 	_r := objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("workflowView"))
 	return WorkflowViewFromID(_r)
@@ -127,13 +127,13 @@ func (wc *WorkflowController) CanRun() bool {
 	return _r
 }
 
-// IsRunning wraps the corresponding Objective-C method.
+// IsRunning reports whether the object is running.
 func (wc *WorkflowController) IsRunning() bool {
 	_r := objc.Send[bool](objref.IDOf(wc), objc.RegisterName("isRunning"))
 	return _r
 }
 
-// IsPaused wraps the corresponding Objective-C method.
+// IsPaused reports whether the object is paused.
 func (wc *WorkflowController) IsPaused() bool {
 	_r := objc.Send[bool](objref.IDOf(wc), objc.RegisterName("isPaused"))
 	return _r

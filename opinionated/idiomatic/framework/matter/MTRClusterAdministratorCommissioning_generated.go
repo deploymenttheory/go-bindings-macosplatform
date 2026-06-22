@@ -58,49 +58,49 @@ func NewMTRClusterAdministratorCommissioningWithDeviceEndpointQueue(device *MTRD
 	return mTRClusterAdministratorCommissioningAdopt(_id)
 }
 
-// ReadAttributeWindowStatusWithParams wraps the corresponding Objective-C method.
+// ReadAttributeWindowStatusWithParams reads attribute window status with params.
 func (mcac *MTRClusterAdministratorCommissioning) ReadAttributeWindowStatusWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeWindowStatusWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAdminFabricIndexWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAdminFabricIndexWithParams reads attribute admin fabric index with params.
 func (mcac *MTRClusterAdministratorCommissioning) ReadAttributeAdminFabricIndexWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeAdminFabricIndexWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAdminVendorIDWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAdminVendorIDWithParams reads attribute admin vendor ID with params.
 func (mcac *MTRClusterAdministratorCommissioning) ReadAttributeAdminVendorIDWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeAdminVendorIdWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcac *MTRClusterAdministratorCommissioning) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcac *MTRClusterAdministratorCommissioning) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcac *MTRClusterAdministratorCommissioning) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcac *MTRClusterAdministratorCommissioning) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcac *MTRClusterAdministratorCommissioning) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

@@ -112,7 +112,7 @@ func (dtr *DetectTrajectoriesRequest) ObjectMinimumNormalizedRadius() float32 {
 	return _r
 }
 
-// MinimumObjectSize wraps the corresponding Objective-C method.
+// MinimumObjectSize returns the minimum object size.
 func (dtr *DetectTrajectoriesRequest) MinimumObjectSize() float32 {
 	_r := objc.Send[float32](objref.IDOf(dtr), objc.RegisterName("minimumObjectSize"))
 	return _r
@@ -124,7 +124,7 @@ func (dtr *DetectTrajectoriesRequest) ObjectMaximumNormalizedRadius() float32 {
 	return _r
 }
 
-// MaximumObjectSize wraps the corresponding Objective-C method.
+// MaximumObjectSize returns the maximum object size.
 func (dtr *DetectTrajectoriesRequest) MaximumObjectSize() float32 {
 	_r := objc.Send[float32](objref.IDOf(dtr), objc.RegisterName("maximumObjectSize"))
 	return _r

@@ -115,13 +115,13 @@ func (csvc *ComposeServiceViewController) ValidateContent() {
 	objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("validateContent"))
 }
 
-// TextView wraps the corresponding Objective-C method.
+// TextView returns the text view.
 func (csvc *ComposeServiceViewController) TextView() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("textView"))
 	return obj.Wrap(_r)
 }
 
-// ContentText wraps the corresponding Objective-C method.
+// ContentText returns the content text.
 func (csvc *ComposeServiceViewController) ContentText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("contentText"))
 	if _r == 0 {
@@ -130,7 +130,7 @@ func (csvc *ComposeServiceViewController) ContentText() string {
 	return purego.GoString(_r)
 }
 
-// Placeholder wraps the corresponding Objective-C method.
+// Placeholder returns the placeholder.
 func (csvc *ComposeServiceViewController) Placeholder() string {
 	_r := objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("placeholder"))
 	if _r == 0 {
@@ -139,7 +139,7 @@ func (csvc *ComposeServiceViewController) Placeholder() string {
 	return purego.GoString(_r)
 }
 
-// CharactersRemaining wraps the corresponding Objective-C method.
+// CharactersRemaining returns the characters remaining.
 func (csvc *ComposeServiceViewController) CharactersRemaining() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("charactersRemaining"))
 	return obj.Wrap(_r)

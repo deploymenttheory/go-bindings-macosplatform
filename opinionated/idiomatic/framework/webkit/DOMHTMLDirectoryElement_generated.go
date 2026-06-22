@@ -49,109 +49,109 @@ func NewDOMHTMLDirectoryElement() *DOMHTMLDirectoryElement {
 	return dOMHTMLDirectoryElementAdopt(_id)
 }
 
-// WithCompact sets the property and returns the receiver so calls can be chained.
+// WithCompact sets the compact.
 func (dde *DOMHTMLDirectoryElement) WithCompact(compact bool) *DOMHTMLDirectoryElement {
 	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setCompact:"), compact)
 	return dde
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (dde *DOMHTMLDirectoryElement) WithTitle(title string) *DOMHTMLDirectoryElement {
 	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return dde
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (dde *DOMHTMLDirectoryElement) WithLang(lang string) *DOMHTMLDirectoryElement {
 	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return dde
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (dde *DOMHTMLDirectoryElement) WithDir(dir string) *DOMHTMLDirectoryElement {
 	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return dde
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (dde *DOMHTMLDirectoryElement) WithTabIndex(tabIndex int) *DOMHTMLDirectoryElement {
 	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setTabIndex:"), tabIndex)
 	return dde
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (dde *DOMHTMLDirectoryElement) WithAccessKey(accessKey string) *DOMHTMLDirectoryElement {
 	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return dde
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (dde *DOMHTMLDirectoryElement) WithInnerText(innerText string) *DOMHTMLDirectoryElement {
 	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return dde
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (dde *DOMHTMLDirectoryElement) WithOuterText(outerText string) *DOMHTMLDirectoryElement {
 	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return dde
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (dde *DOMHTMLDirectoryElement) WithContentEditable(contentEditable string) *DOMHTMLDirectoryElement {
 	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return dde
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (dde *DOMHTMLDirectoryElement) WithIDName(idName string) *DOMHTMLDirectoryElement {
 	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return dde
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (dde *DOMHTMLDirectoryElement) WithScrollLeft(scrollLeft int) *DOMHTMLDirectoryElement {
 	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return dde
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (dde *DOMHTMLDirectoryElement) WithScrollTop(scrollTop int) *DOMHTMLDirectoryElement {
 	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setScrollTop:"), scrollTop)
 	return dde
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (dde *DOMHTMLDirectoryElement) WithInnerHTML(innerHTML string) *DOMHTMLDirectoryElement {
 	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return dde
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (dde *DOMHTMLDirectoryElement) WithOuterHTML(outerHTML string) *DOMHTMLDirectoryElement {
 	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return dde
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (dde *DOMHTMLDirectoryElement) WithClassName(className string) *DOMHTMLDirectoryElement {
 	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return dde
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dde *DOMHTMLDirectoryElement) WithNodeValue(nodeValue string) *DOMHTMLDirectoryElement {
 	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dde
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dde *DOMHTMLDirectoryElement) WithPrefix(prefix string) *DOMHTMLDirectoryElement {
 	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dde
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dde *DOMHTMLDirectoryElement) WithTextContent(textContent string) *DOMHTMLDirectoryElement {
 	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dde

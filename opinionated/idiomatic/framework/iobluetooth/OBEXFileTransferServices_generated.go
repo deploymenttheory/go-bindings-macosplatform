@@ -73,7 +73,7 @@ func NewOBEXFileTransferServicesWithOBEXSession(inOBEXSession *IOBluetoothOBEXSe
 	return oBEXFileTransferServicesAdopt(_id)
 }
 
-// WithDelegate sets the property and returns the receiver so calls can be chained.
+// WithDelegate sets the delegate.
 func (ofts *OBEXFileTransferServices) WithDelegate(delegate obj.Object) *OBEXFileTransferServices {
 	objc.Send[objc.ID](objref.IDOf(ofts), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return ofts
@@ -184,7 +184,7 @@ func (ofts *OBEXFileTransferServices) Abort() int32 {
 	return _r
 }
 
-// Delegate wraps the corresponding Objective-C method.
+// Delegate returns the delegate.
 func (ofts *OBEXFileTransferServices) Delegate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ofts), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)

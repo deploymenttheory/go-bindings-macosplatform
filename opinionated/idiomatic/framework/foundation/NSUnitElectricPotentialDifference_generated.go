@@ -52,7 +52,7 @@ func NewUnitElectricPotentialDifference() *UnitElectricPotentialDifference {
 	return unitElectricPotentialDifferenceAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (uepd *UnitElectricPotentialDifference) WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricPotentialDifference {
 	objc.Send[objc.ID](objref.IDOf(uepd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return uepd

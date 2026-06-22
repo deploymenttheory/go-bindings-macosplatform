@@ -54,25 +54,25 @@ func NewMassFormatter() *MassFormatter {
 	return massFormatterAdopt(_id)
 }
 
-// WithNumberFormatter sets the property and returns the receiver so calls can be chained.
+// WithNumberFormatter sets the number formatter.
 func (mf *MassFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *MassFormatter {
 	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 	return mf
 }
 
-// WithUnitStyle sets the property and returns the receiver so calls can be chained.
+// WithUnitStyle sets the unit style.
 func (mf *MassFormatter) WithUnitStyle(unitStyle FormattingUnitStyle) *MassFormatter {
 	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setUnitStyle:"), unitStyle)
 	return mf
 }
 
-// WithForPersonMassUse sets the property and returns the receiver so calls can be chained.
+// WithForPersonMassUse sets the for person mass use.
 func (mf *MassFormatter) WithForPersonMassUse(forPersonMassUse bool) *MassFormatter {
 	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setForPersonMassUse:"), forPersonMassUse)
 	return mf
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (mf *MassFormatter) WithScriptingProperties(scriptingProperties obj.Object) *MassFormatter {
 	objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return mf
@@ -116,19 +116,19 @@ func (mf *MassFormatter) UnitStringFromKilogramsUsedUnit(numberInKilograms float
 	return _v, _out0
 }
 
-// NumberFormatter wraps the corresponding Objective-C method.
+// NumberFormatter returns the number formatter.
 func (mf *MassFormatter) NumberFormatter() *NumberFormatter {
 	_r := objc.Send[objc.ID](objref.IDOf(mf), objc.RegisterName("numberFormatter"))
 	return NumberFormatterFromID(_r)
 }
 
-// UnitStyle wraps the corresponding Objective-C method.
+// UnitStyle returns the unit style.
 func (mf *MassFormatter) UnitStyle() FormattingUnitStyle {
 	_r := objc.Send[FormattingUnitStyle](objref.IDOf(mf), objc.RegisterName("unitStyle"))
 	return _r
 }
 
-// IsForPersonMassUse wraps the corresponding Objective-C method.
+// IsForPersonMassUse reports whether the object is for person mass use.
 func (mf *MassFormatter) IsForPersonMassUse() bool {
 	_r := objc.Send[bool](objref.IDOf(mf), objc.RegisterName("isForPersonMassUse"))
 	return _r

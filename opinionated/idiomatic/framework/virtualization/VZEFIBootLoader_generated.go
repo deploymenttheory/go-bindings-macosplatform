@@ -57,7 +57,7 @@ func (ebl *EFIBootLoader) WithVariableStore(variableStore *EFIVariableStore) *EF
 	return ebl
 }
 
-// VariableStore wraps the corresponding Objective-C method.
+// VariableStore returns the variable store.
 func (ebl *EFIBootLoader) VariableStore() *EFIVariableStore {
 	_r := objc.Send[objc.ID](objref.IDOf(ebl), objc.RegisterName("variableStore"))
 	return EFIVariableStoreFromID(_r)

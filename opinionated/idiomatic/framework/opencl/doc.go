@@ -3,4 +3,7 @@
 //go:build darwin
 
 // Package opencl provides a fluent Go API over the macOS OpenCL framework.
+//
+// Each With… method sets one property and returns its receiver, so configuration
+// calls can be chained.
 package opencl

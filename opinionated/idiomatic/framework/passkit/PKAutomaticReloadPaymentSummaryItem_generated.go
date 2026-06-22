@@ -76,7 +76,7 @@ func (arpsi *AutomaticReloadPaymentSummaryItem) WithType(type_ PaymentSummaryIte
 	return arpsi
 }
 
-// ThresholdAmount wraps the corresponding Objective-C method.
+// ThresholdAmount returns the threshold amount.
 func (arpsi *AutomaticReloadPaymentSummaryItem) ThresholdAmount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(arpsi), objc.RegisterName("thresholdAmount"))
 	return obj.Wrap(_r)

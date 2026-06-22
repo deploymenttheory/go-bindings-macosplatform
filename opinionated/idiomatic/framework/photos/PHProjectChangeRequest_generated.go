@@ -75,7 +75,7 @@ func (pcr *ProjectChangeRequest) SetProjectPreviewImage(previewImage obj.Object)
 	objc.Send[objc.ID](objref.IDOf(pcr), objc.RegisterName("setProjectPreviewImage:"), objref.IDOf(previewImage))
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (pcr *ProjectChangeRequest) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pcr), objc.RegisterName("title"))
 	if _r == 0 {

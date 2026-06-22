@@ -92,7 +92,7 @@ func (ceiro *ContentEditingInputRequestOptions) WithProgressHandler(progressHand
 	return ceiro
 }
 
-// IsNetworkAccessAllowed wraps the corresponding Objective-C method.
+// IsNetworkAccessAllowed reports whether the object is network access allowed.
 func (ceiro *ContentEditingInputRequestOptions) IsNetworkAccessAllowed() bool {
 	_r := objc.Send[bool](objref.IDOf(ceiro), objc.RegisterName("isNetworkAccessAllowed"))
 	return _r

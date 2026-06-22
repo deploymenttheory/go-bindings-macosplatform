@@ -73,25 +73,25 @@ func NewHapticParameterCurveControlPointWithRelativeTimeValue(time_ float64, val
 	return hapticParameterCurveControlPointAdopt(_id)
 }
 
-// WithRelativeTime sets the property and returns the receiver so calls can be chained.
+// WithRelativeTime sets the relative time.
 func (hpccp *HapticParameterCurveControlPoint) WithRelativeTime(relativeTime float64) *HapticParameterCurveControlPoint {
 	objc.Send[objc.ID](objref.IDOf(hpccp), objc.RegisterName("setRelativeTime:"), relativeTime)
 	return hpccp
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (hpccp *HapticParameterCurveControlPoint) WithValue(value float32) *HapticParameterCurveControlPoint {
 	objc.Send[objc.ID](objref.IDOf(hpccp), objc.RegisterName("setValue:"), value)
 	return hpccp
 }
 
-// RelativeTime wraps the corresponding Objective-C method.
+// RelativeTime returns the relative time.
 func (hpccp *HapticParameterCurveControlPoint) RelativeTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(hpccp), objc.RegisterName("relativeTime"))
 	return _r
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (hpccp *HapticParameterCurveControlPoint) Value() float32 {
 	_r := objc.Send[float32](objref.IDOf(hpccp), objc.RegisterName("value"))
 	return _r

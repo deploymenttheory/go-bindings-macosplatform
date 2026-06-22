@@ -84,7 +84,7 @@ func (fpp *FilePromiseProvider) WithUserInfo(userInfo obj.Object) *FilePromisePr
 	return fpp
 }
 
-// FileType wraps the corresponding Objective-C method.
+// FileType returns the file type.
 func (fpp *FilePromiseProvider) FileType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(fpp), objc.RegisterName("fileType"))
 	if _r == 0 {
@@ -93,7 +93,7 @@ func (fpp *FilePromiseProvider) FileType() string {
 	return purego.GoString(_r)
 }
 
-// UserInfo wraps the corresponding Objective-C method.
+// UserInfo returns the user info.
 func (fpp *FilePromiseProvider) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fpp), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)

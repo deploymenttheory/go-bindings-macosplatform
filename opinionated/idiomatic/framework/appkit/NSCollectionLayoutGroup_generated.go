@@ -79,13 +79,13 @@ func (clg *CollectionLayoutGroup) VisualDescription() string {
 	return purego.GoString(_r)
 }
 
-// InterItemSpacing wraps the corresponding Objective-C method.
+// InterItemSpacing returns the inter item spacing.
 func (clg *CollectionLayoutGroup) InterItemSpacing() *CollectionLayoutSpacing {
 	_r := objc.Send[objc.ID](objref.IDOf(clg), objc.RegisterName("interItemSpacing"))
 	return CollectionLayoutSpacingFromID(_r)
 }
 
-// Subitems wraps the corresponding Objective-C method.
+// Subitems returns the subitems.
 //
 // Subitems returns the collection as a Go slice.
 func (clg *CollectionLayoutGroup) Subitems() []*CollectionLayoutItem {

@@ -74,7 +74,7 @@ func (sf *ScatteringFunction) WithName(name string) *ScatteringFunction {
 	return sf
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (sf *ScatteringFunction) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("name"))
 	if _r == 0 {
@@ -83,49 +83,49 @@ func (sf *ScatteringFunction) Name() string {
 	return purego.GoString(_r)
 }
 
-// BaseColor wraps the corresponding Objective-C method.
+// BaseColor returns the base color.
 func (sf *ScatteringFunction) BaseColor() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("baseColor"))
 	return MaterialPropertyFromID(_r)
 }
 
-// Emission wraps the corresponding Objective-C method.
+// Emission returns the emission.
 func (sf *ScatteringFunction) Emission() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("emission"))
 	return MaterialPropertyFromID(_r)
 }
 
-// Specular wraps the corresponding Objective-C method.
+// Specular returns the specular.
 func (sf *ScatteringFunction) Specular() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("specular"))
 	return MaterialPropertyFromID(_r)
 }
 
-// MaterialIndexOfRefraction wraps the corresponding Objective-C method.
+// MaterialIndexOfRefraction returns the material index of refraction.
 func (sf *ScatteringFunction) MaterialIndexOfRefraction() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("materialIndexOfRefraction"))
 	return MaterialPropertyFromID(_r)
 }
 
-// InterfaceIndexOfRefraction wraps the corresponding Objective-C method.
+// InterfaceIndexOfRefraction returns the interface index of refraction.
 func (sf *ScatteringFunction) InterfaceIndexOfRefraction() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("interfaceIndexOfRefraction"))
 	return MaterialPropertyFromID(_r)
 }
 
-// Normal wraps the corresponding Objective-C method.
+// Normal returns the normal.
 func (sf *ScatteringFunction) Normal() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("normal"))
 	return MaterialPropertyFromID(_r)
 }
 
-// AmbientOcclusion wraps the corresponding Objective-C method.
+// AmbientOcclusion returns the ambient occlusion.
 func (sf *ScatteringFunction) AmbientOcclusion() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("ambientOcclusion"))
 	return MaterialPropertyFromID(_r)
 }
 
-// AmbientOcclusionScale wraps the corresponding Objective-C method.
+// AmbientOcclusionScale returns the ambient occlusion scale.
 func (sf *ScatteringFunction) AmbientOcclusionScale() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(sf), objc.RegisterName("ambientOcclusionScale"))
 	return MaterialPropertyFromID(_r)

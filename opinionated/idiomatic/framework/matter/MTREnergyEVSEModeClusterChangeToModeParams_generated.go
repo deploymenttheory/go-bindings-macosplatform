@@ -70,7 +70,7 @@ func NewMTREnergyEVSEModeClusterChangeToModeParams() *MTREnergyEVSEModeClusterCh
 	return mTREnergyEVSEModeClusterChangeToModeParamsAdopt(_id)
 }
 
-// WithNewMode sets the property and returns the receiver so calls can be chained.
+// WithNewMode sets the new mode.
 func (meemcctmp *MTREnergyEVSEModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTREnergyEVSEModeClusterChangeToModeParams {
 	objc.Send[objc.ID](objref.IDOf(meemcctmp), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
 	return meemcctmp
@@ -88,8 +88,8 @@ func (meemcctmp *MTREnergyEVSEModeClusterChangeToModeParams) WithServerSideProce
 	return meemcctmp
 }
 
-// GetNewMode wraps the corresponding Objective-C method.
-func (meemcctmp *MTREnergyEVSEModeClusterChangeToModeParams) GetNewMode() obj.Object {
+// NewMode returns the new mode.
+func (meemcctmp *MTREnergyEVSEModeClusterChangeToModeParams) NewMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meemcctmp), objc.RegisterName("getNewMode"))
 	return obj.Wrap(_r)
 }

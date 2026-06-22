@@ -52,7 +52,7 @@ func NewAppResponsivenessMetric() *AppResponsivenessMetric {
 	return appResponsivenessMetricAdopt(_id)
 }
 
-// HistogrammedApplicationHangTime wraps the corresponding Objective-C method.
+// HistogrammedApplicationHangTime returns the histogrammed application hang time.
 func (arm *AppResponsivenessMetric) HistogrammedApplicationHangTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(arm), objc.RegisterName("histogrammedApplicationHangTime"))
 	return obj.Wrap(_r)

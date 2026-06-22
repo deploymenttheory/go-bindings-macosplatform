@@ -72,7 +72,7 @@ func NewModelStructureProgram() *ModelStructureProgram {
 	return modelStructureProgramAdopt(_id)
 }
 
-// Functions wraps the corresponding Objective-C method.
+// Functions returns the functions.
 func (msp *ModelStructureProgram) Functions() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("functions"))
 	return obj.Wrap(_r)

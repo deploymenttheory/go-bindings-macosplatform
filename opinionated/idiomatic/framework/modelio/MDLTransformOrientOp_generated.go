@@ -70,7 +70,7 @@ func NewTransformOrientOp() *TransformOrientOp {
 	return transformOrientOpAdopt(_id)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (too *TransformOrientOp) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(too), objc.RegisterName("name"))
 	if _r == 0 {
@@ -79,7 +79,7 @@ func (too *TransformOrientOp) Name() string {
 	return purego.GoString(_r)
 }
 
-// AnimatedValue wraps the corresponding Objective-C method.
+// AnimatedValue returns the animated value.
 func (too *TransformOrientOp) AnimatedValue() *AnimatedQuaternion {
 	_r := objc.Send[objc.ID](objref.IDOf(too), objc.RegisterName("animatedValue"))
 	return AnimatedQuaternionFromID(_r)

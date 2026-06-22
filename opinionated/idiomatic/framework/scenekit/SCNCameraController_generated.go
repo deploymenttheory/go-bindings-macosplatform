@@ -71,55 +71,55 @@ func NewCameraController() *CameraController {
 	return cameraControllerAdopt(_id)
 }
 
-// WithPointOfView sets the property and returns the receiver so calls can be chained.
+// WithPointOfView sets the point of view.
 func (cc *CameraController) WithPointOfView(pointOfView NodeProvider) *CameraController {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setPointOfView:"), objref.IDOf(pointOfView))
 	return cc
 }
 
-// WithInteractionMode sets the property and returns the receiver so calls can be chained.
+// WithInteractionMode sets the interaction mode.
 func (cc *CameraController) WithInteractionMode(interactionMode InteractionMode) *CameraController {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setInteractionMode:"), interactionMode)
 	return cc
 }
 
-// WithAutomaticTarget sets the property and returns the receiver so calls can be chained.
+// WithAutomaticTarget sets the automatic target.
 func (cc *CameraController) WithAutomaticTarget(automaticTarget bool) *CameraController {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setAutomaticTarget:"), automaticTarget)
 	return cc
 }
 
-// WithInertiaEnabled sets the property and returns the receiver so calls can be chained.
+// WithInertiaEnabled sets the inertia enabled.
 func (cc *CameraController) WithInertiaEnabled(inertiaEnabled bool) *CameraController {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setInertiaEnabled:"), inertiaEnabled)
 	return cc
 }
 
-// WithInertiaFriction sets the property and returns the receiver so calls can be chained.
+// WithInertiaFriction sets the inertia friction.
 func (cc *CameraController) WithInertiaFriction(inertiaFriction float32) *CameraController {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setInertiaFriction:"), inertiaFriction)
 	return cc
 }
 
-// WithMinimumVerticalAngle sets the property and returns the receiver so calls can be chained.
+// WithMinimumVerticalAngle sets the minimum vertical angle.
 func (cc *CameraController) WithMinimumVerticalAngle(minimumVerticalAngle float32) *CameraController {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setMinimumVerticalAngle:"), minimumVerticalAngle)
 	return cc
 }
 
-// WithMaximumVerticalAngle sets the property and returns the receiver so calls can be chained.
+// WithMaximumVerticalAngle sets the maximum vertical angle.
 func (cc *CameraController) WithMaximumVerticalAngle(maximumVerticalAngle float32) *CameraController {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setMaximumVerticalAngle:"), maximumVerticalAngle)
 	return cc
 }
 
-// WithMinimumHorizontalAngle sets the property and returns the receiver so calls can be chained.
+// WithMinimumHorizontalAngle sets the minimum horizontal angle.
 func (cc *CameraController) WithMinimumHorizontalAngle(minimumHorizontalAngle float32) *CameraController {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setMinimumHorizontalAngle:"), minimumHorizontalAngle)
 	return cc
 }
 
-// WithMaximumHorizontalAngle sets the property and returns the receiver so calls can be chained.
+// WithMaximumHorizontalAngle sets the maximum horizontal angle.
 func (cc *CameraController) WithMaximumHorizontalAngle(maximumHorizontalAngle float32) *CameraController {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setMaximumHorizontalAngle:"), maximumHorizontalAngle)
 	return cc
@@ -160,17 +160,17 @@ func (cc *CameraController) DollyToTarget(delta float32) {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("dollyToTarget:"), delta)
 }
 
-// ClearRoll wraps the corresponding Objective-C method.
+// ClearRoll clears roll.
 func (cc *CameraController) ClearRoll() {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("clearRoll"))
 }
 
-// StopInertia wraps the corresponding Objective-C method.
+// StopInertia stops inertia.
 func (cc *CameraController) StopInertia() {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("stopInertia"))
 }
 
-// BeginInteractionWithViewport wraps the corresponding Objective-C method.
+// BeginInteractionWithViewport begins interaction with viewport.
 func (cc *CameraController) BeginInteractionWithViewport(location corefoundation.CGPoint, viewport corefoundation.CGSize) {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("beginInteraction:withViewport:"), location, viewport)
 }
@@ -180,18 +180,18 @@ func (cc *CameraController) ContinueInteractionWithViewportSensitivity(location 
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("continueInteraction:withViewport:sensitivity:"), location, viewport, sensitivity)
 }
 
-// EndInteractionWithViewportVelocity wraps the corresponding Objective-C method.
+// EndInteractionWithViewportVelocity ends interaction with viewport velocity.
 func (cc *CameraController) EndInteractionWithViewportVelocity(location corefoundation.CGPoint, viewport corefoundation.CGSize, velocity corefoundation.CGPoint) {
 	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("endInteraction:withViewport:velocity:"), location, viewport, velocity)
 }
 
-// PointOfView wraps the corresponding Objective-C method.
+// PointOfView returns the point of view.
 func (cc *CameraController) PointOfView() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("pointOfView"))
 	return NodeFromID(_r)
 }
 
-// InteractionMode wraps the corresponding Objective-C method.
+// InteractionMode returns the interaction mode.
 func (cc *CameraController) InteractionMode() InteractionMode {
 	_r := objc.Send[InteractionMode](objref.IDOf(cc), objc.RegisterName("interactionMode"))
 	return _r
@@ -209,37 +209,37 @@ func (cc *CameraController) InertiaEnabled() bool {
 	return _r
 }
 
-// InertiaFriction wraps the corresponding Objective-C method.
+// InertiaFriction returns the inertia friction.
 func (cc *CameraController) InertiaFriction() float32 {
 	_r := objc.Send[float32](objref.IDOf(cc), objc.RegisterName("inertiaFriction"))
 	return _r
 }
 
-// IsInertiaRunning wraps the corresponding Objective-C method.
+// IsInertiaRunning reports whether the object is inertia running.
 func (cc *CameraController) IsInertiaRunning() bool {
 	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("isInertiaRunning"))
 	return _r
 }
 
-// MinimumVerticalAngle wraps the corresponding Objective-C method.
+// MinimumVerticalAngle returns the minimum vertical angle.
 func (cc *CameraController) MinimumVerticalAngle() float32 {
 	_r := objc.Send[float32](objref.IDOf(cc), objc.RegisterName("minimumVerticalAngle"))
 	return _r
 }
 
-// MaximumVerticalAngle wraps the corresponding Objective-C method.
+// MaximumVerticalAngle returns the maximum vertical angle.
 func (cc *CameraController) MaximumVerticalAngle() float32 {
 	_r := objc.Send[float32](objref.IDOf(cc), objc.RegisterName("maximumVerticalAngle"))
 	return _r
 }
 
-// MinimumHorizontalAngle wraps the corresponding Objective-C method.
+// MinimumHorizontalAngle returns the minimum horizontal angle.
 func (cc *CameraController) MinimumHorizontalAngle() float32 {
 	_r := objc.Send[float32](objref.IDOf(cc), objc.RegisterName("minimumHorizontalAngle"))
 	return _r
 }
 
-// MaximumHorizontalAngle wraps the corresponding Objective-C method.
+// MaximumHorizontalAngle returns the maximum horizontal angle.
 func (cc *CameraController) MaximumHorizontalAngle() float32 {
 	_r := objc.Send[float32](objref.IDOf(cc), objc.RegisterName("maximumHorizontalAngle"))
 	return _r

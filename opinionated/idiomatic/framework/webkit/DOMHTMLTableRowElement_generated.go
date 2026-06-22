@@ -49,168 +49,168 @@ func NewDOMHTMLTableRowElement() *DOMHTMLTableRowElement {
 	return dOMHTMLTableRowElementAdopt(_id)
 }
 
-// WithAlign sets the property and returns the receiver so calls can be chained.
+// WithAlign sets the align.
 func (dtre *DOMHTMLTableRowElement) WithAlign(align string) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setAlign:"), purego.NSString(align))
 	return dtre
 }
 
-// WithBgColor sets the property and returns the receiver so calls can be chained.
+// WithBgColor sets the bg color.
 func (dtre *DOMHTMLTableRowElement) WithBgColor(bgColor string) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setBgColor:"), purego.NSString(bgColor))
 	return dtre
 }
 
-// WithCh sets the property and returns the receiver so calls can be chained.
+// WithCh sets the ch.
 func (dtre *DOMHTMLTableRowElement) WithCh(ch string) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setCh:"), purego.NSString(ch))
 	return dtre
 }
 
-// WithChOff sets the property and returns the receiver so calls can be chained.
+// WithChOff sets the ch off.
 func (dtre *DOMHTMLTableRowElement) WithChOff(chOff string) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setChOff:"), purego.NSString(chOff))
 	return dtre
 }
 
-// WithVAlign sets the property and returns the receiver so calls can be chained.
+// WithVAlign sets the v align.
 func (dtre *DOMHTMLTableRowElement) WithVAlign(vAlign string) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setVAlign:"), purego.NSString(vAlign))
 	return dtre
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (dtre *DOMHTMLTableRowElement) WithTitle(title string) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return dtre
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (dtre *DOMHTMLTableRowElement) WithLang(lang string) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return dtre
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (dtre *DOMHTMLTableRowElement) WithDir(dir string) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return dtre
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (dtre *DOMHTMLTableRowElement) WithTabIndex(tabIndex int) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setTabIndex:"), tabIndex)
 	return dtre
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (dtre *DOMHTMLTableRowElement) WithAccessKey(accessKey string) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return dtre
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (dtre *DOMHTMLTableRowElement) WithInnerText(innerText string) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return dtre
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (dtre *DOMHTMLTableRowElement) WithOuterText(outerText string) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return dtre
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (dtre *DOMHTMLTableRowElement) WithContentEditable(contentEditable string) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return dtre
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (dtre *DOMHTMLTableRowElement) WithIDName(idName string) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return dtre
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (dtre *DOMHTMLTableRowElement) WithScrollLeft(scrollLeft int) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return dtre
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (dtre *DOMHTMLTableRowElement) WithScrollTop(scrollTop int) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setScrollTop:"), scrollTop)
 	return dtre
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (dtre *DOMHTMLTableRowElement) WithInnerHTML(innerHTML string) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return dtre
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (dtre *DOMHTMLTableRowElement) WithOuterHTML(outerHTML string) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return dtre
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (dtre *DOMHTMLTableRowElement) WithClassName(className string) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return dtre
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dtre *DOMHTMLTableRowElement) WithNodeValue(nodeValue string) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dtre
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dtre *DOMHTMLTableRowElement) WithPrefix(prefix string) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dtre
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dtre *DOMHTMLTableRowElement) WithTextContent(textContent string) *DOMHTMLTableRowElement {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dtre
 }
 
-// InsertCell wraps the corresponding Objective-C method.
+// InsertCell inserts cell.
 func (dtre *DOMHTMLTableRowElement) InsertCell(index int) *DOMHTMLElement {
 	_r := objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("insertCell:"), index)
 	return DOMHTMLElementFromID(_r)
 }
 
-// DeleteCell wraps the corresponding Objective-C method.
+// DeleteCell deletes cell.
 func (dtre *DOMHTMLTableRowElement) DeleteCell(index int) {
 	objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("deleteCell:"), index)
 }
 
-// RowIndex wraps the corresponding Objective-C method.
+// RowIndex returns the row index.
 func (dtre *DOMHTMLTableRowElement) RowIndex() int {
 	_r := objc.Send[int](objref.IDOf(dtre), objc.RegisterName("rowIndex"))
 	return _r
 }
 
-// SectionRowIndex wraps the corresponding Objective-C method.
+// SectionRowIndex returns the section row index.
 func (dtre *DOMHTMLTableRowElement) SectionRowIndex() int {
 	_r := objc.Send[int](objref.IDOf(dtre), objc.RegisterName("sectionRowIndex"))
 	return _r
 }
 
-// Cells wraps the corresponding Objective-C method.
+// Cells returns the cells.
 func (dtre *DOMHTMLTableRowElement) Cells() *DOMHTMLCollection {
 	_r := objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("cells"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
-// Align wraps the corresponding Objective-C method.
+// Align returns the align.
 func (dtre *DOMHTMLTableRowElement) Align() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("align"))
 	if _r == 0 {
@@ -219,7 +219,7 @@ func (dtre *DOMHTMLTableRowElement) Align() string {
 	return purego.GoString(_r)
 }
 
-// BgColor wraps the corresponding Objective-C method.
+// BgColor returns the bg color.
 func (dtre *DOMHTMLTableRowElement) BgColor() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("bgColor"))
 	if _r == 0 {
@@ -228,7 +228,7 @@ func (dtre *DOMHTMLTableRowElement) BgColor() string {
 	return purego.GoString(_r)
 }
 
-// Ch wraps the corresponding Objective-C method.
+// Ch returns the ch.
 func (dtre *DOMHTMLTableRowElement) Ch() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("ch"))
 	if _r == 0 {
@@ -237,7 +237,7 @@ func (dtre *DOMHTMLTableRowElement) Ch() string {
 	return purego.GoString(_r)
 }
 
-// ChOff wraps the corresponding Objective-C method.
+// ChOff returns the ch off.
 func (dtre *DOMHTMLTableRowElement) ChOff() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("chOff"))
 	if _r == 0 {
@@ -246,7 +246,7 @@ func (dtre *DOMHTMLTableRowElement) ChOff() string {
 	return purego.GoString(_r)
 }
 
-// VAlign wraps the corresponding Objective-C method.
+// VAlign returns the v align.
 func (dtre *DOMHTMLTableRowElement) VAlign() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dtre), objc.RegisterName("vAlign"))
 	if _r == 0 {

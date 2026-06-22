@@ -73,13 +73,13 @@ func NewURLQueryItemWithNameValue(name string, value string) *URLQueryItem {
 	return uRLQueryItemAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (uqi *URLQueryItem) WithScriptingProperties(scriptingProperties obj.Object) *URLQueryItem {
 	objc.Send[objc.ID](objref.IDOf(uqi), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return uqi
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (uqi *URLQueryItem) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(uqi), objc.RegisterName("name"))
 	if _r == 0 {
@@ -88,7 +88,7 @@ func (uqi *URLQueryItem) Name() string {
 	return purego.GoString(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (uqi *URLQueryItem) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(uqi), objc.RegisterName("value"))
 	if _r == 0 {

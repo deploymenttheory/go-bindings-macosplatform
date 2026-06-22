@@ -50,7 +50,7 @@ func NewMTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams() *MTRT
 	return mTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsAdopt(_id)
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mtcctetfserp *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams) WithValue(value obj.Object) *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mtcctetfserp), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mtcctetfserp

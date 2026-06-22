@@ -52,7 +52,7 @@ func NewCNNInstanceNormalizationGradientState() *CNNInstanceNormalizationGradien
 	return cNNInstanceNormalizationGradientStateAdopt(_id)
 }
 
-// WithReadCount sets the property and returns the receiver so calls can be chained.
+// WithReadCount sets the read count.
 func (cings *CNNInstanceNormalizationGradientState) WithReadCount(readCount int) *CNNInstanceNormalizationGradientState {
 	objc.Send[objc.ID](objref.IDOf(cings), objc.RegisterName("setReadCount:"), readCount)
 	return cings

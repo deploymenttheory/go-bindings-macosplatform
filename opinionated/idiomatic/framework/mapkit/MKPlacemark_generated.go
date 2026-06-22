@@ -72,7 +72,7 @@ func NewPlacemark() *Placemark {
 	return placemarkAdopt(_id)
 }
 
-// CountryCode wraps the corresponding Objective-C method.
+// CountryCode returns the country code.
 func (p *Placemark) CountryCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("countryCode"))
 	if _r == 0 {

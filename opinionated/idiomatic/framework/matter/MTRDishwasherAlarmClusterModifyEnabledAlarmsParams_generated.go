@@ -70,7 +70,7 @@ func NewMTRDishwasherAlarmClusterModifyEnabledAlarmsParams() *MTRDishwasherAlarm
 	return mTRDishwasherAlarmClusterModifyEnabledAlarmsParamsAdopt(_id)
 }
 
-// WithMask sets the property and returns the receiver so calls can be chained.
+// WithMask sets the mask.
 func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) WithMask(mask obj.Object) *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams {
 	objc.Send[objc.ID](objref.IDOf(mdacmeap), objc.RegisterName("setMask:"), objref.IDOf(mask))
 	return mdacmeap
@@ -88,7 +88,7 @@ func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) WithServerSi
 	return mdacmeap
 }
 
-// Mask wraps the corresponding Objective-C method.
+// Mask returns the mask.
 func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) Mask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdacmeap), objc.RegisterName("mask"))
 	return obj.Wrap(_r)

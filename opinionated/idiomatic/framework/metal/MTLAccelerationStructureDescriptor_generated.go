@@ -74,7 +74,7 @@ func (asd *AccelerationStructureDescriptor) WithUsage(usage AccelerationStructur
 	return asd
 }
 
-// Usage wraps the corresponding Objective-C method.
+// Usage returns the usage.
 func (asd *AccelerationStructureDescriptor) Usage() AccelerationStructureUsage {
 	_r := objc.Send[AccelerationStructureUsage](objref.IDOf(asd), objc.RegisterName("usage"))
 	return _r

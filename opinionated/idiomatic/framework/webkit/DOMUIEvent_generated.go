@@ -57,67 +57,67 @@ func NewDOMUIEventUIEvent(type_ string, canBubble bool, cancelable bool, view *D
 	return dOMUIEventAdopt(_id)
 }
 
-// WithReturnValue sets the property and returns the receiver so calls can be chained.
+// WithReturnValue sets the return value.
 func (de *DOMUIEvent) WithReturnValue(returnValue bool) *DOMUIEvent {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setReturnValue:"), returnValue)
 	return de
 }
 
-// WithCancelBubble sets the property and returns the receiver so calls can be chained.
+// WithCancelBubble sets the cancel bubble.
 func (de *DOMUIEvent) WithCancelBubble(cancelBubble bool) *DOMUIEvent {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setCancelBubble:"), cancelBubble)
 	return de
 }
 
-// View wraps the corresponding Objective-C method.
+// View returns the view.
 func (de *DOMUIEvent) View() *DOMAbstractView {
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("view"))
 	return DOMAbstractViewFromID(_r)
 }
 
-// Detail wraps the corresponding Objective-C method.
+// Detail returns the detail.
 func (de *DOMUIEvent) Detail() int {
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("detail"))
 	return _r
 }
 
-// KeyCode wraps the corresponding Objective-C method.
+// KeyCode returns the key code.
 func (de *DOMUIEvent) KeyCode() int {
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("keyCode"))
 	return _r
 }
 
-// CharCode wraps the corresponding Objective-C method.
+// CharCode returns the char code.
 func (de *DOMUIEvent) CharCode() int {
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("charCode"))
 	return _r
 }
 
-// LayerX wraps the corresponding Objective-C method.
+// LayerX returns the layer x.
 func (de *DOMUIEvent) LayerX() int {
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("layerX"))
 	return _r
 }
 
-// LayerY wraps the corresponding Objective-C method.
+// LayerY returns the layer y.
 func (de *DOMUIEvent) LayerY() int {
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("layerY"))
 	return _r
 }
 
-// PageX wraps the corresponding Objective-C method.
+// PageX returns the page x.
 func (de *DOMUIEvent) PageX() int {
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("pageX"))
 	return _r
 }
 
-// PageY wraps the corresponding Objective-C method.
+// PageY returns the page y.
 func (de *DOMUIEvent) PageY() int {
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("pageY"))
 	return _r
 }
 
-// Which wraps the corresponding Objective-C method.
+// Which returns the which.
 func (de *DOMUIEvent) Which() int {
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("which"))
 	return _r

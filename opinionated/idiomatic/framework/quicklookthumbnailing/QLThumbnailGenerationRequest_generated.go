@@ -110,19 +110,19 @@ func (tgr *ThumbnailGenerationRequest) IconMode() bool {
 	return _r
 }
 
-// Size wraps the corresponding Objective-C method.
+// Size returns the size.
 func (tgr *ThumbnailGenerationRequest) Size() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(tgr), objc.RegisterName("size"))
 	return _r
 }
 
-// Scale wraps the corresponding Objective-C method.
+// Scale returns the scale.
 func (tgr *ThumbnailGenerationRequest) Scale() float64 {
 	_r := objc.Send[float64](objref.IDOf(tgr), objc.RegisterName("scale"))
 	return _r
 }
 
-// RepresentationTypes wraps the corresponding Objective-C method.
+// RepresentationTypes returns the representation types.
 func (tgr *ThumbnailGenerationRequest) RepresentationTypes() ThumbnailGenerationRequestRepresentationTypes {
 	_r := objc.Send[ThumbnailGenerationRequestRepresentationTypes](objref.IDOf(tgr), objc.RegisterName("representationTypes"))
 	return _r

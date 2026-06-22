@@ -70,19 +70,19 @@ func NewMTRUserLabelClusterLabelStruct() *MTRUserLabelClusterLabelStruct {
 	return mTRUserLabelClusterLabelStructAdopt(_id)
 }
 
-// WithLabel sets the property and returns the receiver so calls can be chained.
+// WithLabel sets the label.
 func (mulcls *MTRUserLabelClusterLabelStruct) WithLabel(label string) *MTRUserLabelClusterLabelStruct {
 	objc.Send[objc.ID](objref.IDOf(mulcls), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return mulcls
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mulcls *MTRUserLabelClusterLabelStruct) WithValue(value string) *MTRUserLabelClusterLabelStruct {
 	objc.Send[objc.ID](objref.IDOf(mulcls), objc.RegisterName("setValue:"), purego.NSString(value))
 	return mulcls
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (mulcls *MTRUserLabelClusterLabelStruct) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mulcls), objc.RegisterName("label"))
 	if _r == 0 {
@@ -91,7 +91,7 @@ func (mulcls *MTRUserLabelClusterLabelStruct) Label() string {
 	return purego.GoString(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mulcls *MTRUserLabelClusterLabelStruct) Value() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mulcls), objc.RegisterName("value"))
 	if _r == 0 {

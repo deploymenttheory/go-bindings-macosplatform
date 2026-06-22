@@ -52,19 +52,19 @@ func NewListFormatter() *ListFormatter {
 	return listFormatterAdopt(_id)
 }
 
-// WithLocale sets the property and returns the receiver so calls can be chained.
+// WithLocale sets the locale.
 func (lf *ListFormatter) WithLocale(locale *Locale) *ListFormatter {
 	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return lf
 }
 
-// WithItemFormatter sets the property and returns the receiver so calls can be chained.
+// WithItemFormatter sets the item formatter.
 func (lf *ListFormatter) WithItemFormatter(itemFormatter FormatterProvider) *ListFormatter {
 	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setItemFormatter:"), objref.IDOf(itemFormatter))
 	return lf
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (lf *ListFormatter) WithScriptingProperties(scriptingProperties obj.Object) *ListFormatter {
 	objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return lf
@@ -79,13 +79,13 @@ func (lf *ListFormatter) StringFromItems(items obj.Object) string {
 	return purego.GoString(_r)
 }
 
-// Locale wraps the corresponding Objective-C method.
+// Locale returns the locale.
 func (lf *ListFormatter) Locale() *Locale {
 	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("locale"))
 	return LocaleFromID(_r)
 }
 
-// ItemFormatter wraps the corresponding Objective-C method.
+// ItemFormatter returns the item formatter.
 func (lf *ListFormatter) ItemFormatter() *Formatter {
 	_r := objc.Send[objc.ID](objref.IDOf(lf), objc.RegisterName("itemFormatter"))
 	return FormatterFromID(_r)

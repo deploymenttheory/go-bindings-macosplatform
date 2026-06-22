@@ -245,13 +245,13 @@ func (tc *TreeController) LeafKeyPathForNode(node *TreeNode) string {
 	return purego.GoString(_r)
 }
 
-// ArrangedObjects wraps the corresponding Objective-C method.
+// ArrangedObjects returns the arranged objects.
 func (tc *TreeController) ArrangedObjects() *TreeNode {
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("arrangedObjects"))
 	return TreeNodeFromID(_r)
 }
 
-// ChildrenKeyPath wraps the corresponding Objective-C method.
+// ChildrenKeyPath returns the children key path.
 func (tc *TreeController) ChildrenKeyPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("childrenKeyPath"))
 	if _r == 0 {
@@ -260,7 +260,7 @@ func (tc *TreeController) ChildrenKeyPath() string {
 	return purego.GoString(_r)
 }
 
-// CountKeyPath wraps the corresponding Objective-C method.
+// CountKeyPath returns the count key path.
 func (tc *TreeController) CountKeyPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("countKeyPath"))
 	if _r == 0 {
@@ -269,7 +269,7 @@ func (tc *TreeController) CountKeyPath() string {
 	return purego.GoString(_r)
 }
 
-// LeafKeyPath wraps the corresponding Objective-C method.
+// LeafKeyPath returns the leaf key path.
 func (tc *TreeController) LeafKeyPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("leafKeyPath"))
 	if _r == 0 {
@@ -278,7 +278,7 @@ func (tc *TreeController) LeafKeyPath() string {
 	return purego.GoString(_r)
 }
 
-// SortDescriptors wraps the corresponding Objective-C method.
+// SortDescriptors returns the sort descriptors.
 //
 // SortDescriptors returns the collection as a Go slice.
 func (tc *TreeController) SortDescriptors() []obj.Object {
@@ -328,7 +328,7 @@ func (tc *TreeController) AlwaysUsesMultipleValuesMarker() bool {
 	return _r
 }
 
-// SelectionIndexPaths wraps the corresponding Objective-C method.
+// SelectionIndexPaths returns the selection index paths.
 //
 // SelectionIndexPaths returns the collection as a Go slice.
 func (tc *TreeController) SelectionIndexPaths() []obj.Object {
@@ -336,13 +336,13 @@ func (tc *TreeController) SelectionIndexPaths() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SelectionIndexPath wraps the corresponding Objective-C method.
+// SelectionIndexPath returns the selection index path.
 func (tc *TreeController) SelectionIndexPath() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tc), objc.RegisterName("selectionIndexPath"))
 	return obj.Wrap(_r)
 }
 
-// SelectedNodes wraps the corresponding Objective-C method.
+// SelectedNodes returns the selected nodes.
 //
 // SelectedNodes returns the collection as a Go slice.
 func (tc *TreeController) SelectedNodes() []*TreeNode {

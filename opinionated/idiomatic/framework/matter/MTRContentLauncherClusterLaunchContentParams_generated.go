@@ -70,25 +70,25 @@ func NewMTRContentLauncherClusterLaunchContentParams() *MTRContentLauncherCluste
 	return mTRContentLauncherClusterLaunchContentParamsAdopt(_id)
 }
 
-// WithSearch sets the property and returns the receiver so calls can be chained.
+// WithSearch sets the search.
 func (mclclcp *MTRContentLauncherClusterLaunchContentParams) WithSearch(search MTRContentLauncherClusterContentSearchStructProvider) *MTRContentLauncherClusterLaunchContentParams {
 	objc.Send[objc.ID](objref.IDOf(mclclcp), objc.RegisterName("setSearch:"), objref.IDOf(search))
 	return mclclcp
 }
 
-// WithAutoPlay sets the property and returns the receiver so calls can be chained.
+// WithAutoPlay sets the auto play.
 func (mclclcp *MTRContentLauncherClusterLaunchContentParams) WithAutoPlay(autoPlay obj.Object) *MTRContentLauncherClusterLaunchContentParams {
 	objc.Send[objc.ID](objref.IDOf(mclclcp), objc.RegisterName("setAutoPlay:"), objref.IDOf(autoPlay))
 	return mclclcp
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (mclclcp *MTRContentLauncherClusterLaunchContentParams) WithData(data string) *MTRContentLauncherClusterLaunchContentParams {
 	objc.Send[objc.ID](objref.IDOf(mclclcp), objc.RegisterName("setData:"), purego.NSString(data))
 	return mclclcp
 }
 
-// WithUseCurrentContext sets the property and returns the receiver so calls can be chained.
+// WithUseCurrentContext sets the use current context.
 func (mclclcp *MTRContentLauncherClusterLaunchContentParams) WithUseCurrentContext(useCurrentContext obj.Object) *MTRContentLauncherClusterLaunchContentParams {
 	objc.Send[objc.ID](objref.IDOf(mclclcp), objc.RegisterName("setUseCurrentContext:"), objref.IDOf(useCurrentContext))
 	return mclclcp
@@ -106,19 +106,19 @@ func (mclclcp *MTRContentLauncherClusterLaunchContentParams) WithServerSideProce
 	return mclclcp
 }
 
-// Search wraps the corresponding Objective-C method.
+// Search returns the search.
 func (mclclcp *MTRContentLauncherClusterLaunchContentParams) Search() *MTRContentLauncherClusterContentSearchStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(mclclcp), objc.RegisterName("search"))
 	return MTRContentLauncherClusterContentSearchStructFromID(_r)
 }
 
-// AutoPlay wraps the corresponding Objective-C method.
+// AutoPlay returns the auto play.
 func (mclclcp *MTRContentLauncherClusterLaunchContentParams) AutoPlay() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mclclcp), objc.RegisterName("autoPlay"))
 	return obj.Wrap(_r)
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (mclclcp *MTRContentLauncherClusterLaunchContentParams) Data() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mclclcp), objc.RegisterName("data"))
 	if _r == 0 {
@@ -127,7 +127,7 @@ func (mclclcp *MTRContentLauncherClusterLaunchContentParams) Data() string {
 	return purego.GoString(_r)
 }
 
-// UseCurrentContext wraps the corresponding Objective-C method.
+// UseCurrentContext returns the use current context.
 func (mclclcp *MTRContentLauncherClusterLaunchContentParams) UseCurrentContext() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mclclcp), objc.RegisterName("useCurrentContext"))
 	return obj.Wrap(_r)

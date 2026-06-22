@@ -78,7 +78,7 @@ func (vcpa *VirtioConsolePortArray) ObjectAtIndexedSubscript(portIndex int) *Vir
 	return VirtioConsolePortFromID(_r)
 }
 
-// MaximumPortCount wraps the corresponding Objective-C method.
+// MaximumPortCount returns the maximum port count.
 func (vcpa *VirtioConsolePortArray) MaximumPortCount() uint32 {
 	_r := objc.Send[uint32](objref.IDOf(vcpa), objc.RegisterName("maximumPortCount"))
 	return _r

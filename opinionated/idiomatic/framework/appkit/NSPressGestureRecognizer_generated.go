@@ -136,37 +136,37 @@ func (pgr *PressGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents
 	return pgr
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (pgr *PressGestureRecognizer) WithName(name string) *PressGestureRecognizer {
 	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setName:"), purego.NSString(name))
 	return pgr
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (pgr *PressGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PressGestureRecognizer {
 	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return pgr
 }
 
-// ButtonMask wraps the corresponding Objective-C method.
+// ButtonMask returns the button mask.
 func (pgr *PressGestureRecognizer) ButtonMask() int {
 	_r := objc.Send[int](objref.IDOf(pgr), objc.RegisterName("buttonMask"))
 	return _r
 }
 
-// MinimumPressDuration wraps the corresponding Objective-C method.
+// MinimumPressDuration returns the minimum press duration.
 func (pgr *PressGestureRecognizer) MinimumPressDuration() float64 {
 	_r := objc.Send[float64](objref.IDOf(pgr), objc.RegisterName("minimumPressDuration"))
 	return _r
 }
 
-// AllowableMovement wraps the corresponding Objective-C method.
+// AllowableMovement returns the allowable movement.
 func (pgr *PressGestureRecognizer) AllowableMovement() float64 {
 	_r := objc.Send[float64](objref.IDOf(pgr), objc.RegisterName("allowableMovement"))
 	return _r
 }
 
-// NumberOfTouchesRequired wraps the corresponding Objective-C method.
+// NumberOfTouchesRequired returns the number of touches required.
 func (pgr *PressGestureRecognizer) NumberOfTouchesRequired() int {
 	_r := objc.Send[int](objref.IDOf(pgr), objc.RegisterName("numberOfTouchesRequired"))
 	return _r

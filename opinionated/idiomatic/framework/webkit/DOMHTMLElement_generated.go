@@ -43,103 +43,103 @@ func dOMHTMLElementAdopt(id objc.ID) *DOMHTMLElement {
 	return x
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (de *DOMHTMLElement) WithTitle(title string) *DOMHTMLElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return de
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (de *DOMHTMLElement) WithLang(lang string) *DOMHTMLElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return de
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (de *DOMHTMLElement) WithDir(dir string) *DOMHTMLElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return de
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (de *DOMHTMLElement) WithTabIndex(tabIndex int) *DOMHTMLElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setTabIndex:"), tabIndex)
 	return de
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (de *DOMHTMLElement) WithAccessKey(accessKey string) *DOMHTMLElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return de
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (de *DOMHTMLElement) WithInnerText(innerText string) *DOMHTMLElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return de
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (de *DOMHTMLElement) WithOuterText(outerText string) *DOMHTMLElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return de
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (de *DOMHTMLElement) WithContentEditable(contentEditable string) *DOMHTMLElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return de
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (de *DOMHTMLElement) WithIDName(idName string) *DOMHTMLElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return de
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (de *DOMHTMLElement) WithScrollLeft(scrollLeft int) *DOMHTMLElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return de
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (de *DOMHTMLElement) WithScrollTop(scrollTop int) *DOMHTMLElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setScrollTop:"), scrollTop)
 	return de
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (de *DOMHTMLElement) WithInnerHTML(innerHTML string) *DOMHTMLElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return de
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (de *DOMHTMLElement) WithOuterHTML(outerHTML string) *DOMHTMLElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return de
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (de *DOMHTMLElement) WithClassName(className string) *DOMHTMLElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return de
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (de *DOMHTMLElement) WithNodeValue(nodeValue string) *DOMHTMLElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return de
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (de *DOMHTMLElement) WithPrefix(prefix string) *DOMHTMLElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return de
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (de *DOMHTMLElement) WithTextContent(textContent string) *DOMHTMLElement {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return de
@@ -150,7 +150,7 @@ func (de *DOMHTMLElement) Click() {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("click"))
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (de *DOMHTMLElement) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("title"))
 	if _r == 0 {
@@ -159,7 +159,7 @@ func (de *DOMHTMLElement) Title() string {
 	return purego.GoString(_r)
 }
 
-// Lang wraps the corresponding Objective-C method.
+// Lang returns the lang.
 func (de *DOMHTMLElement) Lang() string {
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("lang"))
 	if _r == 0 {
@@ -168,7 +168,7 @@ func (de *DOMHTMLElement) Lang() string {
 	return purego.GoString(_r)
 }
 
-// Dir wraps the corresponding Objective-C method.
+// Dir returns the dir.
 func (de *DOMHTMLElement) Dir() string {
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("dir"))
 	if _r == 0 {
@@ -177,13 +177,13 @@ func (de *DOMHTMLElement) Dir() string {
 	return purego.GoString(_r)
 }
 
-// TabIndex wraps the corresponding Objective-C method.
+// TabIndex returns the tab index.
 func (de *DOMHTMLElement) TabIndex() int {
 	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("tabIndex"))
 	return _r
 }
 
-// AccessKey wraps the corresponding Objective-C method.
+// AccessKey returns the access key.
 func (de *DOMHTMLElement) AccessKey() string {
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("accessKey"))
 	if _r == 0 {
@@ -192,7 +192,7 @@ func (de *DOMHTMLElement) AccessKey() string {
 	return purego.GoString(_r)
 }
 
-// OuterText wraps the corresponding Objective-C method.
+// OuterText returns the outer text.
 func (de *DOMHTMLElement) OuterText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("outerText"))
 	if _r == 0 {
@@ -201,7 +201,7 @@ func (de *DOMHTMLElement) OuterText() string {
 	return purego.GoString(_r)
 }
 
-// ContentEditable wraps the corresponding Objective-C method.
+// ContentEditable returns the content editable.
 func (de *DOMHTMLElement) ContentEditable() string {
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("contentEditable"))
 	if _r == 0 {
@@ -210,7 +210,7 @@ func (de *DOMHTMLElement) ContentEditable() string {
 	return purego.GoString(_r)
 }
 
-// IDName wraps the corresponding Objective-C method.
+// IDName returns the ID name.
 func (de *DOMHTMLElement) IDName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("idName"))
 	if _r == 0 {
@@ -219,13 +219,13 @@ func (de *DOMHTMLElement) IDName() string {
 	return purego.GoString(_r)
 }
 
-// Children wraps the corresponding Objective-C method.
+// Children returns the children.
 func (de *DOMHTMLElement) Children() *DOMHTMLCollection {
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("children"))
 	return DOMHTMLCollectionFromID(_r)
 }
 
-// TitleDisplayString wraps the corresponding Objective-C method.
+// TitleDisplayString returns the title display string.
 func (de *DOMHTMLElement) TitleDisplayString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("titleDisplayString"))
 	if _r == 0 {

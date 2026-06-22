@@ -72,7 +72,7 @@ func NewPropertyListSerialization() *PropertyListSerialization {
 	return propertyListSerializationAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (pls *PropertyListSerialization) WithScriptingProperties(scriptingProperties obj.Object) *PropertyListSerialization {
 	objc.Send[objc.ID](objref.IDOf(pls), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return pls

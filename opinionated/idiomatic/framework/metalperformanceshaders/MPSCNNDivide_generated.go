@@ -53,19 +53,19 @@ func NewCNNDivide() *CNNDivide {
 	return cNNDivideAdopt(_id)
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (cd *CNNDivide) WithPrimaryScale(primaryScale float32) *CNNDivide {
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return cd
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (cd *CNNDivide) WithSecondaryScale(secondaryScale float32) *CNNDivide {
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return cd
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (cd *CNNDivide) WithBias(bias float32) *CNNDivide {
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setBias:"), bias)
 	return cd

@@ -91,13 +91,13 @@ func (surr *SpeechURLRecognitionRequest) WithAddsPunctuation(addsPunctuation boo
 	return surr
 }
 
-// WithCustomizedLanguageModel sets the property and returns the receiver so calls can be chained.
+// WithCustomizedLanguageModel sets the customized language model.
 func (surr *SpeechURLRecognitionRequest) WithCustomizedLanguageModel(customizedLanguageModel *SpeechLanguageModelConfiguration) *SpeechURLRecognitionRequest {
 	objc.Send[objc.ID](objref.IDOf(surr), objc.RegisterName("setCustomizedLanguageModel:"), objref.IDOf(customizedLanguageModel))
 	return surr
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (surr *SpeechURLRecognitionRequest) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(surr), objc.RegisterName("URL"))
 	return obj.Wrap(_r)

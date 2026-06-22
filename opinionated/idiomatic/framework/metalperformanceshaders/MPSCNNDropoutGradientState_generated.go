@@ -52,7 +52,7 @@ func NewCNNDropoutGradientState() *CNNDropoutGradientState {
 	return cNNDropoutGradientStateAdopt(_id)
 }
 
-// WithReadCount sets the property and returns the receiver so calls can be chained.
+// WithReadCount sets the read count.
 func (cdgs *CNNDropoutGradientState) WithReadCount(readCount int) *CNNDropoutGradientState {
 	objc.Send[objc.ID](objref.IDOf(cdgs), objc.RegisterName("setReadCount:"), readCount)
 	return cdgs

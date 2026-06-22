@@ -147,7 +147,7 @@ func (pc *PersistentContainer) PerformBackgroundTask(ctx context.Context) (resul
 	}
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (pc *PersistentContainer) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("name"))
 	if _r == 0 {
@@ -156,25 +156,25 @@ func (pc *PersistentContainer) Name() string {
 	return purego.GoString(_r)
 }
 
-// ViewContext wraps the corresponding Objective-C method.
+// ViewContext returns the view context.
 func (pc *PersistentContainer) ViewContext() *ManagedObjectContext {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("viewContext"))
 	return ManagedObjectContextFromID(_r)
 }
 
-// ManagedObjectModel wraps the corresponding Objective-C method.
+// ManagedObjectModel returns the managed object model.
 func (pc *PersistentContainer) ManagedObjectModel() *ManagedObjectModel {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("managedObjectModel"))
 	return ManagedObjectModelFromID(_r)
 }
 
-// PersistentStoreCoordinator wraps the corresponding Objective-C method.
+// PersistentStoreCoordinator returns the persistent store coordinator.
 func (pc *PersistentContainer) PersistentStoreCoordinator() *PersistentStoreCoordinator {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("persistentStoreCoordinator"))
 	return PersistentStoreCoordinatorFromID(_r)
 }
 
-// PersistentStoreDescriptions wraps the corresponding Objective-C method.
+// PersistentStoreDescriptions returns the persistent store descriptions.
 //
 // PersistentStoreDescriptions returns the collection as a Go slice.
 func (pc *PersistentContainer) PersistentStoreDescriptions() []*PersistentStoreDescription {

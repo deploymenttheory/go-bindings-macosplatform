@@ -73,7 +73,7 @@ func NewMapItemAnnotationWithMapItem(mapItem *MapItem) *MapItemAnnotation {
 	return mapItemAnnotationAdopt(_id)
 }
 
-// MapItem wraps the corresponding Objective-C method.
+// MapItem returns the map item.
 func (mia *MapItemAnnotation) MapItem() *MapItem {
 	_r := objc.Send[objc.ID](objref.IDOf(mia), objc.RegisterName("mapItem"))
 	return MapItemFromID(_r)

@@ -126,7 +126,7 @@ func (xe *XMLElement) WithURI(uRI StringProvider) *XMLElement {
 	return xe
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (xe *XMLElement) WithScriptingProperties(scriptingProperties obj.Object) *XMLElement {
 	objc.Send[objc.ID](objref.IDOf(xe), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return xe

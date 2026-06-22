@@ -49,53 +49,53 @@ func NewDOMCSSStyleSheet() *DOMCSSStyleSheet {
 	return dOMCSSStyleSheetAdopt(_id)
 }
 
-// WithDisabled sets the property and returns the receiver so calls can be chained.
+// WithDisabled sets the disabled.
 func (dss *DOMCSSStyleSheet) WithDisabled(disabled bool) *DOMCSSStyleSheet {
 	objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("setDisabled:"), disabled)
 	return dss
 }
 
-// InsertRuleIndex wraps the corresponding Objective-C method.
+// InsertRuleIndex inserts rule index.
 func (dss *DOMCSSStyleSheet) InsertRuleIndex(rule string, index int) int {
 	_r := objc.Send[int](objref.IDOf(dss), objc.RegisterName("insertRule:index:"), purego.NSString(rule), index)
 	return _r
 }
 
-// DeleteRule wraps the corresponding Objective-C method.
+// DeleteRule deletes rule.
 func (dss *DOMCSSStyleSheet) DeleteRule(index int) {
 	objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("deleteRule:"), index)
 }
 
-// AddRuleStyleIndex wraps the corresponding Objective-C method.
+// AddRuleStyleIndex adds rule style index.
 func (dss *DOMCSSStyleSheet) AddRuleStyleIndex(selector string, style string, index int) int {
 	_r := objc.Send[int](objref.IDOf(dss), objc.RegisterName("addRule:style:index:"), purego.NSString(selector), purego.NSString(style), index)
 	return _r
 }
 
-// RemoveRule wraps the corresponding Objective-C method.
+// RemoveRule removes rule.
 func (dss *DOMCSSStyleSheet) RemoveRule(index int) {
 	objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("removeRule:"), index)
 }
 
-// OwnerRule wraps the corresponding Objective-C method.
+// OwnerRule returns the owner rule.
 func (dss *DOMCSSStyleSheet) OwnerRule() *DOMCSSRule {
 	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("ownerRule"))
 	return DOMCSSRuleFromID(_r)
 }
 
-// CSSRules wraps the corresponding Objective-C method.
+// CSSRules returns the CSS rules.
 func (dss *DOMCSSStyleSheet) CSSRules() *DOMCSSRuleList {
 	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("cssRules"))
 	return DOMCSSRuleListFromID(_r)
 }
 
-// Rules wraps the corresponding Objective-C method.
+// Rules returns the rules.
 func (dss *DOMCSSStyleSheet) Rules() *DOMCSSRuleList {
 	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("rules"))
 	return DOMCSSRuleListFromID(_r)
 }
 
-// InsertRule wraps the corresponding Objective-C method.
+// InsertRule inserts rule.
 func (dss *DOMCSSStyleSheet) InsertRule(rule string, index int) int {
 	_r := objc.Send[int](objref.IDOf(dss), objc.RegisterName("insertRule::"), purego.NSString(rule), index)
 	return _r

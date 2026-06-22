@@ -26,7 +26,7 @@ func IsSystemCollaborationSupportAvailable() bool {
 	return _r
 }
 
-// ShowAlertWithParticipantHighlightInWindow wraps the corresponding Objective-C method.
+// ShowAlertWithParticipantHighlightInWindow shows alert with participant highlight in window.
 func ShowAlertWithParticipantHighlightInWindow(participant obj.Object, highlight *CollaborationHighlight, window obj.Object) {
 	objc.Send[objc.ID](objc.ID(_class("SWRemoveParticipantAlert")), objc.RegisterName("showAlertWithParticipant:highlight:inWindow:"), objref.IDOf(participant), objref.IDOf(highlight), objref.IDOf(window))
 }

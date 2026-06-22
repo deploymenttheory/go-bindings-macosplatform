@@ -64,7 +64,7 @@ func (mp *MultiPolygon) WithSubtitle(subtitle string) *MultiPolygon {
 	return mp
 }
 
-// Polygons wraps the corresponding Objective-C method.
+// Polygons returns the polygons.
 //
 // Polygons returns the collection as a Go slice.
 func (mp *MultiPolygon) Polygons() []*Polygon {

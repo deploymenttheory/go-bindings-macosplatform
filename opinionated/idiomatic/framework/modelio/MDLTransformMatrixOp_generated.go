@@ -70,7 +70,7 @@ func NewTransformMatrixOp() *TransformMatrixOp {
 	return transformMatrixOpAdopt(_id)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (tmo *TransformMatrixOp) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tmo), objc.RegisterName("name"))
 	if _r == 0 {
@@ -79,7 +79,7 @@ func (tmo *TransformMatrixOp) Name() string {
 	return purego.GoString(_r)
 }
 
-// AnimatedValue wraps the corresponding Objective-C method.
+// AnimatedValue returns the animated value.
 func (tmo *TransformMatrixOp) AnimatedValue() *AnimatedMatrix4x4 {
 	_r := objc.Send[objc.ID](objref.IDOf(tmo), objc.RegisterName("animatedValue"))
 	return AnimatedMatrix4x4FromID(_r)

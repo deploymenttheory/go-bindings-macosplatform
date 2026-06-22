@@ -73,7 +73,7 @@ func NewPasskeyRegistrationCredentialExtensionOutputWithLargeBlobOutput(largeBlo
 	return passkeyRegistrationCredentialExtensionOutputAdopt(_id)
 }
 
-// LargeBlobRegistrationOutput wraps the corresponding Objective-C method.
+// LargeBlobRegistrationOutput returns the large blob registration output.
 func (prceo *PasskeyRegistrationCredentialExtensionOutput) LargeBlobRegistrationOutput() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(prceo), objc.RegisterName("largeBlobRegistrationOutput"))
 	return AuthorizationPublicKeyCredentialLargeBlobRegistrationOutputFromID(_r)

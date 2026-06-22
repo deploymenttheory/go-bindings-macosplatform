@@ -70,19 +70,19 @@ func NewMTRDiagnosticLogsClusterRetrieveLogsRequestParams() *MTRDiagnosticLogsCl
 	return mTRDiagnosticLogsClusterRetrieveLogsRequestParamsAdopt(_id)
 }
 
-// WithIntent sets the property and returns the receiver so calls can be chained.
+// WithIntent sets the intent.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithIntent(intent obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("setIntent:"), objref.IDOf(intent))
 	return mdlcrlrp
 }
 
-// WithRequestedProtocol sets the property and returns the receiver so calls can be chained.
+// WithRequestedProtocol sets the requested protocol.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithRequestedProtocol(requestedProtocol obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("setRequestedProtocol:"), objref.IDOf(requestedProtocol))
 	return mdlcrlrp
 }
 
-// WithTransferFileDesignator sets the property and returns the receiver so calls can be chained.
+// WithTransferFileDesignator sets the transfer file designator.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithTransferFileDesignator(transferFileDesignator string) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("setTransferFileDesignator:"), purego.NSString(transferFileDesignator))
 	return mdlcrlrp
@@ -100,19 +100,19 @@ func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithServerSid
 	return mdlcrlrp
 }
 
-// Intent wraps the corresponding Objective-C method.
+// Intent returns the intent.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) Intent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("intent"))
 	return obj.Wrap(_r)
 }
 
-// RequestedProtocol wraps the corresponding Objective-C method.
+// RequestedProtocol returns the requested protocol.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) RequestedProtocol() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("requestedProtocol"))
 	return obj.Wrap(_r)
 }
 
-// TransferFileDesignator wraps the corresponding Objective-C method.
+// TransferFileDesignator returns the transfer file designator.
 func (mdlcrlrp *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) TransferFileDesignator() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcrlrp), objc.RegisterName("transferFileDesignator"))
 	if _r == 0 {

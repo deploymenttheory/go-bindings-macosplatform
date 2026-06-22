@@ -51,25 +51,25 @@ func NewTextureReferenceType() *TextureReferenceType {
 	return textureReferenceTypeAdopt(_id)
 }
 
-// TextureDataType wraps the corresponding Objective-C method.
+// TextureDataType returns the texture data type.
 func (trt *TextureReferenceType) TextureDataType() DataType {
 	_r := objc.Send[DataType](objref.IDOf(trt), objc.RegisterName("textureDataType"))
 	return _r
 }
 
-// TextureType wraps the corresponding Objective-C method.
+// TextureType returns the texture type.
 func (trt *TextureReferenceType) TextureType() TextureType {
 	_r := objc.Send[TextureType](objref.IDOf(trt), objc.RegisterName("textureType"))
 	return _r
 }
 
-// Access wraps the corresponding Objective-C method.
+// Access returns the access.
 func (trt *TextureReferenceType) Access() BindingAccess {
 	_r := objc.Send[BindingAccess](objref.IDOf(trt), objc.RegisterName("access"))
 	return _r
 }
 
-// IsDepthTexture wraps the corresponding Objective-C method.
+// IsDepthTexture reports whether the object is depth texture.
 func (trt *TextureReferenceType) IsDepthTexture() bool {
 	_r := objc.Send[bool](objref.IDOf(trt), objc.RegisterName("isDepthTexture"))
 	return _r

@@ -67,19 +67,19 @@ func NewBeaconIdentityConditionWithUUIDMajorMinor(uuid obj.Object, major uint16,
 	return beaconIdentityConditionAdopt(_id)
 }
 
-// UUID wraps the corresponding Objective-C method.
+// UUID returns the UUID.
 func (bic *BeaconIdentityCondition) UUID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bic), objc.RegisterName("UUID"))
 	return obj.Wrap(_r)
 }
 
-// Major wraps the corresponding Objective-C method.
+// Major returns the major.
 func (bic *BeaconIdentityCondition) Major() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bic), objc.RegisterName("major"))
 	return obj.Wrap(_r)
 }
 
-// Minor wraps the corresponding Objective-C method.
+// Minor returns the minor.
 func (bic *BeaconIdentityCondition) Minor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bic), objc.RegisterName("minor"))
 	return obj.Wrap(_r)

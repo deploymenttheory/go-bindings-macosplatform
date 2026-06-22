@@ -53,13 +53,13 @@ func NewInflectionRuleExplicitWithMorphology(morphology *Morphology) *Inflection
 	return inflectionRuleExplicitAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ire *InflectionRuleExplicit) WithScriptingProperties(scriptingProperties obj.Object) *InflectionRuleExplicit {
 	objc.Send[objc.ID](objref.IDOf(ire), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ire
 }
 
-// Morphology wraps the corresponding Objective-C method.
+// Morphology returns the morphology.
 func (ire *InflectionRuleExplicit) Morphology() *Morphology {
 	_r := objc.Send[objc.ID](objref.IDOf(ire), objc.RegisterName("morphology"))
 	return MorphologyFromID(_r)

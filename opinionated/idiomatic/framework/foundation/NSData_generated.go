@@ -142,13 +142,13 @@ func NewDataWithBase64Encoding(base64String string) *Data {
 	return dataAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (d *Data) WithScriptingProperties(scriptingProperties obj.Object) *Data {
 	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return d
 }
 
-// Length wraps the corresponding Objective-C method.
+// Length returns the length.
 func (d *Data) Length() int {
 	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("length"))
 	return _r

@@ -72,13 +72,13 @@ func NewPedometerEvent() *PedometerEvent {
 	return pedometerEventAdopt(_id)
 }
 
-// Date wraps the corresponding Objective-C method.
+// Date returns the date.
 func (pe *PedometerEvent) Date() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (pe *PedometerEvent) Type() PedometerEventType {
 	_r := objc.Send[PedometerEventType](objref.IDOf(pe), objc.RegisterName("type"))
 	return _r

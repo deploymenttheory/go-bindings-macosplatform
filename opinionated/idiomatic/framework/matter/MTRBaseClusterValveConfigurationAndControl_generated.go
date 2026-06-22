@@ -54,7 +54,7 @@ func NewMTRBaseClusterValveConfigurationAndControlWithDeviceEndpointIDQueue(devi
 	return mTRBaseClusterValveConfigurationAndControlAdopt(_id)
 }
 
-// ReadAttributeOpenDurationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOpenDurationWithCompletion reads attribute open duration with completion.
 //
 // ReadAttributeOpenDurationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeOpenDurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -104,7 +104,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeOpe
 	}
 }
 
-// ReadAttributeDefaultOpenDurationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDefaultOpenDurationWithCompletion reads attribute default open duration with completion.
 //
 // ReadAttributeDefaultOpenDurationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeDefaultOpenDurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -154,7 +154,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeDef
 	}
 }
 
-// ReadAttributeAutoCloseTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAutoCloseTimeWithCompletion reads attribute auto close time with completion.
 //
 // ReadAttributeAutoCloseTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeAutoCloseTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -204,7 +204,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAut
 	}
 }
 
-// ReadAttributeRemainingDurationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRemainingDurationWithCompletion reads attribute remaining duration with completion.
 //
 // ReadAttributeRemainingDurationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeRemainingDurationWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -254,7 +254,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeRem
 	}
 }
 
-// ReadAttributeCurrentStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentStateWithCompletion reads attribute current state with completion.
 //
 // ReadAttributeCurrentStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeCurrentStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -304,7 +304,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeCur
 	}
 }
 
-// ReadAttributeTargetStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTargetStateWithCompletion reads attribute target state with completion.
 //
 // ReadAttributeTargetStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeTargetStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -354,7 +354,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeTar
 	}
 }
 
-// ReadAttributeCurrentLevelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentLevelWithCompletion reads attribute current level with completion.
 //
 // ReadAttributeCurrentLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeCurrentLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -404,7 +404,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeCur
 	}
 }
 
-// ReadAttributeTargetLevelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTargetLevelWithCompletion reads attribute target level with completion.
 //
 // ReadAttributeTargetLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeTargetLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -454,7 +454,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeTar
 	}
 }
 
-// ReadAttributeDefaultOpenLevelWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDefaultOpenLevelWithCompletion reads attribute default open level with completion.
 //
 // ReadAttributeDefaultOpenLevelWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeDefaultOpenLevelWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -504,7 +504,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeDef
 	}
 }
 
-// ReadAttributeValveFaultWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeValveFaultWithCompletion reads attribute valve fault with completion.
 //
 // ReadAttributeValveFaultWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeValveFaultWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -554,7 +554,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeVal
 	}
 }
 
-// ReadAttributeLevelStepWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLevelStepWithCompletion reads attribute level step with completion.
 //
 // ReadAttributeLevelStepWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeLevelStepWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -604,7 +604,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeLev
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -654,7 +654,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeGen
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -704,7 +704,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAcc
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -754,7 +754,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeAtt
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -804,7 +804,7 @@ func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) SubscribeAttributeFea
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcvcac *MTRBaseClusterValveConfigurationAndControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

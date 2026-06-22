@@ -86,93 +86,93 @@ func (mcac *MTRClusterAccessControl) ReviewFabricRestrictionsWithParamsExpectedV
 	}
 }
 
-// ReadAttributeACLWithParams wraps the corresponding Objective-C method.
+// ReadAttributeACLWithParams reads attribute ACL with params.
 func (mcac *MTRClusterAccessControl) ReadAttributeACLWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeACLWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeACLWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeACLWithValueExpectedValueInterval writes attribute ACL with value expected value interval.
 func (mcac *MTRClusterAccessControl) WriteAttributeACLWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("writeAttributeACLWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeACLWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeACLWithValueExpectedValueIntervalParams writes attribute ACL with value expected value interval params.
 func (mcac *MTRClusterAccessControl) WriteAttributeACLWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("writeAttributeACLWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeExtensionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeExtensionWithParams reads attribute extension with params.
 func (mcac *MTRClusterAccessControl) ReadAttributeExtensionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeExtensionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeExtensionWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeExtensionWithValueExpectedValueInterval writes attribute extension with value expected value interval.
 func (mcac *MTRClusterAccessControl) WriteAttributeExtensionWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("writeAttributeExtensionWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeExtensionWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeExtensionWithValueExpectedValueIntervalParams writes attribute extension with value expected value interval params.
 func (mcac *MTRClusterAccessControl) WriteAttributeExtensionWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("writeAttributeExtensionWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeSubjectsPerAccessControlEntryWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSubjectsPerAccessControlEntryWithParams reads attribute subjects per access control entry with params.
 func (mcac *MTRClusterAccessControl) ReadAttributeSubjectsPerAccessControlEntryWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeSubjectsPerAccessControlEntryWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeTargetsPerAccessControlEntryWithParams wraps the corresponding Objective-C method.
+// ReadAttributeTargetsPerAccessControlEntryWithParams reads attribute targets per access control entry with params.
 func (mcac *MTRClusterAccessControl) ReadAttributeTargetsPerAccessControlEntryWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeTargetsPerAccessControlEntryWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAccessControlEntriesPerFabricWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAccessControlEntriesPerFabricWithParams reads attribute access control entries per fabric with params.
 func (mcac *MTRClusterAccessControl) ReadAttributeAccessControlEntriesPerFabricWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeAccessControlEntriesPerFabricWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCommissioningARLWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCommissioningARLWithParams reads attribute commissioning arl with params.
 func (mcac *MTRClusterAccessControl) ReadAttributeCommissioningARLWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeCommissioningARLWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeARLWithParams wraps the corresponding Objective-C method.
+// ReadAttributeARLWithParams reads attribute arl with params.
 func (mcac *MTRClusterAccessControl) ReadAttributeARLWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeARLWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcac *MTRClusterAccessControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcac *MTRClusterAccessControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcac *MTRClusterAccessControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcac *MTRClusterAccessControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcac *MTRClusterAccessControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcac), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

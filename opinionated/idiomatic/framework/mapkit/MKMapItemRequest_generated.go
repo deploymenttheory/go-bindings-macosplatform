@@ -73,7 +73,7 @@ func NewMapItemRequestWithMapItemIdentifier(identifier *MapItemIdentifier) *MapI
 	return mapItemRequestAdopt(_id)
 }
 
-// MapItemIdentifier wraps the corresponding Objective-C method.
+// MapItemIdentifier returns the map item identifier.
 func (mir *MapItemRequest) MapItemIdentifier() *MapItemIdentifier {
 	_r := objc.Send[objc.ID](objref.IDOf(mir), objc.RegisterName("mapItemIdentifier"))
 	return MapItemIdentifierFromID(_r)

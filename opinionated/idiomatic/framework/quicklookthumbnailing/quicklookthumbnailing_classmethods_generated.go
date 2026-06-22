@@ -10,7 +10,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// SharedGenerator wraps the corresponding Objective-C method.
+// SharedGenerator returns the shared generator.
 func SharedGenerator() *ThumbnailGenerator {
 	_r := objc.Send[objc.ID](objc.ID(_class("QLThumbnailGenerator")), objc.RegisterName("sharedGenerator"))
 	return ThumbnailGeneratorFromID(_r)

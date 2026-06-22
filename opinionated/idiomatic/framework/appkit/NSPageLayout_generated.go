@@ -94,7 +94,7 @@ func (pl *PageLayout) RunModal() int {
 	return _r
 }
 
-// AccessoryControllers wraps the corresponding Objective-C method.
+// AccessoryControllers returns the accessory controllers.
 //
 // AccessoryControllers returns the collection as a Go slice.
 func (pl *PageLayout) AccessoryControllers() []*ViewController {
@@ -102,7 +102,7 @@ func (pl *PageLayout) AccessoryControllers() []*ViewController {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ViewController { return ViewControllerFromID(_id) })
 }
 
-// PrintInfo wraps the corresponding Objective-C method.
+// PrintInfo returns the print info.
 func (pl *PageLayout) PrintInfo() *PrintInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("printInfo"))
 	return PrintInfoFromID(_r)

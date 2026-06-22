@@ -46,7 +46,7 @@ func recognizedPoint3DAdopt(id objc.ID) *RecognizedPoint3D {
 	return x
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (rpd *RecognizedPoint3D) Identifier() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)

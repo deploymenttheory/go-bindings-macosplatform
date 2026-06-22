@@ -114,19 +114,19 @@ func (rs *RelativeSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int
 	return rs
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (rs *RelativeSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *RelativeSpecifier {
 	objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return rs
 }
 
-// RelativePosition wraps the corresponding Objective-C method.
+// RelativePosition returns the relative position.
 func (rs *RelativeSpecifier) RelativePosition() RelativePosition {
 	_r := objc.Send[RelativePosition](objref.IDOf(rs), objc.RegisterName("relativePosition"))
 	return _r
 }
 
-// BaseSpecifier wraps the corresponding Objective-C method.
+// BaseSpecifier returns the base specifier.
 func (rs *RelativeSpecifier) BaseSpecifier() *ScriptObjectSpecifier {
 	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("baseSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)

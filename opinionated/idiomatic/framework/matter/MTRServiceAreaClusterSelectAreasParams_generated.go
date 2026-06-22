@@ -82,8 +82,8 @@ func (msacsap *MTRServiceAreaClusterSelectAreasParams) WithServerSideProcessingT
 	return msacsap
 }
 
-// GetNewAreas wraps the corresponding Objective-C method.
-func (msacsap *MTRServiceAreaClusterSelectAreasParams) GetNewAreas() obj.Object {
+// NewAreas returns the new areas.
+func (msacsap *MTRServiceAreaClusterSelectAreasParams) NewAreas() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msacsap), objc.RegisterName("getNewAreas"))
 	return obj.Wrap(_r)
 }

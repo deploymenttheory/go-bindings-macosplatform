@@ -73,13 +73,13 @@ func NewAuthorizationPublicKeyCredentialPRFAssertionInputValuesWithSaltInput1Sal
 	return authorizationPublicKeyCredentialPRFAssertionInputValuesAdopt(_id)
 }
 
-// SaltInput1 wraps the corresponding Objective-C method.
+// SaltInput1 returns the salt input1.
 func (apkcpaiv *AuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput1() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(apkcpaiv), objc.RegisterName("saltInput1"))
 	return obj.Wrap(_r)
 }
 
-// SaltInput2 wraps the corresponding Objective-C method.
+// SaltInput2 returns the salt input2.
 func (apkcpaiv *AuthorizationPublicKeyCredentialPRFAssertionInputValues) SaltInput2() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(apkcpaiv), objc.RegisterName("saltInput2"))
 	return obj.Wrap(_r)

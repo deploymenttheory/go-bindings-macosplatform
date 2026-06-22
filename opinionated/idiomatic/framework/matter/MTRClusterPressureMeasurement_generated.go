@@ -58,85 +58,85 @@ func NewMTRClusterPressureMeasurementWithDeviceEndpointQueue(device *MTRDevice, 
 	return mTRClusterPressureMeasurementAdopt(_id)
 }
 
-// ReadAttributeMeasuredValueWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMeasuredValueWithParams reads attribute measured value with params.
 func (mcpm *MTRClusterPressureMeasurement) ReadAttributeMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinMeasuredValueWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMinMeasuredValueWithParams reads attribute min measured value with params.
 func (mcpm *MTRClusterPressureMeasurement) ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeMinMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxMeasuredValueWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMaxMeasuredValueWithParams reads attribute max measured value with params.
 func (mcpm *MTRClusterPressureMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeMaxMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeToleranceWithParams wraps the corresponding Objective-C method.
+// ReadAttributeToleranceWithParams reads attribute tolerance with params.
 func (mcpm *MTRClusterPressureMeasurement) ReadAttributeToleranceWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeToleranceWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeScaledValueWithParams wraps the corresponding Objective-C method.
+// ReadAttributeScaledValueWithParams reads attribute scaled value with params.
 func (mcpm *MTRClusterPressureMeasurement) ReadAttributeScaledValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeScaledValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinScaledValueWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMinScaledValueWithParams reads attribute min scaled value with params.
 func (mcpm *MTRClusterPressureMeasurement) ReadAttributeMinScaledValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeMinScaledValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxScaledValueWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMaxScaledValueWithParams reads attribute max scaled value with params.
 func (mcpm *MTRClusterPressureMeasurement) ReadAttributeMaxScaledValueWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeMaxScaledValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeScaledToleranceWithParams wraps the corresponding Objective-C method.
+// ReadAttributeScaledToleranceWithParams reads attribute scaled tolerance with params.
 func (mcpm *MTRClusterPressureMeasurement) ReadAttributeScaledToleranceWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeScaledToleranceWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeScaleWithParams wraps the corresponding Objective-C method.
+// ReadAttributeScaleWithParams reads attribute scale with params.
 func (mcpm *MTRClusterPressureMeasurement) ReadAttributeScaleWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeScaleWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcpm *MTRClusterPressureMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcpm *MTRClusterPressureMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcpm *MTRClusterPressureMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcpm *MTRClusterPressureMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcpm *MTRClusterPressureMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcpm), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

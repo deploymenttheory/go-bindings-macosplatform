@@ -73,13 +73,13 @@ func NewCollectionLayoutGroupCustomItem() *CollectionLayoutGroupCustomItem {
 	return collectionLayoutGroupCustomItemAdopt(_id)
 }
 
-// Frame wraps the corresponding Objective-C method.
+// Frame returns the frame.
 func (clgci *CollectionLayoutGroupCustomItem) Frame() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(clgci), objc.RegisterName("frame"))
 	return _r
 }
 
-// ZIndex wraps the corresponding Objective-C method.
+// ZIndex returns the z index.
 func (clgci *CollectionLayoutGroupCustomItem) ZIndex() int {
 	_r := objc.Send[int](objref.IDOf(clgci), objc.RegisterName("zIndex"))
 	return _r

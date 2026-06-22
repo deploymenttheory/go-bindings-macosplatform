@@ -52,7 +52,7 @@ func NewCNNBatchNormalizationState() *CNNBatchNormalizationState {
 	return cNNBatchNormalizationStateAdopt(_id)
 }
 
-// WithReadCount sets the property and returns the receiver so calls can be chained.
+// WithReadCount sets the read count.
 func (cbns *CNNBatchNormalizationState) WithReadCount(readCount int) *CNNBatchNormalizationState {
 	objc.Send[objc.ID](objref.IDOf(cbns), objc.RegisterName("setReadCount:"), readCount)
 	return cbns
@@ -69,7 +69,7 @@ func (cbns *CNNBatchNormalizationState) Reset() {
 	objc.Send[objc.ID](objref.IDOf(cbns), objc.RegisterName("reset"))
 }
 
-// BatchNormalization wraps the corresponding Objective-C method.
+// BatchNormalization returns the batch normalization.
 func (cbns *CNNBatchNormalizationState) BatchNormalization() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cbns), objc.RegisterName("batchNormalization"))
 	return obj.Wrap(_r)

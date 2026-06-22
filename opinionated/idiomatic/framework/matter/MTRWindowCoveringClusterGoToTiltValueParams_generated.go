@@ -70,7 +70,7 @@ func NewMTRWindowCoveringClusterGoToTiltValueParams() *MTRWindowCoveringClusterG
 	return mTRWindowCoveringClusterGoToTiltValueParamsAdopt(_id)
 }
 
-// WithTiltValue sets the property and returns the receiver so calls can be chained.
+// WithTiltValue sets the tilt value.
 func (mwccgttvp *MTRWindowCoveringClusterGoToTiltValueParams) WithTiltValue(tiltValue obj.Object) *MTRWindowCoveringClusterGoToTiltValueParams {
 	objc.Send[objc.ID](objref.IDOf(mwccgttvp), objc.RegisterName("setTiltValue:"), objref.IDOf(tiltValue))
 	return mwccgttvp
@@ -88,7 +88,7 @@ func (mwccgttvp *MTRWindowCoveringClusterGoToTiltValueParams) WithServerSideProc
 	return mwccgttvp
 }
 
-// TiltValue wraps the corresponding Objective-C method.
+// TiltValue returns the tilt value.
 func (mwccgttvp *MTRWindowCoveringClusterGoToTiltValueParams) TiltValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mwccgttvp), objc.RegisterName("tiltValue"))
 	return obj.Wrap(_r)

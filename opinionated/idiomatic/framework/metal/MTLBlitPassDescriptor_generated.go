@@ -72,7 +72,7 @@ func NewBlitPassDescriptor() *BlitPassDescriptor {
 	return blitPassDescriptorAdopt(_id)
 }
 
-// SampleBufferAttachments wraps the corresponding Objective-C method.
+// SampleBufferAttachments returns the sample buffer attachments.
 func (bpd *BlitPassDescriptor) SampleBufferAttachments() *BlitPassSampleBufferAttachmentDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("sampleBufferAttachments"))
 	return BlitPassSampleBufferAttachmentDescriptorArrayFromID(_r)

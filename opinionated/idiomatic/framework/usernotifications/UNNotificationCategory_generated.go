@@ -72,7 +72,7 @@ func NewNotificationCategory() *NotificationCategory {
 	return notificationCategoryAdopt(_id)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (nc *NotificationCategory) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -81,7 +81,7 @@ func (nc *NotificationCategory) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Actions wraps the corresponding Objective-C method.
+// Actions returns the actions.
 //
 // Actions returns the collection as a Go slice.
 func (nc *NotificationCategory) Actions() []*NotificationAction {
@@ -89,7 +89,7 @@ func (nc *NotificationCategory) Actions() []*NotificationAction {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NotificationAction { return NotificationActionFromID(_id) })
 }
 
-// IntentIdentifiers wraps the corresponding Objective-C method.
+// IntentIdentifiers returns the intent identifiers.
 //
 // IntentIdentifiers returns the collection as a Go slice.
 func (nc *NotificationCategory) IntentIdentifiers() []string {
@@ -97,13 +97,13 @@ func (nc *NotificationCategory) IntentIdentifiers() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Options wraps the corresponding Objective-C method.
+// Options returns the options.
 func (nc *NotificationCategory) Options() NotificationCategoryOptions {
 	_r := objc.Send[NotificationCategoryOptions](objref.IDOf(nc), objc.RegisterName("options"))
 	return _r
 }
 
-// HiddenPreviewsBodyPlaceholder wraps the corresponding Objective-C method.
+// HiddenPreviewsBodyPlaceholder returns the hidden previews body placeholder.
 func (nc *NotificationCategory) HiddenPreviewsBodyPlaceholder() string {
 	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("hiddenPreviewsBodyPlaceholder"))
 	if _r == 0 {

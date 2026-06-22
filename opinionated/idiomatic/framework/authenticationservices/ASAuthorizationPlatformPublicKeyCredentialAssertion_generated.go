@@ -72,19 +72,19 @@ func NewAuthorizationPlatformPublicKeyCredentialAssertion() *AuthorizationPlatfo
 	return authorizationPlatformPublicKeyCredentialAssertionAdopt(_id)
 }
 
-// Attachment wraps the corresponding Objective-C method.
+// Attachment returns the attachment.
 func (appkca *AuthorizationPlatformPublicKeyCredentialAssertion) Attachment() AuthorizationPublicKeyCredentialAttachment {
 	_r := objc.Send[AuthorizationPublicKeyCredentialAttachment](objref.IDOf(appkca), objc.RegisterName("attachment"))
 	return _r
 }
 
-// LargeBlob wraps the corresponding Objective-C method.
+// LargeBlob returns the large blob.
 func (appkca *AuthorizationPlatformPublicKeyCredentialAssertion) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(appkca), objc.RegisterName("largeBlob"))
 	return AuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID(_r)
 }
 
-// Prf wraps the corresponding Objective-C method.
+// Prf returns the prf.
 func (appkca *AuthorizationPlatformPublicKeyCredentialAssertion) Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(appkca), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFAssertionOutputFromID(_r)

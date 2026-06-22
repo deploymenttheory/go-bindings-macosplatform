@@ -49,115 +49,115 @@ func NewDOMHTMLTitleElement() *DOMHTMLTitleElement {
 	return dOMHTMLTitleElementAdopt(_id)
 }
 
-// WithText sets the property and returns the receiver so calls can be chained.
+// WithText sets the text.
 func (dte *DOMHTMLTitleElement) WithText(text string) *DOMHTMLTitleElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setText:"), purego.NSString(text))
 	return dte
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (dte *DOMHTMLTitleElement) WithTitle(title string) *DOMHTMLTitleElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return dte
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (dte *DOMHTMLTitleElement) WithLang(lang string) *DOMHTMLTitleElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return dte
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (dte *DOMHTMLTitleElement) WithDir(dir string) *DOMHTMLTitleElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return dte
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (dte *DOMHTMLTitleElement) WithTabIndex(tabIndex int) *DOMHTMLTitleElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setTabIndex:"), tabIndex)
 	return dte
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (dte *DOMHTMLTitleElement) WithAccessKey(accessKey string) *DOMHTMLTitleElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return dte
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (dte *DOMHTMLTitleElement) WithInnerText(innerText string) *DOMHTMLTitleElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return dte
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (dte *DOMHTMLTitleElement) WithOuterText(outerText string) *DOMHTMLTitleElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return dte
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (dte *DOMHTMLTitleElement) WithContentEditable(contentEditable string) *DOMHTMLTitleElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return dte
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (dte *DOMHTMLTitleElement) WithIDName(idName string) *DOMHTMLTitleElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return dte
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (dte *DOMHTMLTitleElement) WithScrollLeft(scrollLeft int) *DOMHTMLTitleElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return dte
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (dte *DOMHTMLTitleElement) WithScrollTop(scrollTop int) *DOMHTMLTitleElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setScrollTop:"), scrollTop)
 	return dte
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (dte *DOMHTMLTitleElement) WithInnerHTML(innerHTML string) *DOMHTMLTitleElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return dte
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (dte *DOMHTMLTitleElement) WithOuterHTML(outerHTML string) *DOMHTMLTitleElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return dte
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (dte *DOMHTMLTitleElement) WithClassName(className string) *DOMHTMLTitleElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return dte
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dte *DOMHTMLTitleElement) WithNodeValue(nodeValue string) *DOMHTMLTitleElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dte
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dte *DOMHTMLTitleElement) WithPrefix(prefix string) *DOMHTMLTitleElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dte
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dte *DOMHTMLTitleElement) WithTextContent(textContent string) *DOMHTMLTitleElement {
 	objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dte
 }
 
-// Text wraps the corresponding Objective-C method.
+// Text returns the text.
 func (dte *DOMHTMLTitleElement) Text() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dte), objc.RegisterName("text"))
 	if _r == 0 {

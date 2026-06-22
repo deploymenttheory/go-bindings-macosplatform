@@ -79,7 +79,7 @@ func (mcosup *MTRClusterOtaSoftwareUpdateProvider) QueryImageWithParamsExpectedV
 	}
 }
 
-// ApplyUpdateRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
+// ApplyUpdateRequestWithParamsExpectedValuesExpectedValueInterval applies update request with params expected values expected value interval.
 //
 // ApplyUpdateRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
 func (mcosup *MTRClusterOtaSoftwareUpdateProvider) ApplyUpdateRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams, err error) {

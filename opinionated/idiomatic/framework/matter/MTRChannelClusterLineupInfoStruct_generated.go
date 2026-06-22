@@ -66,31 +66,31 @@ func (mcclis *MTRChannelClusterLineupInfoStruct) String() string {
 	return rt.Description(objref.IDOf(mcclis))
 }
 
-// WithOperatorName sets the property and returns the receiver so calls can be chained.
+// WithOperatorName sets the operator name.
 func (mcclis *MTRChannelClusterLineupInfoStruct) WithOperatorName(operatorName string) *MTRChannelClusterLineupInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(mcclis), objc.RegisterName("setOperatorName:"), purego.NSString(operatorName))
 	return mcclis
 }
 
-// WithLineupName sets the property and returns the receiver so calls can be chained.
+// WithLineupName sets the lineup name.
 func (mcclis *MTRChannelClusterLineupInfoStruct) WithLineupName(lineupName string) *MTRChannelClusterLineupInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(mcclis), objc.RegisterName("setLineupName:"), purego.NSString(lineupName))
 	return mcclis
 }
 
-// WithPostalCode sets the property and returns the receiver so calls can be chained.
+// WithPostalCode sets the postal code.
 func (mcclis *MTRChannelClusterLineupInfoStruct) WithPostalCode(postalCode string) *MTRChannelClusterLineupInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(mcclis), objc.RegisterName("setPostalCode:"), purego.NSString(postalCode))
 	return mcclis
 }
 
-// WithLineupInfoType sets the property and returns the receiver so calls can be chained.
+// WithLineupInfoType sets the lineup info type.
 func (mcclis *MTRChannelClusterLineupInfoStruct) WithLineupInfoType(lineupInfoType obj.Object) *MTRChannelClusterLineupInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(mcclis), objc.RegisterName("setLineupInfoType:"), objref.IDOf(lineupInfoType))
 	return mcclis
 }
 
-// OperatorName wraps the corresponding Objective-C method.
+// OperatorName returns the operator name.
 func (mcclis *MTRChannelClusterLineupInfoStruct) OperatorName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mcclis), objc.RegisterName("operatorName"))
 	if _r == 0 {
@@ -99,7 +99,7 @@ func (mcclis *MTRChannelClusterLineupInfoStruct) OperatorName() string {
 	return purego.GoString(_r)
 }
 
-// LineupName wraps the corresponding Objective-C method.
+// LineupName returns the lineup name.
 func (mcclis *MTRChannelClusterLineupInfoStruct) LineupName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mcclis), objc.RegisterName("lineupName"))
 	if _r == 0 {
@@ -108,7 +108,7 @@ func (mcclis *MTRChannelClusterLineupInfoStruct) LineupName() string {
 	return purego.GoString(_r)
 }
 
-// PostalCode wraps the corresponding Objective-C method.
+// PostalCode returns the postal code.
 func (mcclis *MTRChannelClusterLineupInfoStruct) PostalCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mcclis), objc.RegisterName("postalCode"))
 	if _r == 0 {
@@ -117,7 +117,7 @@ func (mcclis *MTRChannelClusterLineupInfoStruct) PostalCode() string {
 	return purego.GoString(_r)
 }
 
-// LineupInfoType wraps the corresponding Objective-C method.
+// LineupInfoType returns the lineup info type.
 func (mcclis *MTRChannelClusterLineupInfoStruct) LineupInfoType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcclis), objc.RegisterName("lineupInfoType"))
 	return obj.Wrap(_r)

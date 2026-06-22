@@ -70,13 +70,13 @@ func NewInputMethodController() *InputMethodController {
 	return inputMethodControllerAdopt(_id)
 }
 
-// AvailableInputMethodLocales wraps the corresponding Objective-C method.
+// AvailableInputMethodLocales returns the available input method locales.
 func (imc *InputMethodController) AvailableInputMethodLocales() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(imc), objc.RegisterName("availableInputMethodLocales"))
 	return obj.Wrap(_r)
 }
 
-// CurrentInputMethodName wraps the corresponding Objective-C method.
+// CurrentInputMethodName returns the current input method name.
 func (imc *InputMethodController) CurrentInputMethodName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(imc), objc.RegisterName("currentInputMethodName"))
 	if _r == 0 {
@@ -85,7 +85,7 @@ func (imc *InputMethodController) CurrentInputMethodName() string {
 	return purego.GoString(_r)
 }
 
-// CurrentInputMethodLocale wraps the corresponding Objective-C method.
+// CurrentInputMethodLocale returns the current input method locale.
 func (imc *InputMethodController) CurrentInputMethodLocale() string {
 	_r := objc.Send[objc.ID](objref.IDOf(imc), objc.RegisterName("currentInputMethodLocale"))
 	if _r == 0 {

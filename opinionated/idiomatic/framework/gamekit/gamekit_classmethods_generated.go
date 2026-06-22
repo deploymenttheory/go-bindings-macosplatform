@@ -15,7 +15,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Shared wraps the corresponding Objective-C method.
+// Shared returns the shared.
 func Shared() *AccessPoint {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKAccessPoint")), objc.RegisterName("shared"))
 	return AccessPointFromID(_r)
@@ -545,7 +545,7 @@ func Local() *LocalPlayer {
 	return LocalPlayerFromID(_r)
 }
 
-// GKLocalPlayerLocalPlayer wraps the corresponding Objective-C method.
+// GKLocalPlayerLocalPlayer returns the gk local player local player.
 func GKLocalPlayerLocalPlayer() *LocalPlayer {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKLocalPlayer")), objc.RegisterName("localPlayer"))
 	return LocalPlayerFromID(_r)

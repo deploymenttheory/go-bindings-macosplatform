@@ -45,7 +45,7 @@ func secureElementPassAdopt(id objc.ID) *SecureElementPass {
 	return x
 }
 
-// PrimaryAccountIdentifier wraps the corresponding Objective-C method.
+// PrimaryAccountIdentifier returns the primary account identifier.
 func (sep *SecureElementPass) PrimaryAccountIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("primaryAccountIdentifier"))
 	if _r == 0 {
@@ -54,7 +54,7 @@ func (sep *SecureElementPass) PrimaryAccountIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// PrimaryAccountNumberSuffix wraps the corresponding Objective-C method.
+// PrimaryAccountNumberSuffix returns the primary account number suffix.
 func (sep *SecureElementPass) PrimaryAccountNumberSuffix() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("primaryAccountNumberSuffix"))
 	if _r == 0 {
@@ -63,7 +63,7 @@ func (sep *SecureElementPass) PrimaryAccountNumberSuffix() string {
 	return purego.GoString(_r)
 }
 
-// DeviceAccountIdentifier wraps the corresponding Objective-C method.
+// DeviceAccountIdentifier returns the device account identifier.
 func (sep *SecureElementPass) DeviceAccountIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("deviceAccountIdentifier"))
 	if _r == 0 {
@@ -72,7 +72,7 @@ func (sep *SecureElementPass) DeviceAccountIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// DeviceAccountNumberSuffix wraps the corresponding Objective-C method.
+// DeviceAccountNumberSuffix returns the device account number suffix.
 func (sep *SecureElementPass) DeviceAccountNumberSuffix() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("deviceAccountNumberSuffix"))
 	if _r == 0 {
@@ -81,13 +81,13 @@ func (sep *SecureElementPass) DeviceAccountNumberSuffix() string {
 	return purego.GoString(_r)
 }
 
-// PassActivationState wraps the corresponding Objective-C method.
+// PassActivationState returns the pass activation state.
 func (sep *SecureElementPass) PassActivationState() SecureElementPassActivationState {
 	_r := objc.Send[SecureElementPassActivationState](objref.IDOf(sep), objc.RegisterName("passActivationState"))
 	return _r
 }
 
-// DevicePassIdentifier wraps the corresponding Objective-C method.
+// DevicePassIdentifier returns the device pass identifier.
 func (sep *SecureElementPass) DevicePassIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("devicePassIdentifier"))
 	if _r == 0 {
@@ -96,7 +96,7 @@ func (sep *SecureElementPass) DevicePassIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// PairedTerminalIdentifier wraps the corresponding Objective-C method.
+// PairedTerminalIdentifier returns the paired terminal identifier.
 func (sep *SecureElementPass) PairedTerminalIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("pairedTerminalIdentifier"))
 	if _r == 0 {

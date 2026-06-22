@@ -80,7 +80,7 @@ func (askpkcr *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Transpor
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Prf wraps the corresponding Objective-C method.
+// Prf returns the prf.
 func (askpkcr *AuthorizationSecurityKeyPublicKeyCredentialRegistration) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationOutput {
 	_r := objc.Send[objc.ID](objref.IDOf(askpkcr), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFRegistrationOutputFromID(_r)

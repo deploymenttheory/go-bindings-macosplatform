@@ -80,7 +80,7 @@ func NewMTRUnitTestingClusterTestSpecificResponseParamsWithResponseValueError(re
 	return mTRUnitTestingClusterTestSpecificResponseParamsAdopt(_id), nil
 }
 
-// WithReturnValue sets the property and returns the receiver so calls can be chained.
+// WithReturnValue sets the return value.
 func (mutctsrp *MTRUnitTestingClusterTestSpecificResponseParams) WithReturnValue(returnValue obj.Object) *MTRUnitTestingClusterTestSpecificResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mutctsrp), objc.RegisterName("setReturnValue:"), objref.IDOf(returnValue))
 	return mutctsrp
@@ -92,7 +92,7 @@ func (mutctsrp *MTRUnitTestingClusterTestSpecificResponseParams) WithTimedInvoke
 	return mutctsrp
 }
 
-// ReturnValue wraps the corresponding Objective-C method.
+// ReturnValue returns the return value.
 func (mutctsrp *MTRUnitTestingClusterTestSpecificResponseParams) ReturnValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctsrp), objc.RegisterName("returnValue"))
 	return obj.Wrap(_r)

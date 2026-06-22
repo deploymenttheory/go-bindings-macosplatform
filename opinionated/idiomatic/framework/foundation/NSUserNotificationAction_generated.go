@@ -72,13 +72,13 @@ func NewUserNotificationAction() *UserNotificationAction {
 	return userNotificationActionAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (una *UserNotificationAction) WithScriptingProperties(scriptingProperties obj.Object) *UserNotificationAction {
 	objc.Send[objc.ID](objref.IDOf(una), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return una
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (una *UserNotificationAction) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(una), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -87,7 +87,7 @@ func (una *UserNotificationAction) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (una *UserNotificationAction) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(una), objc.RegisterName("title"))
 	if _r == 0 {

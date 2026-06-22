@@ -81,7 +81,7 @@ func (c *Container) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (c *Container) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("name"))
 	if _r == 0 {
@@ -90,7 +90,7 @@ func (c *Container) Name() string {
 	return purego.GoString(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (c *Container) Type() ContainerType {
 	_r := objc.Send[ContainerType](objref.IDOf(c), objc.RegisterName("type"))
 	return _r

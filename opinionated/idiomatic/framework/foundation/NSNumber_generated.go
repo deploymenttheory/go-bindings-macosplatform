@@ -158,7 +158,7 @@ func NewNumberWithUnsignedInteger(value int) *Number {
 	return numberAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (n *Number) WithScriptingProperties(scriptingProperties obj.Object) *Number {
 	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return n
@@ -185,73 +185,73 @@ func (n *Number) DescriptionWithLocale(locale obj.Object) string {
 	return purego.GoString(_r)
 }
 
-// CharValue wraps the corresponding Objective-C method.
+// CharValue returns the char value.
 func (n *Number) CharValue() int8 {
 	_r := objc.Send[int8](objref.IDOf(n), objc.RegisterName("charValue"))
 	return _r
 }
 
-// UnsignedCharValue wraps the corresponding Objective-C method.
+// UnsignedCharValue returns the unsigned char value.
 func (n *Number) UnsignedCharValue() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(n), objc.RegisterName("unsignedCharValue"))
 	return _r
 }
 
-// ShortValue wraps the corresponding Objective-C method.
+// ShortValue returns the short value.
 func (n *Number) ShortValue() int16 {
 	_r := objc.Send[int16](objref.IDOf(n), objc.RegisterName("shortValue"))
 	return _r
 }
 
-// UnsignedShortValue wraps the corresponding Objective-C method.
+// UnsignedShortValue returns the unsigned short value.
 func (n *Number) UnsignedShortValue() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(n), objc.RegisterName("unsignedShortValue"))
 	return _r
 }
 
-// IntValue wraps the corresponding Objective-C method.
+// IntValue returns the int value.
 func (n *Number) IntValue() int {
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("intValue"))
 	return _r
 }
 
-// UnsignedIntValue wraps the corresponding Objective-C method.
+// UnsignedIntValue returns the unsigned int value.
 func (n *Number) UnsignedIntValue() int {
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("unsignedIntValue"))
 	return _r
 }
 
-// LongValue wraps the corresponding Objective-C method.
+// LongValue returns the long value.
 func (n *Number) LongValue() int {
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("longValue"))
 	return _r
 }
 
-// UnsignedLongValue wraps the corresponding Objective-C method.
+// UnsignedLongValue returns the unsigned long value.
 func (n *Number) UnsignedLongValue() int {
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("unsignedLongValue"))
 	return _r
 }
 
-// LongLongValue wraps the corresponding Objective-C method.
+// LongLongValue returns the long long value.
 func (n *Number) LongLongValue() int64 {
 	_r := objc.Send[int64](objref.IDOf(n), objc.RegisterName("longLongValue"))
 	return _r
 }
 
-// UnsignedLongLongValue wraps the corresponding Objective-C method.
+// UnsignedLongLongValue returns the unsigned long long value.
 func (n *Number) UnsignedLongLongValue() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(n), objc.RegisterName("unsignedLongLongValue"))
 	return _r
 }
 
-// FloatValue wraps the corresponding Objective-C method.
+// FloatValue returns the float value.
 func (n *Number) FloatValue() float32 {
 	_r := objc.Send[float32](objref.IDOf(n), objc.RegisterName("floatValue"))
 	return _r
 }
 
-// DoubleValue wraps the corresponding Objective-C method.
+// DoubleValue returns the double value.
 func (n *Number) DoubleValue() float64 {
 	_r := objc.Send[float64](objref.IDOf(n), objc.RegisterName("doubleValue"))
 	return _r
@@ -263,19 +263,19 @@ func (n *Number) BoolValue() bool {
 	return _r
 }
 
-// IntegerValue wraps the corresponding Objective-C method.
+// IntegerValue returns the integer value.
 func (n *Number) IntegerValue() int {
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("integerValue"))
 	return _r
 }
 
-// UnsignedIntegerValue wraps the corresponding Objective-C method.
+// UnsignedIntegerValue returns the unsigned integer value.
 func (n *Number) UnsignedIntegerValue() int {
 	_r := objc.Send[int](objref.IDOf(n), objc.RegisterName("unsignedIntegerValue"))
 	return _r
 }
 
-// StringValue wraps the corresponding Objective-C method.
+// StringValue returns the string value.
 func (n *Number) StringValue() string {
 	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("stringValue"))
 	if _r == 0 {

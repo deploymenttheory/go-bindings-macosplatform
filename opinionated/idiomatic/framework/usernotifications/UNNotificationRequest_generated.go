@@ -72,7 +72,7 @@ func NewNotificationRequest() *NotificationRequest {
 	return notificationRequestAdopt(_id)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (nr *NotificationRequest) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -81,13 +81,13 @@ func (nr *NotificationRequest) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// Content wraps the corresponding Objective-C method.
+// Content returns the content.
 func (nr *NotificationRequest) Content() *NotificationContent {
 	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("content"))
 	return NotificationContentFromID(_r)
 }
 
-// Trigger wraps the corresponding Objective-C method.
+// Trigger returns the trigger.
 func (nr *NotificationRequest) Trigger() *NotificationTrigger {
 	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("trigger"))
 	return NotificationTriggerFromID(_r)

@@ -51,13 +51,13 @@ func NewChangeHistoryAddGroupEvent() *ChangeHistoryAddGroupEvent {
 	return changeHistoryAddGroupEventAdopt(_id)
 }
 
-// Group wraps the corresponding Objective-C method.
+// Group returns the group.
 func (chage *ChangeHistoryAddGroupEvent) Group() *Group {
 	_r := objc.Send[objc.ID](objref.IDOf(chage), objc.RegisterName("group"))
 	return GroupFromID(_r)
 }
 
-// ContainerIdentifier wraps the corresponding Objective-C method.
+// ContainerIdentifier returns the container identifier.
 func (chage *ChangeHistoryAddGroupEvent) ContainerIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(chage), objc.RegisterName("containerIdentifier"))
 	if _r == 0 {

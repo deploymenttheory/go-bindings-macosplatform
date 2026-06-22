@@ -119,31 +119,31 @@ func (br *BeaconRegion) PeripheralDataWithMeasuredPower(measuredPower obj.Object
 	return obj.Wrap(_r)
 }
 
-// BeaconIdentityConstraint wraps the corresponding Objective-C method.
+// BeaconIdentityConstraint returns the beacon identity constraint.
 func (br *BeaconRegion) BeaconIdentityConstraint() *BeaconIdentityConstraint {
 	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("beaconIdentityConstraint"))
 	return BeaconIdentityConstraintFromID(_r)
 }
 
-// UUID wraps the corresponding Objective-C method.
+// UUID returns the UUID.
 func (br *BeaconRegion) UUID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("UUID"))
 	return obj.Wrap(_r)
 }
 
-// ProximityUUID wraps the corresponding Objective-C method.
+// ProximityUUID returns the proximity UUID.
 func (br *BeaconRegion) ProximityUUID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("proximityUUID"))
 	return obj.Wrap(_r)
 }
 
-// Major wraps the corresponding Objective-C method.
+// Major returns the major.
 func (br *BeaconRegion) Major() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("major"))
 	return obj.Wrap(_r)
 }
 
-// Minor wraps the corresponding Objective-C method.
+// Minor returns the minor.
 func (br *BeaconRegion) Minor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("minor"))
 	return obj.Wrap(_r)

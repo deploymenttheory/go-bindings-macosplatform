@@ -70,25 +70,25 @@ func NewMTRSwitchClusterMultiPressOngoingEvent() *MTRSwitchClusterMultiPressOngo
 	return mTRSwitchClusterMultiPressOngoingEventAdopt(_id)
 }
 
-// WithNewPosition sets the property and returns the receiver so calls can be chained.
+// WithNewPosition sets the new position.
 func (mscmpoe *MTRSwitchClusterMultiPressOngoingEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterMultiPressOngoingEvent {
 	objc.Send[objc.ID](objref.IDOf(mscmpoe), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
 	return mscmpoe
 }
 
-// WithCurrentNumberOfPressesCounted sets the property and returns the receiver so calls can be chained.
+// WithCurrentNumberOfPressesCounted sets the current number of presses counted.
 func (mscmpoe *MTRSwitchClusterMultiPressOngoingEvent) WithCurrentNumberOfPressesCounted(currentNumberOfPressesCounted obj.Object) *MTRSwitchClusterMultiPressOngoingEvent {
 	objc.Send[objc.ID](objref.IDOf(mscmpoe), objc.RegisterName("setCurrentNumberOfPressesCounted:"), objref.IDOf(currentNumberOfPressesCounted))
 	return mscmpoe
 }
 
-// GetNewPosition wraps the corresponding Objective-C method.
-func (mscmpoe *MTRSwitchClusterMultiPressOngoingEvent) GetNewPosition() obj.Object {
+// NewPosition returns the new position.
+func (mscmpoe *MTRSwitchClusterMultiPressOngoingEvent) NewPosition() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mscmpoe), objc.RegisterName("getNewPosition"))
 	return obj.Wrap(_r)
 }
 
-// CurrentNumberOfPressesCounted wraps the corresponding Objective-C method.
+// CurrentNumberOfPressesCounted returns the current number of presses counted.
 func (mscmpoe *MTRSwitchClusterMultiPressOngoingEvent) CurrentNumberOfPressesCounted() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mscmpoe), objc.RegisterName("currentNumberOfPressesCounted"))
 	return obj.Wrap(_r)

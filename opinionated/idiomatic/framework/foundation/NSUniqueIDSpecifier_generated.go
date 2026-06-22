@@ -108,13 +108,13 @@ func (uis *UniqueIDSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber in
 	return uis
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (uis *UniqueIDSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *UniqueIDSpecifier {
 	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return uis
 }
 
-// UniqueID wraps the corresponding Objective-C method.
+// UniqueID returns the unique ID.
 func (uis *UniqueIDSpecifier) UniqueID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("uniqueID"))
 	return obj.Wrap(_r)

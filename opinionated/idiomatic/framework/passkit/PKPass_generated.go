@@ -88,25 +88,25 @@ func (p *Pass) LocalizedValueForFieldKey(key string) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// PassType wraps the corresponding Objective-C method.
+// PassType returns the pass type.
 func (p *Pass) PassType() PassType {
 	_r := objc.Send[PassType](objref.IDOf(p), objc.RegisterName("passType"))
 	return _r
 }
 
-// PaymentPass wraps the corresponding Objective-C method.
+// PaymentPass returns the payment pass.
 func (p *Pass) PaymentPass() *PaymentPass {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("paymentPass"))
 	return PaymentPassFromID(_r)
 }
 
-// SecureElementPass wraps the corresponding Objective-C method.
+// SecureElementPass returns the secure element pass.
 func (p *Pass) SecureElementPass() *SecureElementPass {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("secureElementPass"))
 	return SecureElementPassFromID(_r)
 }
 
-// SerialNumber wraps the corresponding Objective-C method.
+// SerialNumber returns the serial number.
 func (p *Pass) SerialNumber() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("serialNumber"))
 	if _r == 0 {
@@ -115,7 +115,7 @@ func (p *Pass) SerialNumber() string {
 	return purego.GoString(_r)
 }
 
-// PassTypeIdentifier wraps the corresponding Objective-C method.
+// PassTypeIdentifier returns the pass type identifier.
 func (p *Pass) PassTypeIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("passTypeIdentifier"))
 	if _r == 0 {
@@ -124,13 +124,13 @@ func (p *Pass) PassTypeIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// WebServiceURL wraps the corresponding Objective-C method.
+// WebServiceURL returns the web service URL.
 func (p *Pass) WebServiceURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("webServiceURL"))
 	return obj.Wrap(_r)
 }
 
-// AuthenticationToken wraps the corresponding Objective-C method.
+// AuthenticationToken returns the authentication token.
 func (p *Pass) AuthenticationToken() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("authenticationToken"))
 	if _r == 0 {
@@ -139,7 +139,7 @@ func (p *Pass) AuthenticationToken() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedName wraps the corresponding Objective-C method.
+// LocalizedName returns the localized name.
 func (p *Pass) LocalizedName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("localizedName"))
 	if _r == 0 {
@@ -148,7 +148,7 @@ func (p *Pass) LocalizedName() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedDescription wraps the corresponding Objective-C method.
+// LocalizedDescription returns the localized description.
 func (p *Pass) LocalizedDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
@@ -157,7 +157,7 @@ func (p *Pass) LocalizedDescription() string {
 	return purego.GoString(_r)
 }
 
-// OrganizationName wraps the corresponding Objective-C method.
+// OrganizationName returns the organization name.
 func (p *Pass) OrganizationName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("organizationName"))
 	if _r == 0 {
@@ -166,13 +166,13 @@ func (p *Pass) OrganizationName() string {
 	return purego.GoString(_r)
 }
 
-// RelevantDate wraps the corresponding Objective-C method.
+// RelevantDate returns the relevant date.
 func (p *Pass) RelevantDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("relevantDate"))
 	return obj.Wrap(_r)
 }
 
-// RelevantDates wraps the corresponding Objective-C method.
+// RelevantDates returns the relevant dates.
 //
 // RelevantDates returns the collection as a Go slice.
 func (p *Pass) RelevantDates() []*PassRelevantDate {
@@ -180,25 +180,25 @@ func (p *Pass) RelevantDates() []*PassRelevantDate {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PassRelevantDate { return PassRelevantDateFromID(_id) })
 }
 
-// UserInfo wraps the corresponding Objective-C method.
+// UserInfo returns the user info.
 func (p *Pass) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
 
-// PassURL wraps the corresponding Objective-C method.
+// PassURL returns the pass URL.
 func (p *Pass) PassURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("passURL"))
 	return obj.Wrap(_r)
 }
 
-// IsRemotePass wraps the corresponding Objective-C method.
+// IsRemotePass reports whether the object is remote pass.
 func (p *Pass) IsRemotePass() bool {
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isRemotePass"))
 	return _r
 }
 
-// DeviceName wraps the corresponding Objective-C method.
+// DeviceName returns the device name.
 func (p *Pass) DeviceName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("deviceName"))
 	if _r == 0 {

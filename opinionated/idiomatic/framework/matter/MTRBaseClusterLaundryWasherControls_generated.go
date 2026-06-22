@@ -56,7 +56,7 @@ func NewMTRBaseClusterLaundryWasherControlsWithDeviceEndpointIDQueue(device *MTR
 	return mTRBaseClusterLaundryWasherControlsAdopt(_id)
 }
 
-// ReadAttributeSpinSpeedsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSpinSpeedsWithCompletion reads attribute spin speeds with completion.
 //
 // ReadAttributeSpinSpeedsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeSpinSpeedsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -106,7 +106,7 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeSpinSpeedsW
 	}
 }
 
-// ReadAttributeSpinSpeedCurrentWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSpinSpeedCurrentWithCompletion reads attribute spin speed current with completion.
 //
 // ReadAttributeSpinSpeedCurrentWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeSpinSpeedCurrentWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -156,7 +156,7 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeSpinSpeedCu
 	}
 }
 
-// ReadAttributeNumberOfRinsesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfRinsesWithCompletion reads attribute number of rinses with completion.
 //
 // ReadAttributeNumberOfRinsesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeNumberOfRinsesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -206,7 +206,7 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeNumberOfRin
 	}
 }
 
-// ReadAttributeSupportedRinsesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupportedRinsesWithCompletion reads attribute supported rinses with completion.
 //
 // ReadAttributeSupportedRinsesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeSupportedRinsesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -256,7 +256,7 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeSupportedRi
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -306,7 +306,7 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeGeneratedCo
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -356,7 +356,7 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeAcceptedCom
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -406,7 +406,7 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeAttributeLi
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -456,7 +456,7 @@ func (mbclwc *MTRBaseClusterLaundryWasherControls) SubscribeAttributeFeatureMapW
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbclwc *MTRBaseClusterLaundryWasherControls) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

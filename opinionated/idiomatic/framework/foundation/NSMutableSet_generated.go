@@ -60,7 +60,7 @@ func NewMutableSetWithCapacity(numItems int) *MutableSet {
 	return mutableSetAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ms *MutableSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableSet {
 	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ms

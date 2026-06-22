@@ -78,25 +78,25 @@ func NewMTRDishwasherModeClusterChangeToModeResponseParamsWithResponseValueError
 	return mTRDishwasherModeClusterChangeToModeResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mdmcctmrp *MTRDishwasherModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTRDishwasherModeClusterChangeToModeResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdmcctmrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mdmcctmrp
 }
 
-// WithStatusText sets the property and returns the receiver so calls can be chained.
+// WithStatusText sets the status text.
 func (mdmcctmrp *MTRDishwasherModeClusterChangeToModeResponseParams) WithStatusText(statusText string) *MTRDishwasherModeClusterChangeToModeResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mdmcctmrp), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
 	return mdmcctmrp
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (mdmcctmrp *MTRDishwasherModeClusterChangeToModeResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdmcctmrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// StatusText wraps the corresponding Objective-C method.
+// StatusText returns the status text.
 func (mdmcctmrp *MTRDishwasherModeClusterChangeToModeResponseParams) StatusText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mdmcctmrp), objc.RegisterName("statusText"))
 	if _r == 0 {

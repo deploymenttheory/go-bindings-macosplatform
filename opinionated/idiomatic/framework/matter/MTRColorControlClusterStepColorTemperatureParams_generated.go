@@ -70,43 +70,43 @@ func NewMTRColorControlClusterStepColorTemperatureParams() *MTRColorControlClust
 	return mTRColorControlClusterStepColorTemperatureParamsAdopt(_id)
 }
 
-// WithStepMode sets the property and returns the receiver so calls can be chained.
+// WithStepMode sets the step mode.
 func (mcccsctp *MTRColorControlClusterStepColorTemperatureParams) WithStepMode(stepMode obj.Object) *MTRColorControlClusterStepColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mcccsctp), objc.RegisterName("setStepMode:"), objref.IDOf(stepMode))
 	return mcccsctp
 }
 
-// WithStepSize sets the property and returns the receiver so calls can be chained.
+// WithStepSize sets the step size.
 func (mcccsctp *MTRColorControlClusterStepColorTemperatureParams) WithStepSize(stepSize obj.Object) *MTRColorControlClusterStepColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mcccsctp), objc.RegisterName("setStepSize:"), objref.IDOf(stepSize))
 	return mcccsctp
 }
 
-// WithTransitionTime sets the property and returns the receiver so calls can be chained.
+// WithTransitionTime sets the transition time.
 func (mcccsctp *MTRColorControlClusterStepColorTemperatureParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterStepColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mcccsctp), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return mcccsctp
 }
 
-// WithColorTemperatureMinimumMireds sets the property and returns the receiver so calls can be chained.
+// WithColorTemperatureMinimumMireds sets the color temperature minimum mireds.
 func (mcccsctp *MTRColorControlClusterStepColorTemperatureParams) WithColorTemperatureMinimumMireds(colorTemperatureMinimumMireds obj.Object) *MTRColorControlClusterStepColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mcccsctp), objc.RegisterName("setColorTemperatureMinimumMireds:"), objref.IDOf(colorTemperatureMinimumMireds))
 	return mcccsctp
 }
 
-// WithColorTemperatureMaximumMireds sets the property and returns the receiver so calls can be chained.
+// WithColorTemperatureMaximumMireds sets the color temperature maximum mireds.
 func (mcccsctp *MTRColorControlClusterStepColorTemperatureParams) WithColorTemperatureMaximumMireds(colorTemperatureMaximumMireds obj.Object) *MTRColorControlClusterStepColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mcccsctp), objc.RegisterName("setColorTemperatureMaximumMireds:"), objref.IDOf(colorTemperatureMaximumMireds))
 	return mcccsctp
 }
 
-// WithOptionsMask sets the property and returns the receiver so calls can be chained.
+// WithOptionsMask sets the options mask.
 func (mcccsctp *MTRColorControlClusterStepColorTemperatureParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterStepColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mcccsctp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mcccsctp
 }
 
-// WithOptionsOverride sets the property and returns the receiver so calls can be chained.
+// WithOptionsOverride sets the options override.
 func (mcccsctp *MTRColorControlClusterStepColorTemperatureParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterStepColorTemperatureParams {
 	objc.Send[objc.ID](objref.IDOf(mcccsctp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mcccsctp
@@ -124,43 +124,43 @@ func (mcccsctp *MTRColorControlClusterStepColorTemperatureParams) WithServerSide
 	return mcccsctp
 }
 
-// StepMode wraps the corresponding Objective-C method.
+// StepMode returns the step mode.
 func (mcccsctp *MTRColorControlClusterStepColorTemperatureParams) StepMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccsctp), objc.RegisterName("stepMode"))
 	return obj.Wrap(_r)
 }
 
-// StepSize wraps the corresponding Objective-C method.
+// StepSize returns the step size.
 func (mcccsctp *MTRColorControlClusterStepColorTemperatureParams) StepSize() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccsctp), objc.RegisterName("stepSize"))
 	return obj.Wrap(_r)
 }
 
-// TransitionTime wraps the corresponding Objective-C method.
+// TransitionTime returns the transition time.
 func (mcccsctp *MTRColorControlClusterStepColorTemperatureParams) TransitionTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccsctp), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)
 }
 
-// ColorTemperatureMinimumMireds wraps the corresponding Objective-C method.
+// ColorTemperatureMinimumMireds returns the color temperature minimum mireds.
 func (mcccsctp *MTRColorControlClusterStepColorTemperatureParams) ColorTemperatureMinimumMireds() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccsctp), objc.RegisterName("colorTemperatureMinimumMireds"))
 	return obj.Wrap(_r)
 }
 
-// ColorTemperatureMaximumMireds wraps the corresponding Objective-C method.
+// ColorTemperatureMaximumMireds returns the color temperature maximum mireds.
 func (mcccsctp *MTRColorControlClusterStepColorTemperatureParams) ColorTemperatureMaximumMireds() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccsctp), objc.RegisterName("colorTemperatureMaximumMireds"))
 	return obj.Wrap(_r)
 }
 
-// OptionsMask wraps the corresponding Objective-C method.
+// OptionsMask returns the options mask.
 func (mcccsctp *MTRColorControlClusterStepColorTemperatureParams) OptionsMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccsctp), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
 }
 
-// OptionsOverride wraps the corresponding Objective-C method.
+// OptionsOverride returns the options override.
 func (mcccsctp *MTRColorControlClusterStepColorTemperatureParams) OptionsOverride() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccsctp), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)

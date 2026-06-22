@@ -134,7 +134,7 @@ func NewOrderedSetWithSetCopyItems(set obj.Object, flag bool) *OrderedSet {
 	return orderedSetAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (os *OrderedSet) WithScriptingProperties(scriptingProperties obj.Object) *OrderedSet {
 	objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return os
@@ -153,7 +153,7 @@ func (os *OrderedSet) IndexOfObject(object obj.Object) int {
 	return _r
 }
 
-// Count wraps the corresponding Objective-C method.
+// Count returns the count.
 func (os *OrderedSet) Count() int {
 	_r := objc.Send[int](objref.IDOf(os), objc.RegisterName("count"))
 	return _r
@@ -301,31 +301,31 @@ func (os *OrderedSet) DescriptionWithLocaleIndent(locale obj.Object, level int) 
 	return purego.GoString(_r)
 }
 
-// FirstObject wraps the corresponding Objective-C method.
+// FirstObject returns the first object.
 func (os *OrderedSet) FirstObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("firstObject"))
 	return obj.Wrap(_r)
 }
 
-// LastObject wraps the corresponding Objective-C method.
+// LastObject returns the last object.
 func (os *OrderedSet) LastObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("lastObject"))
 	return obj.Wrap(_r)
 }
 
-// ReversedOrderedSet wraps the corresponding Objective-C method.
+// ReversedOrderedSet returns the reversed ordered set.
 func (os *OrderedSet) ReversedOrderedSet() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("reversedOrderedSet"))
 	return obj.Wrap(_r)
 }
 
-// Array wraps the corresponding Objective-C method.
+// Array returns the array.
 func (os *OrderedSet) Array() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("array"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Set wraps the corresponding Objective-C method.
+// Set returns the set.
 func (os *OrderedSet) Set() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("set"))
 	return obj.Wrap(_r)

@@ -78,7 +78,7 @@ func (mc *MapCamera) WithPitch(pitch float64) *MapCamera {
 	return mc
 }
 
-// Pitch wraps the corresponding Objective-C method.
+// Pitch returns the pitch.
 func (mc *MapCamera) Pitch() float64 {
 	_r := objc.Send[float64](objref.IDOf(mc), objc.RegisterName("pitch"))
 	return _r

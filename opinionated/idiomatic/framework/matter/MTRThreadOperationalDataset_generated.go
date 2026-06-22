@@ -85,7 +85,7 @@ func NewMTRThreadOperationalDatasetWithNetworkNameExtendedPANIDMasterKeyPSKcChan
 	return mTRThreadOperationalDatasetAdopt(_id)
 }
 
-// WithChannel sets the property and returns the receiver so calls can be chained.
+// WithChannel sets the channel.
 func (mtod *MTRThreadOperationalDataset) WithChannel(channel uint16) *MTRThreadOperationalDataset {
 	objc.Send[objc.ID](objref.IDOf(mtod), objc.RegisterName("setChannel:"), channel)
 	return mtod
@@ -136,7 +136,7 @@ func (mtod *MTRThreadOperationalDataset) PanID() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Channel wraps the corresponding Objective-C method.
+// Channel returns the channel.
 func (mtod *MTRThreadOperationalDataset) Channel() uint16 {
 	_r := objc.Send[uint16](objref.IDOf(mtod), objc.RegisterName("channel"))
 	return _r

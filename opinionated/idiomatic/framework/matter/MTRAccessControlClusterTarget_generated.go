@@ -50,19 +50,19 @@ func NewMTRAccessControlClusterTarget() *MTRAccessControlClusterTarget {
 	return mTRAccessControlClusterTargetAdopt(_id)
 }
 
-// WithCluster sets the property and returns the receiver so calls can be chained.
+// WithCluster sets the cluster.
 func (macct *MTRAccessControlClusterTarget) WithCluster(cluster obj.Object) *MTRAccessControlClusterTarget {
 	objc.Send[objc.ID](objref.IDOf(macct), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
 	return macct
 }
 
-// WithEndpoint sets the property and returns the receiver so calls can be chained.
+// WithEndpoint sets the endpoint.
 func (macct *MTRAccessControlClusterTarget) WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterTarget {
 	objc.Send[objc.ID](objref.IDOf(macct), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return macct
 }
 
-// WithDeviceType sets the property and returns the receiver so calls can be chained.
+// WithDeviceType sets the device type.
 func (macct *MTRAccessControlClusterTarget) WithDeviceType(deviceType obj.Object) *MTRAccessControlClusterTarget {
 	objc.Send[objc.ID](objref.IDOf(macct), objc.RegisterName("setDeviceType:"), objref.IDOf(deviceType))
 	return macct

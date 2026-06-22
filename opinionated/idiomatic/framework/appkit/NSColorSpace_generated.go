@@ -80,31 +80,31 @@ func NewColorSpaceWithCGColorSpace(cgColorSpace obj.Object) *ColorSpace {
 	return colorSpaceAdopt(_id)
 }
 
-// ICCProfileData wraps the corresponding Objective-C method.
+// ICCProfileData returns the icc profile data.
 func (cs *ColorSpace) ICCProfileData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("ICCProfileData"))
 	return obj.Wrap(_r)
 }
 
-// CGColorSpace wraps the corresponding Objective-C method.
+// CGColorSpace returns the cg color space.
 func (cs *ColorSpace) CGColorSpace() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("CGColorSpace"))
 	return obj.Wrap(_r)
 }
 
-// NumberOfColorComponents wraps the corresponding Objective-C method.
+// NumberOfColorComponents returns the number of color components.
 func (cs *ColorSpace) NumberOfColorComponents() int {
 	_r := objc.Send[int](objref.IDOf(cs), objc.RegisterName("numberOfColorComponents"))
 	return _r
 }
 
-// ColorSpaceModel wraps the corresponding Objective-C method.
+// ColorSpaceModel returns the color space model.
 func (cs *ColorSpace) ColorSpaceModel() ColorSpaceModel {
 	_r := objc.Send[ColorSpaceModel](objref.IDOf(cs), objc.RegisterName("colorSpaceModel"))
 	return _r
 }
 
-// LocalizedName wraps the corresponding Objective-C method.
+// LocalizedName returns the localized name.
 func (cs *ColorSpace) LocalizedName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("localizedName"))
 	if _r == 0 {

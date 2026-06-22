@@ -70,7 +70,7 @@ func NewMTRKeypadInputClusterSendKeyParams() *MTRKeypadInputClusterSendKeyParams
 	return mTRKeypadInputClusterSendKeyParamsAdopt(_id)
 }
 
-// WithKeyCode sets the property and returns the receiver so calls can be chained.
+// WithKeyCode sets the key code.
 func (mkicskp *MTRKeypadInputClusterSendKeyParams) WithKeyCode(keyCode obj.Object) *MTRKeypadInputClusterSendKeyParams {
 	objc.Send[objc.ID](objref.IDOf(mkicskp), objc.RegisterName("setKeyCode:"), objref.IDOf(keyCode))
 	return mkicskp
@@ -88,7 +88,7 @@ func (mkicskp *MTRKeypadInputClusterSendKeyParams) WithServerSideProcessingTimeo
 	return mkicskp
 }
 
-// KeyCode wraps the corresponding Objective-C method.
+// KeyCode returns the key code.
 func (mkicskp *MTRKeypadInputClusterSendKeyParams) KeyCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mkicskp), objc.RegisterName("keyCode"))
 	return obj.Wrap(_r)

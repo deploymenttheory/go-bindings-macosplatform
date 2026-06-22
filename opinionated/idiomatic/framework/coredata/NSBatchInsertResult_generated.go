@@ -52,13 +52,13 @@ func NewBatchInsertResult() *BatchInsertResult {
 	return batchInsertResultAdopt(_id)
 }
 
-// Result wraps the corresponding Objective-C method.
+// Result returns the result.
 func (bir *BatchInsertResult) Result() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bir), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }
 
-// ResultType wraps the corresponding Objective-C method.
+// ResultType returns the result type.
 func (bir *BatchInsertResult) ResultType() BatchInsertRequestResultType {
 	_r := objc.Send[BatchInsertRequestResultType](objref.IDOf(bir), objc.RegisterName("resultType"))
 	return _r

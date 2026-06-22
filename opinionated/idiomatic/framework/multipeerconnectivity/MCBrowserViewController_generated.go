@@ -92,25 +92,25 @@ func (bvc *BrowserViewController) WithMaximumNumberOfPeers(maximumNumberOfPeers 
 	return bvc
 }
 
-// Browser wraps the corresponding Objective-C method.
+// Browser returns the browser.
 func (bvc *BrowserViewController) Browser() *NearbyServiceBrowser {
 	_r := objc.Send[objc.ID](objref.IDOf(bvc), objc.RegisterName("browser"))
 	return NearbyServiceBrowserFromID(_r)
 }
 
-// Session wraps the corresponding Objective-C method.
+// Session returns the session.
 func (bvc *BrowserViewController) Session() *Session {
 	_r := objc.Send[objc.ID](objref.IDOf(bvc), objc.RegisterName("session"))
 	return SessionFromID(_r)
 }
 
-// MinimumNumberOfPeers wraps the corresponding Objective-C method.
+// MinimumNumberOfPeers returns the minimum number of peers.
 func (bvc *BrowserViewController) MinimumNumberOfPeers() int {
 	_r := objc.Send[int](objref.IDOf(bvc), objc.RegisterName("minimumNumberOfPeers"))
 	return _r
 }
 
-// MaximumNumberOfPeers wraps the corresponding Objective-C method.
+// MaximumNumberOfPeers returns the maximum number of peers.
 func (bvc *BrowserViewController) MaximumNumberOfPeers() int {
 	_r := objc.Send[int](objref.IDOf(bvc), objc.RegisterName("maximumNumberOfPeers"))
 	return _r

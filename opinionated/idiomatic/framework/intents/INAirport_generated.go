@@ -73,7 +73,7 @@ func NewAirportWithNameIataCodeIcaoCode(name string, iataCode string, icaoCode s
 	return airportAdopt(_id)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (a *Airport) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("name"))
 	if _r == 0 {
@@ -82,7 +82,7 @@ func (a *Airport) Name() string {
 	return purego.GoString(_r)
 }
 
-// IataCode wraps the corresponding Objective-C method.
+// IataCode returns the iata code.
 func (a *Airport) IataCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("iataCode"))
 	if _r == 0 {
@@ -91,7 +91,7 @@ func (a *Airport) IataCode() string {
 	return purego.GoString(_r)
 }
 
-// IcaoCode wraps the corresponding Objective-C method.
+// IcaoCode returns the icao code.
 func (a *Airport) IcaoCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("icaoCode"))
 	if _r == 0 {

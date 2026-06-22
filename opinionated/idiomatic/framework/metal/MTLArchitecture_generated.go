@@ -72,7 +72,7 @@ func NewArchitecture() *Architecture {
 	return architectureAdopt(_id)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (a *Architecture) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("name"))
 	if _r == 0 {

@@ -68,7 +68,7 @@ func (cd *ClassDescription) String() string {
 	return rt.Description(objref.IDOf(cd))
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (cd *ClassDescription) WithScriptingProperties(scriptingProperties obj.Object) *ClassDescription {
 	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return cd

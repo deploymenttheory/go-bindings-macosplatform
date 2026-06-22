@@ -72,7 +72,7 @@ func NewAuthorizationPublicKeyCredentialLargeBlobAssertionOutput() *Authorizatio
 	return authorizationPublicKeyCredentialLargeBlobAssertionOutputAdopt(_id)
 }
 
-// ReadData wraps the corresponding Objective-C method.
+// ReadData returns the read data.
 func (apkclbao *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) ReadData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(apkclbao), objc.RegisterName("readData"))
 	return obj.Wrap(_r)

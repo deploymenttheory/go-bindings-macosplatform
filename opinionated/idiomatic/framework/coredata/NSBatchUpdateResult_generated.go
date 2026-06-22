@@ -52,13 +52,13 @@ func NewBatchUpdateResult() *BatchUpdateResult {
 	return batchUpdateResultAdopt(_id)
 }
 
-// Result wraps the corresponding Objective-C method.
+// Result returns the result.
 func (bur *BatchUpdateResult) Result() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }
 
-// ResultType wraps the corresponding Objective-C method.
+// ResultType returns the result type.
 func (bur *BatchUpdateResult) ResultType() BatchUpdateRequestResultType {
 	_r := objc.Send[BatchUpdateRequestResultType](objref.IDOf(bur), objc.RegisterName("resultType"))
 	return _r

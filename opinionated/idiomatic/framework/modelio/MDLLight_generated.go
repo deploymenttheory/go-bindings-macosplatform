@@ -75,13 +75,13 @@ func (l *Light) WithHidden(hidden bool) *Light {
 	return l
 }
 
-// LightType wraps the corresponding Objective-C method.
+// LightType returns the light type.
 func (l *Light) LightType() LightType {
 	_r := objc.Send[LightType](objref.IDOf(l), objc.RegisterName("lightType"))
 	return _r
 }
 
-// ColorSpace wraps the corresponding Objective-C method.
+// ColorSpace returns the color space.
 func (l *Light) ColorSpace() string {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("colorSpace"))
 	if _r == 0 {

@@ -72,7 +72,7 @@ func NewExtensionContext() *ExtensionContext {
 	return extensionContextAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ec *ExtensionContext) WithScriptingProperties(scriptingProperties obj.Object) *ExtensionContext {
 	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ec
@@ -88,7 +88,7 @@ func (ec *ExtensionContext) OpenURLCompletionHandler(uRL string, completionHandl
 	objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("openURL:completionHandler:"), rt.FileURL(uRL), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
-// InputItems wraps the corresponding Objective-C method.
+// InputItems returns the input items.
 func (ec *ExtensionContext) InputItems() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("inputItems"))
 	return obj.Wrap(_r)

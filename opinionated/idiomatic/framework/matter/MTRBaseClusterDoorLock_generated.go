@@ -211,7 +211,7 @@ func (mbcdl *MTRBaseClusterDoorLock) GetCredentialStatusWithParamsCompletion(ctx
 	}
 }
 
-// ReadAttributeLockStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLockStateWithCompletion reads attribute lock state with completion.
 //
 // ReadAttributeLockStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLockStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLockStateWithParamsSubscr
 	}
 }
 
-// ReadAttributeLockTypeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLockTypeWithCompletion reads attribute lock type with completion.
 //
 // ReadAttributeLockTypeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLockTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLockTypeWithParamsSubscri
 	}
 }
 
-// ReadAttributeActuatorEnabledWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActuatorEnabledWithCompletion reads attribute actuator enabled with completion.
 //
 // ReadAttributeActuatorEnabledWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeActuatorEnabledWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeActuatorEnabledWithParams
 	}
 }
 
-// ReadAttributeDoorStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDoorStateWithCompletion reads attribute door state with completion.
 //
 // ReadAttributeDoorStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorStateWithParamsSubscr
 	}
 }
 
-// ReadAttributeDoorOpenEventsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDoorOpenEventsWithCompletion reads attribute door open events with completion.
 //
 // ReadAttributeDoorOpenEventsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorOpenEventsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorOpenEventsWithParamsS
 	}
 }
 
-// ReadAttributeDoorClosedEventsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDoorClosedEventsWithCompletion reads attribute door closed events with completion.
 //
 // ReadAttributeDoorClosedEventsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorClosedEventsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorClosedEventsWithParam
 	}
 }
 
-// ReadAttributeOpenPeriodWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOpenPeriodWithCompletion reads attribute open period with completion.
 //
 // ReadAttributeOpenPeriodWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeOpenPeriodWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeOpenPeriodWithParamsSubsc
 	}
 }
 
-// ReadAttributeNumberOfTotalUsersSupportedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfTotalUsersSupportedWithCompletion reads attribute number of total users supported with completion.
 //
 // ReadAttributeNumberOfTotalUsersSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfTotalUsersSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfTotalUsersSupport
 	}
 }
 
-// ReadAttributeNumberOfPINUsersSupportedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfPINUsersSupportedWithCompletion reads attribute number of pin users supported with completion.
 //
 // ReadAttributeNumberOfPINUsersSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfPINUsersSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfPINUsersSupported
 	}
 }
 
-// ReadAttributeNumberOfRFIDUsersSupportedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfRFIDUsersSupportedWithCompletion reads attribute number of rfid users supported with completion.
 //
 // ReadAttributeNumberOfRFIDUsersSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfRFIDUsersSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfRFIDUsersSupporte
 	}
 }
 
-// ReadAttributeNumberOfWeekDaySchedulesSupportedPerUserWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfWeekDaySchedulesSupportedPerUserWithCompletion reads attribute number of week day schedules supported per user with completion.
 //
 // ReadAttributeNumberOfWeekDaySchedulesSupportedPerUserWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfWeekDaySchedulesSupportedPerUserWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfWeekDaySchedulesS
 	}
 }
 
-// ReadAttributeNumberOfYearDaySchedulesSupportedPerUserWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfYearDaySchedulesSupportedPerUserWithCompletion reads attribute number of year day schedules supported per user with completion.
 //
 // ReadAttributeNumberOfYearDaySchedulesSupportedPerUserWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfYearDaySchedulesSupportedPerUserWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfYearDaySchedulesS
 	}
 }
 
-// ReadAttributeNumberOfHolidaySchedulesSupportedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfHolidaySchedulesSupportedWithCompletion reads attribute number of holiday schedules supported with completion.
 //
 // ReadAttributeNumberOfHolidaySchedulesSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfHolidaySchedulesSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfHolidaySchedulesS
 	}
 }
 
-// ReadAttributeMaxPINCodeLengthWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxPINCodeLengthWithCompletion reads attribute max pin code length with completion.
 //
 // ReadAttributeMaxPINCodeLengthWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMaxPINCodeLengthWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMaxPINCodeLengthWithParam
 	}
 }
 
-// ReadAttributeMinPINCodeLengthWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinPINCodeLengthWithCompletion reads attribute min pin code length with completion.
 //
 // ReadAttributeMinPINCodeLengthWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMinPINCodeLengthWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -961,7 +961,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMinPINCodeLengthWithParam
 	}
 }
 
-// ReadAttributeMaxRFIDCodeLengthWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxRFIDCodeLengthWithCompletion reads attribute max rfid code length with completion.
 //
 // ReadAttributeMaxRFIDCodeLengthWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMaxRFIDCodeLengthWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMaxRFIDCodeLengthWithPara
 	}
 }
 
-// ReadAttributeMinRFIDCodeLengthWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinRFIDCodeLengthWithCompletion reads attribute min rfid code length with completion.
 //
 // ReadAttributeMinRFIDCodeLengthWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMinRFIDCodeLengthWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1061,7 +1061,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMinRFIDCodeLengthWithPara
 	}
 }
 
-// ReadAttributeCredentialRulesSupportWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCredentialRulesSupportWithCompletion reads attribute credential rules support with completion.
 //
 // ReadAttributeCredentialRulesSupportWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeCredentialRulesSupportWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1111,7 +1111,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeCredentialRulesSupportWit
 	}
 }
 
-// ReadAttributeNumberOfCredentialsSupportedPerUserWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfCredentialsSupportedPerUserWithCompletion reads attribute number of credentials supported per user with completion.
 //
 // ReadAttributeNumberOfCredentialsSupportedPerUserWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfCredentialsSupportedPerUserWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1161,7 +1161,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfCredentialsSuppor
 	}
 }
 
-// ReadAttributeLanguageWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLanguageWithCompletion reads attribute language with completion.
 //
 // ReadAttributeLanguageWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLanguageWithCompletion(ctx context.Context) (result string, err error) {
@@ -1211,7 +1211,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLanguageWithParamsSubscri
 	}
 }
 
-// ReadAttributeLEDSettingsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLEDSettingsWithCompletion reads attribute led settings with completion.
 //
 // ReadAttributeLEDSettingsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLEDSettingsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1261,7 +1261,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLEDSettingsWithParamsSubs
 	}
 }
 
-// ReadAttributeAutoRelockTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAutoRelockTimeWithCompletion reads attribute auto relock time with completion.
 //
 // ReadAttributeAutoRelockTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAutoRelockTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1311,7 +1311,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAutoRelockTimeWithParamsS
 	}
 }
 
-// ReadAttributeSoundVolumeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSoundVolumeWithCompletion reads attribute sound volume with completion.
 //
 // ReadAttributeSoundVolumeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSoundVolumeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1361,7 +1361,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSoundVolumeWithParamsSubs
 	}
 }
 
-// ReadAttributeOperatingModeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOperatingModeWithCompletion reads attribute operating mode with completion.
 //
 // ReadAttributeOperatingModeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeOperatingModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1411,7 +1411,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeOperatingModeWithParamsSu
 	}
 }
 
-// ReadAttributeSupportedOperatingModesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupportedOperatingModesWithCompletion reads attribute supported operating modes with completion.
 //
 // ReadAttributeSupportedOperatingModesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSupportedOperatingModesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1461,7 +1461,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSupportedOperatingModesWi
 	}
 }
 
-// ReadAttributeDefaultConfigurationRegisterWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDefaultConfigurationRegisterWithCompletion reads attribute default configuration register with completion.
 //
 // ReadAttributeDefaultConfigurationRegisterWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDefaultConfigurationRegisterWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1511,7 +1511,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDefaultConfigurationRegis
 	}
 }
 
-// ReadAttributeEnableLocalProgrammingWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEnableLocalProgrammingWithCompletion reads attribute enable local programming with completion.
 //
 // ReadAttributeEnableLocalProgrammingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableLocalProgrammingWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1561,7 +1561,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableLocalProgrammingWit
 	}
 }
 
-// ReadAttributeEnableOneTouchLockingWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEnableOneTouchLockingWithCompletion reads attribute enable one touch locking with completion.
 //
 // ReadAttributeEnableOneTouchLockingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableOneTouchLockingWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1611,7 +1611,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableOneTouchLockingWith
 	}
 }
 
-// ReadAttributeEnableInsideStatusLEDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEnableInsideStatusLEDWithCompletion reads attribute enable inside status led with completion.
 //
 // ReadAttributeEnableInsideStatusLEDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableInsideStatusLEDWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1661,7 +1661,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableInsideStatusLEDWith
 	}
 }
 
-// ReadAttributeEnablePrivacyModeButtonWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEnablePrivacyModeButtonWithCompletion reads attribute enable privacy mode button with completion.
 //
 // ReadAttributeEnablePrivacyModeButtonWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnablePrivacyModeButtonWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1711,7 +1711,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnablePrivacyModeButtonWi
 	}
 }
 
-// ReadAttributeLocalProgrammingFeaturesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLocalProgrammingFeaturesWithCompletion reads attribute local programming features with completion.
 //
 // ReadAttributeLocalProgrammingFeaturesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLocalProgrammingFeaturesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1761,7 +1761,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLocalProgrammingFeaturesW
 	}
 }
 
-// ReadAttributeWrongCodeEntryLimitWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeWrongCodeEntryLimitWithCompletion reads attribute wrong code entry limit with completion.
 //
 // ReadAttributeWrongCodeEntryLimitWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeWrongCodeEntryLimitWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1811,7 +1811,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeWrongCodeEntryLimitWithPa
 	}
 }
 
-// ReadAttributeUserCodeTemporaryDisableTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUserCodeTemporaryDisableTimeWithCompletion reads attribute user code temporary disable time with completion.
 //
 // ReadAttributeUserCodeTemporaryDisableTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeUserCodeTemporaryDisableTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1861,7 +1861,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeUserCodeTemporaryDisableT
 	}
 }
 
-// ReadAttributeSendPINOverTheAirWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSendPINOverTheAirWithCompletion reads attribute send pin over the air with completion.
 //
 // ReadAttributeSendPINOverTheAirWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSendPINOverTheAirWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1911,7 +1911,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSendPINOverTheAirWithPara
 	}
 }
 
-// ReadAttributeRequirePINforRemoteOperationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRequirePINforRemoteOperationWithCompletion reads attribute require pi nfor remote operation with completion.
 //
 // ReadAttributeRequirePINforRemoteOperationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeRequirePINforRemoteOperationWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -1961,7 +1961,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeRequirePINforRemoteOperat
 	}
 }
 
-// ReadAttributeExpiringUserTimeoutWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeExpiringUserTimeoutWithCompletion reads attribute expiring user timeout with completion.
 //
 // ReadAttributeExpiringUserTimeoutWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeExpiringUserTimeoutWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2011,7 +2011,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeExpiringUserTimeoutWithPa
 	}
 }
 
-// ReadAttributeAliroReaderVerificationKeyWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAliroReaderVerificationKeyWithCompletion reads attribute aliro reader verification key with completion.
 //
 // ReadAttributeAliroReaderVerificationKeyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroReaderVerificationKeyWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2061,7 +2061,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderVerificationKe
 	}
 }
 
-// ReadAttributeAliroReaderGroupIdentifierWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAliroReaderGroupIdentifierWithCompletion reads attribute aliro reader group identifier with completion.
 //
 // ReadAttributeAliroReaderGroupIdentifierWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroReaderGroupIdentifierWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2111,7 +2111,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderGroupIdentifie
 	}
 }
 
-// ReadAttributeAliroReaderGroupSubIdentifierWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAliroReaderGroupSubIdentifierWithCompletion reads attribute aliro reader group sub identifier with completion.
 //
 // ReadAttributeAliroReaderGroupSubIdentifierWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroReaderGroupSubIdentifierWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2161,7 +2161,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroReaderGroupSubIdenti
 	}
 }
 
-// ReadAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithCompletion reads attribute aliro expedited transaction supported protocol versions with completion.
 //
 // ReadAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroExpeditedTransactionSupportedProtocolVersionsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2211,7 +2211,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroExpeditedTransaction
 	}
 }
 
-// ReadAttributeAliroGroupResolvingKeyWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAliroGroupResolvingKeyWithCompletion reads attribute aliro group resolving key with completion.
 //
 // ReadAttributeAliroGroupResolvingKeyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroGroupResolvingKeyWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2261,7 +2261,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroGroupResolvingKeyWit
 	}
 }
 
-// ReadAttributeAliroSupportedBLEUWBProtocolVersionsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAliroSupportedBLEUWBProtocolVersionsWithCompletion reads attribute aliro supported bleuwb protocol versions with completion.
 //
 // ReadAttributeAliroSupportedBLEUWBProtocolVersionsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroSupportedBLEUWBProtocolVersionsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2311,7 +2311,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroSupportedBLEUWBProto
 	}
 }
 
-// ReadAttributeAliroBLEAdvertisingVersionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAliroBLEAdvertisingVersionWithCompletion reads attribute aliro ble advertising version with completion.
 //
 // ReadAttributeAliroBLEAdvertisingVersionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAliroBLEAdvertisingVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2361,7 +2361,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAliroBLEAdvertisingVersio
 	}
 }
 
-// ReadAttributeNumberOfAliroCredentialIssuerKeysSupportedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfAliroCredentialIssuerKeysSupportedWithCompletion reads attribute number of aliro credential issuer keys supported with completion.
 //
 // ReadAttributeNumberOfAliroCredentialIssuerKeysSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfAliroCredentialIssuerKeysSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2411,7 +2411,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfAliroCredentialIs
 	}
 }
 
-// ReadAttributeNumberOfAliroEndpointKeysSupportedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfAliroEndpointKeysSupportedWithCompletion reads attribute number of aliro endpoint keys supported with completion.
 //
 // ReadAttributeNumberOfAliroEndpointKeysSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfAliroEndpointKeysSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2461,7 +2461,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfAliroEndpointKeys
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2511,7 +2511,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeGeneratedCommandListWithP
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2561,7 +2561,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAcceptedCommandListWithPa
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2611,7 +2611,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAttributeListWithParamsSu
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2661,7 +2661,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeFeatureMapWithParamsSubsc
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -2861,7 +2861,7 @@ func (mbcdl *MTRBaseClusterDoorLock) GetCredentialStatusWithParams(ctx context.C
 	}
 }
 
-// ReadAttributeLockState wraps the corresponding Objective-C method.
+// ReadAttributeLockState reads attribute lock state.
 //
 // ReadAttributeLockState blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLockState(ctx context.Context) (result obj.Object, err error) {
@@ -2911,7 +2911,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLockStateWithMinIntervalM
 	}
 }
 
-// ReadAttributeLockType wraps the corresponding Objective-C method.
+// ReadAttributeLockType reads attribute lock type.
 //
 // ReadAttributeLockType blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLockType(ctx context.Context) (result obj.Object, err error) {
@@ -2961,7 +2961,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLockTypeWithMinIntervalMa
 	}
 }
 
-// ReadAttributeActuatorEnabled wraps the corresponding Objective-C method.
+// ReadAttributeActuatorEnabled reads attribute actuator enabled.
 //
 // ReadAttributeActuatorEnabled blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeActuatorEnabled(ctx context.Context) (result obj.Object, err error) {
@@ -3011,7 +3011,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeActuatorEnabledWithMinInt
 	}
 }
 
-// ReadAttributeDoorState wraps the corresponding Objective-C method.
+// ReadAttributeDoorState reads attribute door state.
 //
 // ReadAttributeDoorState blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorState(ctx context.Context) (result obj.Object, err error) {
@@ -3061,7 +3061,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorStateWithMinIntervalM
 	}
 }
 
-// ReadAttributeDoorOpenEvents wraps the corresponding Objective-C method.
+// ReadAttributeDoorOpenEvents reads attribute door open events.
 //
 // ReadAttributeDoorOpenEvents blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorOpenEvents(ctx context.Context) (result obj.Object, err error) {
@@ -3111,7 +3111,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorOpenEventsWithMinInte
 	}
 }
 
-// ReadAttributeDoorClosedEvents wraps the corresponding Objective-C method.
+// ReadAttributeDoorClosedEvents reads attribute door closed events.
 //
 // ReadAttributeDoorClosedEvents blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDoorClosedEvents(ctx context.Context) (result obj.Object, err error) {
@@ -3161,7 +3161,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDoorClosedEventsWithMinIn
 	}
 }
 
-// ReadAttributeOpenPeriod wraps the corresponding Objective-C method.
+// ReadAttributeOpenPeriod reads attribute open period.
 //
 // ReadAttributeOpenPeriod blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeOpenPeriod(ctx context.Context) (result obj.Object, err error) {
@@ -3211,7 +3211,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeOpenPeriodWithMinInterval
 	}
 }
 
-// ReadAttributeNumberOfTotalUsersSupported wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfTotalUsersSupported reads attribute number of total users supported.
 //
 // ReadAttributeNumberOfTotalUsersSupported blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfTotalUsersSupported(ctx context.Context) (result obj.Object, err error) {
@@ -3261,7 +3261,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfTotalUsersSupport
 	}
 }
 
-// ReadAttributeNumberOfPINUsersSupported wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfPINUsersSupported reads attribute number of pin users supported.
 //
 // ReadAttributeNumberOfPINUsersSupported blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfPINUsersSupported(ctx context.Context) (result obj.Object, err error) {
@@ -3311,7 +3311,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfPINUsersSupported
 	}
 }
 
-// ReadAttributeNumberOfRFIDUsersSupported wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfRFIDUsersSupported reads attribute number of rfid users supported.
 //
 // ReadAttributeNumberOfRFIDUsersSupported blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfRFIDUsersSupported(ctx context.Context) (result obj.Object, err error) {
@@ -3361,7 +3361,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfRFIDUsersSupporte
 	}
 }
 
-// ReadAttributeNumberOfWeekDaySchedulesSupportedPerUser wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfWeekDaySchedulesSupportedPerUser reads attribute number of week day schedules supported per user.
 //
 // ReadAttributeNumberOfWeekDaySchedulesSupportedPerUser blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfWeekDaySchedulesSupportedPerUser(ctx context.Context) (result obj.Object, err error) {
@@ -3411,7 +3411,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfWeekDaySchedulesS
 	}
 }
 
-// ReadAttributeNumberOfYearDaySchedulesSupportedPerUser wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfYearDaySchedulesSupportedPerUser reads attribute number of year day schedules supported per user.
 //
 // ReadAttributeNumberOfYearDaySchedulesSupportedPerUser blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfYearDaySchedulesSupportedPerUser(ctx context.Context) (result obj.Object, err error) {
@@ -3461,7 +3461,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfYearDaySchedulesS
 	}
 }
 
-// ReadAttributeNumberOfHolidaySchedulesSupported wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfHolidaySchedulesSupported reads attribute number of holiday schedules supported.
 //
 // ReadAttributeNumberOfHolidaySchedulesSupported blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfHolidaySchedulesSupported(ctx context.Context) (result obj.Object, err error) {
@@ -3511,7 +3511,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfHolidaySchedulesS
 	}
 }
 
-// ReadAttributeMaxPINCodeLength wraps the corresponding Objective-C method.
+// ReadAttributeMaxPINCodeLength reads attribute max pin code length.
 //
 // ReadAttributeMaxPINCodeLength blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMaxPINCodeLength(ctx context.Context) (result obj.Object, err error) {
@@ -3561,7 +3561,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMaxPINCodeLengthWithMinIn
 	}
 }
 
-// ReadAttributeMinPINCodeLength wraps the corresponding Objective-C method.
+// ReadAttributeMinPINCodeLength reads attribute min pin code length.
 //
 // ReadAttributeMinPINCodeLength blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMinPINCodeLength(ctx context.Context) (result obj.Object, err error) {
@@ -3611,7 +3611,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMinPINCodeLengthWithMinIn
 	}
 }
 
-// ReadAttributeMaxRFIDCodeLength wraps the corresponding Objective-C method.
+// ReadAttributeMaxRFIDCodeLength reads attribute max rfid code length.
 //
 // ReadAttributeMaxRFIDCodeLength blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMaxRFIDCodeLength(ctx context.Context) (result obj.Object, err error) {
@@ -3661,7 +3661,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMaxRFIDCodeLengthWithMinI
 	}
 }
 
-// ReadAttributeMinRFIDCodeLength wraps the corresponding Objective-C method.
+// ReadAttributeMinRFIDCodeLength reads attribute min rfid code length.
 //
 // ReadAttributeMinRFIDCodeLength blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeMinRFIDCodeLength(ctx context.Context) (result obj.Object, err error) {
@@ -3711,7 +3711,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeMinRFIDCodeLengthWithMinI
 	}
 }
 
-// ReadAttributeCredentialRulesSupport wraps the corresponding Objective-C method.
+// ReadAttributeCredentialRulesSupport reads attribute credential rules support.
 //
 // ReadAttributeCredentialRulesSupport blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeCredentialRulesSupport(ctx context.Context) (result obj.Object, err error) {
@@ -3761,7 +3761,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeCredentialRulesSupportWit
 	}
 }
 
-// ReadAttributeNumberOfCredentialsSupportedPerUser wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfCredentialsSupportedPerUser reads attribute number of credentials supported per user.
 //
 // ReadAttributeNumberOfCredentialsSupportedPerUser blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeNumberOfCredentialsSupportedPerUser(ctx context.Context) (result obj.Object, err error) {
@@ -3811,7 +3811,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeNumberOfCredentialsSuppor
 	}
 }
 
-// ReadAttributeLanguage wraps the corresponding Objective-C method.
+// ReadAttributeLanguage reads attribute language.
 //
 // ReadAttributeLanguage blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLanguage(ctx context.Context) (result string, err error) {
@@ -3861,7 +3861,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLanguageWithMinIntervalMa
 	}
 }
 
-// ReadAttributeLEDSettings wraps the corresponding Objective-C method.
+// ReadAttributeLEDSettings reads attribute led settings.
 //
 // ReadAttributeLEDSettings blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLEDSettings(ctx context.Context) (result obj.Object, err error) {
@@ -3911,7 +3911,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLEDSettingsWithMinInterva
 	}
 }
 
-// ReadAttributeAutoRelockTime wraps the corresponding Objective-C method.
+// ReadAttributeAutoRelockTime reads attribute auto relock time.
 //
 // ReadAttributeAutoRelockTime blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAutoRelockTime(ctx context.Context) (result obj.Object, err error) {
@@ -3961,7 +3961,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAutoRelockTimeWithMinInte
 	}
 }
 
-// ReadAttributeSoundVolume wraps the corresponding Objective-C method.
+// ReadAttributeSoundVolume reads attribute sound volume.
 //
 // ReadAttributeSoundVolume blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSoundVolume(ctx context.Context) (result obj.Object, err error) {
@@ -4011,7 +4011,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSoundVolumeWithMinInterva
 	}
 }
 
-// ReadAttributeOperatingMode wraps the corresponding Objective-C method.
+// ReadAttributeOperatingMode reads attribute operating mode.
 //
 // ReadAttributeOperatingMode blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeOperatingMode(ctx context.Context) (result obj.Object, err error) {
@@ -4061,7 +4061,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeOperatingModeWithMinInter
 	}
 }
 
-// ReadAttributeSupportedOperatingModes wraps the corresponding Objective-C method.
+// ReadAttributeSupportedOperatingModes reads attribute supported operating modes.
 //
 // ReadAttributeSupportedOperatingModes blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSupportedOperatingModes(ctx context.Context) (result obj.Object, err error) {
@@ -4111,7 +4111,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSupportedOperatingModesWi
 	}
 }
 
-// ReadAttributeDefaultConfigurationRegister wraps the corresponding Objective-C method.
+// ReadAttributeDefaultConfigurationRegister reads attribute default configuration register.
 //
 // ReadAttributeDefaultConfigurationRegister blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeDefaultConfigurationRegister(ctx context.Context) (result obj.Object, err error) {
@@ -4161,7 +4161,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeDefaultConfigurationRegis
 	}
 }
 
-// ReadAttributeEnableLocalProgramming wraps the corresponding Objective-C method.
+// ReadAttributeEnableLocalProgramming reads attribute enable local programming.
 //
 // ReadAttributeEnableLocalProgramming blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableLocalProgramming(ctx context.Context) (result obj.Object, err error) {
@@ -4211,7 +4211,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableLocalProgrammingWit
 	}
 }
 
-// ReadAttributeEnableOneTouchLocking wraps the corresponding Objective-C method.
+// ReadAttributeEnableOneTouchLocking reads attribute enable one touch locking.
 //
 // ReadAttributeEnableOneTouchLocking blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableOneTouchLocking(ctx context.Context) (result obj.Object, err error) {
@@ -4261,7 +4261,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableOneTouchLockingWith
 	}
 }
 
-// ReadAttributeEnableInsideStatusLED wraps the corresponding Objective-C method.
+// ReadAttributeEnableInsideStatusLED reads attribute enable inside status led.
 //
 // ReadAttributeEnableInsideStatusLED blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnableInsideStatusLED(ctx context.Context) (result obj.Object, err error) {
@@ -4311,7 +4311,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnableInsideStatusLEDWith
 	}
 }
 
-// ReadAttributeEnablePrivacyModeButton wraps the corresponding Objective-C method.
+// ReadAttributeEnablePrivacyModeButton reads attribute enable privacy mode button.
 //
 // ReadAttributeEnablePrivacyModeButton blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeEnablePrivacyModeButton(ctx context.Context) (result obj.Object, err error) {
@@ -4361,7 +4361,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeEnablePrivacyModeButtonWi
 	}
 }
 
-// ReadAttributeLocalProgrammingFeatures wraps the corresponding Objective-C method.
+// ReadAttributeLocalProgrammingFeatures reads attribute local programming features.
 //
 // ReadAttributeLocalProgrammingFeatures blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeLocalProgrammingFeatures(ctx context.Context) (result obj.Object, err error) {
@@ -4411,7 +4411,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeLocalProgrammingFeaturesW
 	}
 }
 
-// ReadAttributeWrongCodeEntryLimit wraps the corresponding Objective-C method.
+// ReadAttributeWrongCodeEntryLimit reads attribute wrong code entry limit.
 //
 // ReadAttributeWrongCodeEntryLimit blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeWrongCodeEntryLimit(ctx context.Context) (result obj.Object, err error) {
@@ -4461,7 +4461,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeWrongCodeEntryLimitWithMi
 	}
 }
 
-// ReadAttributeUserCodeTemporaryDisableTime wraps the corresponding Objective-C method.
+// ReadAttributeUserCodeTemporaryDisableTime reads attribute user code temporary disable time.
 //
 // ReadAttributeUserCodeTemporaryDisableTime blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeUserCodeTemporaryDisableTime(ctx context.Context) (result obj.Object, err error) {
@@ -4511,7 +4511,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeUserCodeTemporaryDisableT
 	}
 }
 
-// ReadAttributeSendPINOverTheAir wraps the corresponding Objective-C method.
+// ReadAttributeSendPINOverTheAir reads attribute send pin over the air.
 //
 // ReadAttributeSendPINOverTheAir blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeSendPINOverTheAir(ctx context.Context) (result obj.Object, err error) {
@@ -4561,7 +4561,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeSendPINOverTheAirWithMinI
 	}
 }
 
-// ReadAttributeRequirePINforRemoteOperation wraps the corresponding Objective-C method.
+// ReadAttributeRequirePINforRemoteOperation reads attribute require pi nfor remote operation.
 //
 // ReadAttributeRequirePINforRemoteOperation blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeRequirePINforRemoteOperation(ctx context.Context) (result obj.Object, err error) {
@@ -4611,7 +4611,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeRequirePINforRemoteOperat
 	}
 }
 
-// ReadAttributeExpiringUserTimeout wraps the corresponding Objective-C method.
+// ReadAttributeExpiringUserTimeout reads attribute expiring user timeout.
 //
 // ReadAttributeExpiringUserTimeout blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeExpiringUserTimeout(ctx context.Context) (result obj.Object, err error) {
@@ -4661,7 +4661,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeExpiringUserTimeoutWithMi
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -4711,7 +4711,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeGeneratedCommandListWithM
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -4761,7 +4761,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAcceptedCommandListWithMi
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -4811,7 +4811,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeAttributeListWithMinInter
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -4861,7 +4861,7 @@ func (mbcdl *MTRBaseClusterDoorLock) SubscribeAttributeFeatureMapWithMinInterval
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcdl *MTRBaseClusterDoorLock) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

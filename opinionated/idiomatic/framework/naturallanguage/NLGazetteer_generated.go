@@ -111,13 +111,13 @@ func (g *Gazetteer) LabelForString(string_ string) string {
 	return purego.GoString(_r)
 }
 
-// Language wraps the corresponding Objective-C method.
+// Language returns the language.
 func (g *Gazetteer) Language() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("language"))
 	return obj.Wrap(_r)
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (g *Gazetteer) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("data"))
 	return obj.Wrap(_r)

@@ -72,13 +72,13 @@ func NewMetalDisplayLinkUpdate() *MetalDisplayLinkUpdate {
 	return metalDisplayLinkUpdateAdopt(_id)
 }
 
-// TargetTimestamp wraps the corresponding Objective-C method.
+// TargetTimestamp returns the target timestamp.
 func (mdlu *MetalDisplayLinkUpdate) TargetTimestamp() float64 {
 	_r := objc.Send[float64](objref.IDOf(mdlu), objc.RegisterName("targetTimestamp"))
 	return _r
 }
 
-// TargetPresentationTimestamp wraps the corresponding Objective-C method.
+// TargetPresentationTimestamp returns the target presentation timestamp.
 func (mdlu *MetalDisplayLinkUpdate) TargetPresentationTimestamp() float64 {
 	_r := objc.Send[float64](objref.IDOf(mdlu), objc.RegisterName("targetPresentationTimestamp"))
 	return _r

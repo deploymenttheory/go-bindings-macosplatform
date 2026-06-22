@@ -136,91 +136,91 @@ func (mcgd *MTRClusterGeneralDiagnostics) PayloadTestRequestWithParamsExpectedVa
 	}
 }
 
-// ReadAttributeNetworkInterfacesWithParams wraps the corresponding Objective-C method.
+// ReadAttributeNetworkInterfacesWithParams reads attribute network interfaces with params.
 func (mcgd *MTRClusterGeneralDiagnostics) ReadAttributeNetworkInterfacesWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgd), objc.RegisterName("readAttributeNetworkInterfacesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeRebootCountWithParams wraps the corresponding Objective-C method.
+// ReadAttributeRebootCountWithParams reads attribute reboot count with params.
 func (mcgd *MTRClusterGeneralDiagnostics) ReadAttributeRebootCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgd), objc.RegisterName("readAttributeRebootCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeUpTimeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeUpTimeWithParams reads attribute up time with params.
 func (mcgd *MTRClusterGeneralDiagnostics) ReadAttributeUpTimeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgd), objc.RegisterName("readAttributeUpTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeTotalOperationalHoursWithParams wraps the corresponding Objective-C method.
+// ReadAttributeTotalOperationalHoursWithParams reads attribute total operational hours with params.
 func (mcgd *MTRClusterGeneralDiagnostics) ReadAttributeTotalOperationalHoursWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgd), objc.RegisterName("readAttributeTotalOperationalHoursWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBootReasonWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBootReasonWithParams reads attribute boot reason with params.
 func (mcgd *MTRClusterGeneralDiagnostics) ReadAttributeBootReasonWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgd), objc.RegisterName("readAttributeBootReasonWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveHardwareFaultsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeActiveHardwareFaultsWithParams reads attribute active hardware faults with params.
 func (mcgd *MTRClusterGeneralDiagnostics) ReadAttributeActiveHardwareFaultsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgd), objc.RegisterName("readAttributeActiveHardwareFaultsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveRadioFaultsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeActiveRadioFaultsWithParams reads attribute active radio faults with params.
 func (mcgd *MTRClusterGeneralDiagnostics) ReadAttributeActiveRadioFaultsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgd), objc.RegisterName("readAttributeActiveRadioFaultsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveNetworkFaultsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeActiveNetworkFaultsWithParams reads attribute active network faults with params.
 func (mcgd *MTRClusterGeneralDiagnostics) ReadAttributeActiveNetworkFaultsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgd), objc.RegisterName("readAttributeActiveNetworkFaultsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeTestEventTriggersEnabledWithParams wraps the corresponding Objective-C method.
+// ReadAttributeTestEventTriggersEnabledWithParams reads attribute test event triggers enabled with params.
 func (mcgd *MTRClusterGeneralDiagnostics) ReadAttributeTestEventTriggersEnabledWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgd), objc.RegisterName("readAttributeTestEventTriggersEnabledWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcgd *MTRClusterGeneralDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgd), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcgd *MTRClusterGeneralDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgd), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcgd *MTRClusterGeneralDiagnostics) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgd), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcgd *MTRClusterGeneralDiagnostics) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgd), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcgd *MTRClusterGeneralDiagnostics) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgd), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeBootReasonsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeBootReasonsWithParams reads attribute boot reasons with params.
 func (mcgd *MTRClusterGeneralDiagnostics) ReadAttributeBootReasonsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgd), objc.RegisterName("readAttributeBootReasonsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

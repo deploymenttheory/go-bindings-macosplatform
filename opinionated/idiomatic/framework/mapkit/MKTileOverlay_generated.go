@@ -104,31 +104,31 @@ func (to *TileOverlay) WithCanReplaceMapContent(canReplaceMapContent bool) *Tile
 	return to
 }
 
-// TileSize wraps the corresponding Objective-C method.
+// TileSize returns the tile size.
 func (to *TileOverlay) TileSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(to), objc.RegisterName("tileSize"))
 	return _r
 }
 
-// IsGeometryFlipped wraps the corresponding Objective-C method.
+// IsGeometryFlipped reports whether the object is geometry flipped.
 func (to *TileOverlay) IsGeometryFlipped() bool {
 	_r := objc.Send[bool](objref.IDOf(to), objc.RegisterName("isGeometryFlipped"))
 	return _r
 }
 
-// MinimumZ wraps the corresponding Objective-C method.
+// MinimumZ returns the minimum z.
 func (to *TileOverlay) MinimumZ() int {
 	_r := objc.Send[int](objref.IDOf(to), objc.RegisterName("minimumZ"))
 	return _r
 }
 
-// MaximumZ wraps the corresponding Objective-C method.
+// MaximumZ returns the maximum z.
 func (to *TileOverlay) MaximumZ() int {
 	_r := objc.Send[int](objref.IDOf(to), objc.RegisterName("maximumZ"))
 	return _r
 }
 
-// URLTemplate wraps the corresponding Objective-C method.
+// URLTemplate returns the URL template.
 func (to *TileOverlay) URLTemplate() string {
 	_r := objc.Send[objc.ID](objref.IDOf(to), objc.RegisterName("URLTemplate"))
 	if _r == 0 {

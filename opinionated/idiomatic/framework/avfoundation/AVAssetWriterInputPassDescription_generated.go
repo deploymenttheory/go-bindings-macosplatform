@@ -72,7 +72,7 @@ func NewAssetWriterInputPassDescription() *AssetWriterInputPassDescription {
 	return assetWriterInputPassDescriptionAdopt(_id)
 }
 
-// SourceTimeRanges wraps the corresponding Objective-C method.
+// SourceTimeRanges returns the source time ranges.
 //
 // SourceTimeRanges returns the collection as a Go slice.
 func (awipd *AssetWriterInputPassDescription) SourceTimeRanges() []obj.Object {

@@ -105,7 +105,7 @@ func (a *Appearance) BestMatchFromAppearancesWithNames(appearances []obj.Object)
 	return obj.Wrap(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (a *Appearance) Name() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("name"))
 	return obj.Wrap(_r)

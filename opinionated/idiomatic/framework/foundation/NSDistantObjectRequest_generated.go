@@ -72,7 +72,7 @@ func NewDistantObjectRequest() *DistantObjectRequest {
 	return distantObjectRequestAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (dor *DistantObjectRequest) WithScriptingProperties(scriptingProperties obj.Object) *DistantObjectRequest {
 	objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return dor
@@ -83,19 +83,19 @@ func (dor *DistantObjectRequest) ReplyWithException(exception *Exception) {
 	objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("replyWithException:"), objref.IDOf(exception))
 }
 
-// Invocation wraps the corresponding Objective-C method.
+// Invocation returns the invocation.
 func (dor *DistantObjectRequest) Invocation() *Invocation {
 	_r := objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("invocation"))
 	return InvocationFromID(_r)
 }
 
-// Connection wraps the corresponding Objective-C method.
+// Connection returns the connection.
 func (dor *DistantObjectRequest) Connection() *Connection {
 	_r := objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("connection"))
 	return ConnectionFromID(_r)
 }
 
-// Conversation wraps the corresponding Objective-C method.
+// Conversation returns the conversation.
 func (dor *DistantObjectRequest) Conversation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dor), objc.RegisterName("conversation"))
 	return obj.Wrap(_r)

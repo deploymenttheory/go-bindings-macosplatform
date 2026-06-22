@@ -70,97 +70,97 @@ func NewMTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct() *MT
 	return mTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStructAdopt(_id)
 }
 
-// WithRangeMin sets the property and returns the receiver so calls can be chained.
+// WithRangeMin sets the range min.
 func (mepmcmars *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) WithRangeMin(rangeMin obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct {
 	objc.Send[objc.ID](objref.IDOf(mepmcmars), objc.RegisterName("setRangeMin:"), objref.IDOf(rangeMin))
 	return mepmcmars
 }
 
-// WithRangeMax sets the property and returns the receiver so calls can be chained.
+// WithRangeMax sets the range max.
 func (mepmcmars *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) WithRangeMax(rangeMax obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct {
 	objc.Send[objc.ID](objref.IDOf(mepmcmars), objc.RegisterName("setRangeMax:"), objref.IDOf(rangeMax))
 	return mepmcmars
 }
 
-// WithPercentMax sets the property and returns the receiver so calls can be chained.
+// WithPercentMax sets the percent max.
 func (mepmcmars *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) WithPercentMax(percentMax obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct {
 	objc.Send[objc.ID](objref.IDOf(mepmcmars), objc.RegisterName("setPercentMax:"), objref.IDOf(percentMax))
 	return mepmcmars
 }
 
-// WithPercentMin sets the property and returns the receiver so calls can be chained.
+// WithPercentMin sets the percent min.
 func (mepmcmars *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) WithPercentMin(percentMin obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct {
 	objc.Send[objc.ID](objref.IDOf(mepmcmars), objc.RegisterName("setPercentMin:"), objref.IDOf(percentMin))
 	return mepmcmars
 }
 
-// WithPercentTypical sets the property and returns the receiver so calls can be chained.
+// WithPercentTypical sets the percent typical.
 func (mepmcmars *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) WithPercentTypical(percentTypical obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct {
 	objc.Send[objc.ID](objref.IDOf(mepmcmars), objc.RegisterName("setPercentTypical:"), objref.IDOf(percentTypical))
 	return mepmcmars
 }
 
-// WithFixedMax sets the property and returns the receiver so calls can be chained.
+// WithFixedMax sets the fixed max.
 func (mepmcmars *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) WithFixedMax(fixedMax obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct {
 	objc.Send[objc.ID](objref.IDOf(mepmcmars), objc.RegisterName("setFixedMax:"), objref.IDOf(fixedMax))
 	return mepmcmars
 }
 
-// WithFixedMin sets the property and returns the receiver so calls can be chained.
+// WithFixedMin sets the fixed min.
 func (mepmcmars *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) WithFixedMin(fixedMin obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct {
 	objc.Send[objc.ID](objref.IDOf(mepmcmars), objc.RegisterName("setFixedMin:"), objref.IDOf(fixedMin))
 	return mepmcmars
 }
 
-// WithFixedTypical sets the property and returns the receiver so calls can be chained.
+// WithFixedTypical sets the fixed typical.
 func (mepmcmars *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) WithFixedTypical(fixedTypical obj.Object) *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct {
 	objc.Send[objc.ID](objref.IDOf(mepmcmars), objc.RegisterName("setFixedTypical:"), objref.IDOf(fixedTypical))
 	return mepmcmars
 }
 
-// RangeMin wraps the corresponding Objective-C method.
+// RangeMin returns the range min.
 func (mepmcmars *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) RangeMin() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mepmcmars), objc.RegisterName("rangeMin"))
 	return obj.Wrap(_r)
 }
 
-// RangeMax wraps the corresponding Objective-C method.
+// RangeMax returns the range max.
 func (mepmcmars *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) RangeMax() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mepmcmars), objc.RegisterName("rangeMax"))
 	return obj.Wrap(_r)
 }
 
-// PercentMax wraps the corresponding Objective-C method.
+// PercentMax returns the percent max.
 func (mepmcmars *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) PercentMax() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mepmcmars), objc.RegisterName("percentMax"))
 	return obj.Wrap(_r)
 }
 
-// PercentMin wraps the corresponding Objective-C method.
+// PercentMin returns the percent min.
 func (mepmcmars *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) PercentMin() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mepmcmars), objc.RegisterName("percentMin"))
 	return obj.Wrap(_r)
 }
 
-// PercentTypical wraps the corresponding Objective-C method.
+// PercentTypical returns the percent typical.
 func (mepmcmars *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) PercentTypical() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mepmcmars), objc.RegisterName("percentTypical"))
 	return obj.Wrap(_r)
 }
 
-// FixedMax wraps the corresponding Objective-C method.
+// FixedMax returns the fixed max.
 func (mepmcmars *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) FixedMax() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mepmcmars), objc.RegisterName("fixedMax"))
 	return obj.Wrap(_r)
 }
 
-// FixedMin wraps the corresponding Objective-C method.
+// FixedMin returns the fixed min.
 func (mepmcmars *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) FixedMin() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mepmcmars), objc.RegisterName("fixedMin"))
 	return obj.Wrap(_r)
 }
 
-// FixedTypical wraps the corresponding Objective-C method.
+// FixedTypical returns the fixed typical.
 func (mepmcmars *MTRElectricalPowerMeasurementClusterMeasurementAccuracyRangeStruct) FixedTypical() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mepmcmars), objc.RegisterName("fixedTypical"))
 	return obj.Wrap(_r)

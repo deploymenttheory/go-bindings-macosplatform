@@ -70,26 +70,26 @@ func NewAnimationBindComponent() *AnimationBindComponent {
 	return animationBindComponentAdopt(_id)
 }
 
-// WithSkeleton sets the property and returns the receiver so calls can be chained.
+// WithSkeleton sets the skeleton.
 func (abc *AnimationBindComponent) WithSkeleton(skeleton *Skeleton) *AnimationBindComponent {
 	objc.Send[objc.ID](objref.IDOf(abc), objc.RegisterName("setSkeleton:"), objref.IDOf(skeleton))
 	return abc
 }
 
-// WithJointPaths sets the property and returns the receiver so calls can be chained.
+// WithJointPaths sets the joint paths.
 func (abc *AnimationBindComponent) WithJointPaths(items ...obj.Object) *AnimationBindComponent {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(abc), objc.RegisterName("setJointPaths:"), _arr)
 	return abc
 }
 
-// Skeleton wraps the corresponding Objective-C method.
+// Skeleton returns the skeleton.
 func (abc *AnimationBindComponent) Skeleton() *Skeleton {
 	_r := objc.Send[objc.ID](objref.IDOf(abc), objc.RegisterName("skeleton"))
 	return SkeletonFromID(_r)
 }
 
-// JointPaths wraps the corresponding Objective-C method.
+// JointPaths returns the joint paths.
 //
 // JointPaths returns the collection as a Go slice.
 func (abc *AnimationBindComponent) JointPaths() []string {

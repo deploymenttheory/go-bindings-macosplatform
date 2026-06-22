@@ -106,37 +106,37 @@ func (se *SkyboxEffect) Draw() {
 	objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("draw"))
 }
 
-// XSize wraps the corresponding Objective-C method.
+// XSize returns the x size.
 func (se *SkyboxEffect) XSize() float32 {
 	_r := objc.Send[float32](objref.IDOf(se), objc.RegisterName("xSize"))
 	return _r
 }
 
-// YSize wraps the corresponding Objective-C method.
+// YSize returns the y size.
 func (se *SkyboxEffect) YSize() float32 {
 	_r := objc.Send[float32](objref.IDOf(se), objc.RegisterName("ySize"))
 	return _r
 }
 
-// ZSize wraps the corresponding Objective-C method.
+// ZSize returns the z size.
 func (se *SkyboxEffect) ZSize() float32 {
 	_r := objc.Send[float32](objref.IDOf(se), objc.RegisterName("zSize"))
 	return _r
 }
 
-// TextureCubeMap wraps the corresponding Objective-C method.
+// TextureCubeMap returns the texture cube map.
 func (se *SkyboxEffect) TextureCubeMap() *EffectPropertyTexture {
 	_r := objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("textureCubeMap"))
 	return EffectPropertyTextureFromID(_r)
 }
 
-// Transform wraps the corresponding Objective-C method.
+// Transform returns the transform.
 func (se *SkyboxEffect) Transform() *EffectPropertyTransform {
 	_r := objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("transform"))
 	return EffectPropertyTransformFromID(_r)
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (se *SkyboxEffect) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("label"))
 	if _r == 0 {

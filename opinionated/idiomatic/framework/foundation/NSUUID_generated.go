@@ -81,7 +81,7 @@ func NewUUIDWithUUIDString(string_ string) *UUID {
 	return uUIDAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (u *UUID) WithScriptingProperties(scriptingProperties obj.Object) *UUID {
 	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return u
@@ -100,7 +100,7 @@ func (u *UUID) Compare(otherUUID *UUID) ComparisonResult {
 	return _r
 }
 
-// UUIDString wraps the corresponding Objective-C method.
+// UUIDString returns the UUID string.
 func (u *UUID) UUIDString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("UUIDString"))
 	if _r == 0 {

@@ -70,31 +70,31 @@ func NewMTRGroupKeyManagementClusterGroupInfoMapStruct() *MTRGroupKeyManagementC
 	return mTRGroupKeyManagementClusterGroupInfoMapStructAdopt(_id)
 }
 
-// WithGroupID sets the property and returns the receiver so calls can be chained.
+// WithGroupID sets the group ID.
 func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) WithGroupID(groupId obj.Object) *MTRGroupKeyManagementClusterGroupInfoMapStruct {
 	objc.Send[objc.ID](objref.IDOf(mgkmcgims), objc.RegisterName("setGroupId:"), objref.IDOf(groupId))
 	return mgkmcgims
 }
 
-// WithGroupName sets the property and returns the receiver so calls can be chained.
+// WithGroupName sets the group name.
 func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) WithGroupName(groupName string) *MTRGroupKeyManagementClusterGroupInfoMapStruct {
 	objc.Send[objc.ID](objref.IDOf(mgkmcgims), objc.RegisterName("setGroupName:"), purego.NSString(groupName))
 	return mgkmcgims
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) WithFabricIndex(fabricIndex obj.Object) *MTRGroupKeyManagementClusterGroupInfoMapStruct {
 	objc.Send[objc.ID](objref.IDOf(mgkmcgims), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mgkmcgims
 }
 
-// GroupID wraps the corresponding Objective-C method.
+// GroupID returns the group ID.
 func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) GroupID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgims), objc.RegisterName("groupId"))
 	return obj.Wrap(_r)
 }
 
-// Endpoints wraps the corresponding Objective-C method.
+// Endpoints returns the endpoints.
 func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) Endpoints() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgims), objc.RegisterName("endpoints"))
 	return obj.Wrap(_r)
@@ -105,7 +105,7 @@ func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetEndpoints(en
 	objc.Send[objc.ID](objref.IDOf(mgkmcgims), objc.RegisterName("setEndpoints:"), objref.IDOf(endpoints))
 }
 
-// GroupName wraps the corresponding Objective-C method.
+// GroupName returns the group name.
 func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) GroupName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgims), objc.RegisterName("groupName"))
 	if _r == 0 {
@@ -114,7 +114,7 @@ func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) GroupName() str
 	return purego.GoString(_r)
 }
 
-// FabricIndex wraps the corresponding Objective-C method.
+// FabricIndex returns the fabric index.
 func (mgkmcgims *MTRGroupKeyManagementClusterGroupInfoMapStruct) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgims), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)

@@ -80,7 +80,7 @@ func (it *InkingTool) InkType() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// Color wraps the corresponding Objective-C method.
+// Color returns the color.
 func (it *InkingTool) Color() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(it), objc.RegisterName("color"))
 	return obj.Wrap(_r)

@@ -65,19 +65,19 @@ func (tp *TextParagraph) WithElementRange(elementRange *TextRange) *TextParagrap
 	return tp
 }
 
-// AttributedString wraps the corresponding Objective-C method.
+// AttributedString returns the attributed string.
 func (tp *TextParagraph) AttributedString() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("attributedString"))
 	return obj.Wrap(_r)
 }
 
-// ParagraphContentRange wraps the corresponding Objective-C method.
+// ParagraphContentRange returns the paragraph content range.
 func (tp *TextParagraph) ParagraphContentRange() *TextRange {
 	_r := objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("paragraphContentRange"))
 	return TextRangeFromID(_r)
 }
 
-// ParagraphSeparatorRange wraps the corresponding Objective-C method.
+// ParagraphSeparatorRange returns the paragraph separator range.
 func (tp *TextParagraph) ParagraphSeparatorRange() *TextRange {
 	_r := objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("paragraphSeparatorRange"))
 	return TextRangeFromID(_r)

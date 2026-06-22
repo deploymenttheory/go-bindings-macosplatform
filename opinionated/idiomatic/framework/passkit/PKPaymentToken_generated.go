@@ -72,13 +72,13 @@ func NewPaymentToken() *PaymentToken {
 	return paymentTokenAdopt(_id)
 }
 
-// PaymentMethod wraps the corresponding Objective-C method.
+// PaymentMethod returns the payment method.
 func (pt *PaymentToken) PaymentMethod() *PaymentMethod {
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("paymentMethod"))
 	return PaymentMethodFromID(_r)
 }
 
-// PaymentInstrumentName wraps the corresponding Objective-C method.
+// PaymentInstrumentName returns the payment instrument name.
 func (pt *PaymentToken) PaymentInstrumentName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("paymentInstrumentName"))
 	if _r == 0 {
@@ -87,7 +87,7 @@ func (pt *PaymentToken) PaymentInstrumentName() string {
 	return purego.GoString(_r)
 }
 
-// PaymentNetwork wraps the corresponding Objective-C method.
+// PaymentNetwork returns the payment network.
 func (pt *PaymentToken) PaymentNetwork() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("paymentNetwork"))
 	if _r == 0 {
@@ -96,7 +96,7 @@ func (pt *PaymentToken) PaymentNetwork() string {
 	return purego.GoString(_r)
 }
 
-// TransactionIdentifier wraps the corresponding Objective-C method.
+// TransactionIdentifier returns the transaction identifier.
 func (pt *PaymentToken) TransactionIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("transactionIdentifier"))
 	if _r == 0 {
@@ -105,7 +105,7 @@ func (pt *PaymentToken) TransactionIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// PaymentData wraps the corresponding Objective-C method.
+// PaymentData returns the payment data.
 func (pt *PaymentToken) PaymentData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("paymentData"))
 	return obj.Wrap(_r)

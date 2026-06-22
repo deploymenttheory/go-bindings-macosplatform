@@ -78,13 +78,13 @@ func NewMTRApplicationLauncherClusterLauncherResponseParamsWithResponseValueErro
 	return mTRApplicationLauncherClusterLauncherResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (malclrp *MTRApplicationLauncherClusterLauncherResponseParams) WithStatus(status obj.Object) *MTRApplicationLauncherClusterLauncherResponseParams {
 	objc.Send[objc.ID](objref.IDOf(malclrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return malclrp
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (malclrp *MTRApplicationLauncherClusterLauncherResponseParams) WithData(data obj.Object) *MTRApplicationLauncherClusterLauncherResponseParams {
 	objc.Send[objc.ID](objref.IDOf(malclrp), objc.RegisterName("setData:"), objref.IDOf(data))
 	return malclrp
@@ -96,13 +96,13 @@ func (malclrp *MTRApplicationLauncherClusterLauncherResponseParams) WithTimedInv
 	return malclrp
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (malclrp *MTRApplicationLauncherClusterLauncherResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(malclrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (malclrp *MTRApplicationLauncherClusterLauncherResponseParams) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(malclrp), objc.RegisterName("data"))
 	return obj.Wrap(_r)

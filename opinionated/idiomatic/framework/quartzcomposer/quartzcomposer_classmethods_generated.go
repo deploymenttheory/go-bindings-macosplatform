@@ -35,19 +35,19 @@ func CompositionLayerWithComposition(composition obj.Object) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// SharedCompositionPickerPanel wraps the corresponding Objective-C method.
+// SharedCompositionPickerPanel returns the shared composition picker panel.
 func SharedCompositionPickerPanel() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCCompositionPickerPanel")), objc.RegisterName("sharedCompositionPickerPanel"))
 	return obj.Wrap(_r)
 }
 
-// SharedCompositionRepository wraps the corresponding Objective-C method.
+// SharedCompositionRepository returns the shared composition repository.
 func SharedCompositionRepository() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCCompositionRepository")), objc.RegisterName("sharedCompositionRepository"))
 	return obj.Wrap(_r)
 }
 
-// Attributes wraps the corresponding Objective-C method.
+// Attributes returns the attributes.
 func Attributes() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCPlugIn")), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
@@ -59,19 +59,19 @@ func AttributesForPropertyPortWithKey(key string) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// SortedPropertyPortKeys wraps the corresponding Objective-C method.
+// SortedPropertyPortKeys returns the sorted property port keys.
 func SortedPropertyPortKeys() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCPlugIn")), objc.RegisterName("sortedPropertyPortKeys"))
 	return obj.Wrap(_r)
 }
 
-// PlugInKeys wraps the corresponding Objective-C method.
+// PlugInKeys returns the plug in keys.
 func PlugInKeys() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("QCPlugIn")), objc.RegisterName("plugInKeys"))
 	return obj.Wrap(_r)
 }
 
-// LoadPlugInAtPath wraps the corresponding Objective-C method.
+// LoadPlugInAtPath loads plug in at path.
 func LoadPlugInAtPath(path string) bool {
 	_r := objc.Send[bool](objc.ID(_class("QCPlugIn")), objc.RegisterName("loadPlugInAtPath:"), purego.NSString(path))
 	return _r

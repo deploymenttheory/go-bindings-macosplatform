@@ -72,13 +72,13 @@ func NewTextCheckingResult() *TextCheckingResult {
 	return textCheckingResultAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (tcr *TextCheckingResult) WithScriptingProperties(scriptingProperties obj.Object) *TextCheckingResult {
 	objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return tcr
 }
 
-// ResultType wraps the corresponding Objective-C method.
+// ResultType returns the result type.
 func (tcr *TextCheckingResult) ResultType() TextCheckingType {
 	_r := objc.Send[TextCheckingType](objref.IDOf(tcr), objc.RegisterName("resultType"))
 	return _r
@@ -90,13 +90,13 @@ func (tcr *TextCheckingResult) ResultByAdjustingRangesWithOffset(offset int) *Te
 	return TextCheckingResultFromID(_r)
 }
 
-// Orthography wraps the corresponding Objective-C method.
+// Orthography returns the orthography.
 func (tcr *TextCheckingResult) Orthography() *Orthography {
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("orthography"))
 	return OrthographyFromID(_r)
 }
 
-// GrammarDetails wraps the corresponding Objective-C method.
+// GrammarDetails returns the grammar details.
 //
 // GrammarDetails returns the collection as a Go slice.
 func (tcr *TextCheckingResult) GrammarDetails() []obj.Object {
@@ -104,37 +104,37 @@ func (tcr *TextCheckingResult) GrammarDetails() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Date wraps the corresponding Objective-C method.
+// Date returns the date.
 func (tcr *TextCheckingResult) Date() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("date"))
 	return DateFromID(_r)
 }
 
-// TimeZone wraps the corresponding Objective-C method.
+// TimeZone returns the time zone.
 func (tcr *TextCheckingResult) TimeZone() *TimeZone {
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (tcr *TextCheckingResult) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(tcr), objc.RegisterName("duration"))
 	return _r
 }
 
-// Components wraps the corresponding Objective-C method.
+// Components returns the components.
 func (tcr *TextCheckingResult) Components() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("components"))
 	return obj.Wrap(_r)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (tcr *TextCheckingResult) URL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("URL"))
 	return URLFromID(_r)
 }
 
-// ReplacementString wraps the corresponding Objective-C method.
+// ReplacementString returns the replacement string.
 func (tcr *TextCheckingResult) ReplacementString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("replacementString"))
 	if _r == 0 {
@@ -143,7 +143,7 @@ func (tcr *TextCheckingResult) ReplacementString() string {
 	return purego.GoString(_r)
 }
 
-// AlternativeStrings wraps the corresponding Objective-C method.
+// AlternativeStrings returns the alternative strings.
 //
 // AlternativeStrings returns the collection as a Go slice.
 func (tcr *TextCheckingResult) AlternativeStrings() []string {
@@ -151,13 +151,13 @@ func (tcr *TextCheckingResult) AlternativeStrings() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// RegularExpression wraps the corresponding Objective-C method.
+// RegularExpression returns the regular expression.
 func (tcr *TextCheckingResult) RegularExpression() *RegularExpression {
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("regularExpression"))
 	return RegularExpressionFromID(_r)
 }
 
-// PhoneNumber wraps the corresponding Objective-C method.
+// PhoneNumber returns the phone number.
 func (tcr *TextCheckingResult) PhoneNumber() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("phoneNumber"))
 	if _r == 0 {
@@ -166,13 +166,13 @@ func (tcr *TextCheckingResult) PhoneNumber() string {
 	return purego.GoString(_r)
 }
 
-// NumberOfRanges wraps the corresponding Objective-C method.
+// NumberOfRanges returns the number of ranges.
 func (tcr *TextCheckingResult) NumberOfRanges() int {
 	_r := objc.Send[int](objref.IDOf(tcr), objc.RegisterName("numberOfRanges"))
 	return _r
 }
 
-// AddressComponents wraps the corresponding Objective-C method.
+// AddressComponents returns the address components.
 func (tcr *TextCheckingResult) AddressComponents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tcr), objc.RegisterName("addressComponents"))
 	return obj.Wrap(_r)

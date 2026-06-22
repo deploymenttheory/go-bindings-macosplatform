@@ -73,7 +73,7 @@ func NewAttributeWithNameType(name string, type_ AttributeType) *Attribute {
 	return attributeAdopt(_id)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (a *Attribute) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("name"))
 	if _r == 0 {
@@ -82,7 +82,7 @@ func (a *Attribute) Name() string {
 	return purego.GoString(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (a *Attribute) Type() AttributeType {
 	_r := objc.Send[AttributeType](objref.IDOf(a), objc.RegisterName("type"))
 	return _r

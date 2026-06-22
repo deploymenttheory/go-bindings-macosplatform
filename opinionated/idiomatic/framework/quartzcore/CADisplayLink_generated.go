@@ -93,25 +93,25 @@ func (dl *DisplayLink) Invalidate() {
 	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("invalidate"))
 }
 
-// Timestamp wraps the corresponding Objective-C method.
+// Timestamp returns the timestamp.
 func (dl *DisplayLink) Timestamp() float64 {
 	_r := objc.Send[float64](objref.IDOf(dl), objc.RegisterName("timestamp"))
 	return _r
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (dl *DisplayLink) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(dl), objc.RegisterName("duration"))
 	return _r
 }
 
-// TargetTimestamp wraps the corresponding Objective-C method.
+// TargetTimestamp returns the target timestamp.
 func (dl *DisplayLink) TargetTimestamp() float64 {
 	_r := objc.Send[float64](objref.IDOf(dl), objc.RegisterName("targetTimestamp"))
 	return _r
 }
 
-// IsPaused wraps the corresponding Objective-C method.
+// IsPaused reports whether the object is paused.
 func (dl *DisplayLink) IsPaused() bool {
 	_r := objc.Send[bool](objref.IDOf(dl), objc.RegisterName("isPaused"))
 	return _r

@@ -75,7 +75,7 @@ func NewMatchmaker() *Matchmaker {
 	return matchmakerAdopt(_id)
 }
 
-// WithInviteHandler sets the property and returns the receiver so calls can be chained.
+// WithInviteHandler sets the invite handler.
 func (m *Matchmaker) WithInviteHandler(inviteHandler func(obj.Object, obj.Object)) *Matchmaker {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setInviteHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { inviteHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return m

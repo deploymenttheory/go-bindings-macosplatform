@@ -78,13 +78,13 @@ func (flpr *FlashingLightsProcessorResult) SurfaceProcessed() bool {
 	return _r
 }
 
-// MitigationLevel wraps the corresponding Objective-C method.
+// MitigationLevel returns the mitigation level.
 func (flpr *FlashingLightsProcessorResult) MitigationLevel() float32 {
 	_r := objc.Send[float32](objref.IDOf(flpr), objc.RegisterName("mitigationLevel"))
 	return _r
 }
 
-// IntensityLevel wraps the corresponding Objective-C method.
+// IntensityLevel returns the intensity level.
 func (flpr *FlashingLightsProcessorResult) IntensityLevel() float32 {
 	_r := objc.Send[float32](objref.IDOf(flpr), objc.RegisterName("intensityLevel"))
 	return _r

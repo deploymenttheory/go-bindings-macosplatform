@@ -131,13 +131,13 @@ func (clcngn *CNNLocalContrastNormalizationGradientNode) Ps() float32 {
 	return _r
 }
 
-// KernelWidth wraps the corresponding Objective-C method.
+// KernelWidth returns the kernel width.
 func (clcngn *CNNLocalContrastNormalizationGradientNode) KernelWidth() int {
 	_r := objc.Send[int](objref.IDOf(clcngn), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
-// KernelHeight wraps the corresponding Objective-C method.
+// KernelHeight returns the kernel height.
 func (clcngn *CNNLocalContrastNormalizationGradientNode) KernelHeight() int {
 	_r := objc.Send[int](objref.IDOf(clcngn), objc.RegisterName("kernelHeight"))
 	return _r

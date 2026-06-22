@@ -88,7 +88,7 @@ func (pckco *PersistentCloudKitContainerOptions) ContainerIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// DatabaseScope wraps the corresponding Objective-C method.
+// DatabaseScope returns the database scope.
 func (pckco *PersistentCloudKitContainerOptions) DatabaseScope() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pckco), objc.RegisterName("databaseScope"))
 	return obj.Wrap(_r)

@@ -70,13 +70,13 @@ func NewMTRApplicationLauncherClusterLaunchAppParams() *MTRApplicationLauncherCl
 	return mTRApplicationLauncherClusterLaunchAppParamsAdopt(_id)
 }
 
-// WithApplication sets the property and returns the receiver so calls can be chained.
+// WithApplication sets the application.
 func (malclap *MTRApplicationLauncherClusterLaunchAppParams) WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterLaunchAppParams {
 	objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("setApplication:"), objref.IDOf(application))
 	return malclap
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (malclap *MTRApplicationLauncherClusterLaunchAppParams) WithData(data obj.Object) *MTRApplicationLauncherClusterLaunchAppParams {
 	objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("setData:"), objref.IDOf(data))
 	return malclap
@@ -94,13 +94,13 @@ func (malclap *MTRApplicationLauncherClusterLaunchAppParams) WithServerSideProce
 	return malclap
 }
 
-// Application wraps the corresponding Objective-C method.
+// Application returns the application.
 func (malclap *MTRApplicationLauncherClusterLaunchAppParams) Application() *MTRApplicationLauncherClusterApplicationStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("application"))
 	return MTRApplicationLauncherClusterApplicationStructFromID(_r)
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (malclap *MTRApplicationLauncherClusterLaunchAppParams) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("data"))
 	return obj.Wrap(_r)

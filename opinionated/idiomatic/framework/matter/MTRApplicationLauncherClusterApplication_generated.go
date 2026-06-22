@@ -50,13 +50,13 @@ func NewMTRApplicationLauncherClusterApplication() *MTRApplicationLauncherCluste
 	return mTRApplicationLauncherClusterApplicationAdopt(_id)
 }
 
-// WithCatalogVendorID sets the property and returns the receiver so calls can be chained.
+// WithCatalogVendorID sets the catalog vendor ID.
 func (malca *MTRApplicationLauncherClusterApplication) WithCatalogVendorID(catalogVendorID obj.Object) *MTRApplicationLauncherClusterApplication {
 	objc.Send[objc.ID](objref.IDOf(malca), objc.RegisterName("setCatalogVendorID:"), objref.IDOf(catalogVendorID))
 	return malca
 }
 
-// WithApplicationID sets the property and returns the receiver so calls can be chained.
+// WithApplicationID sets the application ID.
 func (malca *MTRApplicationLauncherClusterApplication) WithApplicationID(applicationID string) *MTRApplicationLauncherClusterApplication {
 	objc.Send[objc.ID](objref.IDOf(malca), objc.RegisterName("setApplicationID:"), purego.NSString(applicationID))
 	return malca

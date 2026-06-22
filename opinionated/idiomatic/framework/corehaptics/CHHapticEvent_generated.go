@@ -106,13 +106,13 @@ func (he *HapticEvent) WithDuration(duration float64) *HapticEvent {
 	return he
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (he *HapticEvent) Type() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(he), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
 
-// EventParameters wraps the corresponding Objective-C method.
+// EventParameters returns the event parameters.
 //
 // EventParameters returns the collection as a Go slice.
 func (he *HapticEvent) EventParameters() []*HapticEventParameter {
@@ -120,13 +120,13 @@ func (he *HapticEvent) EventParameters() []*HapticEventParameter {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *HapticEventParameter { return HapticEventParameterFromID(_id) })
 }
 
-// RelativeTime wraps the corresponding Objective-C method.
+// RelativeTime returns the relative time.
 func (he *HapticEvent) RelativeTime() float64 {
 	_r := objc.Send[float64](objref.IDOf(he), objc.RegisterName("relativeTime"))
 	return _r
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (he *HapticEvent) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(he), objc.RegisterName("duration"))
 	return _r

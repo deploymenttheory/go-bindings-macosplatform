@@ -73,7 +73,7 @@ func NewFileSecurityWithCoder(coder *Coder) *FileSecurity {
 	return fileSecurityAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (fs *FileSecurity) WithScriptingProperties(scriptingProperties obj.Object) *FileSecurity {
 	objc.Send[objc.ID](objref.IDOf(fs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return fs

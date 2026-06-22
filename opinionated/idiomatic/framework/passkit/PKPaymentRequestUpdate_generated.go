@@ -120,13 +120,13 @@ func (pru *PaymentRequestUpdate) WithDeferredPaymentRequest(deferredPaymentReque
 	return pru
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (pru *PaymentRequestUpdate) Status() PaymentAuthorizationStatus {
 	_r := objc.Send[PaymentAuthorizationStatus](objref.IDOf(pru), objc.RegisterName("status"))
 	return _r
 }
 
-// PaymentSummaryItems wraps the corresponding Objective-C method.
+// PaymentSummaryItems returns the payment summary items.
 //
 // PaymentSummaryItems returns the collection as a Go slice.
 func (pru *PaymentRequestUpdate) PaymentSummaryItems() []*PaymentSummaryItem {
@@ -134,7 +134,7 @@ func (pru *PaymentRequestUpdate) PaymentSummaryItems() []*PaymentSummaryItem {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PaymentSummaryItem { return PaymentSummaryItemFromID(_id) })
 }
 
-// ShippingMethods wraps the corresponding Objective-C method.
+// ShippingMethods returns the shipping methods.
 //
 // ShippingMethods returns the collection as a Go slice.
 func (pru *PaymentRequestUpdate) ShippingMethods() []*ShippingMethod {
@@ -142,7 +142,7 @@ func (pru *PaymentRequestUpdate) ShippingMethods() []*ShippingMethod {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ShippingMethod { return ShippingMethodFromID(_id) })
 }
 
-// MultiTokenContexts wraps the corresponding Objective-C method.
+// MultiTokenContexts returns the multi token contexts.
 //
 // MultiTokenContexts returns the collection as a Go slice.
 func (pru *PaymentRequestUpdate) MultiTokenContexts() []*PaymentTokenContext {
@@ -150,19 +150,19 @@ func (pru *PaymentRequestUpdate) MultiTokenContexts() []*PaymentTokenContext {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PaymentTokenContext { return PaymentTokenContextFromID(_id) })
 }
 
-// RecurringPaymentRequest wraps the corresponding Objective-C method.
+// RecurringPaymentRequest returns the recurring payment request.
 func (pru *PaymentRequestUpdate) RecurringPaymentRequest() *RecurringPaymentRequest {
 	_r := objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("recurringPaymentRequest"))
 	return RecurringPaymentRequestFromID(_r)
 }
 
-// AutomaticReloadPaymentRequest wraps the corresponding Objective-C method.
+// AutomaticReloadPaymentRequest returns the automatic reload payment request.
 func (pru *PaymentRequestUpdate) AutomaticReloadPaymentRequest() *AutomaticReloadPaymentRequest {
 	_r := objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("automaticReloadPaymentRequest"))
 	return AutomaticReloadPaymentRequestFromID(_r)
 }
 
-// DeferredPaymentRequest wraps the corresponding Objective-C method.
+// DeferredPaymentRequest returns the deferred payment request.
 func (pru *PaymentRequestUpdate) DeferredPaymentRequest() *DeferredPaymentRequest {
 	_r := objc.Send[objc.ID](objref.IDOf(pru), objc.RegisterName("deferredPaymentRequest"))
 	return DeferredPaymentRequestFromID(_r)

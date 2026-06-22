@@ -100,19 +100,19 @@ func (ba *BasicAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *Bas
 	return ba
 }
 
-// FromValue wraps the corresponding Objective-C method.
+// FromValue returns the from value.
 func (ba *BasicAnimation) FromValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("fromValue"))
 	return obj.Wrap(_r)
 }
 
-// ToValue wraps the corresponding Objective-C method.
+// ToValue returns the to value.
 func (ba *BasicAnimation) ToValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("toValue"))
 	return obj.Wrap(_r)
 }
 
-// ByValue wraps the corresponding Objective-C method.
+// ByValue returns the by value.
 func (ba *BasicAnimation) ByValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("byValue"))
 	return obj.Wrap(_r)

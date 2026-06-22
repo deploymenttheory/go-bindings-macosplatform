@@ -72,7 +72,7 @@ func NewActivityMoveModeObject() *ActivityMoveModeObject {
 	return activityMoveModeObjectAdopt(_id)
 }
 
-// ActivityMoveMode wraps the corresponding Objective-C method.
+// ActivityMoveMode returns the activity move mode.
 func (ammo *ActivityMoveModeObject) ActivityMoveMode() ActivityMoveMode {
 	_r := objc.Send[ActivityMoveMode](objref.IDOf(ammo), objc.RegisterName("activityMoveMode"))
 	return _r

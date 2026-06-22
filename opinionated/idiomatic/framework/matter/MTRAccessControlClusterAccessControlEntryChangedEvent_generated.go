@@ -70,61 +70,61 @@ func NewMTRAccessControlClusterAccessControlEntryChangedEvent() *MTRAccessContro
 	return mTRAccessControlClusterAccessControlEntryChangedEventAdopt(_id)
 }
 
-// WithAdminNodeID sets the property and returns the receiver so calls can be chained.
+// WithAdminNodeID sets the admin node ID.
 func (maccacece *MTRAccessControlClusterAccessControlEntryChangedEvent) WithAdminNodeID(adminNodeID obj.Object) *MTRAccessControlClusterAccessControlEntryChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("setAdminNodeID:"), objref.IDOf(adminNodeID))
 	return maccacece
 }
 
-// WithAdminPasscodeID sets the property and returns the receiver so calls can be chained.
+// WithAdminPasscodeID sets the admin passcode ID.
 func (maccacece *MTRAccessControlClusterAccessControlEntryChangedEvent) WithAdminPasscodeID(adminPasscodeID obj.Object) *MTRAccessControlClusterAccessControlEntryChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("setAdminPasscodeID:"), objref.IDOf(adminPasscodeID))
 	return maccacece
 }
 
-// WithChangeType sets the property and returns the receiver so calls can be chained.
+// WithChangeType sets the change type.
 func (maccacece *MTRAccessControlClusterAccessControlEntryChangedEvent) WithChangeType(changeType obj.Object) *MTRAccessControlClusterAccessControlEntryChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("setChangeType:"), objref.IDOf(changeType))
 	return maccacece
 }
 
-// WithLatestValue sets the property and returns the receiver so calls can be chained.
+// WithLatestValue sets the latest value.
 func (maccacece *MTRAccessControlClusterAccessControlEntryChangedEvent) WithLatestValue(latestValue MTRAccessControlClusterAccessControlEntryStructProvider) *MTRAccessControlClusterAccessControlEntryChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("setLatestValue:"), objref.IDOf(latestValue))
 	return maccacece
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (maccacece *MTRAccessControlClusterAccessControlEntryChangedEvent) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlEntryChangedEvent {
 	objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return maccacece
 }
 
-// AdminNodeID wraps the corresponding Objective-C method.
+// AdminNodeID returns the admin node ID.
 func (maccacece *MTRAccessControlClusterAccessControlEntryChangedEvent) AdminNodeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("adminNodeID"))
 	return obj.Wrap(_r)
 }
 
-// AdminPasscodeID wraps the corresponding Objective-C method.
+// AdminPasscodeID returns the admin passcode ID.
 func (maccacece *MTRAccessControlClusterAccessControlEntryChangedEvent) AdminPasscodeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("adminPasscodeID"))
 	return obj.Wrap(_r)
 }
 
-// ChangeType wraps the corresponding Objective-C method.
+// ChangeType returns the change type.
 func (maccacece *MTRAccessControlClusterAccessControlEntryChangedEvent) ChangeType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("changeType"))
 	return obj.Wrap(_r)
 }
 
-// LatestValue wraps the corresponding Objective-C method.
+// LatestValue returns the latest value.
 func (maccacece *MTRAccessControlClusterAccessControlEntryChangedEvent) LatestValue() *MTRAccessControlClusterAccessControlEntryStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("latestValue"))
 	return MTRAccessControlClusterAccessControlEntryStructFromID(_r)
 }
 
-// FabricIndex wraps the corresponding Objective-C method.
+// FabricIndex returns the fabric index.
 func (maccacece *MTRAccessControlClusterAccessControlEntryChangedEvent) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccacece), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)

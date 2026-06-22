@@ -141,7 +141,7 @@ func (ka *KeyframeAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *
 	return ka
 }
 
-// Values wraps the corresponding Objective-C method.
+// Values returns the values.
 func (ka *KeyframeAnimation) Values() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("values"))
 	return obj.Wrap(_r)
@@ -152,13 +152,13 @@ func (ka *KeyframeAnimation) SetValues(values obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setValues:"), objref.IDOf(values))
 }
 
-// Path wraps the corresponding Objective-C method.
+// Path returns the path.
 func (ka *KeyframeAnimation) Path() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("path"))
 	return obj.Wrap(_r)
 }
 
-// KeyTimes wraps the corresponding Objective-C method.
+// KeyTimes returns the key times.
 //
 // KeyTimes returns the collection as a Go slice.
 func (ka *KeyframeAnimation) KeyTimes() []obj.Object {
@@ -166,7 +166,7 @@ func (ka *KeyframeAnimation) KeyTimes() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// TimingFunctions wraps the corresponding Objective-C method.
+// TimingFunctions returns the timing functions.
 //
 // TimingFunctions returns the collection as a Go slice.
 func (ka *KeyframeAnimation) TimingFunctions() []*MediaTimingFunction {
@@ -174,13 +174,13 @@ func (ka *KeyframeAnimation) TimingFunctions() []*MediaTimingFunction {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaTimingFunction { return MediaTimingFunctionFromID(_id) })
 }
 
-// CalculationMode wraps the corresponding Objective-C method.
+// CalculationMode returns the calculation mode.
 func (ka *KeyframeAnimation) CalculationMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("calculationMode"))
 	return obj.Wrap(_r)
 }
 
-// TensionValues wraps the corresponding Objective-C method.
+// TensionValues returns the tension values.
 //
 // TensionValues returns the collection as a Go slice.
 func (ka *KeyframeAnimation) TensionValues() []obj.Object {
@@ -188,7 +188,7 @@ func (ka *KeyframeAnimation) TensionValues() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// ContinuityValues wraps the corresponding Objective-C method.
+// ContinuityValues returns the continuity values.
 //
 // ContinuityValues returns the collection as a Go slice.
 func (ka *KeyframeAnimation) ContinuityValues() []obj.Object {
@@ -196,7 +196,7 @@ func (ka *KeyframeAnimation) ContinuityValues() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// BiasValues wraps the corresponding Objective-C method.
+// BiasValues returns the bias values.
 //
 // BiasValues returns the collection as a Go slice.
 func (ka *KeyframeAnimation) BiasValues() []obj.Object {
@@ -204,7 +204,7 @@ func (ka *KeyframeAnimation) BiasValues() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// RotationMode wraps the corresponding Objective-C method.
+// RotationMode returns the rotation mode.
 func (ka *KeyframeAnimation) RotationMode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("rotationMode"))
 	return obj.Wrap(_r)

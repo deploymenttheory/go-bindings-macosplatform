@@ -70,61 +70,61 @@ func NewNNNeuronDescriptor() *NNNeuronDescriptor {
 	return nNNeuronDescriptorAdopt(_id)
 }
 
-// WithNeuronType sets the property and returns the receiver so calls can be chained.
+// WithNeuronType sets the neuron type.
 func (nnd *NNNeuronDescriptor) WithNeuronType(neuronType CNNNeuronType) *NNNeuronDescriptor {
 	objc.Send[objc.ID](objref.IDOf(nnd), objc.RegisterName("setNeuronType:"), neuronType)
 	return nnd
 }
 
-// WithA sets the property and returns the receiver so calls can be chained.
+// WithA sets the a.
 func (nnd *NNNeuronDescriptor) WithA(a float32) *NNNeuronDescriptor {
 	objc.Send[objc.ID](objref.IDOf(nnd), objc.RegisterName("setA:"), a)
 	return nnd
 }
 
-// WithB sets the property and returns the receiver so calls can be chained.
+// WithB sets the b.
 func (nnd *NNNeuronDescriptor) WithB(b float32) *NNNeuronDescriptor {
 	objc.Send[objc.ID](objref.IDOf(nnd), objc.RegisterName("setB:"), b)
 	return nnd
 }
 
-// WithC sets the property and returns the receiver so calls can be chained.
+// WithC sets the c.
 func (nnd *NNNeuronDescriptor) WithC(c float32) *NNNeuronDescriptor {
 	objc.Send[objc.ID](objref.IDOf(nnd), objc.RegisterName("setC:"), c)
 	return nnd
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (nnd *NNNeuronDescriptor) WithData(data obj.Object) *NNNeuronDescriptor {
 	objc.Send[objc.ID](objref.IDOf(nnd), objc.RegisterName("setData:"), objref.IDOf(data))
 	return nnd
 }
 
-// NeuronType wraps the corresponding Objective-C method.
+// NeuronType returns the neuron type.
 func (nnd *NNNeuronDescriptor) NeuronType() CNNNeuronType {
 	_r := objc.Send[CNNNeuronType](objref.IDOf(nnd), objc.RegisterName("neuronType"))
 	return _r
 }
 
-// A wraps the corresponding Objective-C method.
+// A returns the a.
 func (nnd *NNNeuronDescriptor) A() float32 {
 	_r := objc.Send[float32](objref.IDOf(nnd), objc.RegisterName("a"))
 	return _r
 }
 
-// B wraps the corresponding Objective-C method.
+// B returns the b.
 func (nnd *NNNeuronDescriptor) B() float32 {
 	_r := objc.Send[float32](objref.IDOf(nnd), objc.RegisterName("b"))
 	return _r
 }
 
-// C wraps the corresponding Objective-C method.
+// C returns the c.
 func (nnd *NNNeuronDescriptor) C() float32 {
 	_r := objc.Send[float32](objref.IDOf(nnd), objc.RegisterName("c"))
 	return _r
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (nnd *NNNeuronDescriptor) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(nnd), objc.RegisterName("data"))
 	return obj.Wrap(_r)

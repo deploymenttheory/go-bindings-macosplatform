@@ -73,7 +73,7 @@ func NewPositionalSpecifierWithPositionObjectSpecifier(position InsertionPositio
 	return positionalSpecifierAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ps *PositionalSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *PositionalSpecifier {
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ps
@@ -89,19 +89,19 @@ func (ps *PositionalSpecifier) Evaluate() {
 	objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("evaluate"))
 }
 
-// Position wraps the corresponding Objective-C method.
+// Position returns the position.
 func (ps *PositionalSpecifier) Position() InsertionPosition {
 	_r := objc.Send[InsertionPosition](objref.IDOf(ps), objc.RegisterName("position"))
 	return _r
 }
 
-// InsertionContainer wraps the corresponding Objective-C method.
+// InsertionContainer returns the insertion container.
 func (ps *PositionalSpecifier) InsertionContainer() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("insertionContainer"))
 	return obj.Wrap(_r)
 }
 
-// InsertionKey wraps the corresponding Objective-C method.
+// InsertionKey returns the insertion key.
 func (ps *PositionalSpecifier) InsertionKey() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("insertionKey"))
 	if _r == 0 {
@@ -110,7 +110,7 @@ func (ps *PositionalSpecifier) InsertionKey() string {
 	return purego.GoString(_r)
 }
 
-// InsertionIndex wraps the corresponding Objective-C method.
+// InsertionIndex returns the insertion index.
 func (ps *PositionalSpecifier) InsertionIndex() int {
 	_r := objc.Send[int](objref.IDOf(ps), objc.RegisterName("insertionIndex"))
 	return _r

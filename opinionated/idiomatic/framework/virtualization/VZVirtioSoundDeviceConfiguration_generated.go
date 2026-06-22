@@ -58,7 +58,7 @@ func (vsdc *VirtioSoundDeviceConfiguration) WithStreams(items ...VirtioSoundDevi
 	return vsdc
 }
 
-// Streams wraps the corresponding Objective-C method.
+// Streams returns the streams.
 //
 // Streams returns the collection as a Go slice.
 func (vsdc *VirtioSoundDeviceConfiguration) Streams() []*VirtioSoundDeviceStreamConfiguration {

@@ -50,13 +50,13 @@ func NewAnimatedVector3ArrayWithElementCount(arrayElementCount int) *AnimatedVec
 	return animatedVector3ArrayAdopt(_id)
 }
 
-// WithInterpolation sets the property and returns the receiver so calls can be chained.
+// WithInterpolation sets the interpolation.
 func (ava *AnimatedVector3Array) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector3Array {
 	objc.Send[objc.ID](objref.IDOf(ava), objc.RegisterName("setInterpolation:"), interpolation)
 	return ava
 }
 
-// ElementCount wraps the corresponding Objective-C method.
+// ElementCount returns the element count.
 func (ava *AnimatedVector3Array) ElementCount() int {
 	_r := objc.Send[int](objref.IDOf(ava), objc.RegisterName("elementCount"))
 	return _r

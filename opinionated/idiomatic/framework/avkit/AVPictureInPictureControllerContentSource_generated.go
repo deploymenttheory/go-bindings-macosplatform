@@ -73,7 +73,7 @@ func NewPictureInPictureControllerContentSourceWithPlayerLayer(playerLayer obj.O
 	return pictureInPictureControllerContentSourceAdopt(_id)
 }
 
-// PlayerLayer wraps the corresponding Objective-C method.
+// PlayerLayer returns the player layer.
 func (pipccs *PictureInPictureControllerContentSource) PlayerLayer() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pipccs), objc.RegisterName("playerLayer"))
 	return obj.Wrap(_r)

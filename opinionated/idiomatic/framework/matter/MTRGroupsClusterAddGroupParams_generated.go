@@ -70,13 +70,13 @@ func NewMTRGroupsClusterAddGroupParams() *MTRGroupsClusterAddGroupParams {
 	return mTRGroupsClusterAddGroupParamsAdopt(_id)
 }
 
-// WithGroupID sets the property and returns the receiver so calls can be chained.
+// WithGroupID sets the group ID.
 func (mgcagp *MTRGroupsClusterAddGroupParams) WithGroupID(groupID obj.Object) *MTRGroupsClusterAddGroupParams {
 	objc.Send[objc.ID](objref.IDOf(mgcagp), objc.RegisterName("setGroupID:"), objref.IDOf(groupID))
 	return mgcagp
 }
 
-// WithGroupName sets the property and returns the receiver so calls can be chained.
+// WithGroupName sets the group name.
 func (mgcagp *MTRGroupsClusterAddGroupParams) WithGroupName(groupName string) *MTRGroupsClusterAddGroupParams {
 	objc.Send[objc.ID](objref.IDOf(mgcagp), objc.RegisterName("setGroupName:"), purego.NSString(groupName))
 	return mgcagp
@@ -94,13 +94,13 @@ func (mgcagp *MTRGroupsClusterAddGroupParams) WithServerSideProcessingTimeout(se
 	return mgcagp
 }
 
-// GroupID wraps the corresponding Objective-C method.
+// GroupID returns the group ID.
 func (mgcagp *MTRGroupsClusterAddGroupParams) GroupID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgcagp), objc.RegisterName("groupID"))
 	return obj.Wrap(_r)
 }
 
-// GroupName wraps the corresponding Objective-C method.
+// GroupName returns the group name.
 func (mgcagp *MTRGroupsClusterAddGroupParams) GroupName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mgcagp), objc.RegisterName("groupName"))
 	if _r == 0 {

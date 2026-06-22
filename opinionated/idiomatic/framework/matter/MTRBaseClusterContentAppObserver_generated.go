@@ -81,7 +81,7 @@ func (mbccao *MTRBaseClusterContentAppObserver) ContentAppMessageWithParamsCompl
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccao *MTRBaseClusterContentAppObserver) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -131,7 +131,7 @@ func (mbccao *MTRBaseClusterContentAppObserver) SubscribeAttributeGeneratedComma
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccao *MTRBaseClusterContentAppObserver) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -181,7 +181,7 @@ func (mbccao *MTRBaseClusterContentAppObserver) SubscribeAttributeAcceptedComman
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccao *MTRBaseClusterContentAppObserver) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -231,7 +231,7 @@ func (mbccao *MTRBaseClusterContentAppObserver) SubscribeAttributeAttributeListW
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccao *MTRBaseClusterContentAppObserver) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -281,7 +281,7 @@ func (mbccao *MTRBaseClusterContentAppObserver) SubscribeAttributeFeatureMapWith
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccao *MTRBaseClusterContentAppObserver) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

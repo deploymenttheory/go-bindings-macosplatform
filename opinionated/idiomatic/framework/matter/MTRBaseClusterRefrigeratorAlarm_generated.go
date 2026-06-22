@@ -56,7 +56,7 @@ func NewMTRBaseClusterRefrigeratorAlarmWithDeviceEndpointIDQueue(device *MTRBase
 	return mTRBaseClusterRefrigeratorAlarmAdopt(_id)
 }
 
-// ReadAttributeMaskWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaskWithCompletion reads attribute mask with completion.
 //
 // ReadAttributeMaskWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcra *MTRBaseClusterRefrigeratorAlarm) ReadAttributeMaskWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -106,7 +106,7 @@ func (mbcra *MTRBaseClusterRefrigeratorAlarm) SubscribeAttributeMaskWithParamsSu
 	}
 }
 
-// ReadAttributeStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeStateWithCompletion reads attribute state with completion.
 //
 // ReadAttributeStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcra *MTRBaseClusterRefrigeratorAlarm) ReadAttributeStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -156,7 +156,7 @@ func (mbcra *MTRBaseClusterRefrigeratorAlarm) SubscribeAttributeStateWithParamsS
 	}
 }
 
-// ReadAttributeSupportedWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupportedWithCompletion reads attribute supported with completion.
 //
 // ReadAttributeSupportedWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcra *MTRBaseClusterRefrigeratorAlarm) ReadAttributeSupportedWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -206,7 +206,7 @@ func (mbcra *MTRBaseClusterRefrigeratorAlarm) SubscribeAttributeSupportedWithPar
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcra *MTRBaseClusterRefrigeratorAlarm) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -256,7 +256,7 @@ func (mbcra *MTRBaseClusterRefrigeratorAlarm) SubscribeAttributeGeneratedCommand
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcra *MTRBaseClusterRefrigeratorAlarm) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -306,7 +306,7 @@ func (mbcra *MTRBaseClusterRefrigeratorAlarm) SubscribeAttributeAcceptedCommandL
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcra *MTRBaseClusterRefrigeratorAlarm) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -356,7 +356,7 @@ func (mbcra *MTRBaseClusterRefrigeratorAlarm) SubscribeAttributeAttributeListWit
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcra *MTRBaseClusterRefrigeratorAlarm) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -406,7 +406,7 @@ func (mbcra *MTRBaseClusterRefrigeratorAlarm) SubscribeAttributeFeatureMapWithPa
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcra *MTRBaseClusterRefrigeratorAlarm) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

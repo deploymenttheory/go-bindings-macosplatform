@@ -63,7 +63,7 @@ func (auv *AudioUnitVarispeed) WithBypass(bypass bool) *AudioUnitVarispeed {
 	return auv
 }
 
-// Rate wraps the corresponding Objective-C method.
+// Rate returns the rate.
 func (auv *AudioUnitVarispeed) Rate() float32 {
 	_r := objc.Send[float32](objref.IDOf(auv), objc.RegisterName("rate"))
 	return _r

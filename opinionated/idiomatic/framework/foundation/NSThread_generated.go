@@ -79,31 +79,31 @@ func NewThreadWith(block func()) *Thread {
 	return threadAdopt(_id)
 }
 
-// WithThreadPriority sets the property and returns the receiver so calls can be chained.
+// WithThreadPriority sets the thread priority.
 func (t *Thread) WithThreadPriority(threadPriority float64) *Thread {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setThreadPriority:"), threadPriority)
 	return t
 }
 
-// WithQualityOfService sets the property and returns the receiver so calls can be chained.
+// WithQualityOfService sets the quality of service.
 func (t *Thread) WithQualityOfService(qualityOfService QualityOfService) *Thread {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setQualityOfService:"), qualityOfService)
 	return t
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (t *Thread) WithName(name StringProvider) *Thread {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setName:"), objref.IDOf(name))
 	return t
 }
 
-// WithStackSize sets the property and returns the receiver so calls can be chained.
+// WithStackSize sets the stack size.
 func (t *Thread) WithStackSize(stackSize int) *Thread {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setStackSize:"), stackSize)
 	return t
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (t *Thread) WithScriptingProperties(scriptingProperties obj.Object) *Thread {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return t
@@ -124,25 +124,25 @@ func (t *Thread) Main() {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("main"))
 }
 
-// ThreadDictionary wraps the corresponding Objective-C method.
+// ThreadDictionary returns the thread dictionary.
 func (t *Thread) ThreadDictionary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("threadDictionary"))
 	return obj.Wrap(_r)
 }
 
-// ThreadPriority wraps the corresponding Objective-C method.
+// ThreadPriority returns the thread priority.
 func (t *Thread) ThreadPriority() float64 {
 	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("threadPriority"))
 	return _r
 }
 
-// QualityOfService wraps the corresponding Objective-C method.
+// QualityOfService returns the quality of service.
 func (t *Thread) QualityOfService() QualityOfService {
 	_r := objc.Send[QualityOfService](objref.IDOf(t), objc.RegisterName("qualityOfService"))
 	return _r
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (t *Thread) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("name"))
 	if _r == 0 {
@@ -151,31 +151,31 @@ func (t *Thread) Name() string {
 	return purego.GoString(_r)
 }
 
-// StackSize wraps the corresponding Objective-C method.
+// StackSize returns the stack size.
 func (t *Thread) StackSize() int {
 	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("stackSize"))
 	return _r
 }
 
-// IsMainThread wraps the corresponding Objective-C method.
+// IsMainThread reports whether the object is main thread.
 func (t *Thread) IsMainThread() bool {
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isMainThread"))
 	return _r
 }
 
-// IsExecuting wraps the corresponding Objective-C method.
+// IsExecuting reports whether the object is executing.
 func (t *Thread) IsExecuting() bool {
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isExecuting"))
 	return _r
 }
 
-// IsFinished wraps the corresponding Objective-C method.
+// IsFinished reports whether the object is finished.
 func (t *Thread) IsFinished() bool {
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isFinished"))
 	return _r
 }
 
-// IsCancelled wraps the corresponding Objective-C method.
+// IsCancelled reports whether the object is cancelled.
 func (t *Thread) IsCancelled() bool {
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isCancelled"))
 	return _r

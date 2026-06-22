@@ -73,13 +73,13 @@ func NewHighlightChangeEventWithHighlightTrigger(highlight *Highlight, trigger H
 	return highlightChangeEventAdopt(_id)
 }
 
-// ChangeEventTrigger wraps the corresponding Objective-C method.
+// ChangeEventTrigger returns the change event trigger.
 func (hce *HighlightChangeEvent) ChangeEventTrigger() HighlightChangeEventTrigger {
 	_r := objc.Send[HighlightChangeEventTrigger](objref.IDOf(hce), objc.RegisterName("changeEventTrigger"))
 	return _r
 }
 
-// HighlightURL wraps the corresponding Objective-C method.
+// HighlightURL returns the highlight URL.
 func (hce *HighlightChangeEvent) HighlightURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(hce), objc.RegisterName("highlightURL"))
 	return obj.Wrap(_r)

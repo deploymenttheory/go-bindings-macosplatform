@@ -78,19 +78,19 @@ func NewMTRChannelClusterProgramGuideResponseParamsWithResponseValueError(respon
 	return mTRChannelClusterProgramGuideResponseParamsAdopt(_id), nil
 }
 
-// WithPaging sets the property and returns the receiver so calls can be chained.
+// WithPaging sets the paging.
 func (mccpgrp *MTRChannelClusterProgramGuideResponseParams) WithPaging(paging *MTRChannelClusterChannelPagingStruct) *MTRChannelClusterProgramGuideResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mccpgrp), objc.RegisterName("setPaging:"), objref.IDOf(paging))
 	return mccpgrp
 }
 
-// Paging wraps the corresponding Objective-C method.
+// Paging returns the paging.
 func (mccpgrp *MTRChannelClusterProgramGuideResponseParams) Paging() *MTRChannelClusterChannelPagingStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(mccpgrp), objc.RegisterName("paging"))
 	return MTRChannelClusterChannelPagingStructFromID(_r)
 }
 
-// ProgramList wraps the corresponding Objective-C method.
+// ProgramList returns the program list.
 func (mccpgrp *MTRChannelClusterProgramGuideResponseParams) ProgramList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccpgrp), objc.RegisterName("programList"))
 	return obj.Wrap(_r)

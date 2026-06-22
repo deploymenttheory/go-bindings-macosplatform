@@ -89,25 +89,25 @@ func (siod *StageInputOutputDescriptor) Reset() {
 	objc.Send[objc.ID](objref.IDOf(siod), objc.RegisterName("reset"))
 }
 
-// Layouts wraps the corresponding Objective-C method.
+// Layouts returns the layouts.
 func (siod *StageInputOutputDescriptor) Layouts() *BufferLayoutDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(siod), objc.RegisterName("layouts"))
 	return BufferLayoutDescriptorArrayFromID(_r)
 }
 
-// Attributes wraps the corresponding Objective-C method.
+// Attributes returns the attributes.
 func (siod *StageInputOutputDescriptor) Attributes() *AttributeDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(siod), objc.RegisterName("attributes"))
 	return AttributeDescriptorArrayFromID(_r)
 }
 
-// IndexType wraps the corresponding Objective-C method.
+// IndexType returns the index type.
 func (siod *StageInputOutputDescriptor) IndexType() IndexType {
 	_r := objc.Send[IndexType](objref.IDOf(siod), objc.RegisterName("indexType"))
 	return _r
 }
 
-// IndexBufferIndex wraps the corresponding Objective-C method.
+// IndexBufferIndex returns the index buffer index.
 func (siod *StageInputOutputDescriptor) IndexBufferIndex() int {
 	_r := objc.Send[int](objref.IDOf(siod), objc.RegisterName("indexBufferIndex"))
 	return _r

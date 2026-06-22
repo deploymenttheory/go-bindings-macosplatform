@@ -78,7 +78,7 @@ func (pc *PitchControl) WithMapView(mapView *MapView) *PitchControl {
 	return pc
 }
 
-// MapView wraps the corresponding Objective-C method.
+// MapView returns the map view.
 func (pc *PitchControl) MapView() *MapView {
 	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("mapView"))
 	return MapViewFromID(_r)

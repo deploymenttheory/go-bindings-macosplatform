@@ -70,14 +70,14 @@ func NewMTRSwitchClusterLongPressEvent() *MTRSwitchClusterLongPressEvent {
 	return mTRSwitchClusterLongPressEventAdopt(_id)
 }
 
-// WithNewPosition sets the property and returns the receiver so calls can be chained.
+// WithNewPosition sets the new position.
 func (msclpe *MTRSwitchClusterLongPressEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterLongPressEvent {
 	objc.Send[objc.ID](objref.IDOf(msclpe), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
 	return msclpe
 }
 
-// GetNewPosition wraps the corresponding Objective-C method.
-func (msclpe *MTRSwitchClusterLongPressEvent) GetNewPosition() obj.Object {
+// NewPosition returns the new position.
+func (msclpe *MTRSwitchClusterLongPressEvent) NewPosition() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msclpe), objc.RegisterName("getNewPosition"))
 	return obj.Wrap(_r)
 }

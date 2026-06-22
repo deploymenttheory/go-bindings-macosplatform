@@ -144,25 +144,25 @@ func (cng *CNNNeuronGradient) WithLabel(label string) *CNNNeuronGradient {
 	return cng
 }
 
-// A wraps the corresponding Objective-C method.
+// A returns the a.
 func (cng *CNNNeuronGradient) A() float32 {
 	_r := objc.Send[float32](objref.IDOf(cng), objc.RegisterName("a"))
 	return _r
 }
 
-// B wraps the corresponding Objective-C method.
+// B returns the b.
 func (cng *CNNNeuronGradient) B() float32 {
 	_r := objc.Send[float32](objref.IDOf(cng), objc.RegisterName("b"))
 	return _r
 }
 
-// C wraps the corresponding Objective-C method.
+// C returns the c.
 func (cng *CNNNeuronGradient) C() float32 {
 	_r := objc.Send[float32](objref.IDOf(cng), objc.RegisterName("c"))
 	return _r
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (cng *CNNNeuronGradient) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cng), objc.RegisterName("data"))
 	return obj.Wrap(_r)

@@ -50,19 +50,19 @@ func NewMTROtaSoftwareUpdateRequestorClusterProviderLocation() *MTROtaSoftwareUp
 	return mTROtaSoftwareUpdateRequestorClusterProviderLocationAdopt(_id)
 }
 
-// WithProviderNodeID sets the property and returns the receiver so calls can be chained.
+// WithProviderNodeID sets the provider node ID.
 func (mosurcpl *MTROtaSoftwareUpdateRequestorClusterProviderLocation) WithProviderNodeID(providerNodeID obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
 	objc.Send[objc.ID](objref.IDOf(mosurcpl), objc.RegisterName("setProviderNodeID:"), objref.IDOf(providerNodeID))
 	return mosurcpl
 }
 
-// WithEndpoint sets the property and returns the receiver so calls can be chained.
+// WithEndpoint sets the endpoint.
 func (mosurcpl *MTROtaSoftwareUpdateRequestorClusterProviderLocation) WithEndpoint(endpoint obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
 	objc.Send[objc.ID](objref.IDOf(mosurcpl), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 	return mosurcpl
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (mosurcpl *MTROtaSoftwareUpdateRequestorClusterProviderLocation) WithFabricIndex(fabricIndex obj.Object) *MTROtaSoftwareUpdateRequestorClusterProviderLocation {
 	objc.Send[objc.ID](objref.IDOf(mosurcpl), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mosurcpl

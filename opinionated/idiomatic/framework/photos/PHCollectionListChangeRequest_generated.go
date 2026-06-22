@@ -68,13 +68,13 @@ func (clcr *CollectionListChangeRequest) MoveChildCollectionsAtIndexesToIndex(in
 	objc.Send[objc.ID](objref.IDOf(clcr), objc.RegisterName("moveChildCollectionsAtIndexes:toIndex:"), objref.IDOf(indexes), toIndex)
 }
 
-// PlaceholderForCreatedCollectionList wraps the corresponding Objective-C method.
+// PlaceholderForCreatedCollectionList returns the placeholder for created collection list.
 func (clcr *CollectionListChangeRequest) PlaceholderForCreatedCollectionList() *ObjectPlaceholder {
 	_r := objc.Send[objc.ID](objref.IDOf(clcr), objc.RegisterName("placeholderForCreatedCollectionList"))
 	return ObjectPlaceholderFromID(_r)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (clcr *CollectionListChangeRequest) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(clcr), objc.RegisterName("title"))
 	if _r == 0 {

@@ -233,7 +233,7 @@ func (rpd *RenderPipelineDescriptor) Reset() {
 	objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("reset"))
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (rpd *RenderPipelineDescriptor) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("label"))
 	if _r == 0 {
@@ -242,121 +242,121 @@ func (rpd *RenderPipelineDescriptor) Label() string {
 	return purego.GoString(_r)
 }
 
-// VertexDescriptor wraps the corresponding Objective-C method.
+// VertexDescriptor returns the vertex descriptor.
 func (rpd *RenderPipelineDescriptor) VertexDescriptor() *VertexDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("vertexDescriptor"))
 	return VertexDescriptorFromID(_r)
 }
 
-// SampleCount wraps the corresponding Objective-C method.
+// SampleCount returns the sample count.
 func (rpd *RenderPipelineDescriptor) SampleCount() int {
 	_r := objc.Send[int](objref.IDOf(rpd), objc.RegisterName("sampleCount"))
 	return _r
 }
 
-// RasterSampleCount wraps the corresponding Objective-C method.
+// RasterSampleCount returns the raster sample count.
 func (rpd *RenderPipelineDescriptor) RasterSampleCount() int {
 	_r := objc.Send[int](objref.IDOf(rpd), objc.RegisterName("rasterSampleCount"))
 	return _r
 }
 
-// IsAlphaToCoverageEnabled wraps the corresponding Objective-C method.
+// IsAlphaToCoverageEnabled reports whether the object is alpha to coverage enabled.
 func (rpd *RenderPipelineDescriptor) IsAlphaToCoverageEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(rpd), objc.RegisterName("isAlphaToCoverageEnabled"))
 	return _r
 }
 
-// IsAlphaToOneEnabled wraps the corresponding Objective-C method.
+// IsAlphaToOneEnabled reports whether the object is alpha to one enabled.
 func (rpd *RenderPipelineDescriptor) IsAlphaToOneEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(rpd), objc.RegisterName("isAlphaToOneEnabled"))
 	return _r
 }
 
-// IsRasterizationEnabled wraps the corresponding Objective-C method.
+// IsRasterizationEnabled reports whether the object is rasterization enabled.
 func (rpd *RenderPipelineDescriptor) IsRasterizationEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(rpd), objc.RegisterName("isRasterizationEnabled"))
 	return _r
 }
 
-// MaxVertexAmplificationCount wraps the corresponding Objective-C method.
+// MaxVertexAmplificationCount returns the max vertex amplification count.
 func (rpd *RenderPipelineDescriptor) MaxVertexAmplificationCount() int {
 	_r := objc.Send[int](objref.IDOf(rpd), objc.RegisterName("maxVertexAmplificationCount"))
 	return _r
 }
 
-// ColorAttachments wraps the corresponding Objective-C method.
+// ColorAttachments returns the color attachments.
 func (rpd *RenderPipelineDescriptor) ColorAttachments() *RenderPipelineColorAttachmentDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("colorAttachments"))
 	return RenderPipelineColorAttachmentDescriptorArrayFromID(_r)
 }
 
-// DepthAttachmentPixelFormat wraps the corresponding Objective-C method.
+// DepthAttachmentPixelFormat returns the depth attachment pixel format.
 func (rpd *RenderPipelineDescriptor) DepthAttachmentPixelFormat() PixelFormat {
 	_r := objc.Send[PixelFormat](objref.IDOf(rpd), objc.RegisterName("depthAttachmentPixelFormat"))
 	return _r
 }
 
-// StencilAttachmentPixelFormat wraps the corresponding Objective-C method.
+// StencilAttachmentPixelFormat returns the stencil attachment pixel format.
 func (rpd *RenderPipelineDescriptor) StencilAttachmentPixelFormat() PixelFormat {
 	_r := objc.Send[PixelFormat](objref.IDOf(rpd), objc.RegisterName("stencilAttachmentPixelFormat"))
 	return _r
 }
 
-// InputPrimitiveTopology wraps the corresponding Objective-C method.
+// InputPrimitiveTopology returns the input primitive topology.
 func (rpd *RenderPipelineDescriptor) InputPrimitiveTopology() PrimitiveTopologyClass {
 	_r := objc.Send[PrimitiveTopologyClass](objref.IDOf(rpd), objc.RegisterName("inputPrimitiveTopology"))
 	return _r
 }
 
-// TessellationPartitionMode wraps the corresponding Objective-C method.
+// TessellationPartitionMode returns the tessellation partition mode.
 func (rpd *RenderPipelineDescriptor) TessellationPartitionMode() TessellationPartitionMode {
 	_r := objc.Send[TessellationPartitionMode](objref.IDOf(rpd), objc.RegisterName("tessellationPartitionMode"))
 	return _r
 }
 
-// MaxTessellationFactor wraps the corresponding Objective-C method.
+// MaxTessellationFactor returns the max tessellation factor.
 func (rpd *RenderPipelineDescriptor) MaxTessellationFactor() int {
 	_r := objc.Send[int](objref.IDOf(rpd), objc.RegisterName("maxTessellationFactor"))
 	return _r
 }
 
-// IsTessellationFactorScaleEnabled wraps the corresponding Objective-C method.
+// IsTessellationFactorScaleEnabled reports whether the object is tessellation factor scale enabled.
 func (rpd *RenderPipelineDescriptor) IsTessellationFactorScaleEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(rpd), objc.RegisterName("isTessellationFactorScaleEnabled"))
 	return _r
 }
 
-// TessellationFactorFormat wraps the corresponding Objective-C method.
+// TessellationFactorFormat returns the tessellation factor format.
 func (rpd *RenderPipelineDescriptor) TessellationFactorFormat() TessellationFactorFormat {
 	_r := objc.Send[TessellationFactorFormat](objref.IDOf(rpd), objc.RegisterName("tessellationFactorFormat"))
 	return _r
 }
 
-// TessellationControlPointIndexType wraps the corresponding Objective-C method.
+// TessellationControlPointIndexType returns the tessellation control point index type.
 func (rpd *RenderPipelineDescriptor) TessellationControlPointIndexType() TessellationControlPointIndexType {
 	_r := objc.Send[TessellationControlPointIndexType](objref.IDOf(rpd), objc.RegisterName("tessellationControlPointIndexType"))
 	return _r
 }
 
-// TessellationFactorStepFunction wraps the corresponding Objective-C method.
+// TessellationFactorStepFunction returns the tessellation factor step function.
 func (rpd *RenderPipelineDescriptor) TessellationFactorStepFunction() TessellationFactorStepFunction {
 	_r := objc.Send[TessellationFactorStepFunction](objref.IDOf(rpd), objc.RegisterName("tessellationFactorStepFunction"))
 	return _r
 }
 
-// TessellationOutputWindingOrder wraps the corresponding Objective-C method.
+// TessellationOutputWindingOrder returns the tessellation output winding order.
 func (rpd *RenderPipelineDescriptor) TessellationOutputWindingOrder() Winding {
 	_r := objc.Send[Winding](objref.IDOf(rpd), objc.RegisterName("tessellationOutputWindingOrder"))
 	return _r
 }
 
-// VertexBuffers wraps the corresponding Objective-C method.
+// VertexBuffers returns the vertex buffers.
 func (rpd *RenderPipelineDescriptor) VertexBuffers() *PipelineBufferDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("vertexBuffers"))
 	return PipelineBufferDescriptorArrayFromID(_r)
 }
 
-// FragmentBuffers wraps the corresponding Objective-C method.
+// FragmentBuffers returns the fragment buffers.
 func (rpd *RenderPipelineDescriptor) FragmentBuffers() *PipelineBufferDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("fragmentBuffers"))
 	return PipelineBufferDescriptorArrayFromID(_r)

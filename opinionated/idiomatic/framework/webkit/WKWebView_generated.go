@@ -142,7 +142,7 @@ func (wwv *WKWebView) WithInspectable(inspectable bool) *WKWebView {
 	return wwv
 }
 
-// WithObscuredContentInsets sets the property and returns the receiver so calls can be chained.
+// WithObscuredContentInsets sets the obscured content insets.
 func (wwv *WKWebView) WithObscuredContentInsets(obscuredContentInsets foundation.NSEdgeInsets) *WKWebView {
 	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("setObscuredContentInsets:"), obscuredContentInsets)
 	return wwv
@@ -212,7 +212,7 @@ func (wwv *WKWebView) CloseAllMediaPresentationsWithCompletionHandler(completion
 	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("closeAllMediaPresentationsWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block) int { return completionHandler() }))
 }
 
-// CloseAllMediaPresentations wraps the corresponding Objective-C method.
+// CloseAllMediaPresentations closes all media presentations.
 func (wwv *WKWebView) CloseAllMediaPresentations() {
 	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("closeAllMediaPresentations"))
 }
@@ -278,7 +278,7 @@ func (wwv *WKWebView) LoadSimulatedRequestResponseResponseData(request obj.Objec
 	return WKNavigationFromID(_r)
 }
 
-// LoadSimulatedRequestWithResponseResponseData wraps the corresponding Objective-C method.
+// LoadSimulatedRequestWithResponseResponseData loads simulated request with response response data.
 func (wwv *WKWebView) LoadSimulatedRequestWithResponseResponseData(request obj.Object, response obj.Object, data obj.Object) *WKNavigation {
 	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadSimulatedRequest:withResponse:responseData:"), objref.IDOf(request), objref.IDOf(response), objref.IDOf(data))
 	return WKNavigationFromID(_r)
@@ -296,7 +296,7 @@ func (wwv *WKWebView) LoadSimulatedRequestResponseHTMLString(request obj.Object,
 	return WKNavigationFromID(_r)
 }
 
-// LoadSimulatedRequestWithResponseHTMLString wraps the corresponding Objective-C method.
+// LoadSimulatedRequestWithResponseHTMLString loads simulated request with response HTML string.
 func (wwv *WKWebView) LoadSimulatedRequestWithResponseHTMLString(request obj.Object, string_ string) *WKNavigation {
 	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("loadSimulatedRequest:withResponseHTMLString:"), objref.IDOf(request), purego.NSString(string_))
 	return WKNavigationFromID(_r)
@@ -415,19 +415,19 @@ func (wwv *WKWebView) AllowsMagnification() bool {
 	return _r
 }
 
-// Magnification wraps the corresponding Objective-C method.
+// Magnification returns the magnification.
 func (wwv *WKWebView) Magnification() float64 {
 	_r := objc.Send[float64](objref.IDOf(wwv), objc.RegisterName("magnification"))
 	return _r
 }
 
-// PageZoom wraps the corresponding Objective-C method.
+// PageZoom returns the page zoom.
 func (wwv *WKWebView) PageZoom() float64 {
 	_r := objc.Send[float64](objref.IDOf(wwv), objc.RegisterName("pageZoom"))
 	return _r
 }
 
-// MediaType wraps the corresponding Objective-C method.
+// MediaType returns the media type.
 func (wwv *WKWebView) MediaType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("mediaType"))
 	if _r == 0 {
@@ -436,7 +436,7 @@ func (wwv *WKWebView) MediaType() string {
 	return purego.GoString(_r)
 }
 
-// InteractionState wraps the corresponding Objective-C method.
+// InteractionState returns the interaction state.
 func (wwv *WKWebView) InteractionState() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("interactionState"))
 	return obj.Wrap(_r)
@@ -448,13 +448,13 @@ func (wwv *WKWebView) IsBlockedByScreenTime() bool {
 	return _r
 }
 
-// ThemeColor wraps the corresponding Objective-C method.
+// ThemeColor returns the theme color.
 func (wwv *WKWebView) ThemeColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("themeColor"))
 	return obj.Wrap(_r)
 }
 
-// UnderPageBackgroundColor wraps the corresponding Objective-C method.
+// UnderPageBackgroundColor returns the under page background color.
 func (wwv *WKWebView) UnderPageBackgroundColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("underPageBackgroundColor"))
 	return obj.Wrap(_r)
@@ -466,13 +466,13 @@ func (wwv *WKWebView) FullscreenState() WKFullscreenState {
 	return _r
 }
 
-// MinimumViewportInset wraps the corresponding Objective-C method.
+// MinimumViewportInset returns the minimum viewport inset.
 func (wwv *WKWebView) MinimumViewportInset() foundation.NSEdgeInsets {
 	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(wwv), objc.RegisterName("minimumViewportInset"))
 	return _r
 }
 
-// MaximumViewportInset wraps the corresponding Objective-C method.
+// MaximumViewportInset returns the maximum viewport inset.
 func (wwv *WKWebView) MaximumViewportInset() foundation.NSEdgeInsets {
 	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(wwv), objc.RegisterName("maximumViewportInset"))
 	return _r
@@ -490,7 +490,7 @@ func (wwv *WKWebView) IsWritingToolsActive() bool {
 	return _r
 }
 
-// ObscuredContentInsets wraps the corresponding Objective-C method.
+// ObscuredContentInsets returns the obscured content insets.
 func (wwv *WKWebView) ObscuredContentInsets() foundation.NSEdgeInsets {
 	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(wwv), objc.RegisterName("obscuredContentInsets"))
 	return _r
@@ -521,7 +521,7 @@ func (wwv *WKWebView) StopLoading2(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("stopLoading:"), objref.IDOf(sender))
 }
 
-// CertificateChain wraps the corresponding Objective-C method.
+// CertificateChain returns the certificate chain.
 func (wwv *WKWebView) CertificateChain() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(wwv), objc.RegisterName("certificateChain"))
 	return obj.Wrap(_r)

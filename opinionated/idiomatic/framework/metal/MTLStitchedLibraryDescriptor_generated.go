@@ -85,7 +85,7 @@ func (sld *StitchedLibraryDescriptor) WithOptions(options StitchedLibraryOptions
 	return sld
 }
 
-// FunctionGraphs wraps the corresponding Objective-C method.
+// FunctionGraphs returns the function graphs.
 //
 // FunctionGraphs returns the collection as a Go slice.
 func (sld *StitchedLibraryDescriptor) FunctionGraphs() []*FunctionStitchingGraph {
@@ -93,7 +93,7 @@ func (sld *StitchedLibraryDescriptor) FunctionGraphs() []*FunctionStitchingGraph
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FunctionStitchingGraph { return FunctionStitchingGraphFromID(_id) })
 }
 
-// Functions wraps the corresponding Objective-C method.
+// Functions returns the functions.
 func (sld *StitchedLibraryDescriptor) Functions() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sld), objc.RegisterName("functions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

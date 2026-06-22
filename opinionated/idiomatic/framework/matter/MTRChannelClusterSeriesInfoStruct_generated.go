@@ -70,19 +70,19 @@ func NewMTRChannelClusterSeriesInfoStruct() *MTRChannelClusterSeriesInfoStruct {
 	return mTRChannelClusterSeriesInfoStructAdopt(_id)
 }
 
-// WithSeason sets the property and returns the receiver so calls can be chained.
+// WithSeason sets the season.
 func (mccsis *MTRChannelClusterSeriesInfoStruct) WithSeason(season string) *MTRChannelClusterSeriesInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(mccsis), objc.RegisterName("setSeason:"), purego.NSString(season))
 	return mccsis
 }
 
-// WithEpisode sets the property and returns the receiver so calls can be chained.
+// WithEpisode sets the episode.
 func (mccsis *MTRChannelClusterSeriesInfoStruct) WithEpisode(episode string) *MTRChannelClusterSeriesInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(mccsis), objc.RegisterName("setEpisode:"), purego.NSString(episode))
 	return mccsis
 }
 
-// Season wraps the corresponding Objective-C method.
+// Season returns the season.
 func (mccsis *MTRChannelClusterSeriesInfoStruct) Season() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mccsis), objc.RegisterName("season"))
 	if _r == 0 {
@@ -91,7 +91,7 @@ func (mccsis *MTRChannelClusterSeriesInfoStruct) Season() string {
 	return purego.GoString(_r)
 }
 
-// Episode wraps the corresponding Objective-C method.
+// Episode returns the episode.
 func (mccsis *MTRChannelClusterSeriesInfoStruct) Episode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mccsis), objc.RegisterName("episode"))
 	if _r == 0 {

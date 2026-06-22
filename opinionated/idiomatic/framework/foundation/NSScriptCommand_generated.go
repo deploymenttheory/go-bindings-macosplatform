@@ -124,7 +124,7 @@ func (sc *ScriptCommand) WithScriptErrorString(scriptErrorString StringProvider)
 	return sc
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (sc *ScriptCommand) WithScriptingProperties(scriptingProperties obj.Object) *ScriptCommand {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return sc
@@ -152,67 +152,67 @@ func (sc *ScriptCommand) ResumeExecutionWithResult(result obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("resumeExecutionWithResult:"), objref.IDOf(result))
 }
 
-// CommandDescription wraps the corresponding Objective-C method.
+// CommandDescription returns the command description.
 func (sc *ScriptCommand) CommandDescription() *ScriptCommandDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("commandDescription"))
 	return ScriptCommandDescriptionFromID(_r)
 }
 
-// DirectParameter wraps the corresponding Objective-C method.
+// DirectParameter returns the direct parameter.
 func (sc *ScriptCommand) DirectParameter() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("directParameter"))
 	return obj.Wrap(_r)
 }
 
-// ReceiversSpecifier wraps the corresponding Objective-C method.
+// ReceiversSpecifier returns the receivers specifier.
 func (sc *ScriptCommand) ReceiversSpecifier() *ScriptObjectSpecifier {
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("receiversSpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
 
-// EvaluatedReceivers wraps the corresponding Objective-C method.
+// EvaluatedReceivers returns the evaluated receivers.
 func (sc *ScriptCommand) EvaluatedReceivers() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("evaluatedReceivers"))
 	return obj.Wrap(_r)
 }
 
-// Arguments wraps the corresponding Objective-C method.
+// Arguments returns the arguments.
 func (sc *ScriptCommand) Arguments() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("arguments"))
 	return obj.Wrap(_r)
 }
 
-// EvaluatedArguments wraps the corresponding Objective-C method.
+// EvaluatedArguments returns the evaluated arguments.
 func (sc *ScriptCommand) EvaluatedArguments() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("evaluatedArguments"))
 	return obj.Wrap(_r)
 }
 
-// IsWellFormed wraps the corresponding Objective-C method.
+// IsWellFormed reports whether the object is well formed.
 func (sc *ScriptCommand) IsWellFormed() bool {
 	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("isWellFormed"))
 	return _r
 }
 
-// ScriptErrorNumber wraps the corresponding Objective-C method.
+// ScriptErrorNumber returns the script error number.
 func (sc *ScriptCommand) ScriptErrorNumber() int {
 	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("scriptErrorNumber"))
 	return _r
 }
 
-// ScriptErrorOffendingObjectDescriptor wraps the corresponding Objective-C method.
+// ScriptErrorOffendingObjectDescriptor returns the script error offending object descriptor.
 func (sc *ScriptCommand) ScriptErrorOffendingObjectDescriptor() *AppleEventDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("scriptErrorOffendingObjectDescriptor"))
 	return AppleEventDescriptorFromID(_r)
 }
 
-// ScriptErrorExpectedTypeDescriptor wraps the corresponding Objective-C method.
+// ScriptErrorExpectedTypeDescriptor returns the script error expected type descriptor.
 func (sc *ScriptCommand) ScriptErrorExpectedTypeDescriptor() *AppleEventDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("scriptErrorExpectedTypeDescriptor"))
 	return AppleEventDescriptorFromID(_r)
 }
 
-// ScriptErrorString wraps the corresponding Objective-C method.
+// ScriptErrorString returns the script error string.
 func (sc *ScriptCommand) ScriptErrorString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("scriptErrorString"))
 	if _r == 0 {
@@ -221,7 +221,7 @@ func (sc *ScriptCommand) ScriptErrorString() string {
 	return purego.GoString(_r)
 }
 
-// AppleEvent wraps the corresponding Objective-C method.
+// AppleEvent returns the apple event.
 func (sc *ScriptCommand) AppleEvent() *AppleEventDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("appleEvent"))
 	return AppleEventDescriptorFromID(_r)

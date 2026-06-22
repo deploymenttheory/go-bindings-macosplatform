@@ -70,13 +70,13 @@ func NewMTRValveConfigurationAndControlClusterOpenParams() *MTRValveConfiguratio
 	return mTRValveConfigurationAndControlClusterOpenParamsAdopt(_id)
 }
 
-// WithOpenDuration sets the property and returns the receiver so calls can be chained.
+// WithOpenDuration sets the open duration.
 func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) WithOpenDuration(openDuration obj.Object) *MTRValveConfigurationAndControlClusterOpenParams {
 	objc.Send[objc.ID](objref.IDOf(mvcaccop), objc.RegisterName("setOpenDuration:"), objref.IDOf(openDuration))
 	return mvcaccop
 }
 
-// WithTargetLevel sets the property and returns the receiver so calls can be chained.
+// WithTargetLevel sets the target level.
 func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) WithTargetLevel(targetLevel obj.Object) *MTRValveConfigurationAndControlClusterOpenParams {
 	objc.Send[objc.ID](objref.IDOf(mvcaccop), objc.RegisterName("setTargetLevel:"), objref.IDOf(targetLevel))
 	return mvcaccop
@@ -94,13 +94,13 @@ func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) WithServerSide
 	return mvcaccop
 }
 
-// OpenDuration wraps the corresponding Objective-C method.
+// OpenDuration returns the open duration.
 func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) OpenDuration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mvcaccop), objc.RegisterName("openDuration"))
 	return obj.Wrap(_r)
 }
 
-// TargetLevel wraps the corresponding Objective-C method.
+// TargetLevel returns the target level.
 func (mvcaccop *MTRValveConfigurationAndControlClusterOpenParams) TargetLevel() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mvcaccop), objc.RegisterName("targetLevel"))
 	return obj.Wrap(_r)

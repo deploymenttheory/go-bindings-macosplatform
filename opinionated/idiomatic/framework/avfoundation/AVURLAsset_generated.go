@@ -66,13 +66,13 @@ func (ua *URLAsset) HTTPSessionIdentifier() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// ResourceLoader wraps the corresponding Objective-C method.
+// ResourceLoader returns the resource loader.
 func (ua *URLAsset) ResourceLoader() *AssetResourceLoader {
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("resourceLoader"))
 	return AssetResourceLoaderFromID(_r)
 }
 
-// AssetCache wraps the corresponding Objective-C method.
+// AssetCache returns the asset cache.
 func (ua *URLAsset) AssetCache() *AssetCache {
 	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("assetCache"))
 	return AssetCacheFromID(_r)

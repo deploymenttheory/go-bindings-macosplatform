@@ -50,25 +50,25 @@ func NewMTRChannelClusterLineupInfo() *MTRChannelClusterLineupInfo {
 	return mTRChannelClusterLineupInfoAdopt(_id)
 }
 
-// WithOperatorName sets the property and returns the receiver so calls can be chained.
+// WithOperatorName sets the operator name.
 func (mccli *MTRChannelClusterLineupInfo) WithOperatorName(operatorName string) *MTRChannelClusterLineupInfo {
 	objc.Send[objc.ID](objref.IDOf(mccli), objc.RegisterName("setOperatorName:"), purego.NSString(operatorName))
 	return mccli
 }
 
-// WithLineupName sets the property and returns the receiver so calls can be chained.
+// WithLineupName sets the lineup name.
 func (mccli *MTRChannelClusterLineupInfo) WithLineupName(lineupName string) *MTRChannelClusterLineupInfo {
 	objc.Send[objc.ID](objref.IDOf(mccli), objc.RegisterName("setLineupName:"), purego.NSString(lineupName))
 	return mccli
 }
 
-// WithPostalCode sets the property and returns the receiver so calls can be chained.
+// WithPostalCode sets the postal code.
 func (mccli *MTRChannelClusterLineupInfo) WithPostalCode(postalCode string) *MTRChannelClusterLineupInfo {
 	objc.Send[objc.ID](objref.IDOf(mccli), objc.RegisterName("setPostalCode:"), purego.NSString(postalCode))
 	return mccli
 }
 
-// WithLineupInfoType sets the property and returns the receiver so calls can be chained.
+// WithLineupInfoType sets the lineup info type.
 func (mccli *MTRChannelClusterLineupInfo) WithLineupInfoType(lineupInfoType obj.Object) *MTRChannelClusterLineupInfo {
 	objc.Send[objc.ID](objref.IDOf(mccli), objc.RegisterName("setLineupInfoType:"), objref.IDOf(lineupInfoType))
 	return mccli

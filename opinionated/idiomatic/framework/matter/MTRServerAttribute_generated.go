@@ -71,19 +71,19 @@ func NewMTRServerAttributeReadonlyAttributeWithIDInitialValueRequiredPrivilege(a
 	return mTRServerAttributeAdopt(_id)
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (msa *MTRServerAttribute) WithValue(value obj.Object) *MTRServerAttribute {
 	objc.Send[objc.ID](objref.IDOf(msa), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return msa
 }
 
-// AttributeID wraps the corresponding Objective-C method.
+// AttributeID returns the attribute ID.
 func (msa *MTRServerAttribute) AttributeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msa), objc.RegisterName("attributeID"))
 	return obj.Wrap(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (msa *MTRServerAttribute) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msa), objc.RegisterName("value"))
 	return obj.Wrap(_r)
@@ -95,7 +95,7 @@ func (msa *MTRServerAttribute) RequiredReadPrivilege() MTRAccessControlEntryPriv
 	return _r
 }
 
-// IsWritable wraps the corresponding Objective-C method.
+// IsWritable reports whether the object is writable.
 func (msa *MTRServerAttribute) IsWritable() bool {
 	_r := objc.Send[bool](objref.IDOf(msa), objc.RegisterName("isWritable"))
 	return _r

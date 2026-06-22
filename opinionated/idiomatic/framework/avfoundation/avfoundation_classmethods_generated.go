@@ -998,7 +998,7 @@ func EligibleForHDRPlayback() bool {
 	return _r
 }
 
-// IsObservationEnabled wraps the corresponding Objective-C method.
+// IsObservationEnabled reports whether the object is observation enabled.
 func IsObservationEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVPlayer")), objc.RegisterName("isObservationEnabled"))
 	return _r

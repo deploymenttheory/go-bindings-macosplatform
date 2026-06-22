@@ -201,7 +201,7 @@ func ConfirmationRequiredWithFileToConfirm(fileToConfirm *File) *FileResolutionR
 	return FileResolutionResultFromID(_r)
 }
 
-// DefaultCenter wraps the corresponding Objective-C method.
+// DefaultCenter returns the default center.
 func DefaultCenter() *FocusStatusCenter {
 	_r := objc.Send[objc.ID](objc.ID(_class("INFocusStatusCenter")), objc.RegisterName("defaultCenter"))
 	return FocusStatusCenterFromID(_r)
@@ -540,7 +540,7 @@ func ConfirmationRequiredWithURLToConfirm(urlToConfirm string) *URLResolutionRes
 	return URLResolutionResultFromID(_r)
 }
 
-// SharedCenter wraps the corresponding Objective-C method.
+// SharedCenter returns the shared center.
 func SharedCenter() *VoiceShortcutCenter {
 	_r := objc.Send[objc.ID](objc.ID(_class("INVoiceShortcutCenter")), objc.RegisterName("sharedCenter"))
 	return VoiceShortcutCenterFromID(_r)

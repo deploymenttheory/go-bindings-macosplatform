@@ -70,13 +70,13 @@ func NewMTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams() *M
 	return mTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParamsAdopt(_id)
 }
 
-// WithActiveDataset sets the property and returns the receiver so calls can be chained.
+// WithActiveDataset sets the active dataset.
 func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) WithActiveDataset(activeDataset obj.Object) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("setActiveDataset:"), objref.IDOf(activeDataset))
 	return mtbrmcsadrp
 }
 
-// WithBreadcrumb sets the property and returns the receiver so calls can be chained.
+// WithBreadcrumb sets the breadcrumb.
 func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) WithBreadcrumb(breadcrumb obj.Object) *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 	return mtbrmcsadrp
@@ -94,13 +94,13 @@ func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequest
 	return mtbrmcsadrp
 }
 
-// ActiveDataset wraps the corresponding Objective-C method.
+// ActiveDataset returns the active dataset.
 func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) ActiveDataset() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("activeDataset"))
 	return obj.Wrap(_r)
 }
 
-// Breadcrumb wraps the corresponding Objective-C method.
+// Breadcrumb returns the breadcrumb.
 func (mtbrmcsadrp *MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams) Breadcrumb() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtbrmcsadrp), objc.RegisterName("breadcrumb"))
 	return obj.Wrap(_r)

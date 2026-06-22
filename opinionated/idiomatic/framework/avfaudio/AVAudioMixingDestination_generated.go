@@ -72,7 +72,7 @@ func NewAudioMixingDestination() *AudioMixingDestination {
 	return audioMixingDestinationAdopt(_id)
 }
 
-// ConnectionPoint wraps the corresponding Objective-C method.
+// ConnectionPoint returns the connection point.
 func (amd *AudioMixingDestination) ConnectionPoint() *AudioConnectionPoint {
 	_r := objc.Send[objc.ID](objref.IDOf(amd), objc.RegisterName("connectionPoint"))
 	return AudioConnectionPointFromID(_r)

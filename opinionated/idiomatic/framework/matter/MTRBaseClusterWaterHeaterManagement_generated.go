@@ -56,7 +56,7 @@ func NewMTRBaseClusterWaterHeaterManagementWithDeviceEndpointIDQueue(device *MTR
 	return mTRBaseClusterWaterHeaterManagementAdopt(_id)
 }
 
-// ReadAttributeHeaterTypesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeHeaterTypesWithCompletion reads attribute heater types with completion.
 //
 // ReadAttributeHeaterTypesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterManagement) ReadAttributeHeaterTypesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -106,7 +106,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeHeaterTypes
 	}
 }
 
-// ReadAttributeHeatDemandWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeHeatDemandWithCompletion reads attribute heat demand with completion.
 //
 // ReadAttributeHeatDemandWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterManagement) ReadAttributeHeatDemandWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -156,7 +156,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeHeatDemandW
 	}
 }
 
-// ReadAttributeTankVolumeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTankVolumeWithCompletion reads attribute tank volume with completion.
 //
 // ReadAttributeTankVolumeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterManagement) ReadAttributeTankVolumeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -206,7 +206,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeTankVolumeW
 	}
 }
 
-// ReadAttributeEstimatedHeatRequiredWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEstimatedHeatRequiredWithCompletion reads attribute estimated heat required with completion.
 //
 // ReadAttributeEstimatedHeatRequiredWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterManagement) ReadAttributeEstimatedHeatRequiredWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -256,7 +256,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeEstimatedHe
 	}
 }
 
-// ReadAttributeTankPercentageWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTankPercentageWithCompletion reads attribute tank percentage with completion.
 //
 // ReadAttributeTankPercentageWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterManagement) ReadAttributeTankPercentageWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -306,7 +306,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeTankPercent
 	}
 }
 
-// ReadAttributeBoostStateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBoostStateWithCompletion reads attribute boost state with completion.
 //
 // ReadAttributeBoostStateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterManagement) ReadAttributeBoostStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -356,7 +356,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeBoostStateW
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterManagement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -406,7 +406,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeGeneratedCo
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterManagement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -456,7 +456,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeAcceptedCom
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterManagement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -506,7 +506,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeAttributeLi
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterManagement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -556,7 +556,7 @@ func (mbcwhm *MTRBaseClusterWaterHeaterManagement) SubscribeAttributeFeatureMapW
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwhm *MTRBaseClusterWaterHeaterManagement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

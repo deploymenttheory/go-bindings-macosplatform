@@ -74,31 +74,31 @@ func NewProcessInfo() *ProcessInfo {
 	return processInfoAdopt(_id)
 }
 
-// WithProcessName sets the property and returns the receiver so calls can be chained.
+// WithProcessName sets the process name.
 func (pi *ProcessInfo) WithProcessName(processName StringProvider) *ProcessInfo {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setProcessName:"), objref.IDOf(processName))
 	return pi
 }
 
-// WithAutomaticTerminationSupportEnabled sets the property and returns the receiver so calls can be chained.
+// WithAutomaticTerminationSupportEnabled sets the automatic termination support enabled.
 func (pi *ProcessInfo) WithAutomaticTerminationSupportEnabled(automaticTerminationSupportEnabled bool) *ProcessInfo {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setAutomaticTerminationSupportEnabled:"), automaticTerminationSupportEnabled)
 	return pi
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (pi *ProcessInfo) WithScriptingProperties(scriptingProperties obj.Object) *ProcessInfo {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return pi
 }
 
-// OperatingSystem wraps the corresponding Objective-C method.
+// OperatingSystem returns the operating system.
 func (pi *ProcessInfo) OperatingSystem() int {
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("operatingSystem"))
 	return _r
 }
 
-// OperatingSystemName wraps the corresponding Objective-C method.
+// OperatingSystemName returns the operating system name.
 func (pi *ProcessInfo) OperatingSystemName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("operatingSystemName"))
 	if _r == 0 {
@@ -107,33 +107,33 @@ func (pi *ProcessInfo) OperatingSystemName() string {
 	return purego.GoString(_r)
 }
 
-// DisableSuddenTermination wraps the corresponding Objective-C method.
+// DisableSuddenTermination disables sudden termination.
 func (pi *ProcessInfo) DisableSuddenTermination() {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("disableSuddenTermination"))
 }
 
-// EnableSuddenTermination wraps the corresponding Objective-C method.
+// EnableSuddenTermination enables sudden termination.
 func (pi *ProcessInfo) EnableSuddenTermination() {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("enableSuddenTermination"))
 }
 
-// DisableAutomaticTermination wraps the corresponding Objective-C method.
+// DisableAutomaticTermination disables automatic termination.
 func (pi *ProcessInfo) DisableAutomaticTermination(reason string) {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("disableAutomaticTermination:"), purego.NSString(reason))
 }
 
-// EnableAutomaticTermination wraps the corresponding Objective-C method.
+// EnableAutomaticTermination enables automatic termination.
 func (pi *ProcessInfo) EnableAutomaticTermination(reason string) {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("enableAutomaticTermination:"), purego.NSString(reason))
 }
 
-// Environment wraps the corresponding Objective-C method.
+// Environment returns the environment.
 func (pi *ProcessInfo) Environment() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("environment"))
 	return obj.Wrap(_r)
 }
 
-// Arguments wraps the corresponding Objective-C method.
+// Arguments returns the arguments.
 //
 // Arguments returns the collection as a Go slice.
 func (pi *ProcessInfo) Arguments() []string {
@@ -141,7 +141,7 @@ func (pi *ProcessInfo) Arguments() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// HostName wraps the corresponding Objective-C method.
+// HostName returns the host name.
 func (pi *ProcessInfo) HostName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("hostName"))
 	if _r == 0 {
@@ -150,7 +150,7 @@ func (pi *ProcessInfo) HostName() string {
 	return purego.GoString(_r)
 }
 
-// ProcessName wraps the corresponding Objective-C method.
+// ProcessName returns the process name.
 func (pi *ProcessInfo) ProcessName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("processName"))
 	if _r == 0 {
@@ -159,13 +159,13 @@ func (pi *ProcessInfo) ProcessName() string {
 	return purego.GoString(_r)
 }
 
-// ProcessIdentifier wraps the corresponding Objective-C method.
+// ProcessIdentifier returns the process identifier.
 func (pi *ProcessInfo) ProcessIdentifier() int {
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("processIdentifier"))
 	return _r
 }
 
-// GloballyUniqueString wraps the corresponding Objective-C method.
+// GloballyUniqueString returns the globally unique string.
 func (pi *ProcessInfo) GloballyUniqueString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("globallyUniqueString"))
 	if _r == 0 {
@@ -174,7 +174,7 @@ func (pi *ProcessInfo) GloballyUniqueString() string {
 	return purego.GoString(_r)
 }
 
-// OperatingSystemVersionString wraps the corresponding Objective-C method.
+// OperatingSystemVersionString returns the operating system version string.
 func (pi *ProcessInfo) OperatingSystemVersionString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("operatingSystemVersionString"))
 	if _r == 0 {
@@ -183,25 +183,25 @@ func (pi *ProcessInfo) OperatingSystemVersionString() string {
 	return purego.GoString(_r)
 }
 
-// ProcessorCount wraps the corresponding Objective-C method.
+// ProcessorCount returns the processor count.
 func (pi *ProcessInfo) ProcessorCount() int {
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("processorCount"))
 	return _r
 }
 
-// ActiveProcessorCount wraps the corresponding Objective-C method.
+// ActiveProcessorCount returns the active processor count.
 func (pi *ProcessInfo) ActiveProcessorCount() int {
 	_r := objc.Send[int](objref.IDOf(pi), objc.RegisterName("activeProcessorCount"))
 	return _r
 }
 
-// PhysicalMemory wraps the corresponding Objective-C method.
+// PhysicalMemory returns the physical memory.
 func (pi *ProcessInfo) PhysicalMemory() uint64 {
 	_r := objc.Send[uint64](objref.IDOf(pi), objc.RegisterName("physicalMemory"))
 	return _r
 }
 
-// SystemUptime wraps the corresponding Objective-C method.
+// SystemUptime returns the system uptime.
 func (pi *ProcessInfo) SystemUptime() float64 {
 	_r := objc.Send[float64](objref.IDOf(pi), objc.RegisterName("systemUptime"))
 	return _r
@@ -213,7 +213,7 @@ func (pi *ProcessInfo) AutomaticTerminationSupportEnabled() bool {
 	return _r
 }
 
-// PerformActivityWithOptionsReasonUsing wraps the corresponding Objective-C method.
+// PerformActivityWithOptionsReasonUsing performs activity with options reason using.
 //
 // PerformActivityWithOptionsReasonUsing blocks until the operation completes or ctx is cancelled.
 func (pi *ProcessInfo) PerformActivityWithOptionsReasonUsing(ctx context.Context, options ActivityOptions, reason string) error {
@@ -230,7 +230,7 @@ func (pi *ProcessInfo) PerformActivityWithOptionsReasonUsing(ctx context.Context
 	}
 }
 
-// UserName wraps the corresponding Objective-C method.
+// UserName returns the user name.
 func (pi *ProcessInfo) UserName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("userName"))
 	if _r == 0 {
@@ -239,7 +239,7 @@ func (pi *ProcessInfo) UserName() string {
 	return purego.GoString(_r)
 }
 
-// FullUserName wraps the corresponding Objective-C method.
+// FullUserName returns the full user name.
 func (pi *ProcessInfo) FullUserName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("fullUserName"))
 	if _r == 0 {
@@ -248,19 +248,19 @@ func (pi *ProcessInfo) FullUserName() string {
 	return purego.GoString(_r)
 }
 
-// ThermalState wraps the corresponding Objective-C method.
+// ThermalState returns the thermal state.
 func (pi *ProcessInfo) ThermalState() ProcessInfoThermalState {
 	_r := objc.Send[ProcessInfoThermalState](objref.IDOf(pi), objc.RegisterName("thermalState"))
 	return _r
 }
 
-// IsLowPowerModeEnabled wraps the corresponding Objective-C method.
+// IsLowPowerModeEnabled reports whether the object is low power mode enabled.
 func (pi *ProcessInfo) IsLowPowerModeEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isLowPowerModeEnabled"))
 	return _r
 }
 
-// IsMACCatalystApp wraps the corresponding Objective-C method.
+// IsMACCatalystApp reports whether the object is MAC catalyst app.
 func (pi *ProcessInfo) IsMACCatalystApp() bool {
 	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("isMacCatalystApp"))
 	return _r

@@ -51,7 +51,7 @@ func NewCNNNormalizationMeanAndVarianceState() *CNNNormalizationMeanAndVarianceS
 	return cNNNormalizationMeanAndVarianceStateAdopt(_id)
 }
 
-// WithReadCount sets the property and returns the receiver so calls can be chained.
+// WithReadCount sets the read count.
 func (cnmavs *CNNNormalizationMeanAndVarianceState) WithReadCount(readCount int) *CNNNormalizationMeanAndVarianceState {
 	objc.Send[objc.ID](objref.IDOf(cnmavs), objc.RegisterName("setReadCount:"), readCount)
 	return cnmavs

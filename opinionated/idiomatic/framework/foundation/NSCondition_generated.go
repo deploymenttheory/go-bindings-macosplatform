@@ -78,7 +78,7 @@ func (c *Condition) WithName(name StringProvider) *Condition {
 	return c
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (c *Condition) WithScriptingProperties(scriptingProperties obj.Object) *Condition {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return c
@@ -105,7 +105,7 @@ func (c *Condition) Broadcast() {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("broadcast"))
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (c *Condition) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("name"))
 	if _r == 0 {

@@ -107,7 +107,7 @@ func (cs *CISession) SendProfileOnChannelProfileData(profile *CIProfile, channel
 	return _r
 }
 
-// MidiDestination wraps the corresponding Objective-C method.
+// MidiDestination returns the midi destination.
 func (cs *CISession) MidiDestination() int {
 	_r := objc.Send[int](objref.IDOf(cs), objc.RegisterName("midiDestination"))
 	return _r
@@ -125,19 +125,19 @@ func (cs *CISession) SupportsPropertyCapability() bool {
 	return _r
 }
 
-// DeviceInfo wraps the corresponding Objective-C method.
+// DeviceInfo returns the device info.
 func (cs *CISession) DeviceInfo() *CIDeviceInfo {
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("deviceInfo"))
 	return CIDeviceInfoFromID(_r)
 }
 
-// MaxSysExSize wraps the corresponding Objective-C method.
+// MaxSysExSize returns the max sys ex size.
 func (cs *CISession) MaxSysExSize() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("maxSysExSize"))
 	return obj.Wrap(_r)
 }
 
-// MaxPropertyRequests wraps the corresponding Objective-C method.
+// MaxPropertyRequests returns the max property requests.
 func (cs *CISession) MaxPropertyRequests() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("maxPropertyRequests"))
 	return obj.Wrap(_r)

@@ -70,43 +70,43 @@ func NewMTRDoorLockClusterSetUserParams() *MTRDoorLockClusterSetUserParams {
 	return mTRDoorLockClusterSetUserParamsAdopt(_id)
 }
 
-// WithOperationType sets the property and returns the receiver so calls can be chained.
+// WithOperationType sets the operation type.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) WithOperationType(operationType obj.Object) *MTRDoorLockClusterSetUserParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("setOperationType:"), objref.IDOf(operationType))
 	return mdlcsup
 }
 
-// WithUserIndex sets the property and returns the receiver so calls can be chained.
+// WithUserIndex sets the user index.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterSetUserParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return mdlcsup
 }
 
-// WithUserName sets the property and returns the receiver so calls can be chained.
+// WithUserName sets the user name.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) WithUserName(userName string) *MTRDoorLockClusterSetUserParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("setUserName:"), purego.NSString(userName))
 	return mdlcsup
 }
 
-// WithUserUniqueID sets the property and returns the receiver so calls can be chained.
+// WithUserUniqueID sets the user unique ID.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) WithUserUniqueID(userUniqueID obj.Object) *MTRDoorLockClusterSetUserParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("setUserUniqueID:"), objref.IDOf(userUniqueID))
 	return mdlcsup
 }
 
-// WithUserStatus sets the property and returns the receiver so calls can be chained.
+// WithUserStatus sets the user status.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) WithUserStatus(userStatus obj.Object) *MTRDoorLockClusterSetUserParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("setUserStatus:"), objref.IDOf(userStatus))
 	return mdlcsup
 }
 
-// WithUserType sets the property and returns the receiver so calls can be chained.
+// WithUserType sets the user type.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) WithUserType(userType obj.Object) *MTRDoorLockClusterSetUserParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("setUserType:"), objref.IDOf(userType))
 	return mdlcsup
 }
 
-// WithCredentialRule sets the property and returns the receiver so calls can be chained.
+// WithCredentialRule sets the credential rule.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) WithCredentialRule(credentialRule obj.Object) *MTRDoorLockClusterSetUserParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("setCredentialRule:"), objref.IDOf(credentialRule))
 	return mdlcsup
@@ -124,19 +124,19 @@ func (mdlcsup *MTRDoorLockClusterSetUserParams) WithServerSideProcessingTimeout(
 	return mdlcsup
 }
 
-// OperationType wraps the corresponding Objective-C method.
+// OperationType returns the operation type.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) OperationType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("operationType"))
 	return obj.Wrap(_r)
 }
 
-// UserIndex wraps the corresponding Objective-C method.
+// UserIndex returns the user index.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) UserIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("userIndex"))
 	return obj.Wrap(_r)
 }
 
-// UserName wraps the corresponding Objective-C method.
+// UserName returns the user name.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) UserName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("userName"))
 	if _r == 0 {
@@ -145,25 +145,25 @@ func (mdlcsup *MTRDoorLockClusterSetUserParams) UserName() string {
 	return purego.GoString(_r)
 }
 
-// UserUniqueID wraps the corresponding Objective-C method.
+// UserUniqueID returns the user unique ID.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) UserUniqueID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("userUniqueID"))
 	return obj.Wrap(_r)
 }
 
-// UserStatus wraps the corresponding Objective-C method.
+// UserStatus returns the user status.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) UserStatus() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("userStatus"))
 	return obj.Wrap(_r)
 }
 
-// UserType wraps the corresponding Objective-C method.
+// UserType returns the user type.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) UserType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("userType"))
 	return obj.Wrap(_r)
 }
 
-// CredentialRule wraps the corresponding Objective-C method.
+// CredentialRule returns the credential rule.
 func (mdlcsup *MTRDoorLockClusterSetUserParams) CredentialRule() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcsup), objc.RegisterName("credentialRule"))
 	return obj.Wrap(_r)

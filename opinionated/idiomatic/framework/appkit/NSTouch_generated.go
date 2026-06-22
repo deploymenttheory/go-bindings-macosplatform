@@ -73,37 +73,37 @@ func NewTouch() *Touch {
 	return touchAdopt(_id)
 }
 
-// Identity wraps the corresponding Objective-C method.
+// Identity returns the identity.
 func (t *Touch) Identity() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("identity"))
 	return obj.Wrap(_r)
 }
 
-// Phase wraps the corresponding Objective-C method.
+// Phase returns the phase.
 func (t *Touch) Phase() TouchPhase {
 	_r := objc.Send[TouchPhase](objref.IDOf(t), objc.RegisterName("phase"))
 	return _r
 }
 
-// NormalizedPosition wraps the corresponding Objective-C method.
+// NormalizedPosition returns the normalized position.
 func (t *Touch) NormalizedPosition() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(t), objc.RegisterName("normalizedPosition"))
 	return _r
 }
 
-// IsResting wraps the corresponding Objective-C method.
+// IsResting reports whether the object is resting.
 func (t *Touch) IsResting() bool {
 	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isResting"))
 	return _r
 }
 
-// Device wraps the corresponding Objective-C method.
+// Device returns the device.
 func (t *Touch) Device() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("device"))
 	return obj.Wrap(_r)
 }
 
-// DeviceSize wraps the corresponding Objective-C method.
+// DeviceSize returns the device size.
 func (t *Touch) DeviceSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(t), objc.RegisterName("deviceSize"))
 	return _r
@@ -121,7 +121,7 @@ func (t *Touch) PreviousLocationInView(view *View) corefoundation.CGPoint {
 	return _r
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (t *Touch) Type() TouchType {
 	_r := objc.Send[TouchType](objref.IDOf(t), objc.RegisterName("type"))
 	return _r

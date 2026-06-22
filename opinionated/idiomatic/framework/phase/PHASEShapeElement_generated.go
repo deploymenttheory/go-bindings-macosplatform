@@ -78,7 +78,7 @@ func (se *ShapeElement) WithMaterial(material *Material) *ShapeElement {
 	return se
 }
 
-// Material wraps the corresponding Objective-C method.
+// Material returns the material.
 func (se *ShapeElement) Material() *Material {
 	_r := objc.Send[objc.ID](objref.IDOf(se), objc.RegisterName("material"))
 	return MaterialFromID(_r)

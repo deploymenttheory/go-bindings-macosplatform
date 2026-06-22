@@ -70,25 +70,25 @@ func NewMappings() *Mappings {
 	return mappingsAdopt(_id)
 }
 
-// WithComment sets the property and returns the receiver so calls can be chained.
+// WithComment sets the comment.
 func (m *Mappings) WithComment(comment string) *Mappings {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setComment:"), purego.NSString(comment))
 	return m
 }
 
-// WithTemplateName sets the property and returns the receiver so calls can be chained.
+// WithTemplateName sets the template name.
 func (m *Mappings) WithTemplateName(templateName string) *Mappings {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setTemplateName:"), purego.NSString(templateName))
 	return m
 }
 
-// WithIdentifier sets the property and returns the receiver so calls can be chained.
+// WithIdentifier sets the identifier.
 func (m *Mappings) WithIdentifier(identifier string) *Mappings {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 	return m
 }
 
-// WithFunction sets the property and returns the receiver so calls can be chained.
+// WithFunction sets the function.
 func (m *Mappings) WithFunction(function string) *Mappings {
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setFunction:"), purego.NSString(function))
 	return m
@@ -105,7 +105,7 @@ func (m *Mappings) SetRecordMapForStandardRecordType(map_ *RecordMap, stdType st
 	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setRecordMap:forStandardRecordType:"), objref.IDOf(map_), purego.NSString(stdType))
 }
 
-// Comment wraps the corresponding Objective-C method.
+// Comment returns the comment.
 func (m *Mappings) Comment() string {
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("comment"))
 	if _r == 0 {
@@ -114,7 +114,7 @@ func (m *Mappings) Comment() string {
 	return purego.GoString(_r)
 }
 
-// TemplateName wraps the corresponding Objective-C method.
+// TemplateName returns the template name.
 func (m *Mappings) TemplateName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("templateName"))
 	if _r == 0 {
@@ -123,7 +123,7 @@ func (m *Mappings) TemplateName() string {
 	return purego.GoString(_r)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (m *Mappings) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -132,13 +132,13 @@ func (m *Mappings) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// RecordTypes wraps the corresponding Objective-C method.
+// RecordTypes returns the record types.
 func (m *Mappings) RecordTypes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("recordTypes"))
 	return obj.Wrap(_r)
 }
 
-// Function wraps the corresponding Objective-C method.
+// Function returns the function.
 func (m *Mappings) Function() string {
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("function"))
 	if _r == 0 {
@@ -147,7 +147,7 @@ func (m *Mappings) Function() string {
 	return purego.GoString(_r)
 }
 
-// FunctionAttributes wraps the corresponding Objective-C method.
+// FunctionAttributes returns the function attributes.
 func (m *Mappings) FunctionAttributes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("functionAttributes"))
 	return obj.Wrap(_r)

@@ -60,32 +60,32 @@ func (sav *ScrubberArrangedView) WithHighlighted(highlighted bool) *ScrubberArra
 	return sav
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (sav *ScrubberArrangedView) WithSubviews(items ...ViewProvider) *ScrubberArrangedView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setSubviews:"), _arr)
 	return sav
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (sav *ScrubberArrangedView) WithHidden(hidden bool) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setHidden:"), hidden)
 	return sav
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (sav *ScrubberArrangedView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return sav
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (sav *ScrubberArrangedView) WithAutoresizesSubviews(autoresizesSubviews bool) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return sav
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (sav *ScrubberArrangedView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return sav
@@ -97,19 +97,19 @@ func (sav *ScrubberArrangedView) WithFrame(frame corefoundation.CGRect) *Scrubbe
 	return sav
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (sav *ScrubberArrangedView) WithFrameRotation(frameRotation float64) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return sav
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (sav *ScrubberArrangedView) WithFrameCenterRotation(frameCenterRotation float64) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return sav
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (sav *ScrubberArrangedView) WithBoundsRotation(boundsRotation float64) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return sav
@@ -121,7 +121,7 @@ func (sav *ScrubberArrangedView) WithBounds(bounds corefoundation.CGRect) *Scrub
 	return sav
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (sav *ScrubberArrangedView) WithCanDrawConcurrently(canDrawConcurrently bool) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return sav
@@ -133,148 +133,148 @@ func (sav *ScrubberArrangedView) WithNeedsDisplay(needsDisplay bool) *ScrubberAr
 	return sav
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (sav *ScrubberArrangedView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return sav
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (sav *ScrubberArrangedView) WithWantsRestingTouches(wantsRestingTouches bool) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return sav
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (sav *ScrubberArrangedView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return sav
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (sav *ScrubberArrangedView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return sav
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (sav *ScrubberArrangedView) WithWantsLayer(wantsLayer bool) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return sav
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (sav *ScrubberArrangedView) WithLayer(layer obj.Object) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return sav
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (sav *ScrubberArrangedView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return sav
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (sav *ScrubberArrangedView) WithNeedsLayout(needsLayout bool) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return sav
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (sav *ScrubberArrangedView) WithAlphaValue(alphaValue float64) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return sav
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (sav *ScrubberArrangedView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return sav
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (sav *ScrubberArrangedView) WithBackgroundFilters(items ...obj.Object) *ScrubberArrangedView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return sav
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (sav *ScrubberArrangedView) WithCompositingFilter(compositingFilter obj.Object) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return sav
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (sav *ScrubberArrangedView) WithContentFilters(items ...obj.Object) *ScrubberArrangedView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setContentFilters:"), _arr)
 	return sav
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (sav *ScrubberArrangedView) WithShadow(shadow *Shadow) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return sav
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (sav *ScrubberArrangedView) WithClipsToBounds(clipsToBounds bool) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return sav
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (sav *ScrubberArrangedView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return sav
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (sav *ScrubberArrangedView) WithToolTip(toolTip string) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return sav
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (sav *ScrubberArrangedView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return sav
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (sav *ScrubberArrangedView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return sav
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (sav *ScrubberArrangedView) WithNextKeyView(nextKeyView ViewProvider) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return sav
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (sav *ScrubberArrangedView) WithFocusRingType(focusRingType FocusRingType) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return sav
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (sav *ScrubberArrangedView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrubberArrangedView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return sav
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (sav *ScrubberArrangedView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return sav
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (sav *ScrubberArrangedView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return sav
@@ -286,49 +286,49 @@ func (sav *ScrubberArrangedView) WithPrefersCompactControlSizeMetrics(prefersCom
 	return sav
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (sav *ScrubberArrangedView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return sav
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (sav *ScrubberArrangedView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return sav
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (sav *ScrubberArrangedView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return sav
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (sav *ScrubberArrangedView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return sav
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (sav *ScrubberArrangedView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return sav
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (sav *ScrubberArrangedView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return sav
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (sav *ScrubberArrangedView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return sav
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (sav *ScrubberArrangedView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrubberArrangedView {
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return sav
@@ -363,13 +363,13 @@ func (sav *ScrubberArrangedView) ApplyLayoutAttributes(layoutAttributes *Scrubbe
 	objc.Send[objc.ID](objref.IDOf(sav), objc.RegisterName("applyLayoutAttributes:"), objref.IDOf(layoutAttributes))
 }
 
-// IsSelected wraps the corresponding Objective-C method.
+// IsSelected reports whether the object is selected.
 func (sav *ScrubberArrangedView) IsSelected() bool {
 	_r := objc.Send[bool](objref.IDOf(sav), objc.RegisterName("isSelected"))
 	return _r
 }
 
-// IsHighlighted wraps the corresponding Objective-C method.
+// IsHighlighted reports whether the object is highlighted.
 func (sav *ScrubberArrangedView) IsHighlighted() bool {
 	_r := objc.Send[bool](objref.IDOf(sav), objc.RegisterName("isHighlighted"))
 	return _r

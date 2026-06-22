@@ -92,19 +92,19 @@ func (dic *DraggingImageComponent) WithFrame(frame corefoundation.CGRect) *Dragg
 	return dic
 }
 
-// Key wraps the corresponding Objective-C method.
+// Key returns the key.
 func (dic *DraggingImageComponent) Key() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dic), objc.RegisterName("key"))
 	return obj.Wrap(_r)
 }
 
-// Contents wraps the corresponding Objective-C method.
+// Contents returns the contents.
 func (dic *DraggingImageComponent) Contents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dic), objc.RegisterName("contents"))
 	return obj.Wrap(_r)
 }
 
-// Frame wraps the corresponding Objective-C method.
+// Frame returns the frame.
 func (dic *DraggingImageComponent) Frame() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(dic), objc.RegisterName("frame"))
 	return _r

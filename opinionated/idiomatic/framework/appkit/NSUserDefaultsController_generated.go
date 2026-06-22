@@ -93,7 +93,7 @@ func (udc *UserDefaultsController) RevertToInitialValues(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(udc), objc.RegisterName("revertToInitialValues:"), objref.IDOf(sender))
 }
 
-// Defaults wraps the corresponding Objective-C method.
+// Defaults returns the defaults.
 func (udc *UserDefaultsController) Defaults() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(udc), objc.RegisterName("defaults"))
 	return obj.Wrap(_r)
@@ -105,13 +105,13 @@ func (udc *UserDefaultsController) AppliesImmediately() bool {
 	return _r
 }
 
-// HasUnappliedChanges wraps the corresponding Objective-C method.
+// HasUnappliedChanges reports whether the object has unapplied changes.
 func (udc *UserDefaultsController) HasUnappliedChanges() bool {
 	_r := objc.Send[bool](objref.IDOf(udc), objc.RegisterName("hasUnappliedChanges"))
 	return _r
 }
 
-// Values wraps the corresponding Objective-C method.
+// Values returns the values.
 func (udc *UserDefaultsController) Values() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(udc), objc.RegisterName("values"))
 	return obj.Wrap(_r)

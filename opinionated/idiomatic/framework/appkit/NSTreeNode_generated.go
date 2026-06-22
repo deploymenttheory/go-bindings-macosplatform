@@ -84,25 +84,25 @@ func (tn *TreeNode) SortWithSortDescriptorsRecursively(sortDescriptors []obj.Obj
 	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("sortWithSortDescriptors:recursively:"), purego.SliceToNSArray(sortDescriptors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), recursively)
 }
 
-// RepresentedObject wraps the corresponding Objective-C method.
+// RepresentedObject returns the represented object.
 func (tn *TreeNode) RepresentedObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("representedObject"))
 	return obj.Wrap(_r)
 }
 
-// IndexPath wraps the corresponding Objective-C method.
+// IndexPath returns the index path.
 func (tn *TreeNode) IndexPath() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("indexPath"))
 	return obj.Wrap(_r)
 }
 
-// IsLeaf wraps the corresponding Objective-C method.
+// IsLeaf reports whether the object is leaf.
 func (tn *TreeNode) IsLeaf() bool {
 	_r := objc.Send[bool](objref.IDOf(tn), objc.RegisterName("isLeaf"))
 	return _r
 }
 
-// ChildNodes wraps the corresponding Objective-C method.
+// ChildNodes returns the child nodes.
 //
 // ChildNodes returns the collection as a Go slice.
 func (tn *TreeNode) ChildNodes() []*TreeNode {
@@ -110,7 +110,7 @@ func (tn *TreeNode) ChildNodes() []*TreeNode {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TreeNode { return TreeNodeFromID(_id) })
 }
 
-// MutableChildNodes wraps the corresponding Objective-C method.
+// MutableChildNodes returns the mutable child nodes.
 //
 // MutableChildNodes returns the collection as a Go slice.
 func (tn *TreeNode) MutableChildNodes() []*TreeNode {
@@ -118,7 +118,7 @@ func (tn *TreeNode) MutableChildNodes() []*TreeNode {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TreeNode { return TreeNodeFromID(_id) })
 }
 
-// ParentNode wraps the corresponding Objective-C method.
+// ParentNode returns the parent node.
 func (tn *TreeNode) ParentNode() *TreeNode {
 	_r := objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("parentNode"))
 	return TreeNodeFromID(_r)

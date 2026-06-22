@@ -50,7 +50,7 @@ func NewMTRTestClusterClusterTestAddArgumentsResponseParams() *MTRTestClusterClu
 	return mTRTestClusterClusterTestAddArgumentsResponseParamsAdopt(_id)
 }
 
-// WithReturnValue sets the property and returns the receiver so calls can be chained.
+// WithReturnValue sets the return value.
 func (mtcctaarp *MTRTestClusterClusterTestAddArgumentsResponseParams) WithReturnValue(returnValue obj.Object) *MTRTestClusterClusterTestAddArgumentsResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mtcctaarp), objc.RegisterName("setReturnValue:"), objref.IDOf(returnValue))
 	return mtcctaarp

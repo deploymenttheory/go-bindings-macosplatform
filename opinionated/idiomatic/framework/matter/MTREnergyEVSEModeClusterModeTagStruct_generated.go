@@ -70,25 +70,25 @@ func NewMTREnergyEVSEModeClusterModeTagStruct() *MTREnergyEVSEModeClusterModeTag
 	return mTREnergyEVSEModeClusterModeTagStructAdopt(_id)
 }
 
-// WithMfgCode sets the property and returns the receiver so calls can be chained.
+// WithMfgCode sets the mfg code.
 func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTREnergyEVSEModeClusterModeTagStruct {
 	objc.Send[objc.ID](objref.IDOf(meemcmts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return meemcmts
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) WithValue(value obj.Object) *MTREnergyEVSEModeClusterModeTagStruct {
 	objc.Send[objc.ID](objref.IDOf(meemcmts), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return meemcmts
 }
 
-// MfgCode wraps the corresponding Objective-C method.
+// MfgCode returns the mfg code.
 func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) MfgCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meemcmts), objc.RegisterName("mfgCode"))
 	return obj.Wrap(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (meemcmts *MTREnergyEVSEModeClusterModeTagStruct) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meemcmts), objc.RegisterName("value"))
 	return obj.Wrap(_r)

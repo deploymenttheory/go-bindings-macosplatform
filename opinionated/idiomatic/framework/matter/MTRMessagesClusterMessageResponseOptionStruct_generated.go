@@ -70,25 +70,25 @@ func NewMTRMessagesClusterMessageResponseOptionStruct() *MTRMessagesClusterMessa
 	return mTRMessagesClusterMessageResponseOptionStructAdopt(_id)
 }
 
-// WithMessageResponseID sets the property and returns the receiver so calls can be chained.
+// WithMessageResponseID sets the message response ID.
 func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) WithMessageResponseID(messageResponseID obj.Object) *MTRMessagesClusterMessageResponseOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(mmcmros), objc.RegisterName("setMessageResponseID:"), objref.IDOf(messageResponseID))
 	return mmcmros
 }
 
-// WithLabel sets the property and returns the receiver so calls can be chained.
+// WithLabel sets the label.
 func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) WithLabel(label string) *MTRMessagesClusterMessageResponseOptionStruct {
 	objc.Send[objc.ID](objref.IDOf(mmcmros), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return mmcmros
 }
 
-// MessageResponseID wraps the corresponding Objective-C method.
+// MessageResponseID returns the message response ID.
 func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) MessageResponseID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmros), objc.RegisterName("messageResponseID"))
 	return obj.Wrap(_r)
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (mmcmros *MTRMessagesClusterMessageResponseOptionStruct) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mmcmros), objc.RegisterName("label"))
 	if _r == 0 {

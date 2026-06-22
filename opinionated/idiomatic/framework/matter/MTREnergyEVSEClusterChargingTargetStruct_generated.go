@@ -70,37 +70,37 @@ func NewMTREnergyEVSEClusterChargingTargetStruct() *MTREnergyEVSEClusterCharging
 	return mTREnergyEVSEClusterChargingTargetStructAdopt(_id)
 }
 
-// WithTargetTimeMinutesPastMidnight sets the property and returns the receiver so calls can be chained.
+// WithTargetTimeMinutesPastMidnight sets the target time minutes past midnight.
 func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) WithTargetTimeMinutesPastMidnight(targetTimeMinutesPastMidnight obj.Object) *MTREnergyEVSEClusterChargingTargetStruct {
 	objc.Send[objc.ID](objref.IDOf(meeccts), objc.RegisterName("setTargetTimeMinutesPastMidnight:"), objref.IDOf(targetTimeMinutesPastMidnight))
 	return meeccts
 }
 
-// WithTargetSoC sets the property and returns the receiver so calls can be chained.
+// WithTargetSoC sets the target so c.
 func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) WithTargetSoC(targetSoC obj.Object) *MTREnergyEVSEClusterChargingTargetStruct {
 	objc.Send[objc.ID](objref.IDOf(meeccts), objc.RegisterName("setTargetSoC:"), objref.IDOf(targetSoC))
 	return meeccts
 }
 
-// WithAddedEnergy sets the property and returns the receiver so calls can be chained.
+// WithAddedEnergy sets the added energy.
 func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) WithAddedEnergy(addedEnergy obj.Object) *MTREnergyEVSEClusterChargingTargetStruct {
 	objc.Send[objc.ID](objref.IDOf(meeccts), objc.RegisterName("setAddedEnergy:"), objref.IDOf(addedEnergy))
 	return meeccts
 }
 
-// TargetTimeMinutesPastMidnight wraps the corresponding Objective-C method.
+// TargetTimeMinutesPastMidnight returns the target time minutes past midnight.
 func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) TargetTimeMinutesPastMidnight() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meeccts), objc.RegisterName("targetTimeMinutesPastMidnight"))
 	return obj.Wrap(_r)
 }
 
-// TargetSoC wraps the corresponding Objective-C method.
+// TargetSoC returns the target so c.
 func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) TargetSoC() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meeccts), objc.RegisterName("targetSoC"))
 	return obj.Wrap(_r)
 }
 
-// AddedEnergy wraps the corresponding Objective-C method.
+// AddedEnergy returns the added energy.
 func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) AddedEnergy() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meeccts), objc.RegisterName("addedEnergy"))
 	return obj.Wrap(_r)

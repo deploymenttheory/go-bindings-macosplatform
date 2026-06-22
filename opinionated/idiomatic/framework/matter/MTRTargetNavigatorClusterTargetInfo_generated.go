@@ -50,13 +50,13 @@ func NewMTRTargetNavigatorClusterTargetInfo() *MTRTargetNavigatorClusterTargetIn
 	return mTRTargetNavigatorClusterTargetInfoAdopt(_id)
 }
 
-// WithIdentifier sets the property and returns the receiver so calls can be chained.
+// WithIdentifier sets the identifier.
 func (mtncti *MTRTargetNavigatorClusterTargetInfo) WithIdentifier(identifier obj.Object) *MTRTargetNavigatorClusterTargetInfo {
 	objc.Send[objc.ID](objref.IDOf(mtncti), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 	return mtncti
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (mtncti *MTRTargetNavigatorClusterTargetInfo) WithName(name string) *MTRTargetNavigatorClusterTargetInfo {
 	objc.Send[objc.ID](objref.IDOf(mtncti), objc.RegisterName("setName:"), purego.NSString(name))
 	return mtncti

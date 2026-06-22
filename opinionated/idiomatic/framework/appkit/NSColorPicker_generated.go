@@ -99,19 +99,19 @@ func (cp *ColorPicker) SetMode(mode ColorPanelMode) {
 	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMode:"), mode)
 }
 
-// ColorPanel wraps the corresponding Objective-C method.
+// ColorPanel returns the color panel.
 func (cp *ColorPicker) ColorPanel() *ColorPanel {
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("colorPanel"))
 	return ColorPanelFromID(_r)
 }
 
-// ProvideNewButtonImage wraps the corresponding Objective-C method.
+// ProvideNewButtonImage returns the provide new button image.
 func (cp *ColorPicker) ProvideNewButtonImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("provideNewButtonImage"))
 	return ImageFromID(_r)
 }
 
-// ButtonToolTip wraps the corresponding Objective-C method.
+// ButtonToolTip returns the button tool tip.
 func (cp *ColorPicker) ButtonToolTip() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("buttonToolTip"))
 	if _r == 0 {
@@ -120,7 +120,7 @@ func (cp *ColorPicker) ButtonToolTip() string {
 	return purego.GoString(_r)
 }
 
-// MinContentSize wraps the corresponding Objective-C method.
+// MinContentSize returns the min content size.
 func (cp *ColorPicker) MinContentSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cp), objc.RegisterName("minContentSize"))
 	return _r

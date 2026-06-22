@@ -78,19 +78,19 @@ func NewMTRNetworkCommissioningClusterNetworkConfigResponseParamsWithResponseVal
 	return mTRNetworkCommissioningClusterNetworkConfigResponseParamsAdopt(_id), nil
 }
 
-// WithNetworkingStatus sets the property and returns the receiver so calls can be chained.
+// WithNetworkingStatus sets the networking status.
 func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) WithNetworkingStatus(networkingStatus obj.Object) *MTRNetworkCommissioningClusterNetworkConfigResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mnccncrp), objc.RegisterName("setNetworkingStatus:"), objref.IDOf(networkingStatus))
 	return mnccncrp
 }
 
-// WithDebugText sets the property and returns the receiver so calls can be chained.
+// WithDebugText sets the debug text.
 func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) WithDebugText(debugText string) *MTRNetworkCommissioningClusterNetworkConfigResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mnccncrp), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
 	return mnccncrp
 }
 
-// WithNetworkIndex sets the property and returns the receiver so calls can be chained.
+// WithNetworkIndex sets the network index.
 func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) WithNetworkIndex(networkIndex obj.Object) *MTRNetworkCommissioningClusterNetworkConfigResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mnccncrp), objc.RegisterName("setNetworkIndex:"), objref.IDOf(networkIndex))
 	return mnccncrp
@@ -102,13 +102,13 @@ func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) WithT
 	return mnccncrp
 }
 
-// NetworkingStatus wraps the corresponding Objective-C method.
+// NetworkingStatus returns the networking status.
 func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) NetworkingStatus() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccncrp), objc.RegisterName("networkingStatus"))
 	return obj.Wrap(_r)
 }
 
-// DebugText wraps the corresponding Objective-C method.
+// DebugText returns the debug text.
 func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) DebugText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccncrp), objc.RegisterName("debugText"))
 	if _r == 0 {
@@ -117,7 +117,7 @@ func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) Debug
 	return purego.GoString(_r)
 }
 
-// NetworkIndex wraps the corresponding Objective-C method.
+// NetworkIndex returns the network index.
 func (mnccncrp *MTRNetworkCommissioningClusterNetworkConfigResponseParams) NetworkIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccncrp), objc.RegisterName("networkIndex"))
 	return obj.Wrap(_r)

@@ -54,7 +54,7 @@ func NewMTRBaseClusterActivatedCarbonFilterMonitoringWithDeviceEndpointIDQueue(d
 	return mTRBaseClusterActivatedCarbonFilterMonitoringAdopt(_id)
 }
 
-// ReadAttributeConditionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeConditionWithCompletion reads attribute condition with completion.
 //
 // ReadAttributeConditionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeConditionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -104,7 +104,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 	}
 }
 
-// ReadAttributeDegradationDirectionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeDegradationDirectionWithCompletion reads attribute degradation direction with completion.
 //
 // ReadAttributeDegradationDirectionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeDegradationDirectionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -154,7 +154,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 	}
 }
 
-// ReadAttributeChangeIndicationWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeChangeIndicationWithCompletion reads attribute change indication with completion.
 //
 // ReadAttributeChangeIndicationWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeChangeIndicationWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -204,7 +204,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 	}
 }
 
-// ReadAttributeInPlaceIndicatorWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeInPlaceIndicatorWithCompletion reads attribute in place indicator with completion.
 //
 // ReadAttributeInPlaceIndicatorWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeInPlaceIndicatorWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -254,7 +254,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 	}
 }
 
-// ReadAttributeLastChangedTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLastChangedTimeWithCompletion reads attribute last changed time with completion.
 //
 // ReadAttributeLastChangedTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeLastChangedTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -304,7 +304,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 	}
 }
 
-// ReadAttributeReplacementProductListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeReplacementProductListWithCompletion reads attribute replacement product list with completion.
 //
 // ReadAttributeReplacementProductListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeReplacementProductListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -354,7 +354,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -404,7 +404,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -454,7 +454,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -504,7 +504,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -554,7 +554,7 @@ func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttribute
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

@@ -148,49 +148,49 @@ func (ir *ImageRep) DrawInRectFromRectOperationFractionRespectFlippedHints(dstSp
 	return _r
 }
 
-// Size wraps the corresponding Objective-C method.
+// Size returns the size.
 func (ir *ImageRep) Size() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ir), objc.RegisterName("size"))
 	return _r
 }
 
-// HasAlpha wraps the corresponding Objective-C method.
+// HasAlpha reports whether the object has alpha.
 func (ir *ImageRep) HasAlpha() bool {
 	_r := objc.Send[bool](objref.IDOf(ir), objc.RegisterName("hasAlpha"))
 	return _r
 }
 
-// IsOpaque wraps the corresponding Objective-C method.
+// IsOpaque reports whether the object is opaque.
 func (ir *ImageRep) IsOpaque() bool {
 	_r := objc.Send[bool](objref.IDOf(ir), objc.RegisterName("isOpaque"))
 	return _r
 }
 
-// ColorSpaceName wraps the corresponding Objective-C method.
+// ColorSpaceName returns the color space name.
 func (ir *ImageRep) ColorSpaceName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ir), objc.RegisterName("colorSpaceName"))
 	return obj.Wrap(_r)
 }
 
-// BitsPerSample wraps the corresponding Objective-C method.
+// BitsPerSample returns the bits per sample.
 func (ir *ImageRep) BitsPerSample() int {
 	_r := objc.Send[int](objref.IDOf(ir), objc.RegisterName("bitsPerSample"))
 	return _r
 }
 
-// PixelsWide wraps the corresponding Objective-C method.
+// PixelsWide returns the pixels wide.
 func (ir *ImageRep) PixelsWide() int {
 	_r := objc.Send[int](objref.IDOf(ir), objc.RegisterName("pixelsWide"))
 	return _r
 }
 
-// PixelsHigh wraps the corresponding Objective-C method.
+// PixelsHigh returns the pixels high.
 func (ir *ImageRep) PixelsHigh() int {
 	_r := objc.Send[int](objref.IDOf(ir), objc.RegisterName("pixelsHigh"))
 	return _r
 }
 
-// LayoutDirection wraps the corresponding Objective-C method.
+// LayoutDirection returns the layout direction.
 func (ir *ImageRep) LayoutDirection() ImageLayoutDirection {
 	_r := objc.Send[ImageLayoutDirection](objref.IDOf(ir), objc.RegisterName("layoutDirection"))
 	return _r

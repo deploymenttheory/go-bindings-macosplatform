@@ -77,7 +77,7 @@ func (g *Geocoder) CancelGeocode() {
 	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("cancelGeocode"))
 }
 
-// IsGeocoding wraps the corresponding Objective-C method.
+// IsGeocoding reports whether the object is geocoding.
 func (g *Geocoder) IsGeocoding() bool {
 	_r := objc.Send[bool](objref.IDOf(g), objc.RegisterName("isGeocoding"))
 	return _r

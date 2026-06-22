@@ -71,13 +71,13 @@ func NewMTRProductIdentityWithVendorIDProductID(vendorID obj.Object, productID o
 	return mTRProductIdentityAdopt(_id)
 }
 
-// VendorID wraps the corresponding Objective-C method.
+// VendorID returns the vendor ID.
 func (mpi *MTRProductIdentity) VendorID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mpi), objc.RegisterName("vendorID"))
 	return obj.Wrap(_r)
 }
 
-// ProductID wraps the corresponding Objective-C method.
+// ProductID returns the product ID.
 func (mpi *MTRProductIdentity) ProductID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mpi), objc.RegisterName("productID"))
 	return obj.Wrap(_r)

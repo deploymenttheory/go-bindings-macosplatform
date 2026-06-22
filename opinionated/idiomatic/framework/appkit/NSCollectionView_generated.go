@@ -139,32 +139,32 @@ func (cv *CollectionView) WithMaxItemSize(maxItemSize corefoundation.CGSize) *Co
 	return cv
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (cv *CollectionView) WithSubviews(items ...ViewProvider) *CollectionView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setSubviews:"), _arr)
 	return cv
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (cv *CollectionView) WithHidden(hidden bool) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setHidden:"), hidden)
 	return cv
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (cv *CollectionView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return cv
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (cv *CollectionView) WithAutoresizesSubviews(autoresizesSubviews bool) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return cv
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (cv *CollectionView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return cv
@@ -176,19 +176,19 @@ func (cv *CollectionView) WithFrame(frame corefoundation.CGRect) *CollectionView
 	return cv
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (cv *CollectionView) WithFrameRotation(frameRotation float64) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return cv
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (cv *CollectionView) WithFrameCenterRotation(frameCenterRotation float64) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return cv
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (cv *CollectionView) WithBoundsRotation(boundsRotation float64) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return cv
@@ -200,7 +200,7 @@ func (cv *CollectionView) WithBounds(bounds corefoundation.CGRect) *CollectionVi
 	return cv
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (cv *CollectionView) WithCanDrawConcurrently(canDrawConcurrently bool) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return cv
@@ -212,148 +212,148 @@ func (cv *CollectionView) WithNeedsDisplay(needsDisplay bool) *CollectionView {
 	return cv
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (cv *CollectionView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return cv
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (cv *CollectionView) WithWantsRestingTouches(wantsRestingTouches bool) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return cv
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (cv *CollectionView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return cv
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (cv *CollectionView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return cv
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (cv *CollectionView) WithWantsLayer(wantsLayer bool) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return cv
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (cv *CollectionView) WithLayer(layer obj.Object) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return cv
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (cv *CollectionView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return cv
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (cv *CollectionView) WithNeedsLayout(needsLayout bool) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return cv
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (cv *CollectionView) WithAlphaValue(alphaValue float64) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return cv
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (cv *CollectionView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return cv
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (cv *CollectionView) WithBackgroundFilters(items ...obj.Object) *CollectionView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return cv
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (cv *CollectionView) WithCompositingFilter(compositingFilter obj.Object) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return cv
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (cv *CollectionView) WithContentFilters(items ...obj.Object) *CollectionView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setContentFilters:"), _arr)
 	return cv
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (cv *CollectionView) WithShadow(shadow *Shadow) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return cv
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (cv *CollectionView) WithClipsToBounds(clipsToBounds bool) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return cv
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (cv *CollectionView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return cv
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (cv *CollectionView) WithToolTip(toolTip string) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return cv
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (cv *CollectionView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return cv
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (cv *CollectionView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return cv
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (cv *CollectionView) WithNextKeyView(nextKeyView ViewProvider) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return cv
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (cv *CollectionView) WithFocusRingType(focusRingType FocusRingType) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return cv
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (cv *CollectionView) WithGestureRecognizers(items ...GestureRecognizerProvider) *CollectionView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return cv
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (cv *CollectionView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return cv
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (cv *CollectionView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return cv
@@ -365,49 +365,49 @@ func (cv *CollectionView) WithPrefersCompactControlSizeMetrics(prefersCompactCon
 	return cv
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (cv *CollectionView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return cv
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (cv *CollectionView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return cv
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (cv *CollectionView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return cv
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (cv *CollectionView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return cv
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (cv *CollectionView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return cv
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (cv *CollectionView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return cv
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (cv *CollectionView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return cv
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (cv *CollectionView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *CollectionView {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return cv
@@ -630,7 +630,7 @@ func (cv *CollectionView) SetDraggingSourceOperationMaskForLocal(dragOperationMa
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDraggingSourceOperationMask:forLocal:"), dragOperationMask, localDestination)
 }
 
-// Content wraps the corresponding Objective-C method.
+// Content returns the content.
 func (cv *CollectionView) Content() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("content"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
@@ -641,7 +641,7 @@ func (cv *CollectionView) SetContent(content []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setContent:"), purego.SliceToNSArray(content, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// BackgroundView wraps the corresponding Objective-C method.
+// BackgroundView returns the background view.
 func (cv *CollectionView) BackgroundView() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("backgroundView"))
 	return ViewFromID(_r)
@@ -653,13 +653,13 @@ func (cv *CollectionView) BackgroundViewScrollsWithContent() bool {
 	return _r
 }
 
-// CollectionViewLayout wraps the corresponding Objective-C method.
+// CollectionViewLayout returns the collection view layout.
 func (cv *CollectionView) CollectionViewLayout() *CollectionViewLayout {
 	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("collectionViewLayout"))
 	return CollectionViewLayoutFromID(_r)
 }
 
-// BackgroundColors wraps the corresponding Objective-C method.
+// BackgroundColors returns the background colors.
 //
 // BackgroundColors returns the collection as a Go slice.
 func (cv *CollectionView) BackgroundColors() []*Color {
@@ -667,19 +667,19 @@ func (cv *CollectionView) BackgroundColors() []*Color {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Color { return ColorFromID(_id) })
 }
 
-// NumberOfSections wraps the corresponding Objective-C method.
+// NumberOfSections returns the number of sections.
 func (cv *CollectionView) NumberOfSections() int {
 	_r := objc.Send[int](objref.IDOf(cv), objc.RegisterName("numberOfSections"))
 	return _r
 }
 
-// IsFirstResponder wraps the corresponding Objective-C method.
+// IsFirstResponder reports whether the object is first responder.
 func (cv *CollectionView) IsFirstResponder() bool {
 	_r := objc.Send[bool](objref.IDOf(cv), objc.RegisterName("isFirstResponder"))
 	return _r
 }
 
-// IsSelectable wraps the corresponding Objective-C method.
+// IsSelectable reports whether the object is selectable.
 func (cv *CollectionView) IsSelectable() bool {
 	_r := objc.Send[bool](objref.IDOf(cv), objc.RegisterName("isSelectable"))
 	return _r
@@ -697,13 +697,13 @@ func (cv *CollectionView) AllowsMultipleSelection() bool {
 	return _r
 }
 
-// SelectionIndexes wraps the corresponding Objective-C method.
+// SelectionIndexes returns the selection indexes.
 func (cv *CollectionView) SelectionIndexes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("selectionIndexes"))
 	return obj.Wrap(_r)
 }
 
-// SelectionIndexPaths wraps the corresponding Objective-C method.
+// SelectionIndexPaths returns the selection index paths.
 func (cv *CollectionView) SelectionIndexPaths() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("selectionIndexPaths"))
 	return obj.Wrap(_r)
@@ -715,31 +715,31 @@ func (cv *CollectionView) NewItemForRepresentedObject(object obj.Object) *Collec
 	return CollectionViewItemFromID(_r)
 }
 
-// ItemPrototype wraps the corresponding Objective-C method.
+// ItemPrototype returns the item prototype.
 func (cv *CollectionView) ItemPrototype() *CollectionViewItem {
 	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("itemPrototype"))
 	return CollectionViewItemFromID(_r)
 }
 
-// MaxNumberOfRows wraps the corresponding Objective-C method.
+// MaxNumberOfRows returns the max number of rows.
 func (cv *CollectionView) MaxNumberOfRows() int {
 	_r := objc.Send[int](objref.IDOf(cv), objc.RegisterName("maxNumberOfRows"))
 	return _r
 }
 
-// MaxNumberOfColumns wraps the corresponding Objective-C method.
+// MaxNumberOfColumns returns the max number of columns.
 func (cv *CollectionView) MaxNumberOfColumns() int {
 	_r := objc.Send[int](objref.IDOf(cv), objc.RegisterName("maxNumberOfColumns"))
 	return _r
 }
 
-// MinItemSize wraps the corresponding Objective-C method.
+// MinItemSize returns the min item size.
 func (cv *CollectionView) MinItemSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cv), objc.RegisterName("minItemSize"))
 	return _r
 }
 
-// MaxItemSize wraps the corresponding Objective-C method.
+// MaxItemSize returns the max item size.
 func (cv *CollectionView) MaxItemSize() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cv), objc.RegisterName("maxItemSize"))
 	return _r

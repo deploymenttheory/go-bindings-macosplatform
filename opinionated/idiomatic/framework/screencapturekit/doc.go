@@ -3,4 +3,7 @@
 //go:build darwin
 
 // Package screencapturekit provides a fluent Go API over the macOS ScreenCaptureKit framework.
+//
+// Each With… method sets one property and returns its receiver, so configuration
+// calls can be chained.
 package screencapturekit

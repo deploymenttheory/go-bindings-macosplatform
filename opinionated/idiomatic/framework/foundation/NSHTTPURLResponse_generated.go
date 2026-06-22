@@ -54,7 +54,7 @@ func NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields(url string, stat
 	return hTTPURLResponseAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (hr *HTTPURLResponse) WithScriptingProperties(scriptingProperties obj.Object) *HTTPURLResponse {
 	objc.Send[objc.ID](objref.IDOf(hr), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return hr

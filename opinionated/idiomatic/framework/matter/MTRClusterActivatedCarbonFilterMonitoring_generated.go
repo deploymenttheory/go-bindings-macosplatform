@@ -51,77 +51,77 @@ func NewMTRClusterActivatedCarbonFilterMonitoringWithDeviceEndpointIDQueue(devic
 	return mTRClusterActivatedCarbonFilterMonitoringAdopt(_id)
 }
 
-// ReadAttributeConditionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeConditionWithParams reads attribute condition with params.
 func (mcacfm *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeConditionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcacfm), objc.RegisterName("readAttributeConditionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeDegradationDirectionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeDegradationDirectionWithParams reads attribute degradation direction with params.
 func (mcacfm *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeDegradationDirectionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcacfm), objc.RegisterName("readAttributeDegradationDirectionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeChangeIndicationWithParams wraps the corresponding Objective-C method.
+// ReadAttributeChangeIndicationWithParams reads attribute change indication with params.
 func (mcacfm *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeChangeIndicationWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcacfm), objc.RegisterName("readAttributeChangeIndicationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeInPlaceIndicatorWithParams wraps the corresponding Objective-C method.
+// ReadAttributeInPlaceIndicatorWithParams reads attribute in place indicator with params.
 func (mcacfm *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeInPlaceIndicatorWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcacfm), objc.RegisterName("readAttributeInPlaceIndicatorWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeLastChangedTimeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeLastChangedTimeWithParams reads attribute last changed time with params.
 func (mcacfm *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeLastChangedTimeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcacfm), objc.RegisterName("readAttributeLastChangedTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeLastChangedTimeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeLastChangedTimeWithValueExpectedValueInterval writes attribute last changed time with value expected value interval.
 func (mcacfm *MTRClusterActivatedCarbonFilterMonitoring) WriteAttributeLastChangedTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcacfm), objc.RegisterName("writeAttributeLastChangedTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams writes attribute last changed time with value expected value interval params.
 func (mcacfm *MTRClusterActivatedCarbonFilterMonitoring) WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcacfm), objc.RegisterName("writeAttributeLastChangedTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeReplacementProductListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeReplacementProductListWithParams reads attribute replacement product list with params.
 func (mcacfm *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeReplacementProductListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcacfm), objc.RegisterName("readAttributeReplacementProductListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcacfm *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcacfm), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcacfm *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcacfm), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcacfm *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcacfm), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcacfm *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcacfm), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcacfm *MTRClusterActivatedCarbonFilterMonitoring) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcacfm), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

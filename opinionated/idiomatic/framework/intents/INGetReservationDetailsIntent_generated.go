@@ -58,19 +58,19 @@ func (grdi *GetReservationDetailsIntent) WithSuggestedInvocationPhrase(suggested
 	return grdi
 }
 
-// WithDonationMetadata sets the property and returns the receiver so calls can be chained.
+// WithDonationMetadata sets the donation metadata.
 func (grdi *GetReservationDetailsIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *GetReservationDetailsIntent {
 	objc.Send[objc.ID](objref.IDOf(grdi), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return grdi
 }
 
-// ReservationContainerReference wraps the corresponding Objective-C method.
+// ReservationContainerReference returns the reservation container reference.
 func (grdi *GetReservationDetailsIntent) ReservationContainerReference() *SpeakableString {
 	_r := objc.Send[objc.ID](objref.IDOf(grdi), objc.RegisterName("reservationContainerReference"))
 	return SpeakableStringFromID(_r)
 }
 
-// ReservationItemReferences wraps the corresponding Objective-C method.
+// ReservationItemReferences returns the reservation item references.
 //
 // ReservationItemReferences returns the collection as a Go slice.
 func (grdi *GetReservationDetailsIntent) ReservationItemReferences() []*SpeakableString {

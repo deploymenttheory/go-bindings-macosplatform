@@ -66,13 +66,13 @@ func (afr *AsynchronousFetchRequest) WithAffectedStores(items ...PersistentStore
 	return afr
 }
 
-// FetchRequest wraps the corresponding Objective-C method.
+// FetchRequest returns the fetch request.
 func (afr *AsynchronousFetchRequest) FetchRequest() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(afr), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
 }
 
-// EstimatedResultCount wraps the corresponding Objective-C method.
+// EstimatedResultCount returns the estimated result count.
 func (afr *AsynchronousFetchRequest) EstimatedResultCount() int {
 	_r := objc.Send[int](objref.IDOf(afr), objc.RegisterName("estimatedResultCount"))
 	return _r

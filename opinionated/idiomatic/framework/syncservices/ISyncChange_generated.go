@@ -71,13 +71,13 @@ func NewISyncChangeWithChangeTypeRecordIdentifierChanges(type_ int, recordIdenti
 	return iSyncChangeAdopt(_id)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (isc *ISyncChange) Type() int {
 	_r := objc.Send[int](objref.IDOf(isc), objc.RegisterName("type"))
 	return _r
 }
 
-// RecordIdentifier wraps the corresponding Objective-C method.
+// RecordIdentifier returns the record identifier.
 func (isc *ISyncChange) RecordIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("recordIdentifier"))
 	if _r == 0 {
@@ -86,13 +86,13 @@ func (isc *ISyncChange) RecordIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Record wraps the corresponding Objective-C method.
+// Record returns the record.
 func (isc *ISyncChange) Record() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("record"))
 	return obj.Wrap(_r)
 }
 
-// Changes wraps the corresponding Objective-C method.
+// Changes returns the changes.
 func (isc *ISyncChange) Changes() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("changes"))
 	return obj.Wrap(_r)

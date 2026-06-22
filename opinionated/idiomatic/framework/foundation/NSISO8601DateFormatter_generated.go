@@ -52,19 +52,19 @@ func NewISO8601DateFormatter() *ISO8601DateFormatter {
 	return iSO8601DateFormatterAdopt(_id)
 }
 
-// WithTimeZone sets the property and returns the receiver so calls can be chained.
+// WithTimeZone sets the time zone.
 func (idf *ISO8601DateFormatter) WithTimeZone(timeZone *TimeZone) *ISO8601DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return idf
 }
 
-// WithFormatOptions sets the property and returns the receiver so calls can be chained.
+// WithFormatOptions sets the format options.
 func (idf *ISO8601DateFormatter) WithFormatOptions(formatOptions ISO8601DateFormatOptions) *ISO8601DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("setFormatOptions:"), formatOptions)
 	return idf
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (idf *ISO8601DateFormatter) WithScriptingProperties(scriptingProperties obj.Object) *ISO8601DateFormatter {
 	objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return idf
@@ -85,13 +85,13 @@ func (idf *ISO8601DateFormatter) DateFromString(string_ string) *Date {
 	return DateFromID(_r)
 }
 
-// TimeZone wraps the corresponding Objective-C method.
+// TimeZone returns the time zone.
 func (idf *ISO8601DateFormatter) TimeZone() *TimeZone {
 	_r := objc.Send[objc.ID](objref.IDOf(idf), objc.RegisterName("timeZone"))
 	return TimeZoneFromID(_r)
 }
 
-// FormatOptions wraps the corresponding Objective-C method.
+// FormatOptions returns the format options.
 func (idf *ISO8601DateFormatter) FormatOptions() ISO8601DateFormatOptions {
 	_r := objc.Send[ISO8601DateFormatOptions](objref.IDOf(idf), objc.RegisterName("formatOptions"))
 	return _r

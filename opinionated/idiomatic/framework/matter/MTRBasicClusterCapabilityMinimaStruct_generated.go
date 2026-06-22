@@ -50,13 +50,13 @@ func NewMTRBasicClusterCapabilityMinimaStruct() *MTRBasicClusterCapabilityMinima
 	return mTRBasicClusterCapabilityMinimaStructAdopt(_id)
 }
 
-// WithCaseSessionsPerFabric sets the property and returns the receiver so calls can be chained.
+// WithCaseSessionsPerFabric sets the case sessions per fabric.
 func (mbccms *MTRBasicClusterCapabilityMinimaStruct) WithCaseSessionsPerFabric(caseSessionsPerFabric obj.Object) *MTRBasicClusterCapabilityMinimaStruct {
 	objc.Send[objc.ID](objref.IDOf(mbccms), objc.RegisterName("setCaseSessionsPerFabric:"), objref.IDOf(caseSessionsPerFabric))
 	return mbccms
 }
 
-// WithSubscriptionsPerFabric sets the property and returns the receiver so calls can be chained.
+// WithSubscriptionsPerFabric sets the subscriptions per fabric.
 func (mbccms *MTRBasicClusterCapabilityMinimaStruct) WithSubscriptionsPerFabric(subscriptionsPerFabric obj.Object) *MTRBasicClusterCapabilityMinimaStruct {
 	objc.Send[objc.ID](objref.IDOf(mbccms), objc.RegisterName("setSubscriptionsPerFabric:"), objref.IDOf(subscriptionsPerFabric))
 	return mbccms

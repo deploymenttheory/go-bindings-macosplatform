@@ -51,19 +51,19 @@ func NewImageSubtract() *ImageSubtract {
 	return imageSubtractAdopt(_id)
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (is *ImageSubtract) WithPrimaryScale(primaryScale float32) *ImageSubtract {
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return is
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (is *ImageSubtract) WithSecondaryScale(secondaryScale float32) *ImageSubtract {
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return is
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (is *ImageSubtract) WithBias(bias float32) *ImageSubtract {
 	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setBias:"), bias)
 	return is

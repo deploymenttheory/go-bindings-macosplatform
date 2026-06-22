@@ -61,7 +61,7 @@ func NewMTRBaseClusterOnOffWithDeviceEndpointQueue(device *MTRBaseDevice, endpoi
 	return mTRBaseClusterOnOffAdopt(_id)
 }
 
-// ReadAttributeOnOffWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOnOffWithCompletion reads attribute on off with completion.
 //
 // ReadAttributeOnOffWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeOnOffWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -111,7 +111,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeOnOffWithParamsSubscriptionE
 	}
 }
 
-// ReadAttributeGlobalSceneControlWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGlobalSceneControlWithCompletion reads attribute global scene control with completion.
 //
 // ReadAttributeGlobalSceneControlWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeGlobalSceneControlWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -161,7 +161,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeGlobalSceneControlWithParams
 	}
 }
 
-// ReadAttributeOnTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOnTimeWithCompletion reads attribute on time with completion.
 //
 // ReadAttributeOnTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeOnTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -211,7 +211,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeOnTimeWithParamsSubscription
 	}
 }
 
-// ReadAttributeOffWaitTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeOffWaitTimeWithCompletion reads attribute off wait time with completion.
 //
 // ReadAttributeOffWaitTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeOffWaitTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -261,7 +261,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeOffWaitTimeWithParamsSubscri
 	}
 }
 
-// ReadAttributeStartUpOnOffWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeStartUpOnOffWithCompletion reads attribute start up on off with completion.
 //
 // ReadAttributeStartUpOnOffWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeStartUpOnOffWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -311,7 +311,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeStartUpOnOffWithParamsSubscr
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -361,7 +361,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeGeneratedCommandListWithPara
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -411,7 +411,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeAcceptedCommandListWithParam
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -461,7 +461,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeAttributeListWithParamsSubsc
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -511,7 +511,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeFeatureMapWithParamsSubscrip
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -561,7 +561,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeClusterRevisionWithParamsSub
 	}
 }
 
-// ReadAttributeOnOff wraps the corresponding Objective-C method.
+// ReadAttributeOnOff reads attribute on off.
 //
 // ReadAttributeOnOff blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeOnOff(ctx context.Context) (result obj.Object, err error) {
@@ -611,7 +611,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeOnOffWithMinIntervalMaxInter
 	}
 }
 
-// ReadAttributeGlobalSceneControl wraps the corresponding Objective-C method.
+// ReadAttributeGlobalSceneControl reads attribute global scene control.
 //
 // ReadAttributeGlobalSceneControl blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeGlobalSceneControl(ctx context.Context) (result obj.Object, err error) {
@@ -661,7 +661,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeGlobalSceneControlWithMinInt
 	}
 }
 
-// ReadAttributeOnTime wraps the corresponding Objective-C method.
+// ReadAttributeOnTime reads attribute on time.
 //
 // ReadAttributeOnTime blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeOnTime(ctx context.Context) (result obj.Object, err error) {
@@ -711,7 +711,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeOnTimeWithMinIntervalMaxInte
 	}
 }
 
-// ReadAttributeOffWaitTime wraps the corresponding Objective-C method.
+// ReadAttributeOffWaitTime reads attribute off wait time.
 //
 // ReadAttributeOffWaitTime blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeOffWaitTime(ctx context.Context) (result obj.Object, err error) {
@@ -761,7 +761,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeOffWaitTimeWithMinIntervalMa
 	}
 }
 
-// ReadAttributeStartUpOnOff wraps the corresponding Objective-C method.
+// ReadAttributeStartUpOnOff reads attribute start up on off.
 //
 // ReadAttributeStartUpOnOff blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeStartUpOnOff(ctx context.Context) (result obj.Object, err error) {
@@ -811,7 +811,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeStartUpOnOffWithMinIntervalM
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -861,7 +861,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeGeneratedCommandListWithMinI
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -911,7 +911,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeAcceptedCommandListWithMinIn
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -961,7 +961,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeAttributeListWithMinInterval
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -1011,7 +1011,7 @@ func (mbcoo *MTRBaseClusterOnOff) SubscribeAttributeFeatureMapWithMinIntervalMax
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcoo *MTRBaseClusterOnOff) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

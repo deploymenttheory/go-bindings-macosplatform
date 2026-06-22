@@ -78,7 +78,7 @@ func (nd *NetworkDevice) WithAttachment(attachment NetworkDeviceAttachmentProvid
 	return nd
 }
 
-// Attachment wraps the corresponding Objective-C method.
+// Attachment returns the attachment.
 func (nd *NetworkDevice) Attachment() *NetworkDeviceAttachment {
 	_r := objc.Send[objc.ID](objref.IDOf(nd), objc.RegisterName("attachment"))
 	return NetworkDeviceAttachmentFromID(_r)

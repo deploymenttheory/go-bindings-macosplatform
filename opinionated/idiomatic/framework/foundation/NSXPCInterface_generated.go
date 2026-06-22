@@ -72,7 +72,7 @@ func NewXPCInterface() *XPCInterface {
 	return xPCInterfaceAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (xi *XPCInterface) WithScriptingProperties(scriptingProperties obj.Object) *XPCInterface {
 	objc.Send[objc.ID](objref.IDOf(xi), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return xi

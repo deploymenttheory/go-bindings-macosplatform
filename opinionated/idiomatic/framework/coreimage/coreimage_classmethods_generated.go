@@ -28,247 +28,247 @@ func KernelWithString(string_ string) *BlendKernel {
 	return BlendKernelFromID(_r)
 }
 
-// ComponentAdd wraps the corresponding Objective-C method.
+// ComponentAdd returns the component add.
 func ComponentAdd() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("componentAdd"))
 	return BlendKernelFromID(_r)
 }
 
-// ComponentMultiply wraps the corresponding Objective-C method.
+// ComponentMultiply returns the component multiply.
 func ComponentMultiply() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("componentMultiply"))
 	return BlendKernelFromID(_r)
 }
 
-// ComponentMin wraps the corresponding Objective-C method.
+// ComponentMin returns the component min.
 func ComponentMin() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("componentMin"))
 	return BlendKernelFromID(_r)
 }
 
-// ComponentMax wraps the corresponding Objective-C method.
+// ComponentMax returns the component max.
 func ComponentMax() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("componentMax"))
 	return BlendKernelFromID(_r)
 }
 
-// Clear wraps the corresponding Objective-C method.
+// Clear returns the clear.
 func Clear() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("clear"))
 	return BlendKernelFromID(_r)
 }
 
-// Source wraps the corresponding Objective-C method.
+// Source returns the source.
 func Source() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("source"))
 	return BlendKernelFromID(_r)
 }
 
-// Destination wraps the corresponding Objective-C method.
+// Destination returns the destination.
 func Destination() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("destination"))
 	return BlendKernelFromID(_r)
 }
 
-// SourceOver wraps the corresponding Objective-C method.
+// SourceOver returns the source over.
 func SourceOver() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("sourceOver"))
 	return BlendKernelFromID(_r)
 }
 
-// DestinationOver wraps the corresponding Objective-C method.
+// DestinationOver returns the destination over.
 func DestinationOver() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("destinationOver"))
 	return BlendKernelFromID(_r)
 }
 
-// SourceIn wraps the corresponding Objective-C method.
+// SourceIn returns the source in.
 func SourceIn() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("sourceIn"))
 	return BlendKernelFromID(_r)
 }
 
-// DestinationIn wraps the corresponding Objective-C method.
+// DestinationIn returns the destination in.
 func DestinationIn() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("destinationIn"))
 	return BlendKernelFromID(_r)
 }
 
-// SourceOut wraps the corresponding Objective-C method.
+// SourceOut returns the source out.
 func SourceOut() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("sourceOut"))
 	return BlendKernelFromID(_r)
 }
 
-// DestinationOut wraps the corresponding Objective-C method.
+// DestinationOut returns the destination out.
 func DestinationOut() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("destinationOut"))
 	return BlendKernelFromID(_r)
 }
 
-// SourceAtop wraps the corresponding Objective-C method.
+// SourceAtop returns the source atop.
 func SourceAtop() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("sourceAtop"))
 	return BlendKernelFromID(_r)
 }
 
-// DestinationAtop wraps the corresponding Objective-C method.
+// DestinationAtop returns the destination atop.
 func DestinationAtop() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("destinationAtop"))
 	return BlendKernelFromID(_r)
 }
 
-// ExclusiveOr wraps the corresponding Objective-C method.
+// ExclusiveOr returns the exclusive or.
 func ExclusiveOr() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("exclusiveOr"))
 	return BlendKernelFromID(_r)
 }
 
-// Multiply wraps the corresponding Objective-C method.
+// Multiply returns the multiply.
 func Multiply() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("multiply"))
 	return BlendKernelFromID(_r)
 }
 
-// Screen wraps the corresponding Objective-C method.
+// Screen returns the screen.
 func Screen() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("screen"))
 	return BlendKernelFromID(_r)
 }
 
-// Overlay wraps the corresponding Objective-C method.
+// Overlay returns the overlay.
 func Overlay() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("overlay"))
 	return BlendKernelFromID(_r)
 }
 
-// Darken wraps the corresponding Objective-C method.
+// Darken returns the darken.
 func Darken() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("darken"))
 	return BlendKernelFromID(_r)
 }
 
-// Lighten wraps the corresponding Objective-C method.
+// Lighten returns the lighten.
 func Lighten() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("lighten"))
 	return BlendKernelFromID(_r)
 }
 
-// ColorDodge wraps the corresponding Objective-C method.
+// ColorDodge returns the color dodge.
 func ColorDodge() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("colorDodge"))
 	return BlendKernelFromID(_r)
 }
 
-// ColorBurn wraps the corresponding Objective-C method.
+// ColorBurn returns the color burn.
 func ColorBurn() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("colorBurn"))
 	return BlendKernelFromID(_r)
 }
 
-// HardLight wraps the corresponding Objective-C method.
+// HardLight returns the hard light.
 func HardLight() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("hardLight"))
 	return BlendKernelFromID(_r)
 }
 
-// SoftLight wraps the corresponding Objective-C method.
+// SoftLight returns the soft light.
 func SoftLight() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("softLight"))
 	return BlendKernelFromID(_r)
 }
 
-// Difference wraps the corresponding Objective-C method.
+// Difference returns the difference.
 func Difference() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("difference"))
 	return BlendKernelFromID(_r)
 }
 
-// Exclusion wraps the corresponding Objective-C method.
+// Exclusion returns the exclusion.
 func Exclusion() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("exclusion"))
 	return BlendKernelFromID(_r)
 }
 
-// Hue wraps the corresponding Objective-C method.
+// Hue returns the hue.
 func Hue() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("hue"))
 	return BlendKernelFromID(_r)
 }
 
-// Saturation wraps the corresponding Objective-C method.
+// Saturation returns the saturation.
 func Saturation() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("saturation"))
 	return BlendKernelFromID(_r)
 }
 
-// CIBlendKernelColor wraps the corresponding Objective-C method.
+// CIBlendKernelColor returns the ci blend kernel color.
 func CIBlendKernelColor() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("color"))
 	return BlendKernelFromID(_r)
 }
 
-// Luminosity wraps the corresponding Objective-C method.
+// Luminosity returns the luminosity.
 func Luminosity() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("luminosity"))
 	return BlendKernelFromID(_r)
 }
 
-// Subtract wraps the corresponding Objective-C method.
+// Subtract returns the subtract.
 func Subtract() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("subtract"))
 	return BlendKernelFromID(_r)
 }
 
-// Divide wraps the corresponding Objective-C method.
+// Divide returns the divide.
 func Divide() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("divide"))
 	return BlendKernelFromID(_r)
 }
 
-// LinearBurn wraps the corresponding Objective-C method.
+// LinearBurn returns the linear burn.
 func LinearBurn() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("linearBurn"))
 	return BlendKernelFromID(_r)
 }
 
-// LinearDodge wraps the corresponding Objective-C method.
+// LinearDodge returns the linear dodge.
 func LinearDodge() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("linearDodge"))
 	return BlendKernelFromID(_r)
 }
 
-// VividLight wraps the corresponding Objective-C method.
+// VividLight returns the vivid light.
 func VividLight() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("vividLight"))
 	return BlendKernelFromID(_r)
 }
 
-// LinearLight wraps the corresponding Objective-C method.
+// LinearLight returns the linear light.
 func LinearLight() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("linearLight"))
 	return BlendKernelFromID(_r)
 }
 
-// PinLight wraps the corresponding Objective-C method.
+// PinLight returns the pin light.
 func PinLight() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("pinLight"))
 	return BlendKernelFromID(_r)
 }
 
-// HardMix wraps the corresponding Objective-C method.
+// HardMix returns the hard mix.
 func HardMix() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("hardMix"))
 	return BlendKernelFromID(_r)
 }
 
-// DarkerColor wraps the corresponding Objective-C method.
+// DarkerColor returns the darker color.
 func DarkerColor() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("darkerColor"))
 	return BlendKernelFromID(_r)
 }
 
-// LighterColor wraps the corresponding Objective-C method.
+// LighterColor returns the lighter color.
 func LighterColor() *BlendKernel {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("lighterColor"))
 	return BlendKernelFromID(_r)
@@ -643,61 +643,61 @@ func EmptyImage() *Image {
 	return ImageFromID(_r)
 }
 
-// BlackImage wraps the corresponding Objective-C method.
+// BlackImage returns the black image.
 func BlackImage() *Image {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("blackImage"))
 	return ImageFromID(_r)
 }
 
-// WhiteImage wraps the corresponding Objective-C method.
+// WhiteImage returns the white image.
 func WhiteImage() *Image {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("whiteImage"))
 	return ImageFromID(_r)
 }
 
-// GrayImage wraps the corresponding Objective-C method.
+// GrayImage returns the gray image.
 func GrayImage() *Image {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("grayImage"))
 	return ImageFromID(_r)
 }
 
-// RedImage wraps the corresponding Objective-C method.
+// RedImage returns the red image.
 func RedImage() *Image {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("redImage"))
 	return ImageFromID(_r)
 }
 
-// GreenImage wraps the corresponding Objective-C method.
+// GreenImage returns the green image.
 func GreenImage() *Image {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("greenImage"))
 	return ImageFromID(_r)
 }
 
-// BlueImage wraps the corresponding Objective-C method.
+// BlueImage returns the blue image.
 func BlueImage() *Image {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("blueImage"))
 	return ImageFromID(_r)
 }
 
-// CyanImage wraps the corresponding Objective-C method.
+// CyanImage returns the cyan image.
 func CyanImage() *Image {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("cyanImage"))
 	return ImageFromID(_r)
 }
 
-// MagentaImage wraps the corresponding Objective-C method.
+// MagentaImage returns the magenta image.
 func MagentaImage() *Image {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("magentaImage"))
 	return ImageFromID(_r)
 }
 
-// YellowImage wraps the corresponding Objective-C method.
+// YellowImage returns the yellow image.
 func YellowImage() *Image {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("yellowImage"))
 	return ImageFromID(_r)
 }
 
-// ClearImage wraps the corresponding Objective-C method.
+// ClearImage returns the clear image.
 func ClearImage() *Image {
 	_r := objc.Send[objc.ID](objc.ID(_class("CIImage")), objc.RegisterName("clearImage"))
 	return ImageFromID(_r)
@@ -926,7 +926,7 @@ func FilterWithImageDataIdentifierHint(data obj.Object, identifierHint string) *
 	return RAWFilterFromID(_r)
 }
 
-// SupportedCameraModels wraps the corresponding Objective-C method.
+// SupportedCameraModels returns the supported camera models.
 //
 // SupportedCameraModels returns the collection as a Go slice.
 func SupportedCameraModels() []string {

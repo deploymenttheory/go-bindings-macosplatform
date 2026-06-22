@@ -136,65 +136,65 @@ func (mcgkm *MTRClusterGroupKeyManagement) KeySetReadAllIndicesWithExpectedValue
 	}
 }
 
-// ReadAttributeGroupKeyMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGroupKeyMapWithParams reads attribute group key map with params.
 func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeGroupKeyMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("readAttributeGroupKeyMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeGroupKeyMapWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeGroupKeyMapWithValueExpectedValueInterval writes attribute group key map with value expected value interval.
 func (mcgkm *MTRClusterGroupKeyManagement) WriteAttributeGroupKeyMapWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("writeAttributeGroupKeyMapWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeGroupKeyMapWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeGroupKeyMapWithValueExpectedValueIntervalParams writes attribute group key map with value expected value interval params.
 func (mcgkm *MTRClusterGroupKeyManagement) WriteAttributeGroupKeyMapWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("writeAttributeGroupKeyMapWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeGroupTableWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGroupTableWithParams reads attribute group table with params.
 func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeGroupTableWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("readAttributeGroupTableWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxGroupsPerFabricWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMaxGroupsPerFabricWithParams reads attribute max groups per fabric with params.
 func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeMaxGroupsPerFabricWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("readAttributeMaxGroupsPerFabricWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxGroupKeysPerFabricWithParams wraps the corresponding Objective-C method.
+// ReadAttributeMaxGroupKeysPerFabricWithParams reads attribute max group keys per fabric with params.
 func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeMaxGroupKeysPerFabricWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("readAttributeMaxGroupKeysPerFabricWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcgkm *MTRClusterGroupKeyManagement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcgkm), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

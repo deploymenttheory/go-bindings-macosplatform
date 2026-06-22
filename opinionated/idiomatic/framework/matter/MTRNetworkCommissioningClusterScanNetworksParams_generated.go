@@ -70,13 +70,13 @@ func NewMTRNetworkCommissioningClusterScanNetworksParams() *MTRNetworkCommission
 	return mTRNetworkCommissioningClusterScanNetworksParamsAdopt(_id)
 }
 
-// WithSsid sets the property and returns the receiver so calls can be chained.
+// WithSsid sets the ssid.
 func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) WithSsid(ssid obj.Object) *MTRNetworkCommissioningClusterScanNetworksParams {
 	objc.Send[objc.ID](objref.IDOf(mnccsnp), objc.RegisterName("setSsid:"), objref.IDOf(ssid))
 	return mnccsnp
 }
 
-// WithBreadcrumb sets the property and returns the receiver so calls can be chained.
+// WithBreadcrumb sets the breadcrumb.
 func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) WithBreadcrumb(breadcrumb obj.Object) *MTRNetworkCommissioningClusterScanNetworksParams {
 	objc.Send[objc.ID](objref.IDOf(mnccsnp), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 	return mnccsnp
@@ -94,13 +94,13 @@ func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) WithServerSideP
 	return mnccsnp
 }
 
-// Ssid wraps the corresponding Objective-C method.
+// Ssid returns the ssid.
 func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) Ssid() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccsnp), objc.RegisterName("ssid"))
 	return obj.Wrap(_r)
 }
 
-// Breadcrumb wraps the corresponding Objective-C method.
+// Breadcrumb returns the breadcrumb.
 func (mnccsnp *MTRNetworkCommissioningClusterScanNetworksParams) Breadcrumb() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccsnp), objc.RegisterName("breadcrumb"))
 	return obj.Wrap(_r)

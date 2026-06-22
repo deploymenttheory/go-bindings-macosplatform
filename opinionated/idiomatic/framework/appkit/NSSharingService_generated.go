@@ -103,7 +103,7 @@ func (ss *SharingService) PerformWithItems(items obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("performWithItems:"), objref.IDOf(items))
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (ss *SharingService) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("title"))
 	if _r == 0 {
@@ -112,13 +112,13 @@ func (ss *SharingService) Title() string {
 	return purego.GoString(_r)
 }
 
-// Image wraps the corresponding Objective-C method.
+// Image returns the image.
 func (ss *SharingService) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
-// AlternateImage wraps the corresponding Objective-C method.
+// AlternateImage returns the alternate image.
 func (ss *SharingService) AlternateImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("alternateImage"))
 	return ImageFromID(_r)
@@ -141,7 +141,7 @@ func (ss *SharingService) Recipients() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Subject wraps the corresponding Objective-C method.
+// Subject returns the subject.
 func (ss *SharingService) Subject() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ss), objc.RegisterName("subject"))
 	if _r == 0 {

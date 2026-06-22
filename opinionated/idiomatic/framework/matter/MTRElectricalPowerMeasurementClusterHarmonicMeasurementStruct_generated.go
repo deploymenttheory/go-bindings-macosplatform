@@ -70,25 +70,25 @@ func NewMTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct() *MTRElec
 	return mTRElectricalPowerMeasurementClusterHarmonicMeasurementStructAdopt(_id)
 }
 
-// WithOrder sets the property and returns the receiver so calls can be chained.
+// WithOrder sets the order.
 func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) WithOrder(order obj.Object) *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct {
 	objc.Send[objc.ID](objref.IDOf(mepmchms), objc.RegisterName("setOrder:"), objref.IDOf(order))
 	return mepmchms
 }
 
-// WithMeasurement sets the property and returns the receiver so calls can be chained.
+// WithMeasurement sets the measurement.
 func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) WithMeasurement(measurement obj.Object) *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct {
 	objc.Send[objc.ID](objref.IDOf(mepmchms), objc.RegisterName("setMeasurement:"), objref.IDOf(measurement))
 	return mepmchms
 }
 
-// Order wraps the corresponding Objective-C method.
+// Order returns the order.
 func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) Order() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mepmchms), objc.RegisterName("order"))
 	return obj.Wrap(_r)
 }
 
-// Measurement wraps the corresponding Objective-C method.
+// Measurement returns the measurement.
 func (mepmchms *MTRElectricalPowerMeasurementClusterHarmonicMeasurementStruct) Measurement() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mepmchms), objc.RegisterName("measurement"))
 	return obj.Wrap(_r)

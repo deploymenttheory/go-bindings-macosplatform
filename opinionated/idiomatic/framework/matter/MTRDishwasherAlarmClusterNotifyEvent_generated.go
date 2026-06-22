@@ -70,49 +70,49 @@ func NewMTRDishwasherAlarmClusterNotifyEvent() *MTRDishwasherAlarmClusterNotifyE
 	return mTRDishwasherAlarmClusterNotifyEventAdopt(_id)
 }
 
-// WithActive sets the property and returns the receiver so calls can be chained.
+// WithActive sets the active.
 func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) WithActive(active obj.Object) *MTRDishwasherAlarmClusterNotifyEvent {
 	objc.Send[objc.ID](objref.IDOf(mdacne), objc.RegisterName("setActive:"), objref.IDOf(active))
 	return mdacne
 }
 
-// WithInactive sets the property and returns the receiver so calls can be chained.
+// WithInactive sets the inactive.
 func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) WithInactive(inactive obj.Object) *MTRDishwasherAlarmClusterNotifyEvent {
 	objc.Send[objc.ID](objref.IDOf(mdacne), objc.RegisterName("setInactive:"), objref.IDOf(inactive))
 	return mdacne
 }
 
-// WithState sets the property and returns the receiver so calls can be chained.
+// WithState sets the state.
 func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) WithState(state obj.Object) *MTRDishwasherAlarmClusterNotifyEvent {
 	objc.Send[objc.ID](objref.IDOf(mdacne), objc.RegisterName("setState:"), objref.IDOf(state))
 	return mdacne
 }
 
-// WithMask sets the property and returns the receiver so calls can be chained.
+// WithMask sets the mask.
 func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) WithMask(mask obj.Object) *MTRDishwasherAlarmClusterNotifyEvent {
 	objc.Send[objc.ID](objref.IDOf(mdacne), objc.RegisterName("setMask:"), objref.IDOf(mask))
 	return mdacne
 }
 
-// Active wraps the corresponding Objective-C method.
+// Active returns the active.
 func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) Active() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdacne), objc.RegisterName("active"))
 	return obj.Wrap(_r)
 }
 
-// Inactive wraps the corresponding Objective-C method.
+// Inactive returns the inactive.
 func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) Inactive() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdacne), objc.RegisterName("inactive"))
 	return obj.Wrap(_r)
 }
 
-// State wraps the corresponding Objective-C method.
+// State returns the state.
 func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) State() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdacne), objc.RegisterName("state"))
 	return obj.Wrap(_r)
 }
 
-// Mask wraps the corresponding Objective-C method.
+// Mask returns the mask.
 func (mdacne *MTRDishwasherAlarmClusterNotifyEvent) Mask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdacne), objc.RegisterName("mask"))
 	return obj.Wrap(_r)

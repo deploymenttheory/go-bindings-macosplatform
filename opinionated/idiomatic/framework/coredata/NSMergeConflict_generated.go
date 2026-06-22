@@ -73,37 +73,37 @@ func NewMergeConflictWithSourceNewVersionOldVersionCachedSnapshotPersistedSnapsh
 	return mergeConflictAdopt(_id)
 }
 
-// SourceObject wraps the corresponding Objective-C method.
+// SourceObject returns the source object.
 func (mc *MergeConflict) SourceObject() *ManagedObject {
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("sourceObject"))
 	return ManagedObjectFromID(_r)
 }
 
-// ObjectSnapshot wraps the corresponding Objective-C method.
+// ObjectSnapshot returns the object snapshot.
 func (mc *MergeConflict) ObjectSnapshot() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("objectSnapshot"))
 	return obj.Wrap(_r)
 }
 
-// CachedSnapshot wraps the corresponding Objective-C method.
+// CachedSnapshot returns the cached snapshot.
 func (mc *MergeConflict) CachedSnapshot() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("cachedSnapshot"))
 	return obj.Wrap(_r)
 }
 
-// PersistedSnapshot wraps the corresponding Objective-C method.
+// PersistedSnapshot returns the persisted snapshot.
 func (mc *MergeConflict) PersistedSnapshot() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("persistedSnapshot"))
 	return obj.Wrap(_r)
 }
 
-// NewVersionNumber wraps the corresponding Objective-C method.
+// NewVersionNumber returns the new version number.
 func (mc *MergeConflict) NewVersionNumber() int {
 	_r := objc.Send[int](objref.IDOf(mc), objc.RegisterName("newVersionNumber"))
 	return _r
 }
 
-// OldVersionNumber wraps the corresponding Objective-C method.
+// OldVersionNumber returns the old version number.
 func (mc *MergeConflict) OldVersionNumber() int {
 	_r := objc.Send[int](objref.IDOf(mc), objc.RegisterName("oldVersionNumber"))
 	return _r

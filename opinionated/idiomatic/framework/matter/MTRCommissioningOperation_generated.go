@@ -81,7 +81,7 @@ func (mco *MTRCommissioningOperation) Stop() bool {
 	return _r
 }
 
-// MatchedPayload wraps the corresponding Objective-C method.
+// MatchedPayload returns the matched payload.
 func (mco *MTRCommissioningOperation) MatchedPayload() *MTRSetupPayload {
 	_r := objc.Send[objc.ID](objref.IDOf(mco), objc.RegisterName("matchedPayload"))
 	return MTRSetupPayloadFromID(_r)

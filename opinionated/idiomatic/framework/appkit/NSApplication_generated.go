@@ -54,7 +54,7 @@ func NewApplication() *Application {
 	return applicationAdopt(_id)
 }
 
-// WithMainMenu sets the property and returns the receiver so calls can be chained.
+// WithMainMenu sets the main menu.
 func (a *Application) WithMainMenu(mainMenu *Menu) *Application {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setMainMenu:"), objref.IDOf(mainMenu))
 	return a
@@ -84,13 +84,13 @@ func (a *Application) WithAppearance(appearance *Appearance) *Application {
 	return a
 }
 
-// WithWindowsMenu sets the property and returns the receiver so calls can be chained.
+// WithWindowsMenu sets the windows menu.
 func (a *Application) WithWindowsMenu(windowsMenu *Menu) *Application {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setWindowsMenu:"), objref.IDOf(windowsMenu))
 	return a
 }
 
-// WithServicesMenu sets the property and returns the receiver so calls can be chained.
+// WithServicesMenu sets the services menu.
 func (a *Application) WithServicesMenu(servicesMenu *Menu) *Application {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setServicesMenu:"), objref.IDOf(servicesMenu))
 	return a
@@ -198,7 +198,7 @@ func (a *Application) Run() {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("run"))
 }
 
-// RunModalForWindow wraps the corresponding Objective-C method.
+// RunModalForWindow runs modal for window.
 func (a *Application) RunModalForWindow(window *Window) int {
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("runModalForWindow:"), objref.IDOf(window))
 	return _r
@@ -209,12 +209,12 @@ func (a *Application) Stop(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stop:"), objref.IDOf(sender))
 }
 
-// StopModal wraps the corresponding Objective-C method.
+// StopModal stops modal.
 func (a *Application) StopModal() {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stopModal"))
 }
 
-// StopModalWithCode wraps the corresponding Objective-C method.
+// StopModalWithCode stops modal with code.
 func (a *Application) StopModalWithCode(returnCode int) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stopModalWithCode:"), returnCode)
 }
@@ -224,19 +224,19 @@ func (a *Application) AbortModal() {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("abortModal"))
 }
 
-// BeginModalSessionForWindow wraps the corresponding Objective-C method.
+// BeginModalSessionForWindow begins modal session for window.
 func (a *Application) BeginModalSessionForWindow(window *Window) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("beginModalSessionForWindow:"), objref.IDOf(window))
 	return obj.Wrap(_r)
 }
 
-// RunModalSession wraps the corresponding Objective-C method.
+// RunModalSession runs modal session.
 func (a *Application) RunModalSession(session obj.Object) int {
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("runModalSession:"), objref.IDOf(session))
 	return _r
 }
 
-// EndModalSession wraps the corresponding Objective-C method.
+// EndModalSession ends modal session.
 func (a *Application) EndModalSession(session obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("endModalSession:"), objref.IDOf(session))
 }
@@ -309,31 +309,31 @@ func (a *Application) OrderFrontCharacterPalette(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("orderFrontCharacterPalette:"), objref.IDOf(sender))
 }
 
-// MainWindow wraps the corresponding Objective-C method.
+// MainWindow returns the main window.
 func (a *Application) MainWindow() *Window {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("mainWindow"))
 	return WindowFromID(_r)
 }
 
-// KeyWindow wraps the corresponding Objective-C method.
+// KeyWindow returns the key window.
 func (a *Application) KeyWindow() *Window {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("keyWindow"))
 	return WindowFromID(_r)
 }
 
-// IsActive wraps the corresponding Objective-C method.
+// IsActive reports whether the object is active.
 func (a *Application) IsActive() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isActive"))
 	return _r
 }
 
-// IsHidden wraps the corresponding Objective-C method.
+// IsHidden reports whether the object is hidden.
 func (a *Application) IsHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isHidden"))
 	return _r
 }
 
-// IsRunning wraps the corresponding Objective-C method.
+// IsRunning reports whether the object is running.
 func (a *Application) IsRunning() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isRunning"))
 	return _r
@@ -345,13 +345,13 @@ func (a *Application) ApplicationShouldSuppressHighDynamicRangeContent() bool {
 	return _r
 }
 
-// ModalWindow wraps the corresponding Objective-C method.
+// ModalWindow returns the modal window.
 func (a *Application) ModalWindow() *Window {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("modalWindow"))
 	return WindowFromID(_r)
 }
 
-// Windows wraps the corresponding Objective-C method.
+// Windows returns the windows.
 //
 // Windows returns the collection as a Go slice.
 func (a *Application) Windows() []*Window {
@@ -359,7 +359,7 @@ func (a *Application) Windows() []*Window {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
 }
 
-// MainMenu wraps the corresponding Objective-C method.
+// MainMenu returns the main menu.
 func (a *Application) MainMenu() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("mainMenu"))
 	return MenuFromID(_r)
@@ -371,13 +371,13 @@ func (a *Application) HelpMenu() *Menu {
 	return MenuFromID(_r)
 }
 
-// ApplicationIconImage wraps the corresponding Objective-C method.
+// ApplicationIconImage returns the application icon image.
 func (a *Application) ApplicationIconImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("applicationIconImage"))
 	return ImageFromID(_r)
 }
 
-// DockTile wraps the corresponding Objective-C method.
+// DockTile returns the dock tile.
 func (a *Application) DockTile() *DockTile {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("dockTile"))
 	return DockTileFromID(_r)
@@ -389,31 +389,31 @@ func (a *Application) PresentationOptions() ApplicationPresentationOptions {
 	return _r
 }
 
-// CurrentSystemPresentationOptions wraps the corresponding Objective-C method.
+// CurrentSystemPresentationOptions returns the current system presentation options.
 func (a *Application) CurrentSystemPresentationOptions() ApplicationPresentationOptions {
 	_r := objc.Send[ApplicationPresentationOptions](objref.IDOf(a), objc.RegisterName("currentSystemPresentationOptions"))
 	return _r
 }
 
-// OcclusionState wraps the corresponding Objective-C method.
+// OcclusionState returns the occlusion state.
 func (a *Application) OcclusionState() ApplicationOcclusionState {
 	_r := objc.Send[ApplicationOcclusionState](objref.IDOf(a), objc.RegisterName("occlusionState"))
 	return _r
 }
 
-// IsProtectedDataAvailable wraps the corresponding Objective-C method.
+// IsProtectedDataAvailable reports whether the object is protected data available.
 func (a *Application) IsProtectedDataAvailable() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isProtectedDataAvailable"))
 	return _r
 }
 
-// Appearance wraps the corresponding Objective-C method.
+// Appearance returns the appearance.
 func (a *Application) Appearance() *Appearance {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("appearance"))
 	return AppearanceFromID(_r)
 }
 
-// EffectiveAppearance wraps the corresponding Objective-C method.
+// EffectiveAppearance returns the effective appearance.
 func (a *Application) EffectiveAppearance() *Appearance {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("effectiveAppearance"))
 	return AppearanceFromID(_r)
@@ -440,7 +440,7 @@ func (a *Application) DiscardEventsMatchingMaskBeforeEvent(mask EventMask, lastE
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("discardEventsMatchingMask:beforeEvent:"), mask, objref.IDOf(lastEvent))
 }
 
-// CurrentEvent wraps the corresponding Objective-C method.
+// CurrentEvent returns the current event.
 func (a *Application) CurrentEvent() *Event {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("currentEvent"))
 	return EventFromID(_r)
@@ -451,12 +451,12 @@ func (a *Application) ArrangeInFront(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("arrangeInFront:"), objref.IDOf(sender))
 }
 
-// RemoveWindowsItem wraps the corresponding Objective-C method.
+// RemoveWindowsItem removes windows item.
 func (a *Application) RemoveWindowsItem(win *Window) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeWindowsItem:"), objref.IDOf(win))
 }
 
-// AddWindowsItemTitleFilename wraps the corresponding Objective-C method.
+// AddWindowsItemTitleFilename adds windows item title filename.
 func (a *Application) AddWindowsItemTitleFilename(win *Window, string_ string, isFilename bool) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addWindowsItem:title:filename:"), objref.IDOf(win), purego.NSString(string_), isFilename)
 }
@@ -466,7 +466,7 @@ func (a *Application) ChangeWindowsItemTitleFilename(win *Window, string_ string
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("changeWindowsItem:title:filename:"), objref.IDOf(win), purego.NSString(string_), isFilename)
 }
 
-// UpdateWindowsItem wraps the corresponding Objective-C method.
+// UpdateWindowsItem updates windows item.
 func (a *Application) UpdateWindowsItem(win *Window) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("updateWindowsItem:"), objref.IDOf(win))
 }
@@ -476,7 +476,7 @@ func (a *Application) MiniaturizeAll(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("miniaturizeAll:"), objref.IDOf(sender))
 }
 
-// WindowsMenu wraps the corresponding Objective-C method.
+// WindowsMenu returns the windows menu.
 func (a *Application) WindowsMenu() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("windowsMenu"))
 	return MenuFromID(_r)
@@ -488,18 +488,18 @@ func (a *Application) IsFullKeyboardAccessEnabled() bool {
 	return _r
 }
 
-// RegisterServicesMenuSendTypesReturnTypes wraps the corresponding Objective-C method.
+// RegisterServicesMenuSendTypesReturnTypes registers services menu send types return types.
 func (a *Application) RegisterServicesMenuSendTypesReturnTypes(sendTypes []obj.Object, returnTypes []obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("registerServicesMenuSendTypes:returnTypes:"), purego.SliceToNSArray(sendTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(returnTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// ServicesMenu wraps the corresponding Objective-C method.
+// ServicesMenu returns the services menu.
 func (a *Application) ServicesMenu() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("servicesMenu"))
 	return MenuFromID(_r)
 }
 
-// ServicesProvider wraps the corresponding Objective-C method.
+// ServicesProvider returns the services provider.
 func (a *Application) ServicesProvider() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("servicesProvider"))
 	return obj.Wrap(_r)
@@ -515,7 +515,7 @@ func (a *Application) OrderFrontStandardAboutPanelWithOptions(optionsDictionary 
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("orderFrontStandardAboutPanelWithOptions:"), objref.IDOf(optionsDictionary))
 }
 
-// UserInterfaceLayoutDirection wraps the corresponding Objective-C method.
+// UserInterfaceLayoutDirection returns the user interface layout direction.
 func (a *Application) UserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
 	_r := objc.Send[UserInterfaceLayoutDirection](objref.IDOf(a), objc.RegisterName("userInterfaceLayoutDirection"))
 	return _r
@@ -546,13 +546,13 @@ func (a *Application) RegisterForRemoteNotificationTypes(types RemoteNotificatio
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("registerForRemoteNotificationTypes:"), types)
 }
 
-// IsRegisteredForRemoteNotifications wraps the corresponding Objective-C method.
+// IsRegisteredForRemoteNotifications reports whether the object is registered for remote notifications.
 func (a *Application) IsRegisteredForRemoteNotifications() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isRegisteredForRemoteNotifications"))
 	return _r
 }
 
-// EnabledRemoteNotificationTypes wraps the corresponding Objective-C method.
+// EnabledRemoteNotificationTypes returns the enabled remote notification types.
 func (a *Application) EnabledRemoteNotificationTypes() RemoteNotificationType {
 	_r := objc.Send[RemoteNotificationType](objref.IDOf(a), objc.RegisterName("enabledRemoteNotificationTypes"))
 	return _r
@@ -575,12 +575,12 @@ func (a *Application) ApplicationPrintFiles(sender *Application, filenames []str
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("application:printFiles:"), objref.IDOf(sender), purego.SliceToNSArray(filenames, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// EndSheet wraps the corresponding Objective-C method.
+// EndSheet ends sheet.
 func (a *Application) EndSheet(sheet *Window) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("endSheet:"), objref.IDOf(sheet))
 }
 
-// EndSheetReturnCode wraps the corresponding Objective-C method.
+// EndSheetReturnCode ends sheet return code.
 func (a *Application) EndSheetReturnCode(sheet *Window, returnCode int) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("endSheet:returnCode:"), objref.IDOf(sheet), returnCode)
 }
@@ -617,12 +617,12 @@ func (a *Application) OrderFrontColorPanel(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("orderFrontColorPanel:"), objref.IDOf(sender))
 }
 
-// RunPageLayout wraps the corresponding Objective-C method.
+// RunPageLayout runs page layout.
 func (a *Application) RunPageLayout(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("runPageLayout:"), objref.IDOf(sender))
 }
 
-// OrderedDocuments wraps the corresponding Objective-C method.
+// OrderedDocuments returns the ordered documents.
 //
 // OrderedDocuments returns the collection as a Go slice.
 func (a *Application) OrderedDocuments() []*Document {
@@ -630,7 +630,7 @@ func (a *Application) OrderedDocuments() []*Document {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Document { return DocumentFromID(_id) })
 }
 
-// OrderedWindows wraps the corresponding Objective-C method.
+// OrderedWindows returns the ordered windows.
 //
 // OrderedWindows returns the collection as a Go slice.
 func (a *Application) OrderedWindows() []*Window {

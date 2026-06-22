@@ -70,7 +70,7 @@ func NewMTRDoorLockClusterGetCredentialStatusParams() *MTRDoorLockClusterGetCred
 	return mTRDoorLockClusterGetCredentialStatusParamsAdopt(_id)
 }
 
-// WithCredential sets the property and returns the receiver so calls can be chained.
+// WithCredential sets the credential.
 func (mdlcgcsp *MTRDoorLockClusterGetCredentialStatusParams) WithCredential(credential MTRDoorLockClusterCredentialStructProvider) *MTRDoorLockClusterGetCredentialStatusParams {
 	objc.Send[objc.ID](objref.IDOf(mdlcgcsp), objc.RegisterName("setCredential:"), objref.IDOf(credential))
 	return mdlcgcsp
@@ -88,7 +88,7 @@ func (mdlcgcsp *MTRDoorLockClusterGetCredentialStatusParams) WithServerSideProce
 	return mdlcgcsp
 }
 
-// Credential wraps the corresponding Objective-C method.
+// Credential returns the credential.
 func (mdlcgcsp *MTRDoorLockClusterGetCredentialStatusParams) Credential() *MTRDoorLockClusterCredentialStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(mdlcgcsp), objc.RegisterName("credential"))
 	return MTRDoorLockClusterCredentialStructFromID(_r)

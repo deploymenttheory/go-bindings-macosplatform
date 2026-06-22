@@ -50,13 +50,13 @@ func NewShareablePassMetadataPreviewWithTemplateIdentifier(templateIdentifier st
 	return shareablePassMetadataPreviewAdopt(_id)
 }
 
-// WithOwnerDisplayName sets the property and returns the receiver so calls can be chained.
+// WithOwnerDisplayName sets the owner display name.
 func (spmp *ShareablePassMetadataPreview) WithOwnerDisplayName(ownerDisplayName string) *ShareablePassMetadataPreview {
 	objc.Send[objc.ID](objref.IDOf(spmp), objc.RegisterName("setOwnerDisplayName:"), purego.NSString(ownerDisplayName))
 	return spmp
 }
 
-// OwnerDisplayName wraps the corresponding Objective-C method.
+// OwnerDisplayName returns the owner display name.
 func (spmp *ShareablePassMetadataPreview) OwnerDisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(spmp), objc.RegisterName("ownerDisplayName"))
 	if _r == 0 {
@@ -65,7 +65,7 @@ func (spmp *ShareablePassMetadataPreview) OwnerDisplayName() string {
 	return purego.GoString(_r)
 }
 
-// ProvisioningTemplateIdentifier wraps the corresponding Objective-C method.
+// ProvisioningTemplateIdentifier returns the provisioning template identifier.
 func (spmp *ShareablePassMetadataPreview) ProvisioningTemplateIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(spmp), objc.RegisterName("provisioningTemplateIdentifier"))
 	if _r == 0 {

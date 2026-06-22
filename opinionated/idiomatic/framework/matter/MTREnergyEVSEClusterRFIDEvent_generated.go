@@ -70,13 +70,13 @@ func NewMTREnergyEVSEClusterRFIDEvent() *MTREnergyEVSEClusterRFIDEvent {
 	return mTREnergyEVSEClusterRFIDEventAdopt(_id)
 }
 
-// WithUID sets the property and returns the receiver so calls can be chained.
+// WithUID sets the UID.
 func (meecre *MTREnergyEVSEClusterRFIDEvent) WithUID(uid obj.Object) *MTREnergyEVSEClusterRFIDEvent {
 	objc.Send[objc.ID](objref.IDOf(meecre), objc.RegisterName("setUid:"), objref.IDOf(uid))
 	return meecre
 }
 
-// UID wraps the corresponding Objective-C method.
+// UID returns the UID.
 func (meecre *MTREnergyEVSEClusterRFIDEvent) UID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(meecre), objc.RegisterName("uid"))
 	return obj.Wrap(_r)

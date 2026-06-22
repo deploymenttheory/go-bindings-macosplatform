@@ -164,7 +164,7 @@ func (rtr *RecognizeTextRequest) AutomaticallyDetectsLanguage() bool {
 	return _r
 }
 
-// MinimumTextHeight wraps the corresponding Objective-C method.
+// MinimumTextHeight returns the minimum text height.
 func (rtr *RecognizeTextRequest) MinimumTextHeight() float32 {
 	_r := objc.Send[float32](objref.IDOf(rtr), objc.RegisterName("minimumTextHeight"))
 	return _r

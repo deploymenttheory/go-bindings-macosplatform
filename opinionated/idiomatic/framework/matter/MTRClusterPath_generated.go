@@ -66,13 +66,13 @@ func (mcp *MTRClusterPath) String() string {
 	return rt.Description(objref.IDOf(mcp))
 }
 
-// Endpoint wraps the corresponding Objective-C method.
+// Endpoint returns the endpoint.
 func (mcp *MTRClusterPath) Endpoint() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
 }
 
-// Cluster wraps the corresponding Objective-C method.
+// Cluster returns the cluster.
 func (mcp *MTRClusterPath) Cluster() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcp), objc.RegisterName("cluster"))
 	return obj.Wrap(_r)

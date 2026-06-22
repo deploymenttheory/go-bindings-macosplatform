@@ -72,7 +72,7 @@ func NewStorefront() *Storefront {
 	return storefrontAdopt(_id)
 }
 
-// CountryCode wraps the corresponding Objective-C method.
+// CountryCode returns the country code.
 func (s *Storefront) CountryCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("countryCode"))
 	if _r == 0 {
@@ -81,7 +81,7 @@ func (s *Storefront) CountryCode() string {
 	return purego.GoString(_r)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (s *Storefront) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("identifier"))
 	if _r == 0 {

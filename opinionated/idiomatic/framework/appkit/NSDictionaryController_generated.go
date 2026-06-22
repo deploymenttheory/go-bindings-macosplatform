@@ -193,7 +193,7 @@ func (dc *DictionaryController) WithUsesLazyFetching(usesLazyFetching bool) *Dic
 	return dc
 }
 
-// IncludedKeys wraps the corresponding Objective-C method.
+// IncludedKeys returns the included keys.
 //
 // IncludedKeys returns the collection as a Go slice.
 func (dc *DictionaryController) IncludedKeys() []string {
@@ -201,7 +201,7 @@ func (dc *DictionaryController) IncludedKeys() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ExcludedKeys wraps the corresponding Objective-C method.
+// ExcludedKeys returns the excluded keys.
 //
 // ExcludedKeys returns the collection as a Go slice.
 func (dc *DictionaryController) ExcludedKeys() []string {
@@ -209,13 +209,13 @@ func (dc *DictionaryController) ExcludedKeys() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// LocalizedKeyDictionary wraps the corresponding Objective-C method.
+// LocalizedKeyDictionary returns the localized key dictionary.
 func (dc *DictionaryController) LocalizedKeyDictionary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("localizedKeyDictionary"))
 	return obj.Wrap(_r)
 }
 
-// LocalizedKeyTable wraps the corresponding Objective-C method.
+// LocalizedKeyTable returns the localized key table.
 func (dc *DictionaryController) LocalizedKeyTable() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("localizedKeyTable"))
 	if _r == 0 {

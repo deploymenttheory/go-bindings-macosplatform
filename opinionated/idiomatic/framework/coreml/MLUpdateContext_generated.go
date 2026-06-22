@@ -72,31 +72,31 @@ func NewUpdateContext() *UpdateContext {
 	return updateContextAdopt(_id)
 }
 
-// Task wraps the corresponding Objective-C method.
+// Task returns the task.
 func (uc *UpdateContext) Task() *UpdateTask {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("task"))
 	return UpdateTaskFromID(_r)
 }
 
-// Model wraps the corresponding Objective-C method.
+// Model returns the model.
 func (uc *UpdateContext) Model() *Model {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("model"))
 	return ModelFromID(_r)
 }
 
-// Event wraps the corresponding Objective-C method.
+// Event returns the event.
 func (uc *UpdateContext) Event() UpdateProgressEvent {
 	_r := objc.Send[UpdateProgressEvent](objref.IDOf(uc), objc.RegisterName("event"))
 	return _r
 }
 
-// Metrics wraps the corresponding Objective-C method.
+// Metrics returns the metrics.
 func (uc *UpdateContext) Metrics() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("metrics"))
 	return obj.Wrap(_r)
 }
 
-// Parameters wraps the corresponding Objective-C method.
+// Parameters returns the parameters.
 func (uc *UpdateContext) Parameters() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("parameters"))
 	return obj.Wrap(_r)

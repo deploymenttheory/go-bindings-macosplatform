@@ -86,7 +86,7 @@ func (mbcac *MTRBaseClusterAccessControl) ReviewFabricRestrictionsWithParamsComp
 	}
 }
 
-// ReadAttributeACLWithParamsCompletion wraps the corresponding Objective-C method.
+// ReadAttributeACLWithParamsCompletion reads attribute ACL with params completion.
 //
 // ReadAttributeACLWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeACLWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
@@ -136,7 +136,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeACLWithParamsSubscri
 	}
 }
 
-// ReadAttributeExtensionWithParamsCompletion wraps the corresponding Objective-C method.
+// ReadAttributeExtensionWithParamsCompletion reads attribute extension with params completion.
 //
 // ReadAttributeExtensionWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeExtensionWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
@@ -186,7 +186,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeExtensionWithParamsS
 	}
 }
 
-// ReadAttributeSubjectsPerAccessControlEntryWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSubjectsPerAccessControlEntryWithCompletion reads attribute subjects per access control entry with completion.
 //
 // ReadAttributeSubjectsPerAccessControlEntryWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeSubjectsPerAccessControlEntryWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -236,7 +236,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeSubjectsPerAccessCon
 	}
 }
 
-// ReadAttributeTargetsPerAccessControlEntryWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTargetsPerAccessControlEntryWithCompletion reads attribute targets per access control entry with completion.
 //
 // ReadAttributeTargetsPerAccessControlEntryWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeTargetsPerAccessControlEntryWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -286,7 +286,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeTargetsPerAccessCont
 	}
 }
 
-// ReadAttributeAccessControlEntriesPerFabricWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAccessControlEntriesPerFabricWithCompletion reads attribute access control entries per fabric with completion.
 //
 // ReadAttributeAccessControlEntriesPerFabricWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeAccessControlEntriesPerFabricWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -336,7 +336,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeAccessControlEntries
 	}
 }
 
-// ReadAttributeCommissioningARLWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCommissioningARLWithCompletion reads attribute commissioning arl with completion.
 //
 // ReadAttributeCommissioningARLWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeCommissioningARLWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -386,7 +386,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeCommissioningARLWith
 	}
 }
 
-// ReadAttributeARLWithParamsCompletion wraps the corresponding Objective-C method.
+// ReadAttributeARLWithParamsCompletion reads attribute arl with params completion.
 //
 // ReadAttributeARLWithParamsCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeARLWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
@@ -436,7 +436,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeARLWithParamsSubscri
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -486,7 +486,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeGeneratedCommandList
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -536,7 +536,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeAcceptedCommandListW
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -586,7 +586,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeAttributeListWithPar
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -636,7 +636,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeFeatureMapWithParams
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -686,7 +686,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeClusterRevisionWithP
 	}
 }
 
-// ReadAttributeACLWithParams wraps the corresponding Objective-C method.
+// ReadAttributeACLWithParams reads attribute ACL with params.
 //
 // ReadAttributeACLWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeACLWithParams(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
@@ -736,7 +736,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeACLWithMinIntervalMa
 	}
 }
 
-// ReadAttributeExtensionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeExtensionWithParams reads attribute extension with params.
 //
 // ReadAttributeExtensionWithParams blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeExtensionWithParams(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
@@ -786,7 +786,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeExtensionWithMinInte
 	}
 }
 
-// ReadAttributeSubjectsPerAccessControlEntry wraps the corresponding Objective-C method.
+// ReadAttributeSubjectsPerAccessControlEntry reads attribute subjects per access control entry.
 //
 // ReadAttributeSubjectsPerAccessControlEntry blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeSubjectsPerAccessControlEntry(ctx context.Context) (result obj.Object, err error) {
@@ -836,7 +836,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeSubjectsPerAccessCon
 	}
 }
 
-// ReadAttributeTargetsPerAccessControlEntry wraps the corresponding Objective-C method.
+// ReadAttributeTargetsPerAccessControlEntry reads attribute targets per access control entry.
 //
 // ReadAttributeTargetsPerAccessControlEntry blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeTargetsPerAccessControlEntry(ctx context.Context) (result obj.Object, err error) {
@@ -886,7 +886,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeTargetsPerAccessCont
 	}
 }
 
-// ReadAttributeAccessControlEntriesPerFabric wraps the corresponding Objective-C method.
+// ReadAttributeAccessControlEntriesPerFabric reads attribute access control entries per fabric.
 //
 // ReadAttributeAccessControlEntriesPerFabric blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeAccessControlEntriesPerFabric(ctx context.Context) (result obj.Object, err error) {
@@ -936,7 +936,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeAccessControlEntries
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -986,7 +986,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeGeneratedCommandList
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1036,7 +1036,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeAcceptedCommandListW
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -1086,7 +1086,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeAttributeListWithMin
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -1136,7 +1136,7 @@ func (mbcac *MTRBaseClusterAccessControl) SubscribeAttributeFeatureMapWithMinInt
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcac *MTRBaseClusterAccessControl) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

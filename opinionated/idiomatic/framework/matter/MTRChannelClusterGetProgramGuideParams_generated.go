@@ -70,31 +70,31 @@ func NewMTRChannelClusterGetProgramGuideParams() *MTRChannelClusterGetProgramGui
 	return mTRChannelClusterGetProgramGuideParamsAdopt(_id)
 }
 
-// WithStartTime sets the property and returns the receiver so calls can be chained.
+// WithStartTime sets the start time.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithStartTime(startTime obj.Object) *MTRChannelClusterGetProgramGuideParams {
 	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return mccgpgp
 }
 
-// WithEndTime sets the property and returns the receiver so calls can be chained.
+// WithEndTime sets the end time.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithEndTime(endTime obj.Object) *MTRChannelClusterGetProgramGuideParams {
 	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setEndTime:"), objref.IDOf(endTime))
 	return mccgpgp
 }
 
-// WithPageToken sets the property and returns the receiver so calls can be chained.
+// WithPageToken sets the page token.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithPageToken(pageToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterGetProgramGuideParams {
 	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setPageToken:"), objref.IDOf(pageToken))
 	return mccgpgp
 }
 
-// WithRecordingFlag sets the property and returns the receiver so calls can be chained.
+// WithRecordingFlag sets the recording flag.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithRecordingFlag(recordingFlag obj.Object) *MTRChannelClusterGetProgramGuideParams {
 	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setRecordingFlag:"), objref.IDOf(recordingFlag))
 	return mccgpgp
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithData(data obj.Object) *MTRChannelClusterGetProgramGuideParams {
 	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setData:"), objref.IDOf(data))
 	return mccgpgp
@@ -112,19 +112,19 @@ func (mccgpgp *MTRChannelClusterGetProgramGuideParams) WithServerSideProcessingT
 	return mccgpgp
 }
 
-// StartTime wraps the corresponding Objective-C method.
+// StartTime returns the start time.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) StartTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("startTime"))
 	return obj.Wrap(_r)
 }
 
-// EndTime wraps the corresponding Objective-C method.
+// EndTime returns the end time.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) EndTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("endTime"))
 	return obj.Wrap(_r)
 }
 
-// ChannelList wraps the corresponding Objective-C method.
+// ChannelList returns the channel list.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) ChannelList() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("channelList"))
 	return obj.Wrap(_r)
@@ -135,19 +135,19 @@ func (mccgpgp *MTRChannelClusterGetProgramGuideParams) SetChannelList(channelLis
 	objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("setChannelList:"), objref.IDOf(channelList))
 }
 
-// PageToken wraps the corresponding Objective-C method.
+// PageToken returns the page token.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) PageToken() *MTRChannelClusterPageTokenStruct {
 	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("pageToken"))
 	return MTRChannelClusterPageTokenStructFromID(_r)
 }
 
-// RecordingFlag wraps the corresponding Objective-C method.
+// RecordingFlag returns the recording flag.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) RecordingFlag() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("recordingFlag"))
 	return obj.Wrap(_r)
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (mccgpgp *MTRChannelClusterGetProgramGuideParams) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccgpgp), objc.RegisterName("data"))
 	return obj.Wrap(_r)

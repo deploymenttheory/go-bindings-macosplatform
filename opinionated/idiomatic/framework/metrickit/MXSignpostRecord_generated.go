@@ -93,7 +93,7 @@ func (sr *SignpostRecord) Subsystem() string {
 	return purego.GoString(_r)
 }
 
-// Category wraps the corresponding Objective-C method.
+// Category returns the category.
 func (sr *SignpostRecord) Category() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("category"))
 	if _r == 0 {
@@ -102,7 +102,7 @@ func (sr *SignpostRecord) Category() string {
 	return purego.GoString(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (sr *SignpostRecord) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("name"))
 	if _r == 0 {
@@ -111,25 +111,25 @@ func (sr *SignpostRecord) Name() string {
 	return purego.GoString(_r)
 }
 
-// BeginTimeStamp wraps the corresponding Objective-C method.
+// BeginTimeStamp returns the begin time stamp.
 func (sr *SignpostRecord) BeginTimeStamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("beginTimeStamp"))
 	return obj.Wrap(_r)
 }
 
-// EndTimeStamp wraps the corresponding Objective-C method.
+// EndTimeStamp returns the end time stamp.
 func (sr *SignpostRecord) EndTimeStamp() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("endTimeStamp"))
 	return obj.Wrap(_r)
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (sr *SignpostRecord) Duration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sr), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
 
-// IsInterval wraps the corresponding Objective-C method.
+// IsInterval reports whether the object is interval.
 func (sr *SignpostRecord) IsInterval() bool {
 	_r := objc.Send[bool](objref.IDOf(sr), objc.RegisterName("isInterval"))
 	return _r

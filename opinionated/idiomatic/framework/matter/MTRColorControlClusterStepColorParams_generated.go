@@ -70,31 +70,31 @@ func NewMTRColorControlClusterStepColorParams() *MTRColorControlClusterStepColor
 	return mTRColorControlClusterStepColorParamsAdopt(_id)
 }
 
-// WithStepX sets the property and returns the receiver so calls can be chained.
+// WithStepX sets the step x.
 func (mcccscp *MTRColorControlClusterStepColorParams) WithStepX(stepX obj.Object) *MTRColorControlClusterStepColorParams {
 	objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("setStepX:"), objref.IDOf(stepX))
 	return mcccscp
 }
 
-// WithStepY sets the property and returns the receiver so calls can be chained.
+// WithStepY sets the step y.
 func (mcccscp *MTRColorControlClusterStepColorParams) WithStepY(stepY obj.Object) *MTRColorControlClusterStepColorParams {
 	objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("setStepY:"), objref.IDOf(stepY))
 	return mcccscp
 }
 
-// WithTransitionTime sets the property and returns the receiver so calls can be chained.
+// WithTransitionTime sets the transition time.
 func (mcccscp *MTRColorControlClusterStepColorParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterStepColorParams {
 	objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return mcccscp
 }
 
-// WithOptionsMask sets the property and returns the receiver so calls can be chained.
+// WithOptionsMask sets the options mask.
 func (mcccscp *MTRColorControlClusterStepColorParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterStepColorParams {
 	objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mcccscp
 }
 
-// WithOptionsOverride sets the property and returns the receiver so calls can be chained.
+// WithOptionsOverride sets the options override.
 func (mcccscp *MTRColorControlClusterStepColorParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterStepColorParams {
 	objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mcccscp
@@ -112,31 +112,31 @@ func (mcccscp *MTRColorControlClusterStepColorParams) WithServerSideProcessingTi
 	return mcccscp
 }
 
-// StepX wraps the corresponding Objective-C method.
+// StepX returns the step x.
 func (mcccscp *MTRColorControlClusterStepColorParams) StepX() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("stepX"))
 	return obj.Wrap(_r)
 }
 
-// StepY wraps the corresponding Objective-C method.
+// StepY returns the step y.
 func (mcccscp *MTRColorControlClusterStepColorParams) StepY() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("stepY"))
 	return obj.Wrap(_r)
 }
 
-// TransitionTime wraps the corresponding Objective-C method.
+// TransitionTime returns the transition time.
 func (mcccscp *MTRColorControlClusterStepColorParams) TransitionTime() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)
 }
 
-// OptionsMask wraps the corresponding Objective-C method.
+// OptionsMask returns the options mask.
 func (mcccscp *MTRColorControlClusterStepColorParams) OptionsMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
 }
 
-// OptionsOverride wraps the corresponding Objective-C method.
+// OptionsOverride returns the options override.
 func (mcccscp *MTRColorControlClusterStepColorParams) OptionsOverride() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccscp), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)

@@ -70,25 +70,25 @@ func NewMTRLaundryWasherModeClusterModeTagStruct() *MTRLaundryWasherModeClusterM
 	return mTRLaundryWasherModeClusterModeTagStructAdopt(_id)
 }
 
-// WithMfgCode sets the property and returns the receiver so calls can be chained.
+// WithMfgCode sets the mfg code.
 func (mlwmcmts *MTRLaundryWasherModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRLaundryWasherModeClusterModeTagStruct {
 	objc.Send[objc.ID](objref.IDOf(mlwmcmts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 	return mlwmcmts
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mlwmcmts *MTRLaundryWasherModeClusterModeTagStruct) WithValue(value obj.Object) *MTRLaundryWasherModeClusterModeTagStruct {
 	objc.Send[objc.ID](objref.IDOf(mlwmcmts), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mlwmcmts
 }
 
-// MfgCode wraps the corresponding Objective-C method.
+// MfgCode returns the mfg code.
 func (mlwmcmts *MTRLaundryWasherModeClusterModeTagStruct) MfgCode() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlwmcmts), objc.RegisterName("mfgCode"))
 	return obj.Wrap(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mlwmcmts *MTRLaundryWasherModeClusterModeTagStruct) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mlwmcmts), objc.RegisterName("value"))
 	return obj.Wrap(_r)

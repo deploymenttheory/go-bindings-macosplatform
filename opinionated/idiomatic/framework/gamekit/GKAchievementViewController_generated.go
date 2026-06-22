@@ -51,25 +51,25 @@ func NewAchievementViewController() *AchievementViewController {
 	return achievementViewControllerAdopt(_id)
 }
 
-// WithViewState sets the property and returns the receiver so calls can be chained.
+// WithViewState sets the view state.
 func (avc *AchievementViewController) WithViewState(viewState GameCenterViewControllerState) *AchievementViewController {
 	objc.Send[objc.ID](objref.IDOf(avc), objc.RegisterName("setViewState:"), viewState)
 	return avc
 }
 
-// WithLeaderboardTimeScope sets the property and returns the receiver so calls can be chained.
+// WithLeaderboardTimeScope sets the leaderboard time scope.
 func (avc *AchievementViewController) WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *AchievementViewController {
 	objc.Send[objc.ID](objref.IDOf(avc), objc.RegisterName("setLeaderboardTimeScope:"), leaderboardTimeScope)
 	return avc
 }
 
-// WithLeaderboardIdentifier sets the property and returns the receiver so calls can be chained.
+// WithLeaderboardIdentifier sets the leaderboard identifier.
 func (avc *AchievementViewController) WithLeaderboardIdentifier(leaderboardIdentifier string) *AchievementViewController {
 	objc.Send[objc.ID](objref.IDOf(avc), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
 	return avc
 }
 
-// WithLeaderboardCategory sets the property and returns the receiver so calls can be chained.
+// WithLeaderboardCategory sets the leaderboard category.
 func (avc *AchievementViewController) WithLeaderboardCategory(leaderboardCategory string) *AchievementViewController {
 	objc.Send[objc.ID](objref.IDOf(avc), objc.RegisterName("setLeaderboardCategory:"), purego.NSString(leaderboardCategory))
 	return avc

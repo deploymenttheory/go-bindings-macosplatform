@@ -130,31 +130,31 @@ func (cgr *ClickGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents
 	return cgr
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (cgr *ClickGestureRecognizer) WithName(name string) *ClickGestureRecognizer {
 	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setName:"), purego.NSString(name))
 	return cgr
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (cgr *ClickGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ClickGestureRecognizer {
 	objc.Send[objc.ID](objref.IDOf(cgr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return cgr
 }
 
-// ButtonMask wraps the corresponding Objective-C method.
+// ButtonMask returns the button mask.
 func (cgr *ClickGestureRecognizer) ButtonMask() int {
 	_r := objc.Send[int](objref.IDOf(cgr), objc.RegisterName("buttonMask"))
 	return _r
 }
 
-// NumberOfClicksRequired wraps the corresponding Objective-C method.
+// NumberOfClicksRequired returns the number of clicks required.
 func (cgr *ClickGestureRecognizer) NumberOfClicksRequired() int {
 	_r := objc.Send[int](objref.IDOf(cgr), objc.RegisterName("numberOfClicksRequired"))
 	return _r
 }
 
-// NumberOfTouchesRequired wraps the corresponding Objective-C method.
+// NumberOfTouchesRequired returns the number of touches required.
 func (cgr *ClickGestureRecognizer) NumberOfTouchesRequired() int {
 	_r := objc.Send[int](objref.IDOf(cgr), objc.RegisterName("numberOfTouchesRequired"))
 	return _r

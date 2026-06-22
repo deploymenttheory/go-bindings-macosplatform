@@ -66,7 +66,7 @@ func (mutctsarp *MTRUnitTestingClusterTestSimpleArgumentRequestParams) String() 
 	return rt.Description(objref.IDOf(mutctsarp))
 }
 
-// WithArg1 sets the property and returns the receiver so calls can be chained.
+// WithArg1 sets the arg1.
 func (mutctsarp *MTRUnitTestingClusterTestSimpleArgumentRequestParams) WithArg1(arg1 obj.Object) *MTRUnitTestingClusterTestSimpleArgumentRequestParams {
 	objc.Send[objc.ID](objref.IDOf(mutctsarp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return mutctsarp
@@ -84,7 +84,7 @@ func (mutctsarp *MTRUnitTestingClusterTestSimpleArgumentRequestParams) WithServe
 	return mutctsarp
 }
 
-// Arg1 wraps the corresponding Objective-C method.
+// Arg1 returns the arg1.
 func (mutctsarp *MTRUnitTestingClusterTestSimpleArgumentRequestParams) Arg1() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctsarp), objc.RegisterName("arg1"))
 	return obj.Wrap(_r)

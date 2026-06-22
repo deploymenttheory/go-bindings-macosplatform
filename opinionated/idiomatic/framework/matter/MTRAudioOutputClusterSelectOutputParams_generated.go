@@ -70,7 +70,7 @@ func NewMTRAudioOutputClusterSelectOutputParams() *MTRAudioOutputClusterSelectOu
 	return mTRAudioOutputClusterSelectOutputParamsAdopt(_id)
 }
 
-// WithIndex sets the property and returns the receiver so calls can be chained.
+// WithIndex sets the index.
 func (maocsop *MTRAudioOutputClusterSelectOutputParams) WithIndex(index obj.Object) *MTRAudioOutputClusterSelectOutputParams {
 	objc.Send[objc.ID](objref.IDOf(maocsop), objc.RegisterName("setIndex:"), objref.IDOf(index))
 	return maocsop
@@ -88,7 +88,7 @@ func (maocsop *MTRAudioOutputClusterSelectOutputParams) WithServerSideProcessing
 	return maocsop
 }
 
-// Index wraps the corresponding Objective-C method.
+// Index returns the index.
 func (maocsop *MTRAudioOutputClusterSelectOutputParams) Index() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maocsop), objc.RegisterName("index"))
 	return obj.Wrap(_r)

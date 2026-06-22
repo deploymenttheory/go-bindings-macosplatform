@@ -136,7 +136,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) PayloadTestRequestWithParamsCompl
 	}
 }
 
-// ReadAttributeNetworkInterfacesWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeNetworkInterfacesWithCompletion reads attribute network interfaces with completion.
 //
 // ReadAttributeNetworkInterfacesWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeNetworkInterfacesWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -186,7 +186,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeNetworkInterfac
 	}
 }
 
-// ReadAttributeRebootCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeRebootCountWithCompletion reads attribute reboot count with completion.
 //
 // ReadAttributeRebootCountWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeRebootCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -236,7 +236,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeRebootCountWith
 	}
 }
 
-// ReadAttributeUpTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUpTimeWithCompletion reads attribute up time with completion.
 //
 // ReadAttributeUpTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeUpTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -286,7 +286,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeUpTimeWithParam
 	}
 }
 
-// ReadAttributeTotalOperationalHoursWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTotalOperationalHoursWithCompletion reads attribute total operational hours with completion.
 //
 // ReadAttributeTotalOperationalHoursWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeTotalOperationalHoursWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -336,7 +336,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeTotalOperationa
 	}
 }
 
-// ReadAttributeBootReasonWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeBootReasonWithCompletion reads attribute boot reason with completion.
 //
 // ReadAttributeBootReasonWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeBootReasonWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -386,7 +386,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeBootReasonWithP
 	}
 }
 
-// ReadAttributeActiveHardwareFaultsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActiveHardwareFaultsWithCompletion reads attribute active hardware faults with completion.
 //
 // ReadAttributeActiveHardwareFaultsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeActiveHardwareFaultsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -436,7 +436,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeActiveHardwareF
 	}
 }
 
-// ReadAttributeActiveRadioFaultsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActiveRadioFaultsWithCompletion reads attribute active radio faults with completion.
 //
 // ReadAttributeActiveRadioFaultsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeActiveRadioFaultsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -486,7 +486,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeActiveRadioFaul
 	}
 }
 
-// ReadAttributeActiveNetworkFaultsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeActiveNetworkFaultsWithCompletion reads attribute active network faults with completion.
 //
 // ReadAttributeActiveNetworkFaultsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeActiveNetworkFaultsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -536,7 +536,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeActiveNetworkFa
 	}
 }
 
-// ReadAttributeTestEventTriggersEnabledWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeTestEventTriggersEnabledWithCompletion reads attribute test event triggers enabled with completion.
 //
 // ReadAttributeTestEventTriggersEnabledWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeTestEventTriggersEnabledWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -586,7 +586,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeTestEventTrigge
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -636,7 +636,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeGeneratedComman
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -686,7 +686,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeAcceptedCommand
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -736,7 +736,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeAttributeListWi
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -786,7 +786,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeFeatureMapWithP
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -836,7 +836,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeClusterRevision
 	}
 }
 
-// ReadAttributeNetworkInterfaces wraps the corresponding Objective-C method.
+// ReadAttributeNetworkInterfaces reads attribute network interfaces.
 //
 // ReadAttributeNetworkInterfaces blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeNetworkInterfaces(ctx context.Context) (result obj.Object, err error) {
@@ -886,7 +886,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeNetworkInterfac
 	}
 }
 
-// ReadAttributeRebootCount wraps the corresponding Objective-C method.
+// ReadAttributeRebootCount reads attribute reboot count.
 //
 // ReadAttributeRebootCount blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeRebootCount(ctx context.Context) (result obj.Object, err error) {
@@ -936,7 +936,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeRebootCountWith
 	}
 }
 
-// ReadAttributeUpTime wraps the corresponding Objective-C method.
+// ReadAttributeUpTime reads attribute up time.
 //
 // ReadAttributeUpTime blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeUpTime(ctx context.Context) (result obj.Object, err error) {
@@ -986,7 +986,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeUpTimeWithMinIn
 	}
 }
 
-// ReadAttributeTotalOperationalHours wraps the corresponding Objective-C method.
+// ReadAttributeTotalOperationalHours reads attribute total operational hours.
 //
 // ReadAttributeTotalOperationalHours blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeTotalOperationalHours(ctx context.Context) (result obj.Object, err error) {
@@ -1036,7 +1036,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeTotalOperationa
 	}
 }
 
-// ReadAttributeBootReasons wraps the corresponding Objective-C method.
+// ReadAttributeBootReasons reads attribute boot reasons.
 //
 // ReadAttributeBootReasons blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeBootReasons(ctx context.Context) (result obj.Object, err error) {
@@ -1086,7 +1086,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeBootReasonsWith
 	}
 }
 
-// ReadAttributeActiveHardwareFaults wraps the corresponding Objective-C method.
+// ReadAttributeActiveHardwareFaults reads attribute active hardware faults.
 //
 // ReadAttributeActiveHardwareFaults blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeActiveHardwareFaults(ctx context.Context) (result obj.Object, err error) {
@@ -1136,7 +1136,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeActiveHardwareF
 	}
 }
 
-// ReadAttributeActiveRadioFaults wraps the corresponding Objective-C method.
+// ReadAttributeActiveRadioFaults reads attribute active radio faults.
 //
 // ReadAttributeActiveRadioFaults blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeActiveRadioFaults(ctx context.Context) (result obj.Object, err error) {
@@ -1186,7 +1186,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeActiveRadioFaul
 	}
 }
 
-// ReadAttributeActiveNetworkFaults wraps the corresponding Objective-C method.
+// ReadAttributeActiveNetworkFaults reads attribute active network faults.
 //
 // ReadAttributeActiveNetworkFaults blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeActiveNetworkFaults(ctx context.Context) (result obj.Object, err error) {
@@ -1236,7 +1236,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeActiveNetworkFa
 	}
 }
 
-// ReadAttributeTestEventTriggersEnabled wraps the corresponding Objective-C method.
+// ReadAttributeTestEventTriggersEnabled reads attribute test event triggers enabled.
 //
 // ReadAttributeTestEventTriggersEnabled blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeTestEventTriggersEnabled(ctx context.Context) (result obj.Object, err error) {
@@ -1286,7 +1286,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeTestEventTrigge
 	}
 }
 
-// ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandList reads attribute generated command list.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1336,7 +1336,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeGeneratedComman
 	}
 }
 
-// ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandList reads attribute accepted command list.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
@@ -1386,7 +1386,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeAcceptedCommand
 	}
 }
 
-// ReadAttributeAttributeList wraps the corresponding Objective-C method.
+// ReadAttributeAttributeList reads attribute attribute list.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
@@ -1436,7 +1436,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeAttributeListWi
 	}
 }
 
-// ReadAttributeFeatureMap wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMap reads attribute feature map.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
@@ -1486,7 +1486,7 @@ func (mbcgd *MTRBaseClusterGeneralDiagnostics) SubscribeAttributeFeatureMapWithM
 	}
 }
 
-// ReadAttributeClusterRevision wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevision reads attribute cluster revision.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
 func (mbcgd *MTRBaseClusterGeneralDiagnostics) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {

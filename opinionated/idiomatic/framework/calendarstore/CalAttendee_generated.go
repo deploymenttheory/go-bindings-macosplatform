@@ -70,13 +70,13 @@ func NewCalAttendee() *CalAttendee {
 	return calAttendeeAdopt(_id)
 }
 
-// Address wraps the corresponding Objective-C method.
+// Address returns the address.
 func (ca *CalAttendee) Address() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("address"))
 	return obj.Wrap(_r)
 }
 
-// CommonName wraps the corresponding Objective-C method.
+// CommonName returns the common name.
 func (ca *CalAttendee) CommonName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("commonName"))
 	if _r == 0 {
@@ -85,7 +85,7 @@ func (ca *CalAttendee) CommonName() string {
 	return purego.GoString(_r)
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (ca *CalAttendee) Status() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("status"))
 	if _r == 0 {

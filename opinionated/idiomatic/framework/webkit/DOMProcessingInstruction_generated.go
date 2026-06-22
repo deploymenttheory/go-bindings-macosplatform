@@ -49,31 +49,31 @@ func NewDOMProcessingInstruction() *DOMProcessingInstruction {
 	return dOMProcessingInstructionAdopt(_id)
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (dpi *DOMProcessingInstruction) WithData(data string) *DOMProcessingInstruction {
 	objc.Send[objc.ID](objref.IDOf(dpi), objc.RegisterName("setData:"), purego.NSString(data))
 	return dpi
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dpi *DOMProcessingInstruction) WithNodeValue(nodeValue string) *DOMProcessingInstruction {
 	objc.Send[objc.ID](objref.IDOf(dpi), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dpi
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dpi *DOMProcessingInstruction) WithPrefix(prefix string) *DOMProcessingInstruction {
 	objc.Send[objc.ID](objref.IDOf(dpi), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dpi
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dpi *DOMProcessingInstruction) WithTextContent(textContent string) *DOMProcessingInstruction {
 	objc.Send[objc.ID](objref.IDOf(dpi), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dpi
 }
 
-// Target wraps the corresponding Objective-C method.
+// Target returns the target.
 func (dpi *DOMProcessingInstruction) Target() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dpi), objc.RegisterName("target"))
 	if _r == 0 {

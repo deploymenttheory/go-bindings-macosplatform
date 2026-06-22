@@ -66,7 +66,7 @@ func (mc *MTRCluster) String() string {
 	return rt.Description(objref.IDOf(mc))
 }
 
-// EndpointID wraps the corresponding Objective-C method.
+// EndpointID returns the endpoint ID.
 func (mc *MTRCluster) EndpointID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("endpointID"))
 	return obj.Wrap(_r)

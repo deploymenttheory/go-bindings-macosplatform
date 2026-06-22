@@ -187,25 +187,25 @@ func (gl *GradientLayer) WithContentsFormat(contentsFormat obj.Object) *Gradient
 	return gl
 }
 
-// WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeContent sets the wants extended dynamic range content.
 func (gl *GradientLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
 	return gl
 }
 
-// WithToneMapMode sets the property and returns the receiver so calls can be chained.
+// WithToneMapMode sets the tone map mode.
 func (gl *GradientLayer) WithToneMapMode(toneMapMode obj.Object) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return gl
 }
 
-// WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
+// WithPreferredDynamicRange sets the preferred dynamic range.
 func (gl *GradientLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return gl
 }
 
-// WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
+// WithContentsHeadroom sets the contents headroom.
 func (gl *GradientLayer) WithContentsHeadroom(contentsHeadroom float64) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
 	return gl
@@ -271,13 +271,13 @@ func (gl *GradientLayer) WithCornerRadius(cornerRadius float64) *GradientLayer {
 	return gl
 }
 
-// WithMaskedCorners sets the property and returns the receiver so calls can be chained.
+// WithMaskedCorners sets the masked corners.
 func (gl *GradientLayer) WithMaskedCorners(maskedCorners CornerMask) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setMaskedCorners:"), maskedCorners)
 	return gl
 }
 
-// WithCornerCurve sets the property and returns the receiver so calls can be chained.
+// WithCornerCurve sets the corner curve.
 func (gl *GradientLayer) WithCornerCurve(cornerCurve obj.Object) *GradientLayer {
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return gl
@@ -386,7 +386,7 @@ func (gl *GradientLayer) WithConstraints(items ...*Constraint) *GradientLayer {
 	return gl
 }
 
-// Colors wraps the corresponding Objective-C method.
+// Colors returns the colors.
 func (gl *GradientLayer) Colors() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("colors"))
 	return obj.Wrap(_r)
@@ -397,7 +397,7 @@ func (gl *GradientLayer) SetColors(colors obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("setColors:"), objref.IDOf(colors))
 }
 
-// Locations wraps the corresponding Objective-C method.
+// Locations returns the locations.
 //
 // Locations returns the collection as a Go slice.
 func (gl *GradientLayer) Locations() []obj.Object {
@@ -405,19 +405,19 @@ func (gl *GradientLayer) Locations() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// StartPoint wraps the corresponding Objective-C method.
+// StartPoint returns the start point.
 func (gl *GradientLayer) StartPoint() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(gl), objc.RegisterName("startPoint"))
 	return _r
 }
 
-// EndPoint wraps the corresponding Objective-C method.
+// EndPoint returns the end point.
 func (gl *GradientLayer) EndPoint() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(gl), objc.RegisterName("endPoint"))
 	return _r
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (gl *GradientLayer) Type() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(gl), objc.RegisterName("type"))
 	return obj.Wrap(_r)

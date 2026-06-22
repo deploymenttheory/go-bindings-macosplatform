@@ -114,43 +114,43 @@ func (mi *MapItem) OpenInMapsWithLaunchOptionsCompletionHandler(launchOptions ob
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("openInMapsWithLaunchOptions:completionHandler:"), objref.IDOf(launchOptions), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (mi *MapItem) Identifier() *MapItemIdentifier {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("identifier"))
 	return MapItemIdentifierFromID(_r)
 }
 
-// AlternateIdentifiers wraps the corresponding Objective-C method.
+// AlternateIdentifiers returns the alternate identifiers.
 func (mi *MapItem) AlternateIdentifiers() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("alternateIdentifiers"))
 	return obj.Wrap(_r)
 }
 
-// Placemark wraps the corresponding Objective-C method.
+// Placemark returns the placemark.
 func (mi *MapItem) Placemark() *Placemark {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("placemark"))
 	return PlacemarkFromID(_r)
 }
 
-// IsCurrentLocation wraps the corresponding Objective-C method.
+// IsCurrentLocation reports whether the object is current location.
 func (mi *MapItem) IsCurrentLocation() bool {
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isCurrentLocation"))
 	return _r
 }
 
-// Address wraps the corresponding Objective-C method.
+// Address returns the address.
 func (mi *MapItem) Address() *Address {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("address"))
 	return AddressFromID(_r)
 }
 
-// AddressRepresentations wraps the corresponding Objective-C method.
+// AddressRepresentations returns the address representations.
 func (mi *MapItem) AddressRepresentations() *AddressRepresentations {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("addressRepresentations"))
 	return AddressRepresentationsFromID(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (mi *MapItem) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("name"))
 	if _r == 0 {
@@ -159,7 +159,7 @@ func (mi *MapItem) Name() string {
 	return purego.GoString(_r)
 }
 
-// PhoneNumber wraps the corresponding Objective-C method.
+// PhoneNumber returns the phone number.
 func (mi *MapItem) PhoneNumber() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("phoneNumber"))
 	if _r == 0 {
@@ -168,19 +168,19 @@ func (mi *MapItem) PhoneNumber() string {
 	return purego.GoString(_r)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (mi *MapItem) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// TimeZone wraps the corresponding Objective-C method.
+// TimeZone returns the time zone.
 func (mi *MapItem) TimeZone() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("timeZone"))
 	return obj.Wrap(_r)
 }
 
-// PointOfInterestCategory wraps the corresponding Objective-C method.
+// PointOfInterestCategory returns the point of interest category.
 func (mi *MapItem) PointOfInterestCategory() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("pointOfInterestCategory"))
 	return obj.Wrap(_r)

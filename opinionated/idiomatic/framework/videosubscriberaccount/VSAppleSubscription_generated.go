@@ -73,20 +73,20 @@ func NewVSAppleSubscriptionWithCustomerIDProductCodes(customerID string, product
 	return vSAppleSubscriptionAdopt(_id)
 }
 
-// WithCustomerID sets the property and returns the receiver so calls can be chained.
+// WithCustomerID sets the customer ID.
 func (vas *VSAppleSubscription) WithCustomerID(customerID string) *VSAppleSubscription {
 	objc.Send[objc.ID](objref.IDOf(vas), objc.RegisterName("setCustomerID:"), purego.NSString(customerID))
 	return vas
 }
 
-// WithProductCodes sets the property and returns the receiver so calls can be chained.
+// WithProductCodes sets the product codes.
 func (vas *VSAppleSubscription) WithProductCodes(items ...obj.Object) *VSAppleSubscription {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(vas), objc.RegisterName("setProductCodes:"), _arr)
 	return vas
 }
 
-// CustomerID wraps the corresponding Objective-C method.
+// CustomerID returns the customer ID.
 func (vas *VSAppleSubscription) CustomerID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(vas), objc.RegisterName("customerID"))
 	if _r == 0 {
@@ -95,7 +95,7 @@ func (vas *VSAppleSubscription) CustomerID() string {
 	return purego.GoString(_r)
 }
 
-// ProductCodes wraps the corresponding Objective-C method.
+// ProductCodes returns the product codes.
 //
 // ProductCodes returns the collection as a Go slice.
 func (vas *VSAppleSubscription) ProductCodes() []string {

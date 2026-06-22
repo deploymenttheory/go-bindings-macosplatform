@@ -97,7 +97,7 @@ func (va *ViewAnimation) WithProgressMarks(items ...obj.Object) *ViewAnimation {
 	return va
 }
 
-// ViewAnimations wraps the corresponding Objective-C method.
+// ViewAnimations returns the view animations.
 //
 // ViewAnimations returns the collection as a Go slice.
 func (va *ViewAnimation) ViewAnimations() []obj.Object {

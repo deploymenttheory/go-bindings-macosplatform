@@ -51,25 +51,25 @@ func (cpgn *CNNPoolingGradientNode) WithLabel(label string) *CNNPoolingGradientN
 	return cpgn
 }
 
-// KernelWidth wraps the corresponding Objective-C method.
+// KernelWidth returns the kernel width.
 func (cpgn *CNNPoolingGradientNode) KernelWidth() int {
 	_r := objc.Send[int](objref.IDOf(cpgn), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
-// KernelHeight wraps the corresponding Objective-C method.
+// KernelHeight returns the kernel height.
 func (cpgn *CNNPoolingGradientNode) KernelHeight() int {
 	_r := objc.Send[int](objref.IDOf(cpgn), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
-// StrideInPixelsX wraps the corresponding Objective-C method.
+// StrideInPixelsX returns the stride in pixels x.
 func (cpgn *CNNPoolingGradientNode) StrideInPixelsX() int {
 	_r := objc.Send[int](objref.IDOf(cpgn), objc.RegisterName("strideInPixelsX"))
 	return _r
 }
 
-// StrideInPixelsY wraps the corresponding Objective-C method.
+// StrideInPixelsY returns the stride in pixels y.
 func (cpgn *CNNPoolingGradientNode) StrideInPixelsY() int {
 	_r := objc.Send[int](objref.IDOf(cpgn), objc.RegisterName("strideInPixelsY"))
 	return _r

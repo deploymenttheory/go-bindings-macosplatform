@@ -68,7 +68,7 @@ func (vt *ValueTransformer) String() string {
 	return rt.Description(objref.IDOf(vt))
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (vt *ValueTransformer) WithScriptingProperties(scriptingProperties obj.Object) *ValueTransformer {
 	objc.Send[objc.ID](objref.IDOf(vt), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return vt

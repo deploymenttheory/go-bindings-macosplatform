@@ -144,19 +144,19 @@ func (rpd *RenderPassDescriptor) WithSupportColorAttachmentMapping(supportColorA
 	return rpd
 }
 
-// ColorAttachments wraps the corresponding Objective-C method.
+// ColorAttachments returns the color attachments.
 func (rpd *RenderPassDescriptor) ColorAttachments() *RenderPassColorAttachmentDescriptorArray {
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("colorAttachments"))
 	return RenderPassColorAttachmentDescriptorArrayFromID(_r)
 }
 
-// DepthAttachment wraps the corresponding Objective-C method.
+// DepthAttachment returns the depth attachment.
 func (rpd *RenderPassDescriptor) DepthAttachment() *RenderPassDepthAttachmentDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("depthAttachment"))
 	return RenderPassDepthAttachmentDescriptorFromID(_r)
 }
 
-// StencilAttachment wraps the corresponding Objective-C method.
+// StencilAttachment returns the stencil attachment.
 func (rpd *RenderPassDescriptor) StencilAttachment() *RenderPassStencilAttachmentDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(rpd), objc.RegisterName("stencilAttachment"))
 	return RenderPassStencilAttachmentDescriptorFromID(_r)

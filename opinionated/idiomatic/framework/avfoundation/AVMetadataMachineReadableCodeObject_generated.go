@@ -69,7 +69,7 @@ func (mmrco *MetadataMachineReadableCodeObject) StringValue() string {
 	return purego.GoString(_r)
 }
 
-// Descriptor wraps the corresponding Objective-C method.
+// Descriptor returns the descriptor.
 func (mmrco *MetadataMachineReadableCodeObject) Descriptor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mmrco), objc.RegisterName("descriptor"))
 	return obj.Wrap(_r)

@@ -73,7 +73,7 @@ func NewSocialProfileWithURLStringUsernameUserIdentifierService(urlString string
 	return socialProfileAdopt(_id)
 }
 
-// URLString wraps the corresponding Objective-C method.
+// URLString returns the URL string.
 func (sp *SocialProfile) URLString() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("urlString"))
 	if _r == 0 {
@@ -82,7 +82,7 @@ func (sp *SocialProfile) URLString() string {
 	return purego.GoString(_r)
 }
 
-// Username wraps the corresponding Objective-C method.
+// Username returns the username.
 func (sp *SocialProfile) Username() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("username"))
 	if _r == 0 {
@@ -91,7 +91,7 @@ func (sp *SocialProfile) Username() string {
 	return purego.GoString(_r)
 }
 
-// UserIdentifier wraps the corresponding Objective-C method.
+// UserIdentifier returns the user identifier.
 func (sp *SocialProfile) UserIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("userIdentifier"))
 	if _r == 0 {
@@ -100,7 +100,7 @@ func (sp *SocialProfile) UserIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// Service wraps the corresponding Objective-C method.
+// Service returns the service.
 func (sp *SocialProfile) Service() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("service"))
 	if _r == 0 {

@@ -97,7 +97,7 @@ func (ta *TextureAtlas) Preload(ctx context.Context) error {
 	}
 }
 
-// TextureNames wraps the corresponding Objective-C method.
+// TextureNames returns the texture names.
 //
 // TextureNames returns the collection as a Go slice.
 func (ta *TextureAtlas) TextureNames() []string {

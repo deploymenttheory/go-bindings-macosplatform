@@ -52,13 +52,13 @@ func NewMotionActivity() *MotionActivity {
 	return motionActivityAdopt(_id)
 }
 
-// Confidence wraps the corresponding Objective-C method.
+// Confidence returns the confidence.
 func (ma *MotionActivity) Confidence() MotionActivityConfidence {
 	_r := objc.Send[MotionActivityConfidence](objref.IDOf(ma), objc.RegisterName("confidence"))
 	return _r
 }
 
-// StartDate wraps the corresponding Objective-C method.
+// StartDate returns the start date.
 func (ma *MotionActivity) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)

@@ -72,7 +72,7 @@ func NewAccountType() *AccountType {
 	return accountTypeAdopt(_id)
 }
 
-// AccountTypeDescription wraps the corresponding Objective-C method.
+// AccountTypeDescription returns the account type description.
 func (at *AccountType) AccountTypeDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("accountTypeDescription"))
 	if _r == 0 {
@@ -81,7 +81,7 @@ func (at *AccountType) AccountTypeDescription() string {
 	return purego.GoString(_r)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (at *AccountType) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("identifier"))
 	if _r == 0 {

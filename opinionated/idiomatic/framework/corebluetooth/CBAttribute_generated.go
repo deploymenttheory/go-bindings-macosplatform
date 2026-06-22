@@ -68,7 +68,7 @@ func (a *Attribute) String() string {
 	return rt.Description(objref.IDOf(a))
 }
 
-// UUID wraps the corresponding Objective-C method.
+// UUID returns the UUID.
 func (a *Attribute) UUID() *UUID {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("UUID"))
 	return UUIDFromID(_r)

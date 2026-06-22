@@ -72,19 +72,19 @@ func NewPipe() *Pipe {
 	return pipeAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (p *Pipe) WithScriptingProperties(scriptingProperties obj.Object) *Pipe {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return p
 }
 
-// FileHandleForReading wraps the corresponding Objective-C method.
+// FileHandleForReading returns the file handle for reading.
 func (p *Pipe) FileHandleForReading() *FileHandle {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileHandleForReading"))
 	return FileHandleFromID(_r)
 }
 
-// FileHandleForWriting wraps the corresponding Objective-C method.
+// FileHandleForWriting returns the file handle for writing.
 func (p *Pipe) FileHandleForWriting() *FileHandle {
 	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileHandleForWriting"))
 	return FileHandleFromID(_r)

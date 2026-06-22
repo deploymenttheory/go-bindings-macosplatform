@@ -65,7 +65,7 @@ func (arf *ActionResetForm) WithFieldsIncludedAreCleared(fieldsIncludedAreCleare
 	return arf
 }
 
-// Fields wraps the corresponding Objective-C method.
+// Fields returns the fields.
 //
 // Fields returns the collection as a Go slice.
 func (arf *ActionResetForm) Fields() []string {

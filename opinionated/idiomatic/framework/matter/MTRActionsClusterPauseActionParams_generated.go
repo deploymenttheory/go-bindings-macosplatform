@@ -70,13 +70,13 @@ func NewMTRActionsClusterPauseActionParams() *MTRActionsClusterPauseActionParams
 	return mTRActionsClusterPauseActionParamsAdopt(_id)
 }
 
-// WithActionID sets the property and returns the receiver so calls can be chained.
+// WithActionID sets the action ID.
 func (macpap *MTRActionsClusterPauseActionParams) WithActionID(actionID obj.Object) *MTRActionsClusterPauseActionParams {
 	objc.Send[objc.ID](objref.IDOf(macpap), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 	return macpap
 }
 
-// WithInvokeID sets the property and returns the receiver so calls can be chained.
+// WithInvokeID sets the invoke ID.
 func (macpap *MTRActionsClusterPauseActionParams) WithInvokeID(invokeID obj.Object) *MTRActionsClusterPauseActionParams {
 	objc.Send[objc.ID](objref.IDOf(macpap), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 	return macpap
@@ -94,13 +94,13 @@ func (macpap *MTRActionsClusterPauseActionParams) WithServerSideProcessingTimeou
 	return macpap
 }
 
-// ActionID wraps the corresponding Objective-C method.
+// ActionID returns the action ID.
 func (macpap *MTRActionsClusterPauseActionParams) ActionID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macpap), objc.RegisterName("actionID"))
 	return obj.Wrap(_r)
 }
 
-// InvokeID wraps the corresponding Objective-C method.
+// InvokeID returns the invoke ID.
 func (macpap *MTRActionsClusterPauseActionParams) InvokeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(macpap), objc.RegisterName("invokeID"))
 	return obj.Wrap(_r)

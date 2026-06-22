@@ -317,13 +317,13 @@ func (i *Image) ImageWithLocale(locale obj.Object) *Image {
 	return ImageFromID(_r)
 }
 
-// Size wraps the corresponding Objective-C method.
+// Size returns the size.
 func (i *Image) Size() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(i), objc.RegisterName("size"))
 	return _r
 }
 
-// BackgroundColor wraps the corresponding Objective-C method.
+// BackgroundColor returns the background color.
 func (i *Image) BackgroundColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
@@ -353,13 +353,13 @@ func (i *Image) MatchesOnlyOnBestFittingAxis() bool {
 	return _r
 }
 
-// TIFFRepresentation wraps the corresponding Objective-C method.
+// TIFFRepresentation returns the tiff representation.
 func (i *Image) TIFFRepresentation() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("TIFFRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// Representations wraps the corresponding Objective-C method.
+// Representations returns the representations.
 //
 // Representations returns the collection as a Go slice.
 func (i *Image) Representations() []*ImageRep {
@@ -367,31 +367,31 @@ func (i *Image) Representations() []*ImageRep {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ImageRep { return ImageRepFromID(_id) })
 }
 
-// IsValid wraps the corresponding Objective-C method.
+// IsValid reports whether the object is valid.
 func (i *Image) IsValid() bool {
 	_r := objc.Send[bool](objref.IDOf(i), objc.RegisterName("isValid"))
 	return _r
 }
 
-// CacheMode wraps the corresponding Objective-C method.
+// CacheMode returns the cache mode.
 func (i *Image) CacheMode() ImageCacheMode {
 	_r := objc.Send[ImageCacheMode](objref.IDOf(i), objc.RegisterName("cacheMode"))
 	return _r
 }
 
-// AlignmentRect wraps the corresponding Objective-C method.
+// AlignmentRect returns the alignment rect.
 func (i *Image) AlignmentRect() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(i), objc.RegisterName("alignmentRect"))
 	return _r
 }
 
-// IsTemplate wraps the corresponding Objective-C method.
+// IsTemplate reports whether the object is template.
 func (i *Image) IsTemplate() bool {
 	_r := objc.Send[bool](objref.IDOf(i), objc.RegisterName("isTemplate"))
 	return _r
 }
 
-// AccessibilityDescription wraps the corresponding Objective-C method.
+// AccessibilityDescription returns the accessibility description.
 func (i *Image) AccessibilityDescription() string {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("accessibilityDescription"))
 	if _r == 0 {
@@ -400,19 +400,19 @@ func (i *Image) AccessibilityDescription() string {
 	return purego.GoString(_r)
 }
 
-// CapInsets wraps the corresponding Objective-C method.
+// CapInsets returns the cap insets.
 func (i *Image) CapInsets() foundation.NSEdgeInsets {
 	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(i), objc.RegisterName("capInsets"))
 	return _r
 }
 
-// ResizingMode wraps the corresponding Objective-C method.
+// ResizingMode returns the resizing mode.
 func (i *Image) ResizingMode() ImageResizingMode {
 	_r := objc.Send[ImageResizingMode](objref.IDOf(i), objc.RegisterName("resizingMode"))
 	return _r
 }
 
-// SymbolConfiguration wraps the corresponding Objective-C method.
+// SymbolConfiguration returns the symbol configuration.
 func (i *Image) SymbolConfiguration() *ImageSymbolConfiguration {
 	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("symbolConfiguration"))
 	return ImageSymbolConfigurationFromID(_r)
@@ -430,17 +430,17 @@ func (i *Image) BestRepresentationForDevice(deviceDescription obj.Object) *Image
 	return ImageRepFromID(_r)
 }
 
-// LockFocus wraps the corresponding Objective-C method.
+// LockFocus locks focus.
 func (i *Image) LockFocus() {
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("lockFocus"))
 }
 
-// LockFocusFlipped wraps the corresponding Objective-C method.
+// LockFocusFlipped locks focus flipped.
 func (i *Image) LockFocusFlipped(flipped bool) {
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("lockFocusFlipped:"), flipped)
 }
 
-// UnlockFocus wraps the corresponding Objective-C method.
+// UnlockFocus unlocks focus.
 func (i *Image) UnlockFocus() {
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("unlockFocus"))
 }
@@ -450,7 +450,7 @@ func (i *Image) SetFlipped(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("setFlipped:"), flag)
 }
 
-// IsFlipped wraps the corresponding Objective-C method.
+// IsFlipped reports whether the object is flipped.
 func (i *Image) IsFlipped() bool {
 	_r := objc.Send[bool](objref.IDOf(i), objc.RegisterName("isFlipped"))
 	return _r
@@ -472,7 +472,7 @@ func (i *Image) SetDataRetained(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("setDataRetained:"), flag)
 }
 
-// IsDataRetained wraps the corresponding Objective-C method.
+// IsDataRetained reports whether the object is data retained.
 func (i *Image) IsDataRetained() bool {
 	_r := objc.Send[bool](objref.IDOf(i), objc.RegisterName("isDataRetained"))
 	return _r
@@ -483,7 +483,7 @@ func (i *Image) SetCachedSeparately(flag bool) {
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("setCachedSeparately:"), flag)
 }
 
-// IsCachedSeparately wraps the corresponding Objective-C method.
+// IsCachedSeparately reports whether the object is cached separately.
 func (i *Image) IsCachedSeparately() bool {
 	_r := objc.Send[bool](objref.IDOf(i), objc.RegisterName("isCachedSeparately"))
 	return _r
@@ -530,7 +530,7 @@ func (i *Image) CompositeToPointFromRectOperationFraction(point corefoundation.C
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("compositeToPoint:fromRect:operation:fraction:"), point, rect, operation, fraction)
 }
 
-// LockFocusOnRepresentation wraps the corresponding Objective-C method.
+// LockFocusOnRepresentation locks focus on representation.
 func (i *Image) LockFocusOnRepresentation(imageRepresentation *ImageRep) {
 	objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("lockFocusOnRepresentation:"), objref.IDOf(imageRepresentation))
 }

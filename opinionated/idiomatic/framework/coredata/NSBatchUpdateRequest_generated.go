@@ -91,7 +91,7 @@ func (bur *BatchUpdateRequest) WithAffectedStores(items ...PersistentStoreProvid
 	return bur
 }
 
-// EntityName wraps the corresponding Objective-C method.
+// EntityName returns the entity name.
 func (bur *BatchUpdateRequest) EntityName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("entityName"))
 	if _r == 0 {
@@ -100,13 +100,13 @@ func (bur *BatchUpdateRequest) EntityName() string {
 	return purego.GoString(_r)
 }
 
-// Entity wraps the corresponding Objective-C method.
+// Entity returns the entity.
 func (bur *BatchUpdateRequest) Entity() *EntityDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
-// Predicate wraps the corresponding Objective-C method.
+// Predicate returns the predicate.
 func (bur *BatchUpdateRequest) Predicate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("predicate"))
 	return obj.Wrap(_r)
@@ -118,13 +118,13 @@ func (bur *BatchUpdateRequest) IncludesSubentities() bool {
 	return _r
 }
 
-// ResultType wraps the corresponding Objective-C method.
+// ResultType returns the result type.
 func (bur *BatchUpdateRequest) ResultType() BatchUpdateRequestResultType {
 	_r := objc.Send[BatchUpdateRequestResultType](objref.IDOf(bur), objc.RegisterName("resultType"))
 	return _r
 }
 
-// PropertiesToUpdate wraps the corresponding Objective-C method.
+// PropertiesToUpdate returns the properties to update.
 func (bur *BatchUpdateRequest) PropertiesToUpdate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bur), objc.RegisterName("propertiesToUpdate"))
 	return obj.Wrap(_r)

@@ -87,13 +87,13 @@ func (msc *MTRServerCluster) AddAttribute(attribute *MTRServerAttribute) bool {
 	return _r
 }
 
-// ClusterID wraps the corresponding Objective-C method.
+// ClusterID returns the cluster ID.
 func (msc *MTRServerCluster) ClusterID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msc), objc.RegisterName("clusterID"))
 	return obj.Wrap(_r)
 }
 
-// ClusterRevision wraps the corresponding Objective-C method.
+// ClusterRevision returns the cluster revision.
 func (msc *MTRServerCluster) ClusterRevision() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msc), objc.RegisterName("clusterRevision"))
 	return obj.Wrap(_r)

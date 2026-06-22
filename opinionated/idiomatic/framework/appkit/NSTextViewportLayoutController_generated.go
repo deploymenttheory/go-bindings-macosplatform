@@ -84,19 +84,19 @@ func (tvlc *TextViewportLayoutController) AdjustViewportByVerticalOffset(vertica
 	objc.Send[objc.ID](objref.IDOf(tvlc), objc.RegisterName("adjustViewportByVerticalOffset:"), verticalOffset)
 }
 
-// TextLayoutManager wraps the corresponding Objective-C method.
+// TextLayoutManager returns the text layout manager.
 func (tvlc *TextViewportLayoutController) TextLayoutManager() *TextLayoutManager {
 	_r := objc.Send[objc.ID](objref.IDOf(tvlc), objc.RegisterName("textLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
-// ViewportBounds wraps the corresponding Objective-C method.
+// ViewportBounds returns the viewport bounds.
 func (tvlc *TextViewportLayoutController) ViewportBounds() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tvlc), objc.RegisterName("viewportBounds"))
 	return _r
 }
 
-// ViewportRange wraps the corresponding Objective-C method.
+// ViewportRange returns the viewport range.
 func (tvlc *TextViewportLayoutController) ViewportRange() *TextRange {
 	_r := objc.Send[objc.ID](objref.IDOf(tvlc), objc.RegisterName("viewportRange"))
 	return TextRangeFromID(_r)

@@ -158,7 +158,7 @@ func (s *Session) PeersWithConnectionState(state PeerConnectionState) obj.Object
 	return obj.Wrap(_r)
 }
 
-// SessionID wraps the corresponding Objective-C method.
+// SessionID returns the session ID.
 func (s *Session) SessionID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("sessionID"))
 	if _r == 0 {
@@ -167,7 +167,7 @@ func (s *Session) SessionID() string {
 	return purego.GoString(_r)
 }
 
-// DisplayName wraps the corresponding Objective-C method.
+// DisplayName returns the display name.
 func (s *Session) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -176,13 +176,13 @@ func (s *Session) DisplayName() string {
 	return purego.GoString(_r)
 }
 
-// SessionMode wraps the corresponding Objective-C method.
+// SessionMode returns the session mode.
 func (s *Session) SessionMode() SessionMode {
 	_r := objc.Send[SessionMode](objref.IDOf(s), objc.RegisterName("sessionMode"))
 	return _r
 }
 
-// PeerID wraps the corresponding Objective-C method.
+// PeerID returns the peer ID.
 func (s *Session) PeerID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("peerID"))
 	if _r == 0 {

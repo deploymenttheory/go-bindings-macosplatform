@@ -58,173 +58,173 @@ func NewMTRClusterWindowCoveringWithDeviceEndpointQueue(device *MTRDevice, endpo
 	return mTRClusterWindowCoveringAdopt(_id)
 }
 
-// ReadAttributeTypeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeTypeWithParams reads attribute type with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeTypeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeTypeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePhysicalClosedLimitLiftWithParams wraps the corresponding Objective-C method.
+// ReadAttributePhysicalClosedLimitLiftWithParams reads attribute physical closed limit lift with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributePhysicalClosedLimitLiftWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributePhysicalClosedLimitLiftWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePhysicalClosedLimitTiltWithParams wraps the corresponding Objective-C method.
+// ReadAttributePhysicalClosedLimitTiltWithParams reads attribute physical closed limit tilt with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributePhysicalClosedLimitTiltWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributePhysicalClosedLimitTiltWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentPositionLiftWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPositionLiftWithParams reads attribute current position lift with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeCurrentPositionLiftWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeCurrentPositionLiftWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentPositionTiltWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPositionTiltWithParams reads attribute current position tilt with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeCurrentPositionTiltWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeCurrentPositionTiltWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeNumberOfActuationsLiftWithParams wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfActuationsLiftWithParams reads attribute number of actuations lift with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeNumberOfActuationsLiftWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeNumberOfActuationsLiftWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeNumberOfActuationsTiltWithParams wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfActuationsTiltWithParams reads attribute number of actuations tilt with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeNumberOfActuationsTiltWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeNumberOfActuationsTiltWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeConfigStatusWithParams wraps the corresponding Objective-C method.
+// ReadAttributeConfigStatusWithParams reads attribute config status with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeConfigStatusWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeConfigStatusWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentPositionLiftPercentageWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPositionLiftPercentageWithParams reads attribute current position lift percentage with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentageWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeCurrentPositionLiftPercentageWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentPositionTiltPercentageWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPositionTiltPercentageWithParams reads attribute current position tilt percentage with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentageWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeCurrentPositionTiltPercentageWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeOperationalStatusWithParams wraps the corresponding Objective-C method.
+// ReadAttributeOperationalStatusWithParams reads attribute operational status with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeOperationalStatusWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeOperationalStatusWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeTargetPositionLiftPercent100thsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeTargetPositionLiftPercent100thsWithParams reads attribute target position lift percent100ths with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100thsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeTargetPositionLiftPercent100thsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeTargetPositionTiltPercent100thsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeTargetPositionTiltPercent100thsWithParams reads attribute target position tilt percent100ths with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100thsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeTargetPositionTiltPercent100thsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeEndProductTypeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeEndProductTypeWithParams reads attribute end product type with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeEndProductTypeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeEndProductTypeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentPositionLiftPercent100thsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPositionLiftPercent100thsWithParams reads attribute current position lift percent100ths with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent100thsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeCurrentPositionLiftPercent100thsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentPositionTiltPercent100thsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCurrentPositionTiltPercent100thsWithParams reads attribute current position tilt percent100ths with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent100thsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeCurrentPositionTiltPercent100thsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeInstalledOpenLimitLiftWithParams wraps the corresponding Objective-C method.
+// ReadAttributeInstalledOpenLimitLiftWithParams reads attribute installed open limit lift with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeInstalledOpenLimitLiftWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeInstalledOpenLimitLiftWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeInstalledClosedLimitLiftWithParams wraps the corresponding Objective-C method.
+// ReadAttributeInstalledClosedLimitLiftWithParams reads attribute installed closed limit lift with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeInstalledClosedLimitLiftWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeInstalledClosedLimitLiftWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeInstalledOpenLimitTiltWithParams wraps the corresponding Objective-C method.
+// ReadAttributeInstalledOpenLimitTiltWithParams reads attribute installed open limit tilt with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeInstalledOpenLimitTiltWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeInstalledOpenLimitTiltWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeInstalledClosedLimitTiltWithParams wraps the corresponding Objective-C method.
+// ReadAttributeInstalledClosedLimitTiltWithParams reads attribute installed closed limit tilt with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeInstalledClosedLimitTiltWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeInstalledClosedLimitTiltWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeModeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeModeWithParams reads attribute mode with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeModeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeModeWithValueExpectedValueInterval writes attribute mode with value expected value interval.
 func (mcwc *MTRClusterWindowCovering) WriteAttributeModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("writeAttributeModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeModeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeModeWithValueExpectedValueIntervalParams writes attribute mode with value expected value interval params.
 func (mcwc *MTRClusterWindowCovering) WriteAttributeModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("writeAttributeModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeSafetyStatusWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSafetyStatusWithParams reads attribute safety status with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeSafetyStatusWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeSafetyStatusWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcwc *MTRClusterWindowCovering) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcwc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

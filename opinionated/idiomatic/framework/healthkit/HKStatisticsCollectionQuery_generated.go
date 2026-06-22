@@ -59,19 +59,19 @@ func NewStatisticsCollectionQueryWithQuantityTypeQuantitySamplePredicateOptionsA
 	return statisticsCollectionQueryAdopt(_id)
 }
 
-// AnchorDate wraps the corresponding Objective-C method.
+// AnchorDate returns the anchor date.
 func (scq *StatisticsCollectionQuery) AnchorDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(scq), objc.RegisterName("anchorDate"))
 	return obj.Wrap(_r)
 }
 
-// Options wraps the corresponding Objective-C method.
+// Options returns the options.
 func (scq *StatisticsCollectionQuery) Options() StatisticsOptions {
 	_r := objc.Send[StatisticsOptions](objref.IDOf(scq), objc.RegisterName("options"))
 	return _r
 }
 
-// IntervalComponents wraps the corresponding Objective-C method.
+// IntervalComponents returns the interval components.
 func (scq *StatisticsCollectionQuery) IntervalComponents() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(scq), objc.RegisterName("intervalComponents"))
 	return obj.Wrap(_r)

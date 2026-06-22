@@ -589,7 +589,7 @@ func MPSNNUnaryReductionNodeNodeWithSource(sourceNode obj.Object) *NNUnaryReduct
 	return NNUnaryReductionNodeFromID(_r)
 }
 
-// MPSPolygonBufferPolygonBuffer wraps the corresponding Objective-C method.
+// MPSPolygonBufferPolygonBuffer returns the mps polygon buffer polygon buffer.
 func MPSPolygonBufferPolygonBuffer() *PolygonBuffer {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSPolygonBuffer")), objc.RegisterName("polygonBuffer"))
 	return PolygonBufferFromID(_r)

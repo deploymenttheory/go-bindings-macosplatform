@@ -201,7 +201,7 @@ func (c *Color) DrawSwatchInRect(rect corefoundation.CGRect) {
 	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("drawSwatchInRect:"), rect)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (c *Color) Type() ColorType {
 	_r := objc.Send[ColorType](objref.IDOf(c), objc.RegisterName("type"))
 	return _r
@@ -213,19 +213,19 @@ func (c *Color) StandardDynamicRangeColor() *Color {
 	return ColorFromID(_r)
 }
 
-// CatalogNameComponent wraps the corresponding Objective-C method.
+// CatalogNameComponent returns the catalog name component.
 func (c *Color) CatalogNameComponent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("catalogNameComponent"))
 	return obj.Wrap(_r)
 }
 
-// ColorNameComponent wraps the corresponding Objective-C method.
+// ColorNameComponent returns the color name component.
 func (c *Color) ColorNameComponent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorNameComponent"))
 	return obj.Wrap(_r)
 }
 
-// LocalizedCatalogNameComponent wraps the corresponding Objective-C method.
+// LocalizedCatalogNameComponent returns the localized catalog name component.
 func (c *Color) LocalizedCatalogNameComponent() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("localizedCatalogNameComponent"))
 	if _r == 0 {
@@ -234,7 +234,7 @@ func (c *Color) LocalizedCatalogNameComponent() string {
 	return purego.GoString(_r)
 }
 
-// LocalizedColorNameComponent wraps the corresponding Objective-C method.
+// LocalizedColorNameComponent returns the localized color name component.
 func (c *Color) LocalizedColorNameComponent() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("localizedColorNameComponent"))
 	if _r == 0 {
@@ -243,91 +243,91 @@ func (c *Color) LocalizedColorNameComponent() string {
 	return purego.GoString(_r)
 }
 
-// RedComponent wraps the corresponding Objective-C method.
+// RedComponent returns the red component.
 func (c *Color) RedComponent() float64 {
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("redComponent"))
 	return _r
 }
 
-// GreenComponent wraps the corresponding Objective-C method.
+// GreenComponent returns the green component.
 func (c *Color) GreenComponent() float64 {
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("greenComponent"))
 	return _r
 }
 
-// BlueComponent wraps the corresponding Objective-C method.
+// BlueComponent returns the blue component.
 func (c *Color) BlueComponent() float64 {
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("blueComponent"))
 	return _r
 }
 
-// HueComponent wraps the corresponding Objective-C method.
+// HueComponent returns the hue component.
 func (c *Color) HueComponent() float64 {
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("hueComponent"))
 	return _r
 }
 
-// SaturationComponent wraps the corresponding Objective-C method.
+// SaturationComponent returns the saturation component.
 func (c *Color) SaturationComponent() float64 {
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("saturationComponent"))
 	return _r
 }
 
-// BrightnessComponent wraps the corresponding Objective-C method.
+// BrightnessComponent returns the brightness component.
 func (c *Color) BrightnessComponent() float64 {
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("brightnessComponent"))
 	return _r
 }
 
-// WhiteComponent wraps the corresponding Objective-C method.
+// WhiteComponent returns the white component.
 func (c *Color) WhiteComponent() float64 {
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("whiteComponent"))
 	return _r
 }
 
-// CyanComponent wraps the corresponding Objective-C method.
+// CyanComponent returns the cyan component.
 func (c *Color) CyanComponent() float64 {
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("cyanComponent"))
 	return _r
 }
 
-// MagentaComponent wraps the corresponding Objective-C method.
+// MagentaComponent returns the magenta component.
 func (c *Color) MagentaComponent() float64 {
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("magentaComponent"))
 	return _r
 }
 
-// YellowComponent wraps the corresponding Objective-C method.
+// YellowComponent returns the yellow component.
 func (c *Color) YellowComponent() float64 {
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("yellowComponent"))
 	return _r
 }
 
-// BlackComponent wraps the corresponding Objective-C method.
+// BlackComponent returns the black component.
 func (c *Color) BlackComponent() float64 {
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("blackComponent"))
 	return _r
 }
 
-// ColorSpace wraps the corresponding Objective-C method.
+// ColorSpace returns the color space.
 func (c *Color) ColorSpace() *ColorSpace {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorSpace"))
 	return ColorSpaceFromID(_r)
 }
 
-// NumberOfComponents wraps the corresponding Objective-C method.
+// NumberOfComponents returns the number of components.
 func (c *Color) NumberOfComponents() int {
 	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("numberOfComponents"))
 	return _r
 }
 
-// PatternImage wraps the corresponding Objective-C method.
+// PatternImage returns the pattern image.
 func (c *Color) PatternImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("patternImage"))
 	return ImageFromID(_r)
 }
 
-// AlphaComponent wraps the corresponding Objective-C method.
+// AlphaComponent returns the alpha component.
 func (c *Color) AlphaComponent() float64 {
 	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("alphaComponent"))
 	return _r
@@ -339,7 +339,7 @@ func (c *Color) LinearExposure() float64 {
 	return _r
 }
 
-// CGColor wraps the corresponding Objective-C method.
+// CGColor returns the cg color.
 func (c *Color) CGColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("CGColor"))
 	return obj.Wrap(_r)
@@ -357,7 +357,7 @@ func (c *Color) ColorUsingColorSpaceName(name obj.Object) *Color {
 	return ColorFromID(_r)
 }
 
-// ColorSpaceName wraps the corresponding Objective-C method.
+// ColorSpaceName returns the color space name.
 func (c *Color) ColorSpaceName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("colorSpaceName"))
 	return obj.Wrap(_r)

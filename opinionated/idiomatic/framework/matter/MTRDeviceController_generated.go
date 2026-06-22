@@ -199,7 +199,7 @@ func (mdc *MTRDeviceController) UniqueIdentifier() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// ControllerNodeID wraps the corresponding Objective-C method.
+// ControllerNodeID returns the controller node ID.
 func (mdc *MTRDeviceController) ControllerNodeID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdc), objc.RegisterName("controllerNodeID"))
 	return obj.Wrap(_r)
@@ -221,7 +221,7 @@ func (mdc *MTRDeviceController) NodesWithStoredData() []obj.Object {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// FetchAttestationChallengeForDeviceID wraps the corresponding Objective-C method.
+// FetchAttestationChallengeForDeviceID fetches attestation challenge for device ID.
 func (mdc *MTRDeviceController) FetchAttestationChallengeForDeviceID(deviceId uint64) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mdc), objc.RegisterName("fetchAttestationChallengeForDeviceId:"), deviceId)
 	return obj.Wrap(_r)
@@ -267,7 +267,7 @@ func (mdc *MTRDeviceController) CommissionDeviceCommissioningParams(deviceId uin
 	return nil
 }
 
-// StopDevicePairing wraps the corresponding Objective-C method.
+// StopDevicePairing stops device pairing.
 func (mdc *MTRDeviceController) StopDevicePairing(deviceID uint64) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(mdc), objc.RegisterName("stopDevicePairing:error:"), deviceID, unsafe.Pointer(&_nsErr))
@@ -287,7 +287,7 @@ func (mdc *MTRDeviceController) GetDeviceBeingCommissionedError(deviceId uint64)
 	return MTRBaseDeviceFromID(_r), nil
 }
 
-// OpenPairingWindowDuration wraps the corresponding Objective-C method.
+// OpenPairingWindowDuration opens pairing window duration.
 func (mdc *MTRDeviceController) OpenPairingWindowDuration(deviceID uint64, duration int) error {
 	var _nsErr uintptr
 	_ = objc.Send[bool](objref.IDOf(mdc), objc.RegisterName("openPairingWindow:duration:error:"), deviceID, duration, unsafe.Pointer(&_nsErr))
@@ -297,7 +297,7 @@ func (mdc *MTRDeviceController) OpenPairingWindowDuration(deviceID uint64, durat
 	return nil
 }
 
-// OpenPairingWindowWithPINDurationDiscriminatorSetupPINError wraps the corresponding Objective-C method.
+// OpenPairingWindowWithPINDurationDiscriminatorSetupPINError opens pairing window with pin duration discriminator setup pin error.
 func (mdc *MTRDeviceController) OpenPairingWindowWithPINDurationDiscriminatorSetupPINError(deviceID uint64, duration int, discriminator int, setupPIN int) (result string, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[objc.ID](objref.IDOf(mdc), objc.RegisterName("openPairingWindowWithPIN:duration:discriminator:setupPIN:error:"), deviceID, duration, discriminator, setupPIN, unsafe.Pointer(&_nsErr))

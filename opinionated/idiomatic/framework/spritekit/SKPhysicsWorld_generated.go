@@ -136,7 +136,7 @@ func (pw *PhysicsWorld) Gravity() corefoundation.CGVector {
 	return _r
 }
 
-// Speed wraps the corresponding Objective-C method.
+// Speed returns the speed.
 func (pw *PhysicsWorld) Speed() float64 {
 	_r := objc.Send[float64](objref.IDOf(pw), objc.RegisterName("speed"))
 	return _r

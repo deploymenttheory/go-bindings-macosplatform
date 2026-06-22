@@ -93,13 +93,13 @@ func (bnd *BlendNodeDefinition) AddRangeWithEnvelopeSubtree(envelope *Envelope, 
 	objc.Send[objc.ID](objref.IDOf(bnd), objc.RegisterName("addRangeWithEnvelope:subtree:"), objref.IDOf(envelope), objref.IDOf(subtree))
 }
 
-// BlendParameterDefinition wraps the corresponding Objective-C method.
+// BlendParameterDefinition returns the blend parameter definition.
 func (bnd *BlendNodeDefinition) BlendParameterDefinition() *NumberMetaParameterDefinition {
 	_r := objc.Send[objc.ID](objref.IDOf(bnd), objc.RegisterName("blendParameterDefinition"))
 	return NumberMetaParameterDefinitionFromID(_r)
 }
 
-// SpatialMixerDefinitionForDistance wraps the corresponding Objective-C method.
+// SpatialMixerDefinitionForDistance returns the spatial mixer definition for distance.
 func (bnd *BlendNodeDefinition) SpatialMixerDefinitionForDistance() *SpatialMixerDefinition {
 	_r := objc.Send[objc.ID](objref.IDOf(bnd), objc.RegisterName("spatialMixerDefinitionForDistance"))
 	return SpatialMixerDefinitionFromID(_r)

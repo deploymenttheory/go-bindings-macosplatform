@@ -106,7 +106,7 @@ func (mbcwfnm *MTRBaseClusterWiFiNetworkManagement) NetworkPassphraseRequestWith
 	}
 }
 
-// ReadAttributeSSIDWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSSIDWithCompletion reads attribute ssid with completion.
 //
 // ReadAttributeSSIDWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwfnm *MTRBaseClusterWiFiNetworkManagement) ReadAttributeSSIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -156,7 +156,7 @@ func (mbcwfnm *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeSSIDWithPa
 	}
 }
 
-// ReadAttributePassphraseSurrogateWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePassphraseSurrogateWithCompletion reads attribute passphrase surrogate with completion.
 //
 // ReadAttributePassphraseSurrogateWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwfnm *MTRBaseClusterWiFiNetworkManagement) ReadAttributePassphraseSurrogateWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -206,7 +206,7 @@ func (mbcwfnm *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributePassphrase
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwfnm *MTRBaseClusterWiFiNetworkManagement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -256,7 +256,7 @@ func (mbcwfnm *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeGeneratedC
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwfnm *MTRBaseClusterWiFiNetworkManagement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -306,7 +306,7 @@ func (mbcwfnm *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeAcceptedCo
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwfnm *MTRBaseClusterWiFiNetworkManagement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -356,7 +356,7 @@ func (mbcwfnm *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeAttributeL
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwfnm *MTRBaseClusterWiFiNetworkManagement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -406,7 +406,7 @@ func (mbcwfnm *MTRBaseClusterWiFiNetworkManagement) SubscribeAttributeFeatureMap
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcwfnm *MTRBaseClusterWiFiNetworkManagement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

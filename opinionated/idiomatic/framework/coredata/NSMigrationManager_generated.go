@@ -138,49 +138,49 @@ func (mm *MigrationManager) UsesStoreSpecificMigrationManager() bool {
 	return _r
 }
 
-// MappingModel wraps the corresponding Objective-C method.
+// MappingModel returns the mapping model.
 func (mm *MigrationManager) MappingModel() *MappingModel {
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("mappingModel"))
 	return MappingModelFromID(_r)
 }
 
-// SourceModel wraps the corresponding Objective-C method.
+// SourceModel returns the source model.
 func (mm *MigrationManager) SourceModel() *ManagedObjectModel {
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("sourceModel"))
 	return ManagedObjectModelFromID(_r)
 }
 
-// DestinationModel wraps the corresponding Objective-C method.
+// DestinationModel returns the destination model.
 func (mm *MigrationManager) DestinationModel() *ManagedObjectModel {
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("destinationModel"))
 	return ManagedObjectModelFromID(_r)
 }
 
-// SourceContext wraps the corresponding Objective-C method.
+// SourceContext returns the source context.
 func (mm *MigrationManager) SourceContext() *ManagedObjectContext {
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("sourceContext"))
 	return ManagedObjectContextFromID(_r)
 }
 
-// DestinationContext wraps the corresponding Objective-C method.
+// DestinationContext returns the destination context.
 func (mm *MigrationManager) DestinationContext() *ManagedObjectContext {
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("destinationContext"))
 	return ManagedObjectContextFromID(_r)
 }
 
-// CurrentEntityMapping wraps the corresponding Objective-C method.
+// CurrentEntityMapping returns the current entity mapping.
 func (mm *MigrationManager) CurrentEntityMapping() *EntityMapping {
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("currentEntityMapping"))
 	return EntityMappingFromID(_r)
 }
 
-// MigrationProgress wraps the corresponding Objective-C method.
+// MigrationProgress returns the migration progress.
 func (mm *MigrationManager) MigrationProgress() float32 {
 	_r := objc.Send[float32](objref.IDOf(mm), objc.RegisterName("migrationProgress"))
 	return _r
 }
 
-// UserInfo wraps the corresponding Objective-C method.
+// UserInfo returns the user info.
 func (mm *MigrationManager) UserInfo() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mm), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)

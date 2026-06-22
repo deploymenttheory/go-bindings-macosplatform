@@ -73,7 +73,7 @@ func (nlgn *NNLossGradientNode) WithLabel(label string) *NNLossGradientNode {
 	return nlgn
 }
 
-// NumberOfClasses wraps the corresponding Objective-C method.
+// NumberOfClasses returns the number of classes.
 func (nlgn *NNLossGradientNode) NumberOfClasses() int {
 	_r := objc.Send[int](objref.IDOf(nlgn), objc.RegisterName("numberOfClasses"))
 	return _r
@@ -85,31 +85,31 @@ func (nlgn *NNLossGradientNode) ReduceAcrossBatch() bool {
 	return _r
 }
 
-// Weight wraps the corresponding Objective-C method.
+// Weight returns the weight.
 func (nlgn *NNLossGradientNode) Weight() float32 {
 	_r := objc.Send[float32](objref.IDOf(nlgn), objc.RegisterName("weight"))
 	return _r
 }
 
-// LabelSmoothing wraps the corresponding Objective-C method.
+// LabelSmoothing returns the label smoothing.
 func (nlgn *NNLossGradientNode) LabelSmoothing() float32 {
 	_r := objc.Send[float32](objref.IDOf(nlgn), objc.RegisterName("labelSmoothing"))
 	return _r
 }
 
-// Epsilon wraps the corresponding Objective-C method.
+// Epsilon returns the epsilon.
 func (nlgn *NNLossGradientNode) Epsilon() float32 {
 	_r := objc.Send[float32](objref.IDOf(nlgn), objc.RegisterName("epsilon"))
 	return _r
 }
 
-// Delta wraps the corresponding Objective-C method.
+// Delta returns the delta.
 func (nlgn *NNLossGradientNode) Delta() float32 {
 	_r := objc.Send[float32](objref.IDOf(nlgn), objc.RegisterName("delta"))
 	return _r
 }
 
-// IsLabelsGradientFilter wraps the corresponding Objective-C method.
+// IsLabelsGradientFilter reports whether the object is labels gradient filter.
 func (nlgn *NNLossGradientNode) IsLabelsGradientFilter() bool {
 	_r := objc.Send[bool](objref.IDOf(nlgn), objc.RegisterName("isLabelsGradientFilter"))
 	return _r

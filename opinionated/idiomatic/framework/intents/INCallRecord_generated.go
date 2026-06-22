@@ -101,7 +101,7 @@ func NewCallRecordWithIdentifierDateCreatedCallerCallRecordTypeCallCapabilityCal
 	return callRecordAdopt(_id)
 }
 
-// Identifier wraps the corresponding Objective-C method.
+// Identifier returns the identifier.
 func (cr *CallRecord) Identifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("identifier"))
 	if _r == 0 {
@@ -110,49 +110,49 @@ func (cr *CallRecord) Identifier() string {
 	return purego.GoString(_r)
 }
 
-// DateCreated wraps the corresponding Objective-C method.
+// DateCreated returns the date created.
 func (cr *CallRecord) DateCreated() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("dateCreated"))
 	return obj.Wrap(_r)
 }
 
-// CallRecordType wraps the corresponding Objective-C method.
+// CallRecordType returns the call record type.
 func (cr *CallRecord) CallRecordType() CallRecordType {
 	_r := objc.Send[CallRecordType](objref.IDOf(cr), objc.RegisterName("callRecordType"))
 	return _r
 }
 
-// CallDuration wraps the corresponding Objective-C method.
+// CallDuration returns the call duration.
 func (cr *CallRecord) CallDuration() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("callDuration"))
 	return obj.Wrap(_r)
 }
 
-// Unseen wraps the corresponding Objective-C method.
+// Unseen returns the unseen.
 func (cr *CallRecord) Unseen() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("unseen"))
 	return obj.Wrap(_r)
 }
 
-// CallCapability wraps the corresponding Objective-C method.
+// CallCapability returns the call capability.
 func (cr *CallRecord) CallCapability() CallCapability {
 	_r := objc.Send[CallCapability](objref.IDOf(cr), objc.RegisterName("callCapability"))
 	return _r
 }
 
-// NumberOfCalls wraps the corresponding Objective-C method.
+// NumberOfCalls returns the number of calls.
 func (cr *CallRecord) NumberOfCalls() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("numberOfCalls"))
 	return obj.Wrap(_r)
 }
 
-// IsCallerIDBlocked wraps the corresponding Objective-C method.
+// IsCallerIDBlocked returns the is caller ID blocked.
 func (cr *CallRecord) IsCallerIDBlocked() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("isCallerIdBlocked"))
 	return obj.Wrap(_r)
 }
 
-// Participants wraps the corresponding Objective-C method.
+// Participants returns the participants.
 //
 // Participants returns the collection as a Go slice.
 func (cr *CallRecord) Participants() []*Person {
@@ -160,7 +160,7 @@ func (cr *CallRecord) Participants() []*Person {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
-// Caller wraps the corresponding Objective-C method.
+// Caller returns the caller.
 func (cr *CallRecord) Caller() *Person {
 	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("caller"))
 	return PersonFromID(_r)

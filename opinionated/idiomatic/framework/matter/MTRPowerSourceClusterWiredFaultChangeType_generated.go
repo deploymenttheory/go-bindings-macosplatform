@@ -70,7 +70,7 @@ func NewMTRPowerSourceClusterWiredFaultChangeType() *MTRPowerSourceClusterWiredF
 	return mTRPowerSourceClusterWiredFaultChangeTypeAdopt(_id)
 }
 
-// Current wraps the corresponding Objective-C method.
+// Current returns the current.
 func (mpscwfct *MTRPowerSourceClusterWiredFaultChangeType) Current() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mpscwfct), objc.RegisterName("current"))
 	return obj.Wrap(_r)
@@ -81,7 +81,7 @@ func (mpscwfct *MTRPowerSourceClusterWiredFaultChangeType) SetCurrent(current ob
 	objc.Send[objc.ID](objref.IDOf(mpscwfct), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
-// Previous wraps the corresponding Objective-C method.
+// Previous returns the previous.
 func (mpscwfct *MTRPowerSourceClusterWiredFaultChangeType) Previous() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mpscwfct), objc.RegisterName("previous"))
 	return obj.Wrap(_r)

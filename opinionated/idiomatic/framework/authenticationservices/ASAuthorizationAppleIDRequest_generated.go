@@ -83,7 +83,7 @@ func (aair *AuthorizationAppleIDRequest) WithRequestedOperation(requestedOperati
 	return aair
 }
 
-// User wraps the corresponding Objective-C method.
+// User returns the user.
 func (aair *AuthorizationAppleIDRequest) User() string {
 	_r := objc.Send[objc.ID](objref.IDOf(aair), objc.RegisterName("user"))
 	if _r == 0 {

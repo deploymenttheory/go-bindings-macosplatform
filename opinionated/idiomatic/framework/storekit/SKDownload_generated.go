@@ -72,19 +72,19 @@ func NewDownload() *Download {
 	return downloadAdopt(_id)
 }
 
-// State wraps the corresponding Objective-C method.
+// State returns the state.
 func (d *Download) State() DownloadState {
 	_r := objc.Send[DownloadState](objref.IDOf(d), objc.RegisterName("state"))
 	return _r
 }
 
-// ExpectedContentLength wraps the corresponding Objective-C method.
+// ExpectedContentLength returns the expected content length.
 func (d *Download) ExpectedContentLength() int64 {
 	_r := objc.Send[int64](objref.IDOf(d), objc.RegisterName("expectedContentLength"))
 	return _r
 }
 
-// ContentIdentifier wraps the corresponding Objective-C method.
+// ContentIdentifier returns the content identifier.
 func (d *Download) ContentIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("contentIdentifier"))
 	if _r == 0 {
@@ -93,13 +93,13 @@ func (d *Download) ContentIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// ContentURL wraps the corresponding Objective-C method.
+// ContentURL returns the content URL.
 func (d *Download) ContentURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("contentURL"))
 	return obj.Wrap(_r)
 }
 
-// ContentVersion wraps the corresponding Objective-C method.
+// ContentVersion returns the content version.
 func (d *Download) ContentVersion() string {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("contentVersion"))
 	if _r == 0 {
@@ -108,19 +108,19 @@ func (d *Download) ContentVersion() string {
 	return purego.GoString(_r)
 }
 
-// Progress wraps the corresponding Objective-C method.
+// Progress returns the progress.
 func (d *Download) Progress() float32 {
 	_r := objc.Send[float32](objref.IDOf(d), objc.RegisterName("progress"))
 	return _r
 }
 
-// TimeRemaining wraps the corresponding Objective-C method.
+// TimeRemaining returns the time remaining.
 func (d *Download) TimeRemaining() float64 {
 	_r := objc.Send[float64](objref.IDOf(d), objc.RegisterName("timeRemaining"))
 	return _r
 }
 
-// Transaction wraps the corresponding Objective-C method.
+// Transaction returns the transaction.
 func (d *Download) Transaction() *PaymentTransaction {
 	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("transaction"))
 	return PaymentTransactionFromID(_r)

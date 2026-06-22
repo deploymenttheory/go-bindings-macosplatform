@@ -80,7 +80,7 @@ func NewSortDescriptorWithCoder(coder *Coder) *SortDescriptor {
 	return sortDescriptorAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (sd *SortDescriptor) WithScriptingProperties(scriptingProperties obj.Object) *SortDescriptor {
 	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return sd
@@ -97,7 +97,7 @@ func (sd *SortDescriptor) CompareObjectToObject(object1 obj.Object, object2 obj.
 	return _r
 }
 
-// Key wraps the corresponding Objective-C method.
+// Key returns the key.
 func (sd *SortDescriptor) Key() string {
 	_r := objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("key"))
 	if _r == 0 {
@@ -112,7 +112,7 @@ func (sd *SortDescriptor) Ascending() bool {
 	return _r
 }
 
-// ReversedSortDescriptor wraps the corresponding Objective-C method.
+// ReversedSortDescriptor returns the reversed sort descriptor.
 func (sd *SortDescriptor) ReversedSortDescriptor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("reversedSortDescriptor"))
 	return obj.Wrap(_r)

@@ -119,7 +119,7 @@ func (sspti *SharingServicePickerToolbarItem) WithBordered(bordered bool) *Shari
 	return sspti
 }
 
-// WithBackgroundTintColor sets the property and returns the receiver so calls can be chained.
+// WithBackgroundTintColor sets the background tint color.
 func (sspti *SharingServicePickerToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *SharingServicePickerToolbarItem {
 	objc.Send[objc.ID](objref.IDOf(sspti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
 	return sspti

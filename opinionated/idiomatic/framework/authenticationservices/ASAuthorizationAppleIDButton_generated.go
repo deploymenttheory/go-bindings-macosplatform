@@ -79,7 +79,7 @@ func (aaib *AuthorizationAppleIDButton) WithCornerRadius(cornerRadius float64) *
 	return aaib
 }
 
-// CornerRadius wraps the corresponding Objective-C method.
+// CornerRadius returns the corner radius.
 func (aaib *AuthorizationAppleIDButton) CornerRadius() float64 {
 	_r := objc.Send[float64](objref.IDOf(aaib), objc.RegisterName("cornerRadius"))
 	return _r

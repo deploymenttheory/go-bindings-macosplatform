@@ -72,7 +72,7 @@ func NewPaymentMethod() *PaymentMethod {
 	return paymentMethodAdopt(_id)
 }
 
-// DisplayName wraps the corresponding Objective-C method.
+// DisplayName returns the display name.
 func (pm *PaymentMethod) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -81,31 +81,31 @@ func (pm *PaymentMethod) DisplayName() string {
 	return purego.GoString(_r)
 }
 
-// Network wraps the corresponding Objective-C method.
+// Network returns the network.
 func (pm *PaymentMethod) Network() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("network"))
 	return obj.Wrap(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (pm *PaymentMethod) Type() PaymentMethodType {
 	_r := objc.Send[PaymentMethodType](objref.IDOf(pm), objc.RegisterName("type"))
 	return _r
 }
 
-// PaymentPass wraps the corresponding Objective-C method.
+// PaymentPass returns the payment pass.
 func (pm *PaymentMethod) PaymentPass() *PaymentPass {
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("paymentPass"))
 	return PaymentPassFromID(_r)
 }
 
-// SecureElementPass wraps the corresponding Objective-C method.
+// SecureElementPass returns the secure element pass.
 func (pm *PaymentMethod) SecureElementPass() *SecureElementPass {
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("secureElementPass"))
 	return SecureElementPassFromID(_r)
 }
 
-// BillingAddress wraps the corresponding Objective-C method.
+// BillingAddress returns the billing address.
 func (pm *PaymentMethod) BillingAddress() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("billingAddress"))
 	return obj.Wrap(_r)

@@ -106,7 +106,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SkipAreaWithParamsCompletion(ctx context
 	}
 }
 
-// ReadAttributeSupportedAreasWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupportedAreasWithCompletion reads attribute supported areas with completion.
 //
 // ReadAttributeSupportedAreasWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeSupportedAreasWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -156,7 +156,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeSupportedAreasWithPara
 	}
 }
 
-// ReadAttributeSupportedMapsWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSupportedMapsWithCompletion reads attribute supported maps with completion.
 //
 // ReadAttributeSupportedMapsWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeSupportedMapsWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -206,7 +206,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeSupportedMapsWithParam
 	}
 }
 
-// ReadAttributeSelectedAreasWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeSelectedAreasWithCompletion reads attribute selected areas with completion.
 //
 // ReadAttributeSelectedAreasWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeSelectedAreasWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -256,7 +256,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeSelectedAreasWithParam
 	}
 }
 
-// ReadAttributeCurrentAreaWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCurrentAreaWithCompletion reads attribute current area with completion.
 //
 // ReadAttributeCurrentAreaWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeCurrentAreaWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -306,7 +306,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeCurrentAreaWithParamsS
 	}
 }
 
-// ReadAttributeEstimatedEndTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeEstimatedEndTimeWithCompletion reads attribute estimated end time with completion.
 //
 // ReadAttributeEstimatedEndTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeEstimatedEndTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -356,7 +356,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeEstimatedEndTimeWithPa
 	}
 }
 
-// ReadAttributeProgressWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeProgressWithCompletion reads attribute progress with completion.
 //
 // ReadAttributeProgressWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeProgressWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -406,7 +406,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeProgressWithParamsSubs
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -456,7 +456,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeGeneratedCommandListWi
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -506,7 +506,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeAcceptedCommandListWit
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -556,7 +556,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeAttributeListWithParam
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -606,7 +606,7 @@ func (mbcsa *MTRBaseClusterServiceArea) SubscribeAttributeFeatureMapWithParamsSu
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcsa *MTRBaseClusterServiceArea) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

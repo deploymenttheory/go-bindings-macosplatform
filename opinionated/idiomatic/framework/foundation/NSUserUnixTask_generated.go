@@ -70,25 +70,25 @@ func (uut *UserUnixTask) WithStandardError(standardError *FileHandle) *UserUnixT
 	return uut
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (uut *UserUnixTask) WithScriptingProperties(scriptingProperties obj.Object) *UserUnixTask {
 	objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return uut
 }
 
-// StandardInput wraps the corresponding Objective-C method.
+// StandardInput returns the standard input.
 func (uut *UserUnixTask) StandardInput() *FileHandle {
 	_r := objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("standardInput"))
 	return FileHandleFromID(_r)
 }
 
-// StandardOutput wraps the corresponding Objective-C method.
+// StandardOutput returns the standard output.
 func (uut *UserUnixTask) StandardOutput() *FileHandle {
 	_r := objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("standardOutput"))
 	return FileHandleFromID(_r)
 }
 
-// StandardError wraps the corresponding Objective-C method.
+// StandardError returns the standard error.
 func (uut *UserUnixTask) StandardError() *FileHandle {
 	_r := objc.Send[objc.ID](objref.IDOf(uut), objc.RegisterName("standardError"))
 	return FileHandleFromID(_r)

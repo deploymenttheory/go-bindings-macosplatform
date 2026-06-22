@@ -50,37 +50,37 @@ func NewMTRNetworkCommissioningClusterWiFiInterfaceScanResult() *MTRNetworkCommi
 	return mTRNetworkCommissioningClusterWiFiInterfaceScanResultAdopt(_id)
 }
 
-// WithSecurity sets the property and returns the receiver so calls can be chained.
+// WithSecurity sets the security.
 func (mnccwfisr *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithSecurity(security obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
 	objc.Send[objc.ID](objref.IDOf(mnccwfisr), objc.RegisterName("setSecurity:"), objref.IDOf(security))
 	return mnccwfisr
 }
 
-// WithSsid sets the property and returns the receiver so calls can be chained.
+// WithSsid sets the ssid.
 func (mnccwfisr *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithSsid(ssid obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
 	objc.Send[objc.ID](objref.IDOf(mnccwfisr), objc.RegisterName("setSsid:"), objref.IDOf(ssid))
 	return mnccwfisr
 }
 
-// WithBssid sets the property and returns the receiver so calls can be chained.
+// WithBssid sets the bssid.
 func (mnccwfisr *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithBssid(bssid obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
 	objc.Send[objc.ID](objref.IDOf(mnccwfisr), objc.RegisterName("setBssid:"), objref.IDOf(bssid))
 	return mnccwfisr
 }
 
-// WithChannel sets the property and returns the receiver so calls can be chained.
+// WithChannel sets the channel.
 func (mnccwfisr *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithChannel(channel obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
 	objc.Send[objc.ID](objref.IDOf(mnccwfisr), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 	return mnccwfisr
 }
 
-// WithWiFiBand sets the property and returns the receiver so calls can be chained.
+// WithWiFiBand sets the wi fi band.
 func (mnccwfisr *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithWiFiBand(wiFiBand obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
 	objc.Send[objc.ID](objref.IDOf(mnccwfisr), objc.RegisterName("setWiFiBand:"), objref.IDOf(wiFiBand))
 	return mnccwfisr
 }
 
-// WithRssi sets the property and returns the receiver so calls can be chained.
+// WithRssi sets the rssi.
 func (mnccwfisr *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithRssi(rssi obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
 	objc.Send[objc.ID](objref.IDOf(mnccwfisr), objc.RegisterName("setRssi:"), objref.IDOf(rssi))
 	return mnccwfisr

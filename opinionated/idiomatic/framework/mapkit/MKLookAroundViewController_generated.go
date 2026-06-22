@@ -117,13 +117,13 @@ func (lavc *LookAroundViewController) WithBadgePosition(badgePosition LookAround
 	return lavc
 }
 
-// Scene wraps the corresponding Objective-C method.
+// Scene returns the scene.
 func (lavc *LookAroundViewController) Scene() *LookAroundScene {
 	_r := objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("scene"))
 	return LookAroundSceneFromID(_r)
 }
 
-// IsNavigationEnabled wraps the corresponding Objective-C method.
+// IsNavigationEnabled reports whether the object is navigation enabled.
 func (lavc *LookAroundViewController) IsNavigationEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(lavc), objc.RegisterName("isNavigationEnabled"))
 	return _r
@@ -135,13 +135,13 @@ func (lavc *LookAroundViewController) ShowsRoadLabels() bool {
 	return _r
 }
 
-// PointOfInterestFilter wraps the corresponding Objective-C method.
+// PointOfInterestFilter returns the point of interest filter.
 func (lavc *LookAroundViewController) PointOfInterestFilter() *PointOfInterestFilter {
 	_r := objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
-// BadgePosition wraps the corresponding Objective-C method.
+// BadgePosition returns the badge position.
 func (lavc *LookAroundViewController) BadgePosition() LookAroundBadgePosition {
 	_r := objc.Send[LookAroundBadgePosition](objref.IDOf(lavc), objc.RegisterName("badgePosition"))
 	return _r

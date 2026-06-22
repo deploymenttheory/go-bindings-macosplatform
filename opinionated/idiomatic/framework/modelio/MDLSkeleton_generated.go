@@ -68,7 +68,7 @@ func (s *Skeleton) WithHidden(hidden bool) *Skeleton {
 	return s
 }
 
-// JointPaths wraps the corresponding Objective-C method.
+// JointPaths returns the joint paths.
 //
 // JointPaths returns the collection as a Go slice.
 func (s *Skeleton) JointPaths() []string {
@@ -76,13 +76,13 @@ func (s *Skeleton) JointPaths() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// JointBindTransforms wraps the corresponding Objective-C method.
+// JointBindTransforms returns the joint bind transforms.
 func (s *Skeleton) JointBindTransforms() *Matrix4x4Array {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("jointBindTransforms"))
 	return Matrix4x4ArrayFromID(_r)
 }
 
-// JointRestTransforms wraps the corresponding Objective-C method.
+// JointRestTransforms returns the joint rest transforms.
 func (s *Skeleton) JointRestTransforms() *Matrix4x4Array {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("jointRestTransforms"))
 	return Matrix4x4ArrayFromID(_r)

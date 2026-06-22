@@ -78,32 +78,32 @@ func (gev *GlassEffectView) WithStyle(style GlassEffectViewStyle) *GlassEffectVi
 	return gev
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (gev *GlassEffectView) WithSubviews(items ...ViewProvider) *GlassEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setSubviews:"), _arr)
 	return gev
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (gev *GlassEffectView) WithHidden(hidden bool) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setHidden:"), hidden)
 	return gev
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (gev *GlassEffectView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return gev
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (gev *GlassEffectView) WithAutoresizesSubviews(autoresizesSubviews bool) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return gev
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (gev *GlassEffectView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return gev
@@ -115,19 +115,19 @@ func (gev *GlassEffectView) WithFrame(frame corefoundation.CGRect) *GlassEffectV
 	return gev
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (gev *GlassEffectView) WithFrameRotation(frameRotation float64) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return gev
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (gev *GlassEffectView) WithFrameCenterRotation(frameCenterRotation float64) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return gev
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (gev *GlassEffectView) WithBoundsRotation(boundsRotation float64) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return gev
@@ -139,7 +139,7 @@ func (gev *GlassEffectView) WithBounds(bounds corefoundation.CGRect) *GlassEffec
 	return gev
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (gev *GlassEffectView) WithCanDrawConcurrently(canDrawConcurrently bool) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return gev
@@ -151,148 +151,148 @@ func (gev *GlassEffectView) WithNeedsDisplay(needsDisplay bool) *GlassEffectView
 	return gev
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (gev *GlassEffectView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return gev
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (gev *GlassEffectView) WithWantsRestingTouches(wantsRestingTouches bool) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return gev
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (gev *GlassEffectView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return gev
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (gev *GlassEffectView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return gev
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (gev *GlassEffectView) WithWantsLayer(wantsLayer bool) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return gev
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (gev *GlassEffectView) WithLayer(layer obj.Object) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return gev
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (gev *GlassEffectView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return gev
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (gev *GlassEffectView) WithNeedsLayout(needsLayout bool) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return gev
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (gev *GlassEffectView) WithAlphaValue(alphaValue float64) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return gev
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (gev *GlassEffectView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return gev
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (gev *GlassEffectView) WithBackgroundFilters(items ...obj.Object) *GlassEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return gev
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (gev *GlassEffectView) WithCompositingFilter(compositingFilter obj.Object) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return gev
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (gev *GlassEffectView) WithContentFilters(items ...obj.Object) *GlassEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setContentFilters:"), _arr)
 	return gev
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (gev *GlassEffectView) WithShadow(shadow *Shadow) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return gev
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (gev *GlassEffectView) WithClipsToBounds(clipsToBounds bool) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return gev
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (gev *GlassEffectView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return gev
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (gev *GlassEffectView) WithToolTip(toolTip string) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return gev
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (gev *GlassEffectView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return gev
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (gev *GlassEffectView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return gev
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (gev *GlassEffectView) WithNextKeyView(nextKeyView ViewProvider) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return gev
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (gev *GlassEffectView) WithFocusRingType(focusRingType FocusRingType) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return gev
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (gev *GlassEffectView) WithGestureRecognizers(items ...GestureRecognizerProvider) *GlassEffectView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return gev
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (gev *GlassEffectView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return gev
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (gev *GlassEffectView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return gev
@@ -304,49 +304,49 @@ func (gev *GlassEffectView) WithPrefersCompactControlSizeMetrics(prefersCompactC
 	return gev
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (gev *GlassEffectView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return gev
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (gev *GlassEffectView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return gev
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (gev *GlassEffectView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return gev
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (gev *GlassEffectView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return gev
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (gev *GlassEffectView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return gev
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (gev *GlassEffectView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return gev
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (gev *GlassEffectView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return gev
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (gev *GlassEffectView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GlassEffectView {
 	objc.Send[objc.ID](objref.IDOf(gev), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return gev

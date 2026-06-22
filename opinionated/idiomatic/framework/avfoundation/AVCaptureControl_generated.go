@@ -74,7 +74,7 @@ func (cc *CaptureControl) WithEnabled(enabled bool) *CaptureControl {
 	return cc
 }
 
-// IsEnabled wraps the corresponding Objective-C method.
+// IsEnabled reports whether the object is enabled.
 func (cc *CaptureControl) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(cc), objc.RegisterName("isEnabled"))
 	return _r

@@ -50,13 +50,13 @@ func NewAnimatedQuaternionArrayWithElementCount(arrayElementCount int) *Animated
 	return animatedQuaternionArrayAdopt(_id)
 }
 
-// WithInterpolation sets the property and returns the receiver so calls can be chained.
+// WithInterpolation sets the interpolation.
 func (aqa *AnimatedQuaternionArray) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedQuaternionArray {
 	objc.Send[objc.ID](objref.IDOf(aqa), objc.RegisterName("setInterpolation:"), interpolation)
 	return aqa
 }
 
-// ElementCount wraps the corresponding Objective-C method.
+// ElementCount returns the element count.
 func (aqa *AnimatedQuaternionArray) ElementCount() int {
 	_r := objc.Send[int](objref.IDOf(aqa), objc.RegisterName("elementCount"))
 	return _r

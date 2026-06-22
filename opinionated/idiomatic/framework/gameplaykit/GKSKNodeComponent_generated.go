@@ -59,7 +59,7 @@ func (snc *SKNodeComponent) WithNode(node obj.Object) *SKNodeComponent {
 	return snc
 }
 
-// Node wraps the corresponding Objective-C method.
+// Node returns the node.
 func (snc *SKNodeComponent) Node() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(snc), objc.RegisterName("node"))
 	return obj.Wrap(_r)

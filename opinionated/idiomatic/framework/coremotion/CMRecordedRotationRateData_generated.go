@@ -52,7 +52,7 @@ func NewRecordedRotationRateData() *RecordedRotationRateData {
 	return recordedRotationRateDataAdopt(_id)
 }
 
-// StartDate wraps the corresponding Objective-C method.
+// StartDate returns the start date.
 func (rrrd *RecordedRotationRateData) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(rrrd), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)

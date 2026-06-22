@@ -99,27 +99,27 @@ func (pi *PlugIn) SetValueForOutputKey(value obj.Object, key string) bool {
 	return _r
 }
 
-// AddInputPortWithTypeForKeyWithAttributes wraps the corresponding Objective-C method.
+// AddInputPortWithTypeForKeyWithAttributes adds input port with type for key with attributes.
 func (pi *PlugIn) AddInputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("addInputPortWithType:forKey:withAttributes:"), purego.NSString(type_), purego.NSString(key), objref.IDOf(attributes))
 }
 
-// RemoveInputPortForKey wraps the corresponding Objective-C method.
+// RemoveInputPortForKey removes input port for key.
 func (pi *PlugIn) RemoveInputPortForKey(key string) {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("removeInputPortForKey:"), purego.NSString(key))
 }
 
-// AddOutputPortWithTypeForKeyWithAttributes wraps the corresponding Objective-C method.
+// AddOutputPortWithTypeForKeyWithAttributes adds output port with type for key with attributes.
 func (pi *PlugIn) AddOutputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("addOutputPortWithType:forKey:withAttributes:"), purego.NSString(type_), purego.NSString(key), objref.IDOf(attributes))
 }
 
-// RemoveOutputPortForKey wraps the corresponding Objective-C method.
+// RemoveOutputPortForKey removes output port for key.
 func (pi *PlugIn) RemoveOutputPortForKey(key string) {
 	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("removeOutputPortForKey:"), purego.NSString(key))
 }
 
-// CreateViewController wraps the corresponding Objective-C method.
+// CreateViewController returns the create view controller.
 func (pi *PlugIn) CreateViewController() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("createViewController"))
 	return obj.Wrap(_r)

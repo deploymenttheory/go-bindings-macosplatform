@@ -50,13 +50,13 @@ func NewMathExpressionSubSuperscriptWithBaseExpressionSubscriptExpressionsSupers
 	return mathExpressionSubSuperscriptAdopt(_id)
 }
 
-// BaseExpression wraps the corresponding Objective-C method.
+// BaseExpression returns the base expression.
 func (mess *MathExpressionSubSuperscript) BaseExpression() *MathExpression {
 	_r := objc.Send[objc.ID](objref.IDOf(mess), objc.RegisterName("baseExpression"))
 	return MathExpressionFromID(_r)
 }
 
-// SubscriptExpressions wraps the corresponding Objective-C method.
+// SubscriptExpressions returns the subscript expressions.
 //
 // SubscriptExpressions returns the collection as a Go slice.
 func (mess *MathExpressionSubSuperscript) SubscriptExpressions() []*MathExpression {
@@ -64,7 +64,7 @@ func (mess *MathExpressionSubSuperscript) SubscriptExpressions() []*MathExpressi
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }
 
-// SuperscriptExpressions wraps the corresponding Objective-C method.
+// SuperscriptExpressions returns the superscript expressions.
 //
 // SuperscriptExpressions returns the collection as a Go slice.
 func (mess *MathExpressionSubSuperscript) SuperscriptExpressions() []*MathExpression {

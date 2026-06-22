@@ -66,13 +66,13 @@ func (mbicle *MTRBasicInformationClusterLeaveEvent) String() string {
 	return rt.Description(objref.IDOf(mbicle))
 }
 
-// WithFabricIndex sets the property and returns the receiver so calls can be chained.
+// WithFabricIndex sets the fabric index.
 func (mbicle *MTRBasicInformationClusterLeaveEvent) WithFabricIndex(fabricIndex obj.Object) *MTRBasicInformationClusterLeaveEvent {
 	objc.Send[objc.ID](objref.IDOf(mbicle), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return mbicle
 }
 
-// FabricIndex wraps the corresponding Objective-C method.
+// FabricIndex returns the fabric index.
 func (mbicle *MTRBasicInformationClusterLeaveEvent) FabricIndex() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mbicle), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)

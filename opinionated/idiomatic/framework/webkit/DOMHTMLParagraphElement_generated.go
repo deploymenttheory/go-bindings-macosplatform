@@ -49,115 +49,115 @@ func NewDOMHTMLParagraphElement() *DOMHTMLParagraphElement {
 	return dOMHTMLParagraphElementAdopt(_id)
 }
 
-// WithAlign sets the property and returns the receiver so calls can be chained.
+// WithAlign sets the align.
 func (dpe *DOMHTMLParagraphElement) WithAlign(align string) *DOMHTMLParagraphElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setAlign:"), purego.NSString(align))
 	return dpe
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (dpe *DOMHTMLParagraphElement) WithTitle(title string) *DOMHTMLParagraphElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return dpe
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (dpe *DOMHTMLParagraphElement) WithLang(lang string) *DOMHTMLParagraphElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return dpe
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (dpe *DOMHTMLParagraphElement) WithDir(dir string) *DOMHTMLParagraphElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return dpe
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (dpe *DOMHTMLParagraphElement) WithTabIndex(tabIndex int) *DOMHTMLParagraphElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setTabIndex:"), tabIndex)
 	return dpe
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (dpe *DOMHTMLParagraphElement) WithAccessKey(accessKey string) *DOMHTMLParagraphElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return dpe
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (dpe *DOMHTMLParagraphElement) WithInnerText(innerText string) *DOMHTMLParagraphElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return dpe
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (dpe *DOMHTMLParagraphElement) WithOuterText(outerText string) *DOMHTMLParagraphElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return dpe
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (dpe *DOMHTMLParagraphElement) WithContentEditable(contentEditable string) *DOMHTMLParagraphElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return dpe
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (dpe *DOMHTMLParagraphElement) WithIDName(idName string) *DOMHTMLParagraphElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return dpe
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (dpe *DOMHTMLParagraphElement) WithScrollLeft(scrollLeft int) *DOMHTMLParagraphElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return dpe
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (dpe *DOMHTMLParagraphElement) WithScrollTop(scrollTop int) *DOMHTMLParagraphElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setScrollTop:"), scrollTop)
 	return dpe
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (dpe *DOMHTMLParagraphElement) WithInnerHTML(innerHTML string) *DOMHTMLParagraphElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return dpe
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (dpe *DOMHTMLParagraphElement) WithOuterHTML(outerHTML string) *DOMHTMLParagraphElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return dpe
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (dpe *DOMHTMLParagraphElement) WithClassName(className string) *DOMHTMLParagraphElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return dpe
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dpe *DOMHTMLParagraphElement) WithNodeValue(nodeValue string) *DOMHTMLParagraphElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dpe
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dpe *DOMHTMLParagraphElement) WithPrefix(prefix string) *DOMHTMLParagraphElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dpe
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dpe *DOMHTMLParagraphElement) WithTextContent(textContent string) *DOMHTMLParagraphElement {
 	objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dpe
 }
 
-// Align wraps the corresponding Objective-C method.
+// Align returns the align.
 func (dpe *DOMHTMLParagraphElement) Align() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dpe), objc.RegisterName("align"))
 	if _r == 0 {

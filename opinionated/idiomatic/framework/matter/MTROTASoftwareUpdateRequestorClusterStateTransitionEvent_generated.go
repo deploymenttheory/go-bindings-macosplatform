@@ -66,49 +66,49 @@ func (msurcste *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) String
 	return rt.Description(objref.IDOf(msurcste))
 }
 
-// WithPreviousState sets the property and returns the receiver so calls can be chained.
+// WithPreviousState sets the previous state.
 func (msurcste *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) WithPreviousState(previousState obj.Object) *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent {
 	objc.Send[objc.ID](objref.IDOf(msurcste), objc.RegisterName("setPreviousState:"), objref.IDOf(previousState))
 	return msurcste
 }
 
-// WithNewState sets the property and returns the receiver so calls can be chained.
+// WithNewState sets the new state.
 func (msurcste *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) WithNewState(newState obj.Object) *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent {
 	objc.Send[objc.ID](objref.IDOf(msurcste), objc.RegisterName("setNewState:"), objref.IDOf(newState))
 	return msurcste
 }
 
-// WithReason sets the property and returns the receiver so calls can be chained.
+// WithReason sets the reason.
 func (msurcste *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) WithReason(reason obj.Object) *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent {
 	objc.Send[objc.ID](objref.IDOf(msurcste), objc.RegisterName("setReason:"), objref.IDOf(reason))
 	return msurcste
 }
 
-// WithTargetSoftwareVersion sets the property and returns the receiver so calls can be chained.
+// WithTargetSoftwareVersion sets the target software version.
 func (msurcste *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) WithTargetSoftwareVersion(targetSoftwareVersion obj.Object) *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent {
 	objc.Send[objc.ID](objref.IDOf(msurcste), objc.RegisterName("setTargetSoftwareVersion:"), objref.IDOf(targetSoftwareVersion))
 	return msurcste
 }
 
-// PreviousState wraps the corresponding Objective-C method.
+// PreviousState returns the previous state.
 func (msurcste *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) PreviousState() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msurcste), objc.RegisterName("previousState"))
 	return obj.Wrap(_r)
 }
 
-// GetNewState wraps the corresponding Objective-C method.
-func (msurcste *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) GetNewState() obj.Object {
+// NewState returns the new state.
+func (msurcste *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) NewState() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msurcste), objc.RegisterName("getNewState"))
 	return obj.Wrap(_r)
 }
 
-// Reason wraps the corresponding Objective-C method.
+// Reason returns the reason.
 func (msurcste *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) Reason() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msurcste), objc.RegisterName("reason"))
 	return obj.Wrap(_r)
 }
 
-// TargetSoftwareVersion wraps the corresponding Objective-C method.
+// TargetSoftwareVersion returns the target software version.
 func (msurcste *MTROTASoftwareUpdateRequestorClusterStateTransitionEvent) TargetSoftwareVersion() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msurcste), objc.RegisterName("targetSoftwareVersion"))
 	return obj.Wrap(_r)

@@ -114,31 +114,31 @@ func (ac *AppearanceCharacteristics) WithDownCaption(downCaption string) *Appear
 	return ac
 }
 
-// ControlType wraps the corresponding Objective-C method.
+// ControlType returns the control type.
 func (ac *AppearanceCharacteristics) ControlType() WidgetControlType {
 	_r := objc.Send[WidgetControlType](objref.IDOf(ac), objc.RegisterName("controlType"))
 	return _r
 }
 
-// BackgroundColor wraps the corresponding Objective-C method.
+// BackgroundColor returns the background color.
 func (ac *AppearanceCharacteristics) BackgroundColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
 }
 
-// BorderColor wraps the corresponding Objective-C method.
+// BorderColor returns the border color.
 func (ac *AppearanceCharacteristics) BorderColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("borderColor"))
 	return obj.Wrap(_r)
 }
 
-// Rotation wraps the corresponding Objective-C method.
+// Rotation returns the rotation.
 func (ac *AppearanceCharacteristics) Rotation() int {
 	_r := objc.Send[int](objref.IDOf(ac), objc.RegisterName("rotation"))
 	return _r
 }
 
-// Caption wraps the corresponding Objective-C method.
+// Caption returns the caption.
 func (ac *AppearanceCharacteristics) Caption() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("caption"))
 	if _r == 0 {
@@ -147,7 +147,7 @@ func (ac *AppearanceCharacteristics) Caption() string {
 	return purego.GoString(_r)
 }
 
-// RolloverCaption wraps the corresponding Objective-C method.
+// RolloverCaption returns the rollover caption.
 func (ac *AppearanceCharacteristics) RolloverCaption() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("rolloverCaption"))
 	if _r == 0 {
@@ -156,7 +156,7 @@ func (ac *AppearanceCharacteristics) RolloverCaption() string {
 	return purego.GoString(_r)
 }
 
-// DownCaption wraps the corresponding Objective-C method.
+// DownCaption returns the down caption.
 func (ac *AppearanceCharacteristics) DownCaption() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("downCaption"))
 	if _r == 0 {
@@ -165,7 +165,7 @@ func (ac *AppearanceCharacteristics) DownCaption() string {
 	return purego.GoString(_r)
 }
 
-// AppearanceCharacteristicsKeyValues wraps the corresponding Objective-C method.
+// AppearanceCharacteristicsKeyValues returns the appearance characteristics key values.
 func (ac *AppearanceCharacteristics) AppearanceCharacteristicsKeyValues() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("appearanceCharacteristicsKeyValues"))
 	return obj.Wrap(_r)

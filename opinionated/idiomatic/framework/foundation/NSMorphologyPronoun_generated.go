@@ -73,13 +73,13 @@ func NewMorphologyPronounWithPronounMorphologyDependentMorphology(pronoun string
 	return morphologyPronounAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (mp *MorphologyPronoun) WithScriptingProperties(scriptingProperties obj.Object) *MorphologyPronoun {
 	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return mp
 }
 
-// Pronoun wraps the corresponding Objective-C method.
+// Pronoun returns the pronoun.
 func (mp *MorphologyPronoun) Pronoun() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("pronoun"))
 	if _r == 0 {
@@ -88,13 +88,13 @@ func (mp *MorphologyPronoun) Pronoun() string {
 	return purego.GoString(_r)
 }
 
-// Morphology wraps the corresponding Objective-C method.
+// Morphology returns the morphology.
 func (mp *MorphologyPronoun) Morphology() *Morphology {
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("morphology"))
 	return MorphologyFromID(_r)
 }
 
-// DependentMorphology wraps the corresponding Objective-C method.
+// DependentMorphology returns the dependent morphology.
 func (mp *MorphologyPronoun) DependentMorphology() *Morphology {
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("dependentMorphology"))
 	return MorphologyFromID(_r)

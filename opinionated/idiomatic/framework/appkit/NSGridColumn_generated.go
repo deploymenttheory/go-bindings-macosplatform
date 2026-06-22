@@ -73,31 +73,31 @@ func NewGridColumn() *GridColumn {
 	return gridColumnAdopt(_id)
 }
 
-// WithXPlacement sets the property and returns the receiver so calls can be chained.
+// WithXPlacement sets the x placement.
 func (gc *GridColumn) WithXPlacement(xPlacement GridCellPlacement) *GridColumn {
 	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setXPlacement:"), xPlacement)
 	return gc
 }
 
-// WithWidth sets the property and returns the receiver so calls can be chained.
+// WithWidth sets the width.
 func (gc *GridColumn) WithWidth(width float64) *GridColumn {
 	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setWidth:"), width)
 	return gc
 }
 
-// WithLeadingPadding sets the property and returns the receiver so calls can be chained.
+// WithLeadingPadding sets the leading padding.
 func (gc *GridColumn) WithLeadingPadding(leadingPadding float64) *GridColumn {
 	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setLeadingPadding:"), leadingPadding)
 	return gc
 }
 
-// WithTrailingPadding sets the property and returns the receiver so calls can be chained.
+// WithTrailingPadding sets the trailing padding.
 func (gc *GridColumn) WithTrailingPadding(trailingPadding float64) *GridColumn {
 	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setTrailingPadding:"), trailingPadding)
 	return gc
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (gc *GridColumn) WithHidden(hidden bool) *GridColumn {
 	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setHidden:"), hidden)
 	return gc
@@ -114,43 +114,43 @@ func (gc *GridColumn) MergeCellsInRange(range_ foundation.NSRange) {
 	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("mergeCellsInRange:"), range_)
 }
 
-// GridView wraps the corresponding Objective-C method.
+// GridView returns the grid view.
 func (gc *GridColumn) GridView() *GridView {
 	_r := objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("gridView"))
 	return GridViewFromID(_r)
 }
 
-// NumberOfCells wraps the corresponding Objective-C method.
+// NumberOfCells returns the number of cells.
 func (gc *GridColumn) NumberOfCells() int {
 	_r := objc.Send[int](objref.IDOf(gc), objc.RegisterName("numberOfCells"))
 	return _r
 }
 
-// XPlacement wraps the corresponding Objective-C method.
+// XPlacement returns the x placement.
 func (gc *GridColumn) XPlacement() GridCellPlacement {
 	_r := objc.Send[GridCellPlacement](objref.IDOf(gc), objc.RegisterName("xPlacement"))
 	return _r
 }
 
-// Width wraps the corresponding Objective-C method.
+// Width returns the width.
 func (gc *GridColumn) Width() float64 {
 	_r := objc.Send[float64](objref.IDOf(gc), objc.RegisterName("width"))
 	return _r
 }
 
-// LeadingPadding wraps the corresponding Objective-C method.
+// LeadingPadding returns the leading padding.
 func (gc *GridColumn) LeadingPadding() float64 {
 	_r := objc.Send[float64](objref.IDOf(gc), objc.RegisterName("leadingPadding"))
 	return _r
 }
 
-// TrailingPadding wraps the corresponding Objective-C method.
+// TrailingPadding returns the trailing padding.
 func (gc *GridColumn) TrailingPadding() float64 {
 	_r := objc.Send[float64](objref.IDOf(gc), objc.RegisterName("trailingPadding"))
 	return _r
 }
 
-// IsHidden wraps the corresponding Objective-C method.
+// IsHidden reports whether the object is hidden.
 func (gc *GridColumn) IsHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(gc), objc.RegisterName("isHidden"))
 	return _r

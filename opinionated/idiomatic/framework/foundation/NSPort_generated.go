@@ -68,7 +68,7 @@ func (p *Port) String() string {
 	return rt.Description(objref.IDOf(p))
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (p *Port) WithScriptingProperties(scriptingProperties obj.Object) *Port {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return p
@@ -84,18 +84,18 @@ func (p *Port) ScheduleInRunLoopForMode(runLoop *RunLoop, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
-// RemoveFromRunLoopForMode wraps the corresponding Objective-C method.
+// RemoveFromRunLoopForMode removes from run loop for mode.
 func (p *Port) RemoveFromRunLoopForMode(runLoop *RunLoop, mode *String) {
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
-// SendBeforeDateComponentsFromReserved wraps the corresponding Objective-C method.
+// SendBeforeDateComponentsFromReserved sends before date components from reserved.
 func (p *Port) SendBeforeDateComponentsFromReserved(limitDate *Date, components obj.Object, receivePort *Port, headerSpaceReserved int) bool {
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("sendBeforeDate:components:from:reserved:"), objref.IDOf(limitDate), objref.IDOf(components), objref.IDOf(receivePort), headerSpaceReserved)
 	return _r
 }
 
-// SendBeforeDateMsgidComponentsFromReserved wraps the corresponding Objective-C method.
+// SendBeforeDateMsgidComponentsFromReserved sends before date msgid components from reserved.
 func (p *Port) SendBeforeDateMsgidComponentsFromReserved(limitDate *Date, msgID int, components obj.Object, receivePort *Port, headerSpaceReserved int) bool {
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("sendBeforeDate:msgid:components:from:reserved:"), objref.IDOf(limitDate), msgID, objref.IDOf(components), objref.IDOf(receivePort), headerSpaceReserved)
 	return _r
@@ -111,13 +111,13 @@ func (p *Port) RemoveConnectionFromRunLoopForMode(conn *Connection, runLoop *Run
 	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("removeConnection:fromRunLoop:forMode:"), objref.IDOf(conn), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
-// IsValid wraps the corresponding Objective-C method.
+// IsValid reports whether the object is valid.
 func (p *Port) IsValid() bool {
 	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isValid"))
 	return _r
 }
 
-// ReservedSpaceLength wraps the corresponding Objective-C method.
+// ReservedSpaceLength returns the reserved space length.
 func (p *Port) ReservedSpaceLength() int {
 	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("reservedSpaceLength"))
 	return _r

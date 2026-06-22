@@ -78,25 +78,25 @@ func NewMTRServiceAreaClusterSelectAreasResponseParamsWithResponseValueError(res
 	return mTRServiceAreaClusterSelectAreasResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) WithStatus(status obj.Object) *MTRServiceAreaClusterSelectAreasResponseParams {
 	objc.Send[objc.ID](objref.IDOf(msacsarp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return msacsarp
 }
 
-// WithStatusText sets the property and returns the receiver so calls can be chained.
+// WithStatusText sets the status text.
 func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) WithStatusText(statusText string) *MTRServiceAreaClusterSelectAreasResponseParams {
 	objc.Send[objc.ID](objref.IDOf(msacsarp), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
 	return msacsarp
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(msacsarp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// StatusText wraps the corresponding Objective-C method.
+// StatusText returns the status text.
 func (msacsarp *MTRServiceAreaClusterSelectAreasResponseParams) StatusText() string {
 	_r := objc.Send[objc.ID](objref.IDOf(msacsarp), objc.RegisterName("statusText"))
 	if _r == 0 {

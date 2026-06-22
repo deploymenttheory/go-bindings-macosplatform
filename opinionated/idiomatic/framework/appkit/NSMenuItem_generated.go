@@ -115,7 +115,7 @@ func (mi *MenuItem) WithKeyEquivalentModifierMask(keyEquivalentModifierMask Even
 	return mi
 }
 
-// WithAllowsKeyEquivalentWhenHidden sets the property and returns the receiver so calls can be chained.
+// WithAllowsKeyEquivalentWhenHidden sets the allows key equivalent when hidden.
 func (mi *MenuItem) WithAllowsKeyEquivalentWhenHidden(allowsKeyEquivalentWhenHidden bool) *MenuItem {
 	objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("setAllowsKeyEquivalentWhenHidden:"), allowsKeyEquivalentWhenHidden)
 	return mi
@@ -223,31 +223,31 @@ func (mi *MenuItem) WithBadge(badge *MenuItemBadge) *MenuItem {
 	return mi
 }
 
-// Menu wraps the corresponding Objective-C method.
+// Menu returns the menu.
 func (mi *MenuItem) Menu() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("menu"))
 	return MenuFromID(_r)
 }
 
-// HasSubmenu wraps the corresponding Objective-C method.
+// HasSubmenu reports whether the object has submenu.
 func (mi *MenuItem) HasSubmenu() bool {
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("hasSubmenu"))
 	return _r
 }
 
-// Submenu wraps the corresponding Objective-C method.
+// Submenu returns the submenu.
 func (mi *MenuItem) Submenu() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("submenu"))
 	return MenuFromID(_r)
 }
 
-// ParentItem wraps the corresponding Objective-C method.
+// ParentItem returns the parent item.
 func (mi *MenuItem) ParentItem() *MenuItem {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("parentItem"))
 	return MenuItemFromID(_r)
 }
 
-// Title wraps the corresponding Objective-C method.
+// Title returns the title.
 func (mi *MenuItem) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("title"))
 	if _r == 0 {
@@ -256,7 +256,7 @@ func (mi *MenuItem) Title() string {
 	return purego.GoString(_r)
 }
 
-// AttributedTitle wraps the corresponding Objective-C method.
+// AttributedTitle returns the attributed title.
 func (mi *MenuItem) AttributedTitle() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("attributedTitle"))
 	return obj.Wrap(_r)
@@ -271,7 +271,7 @@ func (mi *MenuItem) Subtitle() string {
 	return purego.GoString(_r)
 }
 
-// IsSeparatorItem wraps the corresponding Objective-C method.
+// IsSeparatorItem reports whether the object is separator item.
 func (mi *MenuItem) IsSeparatorItem() bool {
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isSeparatorItem"))
 	return _r
@@ -283,7 +283,7 @@ func (mi *MenuItem) IsSectionHeader() bool {
 	return _r
 }
 
-// KeyEquivalent wraps the corresponding Objective-C method.
+// KeyEquivalent returns the key equivalent.
 func (mi *MenuItem) KeyEquivalent() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("keyEquivalent"))
 	if _r == 0 {
@@ -292,13 +292,13 @@ func (mi *MenuItem) KeyEquivalent() string {
 	return purego.GoString(_r)
 }
 
-// KeyEquivalentModifierMask wraps the corresponding Objective-C method.
+// KeyEquivalentModifierMask returns the key equivalent modifier mask.
 func (mi *MenuItem) KeyEquivalentModifierMask() EventModifierFlags {
 	_r := objc.Send[EventModifierFlags](objref.IDOf(mi), objc.RegisterName("keyEquivalentModifierMask"))
 	return _r
 }
 
-// UserKeyEquivalent wraps the corresponding Objective-C method.
+// UserKeyEquivalent returns the user key equivalent.
 func (mi *MenuItem) UserKeyEquivalent() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("userKeyEquivalent"))
 	if _r == 0 {
@@ -325,97 +325,97 @@ func (mi *MenuItem) AllowsAutomaticKeyEquivalentMirroring() bool {
 	return _r
 }
 
-// Image wraps the corresponding Objective-C method.
+// Image returns the image.
 func (mi *MenuItem) Image() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
-// State wraps the corresponding Objective-C method.
+// State returns the state.
 func (mi *MenuItem) State() int {
 	_r := objc.Send[int](objref.IDOf(mi), objc.RegisterName("state"))
 	return _r
 }
 
-// OnStateImage wraps the corresponding Objective-C method.
+// OnStateImage returns the on state image.
 func (mi *MenuItem) OnStateImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("onStateImage"))
 	return ImageFromID(_r)
 }
 
-// OffStateImage wraps the corresponding Objective-C method.
+// OffStateImage returns the off state image.
 func (mi *MenuItem) OffStateImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("offStateImage"))
 	return ImageFromID(_r)
 }
 
-// MixedStateImage wraps the corresponding Objective-C method.
+// MixedStateImage returns the mixed state image.
 func (mi *MenuItem) MixedStateImage() *Image {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("mixedStateImage"))
 	return ImageFromID(_r)
 }
 
-// IsEnabled wraps the corresponding Objective-C method.
+// IsEnabled reports whether the object is enabled.
 func (mi *MenuItem) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isEnabled"))
 	return _r
 }
 
-// IsAlternate wraps the corresponding Objective-C method.
+// IsAlternate reports whether the object is alternate.
 func (mi *MenuItem) IsAlternate() bool {
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isAlternate"))
 	return _r
 }
 
-// IndentationLevel wraps the corresponding Objective-C method.
+// IndentationLevel returns the indentation level.
 func (mi *MenuItem) IndentationLevel() int {
 	_r := objc.Send[int](objref.IDOf(mi), objc.RegisterName("indentationLevel"))
 	return _r
 }
 
-// Target wraps the corresponding Objective-C method.
+// Target returns the target.
 func (mi *MenuItem) Target() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("target"))
 	return obj.Wrap(_r)
 }
 
-// Tag wraps the corresponding Objective-C method.
+// Tag returns the tag.
 func (mi *MenuItem) Tag() int {
 	_r := objc.Send[int](objref.IDOf(mi), objc.RegisterName("tag"))
 	return _r
 }
 
-// RepresentedObject wraps the corresponding Objective-C method.
+// RepresentedObject returns the represented object.
 func (mi *MenuItem) RepresentedObject() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("representedObject"))
 	return obj.Wrap(_r)
 }
 
-// View wraps the corresponding Objective-C method.
+// View returns the view.
 func (mi *MenuItem) View() *View {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
-// IsHighlighted wraps the corresponding Objective-C method.
+// IsHighlighted reports whether the object is highlighted.
 func (mi *MenuItem) IsHighlighted() bool {
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isHighlighted"))
 	return _r
 }
 
-// IsHidden wraps the corresponding Objective-C method.
+// IsHidden reports whether the object is hidden.
 func (mi *MenuItem) IsHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isHidden"))
 	return _r
 }
 
-// IsHiddenOrHasHiddenAncestor wraps the corresponding Objective-C method.
+// IsHiddenOrHasHiddenAncestor reports whether the object is hidden or has hidden ancestor.
 func (mi *MenuItem) IsHiddenOrHasHiddenAncestor() bool {
 	_r := objc.Send[bool](objref.IDOf(mi), objc.RegisterName("isHiddenOrHasHiddenAncestor"))
 	return _r
 }
 
-// ToolTip wraps the corresponding Objective-C method.
+// ToolTip returns the tool tip.
 func (mi *MenuItem) ToolTip() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mi), objc.RegisterName("toolTip"))
 	if _r == 0 {

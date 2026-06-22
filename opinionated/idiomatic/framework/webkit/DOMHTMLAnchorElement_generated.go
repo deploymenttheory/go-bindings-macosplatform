@@ -50,169 +50,169 @@ func NewDOMHTMLAnchorElement() *DOMHTMLAnchorElement {
 	return dOMHTMLAnchorElementAdopt(_id)
 }
 
-// WithCharset sets the property and returns the receiver so calls can be chained.
+// WithCharset sets the charset.
 func (dae *DOMHTMLAnchorElement) WithCharset(charset string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setCharset:"), purego.NSString(charset))
 	return dae
 }
 
-// WithCoords sets the property and returns the receiver so calls can be chained.
+// WithCoords sets the coords.
 func (dae *DOMHTMLAnchorElement) WithCoords(coords string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setCoords:"), purego.NSString(coords))
 	return dae
 }
 
-// WithHreflang sets the property and returns the receiver so calls can be chained.
+// WithHreflang sets the hreflang.
 func (dae *DOMHTMLAnchorElement) WithHreflang(hreflang string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setHreflang:"), purego.NSString(hreflang))
 	return dae
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (dae *DOMHTMLAnchorElement) WithName(name string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setName:"), purego.NSString(name))
 	return dae
 }
 
-// WithRel sets the property and returns the receiver so calls can be chained.
+// WithRel sets the rel.
 func (dae *DOMHTMLAnchorElement) WithRel(rel string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setRel:"), purego.NSString(rel))
 	return dae
 }
 
-// WithRev sets the property and returns the receiver so calls can be chained.
+// WithRev sets the rev.
 func (dae *DOMHTMLAnchorElement) WithRev(rev string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setRev:"), purego.NSString(rev))
 	return dae
 }
 
-// WithShape sets the property and returns the receiver so calls can be chained.
+// WithShape sets the shape.
 func (dae *DOMHTMLAnchorElement) WithShape(shape string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setShape:"), purego.NSString(shape))
 	return dae
 }
 
-// WithTarget sets the property and returns the receiver so calls can be chained.
+// WithTarget sets the target.
 func (dae *DOMHTMLAnchorElement) WithTarget(target string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setTarget:"), purego.NSString(target))
 	return dae
 }
 
-// WithType sets the property and returns the receiver so calls can be chained.
+// WithType sets the type.
 func (dae *DOMHTMLAnchorElement) WithType(type_ string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setType:"), purego.NSString(type_))
 	return dae
 }
 
-// WithHref sets the property and returns the receiver so calls can be chained.
+// WithHref sets the href.
 func (dae *DOMHTMLAnchorElement) WithHref(href string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setHref:"), purego.NSString(href))
 	return dae
 }
 
-// WithTitle sets the property and returns the receiver so calls can be chained.
+// WithTitle sets the title.
 func (dae *DOMHTMLAnchorElement) WithTitle(title string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return dae
 }
 
-// WithLang sets the property and returns the receiver so calls can be chained.
+// WithLang sets the lang.
 func (dae *DOMHTMLAnchorElement) WithLang(lang string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return dae
 }
 
-// WithDir sets the property and returns the receiver so calls can be chained.
+// WithDir sets the dir.
 func (dae *DOMHTMLAnchorElement) WithDir(dir string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return dae
 }
 
-// WithTabIndex sets the property and returns the receiver so calls can be chained.
+// WithTabIndex sets the tab index.
 func (dae *DOMHTMLAnchorElement) WithTabIndex(tabIndex int) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setTabIndex:"), tabIndex)
 	return dae
 }
 
-// WithAccessKey sets the property and returns the receiver so calls can be chained.
+// WithAccessKey sets the access key.
 func (dae *DOMHTMLAnchorElement) WithAccessKey(accessKey string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return dae
 }
 
-// WithInnerText sets the property and returns the receiver so calls can be chained.
+// WithInnerText sets the inner text.
 func (dae *DOMHTMLAnchorElement) WithInnerText(innerText string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return dae
 }
 
-// WithOuterText sets the property and returns the receiver so calls can be chained.
+// WithOuterText sets the outer text.
 func (dae *DOMHTMLAnchorElement) WithOuterText(outerText string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return dae
 }
 
-// WithContentEditable sets the property and returns the receiver so calls can be chained.
+// WithContentEditable sets the content editable.
 func (dae *DOMHTMLAnchorElement) WithContentEditable(contentEditable string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return dae
 }
 
-// WithIDName sets the property and returns the receiver so calls can be chained.
+// WithIDName sets the ID name.
 func (dae *DOMHTMLAnchorElement) WithIDName(idName string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return dae
 }
 
-// WithScrollLeft sets the property and returns the receiver so calls can be chained.
+// WithScrollLeft sets the scroll left.
 func (dae *DOMHTMLAnchorElement) WithScrollLeft(scrollLeft int) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return dae
 }
 
-// WithScrollTop sets the property and returns the receiver so calls can be chained.
+// WithScrollTop sets the scroll top.
 func (dae *DOMHTMLAnchorElement) WithScrollTop(scrollTop int) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setScrollTop:"), scrollTop)
 	return dae
 }
 
-// WithInnerHTML sets the property and returns the receiver so calls can be chained.
+// WithInnerHTML sets the inner HTML.
 func (dae *DOMHTMLAnchorElement) WithInnerHTML(innerHTML string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return dae
 }
 
-// WithOuterHTML sets the property and returns the receiver so calls can be chained.
+// WithOuterHTML sets the outer HTML.
 func (dae *DOMHTMLAnchorElement) WithOuterHTML(outerHTML string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return dae
 }
 
-// WithClassName sets the property and returns the receiver so calls can be chained.
+// WithClassName sets the class name.
 func (dae *DOMHTMLAnchorElement) WithClassName(className string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return dae
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (dae *DOMHTMLAnchorElement) WithNodeValue(nodeValue string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return dae
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (dae *DOMHTMLAnchorElement) WithPrefix(prefix string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return dae
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (dae *DOMHTMLAnchorElement) WithTextContent(textContent string) *DOMHTMLAnchorElement {
 	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return dae
 }
 
-// Charset wraps the corresponding Objective-C method.
+// Charset returns the charset.
 func (dae *DOMHTMLAnchorElement) Charset() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("charset"))
 	if _r == 0 {
@@ -221,7 +221,7 @@ func (dae *DOMHTMLAnchorElement) Charset() string {
 	return purego.GoString(_r)
 }
 
-// Coords wraps the corresponding Objective-C method.
+// Coords returns the coords.
 func (dae *DOMHTMLAnchorElement) Coords() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("coords"))
 	if _r == 0 {
@@ -230,7 +230,7 @@ func (dae *DOMHTMLAnchorElement) Coords() string {
 	return purego.GoString(_r)
 }
 
-// Hreflang wraps the corresponding Objective-C method.
+// Hreflang returns the hreflang.
 func (dae *DOMHTMLAnchorElement) Hreflang() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("hreflang"))
 	if _r == 0 {
@@ -239,7 +239,7 @@ func (dae *DOMHTMLAnchorElement) Hreflang() string {
 	return purego.GoString(_r)
 }
 
-// Name wraps the corresponding Objective-C method.
+// Name returns the name.
 func (dae *DOMHTMLAnchorElement) Name() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("name"))
 	if _r == 0 {
@@ -248,7 +248,7 @@ func (dae *DOMHTMLAnchorElement) Name() string {
 	return purego.GoString(_r)
 }
 
-// Rel wraps the corresponding Objective-C method.
+// Rel returns the rel.
 func (dae *DOMHTMLAnchorElement) Rel() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("rel"))
 	if _r == 0 {
@@ -257,7 +257,7 @@ func (dae *DOMHTMLAnchorElement) Rel() string {
 	return purego.GoString(_r)
 }
 
-// Rev wraps the corresponding Objective-C method.
+// Rev returns the rev.
 func (dae *DOMHTMLAnchorElement) Rev() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("rev"))
 	if _r == 0 {
@@ -266,7 +266,7 @@ func (dae *DOMHTMLAnchorElement) Rev() string {
 	return purego.GoString(_r)
 }
 
-// Shape wraps the corresponding Objective-C method.
+// Shape returns the shape.
 func (dae *DOMHTMLAnchorElement) Shape() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("shape"))
 	if _r == 0 {
@@ -275,7 +275,7 @@ func (dae *DOMHTMLAnchorElement) Shape() string {
 	return purego.GoString(_r)
 }
 
-// Target wraps the corresponding Objective-C method.
+// Target returns the target.
 func (dae *DOMHTMLAnchorElement) Target() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("target"))
 	if _r == 0 {
@@ -284,7 +284,7 @@ func (dae *DOMHTMLAnchorElement) Target() string {
 	return purego.GoString(_r)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (dae *DOMHTMLAnchorElement) Type() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("type"))
 	if _r == 0 {
@@ -293,7 +293,7 @@ func (dae *DOMHTMLAnchorElement) Type() string {
 	return purego.GoString(_r)
 }
 
-// Text wraps the corresponding Objective-C method.
+// Text returns the text.
 func (dae *DOMHTMLAnchorElement) Text() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("text"))
 	if _r == 0 {
@@ -302,13 +302,13 @@ func (dae *DOMHTMLAnchorElement) Text() string {
 	return purego.GoString(_r)
 }
 
-// AbsoluteLinkURL wraps the corresponding Objective-C method.
+// AbsoluteLinkURL returns the absolute link URL.
 func (dae *DOMHTMLAnchorElement) AbsoluteLinkURL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("absoluteLinkURL"))
 	return obj.Wrap(_r)
 }
 
-// Href wraps the corresponding Objective-C method.
+// Href returns the href.
 func (dae *DOMHTMLAnchorElement) Href() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("href"))
 	if _r == 0 {
@@ -317,7 +317,7 @@ func (dae *DOMHTMLAnchorElement) Href() string {
 	return purego.GoString(_r)
 }
 
-// Protocol wraps the corresponding Objective-C method.
+// Protocol returns the protocol.
 func (dae *DOMHTMLAnchorElement) Protocol() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("protocol"))
 	if _r == 0 {
@@ -326,7 +326,7 @@ func (dae *DOMHTMLAnchorElement) Protocol() string {
 	return purego.GoString(_r)
 }
 
-// Host wraps the corresponding Objective-C method.
+// Host returns the host.
 func (dae *DOMHTMLAnchorElement) Host() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("host"))
 	if _r == 0 {
@@ -335,7 +335,7 @@ func (dae *DOMHTMLAnchorElement) Host() string {
 	return purego.GoString(_r)
 }
 
-// Hostname wraps the corresponding Objective-C method.
+// Hostname returns the hostname.
 func (dae *DOMHTMLAnchorElement) Hostname() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("hostname"))
 	if _r == 0 {
@@ -344,7 +344,7 @@ func (dae *DOMHTMLAnchorElement) Hostname() string {
 	return purego.GoString(_r)
 }
 
-// Port wraps the corresponding Objective-C method.
+// Port returns the port.
 func (dae *DOMHTMLAnchorElement) Port() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("port"))
 	if _r == 0 {
@@ -353,7 +353,7 @@ func (dae *DOMHTMLAnchorElement) Port() string {
 	return purego.GoString(_r)
 }
 
-// Pathname wraps the corresponding Objective-C method.
+// Pathname returns the pathname.
 func (dae *DOMHTMLAnchorElement) Pathname() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("pathname"))
 	if _r == 0 {
@@ -362,7 +362,7 @@ func (dae *DOMHTMLAnchorElement) Pathname() string {
 	return purego.GoString(_r)
 }
 
-// Search wraps the corresponding Objective-C method.
+// Search returns the search.
 func (dae *DOMHTMLAnchorElement) Search() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("search"))
 	if _r == 0 {
@@ -371,7 +371,7 @@ func (dae *DOMHTMLAnchorElement) Search() string {
 	return purego.GoString(_r)
 }
 
-// HashName wraps the corresponding Objective-C method.
+// HashName returns the hash name.
 func (dae *DOMHTMLAnchorElement) HashName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("hashName"))
 	if _r == 0 {

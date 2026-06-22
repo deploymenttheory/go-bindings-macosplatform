@@ -185,13 +185,13 @@ func (wc *WindowController) ShowWindow(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("showWindow:"), objref.IDOf(sender))
 }
 
-// WindowNibName wraps the corresponding Objective-C method.
+// WindowNibName returns the window nib name.
 func (wc *WindowController) WindowNibName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("windowNibName"))
 	return obj.Wrap(_r)
 }
 
-// WindowNibPath wraps the corresponding Objective-C method.
+// WindowNibPath returns the window nib path.
 func (wc *WindowController) WindowNibPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("windowNibPath"))
 	if _r == 0 {
@@ -200,13 +200,13 @@ func (wc *WindowController) WindowNibPath() string {
 	return purego.GoString(_r)
 }
 
-// Owner wraps the corresponding Objective-C method.
+// Owner returns the owner.
 func (wc *WindowController) Owner() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("owner"))
 	return obj.Wrap(_r)
 }
 
-// WindowFrameAutosaveName wraps the corresponding Objective-C method.
+// WindowFrameAutosaveName returns the window frame autosave name.
 func (wc *WindowController) WindowFrameAutosaveName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("windowFrameAutosaveName"))
 	return obj.Wrap(_r)
@@ -218,7 +218,7 @@ func (wc *WindowController) ShouldCascadeWindows() bool {
 	return _r
 }
 
-// PreviewRepresentableActivityItems wraps the corresponding Objective-C method.
+// PreviewRepresentableActivityItems returns the preview representable activity items.
 func (wc *WindowController) PreviewRepresentableActivityItems() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("previewRepresentableActivityItems"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
@@ -229,7 +229,7 @@ func (wc *WindowController) SetPreviewRepresentableActivityItems(previewRepresen
 	objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setPreviewRepresentableActivityItems:"), purego.SliceToNSArray(previewRepresentableActivityItems, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Document wraps the corresponding Objective-C method.
+// Document returns the document.
 func (wc *WindowController) Document() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("document"))
 	return obj.Wrap(_r)
@@ -241,25 +241,25 @@ func (wc *WindowController) ShouldCloseDocument() bool {
 	return _r
 }
 
-// ContentViewController wraps the corresponding Objective-C method.
+// ContentViewController returns the content view controller.
 func (wc *WindowController) ContentViewController() *ViewController {
 	_r := objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("contentViewController"))
 	return ViewControllerFromID(_r)
 }
 
-// Window wraps the corresponding Objective-C method.
+// Window returns the window.
 func (wc *WindowController) Window() *Window {
 	_r := objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("window"))
 	return WindowFromID(_r)
 }
 
-// IsWindowLoaded wraps the corresponding Objective-C method.
+// IsWindowLoaded reports whether the object is window loaded.
 func (wc *WindowController) IsWindowLoaded() bool {
 	_r := objc.Send[bool](objref.IDOf(wc), objc.RegisterName("isWindowLoaded"))
 	return _r
 }
 
-// Storyboard wraps the corresponding Objective-C method.
+// Storyboard returns the storyboard.
 func (wc *WindowController) Storyboard() *Storyboard {
 	_r := objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("storyboard"))
 	return StoryboardFromID(_r)

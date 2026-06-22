@@ -60,7 +60,7 @@ func NewSpecifierTestWithObjectSpecifierComparisonOperatorTestObject(obj1 *Scrip
 	return specifierTestAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (st *SpecifierTest) WithScriptingProperties(scriptingProperties obj.Object) *SpecifierTest {
 	objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return st

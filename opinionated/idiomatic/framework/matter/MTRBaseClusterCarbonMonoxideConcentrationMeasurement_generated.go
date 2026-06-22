@@ -54,7 +54,7 @@ func NewMTRBaseClusterCarbonMonoxideConcentrationMeasurementWithDeviceEndpointID
 	return mTRBaseClusterCarbonMonoxideConcentrationMeasurementAdopt(_id)
 }
 
-// ReadAttributeMeasuredValueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMeasuredValueWithCompletion reads attribute measured value with completion.
 //
 // ReadAttributeMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -104,7 +104,7 @@ func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAt
 	}
 }
 
-// ReadAttributeMinMeasuredValueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinMeasuredValueWithCompletion reads attribute min measured value with completion.
 //
 // ReadAttributeMinMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeMinMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -154,7 +154,7 @@ func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAt
 	}
 }
 
-// ReadAttributeMaxMeasuredValueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxMeasuredValueWithCompletion reads attribute max measured value with completion.
 //
 // ReadAttributeMaxMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeMaxMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -204,7 +204,7 @@ func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAt
 	}
 }
 
-// ReadAttributePeakMeasuredValueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePeakMeasuredValueWithCompletion reads attribute peak measured value with completion.
 //
 // ReadAttributePeakMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributePeakMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -254,7 +254,7 @@ func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAt
 	}
 }
 
-// ReadAttributePeakMeasuredValueWindowWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePeakMeasuredValueWindowWithCompletion reads attribute peak measured value window with completion.
 //
 // ReadAttributePeakMeasuredValueWindowWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributePeakMeasuredValueWindowWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -304,7 +304,7 @@ func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAt
 	}
 }
 
-// ReadAttributeAverageMeasuredValueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAverageMeasuredValueWithCompletion reads attribute average measured value with completion.
 //
 // ReadAttributeAverageMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeAverageMeasuredValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -354,7 +354,7 @@ func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAt
 	}
 }
 
-// ReadAttributeAverageMeasuredValueWindowWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAverageMeasuredValueWindowWithCompletion reads attribute average measured value window with completion.
 //
 // ReadAttributeAverageMeasuredValueWindowWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeAverageMeasuredValueWindowWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -404,7 +404,7 @@ func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAt
 	}
 }
 
-// ReadAttributeUncertaintyWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeUncertaintyWithCompletion reads attribute uncertainty with completion.
 //
 // ReadAttributeUncertaintyWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeUncertaintyWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -454,7 +454,7 @@ func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAt
 	}
 }
 
-// ReadAttributeMeasurementUnitWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMeasurementUnitWithCompletion reads attribute measurement unit with completion.
 //
 // ReadAttributeMeasurementUnitWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeMeasurementUnitWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -504,7 +504,7 @@ func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAt
 	}
 }
 
-// ReadAttributeMeasurementMediumWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMeasurementMediumWithCompletion reads attribute measurement medium with completion.
 //
 // ReadAttributeMeasurementMediumWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeMeasurementMediumWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -554,7 +554,7 @@ func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAt
 	}
 }
 
-// ReadAttributeLevelValueWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLevelValueWithCompletion reads attribute level value with completion.
 //
 // ReadAttributeLevelValueWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeLevelValueWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -604,7 +604,7 @@ func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAt
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -654,7 +654,7 @@ func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAt
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -704,7 +704,7 @@ func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAt
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -754,7 +754,7 @@ func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAt
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -804,7 +804,7 @@ func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) SubscribeAt
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbccmcm *MTRBaseClusterCarbonMonoxideConcentrationMeasurement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

@@ -50,19 +50,19 @@ func NewMTRTimeSynchronizationClusterTimeZoneType() *MTRTimeSynchronizationClust
 	return mTRTimeSynchronizationClusterTimeZoneTypeAdopt(_id)
 }
 
-// WithOffset sets the property and returns the receiver so calls can be chained.
+// WithOffset sets the offset.
 func (mtsctzt *MTRTimeSynchronizationClusterTimeZoneType) WithOffset(offset obj.Object) *MTRTimeSynchronizationClusterTimeZoneType {
 	objc.Send[objc.ID](objref.IDOf(mtsctzt), objc.RegisterName("setOffset:"), objref.IDOf(offset))
 	return mtsctzt
 }
 
-// WithValidAt sets the property and returns the receiver so calls can be chained.
+// WithValidAt sets the valid at.
 func (mtsctzt *MTRTimeSynchronizationClusterTimeZoneType) WithValidAt(validAt obj.Object) *MTRTimeSynchronizationClusterTimeZoneType {
 	objc.Send[objc.ID](objref.IDOf(mtsctzt), objc.RegisterName("setValidAt:"), objref.IDOf(validAt))
 	return mtsctzt
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (mtsctzt *MTRTimeSynchronizationClusterTimeZoneType) WithName(name string) *MTRTimeSynchronizationClusterTimeZoneType {
 	objc.Send[objc.ID](objref.IDOf(mtsctzt), objc.RegisterName("setName:"), purego.NSString(name))
 	return mtsctzt

@@ -78,13 +78,13 @@ func (a *Action) Fail() {
 	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("fail"))
 }
 
-// UUID wraps the corresponding Objective-C method.
+// UUID returns the UUID.
 func (a *Action) UUID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("uuid"))
 	return obj.Wrap(_r)
 }
 
-// IsComplete wraps the corresponding Objective-C method.
+// IsComplete reports whether the object is complete.
 func (a *Action) IsComplete() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isComplete"))
 	return _r

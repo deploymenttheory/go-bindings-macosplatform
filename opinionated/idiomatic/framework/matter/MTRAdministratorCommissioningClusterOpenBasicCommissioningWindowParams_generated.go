@@ -70,7 +70,7 @@ func NewMTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams()
 	return mTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParamsAdopt(_id)
 }
 
-// WithCommissioningTimeout sets the property and returns the receiver so calls can be chained.
+// WithCommissioningTimeout sets the commissioning timeout.
 func (maccobcwp *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) WithCommissioningTimeout(commissioningTimeout obj.Object) *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams {
 	objc.Send[objc.ID](objref.IDOf(maccobcwp), objc.RegisterName("setCommissioningTimeout:"), objref.IDOf(commissioningTimeout))
 	return maccobcwp
@@ -88,7 +88,7 @@ func (maccobcwp *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindo
 	return maccobcwp
 }
 
-// CommissioningTimeout wraps the corresponding Objective-C method.
+// CommissioningTimeout returns the commissioning timeout.
 func (maccobcwp *MTRAdministratorCommissioningClusterOpenBasicCommissioningWindowParams) CommissioningTimeout() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(maccobcwp), objc.RegisterName("commissioningTimeout"))
 	return obj.Wrap(_r)

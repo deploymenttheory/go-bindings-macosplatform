@@ -73,7 +73,7 @@ func NewAddressWithFullAddressShortAddress(fullAddress string, shortAddress stri
 	return addressAdopt(_id)
 }
 
-// FullAddress wraps the corresponding Objective-C method.
+// FullAddress returns the full address.
 func (a *Address) FullAddress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("fullAddress"))
 	if _r == 0 {
@@ -82,7 +82,7 @@ func (a *Address) FullAddress() string {
 	return purego.GoString(_r)
 }
 
-// ShortAddress wraps the corresponding Objective-C method.
+// ShortAddress returns the short address.
 func (a *Address) ShortAddress() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("shortAddress"))
 	if _r == 0 {

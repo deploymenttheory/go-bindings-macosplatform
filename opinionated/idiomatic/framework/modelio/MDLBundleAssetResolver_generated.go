@@ -71,13 +71,13 @@ func NewBundleAssetResolverWithBundle(path string) *BundleAssetResolver {
 	return bundleAssetResolverAdopt(_id)
 }
 
-// WithPath sets the property and returns the receiver so calls can be chained.
+// WithPath sets the path.
 func (bar *BundleAssetResolver) WithPath(path string) *BundleAssetResolver {
 	objc.Send[objc.ID](objref.IDOf(bar), objc.RegisterName("setPath:"), purego.NSString(path))
 	return bar
 }
 
-// Path wraps the corresponding Objective-C method.
+// Path returns the path.
 func (bar *BundleAssetResolver) Path() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bar), objc.RegisterName("path"))
 	if _r == 0 {

@@ -92,7 +92,7 @@ func (fsg *FunctionStitchingGraph) WithOutputNode(outputNode *FunctionStitchingF
 	return fsg
 }
 
-// FunctionName wraps the corresponding Objective-C method.
+// FunctionName returns the function name.
 func (fsg *FunctionStitchingGraph) FunctionName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(fsg), objc.RegisterName("functionName"))
 	if _r == 0 {
@@ -101,7 +101,7 @@ func (fsg *FunctionStitchingGraph) FunctionName() string {
 	return purego.GoString(_r)
 }
 
-// Nodes wraps the corresponding Objective-C method.
+// Nodes returns the nodes.
 //
 // Nodes returns the collection as a Go slice.
 func (fsg *FunctionStitchingGraph) Nodes() []*FunctionStitchingFunctionNode {
@@ -109,13 +109,13 @@ func (fsg *FunctionStitchingGraph) Nodes() []*FunctionStitchingFunctionNode {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FunctionStitchingFunctionNode { return FunctionStitchingFunctionNodeFromID(_id) })
 }
 
-// OutputNode wraps the corresponding Objective-C method.
+// OutputNode returns the output node.
 func (fsg *FunctionStitchingGraph) OutputNode() *FunctionStitchingFunctionNode {
 	_r := objc.Send[objc.ID](objref.IDOf(fsg), objc.RegisterName("outputNode"))
 	return FunctionStitchingFunctionNodeFromID(_r)
 }
 
-// Attributes wraps the corresponding Objective-C method.
+// Attributes returns the attributes.
 func (fsg *FunctionStitchingGraph) Attributes() []obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fsg), objc.RegisterName("attributes"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })

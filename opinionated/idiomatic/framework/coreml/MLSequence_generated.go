@@ -78,7 +78,7 @@ func (s *Sequence) Type() FeatureType {
 	return _r
 }
 
-// StringValues wraps the corresponding Objective-C method.
+// StringValues returns the string values.
 //
 // StringValues returns the collection as a Go slice.
 func (s *Sequence) StringValues() []string {
@@ -86,7 +86,7 @@ func (s *Sequence) StringValues() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Int64Values wraps the corresponding Objective-C method.
+// Int64Values returns the int64 values.
 //
 // Int64Values returns the collection as a Go slice.
 func (s *Sequence) Int64Values() []obj.Object {

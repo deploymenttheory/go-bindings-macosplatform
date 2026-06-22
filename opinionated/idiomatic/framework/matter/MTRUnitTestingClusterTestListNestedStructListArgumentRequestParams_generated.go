@@ -78,7 +78,7 @@ func (mutctlnslarp *MTRUnitTestingClusterTestListNestedStructListArgumentRequest
 	return mutctlnslarp
 }
 
-// Arg1 wraps the corresponding Objective-C method.
+// Arg1 returns the arg1.
 func (mutctlnslarp *MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams) Arg1() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctlnslarp), objc.RegisterName("arg1"))
 	return obj.Wrap(_r)

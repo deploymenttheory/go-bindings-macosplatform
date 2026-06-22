@@ -303,7 +303,7 @@ func (r *Responder) FlushBufferedKeyEvents() {
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("flushBufferedKeyEvents"))
 }
 
-// ShowContextHelp wraps the corresponding Objective-C method.
+// ShowContextHelp shows context help.
 func (r *Responder) ShowContextHelp(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("showContextHelp:"), objref.IDOf(sender))
 }
@@ -331,7 +331,7 @@ func (r *Responder) WantsForwardedScrollEventsForAxis(axis EventGestureAxis) boo
 	return _r
 }
 
-// NextResponder wraps the corresponding Objective-C method.
+// NextResponder returns the next responder.
 func (r *Responder) NextResponder() *Responder {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("nextResponder"))
 	return ResponderFromID(_r)
@@ -343,13 +343,13 @@ func (r *Responder) AcceptsFirstResponder() bool {
 	return _r
 }
 
-// Menu wraps the corresponding Objective-C method.
+// Menu returns the menu.
 func (r *Responder) Menu() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("menu"))
 	return MenuFromID(_r)
 }
 
-// UndoManager wraps the corresponding Objective-C method.
+// UndoManager returns the undo manager.
 func (r *Responder) UndoManager() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("undoManager"))
 	return obj.Wrap(_r)
@@ -371,7 +371,7 @@ func (r *Responder) NewWindowForTab(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("newWindowForTab:"), objref.IDOf(sender))
 }
 
-// ShowWritingTools wraps the corresponding Objective-C method.
+// ShowWritingTools shows writing tools.
 func (r *Responder) ShowWritingTools(sender obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("showWritingTools:"), objref.IDOf(sender))
 }
@@ -387,7 +387,7 @@ func (r *Responder) UpdateUserActivityState(userActivity obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("updateUserActivityState:"), objref.IDOf(userActivity))
 }
 
-// UserActivity wraps the corresponding Objective-C method.
+// UserActivity returns the user activity.
 func (r *Responder) UserActivity() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("userActivity"))
 	return obj.Wrap(_r)
@@ -399,7 +399,7 @@ func (r *Responder) MakeTouchBar() *TouchBar {
 	return TouchBarFromID(_r)
 }
 
-// TouchBar wraps the corresponding Objective-C method.
+// TouchBar returns the touch bar.
 func (r *Responder) TouchBar() *TouchBar {
 	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("touchBar"))
 	return TouchBarFromID(_r)

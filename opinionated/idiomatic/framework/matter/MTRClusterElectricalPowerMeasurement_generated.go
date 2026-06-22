@@ -51,145 +51,145 @@ func NewMTRClusterElectricalPowerMeasurementWithDeviceEndpointIDQueue(device *MT
 	return mTRClusterElectricalPowerMeasurementAdopt(_id)
 }
 
-// ReadAttributePowerModeWithParams wraps the corresponding Objective-C method.
+// ReadAttributePowerModeWithParams reads attribute power mode with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributePowerModeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributePowerModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeNumberOfMeasurementTypesWithParams wraps the corresponding Objective-C method.
+// ReadAttributeNumberOfMeasurementTypesWithParams reads attribute number of measurement types with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeNumberOfMeasurementTypesWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeNumberOfMeasurementTypesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAccuracyWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAccuracyWithParams reads attribute accuracy with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeAccuracyWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeAccuracyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeRangesWithParams wraps the corresponding Objective-C method.
+// ReadAttributeRangesWithParams reads attribute ranges with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeRangesWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeRangesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeVoltageWithParams wraps the corresponding Objective-C method.
+// ReadAttributeVoltageWithParams reads attribute voltage with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeVoltageWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeVoltageWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveCurrentWithParams wraps the corresponding Objective-C method.
+// ReadAttributeActiveCurrentWithParams reads attribute active current with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeActiveCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeActiveCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeReactiveCurrentWithParams wraps the corresponding Objective-C method.
+// ReadAttributeReactiveCurrentWithParams reads attribute reactive current with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeReactiveCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeReactiveCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeApparentCurrentWithParams wraps the corresponding Objective-C method.
+// ReadAttributeApparentCurrentWithParams reads attribute apparent current with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeApparentCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeApparentCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeActivePowerWithParams wraps the corresponding Objective-C method.
+// ReadAttributeActivePowerWithParams reads attribute active power with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeActivePowerWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeActivePowerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeReactivePowerWithParams wraps the corresponding Objective-C method.
+// ReadAttributeReactivePowerWithParams reads attribute reactive power with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeReactivePowerWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeReactivePowerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeApparentPowerWithParams wraps the corresponding Objective-C method.
+// ReadAttributeApparentPowerWithParams reads attribute apparent power with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeApparentPowerWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeApparentPowerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeRMSVoltageWithParams wraps the corresponding Objective-C method.
+// ReadAttributeRMSVoltageWithParams reads attribute rms voltage with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeRMSVoltageWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeRMSVoltageWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeRMSCurrentWithParams wraps the corresponding Objective-C method.
+// ReadAttributeRMSCurrentWithParams reads attribute rms current with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeRMSCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeRMSCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeRMSPowerWithParams wraps the corresponding Objective-C method.
+// ReadAttributeRMSPowerWithParams reads attribute rms power with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeRMSPowerWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeRMSPowerWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFrequencyWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFrequencyWithParams reads attribute frequency with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeFrequencyWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeFrequencyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeHarmonicCurrentsWithParams wraps the corresponding Objective-C method.
+// ReadAttributeHarmonicCurrentsWithParams reads attribute harmonic currents with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeHarmonicCurrentsWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeHarmonicCurrentsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeHarmonicPhasesWithParams wraps the corresponding Objective-C method.
+// ReadAttributeHarmonicPhasesWithParams reads attribute harmonic phases with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeHarmonicPhasesWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeHarmonicPhasesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePowerFactorWithParams wraps the corresponding Objective-C method.
+// ReadAttributePowerFactorWithParams reads attribute power factor with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributePowerFactorWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributePowerFactorWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeNeutralCurrentWithParams wraps the corresponding Objective-C method.
+// ReadAttributeNeutralCurrentWithParams reads attribute neutral current with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeNeutralCurrentWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeNeutralCurrentWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcepm *MTRClusterElectricalPowerMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcepm), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

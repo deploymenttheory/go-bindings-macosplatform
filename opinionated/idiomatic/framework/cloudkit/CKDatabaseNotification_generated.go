@@ -51,7 +51,7 @@ func NewDatabaseNotification() *DatabaseNotification {
 	return databaseNotificationAdopt(_id)
 }
 
-// DatabaseScope wraps the corresponding Objective-C method.
+// DatabaseScope returns the database scope.
 func (dn *DatabaseNotification) DatabaseScope() DatabaseScope {
 	_r := objc.Send[DatabaseScope](objref.IDOf(dn), objc.RegisterName("databaseScope"))
 	return _r

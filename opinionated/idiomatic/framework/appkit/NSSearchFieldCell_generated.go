@@ -445,19 +445,19 @@ func (sfc *SearchFieldCell) CancelButtonRectForBounds(rect corefoundation.CGRect
 	return _r
 }
 
-// SearchButtonCell wraps the corresponding Objective-C method.
+// SearchButtonCell returns the search button cell.
 func (sfc *SearchFieldCell) SearchButtonCell() *ButtonCell {
 	_r := objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("searchButtonCell"))
 	return ButtonCellFromID(_r)
 }
 
-// CancelButtonCell wraps the corresponding Objective-C method.
+// CancelButtonCell returns the cancel button cell.
 func (sfc *SearchFieldCell) CancelButtonCell() *ButtonCell {
 	_r := objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("cancelButtonCell"))
 	return ButtonCellFromID(_r)
 }
 
-// SearchMenuTemplate wraps the corresponding Objective-C method.
+// SearchMenuTemplate returns the search menu template.
 func (sfc *SearchFieldCell) SearchMenuTemplate() *Menu {
 	_r := objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("searchMenuTemplate"))
 	return MenuFromID(_r)
@@ -469,13 +469,13 @@ func (sfc *SearchFieldCell) SendsWholeSearchString() bool {
 	return _r
 }
 
-// MaximumRecents wraps the corresponding Objective-C method.
+// MaximumRecents returns the maximum recents.
 func (sfc *SearchFieldCell) MaximumRecents() int {
 	_r := objc.Send[int](objref.IDOf(sfc), objc.RegisterName("maximumRecents"))
 	return _r
 }
 
-// RecentSearches wraps the corresponding Objective-C method.
+// RecentSearches returns the recent searches.
 //
 // RecentSearches returns the collection as a Go slice.
 func (sfc *SearchFieldCell) RecentSearches() []string {
@@ -483,7 +483,7 @@ func (sfc *SearchFieldCell) RecentSearches() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// RecentsAutosaveName wraps the corresponding Objective-C method.
+// RecentsAutosaveName returns the recents autosave name.
 func (sfc *SearchFieldCell) RecentsAutosaveName() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(sfc), objc.RegisterName("recentsAutosaveName"))
 	return obj.Wrap(_r)

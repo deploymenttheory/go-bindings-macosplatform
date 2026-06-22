@@ -47,13 +47,13 @@ func imageLaplacianPyramidAdopt(id objc.ID) *ImageLaplacianPyramid {
 	return x
 }
 
-// WithLaplacianBias sets the property and returns the receiver so calls can be chained.
+// WithLaplacianBias sets the laplacian bias.
 func (ilp *ImageLaplacianPyramid) WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramid {
 	objc.Send[objc.ID](objref.IDOf(ilp), objc.RegisterName("setLaplacianBias:"), laplacianBias)
 	return ilp
 }
 
-// WithLaplacianScale sets the property and returns the receiver so calls can be chained.
+// WithLaplacianScale sets the laplacian scale.
 func (ilp *ImageLaplacianPyramid) WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramid {
 	objc.Send[objc.ID](objref.IDOf(ilp), objc.RegisterName("setLaplacianScale:"), laplacianScale)
 	return ilp
@@ -77,14 +77,14 @@ func (ilp *ImageLaplacianPyramid) WithLabel(label string) *ImageLaplacianPyramid
 	return ilp
 }
 
-// GetLaplacianBias wraps the corresponding Objective-C method.
-func (ilp *ImageLaplacianPyramid) GetLaplacianBias() float32 {
+// LaplacianBias returns the laplacian bias.
+func (ilp *ImageLaplacianPyramid) LaplacianBias() float32 {
 	_r := objc.Send[float32](objref.IDOf(ilp), objc.RegisterName("getLaplacianBias"))
 	return _r
 }
 
-// GetLaplacianScale wraps the corresponding Objective-C method.
-func (ilp *ImageLaplacianPyramid) GetLaplacianScale() float32 {
+// LaplacianScale returns the laplacian scale.
+func (ilp *ImageLaplacianPyramid) LaplacianScale() float32 {
 	_r := objc.Send[float32](objref.IDOf(ilp), objc.RegisterName("getLaplacianScale"))
 	return _r
 }

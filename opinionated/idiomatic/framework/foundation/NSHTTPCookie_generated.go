@@ -73,7 +73,7 @@ func NewHTTPCookieWithProperties(properties obj.Object) *HTTPCookie {
 	return hTTPCookieAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (hc *HTTPCookie) WithScriptingProperties(scriptingProperties obj.Object) *HTTPCookie {
 	objc.Send[objc.ID](objref.IDOf(hc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return hc

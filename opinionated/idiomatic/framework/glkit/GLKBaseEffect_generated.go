@@ -110,73 +110,73 @@ func (be *BaseEffect) PrepareToDraw() {
 	objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("prepareToDraw"))
 }
 
-// ColorMaterialEnabled wraps the corresponding Objective-C method.
+// ColorMaterialEnabled returns the color material enabled.
 func (be *BaseEffect) ColorMaterialEnabled() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(be), objc.RegisterName("colorMaterialEnabled"))
 	return _r
 }
 
-// LightModelTwoSided wraps the corresponding Objective-C method.
+// LightModelTwoSided returns the light model two sided.
 func (be *BaseEffect) LightModelTwoSided() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(be), objc.RegisterName("lightModelTwoSided"))
 	return _r
 }
 
-// UseConstantColor wraps the corresponding Objective-C method.
+// UseConstantColor returns the use constant color.
 func (be *BaseEffect) UseConstantColor() uint8 {
 	_r := objc.Send[uint8](objref.IDOf(be), objc.RegisterName("useConstantColor"))
 	return _r
 }
 
-// Transform wraps the corresponding Objective-C method.
+// Transform returns the transform.
 func (be *BaseEffect) Transform() *EffectPropertyTransform {
 	_r := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("transform"))
 	return EffectPropertyTransformFromID(_r)
 }
 
-// Light0 wraps the corresponding Objective-C method.
+// Light0 returns the light0.
 func (be *BaseEffect) Light0() *EffectPropertyLight {
 	_r := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("light0"))
 	return EffectPropertyLightFromID(_r)
 }
 
-// Light1 wraps the corresponding Objective-C method.
+// Light1 returns the light1.
 func (be *BaseEffect) Light1() *EffectPropertyLight {
 	_r := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("light1"))
 	return EffectPropertyLightFromID(_r)
 }
 
-// Light2 wraps the corresponding Objective-C method.
+// Light2 returns the light2.
 func (be *BaseEffect) Light2() *EffectPropertyLight {
 	_r := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("light2"))
 	return EffectPropertyLightFromID(_r)
 }
 
-// LightingType wraps the corresponding Objective-C method.
+// LightingType returns the lighting type.
 func (be *BaseEffect) LightingType() LightingType {
 	_r := objc.Send[LightingType](objref.IDOf(be), objc.RegisterName("lightingType"))
 	return _r
 }
 
-// Material wraps the corresponding Objective-C method.
+// Material returns the material.
 func (be *BaseEffect) Material() *EffectPropertyMaterial {
 	_r := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("material"))
 	return EffectPropertyMaterialFromID(_r)
 }
 
-// Texture2d0 wraps the corresponding Objective-C method.
+// Texture2d0 returns the texture2d0.
 func (be *BaseEffect) Texture2d0() *EffectPropertyTexture {
 	_r := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("texture2d0"))
 	return EffectPropertyTextureFromID(_r)
 }
 
-// Texture2d1 wraps the corresponding Objective-C method.
+// Texture2d1 returns the texture2d1.
 func (be *BaseEffect) Texture2d1() *EffectPropertyTexture {
 	_r := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("texture2d1"))
 	return EffectPropertyTextureFromID(_r)
 }
 
-// TextureOrder wraps the corresponding Objective-C method.
+// TextureOrder returns the texture order.
 //
 // TextureOrder returns the collection as a Go slice.
 func (be *BaseEffect) TextureOrder() []*EffectPropertyTexture {
@@ -184,13 +184,13 @@ func (be *BaseEffect) TextureOrder() []*EffectPropertyTexture {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EffectPropertyTexture { return EffectPropertyTextureFromID(_id) })
 }
 
-// Fog wraps the corresponding Objective-C method.
+// Fog returns the fog.
 func (be *BaseEffect) Fog() *EffectPropertyFog {
 	_r := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("fog"))
 	return EffectPropertyFogFromID(_r)
 }
 
-// Label wraps the corresponding Objective-C method.
+// Label returns the label.
 func (be *BaseEffect) Label() string {
 	_r := objc.Send[objc.ID](objref.IDOf(be), objc.RegisterName("label"))
 	if _r == 0 {

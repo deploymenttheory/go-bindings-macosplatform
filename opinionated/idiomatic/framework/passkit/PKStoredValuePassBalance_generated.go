@@ -78,13 +78,13 @@ func (svpb *StoredValuePassBalance) IsEqualToBalance(balance *StoredValuePassBal
 	return _r
 }
 
-// Amount wraps the corresponding Objective-C method.
+// Amount returns the amount.
 func (svpb *StoredValuePassBalance) Amount() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(svpb), objc.RegisterName("amount"))
 	return obj.Wrap(_r)
 }
 
-// CurrencyCode wraps the corresponding Objective-C method.
+// CurrencyCode returns the currency code.
 func (svpb *StoredValuePassBalance) CurrencyCode() string {
 	_r := objc.Send[objc.ID](objref.IDOf(svpb), objc.RegisterName("currencyCode"))
 	if _r == 0 {
@@ -93,13 +93,13 @@ func (svpb *StoredValuePassBalance) CurrencyCode() string {
 	return purego.GoString(_r)
 }
 
-// BalanceType wraps the corresponding Objective-C method.
+// BalanceType returns the balance type.
 func (svpb *StoredValuePassBalance) BalanceType() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(svpb), objc.RegisterName("balanceType"))
 	return obj.Wrap(_r)
 }
 
-// ExpiryDate wraps the corresponding Objective-C method.
+// ExpiryDate returns the expiry date.
 func (svpb *StoredValuePassBalance) ExpiryDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(svpb), objc.RegisterName("expiryDate"))
 	return obj.Wrap(_r)

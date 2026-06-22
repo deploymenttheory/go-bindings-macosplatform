@@ -80,37 +80,37 @@ func (cdp *ControllerDirectionPad) SetValueForXAxisYAxis(xAxis float32, yAxis fl
 	objc.Send[objc.ID](objref.IDOf(cdp), objc.RegisterName("setValueForXAxis:yAxis:"), xAxis, yAxis)
 }
 
-// XAxis wraps the corresponding Objective-C method.
+// XAxis returns the x axis.
 func (cdp *ControllerDirectionPad) XAxis() *ControllerAxisInput {
 	_r := objc.Send[objc.ID](objref.IDOf(cdp), objc.RegisterName("xAxis"))
 	return ControllerAxisInputFromID(_r)
 }
 
-// YAxis wraps the corresponding Objective-C method.
+// YAxis returns the y axis.
 func (cdp *ControllerDirectionPad) YAxis() *ControllerAxisInput {
 	_r := objc.Send[objc.ID](objref.IDOf(cdp), objc.RegisterName("yAxis"))
 	return ControllerAxisInputFromID(_r)
 }
 
-// Up wraps the corresponding Objective-C method.
+// Up returns the up.
 func (cdp *ControllerDirectionPad) Up() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(cdp), objc.RegisterName("up"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// Down wraps the corresponding Objective-C method.
+// Down returns the down.
 func (cdp *ControllerDirectionPad) Down() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(cdp), objc.RegisterName("down"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// Left wraps the corresponding Objective-C method.
+// Left returns the left.
 func (cdp *ControllerDirectionPad) Left() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(cdp), objc.RegisterName("left"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// Right wraps the corresponding Objective-C method.
+// Right returns the right.
 func (cdp *ControllerDirectionPad) Right() *ControllerButtonInput {
 	_r := objc.Send[objc.ID](objref.IDOf(cdp), objc.RegisterName("right"))
 	return ControllerButtonInputFromID(_r)

@@ -211,7 +211,7 @@ func (mp *MaterialProperty) MaxAnisotropy() float64 {
 	return _r
 }
 
-// BorderColor wraps the corresponding Objective-C method.
+// BorderColor returns the border color.
 func (mp *MaterialProperty) BorderColor() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("borderColor"))
 	return obj.Wrap(_r)

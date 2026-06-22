@@ -45,7 +45,7 @@ func nNGradientStateAdopt(id objc.ID) *NNGradientState {
 	return x
 }
 
-// WithReadCount sets the property and returns the receiver so calls can be chained.
+// WithReadCount sets the read count.
 func (ngs *NNGradientState) WithReadCount(readCount int) *NNGradientState {
 	objc.Send[objc.ID](objref.IDOf(ngs), objc.RegisterName("setReadCount:"), readCount)
 	return ngs

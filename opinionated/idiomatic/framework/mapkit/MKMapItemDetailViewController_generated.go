@@ -86,7 +86,7 @@ func (midvc *MapItemDetailViewController) WithMapItem(mapItem *MapItem) *MapItem
 	return midvc
 }
 
-// MapItem wraps the corresponding Objective-C method.
+// MapItem returns the map item.
 func (midvc *MapItemDetailViewController) MapItem() *MapItem {
 	_r := objc.Send[objc.ID](objref.IDOf(midvc), objc.RegisterName("mapItem"))
 	return MapItemFromID(_r)

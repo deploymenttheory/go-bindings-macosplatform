@@ -135,7 +135,7 @@ func (ts *TileSet) Type() TileSetType {
 	return _r
 }
 
-// DefaultTileGroup wraps the corresponding Objective-C method.
+// DefaultTileGroup returns the default tile group.
 func (ts *TileSet) DefaultTileGroup() *TileGroup {
 	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("defaultTileGroup"))
 	return TileGroupFromID(_r)

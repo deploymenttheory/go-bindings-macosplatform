@@ -49,19 +49,19 @@ func NewDOMDocumentFragment() *DOMDocumentFragment {
 	return dOMDocumentFragmentAdopt(_id)
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (ddf *DOMDocumentFragment) WithNodeValue(nodeValue string) *DOMDocumentFragment {
 	objc.Send[objc.ID](objref.IDOf(ddf), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return ddf
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (ddf *DOMDocumentFragment) WithPrefix(prefix string) *DOMDocumentFragment {
 	objc.Send[objc.ID](objref.IDOf(ddf), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return ddf
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (ddf *DOMDocumentFragment) WithTextContent(textContent string) *DOMDocumentFragment {
 	objc.Send[objc.ID](objref.IDOf(ddf), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return ddf

@@ -70,7 +70,7 @@ func NewMTRGeneralDiagnosticsClusterNetworkFaultChangeEvent() *MTRGeneralDiagnos
 	return mTRGeneralDiagnosticsClusterNetworkFaultChangeEventAdopt(_id)
 }
 
-// Current wraps the corresponding Objective-C method.
+// Current returns the current.
 func (mgdcnfce *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) Current() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgdcnfce), objc.RegisterName("current"))
 	return obj.Wrap(_r)
@@ -81,7 +81,7 @@ func (mgdcnfce *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) SetCurrent(
 	objc.Send[objc.ID](objref.IDOf(mgdcnfce), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
-// Previous wraps the corresponding Objective-C method.
+// Previous returns the previous.
 func (mgdcnfce *MTRGeneralDiagnosticsClusterNetworkFaultChangeEvent) Previous() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgdcnfce), objc.RegisterName("previous"))
 	return obj.Wrap(_r)

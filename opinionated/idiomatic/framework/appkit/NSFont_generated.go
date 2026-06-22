@@ -110,13 +110,13 @@ func (f *Font) FontName() string {
 	return purego.GoString(_r)
 }
 
-// PointSize wraps the corresponding Objective-C method.
+// PointSize returns the point size.
 func (f *Font) PointSize() float64 {
 	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("pointSize"))
 	return _r
 }
 
-// FamilyName wraps the corresponding Objective-C method.
+// FamilyName returns the family name.
 func (f *Font) FamilyName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("familyName"))
 	if _r == 0 {
@@ -125,7 +125,7 @@ func (f *Font) FamilyName() string {
 	return purego.GoString(_r)
 }
 
-// DisplayName wraps the corresponding Objective-C method.
+// DisplayName returns the display name.
 func (f *Font) DisplayName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("displayName"))
 	if _r == 0 {
@@ -134,13 +134,13 @@ func (f *Font) DisplayName() string {
 	return purego.GoString(_r)
 }
 
-// FontDescriptor wraps the corresponding Objective-C method.
+// FontDescriptor returns the font descriptor.
 func (f *Font) FontDescriptor() *FontDescriptor {
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("fontDescriptor"))
 	return FontDescriptorFromID(_r)
 }
 
-// TextTransform wraps the corresponding Objective-C method.
+// TextTransform returns the text transform.
 func (f *Font) TextTransform() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("textTransform"))
 	return obj.Wrap(_r)
@@ -152,91 +152,91 @@ func (f *Font) NumberOfGlyphs() int {
 	return _r
 }
 
-// MostCompatibleStringEncoding wraps the corresponding Objective-C method.
+// MostCompatibleStringEncoding returns the most compatible string encoding.
 func (f *Font) MostCompatibleStringEncoding() int {
 	_r := objc.Send[int](objref.IDOf(f), objc.RegisterName("mostCompatibleStringEncoding"))
 	return _r
 }
 
-// CoveredCharacterSet wraps the corresponding Objective-C method.
+// CoveredCharacterSet returns the covered character set.
 func (f *Font) CoveredCharacterSet() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("coveredCharacterSet"))
 	return obj.Wrap(_r)
 }
 
-// BoundingRectForFont wraps the corresponding Objective-C method.
+// BoundingRectForFont returns the bounding rect for font.
 func (f *Font) BoundingRectForFont() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(f), objc.RegisterName("boundingRectForFont"))
 	return _r
 }
 
-// MaximumAdvancement wraps the corresponding Objective-C method.
+// MaximumAdvancement returns the maximum advancement.
 func (f *Font) MaximumAdvancement() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(f), objc.RegisterName("maximumAdvancement"))
 	return _r
 }
 
-// Ascender wraps the corresponding Objective-C method.
+// Ascender returns the ascender.
 func (f *Font) Ascender() float64 {
 	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("ascender"))
 	return _r
 }
 
-// Descender wraps the corresponding Objective-C method.
+// Descender returns the descender.
 func (f *Font) Descender() float64 {
 	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("descender"))
 	return _r
 }
 
-// Leading wraps the corresponding Objective-C method.
+// Leading returns the leading.
 func (f *Font) Leading() float64 {
 	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("leading"))
 	return _r
 }
 
-// UnderlinePosition wraps the corresponding Objective-C method.
+// UnderlinePosition returns the underline position.
 func (f *Font) UnderlinePosition() float64 {
 	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("underlinePosition"))
 	return _r
 }
 
-// UnderlineThickness wraps the corresponding Objective-C method.
+// UnderlineThickness returns the underline thickness.
 func (f *Font) UnderlineThickness() float64 {
 	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("underlineThickness"))
 	return _r
 }
 
-// ItalicAngle wraps the corresponding Objective-C method.
+// ItalicAngle returns the italic angle.
 func (f *Font) ItalicAngle() float64 {
 	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("italicAngle"))
 	return _r
 }
 
-// CapHeight wraps the corresponding Objective-C method.
+// CapHeight returns the cap height.
 func (f *Font) CapHeight() float64 {
 	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("capHeight"))
 	return _r
 }
 
-// XHeight wraps the corresponding Objective-C method.
+// XHeight returns the x height.
 func (f *Font) XHeight() float64 {
 	_r := objc.Send[float64](objref.IDOf(f), objc.RegisterName("xHeight"))
 	return _r
 }
 
-// IsFixedPitch wraps the corresponding Objective-C method.
+// IsFixedPitch reports whether the object is fixed pitch.
 func (f *Font) IsFixedPitch() bool {
 	_r := objc.Send[bool](objref.IDOf(f), objc.RegisterName("isFixedPitch"))
 	return _r
 }
 
-// VerticalFont wraps the corresponding Objective-C method.
+// VerticalFont returns the vertical font.
 func (f *Font) VerticalFont() *Font {
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("verticalFont"))
 	return FontFromID(_r)
 }
 
-// IsVertical wraps the corresponding Objective-C method.
+// IsVertical reports whether the object is vertical.
 func (f *Font) IsVertical() bool {
 	_r := objc.Send[bool](objref.IDOf(f), objc.RegisterName("isVertical"))
 	return _r
@@ -272,13 +272,13 @@ func (f *Font) PrinterFont() *Font {
 	return FontFromID(_r)
 }
 
-// ScreenFont wraps the corresponding Objective-C method.
+// ScreenFont returns the screen font.
 func (f *Font) ScreenFont() *Font {
 	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("screenFont"))
 	return FontFromID(_r)
 }
 
-// RenderingMode wraps the corresponding Objective-C method.
+// RenderingMode returns the rendering mode.
 func (f *Font) RenderingMode() FontRenderingMode {
 	_r := objc.Send[FontRenderingMode](objref.IDOf(f), objc.RegisterName("renderingMode"))
 	return _r

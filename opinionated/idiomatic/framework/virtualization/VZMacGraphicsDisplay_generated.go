@@ -51,7 +51,7 @@ func NewMacGraphicsDisplay() *MacGraphicsDisplay {
 	return macGraphicsDisplayAdopt(_id)
 }
 
-// PixelsPerInch wraps the corresponding Objective-C method.
+// PixelsPerInch returns the pixels per inch.
 func (mgd *MacGraphicsDisplay) PixelsPerInch() int {
 	_r := objc.Send[int](objref.IDOf(mgd), objc.RegisterName("pixelsPerInch"))
 	return _r

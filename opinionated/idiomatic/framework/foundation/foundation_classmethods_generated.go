@@ -183,7 +183,7 @@ func ArrayWithContentsOfURL(url string) []obj.Object {
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// CurrentHandler wraps the corresponding Objective-C method.
+// CurrentHandler returns the current handler.
 func CurrentHandler() *AssertionHandler {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSAssertionHandler")), objc.RegisterName("currentHandler"))
 	return AssertionHandlerFromID(_r)
@@ -281,13 +281,13 @@ func PreferredLocalizationsFromArrayForPreferences(localizationsArray []string, 
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// MainBundle wraps the corresponding Objective-C method.
+// MainBundle returns the main bundle.
 func MainBundle() *Bundle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSBundle")), objc.RegisterName("mainBundle"))
 	return BundleFromID(_r)
 }
 
-// AllBundles wraps the corresponding Objective-C method.
+// AllBundles returns the all bundles.
 //
 // AllBundles returns the collection as a Go slice.
 func AllBundles() []*Bundle {
@@ -295,7 +295,7 @@ func AllBundles() []*Bundle {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Bundle { return BundleFromID(_id) })
 }
 
-// AllFrameworks wraps the corresponding Objective-C method.
+// AllFrameworks returns the all frameworks.
 //
 // AllFrameworks returns the collection as a Go slice.
 func AllFrameworks() []*Bundle {
@@ -327,19 +327,19 @@ func CalendarWithIdentifier(calendarIdentifierConstant *String) *Calendar {
 	return CalendarFromID(_r)
 }
 
-// CurrentCalendar wraps the corresponding Objective-C method.
+// CurrentCalendar returns the current calendar.
 func CurrentCalendar() *Calendar {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCalendar")), objc.RegisterName("currentCalendar"))
 	return CalendarFromID(_r)
 }
 
-// AutoupdatingCurrentCalendar wraps the corresponding Objective-C method.
+// AutoupdatingCurrentCalendar returns the autoupdating current calendar.
 func AutoupdatingCurrentCalendar() *Calendar {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCalendar")), objc.RegisterName("autoupdatingCurrentCalendar"))
 	return CalendarFromID(_r)
 }
 
-// NSCalendarDateCalendarDate wraps the corresponding Objective-C method.
+// NSCalendarDateCalendarDate returns the ns calendar date calendar date.
 func NSCalendarDateCalendarDate() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCalendarDate")), objc.RegisterName("calendarDate"))
 	return obj.Wrap(_r)
@@ -363,13 +363,13 @@ func DateWithYearMonthDayHourMinuteSecondTimeZone(year int, month int, day int, 
 	return obj.Wrap(_r)
 }
 
-// DistantFuture wraps the corresponding Objective-C method.
+// DistantFuture returns the distant future.
 func DistantFuture() *CalendarDate {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCalendarDate")), objc.RegisterName("distantFuture"))
 	return CalendarDateFromID(_r)
 }
 
-// DistantPast wraps the corresponding Objective-C method.
+// DistantPast returns the distant past.
 func DistantPast() *CalendarDate {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCalendarDate")), objc.RegisterName("distantPast"))
 	return CalendarDateFromID(_r)
@@ -393,127 +393,127 @@ func CharacterSetWithContentsOfFile(fName string) *CharacterSet {
 	return CharacterSetFromID(_r)
 }
 
-// ControlCharacterSet wraps the corresponding Objective-C method.
+// ControlCharacterSet returns the control character set.
 func ControlCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("controlCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// WhitespaceCharacterSet wraps the corresponding Objective-C method.
+// WhitespaceCharacterSet returns the whitespace character set.
 func WhitespaceCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("whitespaceCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// WhitespaceAndNewlineCharacterSet wraps the corresponding Objective-C method.
+// WhitespaceAndNewlineCharacterSet returns the whitespace and newline character set.
 func WhitespaceAndNewlineCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("whitespaceAndNewlineCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// DecimalDigitCharacterSet wraps the corresponding Objective-C method.
+// DecimalDigitCharacterSet returns the decimal digit character set.
 func DecimalDigitCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("decimalDigitCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// LetterCharacterSet wraps the corresponding Objective-C method.
+// LetterCharacterSet returns the letter character set.
 func LetterCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("letterCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// LowercaseLetterCharacterSet wraps the corresponding Objective-C method.
+// LowercaseLetterCharacterSet returns the lowercase letter character set.
 func LowercaseLetterCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("lowercaseLetterCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// UppercaseLetterCharacterSet wraps the corresponding Objective-C method.
+// UppercaseLetterCharacterSet returns the uppercase letter character set.
 func UppercaseLetterCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("uppercaseLetterCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// NonBaseCharacterSet wraps the corresponding Objective-C method.
+// NonBaseCharacterSet returns the non base character set.
 func NonBaseCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("nonBaseCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// AlphanumericCharacterSet wraps the corresponding Objective-C method.
+// AlphanumericCharacterSet returns the alphanumeric character set.
 func AlphanumericCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("alphanumericCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// DecomposableCharacterSet wraps the corresponding Objective-C method.
+// DecomposableCharacterSet returns the decomposable character set.
 func DecomposableCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("decomposableCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// IllegalCharacterSet wraps the corresponding Objective-C method.
+// IllegalCharacterSet returns the illegal character set.
 func IllegalCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("illegalCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// PunctuationCharacterSet wraps the corresponding Objective-C method.
+// PunctuationCharacterSet returns the punctuation character set.
 func PunctuationCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("punctuationCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// CapitalizedLetterCharacterSet wraps the corresponding Objective-C method.
+// CapitalizedLetterCharacterSet returns the capitalized letter character set.
 func CapitalizedLetterCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("capitalizedLetterCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// SymbolCharacterSet wraps the corresponding Objective-C method.
+// SymbolCharacterSet returns the symbol character set.
 func SymbolCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("symbolCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// NewlineCharacterSet wraps the corresponding Objective-C method.
+// NewlineCharacterSet returns the newline character set.
 func NewlineCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("newlineCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// URLUserAllowedCharacterSet wraps the corresponding Objective-C method.
+// URLUserAllowedCharacterSet returns the URL user allowed character set.
 func URLUserAllowedCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("URLUserAllowedCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// URLPasswordAllowedCharacterSet wraps the corresponding Objective-C method.
+// URLPasswordAllowedCharacterSet returns the URL password allowed character set.
 func URLPasswordAllowedCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("URLPasswordAllowedCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// URLHostAllowedCharacterSet wraps the corresponding Objective-C method.
+// URLHostAllowedCharacterSet returns the URL host allowed character set.
 func URLHostAllowedCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("URLHostAllowedCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// URLPathAllowedCharacterSet wraps the corresponding Objective-C method.
+// URLPathAllowedCharacterSet returns the URL path allowed character set.
 func URLPathAllowedCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("URLPathAllowedCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// URLQueryAllowedCharacterSet wraps the corresponding Objective-C method.
+// URLQueryAllowedCharacterSet returns the URL query allowed character set.
 func URLQueryAllowedCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("URLQueryAllowedCharacterSet"))
 	return CharacterSetFromID(_r)
 }
 
-// URLFragmentAllowedCharacterSet wraps the corresponding Objective-C method.
+// URLFragmentAllowedCharacterSet returns the URL fragment allowed character set.
 func URLFragmentAllowedCharacterSet() *CharacterSet {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("URLFragmentAllowedCharacterSet"))
 	return CharacterSetFromID(_r)
@@ -670,7 +670,7 @@ func DataDetectorWithTypesError(checkingTypes uint64) (result *DataDetector, err
 	return DataDetectorFromID(_r), nil
 }
 
-// TimeIntervalSinceReferenceDate wraps the corresponding Objective-C method.
+// TimeIntervalSinceReferenceDate returns the time interval since reference date.
 func TimeIntervalSinceReferenceDate() float64 {
 	_r := objc.Send[float64](objc.ID(_class("NSDate")), objc.RegisterName("timeIntervalSinceReferenceDate"))
 	return _r
@@ -706,19 +706,19 @@ func DateWithTimeIntervalSinceDate(secsToBeAdded float64, date *Date) *Date {
 	return DateFromID(_r)
 }
 
-// NSDateDistantFuture wraps the corresponding Objective-C method.
+// NSDateDistantFuture returns the ns date distant future.
 func NSDateDistantFuture() *Date {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("distantFuture"))
 	return DateFromID(_r)
 }
 
-// NSDateDistantPast wraps the corresponding Objective-C method.
+// NSDateDistantPast returns the ns date distant past.
 func NSDateDistantPast() *Date {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("distantPast"))
 	return DateFromID(_r)
 }
 
-// Now wraps the corresponding Objective-C method.
+// Now returns the now.
 func Now() *Date {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDate")), objc.RegisterName("now"))
 	return DateFromID(_r)
@@ -769,7 +769,7 @@ func DateFormatFromTemplateOptionsLocale(tmplate string, opts int, locale *Local
 	return purego.GoString(_r)
 }
 
-// DefaultFormatterBehavior wraps the corresponding Objective-C method.
+// DefaultFormatterBehavior returns the default formatter behavior.
 func DefaultFormatterBehavior() DateFormatterBehavior {
 	_r := objc.Send[DateFormatterBehavior](objc.ID(_class("NSDateFormatter")), objc.RegisterName("defaultFormatterBehavior"))
 	return _r
@@ -798,31 +798,31 @@ func DecimalNumberWithStringLocale(numberValue string, locale obj.Object) *Decim
 	return DecimalNumberFromID(_r)
 }
 
-// Zero wraps the corresponding Objective-C method.
+// Zero returns the zero.
 func Zero() *DecimalNumber {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("zero"))
 	return DecimalNumberFromID(_r)
 }
 
-// One wraps the corresponding Objective-C method.
+// One returns the one.
 func One() *DecimalNumber {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("one"))
 	return DecimalNumberFromID(_r)
 }
 
-// MinimumDecimalNumber wraps the corresponding Objective-C method.
+// MinimumDecimalNumber returns the minimum decimal number.
 func MinimumDecimalNumber() *DecimalNumber {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("minimumDecimalNumber"))
 	return DecimalNumberFromID(_r)
 }
 
-// MaximumDecimalNumber wraps the corresponding Objective-C method.
+// MaximumDecimalNumber returns the maximum decimal number.
 func MaximumDecimalNumber() *DecimalNumber {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("maximumDecimalNumber"))
 	return DecimalNumberFromID(_r)
 }
 
-// NotANumber wraps the corresponding Objective-C method.
+// NotANumber returns the not a number.
 func NotANumber() *DecimalNumber {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumber")), objc.RegisterName("notANumber"))
 	return DecimalNumberFromID(_r)
@@ -834,7 +834,7 @@ func DecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRai
 	return DecimalNumberHandlerFromID(_r)
 }
 
-// DefaultDecimalNumberHandler wraps the corresponding Objective-C method.
+// DefaultDecimalNumberHandler returns the default decimal number handler.
 func DefaultDecimalNumberHandler() *DecimalNumberHandler {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumberHandler")), objc.RegisterName("defaultDecimalNumberHandler"))
 	return DecimalNumberHandlerFromID(_r)
@@ -886,7 +886,7 @@ func SharedKeySetForKeys(keys []obj.Object) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// BaseUnit wraps the corresponding Objective-C method.
+// BaseUnit returns the base unit.
 func BaseUnit() *Dimension {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDimension")), objc.RegisterName("baseUnit"))
 	return DimensionFromID(_r)
@@ -916,7 +916,7 @@ func NotificationCenterForType(notificationCenterType *String) *DistributedNotif
 	return DistributedNotificationCenterFromID(_r)
 }
 
-// DefaultCenter wraps the corresponding Objective-C method.
+// DefaultCenter returns the default center.
 func DefaultCenter() *DistributedNotificationCenter {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSDistributedNotificationCenter")), objc.RegisterName("defaultCenter"))
 	return DistributedNotificationCenterFromID(_r)
@@ -1060,7 +1060,7 @@ func WritingIntentWithURLOptions(url string, options FileCoordinatorWritingOptio
 	return FileAccessIntentFromID(_r)
 }
 
-// FilePresenters wraps the corresponding Objective-C method.
+// FilePresenters returns the file presenters.
 func FilePresenters() []obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileCoordinator")), objc.RegisterName("filePresenters"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
@@ -1114,31 +1114,31 @@ func FileHandleForUpdatingURLError(url string) (result *FileHandle, err error) {
 	return FileHandleFromID(_r), nil
 }
 
-// FileHandleWithStandardInput wraps the corresponding Objective-C method.
+// FileHandleWithStandardInput returns the file handle with standard input.
 func FileHandleWithStandardInput() *FileHandle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleWithStandardInput"))
 	return FileHandleFromID(_r)
 }
 
-// FileHandleWithStandardOutput wraps the corresponding Objective-C method.
+// FileHandleWithStandardOutput returns the file handle with standard output.
 func FileHandleWithStandardOutput() *FileHandle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleWithStandardOutput"))
 	return FileHandleFromID(_r)
 }
 
-// FileHandleWithStandardError wraps the corresponding Objective-C method.
+// FileHandleWithStandardError returns the file handle with standard error.
 func FileHandleWithStandardError() *FileHandle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleWithStandardError"))
 	return FileHandleFromID(_r)
 }
 
-// FileHandleWithNullDevice wraps the corresponding Objective-C method.
+// FileHandleWithNullDevice returns the file handle with null device.
 func FileHandleWithNullDevice() *FileHandle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileHandle")), objc.RegisterName("fileHandleWithNullDevice"))
 	return FileHandleFromID(_r)
 }
 
-// DefaultManager wraps the corresponding Objective-C method.
+// DefaultManager returns the default manager.
 func DefaultManager() *FileManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileManager")), objc.RegisterName("defaultManager"))
 	return FileManagerFromID(_r)
@@ -1282,7 +1282,7 @@ func WeakObjectsHashTable() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// CurrentHost wraps the corresponding Objective-C method.
+// CurrentHost returns the current host.
 func CurrentHost() *Host {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSHost")), objc.RegisterName("currentHost"))
 	return HostFromID(_r)
@@ -1351,7 +1351,7 @@ func IndexSetWithIndex(value int) *IndexSet {
 	return IndexSetFromID(_r)
 }
 
-// AutomaticRule wraps the corresponding Objective-C method.
+// AutomaticRule returns the automatic rule.
 func AutomaticRule() *InflectionRule {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSInflectionRule")), objc.RegisterName("automaticRule"))
 	return InflectionRuleFromID(_r)
@@ -1419,7 +1419,7 @@ func JSONObjectWithDataOptionsError(data *Data, opt JSONReadingOptions) (result 
 	return obj.Wrap(_r), nil
 }
 
-// WriteJSONObjectToStreamOptionsError wraps the corresponding Objective-C method.
+// WriteJSONObjectToStreamOptionsError writes JSON object to stream options error.
 func WriteJSONObjectToStreamOptionsError(obj_ obj.Object, stream *OutputStream, opt JSONWritingOptions) (result int, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[int](objc.ID(_class("NSJSONSerialization")), objc.RegisterName("writeJSONObject:toStream:options:error:"), objref.IDOf(obj_), objref.IDOf(stream), opt, unsafe.Pointer(&_nsErr))
@@ -1549,19 +1549,19 @@ func LocaleWithLocaleIdentifier(ident string) *Locale {
 	return LocaleFromID(_r)
 }
 
-// AutoupdatingCurrentLocale wraps the corresponding Objective-C method.
+// AutoupdatingCurrentLocale returns the autoupdating current locale.
 func AutoupdatingCurrentLocale() *Locale {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("autoupdatingCurrentLocale"))
 	return LocaleFromID(_r)
 }
 
-// CurrentLocale wraps the corresponding Objective-C method.
+// CurrentLocale returns the current locale.
 func CurrentLocale() *Locale {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("currentLocale"))
 	return LocaleFromID(_r)
 }
 
-// SystemLocale wraps the corresponding Objective-C method.
+// SystemLocale returns the system locale.
 func SystemLocale() *Locale {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("systemLocale"))
 	return LocaleFromID(_r)
@@ -1627,7 +1627,7 @@ func LineDirectionForLanguage(isoLangCode string) LocaleLanguageDirection {
 	return _r
 }
 
-// AvailableLocaleIdentifiers wraps the corresponding Objective-C method.
+// AvailableLocaleIdentifiers returns the available locale identifiers.
 //
 // AvailableLocaleIdentifiers returns the collection as a Go slice.
 func AvailableLocaleIdentifiers() []string {
@@ -1635,7 +1635,7 @@ func AvailableLocaleIdentifiers() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ISOLanguageCodes wraps the corresponding Objective-C method.
+// ISOLanguageCodes returns the iso language codes.
 //
 // ISOLanguageCodes returns the collection as a Go slice.
 func ISOLanguageCodes() []string {
@@ -1643,7 +1643,7 @@ func ISOLanguageCodes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ISOCountryCodes wraps the corresponding Objective-C method.
+// ISOCountryCodes returns the iso country codes.
 //
 // ISOCountryCodes returns the collection as a Go slice.
 func ISOCountryCodes() []string {
@@ -1651,7 +1651,7 @@ func ISOCountryCodes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ISOCurrencyCodes wraps the corresponding Objective-C method.
+// ISOCurrencyCodes returns the iso currency codes.
 //
 // ISOCurrencyCodes returns the collection as a Go slice.
 func ISOCurrencyCodes() []string {
@@ -1659,7 +1659,7 @@ func ISOCurrencyCodes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// CommonISOCurrencyCodes wraps the corresponding Objective-C method.
+// CommonISOCurrencyCodes returns the common iso currency codes.
 //
 // CommonISOCurrencyCodes returns the collection as a Go slice.
 func CommonISOCurrencyCodes() []string {
@@ -1667,7 +1667,7 @@ func CommonISOCurrencyCodes() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// PreferredLanguages wraps the corresponding Objective-C method.
+// PreferredLanguages returns the preferred languages.
 //
 // PreferredLanguages returns the collection as a Go slice.
 func PreferredLanguages() []string {
@@ -1675,7 +1675,7 @@ func PreferredLanguages() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Automatic wraps the corresponding Objective-C method.
+// Automatic returns the automatic.
 func Automatic() *LocalizedNumberFormatRule {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSLocalizedNumberFormatRule")), objc.RegisterName("automatic"))
 	return LocalizedNumberFormatRuleFromID(_r)
@@ -1765,7 +1765,7 @@ func SignatureWithObjCTypes(types string) *MethodSignature {
 	return MethodSignatureFromID(_r)
 }
 
-// UserMorphology wraps the corresponding Objective-C method.
+// UserMorphology returns the user morphology.
 func UserMorphology() *Morphology {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSMorphology")), objc.RegisterName("userMorphology"))
 	return MorphologyFromID(_r)
@@ -1987,13 +1987,13 @@ func NotificationWithNameObjectUserInfo(aName *String, anObject obj.Object, aUse
 	return NotificationFromID(_r)
 }
 
-// NSNotificationCenterDefaultCenter wraps the corresponding Objective-C method.
+// NSNotificationCenterDefaultCenter returns the ns notification center default center.
 func NSNotificationCenterDefaultCenter() *NotificationCenter {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSNotificationCenter")), objc.RegisterName("defaultCenter"))
 	return NotificationCenterFromID(_r)
 }
 
-// DefaultQueue wraps the corresponding Objective-C method.
+// DefaultQueue returns the default queue.
 func DefaultQueue() *NotificationQueue {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSNotificationQueue")), objc.RegisterName("defaultQueue"))
 	return NotificationQueueFromID(_r)
@@ -2104,7 +2104,7 @@ func LocalizedStringFromNumberNumberStyle(num *Number, nstyle NumberFormatterSty
 	return purego.GoString(_r)
 }
 
-// NSNumberFormatterDefaultFormatterBehavior wraps the corresponding Objective-C method.
+// NSNumberFormatterDefaultFormatterBehavior returns the ns number formatter default formatter behavior.
 func NSNumberFormatterDefaultFormatterBehavior() NumberFormatterBehavior {
 	_r := objc.Send[NumberFormatterBehavior](objc.ID(_class("NSNumberFormatter")), objc.RegisterName("defaultFormatterBehavior"))
 	return _r
@@ -2115,25 +2115,25 @@ func NSNumberFormatterSetDefaultFormatterBehavior(behavior NumberFormatterBehavi
 	objc.Send[objc.ID](objc.ID(_class("NSNumberFormatter")), objc.RegisterName("setDefaultFormatterBehavior:"), behavior)
 }
 
-// New wraps the corresponding Objective-C method.
+// New returns the new.
 func New() *Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("new"))
 	return ObjectFromID(_r)
 }
 
-// Alloc wraps the corresponding Objective-C method.
+// Alloc returns the alloc.
 func Alloc() *Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("alloc"))
 	return ObjectFromID(_r)
 }
 
-// Hash wraps the corresponding Objective-C method.
+// Hash returns the hash.
 func Hash() int {
 	_r := objc.Send[int](objc.ID(_class("NSObject")), objc.RegisterName("hash"))
 	return _r
 }
 
-// Description wraps the corresponding Objective-C method.
+// Description returns the description.
 func Description() string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("description"))
 	if _r == 0 {
@@ -2142,7 +2142,7 @@ func Description() string {
 	return purego.GoString(_r)
 }
 
-// DebugDescription wraps the corresponding Objective-C method.
+// DebugDescription returns the debug description.
 func DebugDescription() string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("debugDescription"))
 	if _r == 0 {
@@ -2151,7 +2151,7 @@ func DebugDescription() string {
 	return purego.GoString(_r)
 }
 
-// Version wraps the corresponding Objective-C method.
+// Version returns the version.
 func Version() int {
 	_r := objc.Send[int](objc.ID(_class("NSObject")), objc.RegisterName("version"))
 	return _r
@@ -2162,7 +2162,7 @@ func SetVersion(aVersion int) {
 	objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("setVersion:"), aVersion)
 }
 
-// CancelPreviousPerformRequestsWithTarget wraps the corresponding Objective-C method.
+// CancelPreviousPerformRequestsWithTarget cancels previous perform requests with target.
 func CancelPreviousPerformRequestsWithTarget(aTarget obj.Object) {
 	objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("cancelPreviousPerformRequestsWithTarget:"), objref.IDOf(aTarget))
 }
@@ -2196,7 +2196,7 @@ func SetKeysTriggerChangeNotificationsForDependentKey(keys obj.Object, dependent
 	objc.Send[objc.ID](objc.ID(_class("NSObject")), objc.RegisterName("setKeys:triggerChangeNotificationsForDependentKey:"), objref.IDOf(keys), purego.NSString(dependentKey))
 }
 
-// ClassFallbacksForKeyedArchiver wraps the corresponding Objective-C method.
+// ClassFallbacksForKeyedArchiver returns the class fallbacks for keyed archiver.
 //
 // ClassFallbacksForKeyedArchiver returns the collection as a Go slice.
 func ClassFallbacksForKeyedArchiver() []string {
@@ -2204,13 +2204,13 @@ func ClassFallbacksForKeyedArchiver() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// CurrentQueue wraps the corresponding Objective-C method.
+// CurrentQueue returns the current queue.
 func CurrentQueue() *OperationQueue {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSOperationQueue")), objc.RegisterName("currentQueue"))
 	return OperationQueueFromID(_r)
 }
 
-// MainQueue wraps the corresponding Objective-C method.
+// MainQueue returns the main queue.
 func MainQueue() *OperationQueue {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSOperationQueue")), objc.RegisterName("mainQueue"))
 	return OperationQueueFromID(_r)
@@ -2276,7 +2276,7 @@ func OrthographyWithDominantScriptLanguageMap(script string, map_ obj.Object) *O
 	return OrthographyFromID(_r)
 }
 
-// OutputStreamToMemory wraps the corresponding Objective-C method.
+// OutputStreamToMemory returns the output stream to memory.
 func OutputStreamToMemory() *OutputStream {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSOutputStream")), objc.RegisterName("outputStreamToMemory"))
 	return OutputStreamFromID(_r)
@@ -2485,13 +2485,13 @@ func TableCellIntentWithIdentityColumnNestedInsideIntent(identity int, column in
 	return PresentationIntentFromID(_r)
 }
 
-// NSProcessInfoProcessInfo wraps the corresponding Objective-C method.
+// NSProcessInfoProcessInfo returns the ns process info process info.
 func NSProcessInfoProcessInfo() *ProcessInfo {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSProcessInfo")), objc.RegisterName("processInfo"))
 	return ProcessInfoFromID(_r)
 }
 
-// CurrentProgress wraps the corresponding Objective-C method.
+// CurrentProgress returns the current progress.
 func CurrentProgress() *Progress {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSProgress")), objc.RegisterName("currentProgress"))
 	return ProgressFromID(_r)
@@ -2515,7 +2515,7 @@ func ProgressWithTotalUnitCountParentPendingUnitCount(unitCount int64, parent *P
 	return ProgressFromID(_r)
 }
 
-// RemoveSubscriber wraps the corresponding Objective-C method.
+// RemoveSubscriber removes subscriber.
 func RemoveSubscriber(subscriber obj.Object) {
 	objc.Send[objc.ID](objc.ID(_class("NSProgress")), objc.RegisterName("removeSubscriber:"), objref.IDOf(subscriber))
 }
@@ -2536,7 +2536,7 @@ func DataWithPropertyListFormatOptionsError(plist obj.Object, format PropertyLis
 	return DataFromID(_r), nil
 }
 
-// WritePropertyListToStreamFormatOptionsError wraps the corresponding Objective-C method.
+// WritePropertyListToStreamFormatOptionsError writes property list to stream format options error.
 func WritePropertyListToStreamFormatOptionsError(plist obj.Object, stream *OutputStream, format PropertyListFormat, opt int) (result int, err error) {
 	var _nsErr uintptr
 	_r := objc.Send[int](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("writePropertyList:toStream:format:options:error:"), objref.IDOf(plist), objref.IDOf(stream), format, opt, unsafe.Pointer(&_nsErr))
@@ -2618,13 +2618,13 @@ func EscapedTemplateForString(string_ string) string {
 	return purego.GoString(_r)
 }
 
-// CurrentRunLoop wraps the corresponding Objective-C method.
+// CurrentRunLoop returns the current run loop.
 func CurrentRunLoop() *RunLoop {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSRunLoop")), objc.RegisterName("currentRunLoop"))
 	return RunLoopFromID(_r)
 }
 
-// MainRunLoop wraps the corresponding Objective-C method.
+// MainRunLoop returns the main run loop.
 func MainRunLoop() *RunLoop {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSRunLoop")), objc.RegisterName("mainRunLoop"))
 	return RunLoopFromID(_r)
@@ -2677,7 +2677,7 @@ func SetSharedScriptSuiteRegistry(registry *ScriptSuiteRegistry) {
 	objc.Send[objc.ID](objc.ID(_class("NSScriptSuiteRegistry")), objc.RegisterName("setSharedScriptSuiteRegistry:"), objref.IDOf(registry))
 }
 
-// AllowedTopLevelClasses wraps the corresponding Objective-C method.
+// AllowedTopLevelClasses returns the allowed top level classes.
 func AllowedTopLevelClasses() []obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSSecureUnarchiveFromDataTransformer")), objc.RegisterName("allowedTopLevelClasses"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
@@ -2851,7 +2851,7 @@ func StringWithContentsOfFileUsedEncodingError(path string) (result *String, enc
 	return _v, _out0, nil
 }
 
-// DefaultCStringEncoding wraps the corresponding Objective-C method.
+// DefaultCStringEncoding returns the default c string encoding.
 func DefaultCStringEncoding() int {
 	_r := objc.Send[int](objc.ID(_class("NSString")), objc.RegisterName("defaultCStringEncoding"))
 	return _r
@@ -2933,7 +2933,7 @@ func LocalizedForLanguageIdentifierWithPronouns(language string, pronouns []*Mor
 	return TermOfAddressFromID(_r)
 }
 
-// DetachNewThreadWith wraps the corresponding Objective-C method.
+// DetachNewThreadWith detaches new thread with.
 //
 // DetachNewThreadWith blocks until the operation completes or ctx is cancelled.
 func DetachNewThreadWith(ctx context.Context) error {
@@ -2950,7 +2950,7 @@ func DetachNewThreadWith(ctx context.Context) error {
 	}
 }
 
-// IsMultiThreaded wraps the corresponding Objective-C method.
+// IsMultiThreaded reports whether the object is multi threaded.
 func IsMultiThreaded() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSThread")), objc.RegisterName("isMultiThreaded"))
 	return _r
@@ -2971,7 +2971,7 @@ func Exit() {
 	objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("exit"))
 }
 
-// ThreadPriority wraps the corresponding Objective-C method.
+// ThreadPriority returns the thread priority.
 func ThreadPriority() float64 {
 	_r := objc.Send[float64](objc.ID(_class("NSThread")), objc.RegisterName("threadPriority"))
 	return _r
@@ -2983,13 +2983,13 @@ func SetThreadPriority(p float64) bool {
 	return _r
 }
 
-// CurrentThread wraps the corresponding Objective-C method.
+// CurrentThread returns the current thread.
 func CurrentThread() *Thread {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("currentThread"))
 	return ThreadFromID(_r)
 }
 
-// CallStackReturnAddresses wraps the corresponding Objective-C method.
+// CallStackReturnAddresses returns the call stack return addresses.
 //
 // CallStackReturnAddresses returns the collection as a Go slice.
 func CallStackReturnAddresses() []*Number {
@@ -2997,7 +2997,7 @@ func CallStackReturnAddresses() []*Number {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Number { return NumberFromID(_id) })
 }
 
-// CallStackSymbols wraps the corresponding Objective-C method.
+// CallStackSymbols returns the call stack symbols.
 //
 // CallStackSymbols returns the collection as a Go slice.
 func CallStackSymbols() []string {
@@ -3005,13 +3005,13 @@ func CallStackSymbols() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// IsMainThread wraps the corresponding Objective-C method.
+// IsMainThread reports whether the object is main thread.
 func IsMainThread() bool {
 	_r := objc.Send[bool](objc.ID(_class("NSThread")), objc.RegisterName("isMainThread"))
 	return _r
 }
 
-// MainThread wraps the corresponding Objective-C method.
+// MainThread returns the main thread.
 func MainThread() *Thread {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSThread")), objc.RegisterName("mainThread"))
 	return ThreadFromID(_r)
@@ -3022,19 +3022,19 @@ func ResetSystemTimeZone() {
 	objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("resetSystemTimeZone"))
 }
 
-// AbbreviationDictionary wraps the corresponding Objective-C method.
+// AbbreviationDictionary returns the abbreviation dictionary.
 func AbbreviationDictionary() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("abbreviationDictionary"))
 	return obj.Wrap(_r)
 }
 
-// SystemTimeZone wraps the corresponding Objective-C method.
+// SystemTimeZone returns the system time zone.
 func SystemTimeZone() *TimeZone {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("systemTimeZone"))
 	return TimeZoneFromID(_r)
 }
 
-// DefaultTimeZone wraps the corresponding Objective-C method.
+// DefaultTimeZone returns the default time zone.
 func DefaultTimeZone() *TimeZone {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("defaultTimeZone"))
 	return TimeZoneFromID(_r)
@@ -3045,13 +3045,13 @@ func SetDefaultTimeZone(defaultTimeZone *TimeZone) {
 	objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("setDefaultTimeZone:"), objref.IDOf(defaultTimeZone))
 }
 
-// LocalTimeZone wraps the corresponding Objective-C method.
+// LocalTimeZone returns the local time zone.
 func LocalTimeZone() *TimeZone {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("localTimeZone"))
 	return TimeZoneFromID(_r)
 }
 
-// KnownTimeZoneNames wraps the corresponding Objective-C method.
+// KnownTimeZoneNames returns the known time zone names.
 //
 // KnownTimeZoneNames returns the collection as a Go slice.
 func KnownTimeZoneNames() []string {
@@ -3064,7 +3064,7 @@ func SetAbbreviationDictionary(abbreviationDictionary obj.Object) {
 	objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("setAbbreviationDictionary:"), objref.IDOf(abbreviationDictionary))
 }
 
-// TimeZoneDataVersion wraps the corresponding Objective-C method.
+// TimeZoneDataVersion returns the time zone data version.
 func TimeZoneDataVersion() string {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSTimeZone")), objc.RegisterName("timeZoneDataVersion"))
 	if _r == 0 {
@@ -3398,13 +3398,13 @@ func SessionWithConfiguration(configuration *URLSessionConfiguration) *URLSessio
 	return URLSessionFromID(_r)
 }
 
-// NSURLSessionNew wraps the corresponding Objective-C method.
+// NSURLSessionNew returns the nsurl session new.
 func NSURLSessionNew() *URLSession {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSession")), objc.RegisterName("new"))
 	return URLSessionFromID(_r)
 }
 
-// SharedSession wraps the corresponding Objective-C method.
+// SharedSession returns the shared session.
 func SharedSession() *URLSession {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSession")), objc.RegisterName("sharedSession"))
 	return URLSessionFromID(_r)
@@ -3416,19 +3416,19 @@ func BackgroundSessionConfigurationWithIdentifier(identifier string) *URLSession
 	return URLSessionConfigurationFromID(_r)
 }
 
-// NSURLSessionConfigurationNew wraps the corresponding Objective-C method.
+// NSURLSessionConfigurationNew returns the nsurl session configuration new.
 func NSURLSessionConfigurationNew() *URLSessionConfiguration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionConfiguration")), objc.RegisterName("new"))
 	return URLSessionConfigurationFromID(_r)
 }
 
-// DefaultSessionConfiguration wraps the corresponding Objective-C method.
+// DefaultSessionConfiguration returns the default session configuration.
 func DefaultSessionConfiguration() *URLSessionConfiguration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionConfiguration")), objc.RegisterName("defaultSessionConfiguration"))
 	return URLSessionConfigurationFromID(_r)
 }
 
-// EphemeralSessionConfiguration wraps the corresponding Objective-C method.
+// EphemeralSessionConfiguration returns the ephemeral session configuration.
 func EphemeralSessionConfiguration() *URLSessionConfiguration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionConfiguration")), objc.RegisterName("ephemeralSessionConfiguration"))
 	return URLSessionConfigurationFromID(_r)
@@ -3440,43 +3440,43 @@ func BackgroundSessionConfiguration(identifier string) *URLSessionConfiguration 
 	return URLSessionConfigurationFromID(_r)
 }
 
-// NSURLSessionDataTaskNew wraps the corresponding Objective-C method.
+// NSURLSessionDataTaskNew returns the nsurl session data task new.
 func NSURLSessionDataTaskNew() *URLSessionDataTask {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionDataTask")), objc.RegisterName("new"))
 	return URLSessionDataTaskFromID(_r)
 }
 
-// NSURLSessionDownloadTaskNew wraps the corresponding Objective-C method.
+// NSURLSessionDownloadTaskNew returns the nsurl session download task new.
 func NSURLSessionDownloadTaskNew() *URLSessionDownloadTask {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionDownloadTask")), objc.RegisterName("new"))
 	return URLSessionDownloadTaskFromID(_r)
 }
 
-// NSURLSessionStreamTaskNew wraps the corresponding Objective-C method.
+// NSURLSessionStreamTaskNew returns the nsurl session stream task new.
 func NSURLSessionStreamTaskNew() *URLSessionStreamTask {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionStreamTask")), objc.RegisterName("new"))
 	return URLSessionStreamTaskFromID(_r)
 }
 
-// NSURLSessionTaskNew wraps the corresponding Objective-C method.
+// NSURLSessionTaskNew returns the nsurl session task new.
 func NSURLSessionTaskNew() *URLSessionTask {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionTask")), objc.RegisterName("new"))
 	return URLSessionTaskFromID(_r)
 }
 
-// NSURLSessionTaskMetricsNew wraps the corresponding Objective-C method.
+// NSURLSessionTaskMetricsNew returns the nsurl session task metrics new.
 func NSURLSessionTaskMetricsNew() *URLSessionTaskMetrics {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionTaskMetrics")), objc.RegisterName("new"))
 	return URLSessionTaskMetricsFromID(_r)
 }
 
-// NSURLSessionTaskTransactionMetricsNew wraps the corresponding Objective-C method.
+// NSURLSessionTaskTransactionMetricsNew returns the nsurl session task transaction metrics new.
 func NSURLSessionTaskTransactionMetricsNew() *URLSessionTaskTransactionMetrics {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionTaskTransactionMetrics")), objc.RegisterName("new"))
 	return URLSessionTaskTransactionMetricsFromID(_r)
 }
 
-// NSURLSessionUploadTaskNew wraps the corresponding Objective-C method.
+// NSURLSessionUploadTaskNew returns the nsurl session upload task new.
 func NSURLSessionUploadTaskNew() *URLSessionUploadTask {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSURLSessionUploadTask")), objc.RegisterName("new"))
 	return URLSessionUploadTaskFromID(_r)
@@ -3488,7 +3488,7 @@ func NSUUIDUUID() *UUID {
 	return UUIDFromID(_r)
 }
 
-// DefaultStore wraps the corresponding Objective-C method.
+// DefaultStore returns the default store.
 func DefaultStore() *UbiquitousKeyValueStore {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUbiquitousKeyValueStore")), objc.RegisterName("defaultStore"))
 	return UbiquitousKeyValueStoreFromID(_r)
@@ -3520,133 +3520,133 @@ func ClassNameDecodedForArchiveClassName(inArchiveName string) string {
 	return purego.GoString(_r)
 }
 
-// MetersPerSecondSquared wraps the corresponding Objective-C method.
+// MetersPerSecondSquared returns the meters per second squared.
 func MetersPerSecondSquared() *UnitAcceleration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAcceleration")), objc.RegisterName("metersPerSecondSquared"))
 	return UnitAccelerationFromID(_r)
 }
 
-// Gravity wraps the corresponding Objective-C method.
+// Gravity returns the gravity.
 func Gravity() *UnitAcceleration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAcceleration")), objc.RegisterName("gravity"))
 	return UnitAccelerationFromID(_r)
 }
 
-// Degrees wraps the corresponding Objective-C method.
+// Degrees returns the degrees.
 func Degrees() *UnitAngle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("degrees"))
 	return UnitAngleFromID(_r)
 }
 
-// ArcMinutes wraps the corresponding Objective-C method.
+// ArcMinutes returns the arc minutes.
 func ArcMinutes() *UnitAngle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("arcMinutes"))
 	return UnitAngleFromID(_r)
 }
 
-// ArcSeconds wraps the corresponding Objective-C method.
+// ArcSeconds returns the arc seconds.
 func ArcSeconds() *UnitAngle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("arcSeconds"))
 	return UnitAngleFromID(_r)
 }
 
-// Radians wraps the corresponding Objective-C method.
+// Radians returns the radians.
 func Radians() *UnitAngle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("radians"))
 	return UnitAngleFromID(_r)
 }
 
-// Gradians wraps the corresponding Objective-C method.
+// Gradians returns the gradians.
 func Gradians() *UnitAngle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("gradians"))
 	return UnitAngleFromID(_r)
 }
 
-// Revolutions wraps the corresponding Objective-C method.
+// Revolutions returns the revolutions.
 func Revolutions() *UnitAngle {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitAngle")), objc.RegisterName("revolutions"))
 	return UnitAngleFromID(_r)
 }
 
-// SquareMegameters wraps the corresponding Objective-C method.
+// SquareMegameters returns the square megameters.
 func SquareMegameters() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareMegameters"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareKilometers wraps the corresponding Objective-C method.
+// SquareKilometers returns the square kilometers.
 func SquareKilometers() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareKilometers"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareMeters wraps the corresponding Objective-C method.
+// SquareMeters returns the square meters.
 func SquareMeters() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareMeters"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareCentimeters wraps the corresponding Objective-C method.
+// SquareCentimeters returns the square centimeters.
 func SquareCentimeters() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareCentimeters"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareMillimeters wraps the corresponding Objective-C method.
+// SquareMillimeters returns the square millimeters.
 func SquareMillimeters() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareMillimeters"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareMicrometers wraps the corresponding Objective-C method.
+// SquareMicrometers returns the square micrometers.
 func SquareMicrometers() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareMicrometers"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareNanometers wraps the corresponding Objective-C method.
+// SquareNanometers returns the square nanometers.
 func SquareNanometers() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareNanometers"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareInches wraps the corresponding Objective-C method.
+// SquareInches returns the square inches.
 func SquareInches() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareInches"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareFeet wraps the corresponding Objective-C method.
+// SquareFeet returns the square feet.
 func SquareFeet() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareFeet"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareYards wraps the corresponding Objective-C method.
+// SquareYards returns the square yards.
 func SquareYards() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareYards"))
 	return UnitAreaFromID(_r)
 }
 
-// SquareMiles wraps the corresponding Objective-C method.
+// SquareMiles returns the square miles.
 func SquareMiles() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("squareMiles"))
 	return UnitAreaFromID(_r)
 }
 
-// Acres wraps the corresponding Objective-C method.
+// Acres returns the acres.
 func Acres() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("acres"))
 	return UnitAreaFromID(_r)
 }
 
-// Ares wraps the corresponding Objective-C method.
+// Ares returns the ares.
 func Ares() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("ares"))
 	return UnitAreaFromID(_r)
 }
 
-// Hectares wraps the corresponding Objective-C method.
+// Hectares returns the hectares.
 func Hectares() *UnitArea {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitArea")), objc.RegisterName("hectares"))
 	return UnitAreaFromID(_r)
@@ -3658,1087 +3658,1087 @@ func MillimolesPerLiterWithGramsPerMole(gramsPerMole float64) *UnitConcentration
 	return UnitConcentrationMassFromID(_r)
 }
 
-// GramsPerLiter wraps the corresponding Objective-C method.
+// GramsPerLiter returns the grams per liter.
 func GramsPerLiter() *UnitConcentrationMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitConcentrationMass")), objc.RegisterName("gramsPerLiter"))
 	return UnitConcentrationMassFromID(_r)
 }
 
-// MilligramsPerDeciliter wraps the corresponding Objective-C method.
+// MilligramsPerDeciliter returns the milligrams per deciliter.
 func MilligramsPerDeciliter() *UnitConcentrationMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitConcentrationMass")), objc.RegisterName("milligramsPerDeciliter"))
 	return UnitConcentrationMassFromID(_r)
 }
 
-// PartsPerMillion wraps the corresponding Objective-C method.
+// PartsPerMillion returns the parts per million.
 func PartsPerMillion() *UnitDispersion {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDispersion")), objc.RegisterName("partsPerMillion"))
 	return UnitDispersionFromID(_r)
 }
 
-// Hours wraps the corresponding Objective-C method.
+// Hours returns the hours.
 func Hours() *UnitDuration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("hours"))
 	return UnitDurationFromID(_r)
 }
 
-// Minutes wraps the corresponding Objective-C method.
+// Minutes returns the minutes.
 func Minutes() *UnitDuration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("minutes"))
 	return UnitDurationFromID(_r)
 }
 
-// Seconds wraps the corresponding Objective-C method.
+// Seconds returns the seconds.
 func Seconds() *UnitDuration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("seconds"))
 	return UnitDurationFromID(_r)
 }
 
-// Milliseconds wraps the corresponding Objective-C method.
+// Milliseconds returns the milliseconds.
 func Milliseconds() *UnitDuration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("milliseconds"))
 	return UnitDurationFromID(_r)
 }
 
-// Microseconds wraps the corresponding Objective-C method.
+// Microseconds returns the microseconds.
 func Microseconds() *UnitDuration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("microseconds"))
 	return UnitDurationFromID(_r)
 }
 
-// Nanoseconds wraps the corresponding Objective-C method.
+// Nanoseconds returns the nanoseconds.
 func Nanoseconds() *UnitDuration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("nanoseconds"))
 	return UnitDurationFromID(_r)
 }
 
-// Picoseconds wraps the corresponding Objective-C method.
+// Picoseconds returns the picoseconds.
 func Picoseconds() *UnitDuration {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitDuration")), objc.RegisterName("picoseconds"))
 	return UnitDurationFromID(_r)
 }
 
-// Coulombs wraps the corresponding Objective-C method.
+// Coulombs returns the coulombs.
 func Coulombs() *UnitElectricCharge {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCharge")), objc.RegisterName("coulombs"))
 	return UnitElectricChargeFromID(_r)
 }
 
-// MegaampereHours wraps the corresponding Objective-C method.
+// MegaampereHours returns the megaampere hours.
 func MegaampereHours() *UnitElectricCharge {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCharge")), objc.RegisterName("megaampereHours"))
 	return UnitElectricChargeFromID(_r)
 }
 
-// KiloampereHours wraps the corresponding Objective-C method.
+// KiloampereHours returns the kiloampere hours.
 func KiloampereHours() *UnitElectricCharge {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCharge")), objc.RegisterName("kiloampereHours"))
 	return UnitElectricChargeFromID(_r)
 }
 
-// AmpereHours wraps the corresponding Objective-C method.
+// AmpereHours returns the ampere hours.
 func AmpereHours() *UnitElectricCharge {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCharge")), objc.RegisterName("ampereHours"))
 	return UnitElectricChargeFromID(_r)
 }
 
-// MilliampereHours wraps the corresponding Objective-C method.
+// MilliampereHours returns the milliampere hours.
 func MilliampereHours() *UnitElectricCharge {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCharge")), objc.RegisterName("milliampereHours"))
 	return UnitElectricChargeFromID(_r)
 }
 
-// MicroampereHours wraps the corresponding Objective-C method.
+// MicroampereHours returns the microampere hours.
 func MicroampereHours() *UnitElectricCharge {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCharge")), objc.RegisterName("microampereHours"))
 	return UnitElectricChargeFromID(_r)
 }
 
-// Megaamperes wraps the corresponding Objective-C method.
+// Megaamperes returns the megaamperes.
 func Megaamperes() *UnitElectricCurrent {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCurrent")), objc.RegisterName("megaamperes"))
 	return UnitElectricCurrentFromID(_r)
 }
 
-// Kiloamperes wraps the corresponding Objective-C method.
+// Kiloamperes returns the kiloamperes.
 func Kiloamperes() *UnitElectricCurrent {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCurrent")), objc.RegisterName("kiloamperes"))
 	return UnitElectricCurrentFromID(_r)
 }
 
-// Amperes wraps the corresponding Objective-C method.
+// Amperes returns the amperes.
 func Amperes() *UnitElectricCurrent {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCurrent")), objc.RegisterName("amperes"))
 	return UnitElectricCurrentFromID(_r)
 }
 
-// Milliamperes wraps the corresponding Objective-C method.
+// Milliamperes returns the milliamperes.
 func Milliamperes() *UnitElectricCurrent {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCurrent")), objc.RegisterName("milliamperes"))
 	return UnitElectricCurrentFromID(_r)
 }
 
-// Microamperes wraps the corresponding Objective-C method.
+// Microamperes returns the microamperes.
 func Microamperes() *UnitElectricCurrent {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricCurrent")), objc.RegisterName("microamperes"))
 	return UnitElectricCurrentFromID(_r)
 }
 
-// Megavolts wraps the corresponding Objective-C method.
+// Megavolts returns the megavolts.
 func Megavolts() *UnitElectricPotentialDifference {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricPotentialDifference")), objc.RegisterName("megavolts"))
 	return UnitElectricPotentialDifferenceFromID(_r)
 }
 
-// Kilovolts wraps the corresponding Objective-C method.
+// Kilovolts returns the kilovolts.
 func Kilovolts() *UnitElectricPotentialDifference {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricPotentialDifference")), objc.RegisterName("kilovolts"))
 	return UnitElectricPotentialDifferenceFromID(_r)
 }
 
-// Volts wraps the corresponding Objective-C method.
+// Volts returns the volts.
 func Volts() *UnitElectricPotentialDifference {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricPotentialDifference")), objc.RegisterName("volts"))
 	return UnitElectricPotentialDifferenceFromID(_r)
 }
 
-// Millivolts wraps the corresponding Objective-C method.
+// Millivolts returns the millivolts.
 func Millivolts() *UnitElectricPotentialDifference {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricPotentialDifference")), objc.RegisterName("millivolts"))
 	return UnitElectricPotentialDifferenceFromID(_r)
 }
 
-// Microvolts wraps the corresponding Objective-C method.
+// Microvolts returns the microvolts.
 func Microvolts() *UnitElectricPotentialDifference {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricPotentialDifference")), objc.RegisterName("microvolts"))
 	return UnitElectricPotentialDifferenceFromID(_r)
 }
 
-// Megaohms wraps the corresponding Objective-C method.
+// Megaohms returns the megaohms.
 func Megaohms() *UnitElectricResistance {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricResistance")), objc.RegisterName("megaohms"))
 	return UnitElectricResistanceFromID(_r)
 }
 
-// Kiloohms wraps the corresponding Objective-C method.
+// Kiloohms returns the kiloohms.
 func Kiloohms() *UnitElectricResistance {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricResistance")), objc.RegisterName("kiloohms"))
 	return UnitElectricResistanceFromID(_r)
 }
 
-// Ohms wraps the corresponding Objective-C method.
+// Ohms returns the ohms.
 func Ohms() *UnitElectricResistance {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricResistance")), objc.RegisterName("ohms"))
 	return UnitElectricResistanceFromID(_r)
 }
 
-// Milliohms wraps the corresponding Objective-C method.
+// Milliohms returns the milliohms.
 func Milliohms() *UnitElectricResistance {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricResistance")), objc.RegisterName("milliohms"))
 	return UnitElectricResistanceFromID(_r)
 }
 
-// Microohms wraps the corresponding Objective-C method.
+// Microohms returns the microohms.
 func Microohms() *UnitElectricResistance {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricResistance")), objc.RegisterName("microohms"))
 	return UnitElectricResistanceFromID(_r)
 }
 
-// Kilojoules wraps the corresponding Objective-C method.
+// Kilojoules returns the kilojoules.
 func Kilojoules() *UnitEnergy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitEnergy")), objc.RegisterName("kilojoules"))
 	return UnitEnergyFromID(_r)
 }
 
-// Joules wraps the corresponding Objective-C method.
+// Joules returns the joules.
 func Joules() *UnitEnergy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitEnergy")), objc.RegisterName("joules"))
 	return UnitEnergyFromID(_r)
 }
 
-// Kilocalories wraps the corresponding Objective-C method.
+// Kilocalories returns the kilocalories.
 func Kilocalories() *UnitEnergy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitEnergy")), objc.RegisterName("kilocalories"))
 	return UnitEnergyFromID(_r)
 }
 
-// Calories wraps the corresponding Objective-C method.
+// Calories returns the calories.
 func Calories() *UnitEnergy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitEnergy")), objc.RegisterName("calories"))
 	return UnitEnergyFromID(_r)
 }
 
-// KilowattHours wraps the corresponding Objective-C method.
+// KilowattHours returns the kilowatt hours.
 func KilowattHours() *UnitEnergy {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitEnergy")), objc.RegisterName("kilowattHours"))
 	return UnitEnergyFromID(_r)
 }
 
-// Terahertz wraps the corresponding Objective-C method.
+// Terahertz returns the terahertz.
 func Terahertz() *UnitFrequency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("terahertz"))
 	return UnitFrequencyFromID(_r)
 }
 
-// Gigahertz wraps the corresponding Objective-C method.
+// Gigahertz returns the gigahertz.
 func Gigahertz() *UnitFrequency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("gigahertz"))
 	return UnitFrequencyFromID(_r)
 }
 
-// Megahertz wraps the corresponding Objective-C method.
+// Megahertz returns the megahertz.
 func Megahertz() *UnitFrequency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("megahertz"))
 	return UnitFrequencyFromID(_r)
 }
 
-// Kilohertz wraps the corresponding Objective-C method.
+// Kilohertz returns the kilohertz.
 func Kilohertz() *UnitFrequency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("kilohertz"))
 	return UnitFrequencyFromID(_r)
 }
 
-// Hertz wraps the corresponding Objective-C method.
+// Hertz returns the hertz.
 func Hertz() *UnitFrequency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("hertz"))
 	return UnitFrequencyFromID(_r)
 }
 
-// Millihertz wraps the corresponding Objective-C method.
+// Millihertz returns the millihertz.
 func Millihertz() *UnitFrequency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("millihertz"))
 	return UnitFrequencyFromID(_r)
 }
 
-// Microhertz wraps the corresponding Objective-C method.
+// Microhertz returns the microhertz.
 func Microhertz() *UnitFrequency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("microhertz"))
 	return UnitFrequencyFromID(_r)
 }
 
-// Nanohertz wraps the corresponding Objective-C method.
+// Nanohertz returns the nanohertz.
 func Nanohertz() *UnitFrequency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("nanohertz"))
 	return UnitFrequencyFromID(_r)
 }
 
-// FramesPerSecond wraps the corresponding Objective-C method.
+// FramesPerSecond returns the frames per second.
 func FramesPerSecond() *UnitFrequency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFrequency")), objc.RegisterName("framesPerSecond"))
 	return UnitFrequencyFromID(_r)
 }
 
-// LitersPer100Kilometers wraps the corresponding Objective-C method.
+// LitersPer100Kilometers returns the liters per100 kilometers.
 func LitersPer100Kilometers() *UnitFuelEfficiency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFuelEfficiency")), objc.RegisterName("litersPer100Kilometers"))
 	return UnitFuelEfficiencyFromID(_r)
 }
 
-// MilesPerImperialGallon wraps the corresponding Objective-C method.
+// MilesPerImperialGallon returns the miles per imperial gallon.
 func MilesPerImperialGallon() *UnitFuelEfficiency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFuelEfficiency")), objc.RegisterName("milesPerImperialGallon"))
 	return UnitFuelEfficiencyFromID(_r)
 }
 
-// MilesPerGallon wraps the corresponding Objective-C method.
+// MilesPerGallon returns the miles per gallon.
 func MilesPerGallon() *UnitFuelEfficiency {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitFuelEfficiency")), objc.RegisterName("milesPerGallon"))
 	return UnitFuelEfficiencyFromID(_r)
 }
 
-// Lux wraps the corresponding Objective-C method.
+// Lux returns the lux.
 func Lux() *UnitIlluminance {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitIlluminance")), objc.RegisterName("lux"))
 	return UnitIlluminanceFromID(_r)
 }
 
-// Bytes wraps the corresponding Objective-C method.
+// Bytes returns the bytes.
 func Bytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("bytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Bits wraps the corresponding Objective-C method.
+// Bits returns the bits.
 func Bits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("bits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Nibbles wraps the corresponding Objective-C method.
+// Nibbles returns the nibbles.
 func Nibbles() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("nibbles"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Yottabytes wraps the corresponding Objective-C method.
+// Yottabytes returns the yottabytes.
 func Yottabytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("yottabytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Zettabytes wraps the corresponding Objective-C method.
+// Zettabytes returns the zettabytes.
 func Zettabytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("zettabytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Exabytes wraps the corresponding Objective-C method.
+// Exabytes returns the exabytes.
 func Exabytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("exabytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Petabytes wraps the corresponding Objective-C method.
+// Petabytes returns the petabytes.
 func Petabytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("petabytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Terabytes wraps the corresponding Objective-C method.
+// Terabytes returns the terabytes.
 func Terabytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("terabytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Gigabytes wraps the corresponding Objective-C method.
+// Gigabytes returns the gigabytes.
 func Gigabytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("gigabytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Megabytes wraps the corresponding Objective-C method.
+// Megabytes returns the megabytes.
 func Megabytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("megabytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Kilobytes wraps the corresponding Objective-C method.
+// Kilobytes returns the kilobytes.
 func Kilobytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("kilobytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Yottabits wraps the corresponding Objective-C method.
+// Yottabits returns the yottabits.
 func Yottabits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("yottabits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Zettabits wraps the corresponding Objective-C method.
+// Zettabits returns the zettabits.
 func Zettabits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("zettabits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Exabits wraps the corresponding Objective-C method.
+// Exabits returns the exabits.
 func Exabits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("exabits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Petabits wraps the corresponding Objective-C method.
+// Petabits returns the petabits.
 func Petabits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("petabits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Terabits wraps the corresponding Objective-C method.
+// Terabits returns the terabits.
 func Terabits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("terabits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Gigabits wraps the corresponding Objective-C method.
+// Gigabits returns the gigabits.
 func Gigabits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("gigabits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Megabits wraps the corresponding Objective-C method.
+// Megabits returns the megabits.
 func Megabits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("megabits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Kilobits wraps the corresponding Objective-C method.
+// Kilobits returns the kilobits.
 func Kilobits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("kilobits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Yobibytes wraps the corresponding Objective-C method.
+// Yobibytes returns the yobibytes.
 func Yobibytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("yobibytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Zebibytes wraps the corresponding Objective-C method.
+// Zebibytes returns the zebibytes.
 func Zebibytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("zebibytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Exbibytes wraps the corresponding Objective-C method.
+// Exbibytes returns the exbibytes.
 func Exbibytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("exbibytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Pebibytes wraps the corresponding Objective-C method.
+// Pebibytes returns the pebibytes.
 func Pebibytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("pebibytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Tebibytes wraps the corresponding Objective-C method.
+// Tebibytes returns the tebibytes.
 func Tebibytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("tebibytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Gibibytes wraps the corresponding Objective-C method.
+// Gibibytes returns the gibibytes.
 func Gibibytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("gibibytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Mebibytes wraps the corresponding Objective-C method.
+// Mebibytes returns the mebibytes.
 func Mebibytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("mebibytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Kibibytes wraps the corresponding Objective-C method.
+// Kibibytes returns the kibibytes.
 func Kibibytes() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("kibibytes"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Yobibits wraps the corresponding Objective-C method.
+// Yobibits returns the yobibits.
 func Yobibits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("yobibits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Zebibits wraps the corresponding Objective-C method.
+// Zebibits returns the zebibits.
 func Zebibits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("zebibits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Exbibits wraps the corresponding Objective-C method.
+// Exbibits returns the exbibits.
 func Exbibits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("exbibits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Pebibits wraps the corresponding Objective-C method.
+// Pebibits returns the pebibits.
 func Pebibits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("pebibits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Tebibits wraps the corresponding Objective-C method.
+// Tebibits returns the tebibits.
 func Tebibits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("tebibits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Gibibits wraps the corresponding Objective-C method.
+// Gibibits returns the gibibits.
 func Gibibits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("gibibits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Mebibits wraps the corresponding Objective-C method.
+// Mebibits returns the mebibits.
 func Mebibits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("mebibits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Kibibits wraps the corresponding Objective-C method.
+// Kibibits returns the kibibits.
 func Kibibits() *UnitInformationStorage {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitInformationStorage")), objc.RegisterName("kibibits"))
 	return UnitInformationStorageFromID(_r)
 }
 
-// Megameters wraps the corresponding Objective-C method.
+// Megameters returns the megameters.
 func Megameters() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("megameters"))
 	return UnitLengthFromID(_r)
 }
 
-// Kilometers wraps the corresponding Objective-C method.
+// Kilometers returns the kilometers.
 func Kilometers() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("kilometers"))
 	return UnitLengthFromID(_r)
 }
 
-// Hectometers wraps the corresponding Objective-C method.
+// Hectometers returns the hectometers.
 func Hectometers() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("hectometers"))
 	return UnitLengthFromID(_r)
 }
 
-// Decameters wraps the corresponding Objective-C method.
+// Decameters returns the decameters.
 func Decameters() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("decameters"))
 	return UnitLengthFromID(_r)
 }
 
-// Meters wraps the corresponding Objective-C method.
+// Meters returns the meters.
 func Meters() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("meters"))
 	return UnitLengthFromID(_r)
 }
 
-// Decimeters wraps the corresponding Objective-C method.
+// Decimeters returns the decimeters.
 func Decimeters() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("decimeters"))
 	return UnitLengthFromID(_r)
 }
 
-// Centimeters wraps the corresponding Objective-C method.
+// Centimeters returns the centimeters.
 func Centimeters() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("centimeters"))
 	return UnitLengthFromID(_r)
 }
 
-// Millimeters wraps the corresponding Objective-C method.
+// Millimeters returns the millimeters.
 func Millimeters() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("millimeters"))
 	return UnitLengthFromID(_r)
 }
 
-// Micrometers wraps the corresponding Objective-C method.
+// Micrometers returns the micrometers.
 func Micrometers() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("micrometers"))
 	return UnitLengthFromID(_r)
 }
 
-// Nanometers wraps the corresponding Objective-C method.
+// Nanometers returns the nanometers.
 func Nanometers() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("nanometers"))
 	return UnitLengthFromID(_r)
 }
 
-// Picometers wraps the corresponding Objective-C method.
+// Picometers returns the picometers.
 func Picometers() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("picometers"))
 	return UnitLengthFromID(_r)
 }
 
-// Inches wraps the corresponding Objective-C method.
+// Inches returns the inches.
 func Inches() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("inches"))
 	return UnitLengthFromID(_r)
 }
 
-// Feet wraps the corresponding Objective-C method.
+// Feet returns the feet.
 func Feet() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("feet"))
 	return UnitLengthFromID(_r)
 }
 
-// Yards wraps the corresponding Objective-C method.
+// Yards returns the yards.
 func Yards() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("yards"))
 	return UnitLengthFromID(_r)
 }
 
-// Miles wraps the corresponding Objective-C method.
+// Miles returns the miles.
 func Miles() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("miles"))
 	return UnitLengthFromID(_r)
 }
 
-// ScandinavianMiles wraps the corresponding Objective-C method.
+// ScandinavianMiles returns the scandinavian miles.
 func ScandinavianMiles() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("scandinavianMiles"))
 	return UnitLengthFromID(_r)
 }
 
-// Lightyears wraps the corresponding Objective-C method.
+// Lightyears returns the lightyears.
 func Lightyears() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("lightyears"))
 	return UnitLengthFromID(_r)
 }
 
-// NauticalMiles wraps the corresponding Objective-C method.
+// NauticalMiles returns the nautical miles.
 func NauticalMiles() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("nauticalMiles"))
 	return UnitLengthFromID(_r)
 }
 
-// Fathoms wraps the corresponding Objective-C method.
+// Fathoms returns the fathoms.
 func Fathoms() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("fathoms"))
 	return UnitLengthFromID(_r)
 }
 
-// Furlongs wraps the corresponding Objective-C method.
+// Furlongs returns the furlongs.
 func Furlongs() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("furlongs"))
 	return UnitLengthFromID(_r)
 }
 
-// AstronomicalUnits wraps the corresponding Objective-C method.
+// AstronomicalUnits returns the astronomical units.
 func AstronomicalUnits() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("astronomicalUnits"))
 	return UnitLengthFromID(_r)
 }
 
-// Parsecs wraps the corresponding Objective-C method.
+// Parsecs returns the parsecs.
 func Parsecs() *UnitLength {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("parsecs"))
 	return UnitLengthFromID(_r)
 }
 
-// Kilograms wraps the corresponding Objective-C method.
+// Kilograms returns the kilograms.
 func Kilograms() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("kilograms"))
 	return UnitMassFromID(_r)
 }
 
-// Grams wraps the corresponding Objective-C method.
+// Grams returns the grams.
 func Grams() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("grams"))
 	return UnitMassFromID(_r)
 }
 
-// Decigrams wraps the corresponding Objective-C method.
+// Decigrams returns the decigrams.
 func Decigrams() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("decigrams"))
 	return UnitMassFromID(_r)
 }
 
-// Centigrams wraps the corresponding Objective-C method.
+// Centigrams returns the centigrams.
 func Centigrams() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("centigrams"))
 	return UnitMassFromID(_r)
 }
 
-// Milligrams wraps the corresponding Objective-C method.
+// Milligrams returns the milligrams.
 func Milligrams() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("milligrams"))
 	return UnitMassFromID(_r)
 }
 
-// Micrograms wraps the corresponding Objective-C method.
+// Micrograms returns the micrograms.
 func Micrograms() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("micrograms"))
 	return UnitMassFromID(_r)
 }
 
-// Nanograms wraps the corresponding Objective-C method.
+// Nanograms returns the nanograms.
 func Nanograms() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("nanograms"))
 	return UnitMassFromID(_r)
 }
 
-// Picograms wraps the corresponding Objective-C method.
+// Picograms returns the picograms.
 func Picograms() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("picograms"))
 	return UnitMassFromID(_r)
 }
 
-// Ounces wraps the corresponding Objective-C method.
+// Ounces returns the ounces.
 func Ounces() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("ounces"))
 	return UnitMassFromID(_r)
 }
 
-// PoundsMass wraps the corresponding Objective-C method.
+// PoundsMass returns the pounds mass.
 func PoundsMass() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("poundsMass"))
 	return UnitMassFromID(_r)
 }
 
-// Stones wraps the corresponding Objective-C method.
+// Stones returns the stones.
 func Stones() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("stones"))
 	return UnitMassFromID(_r)
 }
 
-// MetricTons wraps the corresponding Objective-C method.
+// MetricTons returns the metric tons.
 func MetricTons() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("metricTons"))
 	return UnitMassFromID(_r)
 }
 
-// ShortTons wraps the corresponding Objective-C method.
+// ShortTons returns the short tons.
 func ShortTons() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("shortTons"))
 	return UnitMassFromID(_r)
 }
 
-// Carats wraps the corresponding Objective-C method.
+// Carats returns the carats.
 func Carats() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("carats"))
 	return UnitMassFromID(_r)
 }
 
-// OuncesTroy wraps the corresponding Objective-C method.
+// OuncesTroy returns the ounces troy.
 func OuncesTroy() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("ouncesTroy"))
 	return UnitMassFromID(_r)
 }
 
-// Slugs wraps the corresponding Objective-C method.
+// Slugs returns the slugs.
 func Slugs() *UnitMass {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitMass")), objc.RegisterName("slugs"))
 	return UnitMassFromID(_r)
 }
 
-// Terawatts wraps the corresponding Objective-C method.
+// Terawatts returns the terawatts.
 func Terawatts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("terawatts"))
 	return UnitPowerFromID(_r)
 }
 
-// Gigawatts wraps the corresponding Objective-C method.
+// Gigawatts returns the gigawatts.
 func Gigawatts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("gigawatts"))
 	return UnitPowerFromID(_r)
 }
 
-// Megawatts wraps the corresponding Objective-C method.
+// Megawatts returns the megawatts.
 func Megawatts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("megawatts"))
 	return UnitPowerFromID(_r)
 }
 
-// Kilowatts wraps the corresponding Objective-C method.
+// Kilowatts returns the kilowatts.
 func Kilowatts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("kilowatts"))
 	return UnitPowerFromID(_r)
 }
 
-// Watts wraps the corresponding Objective-C method.
+// Watts returns the watts.
 func Watts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("watts"))
 	return UnitPowerFromID(_r)
 }
 
-// Milliwatts wraps the corresponding Objective-C method.
+// Milliwatts returns the milliwatts.
 func Milliwatts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("milliwatts"))
 	return UnitPowerFromID(_r)
 }
 
-// Microwatts wraps the corresponding Objective-C method.
+// Microwatts returns the microwatts.
 func Microwatts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("microwatts"))
 	return UnitPowerFromID(_r)
 }
 
-// Nanowatts wraps the corresponding Objective-C method.
+// Nanowatts returns the nanowatts.
 func Nanowatts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("nanowatts"))
 	return UnitPowerFromID(_r)
 }
 
-// Picowatts wraps the corresponding Objective-C method.
+// Picowatts returns the picowatts.
 func Picowatts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("picowatts"))
 	return UnitPowerFromID(_r)
 }
 
-// Femtowatts wraps the corresponding Objective-C method.
+// Femtowatts returns the femtowatts.
 func Femtowatts() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("femtowatts"))
 	return UnitPowerFromID(_r)
 }
 
-// Horsepower wraps the corresponding Objective-C method.
+// Horsepower returns the horsepower.
 func Horsepower() *UnitPower {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("horsepower"))
 	return UnitPowerFromID(_r)
 }
 
-// NewtonsPerMetersSquared wraps the corresponding Objective-C method.
+// NewtonsPerMetersSquared returns the newtons per meters squared.
 func NewtonsPerMetersSquared() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("newtonsPerMetersSquared"))
 	return UnitPressureFromID(_r)
 }
 
-// Gigapascals wraps the corresponding Objective-C method.
+// Gigapascals returns the gigapascals.
 func Gigapascals() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("gigapascals"))
 	return UnitPressureFromID(_r)
 }
 
-// Megapascals wraps the corresponding Objective-C method.
+// Megapascals returns the megapascals.
 func Megapascals() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("megapascals"))
 	return UnitPressureFromID(_r)
 }
 
-// Kilopascals wraps the corresponding Objective-C method.
+// Kilopascals returns the kilopascals.
 func Kilopascals() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("kilopascals"))
 	return UnitPressureFromID(_r)
 }
 
-// Hectopascals wraps the corresponding Objective-C method.
+// Hectopascals returns the hectopascals.
 func Hectopascals() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("hectopascals"))
 	return UnitPressureFromID(_r)
 }
 
-// InchesOfMercury wraps the corresponding Objective-C method.
+// InchesOfMercury returns the inches of mercury.
 func InchesOfMercury() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("inchesOfMercury"))
 	return UnitPressureFromID(_r)
 }
 
-// Bars wraps the corresponding Objective-C method.
+// Bars returns the bars.
 func Bars() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("bars"))
 	return UnitPressureFromID(_r)
 }
 
-// Millibars wraps the corresponding Objective-C method.
+// Millibars returns the millibars.
 func Millibars() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("millibars"))
 	return UnitPressureFromID(_r)
 }
 
-// MillimetersOfMercury wraps the corresponding Objective-C method.
+// MillimetersOfMercury returns the millimeters of mercury.
 func MillimetersOfMercury() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("millimetersOfMercury"))
 	return UnitPressureFromID(_r)
 }
 
-// PoundsForcePerSquareInch wraps the corresponding Objective-C method.
+// PoundsForcePerSquareInch returns the pounds force per square inch.
 func PoundsForcePerSquareInch() *UnitPressure {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitPressure")), objc.RegisterName("poundsForcePerSquareInch"))
 	return UnitPressureFromID(_r)
 }
 
-// MetersPerSecond wraps the corresponding Objective-C method.
+// MetersPerSecond returns the meters per second.
 func MetersPerSecond() *UnitSpeed {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitSpeed")), objc.RegisterName("metersPerSecond"))
 	return UnitSpeedFromID(_r)
 }
 
-// KilometersPerHour wraps the corresponding Objective-C method.
+// KilometersPerHour returns the kilometers per hour.
 func KilometersPerHour() *UnitSpeed {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitSpeed")), objc.RegisterName("kilometersPerHour"))
 	return UnitSpeedFromID(_r)
 }
 
-// MilesPerHour wraps the corresponding Objective-C method.
+// MilesPerHour returns the miles per hour.
 func MilesPerHour() *UnitSpeed {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitSpeed")), objc.RegisterName("milesPerHour"))
 	return UnitSpeedFromID(_r)
 }
 
-// Knots wraps the corresponding Objective-C method.
+// Knots returns the knots.
 func Knots() *UnitSpeed {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitSpeed")), objc.RegisterName("knots"))
 	return UnitSpeedFromID(_r)
 }
 
-// Kelvin wraps the corresponding Objective-C method.
+// Kelvin returns the kelvin.
 func Kelvin() *UnitTemperature {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitTemperature")), objc.RegisterName("kelvin"))
 	return UnitTemperatureFromID(_r)
 }
 
-// Celsius wraps the corresponding Objective-C method.
+// Celsius returns the celsius.
 func Celsius() *UnitTemperature {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitTemperature")), objc.RegisterName("celsius"))
 	return UnitTemperatureFromID(_r)
 }
 
-// Fahrenheit wraps the corresponding Objective-C method.
+// Fahrenheit returns the fahrenheit.
 func Fahrenheit() *UnitTemperature {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitTemperature")), objc.RegisterName("fahrenheit"))
 	return UnitTemperatureFromID(_r)
 }
 
-// Megaliters wraps the corresponding Objective-C method.
+// Megaliters returns the megaliters.
 func Megaliters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("megaliters"))
 	return UnitVolumeFromID(_r)
 }
 
-// Kiloliters wraps the corresponding Objective-C method.
+// Kiloliters returns the kiloliters.
 func Kiloliters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("kiloliters"))
 	return UnitVolumeFromID(_r)
 }
 
-// Liters wraps the corresponding Objective-C method.
+// Liters returns the liters.
 func Liters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("liters"))
 	return UnitVolumeFromID(_r)
 }
 
-// Deciliters wraps the corresponding Objective-C method.
+// Deciliters returns the deciliters.
 func Deciliters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("deciliters"))
 	return UnitVolumeFromID(_r)
 }
 
-// Centiliters wraps the corresponding Objective-C method.
+// Centiliters returns the centiliters.
 func Centiliters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("centiliters"))
 	return UnitVolumeFromID(_r)
 }
 
-// Milliliters wraps the corresponding Objective-C method.
+// Milliliters returns the milliliters.
 func Milliliters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("milliliters"))
 	return UnitVolumeFromID(_r)
 }
 
-// CubicKilometers wraps the corresponding Objective-C method.
+// CubicKilometers returns the cubic kilometers.
 func CubicKilometers() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicKilometers"))
 	return UnitVolumeFromID(_r)
 }
 
-// CubicMeters wraps the corresponding Objective-C method.
+// CubicMeters returns the cubic meters.
 func CubicMeters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicMeters"))
 	return UnitVolumeFromID(_r)
 }
 
-// CubicDecimeters wraps the corresponding Objective-C method.
+// CubicDecimeters returns the cubic decimeters.
 func CubicDecimeters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicDecimeters"))
 	return UnitVolumeFromID(_r)
 }
 
-// CubicCentimeters wraps the corresponding Objective-C method.
+// CubicCentimeters returns the cubic centimeters.
 func CubicCentimeters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicCentimeters"))
 	return UnitVolumeFromID(_r)
 }
 
-// CubicMillimeters wraps the corresponding Objective-C method.
+// CubicMillimeters returns the cubic millimeters.
 func CubicMillimeters() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicMillimeters"))
 	return UnitVolumeFromID(_r)
 }
 
-// CubicInches wraps the corresponding Objective-C method.
+// CubicInches returns the cubic inches.
 func CubicInches() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicInches"))
 	return UnitVolumeFromID(_r)
 }
 
-// CubicFeet wraps the corresponding Objective-C method.
+// CubicFeet returns the cubic feet.
 func CubicFeet() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicFeet"))
 	return UnitVolumeFromID(_r)
 }
 
-// CubicYards wraps the corresponding Objective-C method.
+// CubicYards returns the cubic yards.
 func CubicYards() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicYards"))
 	return UnitVolumeFromID(_r)
 }
 
-// CubicMiles wraps the corresponding Objective-C method.
+// CubicMiles returns the cubic miles.
 func CubicMiles() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cubicMiles"))
 	return UnitVolumeFromID(_r)
 }
 
-// AcreFeet wraps the corresponding Objective-C method.
+// AcreFeet returns the acre feet.
 func AcreFeet() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("acreFeet"))
 	return UnitVolumeFromID(_r)
 }
 
-// Bushels wraps the corresponding Objective-C method.
+// Bushels returns the bushels.
 func Bushels() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("bushels"))
 	return UnitVolumeFromID(_r)
 }
 
-// Teaspoons wraps the corresponding Objective-C method.
+// Teaspoons returns the teaspoons.
 func Teaspoons() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("teaspoons"))
 	return UnitVolumeFromID(_r)
 }
 
-// Tablespoons wraps the corresponding Objective-C method.
+// Tablespoons returns the tablespoons.
 func Tablespoons() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("tablespoons"))
 	return UnitVolumeFromID(_r)
 }
 
-// FluidOunces wraps the corresponding Objective-C method.
+// FluidOunces returns the fluid ounces.
 func FluidOunces() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("fluidOunces"))
 	return UnitVolumeFromID(_r)
 }
 
-// Cups wraps the corresponding Objective-C method.
+// Cups returns the cups.
 func Cups() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("cups"))
 	return UnitVolumeFromID(_r)
 }
 
-// Pints wraps the corresponding Objective-C method.
+// Pints returns the pints.
 func Pints() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("pints"))
 	return UnitVolumeFromID(_r)
 }
 
-// Quarts wraps the corresponding Objective-C method.
+// Quarts returns the quarts.
 func Quarts() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("quarts"))
 	return UnitVolumeFromID(_r)
 }
 
-// Gallons wraps the corresponding Objective-C method.
+// Gallons returns the gallons.
 func Gallons() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("gallons"))
 	return UnitVolumeFromID(_r)
 }
 
-// ImperialTeaspoons wraps the corresponding Objective-C method.
+// ImperialTeaspoons returns the imperial teaspoons.
 func ImperialTeaspoons() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("imperialTeaspoons"))
 	return UnitVolumeFromID(_r)
 }
 
-// ImperialTablespoons wraps the corresponding Objective-C method.
+// ImperialTablespoons returns the imperial tablespoons.
 func ImperialTablespoons() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("imperialTablespoons"))
 	return UnitVolumeFromID(_r)
 }
 
-// ImperialFluidOunces wraps the corresponding Objective-C method.
+// ImperialFluidOunces returns the imperial fluid ounces.
 func ImperialFluidOunces() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("imperialFluidOunces"))
 	return UnitVolumeFromID(_r)
 }
 
-// ImperialPints wraps the corresponding Objective-C method.
+// ImperialPints returns the imperial pints.
 func ImperialPints() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("imperialPints"))
 	return UnitVolumeFromID(_r)
 }
 
-// ImperialQuarts wraps the corresponding Objective-C method.
+// ImperialQuarts returns the imperial quarts.
 func ImperialQuarts() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("imperialQuarts"))
 	return UnitVolumeFromID(_r)
 }
 
-// ImperialGallons wraps the corresponding Objective-C method.
+// ImperialGallons returns the imperial gallons.
 func ImperialGallons() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("imperialGallons"))
 	return UnitVolumeFromID(_r)
 }
 
-// MetricCups wraps the corresponding Objective-C method.
+// MetricCups returns the metric cups.
 func MetricCups() *UnitVolume {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("metricCups"))
 	return UnitVolumeFromID(_r)
@@ -4795,7 +4795,7 @@ func ActionWithIdentifierTitle(identifier string, title string) *UserNotificatio
 	return UserNotificationActionFromID(_r)
 }
 
-// DefaultUserNotificationCenter wraps the corresponding Objective-C method.
+// DefaultUserNotificationCenter returns the default user notification center.
 func DefaultUserNotificationCenter() *UserNotificationCenter {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSUserNotificationCenter")), objc.RegisterName("defaultUserNotificationCenter"))
 	return UserNotificationCenterFromID(_r)
@@ -4836,7 +4836,7 @@ func ValueTransformerForName(name *String) *ValueTransformer {
 	return ValueTransformerFromID(_r)
 }
 
-// ValueTransformerNames wraps the corresponding Objective-C method.
+// ValueTransformerNames returns the value transformer names.
 //
 // ValueTransformerNames returns the collection as a Go slice.
 func ValueTransformerNames() []*String {

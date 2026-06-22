@@ -78,19 +78,19 @@ func NewMTRGroupsClusterViewGroupResponseParamsWithResponseValueError(responseVa
 	return mTRGroupsClusterViewGroupResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets the property and returns the receiver so calls can be chained.
+// WithStatus sets the status.
 func (mgcvgrp *MTRGroupsClusterViewGroupResponseParams) WithStatus(status obj.Object) *MTRGroupsClusterViewGroupResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mgcvgrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return mgcvgrp
 }
 
-// WithGroupID sets the property and returns the receiver so calls can be chained.
+// WithGroupID sets the group ID.
 func (mgcvgrp *MTRGroupsClusterViewGroupResponseParams) WithGroupID(groupID obj.Object) *MTRGroupsClusterViewGroupResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mgcvgrp), objc.RegisterName("setGroupID:"), objref.IDOf(groupID))
 	return mgcvgrp
 }
 
-// WithGroupName sets the property and returns the receiver so calls can be chained.
+// WithGroupName sets the group name.
 func (mgcvgrp *MTRGroupsClusterViewGroupResponseParams) WithGroupName(groupName string) *MTRGroupsClusterViewGroupResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mgcvgrp), objc.RegisterName("setGroupName:"), purego.NSString(groupName))
 	return mgcvgrp
@@ -102,19 +102,19 @@ func (mgcvgrp *MTRGroupsClusterViewGroupResponseParams) WithTimedInvokeTimeoutMs
 	return mgcvgrp
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (mgcvgrp *MTRGroupsClusterViewGroupResponseParams) Status() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgcvgrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// GroupID wraps the corresponding Objective-C method.
+// GroupID returns the group ID.
 func (mgcvgrp *MTRGroupsClusterViewGroupResponseParams) GroupID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgcvgrp), objc.RegisterName("groupID"))
 	return obj.Wrap(_r)
 }
 
-// GroupName wraps the corresponding Objective-C method.
+// GroupName returns the group name.
 func (mgcvgrp *MTRGroupsClusterViewGroupResponseParams) GroupName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mgcvgrp), objc.RegisterName("groupName"))
 	if _r == 0 {

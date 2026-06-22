@@ -85,13 +85,13 @@ func (fied *FetchIndexElementDescription) WithAscending(ascending bool) *FetchIn
 	return fied
 }
 
-// Property wraps the corresponding Objective-C method.
+// Property returns the property.
 func (fied *FetchIndexElementDescription) Property() *PropertyDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(fied), objc.RegisterName("property"))
 	return PropertyDescriptionFromID(_r)
 }
 
-// PropertyName wraps the corresponding Objective-C method.
+// PropertyName returns the property name.
 func (fied *FetchIndexElementDescription) PropertyName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(fied), objc.RegisterName("propertyName"))
 	if _r == 0 {
@@ -100,19 +100,19 @@ func (fied *FetchIndexElementDescription) PropertyName() string {
 	return purego.GoString(_r)
 }
 
-// CollationType wraps the corresponding Objective-C method.
+// CollationType returns the collation type.
 func (fied *FetchIndexElementDescription) CollationType() FetchIndexElementType {
 	_r := objc.Send[FetchIndexElementType](objref.IDOf(fied), objc.RegisterName("collationType"))
 	return _r
 }
 
-// IsAscending wraps the corresponding Objective-C method.
+// IsAscending reports whether the object is ascending.
 func (fied *FetchIndexElementDescription) IsAscending() bool {
 	_r := objc.Send[bool](objref.IDOf(fied), objc.RegisterName("isAscending"))
 	return _r
 }
 
-// IndexDescription wraps the corresponding Objective-C method.
+// IndexDescription returns the index description.
 func (fied *FetchIndexElementDescription) IndexDescription() *FetchIndexDescription {
 	_r := objc.Send[objc.ID](objref.IDOf(fied), objc.RegisterName("indexDescription"))
 	return FetchIndexDescriptionFromID(_r)

@@ -115,13 +115,13 @@ func (fo *FetchOptions) WithWantsIncrementalChangeDetails(wantsIncrementalChange
 	return fo
 }
 
-// Predicate wraps the corresponding Objective-C method.
+// Predicate returns the predicate.
 func (fo *FetchOptions) Predicate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("predicate"))
 	return obj.Wrap(_r)
 }
 
-// SortDescriptors wraps the corresponding Objective-C method.
+// SortDescriptors returns the sort descriptors.
 //
 // SortDescriptors returns the collection as a Go slice.
 func (fo *FetchOptions) SortDescriptors() []obj.Object {
@@ -141,13 +141,13 @@ func (fo *FetchOptions) IncludeAllBurstAssets() bool {
 	return _r
 }
 
-// IncludeAssetSourceTypes wraps the corresponding Objective-C method.
+// IncludeAssetSourceTypes returns the include asset source types.
 func (fo *FetchOptions) IncludeAssetSourceTypes() AssetSourceType {
 	_r := objc.Send[AssetSourceType](objref.IDOf(fo), objc.RegisterName("includeAssetSourceTypes"))
 	return _r
 }
 
-// FetchLimit wraps the corresponding Objective-C method.
+// FetchLimit returns the fetch limit.
 func (fo *FetchOptions) FetchLimit() int {
 	_r := objc.Send[int](objref.IDOf(fo), objc.RegisterName("fetchLimit"))
 	return _r

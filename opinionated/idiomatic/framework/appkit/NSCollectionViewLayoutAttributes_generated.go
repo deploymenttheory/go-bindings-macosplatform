@@ -109,49 +109,49 @@ func (cvla *CollectionViewLayoutAttributes) WithIndexPath(indexPath obj.Object) 
 	return cvla
 }
 
-// Frame wraps the corresponding Objective-C method.
+// Frame returns the frame.
 func (cvla *CollectionViewLayoutAttributes) Frame() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cvla), objc.RegisterName("frame"))
 	return _r
 }
 
-// Size wraps the corresponding Objective-C method.
+// Size returns the size.
 func (cvla *CollectionViewLayoutAttributes) Size() corefoundation.CGSize {
 	_r := objc.Send[corefoundation.CGSize](objref.IDOf(cvla), objc.RegisterName("size"))
 	return _r
 }
 
-// Alpha wraps the corresponding Objective-C method.
+// Alpha returns the alpha.
 func (cvla *CollectionViewLayoutAttributes) Alpha() float64 {
 	_r := objc.Send[float64](objref.IDOf(cvla), objc.RegisterName("alpha"))
 	return _r
 }
 
-// ZIndex wraps the corresponding Objective-C method.
+// ZIndex returns the z index.
 func (cvla *CollectionViewLayoutAttributes) ZIndex() int {
 	_r := objc.Send[int](objref.IDOf(cvla), objc.RegisterName("zIndex"))
 	return _r
 }
 
-// IsHidden wraps the corresponding Objective-C method.
+// IsHidden reports whether the object is hidden.
 func (cvla *CollectionViewLayoutAttributes) IsHidden() bool {
 	_r := objc.Send[bool](objref.IDOf(cvla), objc.RegisterName("isHidden"))
 	return _r
 }
 
-// IndexPath wraps the corresponding Objective-C method.
+// IndexPath returns the index path.
 func (cvla *CollectionViewLayoutAttributes) IndexPath() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("indexPath"))
 	return obj.Wrap(_r)
 }
 
-// RepresentedElementCategory wraps the corresponding Objective-C method.
+// RepresentedElementCategory returns the represented element category.
 func (cvla *CollectionViewLayoutAttributes) RepresentedElementCategory() CollectionElementCategory {
 	_r := objc.Send[CollectionElementCategory](objref.IDOf(cvla), objc.RegisterName("representedElementCategory"))
 	return _r
 }
 
-// RepresentedElementKind wraps the corresponding Objective-C method.
+// RepresentedElementKind returns the represented element kind.
 func (cvla *CollectionViewLayoutAttributes) RepresentedElementKind() string {
 	_r := objc.Send[objc.ID](objref.IDOf(cvla), objc.RegisterName("representedElementKind"))
 	if _r == 0 {

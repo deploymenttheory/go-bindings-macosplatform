@@ -72,7 +72,7 @@ func NewContentBlockerState() *ContentBlockerState {
 	return contentBlockerStateAdopt(_id)
 }
 
-// IsEnabled wraps the corresponding Objective-C method.
+// IsEnabled reports whether the object is enabled.
 func (cbs *ContentBlockerState) IsEnabled() bool {
 	_r := objc.Send[bool](objref.IDOf(cbs), objc.RegisterName("isEnabled"))
 	return _r

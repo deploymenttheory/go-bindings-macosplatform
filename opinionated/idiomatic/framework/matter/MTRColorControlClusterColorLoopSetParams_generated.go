@@ -70,43 +70,43 @@ func NewMTRColorControlClusterColorLoopSetParams() *MTRColorControlClusterColorL
 	return mTRColorControlClusterColorLoopSetParamsAdopt(_id)
 }
 
-// WithUpdateFlags sets the property and returns the receiver so calls can be chained.
+// WithUpdateFlags sets the update flags.
 func (mcccclsp *MTRColorControlClusterColorLoopSetParams) WithUpdateFlags(updateFlags obj.Object) *MTRColorControlClusterColorLoopSetParams {
 	objc.Send[objc.ID](objref.IDOf(mcccclsp), objc.RegisterName("setUpdateFlags:"), objref.IDOf(updateFlags))
 	return mcccclsp
 }
 
-// WithAction sets the property and returns the receiver so calls can be chained.
+// WithAction sets the action.
 func (mcccclsp *MTRColorControlClusterColorLoopSetParams) WithAction(action obj.Object) *MTRColorControlClusterColorLoopSetParams {
 	objc.Send[objc.ID](objref.IDOf(mcccclsp), objc.RegisterName("setAction:"), objref.IDOf(action))
 	return mcccclsp
 }
 
-// WithDirection sets the property and returns the receiver so calls can be chained.
+// WithDirection sets the direction.
 func (mcccclsp *MTRColorControlClusterColorLoopSetParams) WithDirection(direction obj.Object) *MTRColorControlClusterColorLoopSetParams {
 	objc.Send[objc.ID](objref.IDOf(mcccclsp), objc.RegisterName("setDirection:"), objref.IDOf(direction))
 	return mcccclsp
 }
 
-// WithTime sets the property and returns the receiver so calls can be chained.
+// WithTime sets the time.
 func (mcccclsp *MTRColorControlClusterColorLoopSetParams) WithTime(time_ obj.Object) *MTRColorControlClusterColorLoopSetParams {
 	objc.Send[objc.ID](objref.IDOf(mcccclsp), objc.RegisterName("setTime:"), objref.IDOf(time_))
 	return mcccclsp
 }
 
-// WithStartHue sets the property and returns the receiver so calls can be chained.
+// WithStartHue sets the start hue.
 func (mcccclsp *MTRColorControlClusterColorLoopSetParams) WithStartHue(startHue obj.Object) *MTRColorControlClusterColorLoopSetParams {
 	objc.Send[objc.ID](objref.IDOf(mcccclsp), objc.RegisterName("setStartHue:"), objref.IDOf(startHue))
 	return mcccclsp
 }
 
-// WithOptionsMask sets the property and returns the receiver so calls can be chained.
+// WithOptionsMask sets the options mask.
 func (mcccclsp *MTRColorControlClusterColorLoopSetParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterColorLoopSetParams {
 	objc.Send[objc.ID](objref.IDOf(mcccclsp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return mcccclsp
 }
 
-// WithOptionsOverride sets the property and returns the receiver so calls can be chained.
+// WithOptionsOverride sets the options override.
 func (mcccclsp *MTRColorControlClusterColorLoopSetParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterColorLoopSetParams {
 	objc.Send[objc.ID](objref.IDOf(mcccclsp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return mcccclsp
@@ -124,43 +124,43 @@ func (mcccclsp *MTRColorControlClusterColorLoopSetParams) WithServerSideProcessi
 	return mcccclsp
 }
 
-// UpdateFlags wraps the corresponding Objective-C method.
+// UpdateFlags returns the update flags.
 func (mcccclsp *MTRColorControlClusterColorLoopSetParams) UpdateFlags() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccclsp), objc.RegisterName("updateFlags"))
 	return obj.Wrap(_r)
 }
 
-// Action wraps the corresponding Objective-C method.
+// Action returns the action.
 func (mcccclsp *MTRColorControlClusterColorLoopSetParams) Action() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccclsp), objc.RegisterName("action"))
 	return obj.Wrap(_r)
 }
 
-// Direction wraps the corresponding Objective-C method.
+// Direction returns the direction.
 func (mcccclsp *MTRColorControlClusterColorLoopSetParams) Direction() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccclsp), objc.RegisterName("direction"))
 	return obj.Wrap(_r)
 }
 
-// Time wraps the corresponding Objective-C method.
+// Time returns the time.
 func (mcccclsp *MTRColorControlClusterColorLoopSetParams) Time() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccclsp), objc.RegisterName("time"))
 	return obj.Wrap(_r)
 }
 
-// StartHue wraps the corresponding Objective-C method.
+// StartHue returns the start hue.
 func (mcccclsp *MTRColorControlClusterColorLoopSetParams) StartHue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccclsp), objc.RegisterName("startHue"))
 	return obj.Wrap(_r)
 }
 
-// OptionsMask wraps the corresponding Objective-C method.
+// OptionsMask returns the options mask.
 func (mcccclsp *MTRColorControlClusterColorLoopSetParams) OptionsMask() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccclsp), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
 }
 
-// OptionsOverride wraps the corresponding Objective-C method.
+// OptionsOverride returns the options override.
 func (mcccclsp *MTRColorControlClusterColorLoopSetParams) OptionsOverride() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcccclsp), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)

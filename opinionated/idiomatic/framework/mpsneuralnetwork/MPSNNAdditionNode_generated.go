@@ -51,67 +51,67 @@ func NewNNAdditionNode() *NNAdditionNode {
 	return nNAdditionNodeAdopt(_id)
 }
 
-// WithPrimaryScale sets the property and returns the receiver so calls can be chained.
+// WithPrimaryScale sets the primary scale.
 func (nan *NNAdditionNode) WithPrimaryScale(primaryScale float32) *NNAdditionNode {
 	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return nan
 }
 
-// WithSecondaryScale sets the property and returns the receiver so calls can be chained.
+// WithSecondaryScale sets the secondary scale.
 func (nan *NNAdditionNode) WithSecondaryScale(secondaryScale float32) *NNAdditionNode {
 	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return nan
 }
 
-// WithBias sets the property and returns the receiver so calls can be chained.
+// WithBias sets the bias.
 func (nan *NNAdditionNode) WithBias(bias float32) *NNAdditionNode {
 	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setBias:"), bias)
 	return nan
 }
 
-// WithPrimaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
+// WithPrimaryStrideInPixelsX sets the primary stride in pixels x.
 func (nan *NNAdditionNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNAdditionNode {
 	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
 	return nan
 }
 
-// WithPrimaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
+// WithPrimaryStrideInPixelsY sets the primary stride in pixels y.
 func (nan *NNAdditionNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNAdditionNode {
 	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
 	return nan
 }
 
-// WithPrimaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
+// WithPrimaryStrideInFeatureChannels sets the primary stride in feature channels.
 func (nan *NNAdditionNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNAdditionNode {
 	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
 	return nan
 }
 
-// WithSecondaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsX sets the secondary stride in pixels x.
 func (nan *NNAdditionNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNAdditionNode {
 	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return nan
 }
 
-// WithSecondaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInPixelsY sets the secondary stride in pixels y.
 func (nan *NNAdditionNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNAdditionNode {
 	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return nan
 }
 
-// WithSecondaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
+// WithSecondaryStrideInFeatureChannels sets the secondary stride in feature channels.
 func (nan *NNAdditionNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNAdditionNode {
 	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
 	return nan
 }
 
-// WithMinimumValue sets the property and returns the receiver so calls can be chained.
+// WithMinimumValue sets the minimum value.
 func (nan *NNAdditionNode) WithMinimumValue(minimumValue float32) *NNAdditionNode {
 	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return nan
 }
 
-// WithMaximumValue sets the property and returns the receiver so calls can be chained.
+// WithMaximumValue sets the maximum value.
 func (nan *NNAdditionNode) WithMaximumValue(maximumValue float32) *NNAdditionNode {
 	objc.Send[objc.ID](objref.IDOf(nan), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return nan

@@ -70,19 +70,19 @@ func NewQuartzFilter() *QuartzFilter {
 	return quartzFilterAdopt(_id)
 }
 
-// Properties wraps the corresponding Objective-C method.
+// Properties returns the properties.
 func (qf *QuartzFilter) Properties() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(qf), objc.RegisterName("properties"))
 	return obj.Wrap(_r)
 }
 
-// URL wraps the corresponding Objective-C method.
+// URL returns the URL.
 func (qf *QuartzFilter) URL() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(qf), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// LocalizedName wraps the corresponding Objective-C method.
+// LocalizedName returns the localized name.
 func (qf *QuartzFilter) LocalizedName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(qf), objc.RegisterName("localizedName"))
 	if _r == 0 {
@@ -91,13 +91,13 @@ func (qf *QuartzFilter) LocalizedName() string {
 	return purego.GoString(_r)
 }
 
-// ApplyToContext wraps the corresponding Objective-C method.
+// ApplyToContext applies to context.
 func (qf *QuartzFilter) ApplyToContext(aContext obj.Object) bool {
 	_r := objc.Send[bool](objref.IDOf(qf), objc.RegisterName("applyToContext:"), objref.IDOf(aContext))
 	return _r
 }
 
-// RemoveFromContext wraps the corresponding Objective-C method.
+// RemoveFromContext removes from context.
 func (qf *QuartzFilter) RemoveFromContext(aContext obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(qf), objc.RegisterName("removeFromContext:"), objref.IDOf(aContext))
 }

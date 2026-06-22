@@ -51,7 +51,7 @@ func NewCNNConvolutionWeightsAndBiasesState() *CNNConvolutionWeightsAndBiasesSta
 	return cNNConvolutionWeightsAndBiasesStateAdopt(_id)
 }
 
-// WithReadCount sets the property and returns the receiver so calls can be chained.
+// WithReadCount sets the read count.
 func (ccwabs *CNNConvolutionWeightsAndBiasesState) WithReadCount(readCount int) *CNNConvolutionWeightsAndBiasesState {
 	objc.Send[objc.ID](objref.IDOf(ccwabs), objc.RegisterName("setReadCount:"), readCount)
 	return ccwabs

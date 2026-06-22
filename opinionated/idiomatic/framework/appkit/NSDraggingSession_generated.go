@@ -98,7 +98,7 @@ func (ds *DraggingSession) EnumerateDraggingItemsWithOptionsForViewClassesSearch
 	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("enumerateDraggingItemsWithOptions:forView:classes:searchOptions:usingBlock:"), enumOpts, objref.IDOf(view), purego.SliceToNSArray(classArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(searchOptions), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 int, _b2 unsafe.Pointer) { block(obj.Wrap(_b0), _b1, (*bool)(_b2)) }))
 }
 
-// DraggingFormation wraps the corresponding Objective-C method.
+// DraggingFormation returns the dragging formation.
 func (ds *DraggingSession) DraggingFormation() DraggingFormation {
 	_r := objc.Send[DraggingFormation](objref.IDOf(ds), objc.RegisterName("draggingFormation"))
 	return _r
@@ -110,25 +110,25 @@ func (ds *DraggingSession) AnimatesToStartingPositionsOnCancelOrFail() bool {
 	return _r
 }
 
-// DraggingLeaderIndex wraps the corresponding Objective-C method.
+// DraggingLeaderIndex returns the dragging leader index.
 func (ds *DraggingSession) DraggingLeaderIndex() int {
 	_r := objc.Send[int](objref.IDOf(ds), objc.RegisterName("draggingLeaderIndex"))
 	return _r
 }
 
-// DraggingPasteboard wraps the corresponding Objective-C method.
+// DraggingPasteboard returns the dragging pasteboard.
 func (ds *DraggingSession) DraggingPasteboard() *Pasteboard {
 	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("draggingPasteboard"))
 	return PasteboardFromID(_r)
 }
 
-// DraggingSequenceNumber wraps the corresponding Objective-C method.
+// DraggingSequenceNumber returns the dragging sequence number.
 func (ds *DraggingSession) DraggingSequenceNumber() int {
 	_r := objc.Send[int](objref.IDOf(ds), objc.RegisterName("draggingSequenceNumber"))
 	return _r
 }
 
-// DraggingLocation wraps the corresponding Objective-C method.
+// DraggingLocation returns the dragging location.
 func (ds *DraggingSession) DraggingLocation() corefoundation.CGPoint {
 	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(ds), objc.RegisterName("draggingLocation"))
 	return _r

@@ -78,7 +78,7 @@ func NewMTRAccountLoginClusterGetSetupPINResponseParamsWithResponseValueError(re
 	return mTRAccountLoginClusterGetSetupPINResponseParamsAdopt(_id), nil
 }
 
-// WithSetupPIN sets the property and returns the receiver so calls can be chained.
+// WithSetupPIN sets the setup pin.
 func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) WithSetupPIN(setupPIN string) *MTRAccountLoginClusterGetSetupPINResponseParams {
 	objc.Send[objc.ID](objref.IDOf(malcgsprp), objc.RegisterName("setSetupPIN:"), purego.NSString(setupPIN))
 	return malcgsprp
@@ -90,7 +90,7 @@ func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) WithTimedInvok
 	return malcgsprp
 }
 
-// SetupPIN wraps the corresponding Objective-C method.
+// SetupPIN returns the setup pin.
 func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) SetupPIN() string {
 	_r := objc.Send[objc.ID](objref.IDOf(malcgsprp), objc.RegisterName("setupPIN"))
 	if _r == 0 {

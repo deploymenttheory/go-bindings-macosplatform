@@ -50,31 +50,31 @@ func NewDOMRGBColor() *DOMRGBColor {
 	return dOMRGBColorAdopt(_id)
 }
 
-// Red wraps the corresponding Objective-C method.
+// Red returns the red.
 func (dc *DOMRGBColor) Red() *DOMCSSPrimitiveValue {
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("red"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
-// Green wraps the corresponding Objective-C method.
+// Green returns the green.
 func (dc *DOMRGBColor) Green() *DOMCSSPrimitiveValue {
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("green"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
-// Blue wraps the corresponding Objective-C method.
+// Blue returns the blue.
 func (dc *DOMRGBColor) Blue() *DOMCSSPrimitiveValue {
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("blue"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
-// Alpha wraps the corresponding Objective-C method.
+// Alpha returns the alpha.
 func (dc *DOMRGBColor) Alpha() *DOMCSSPrimitiveValue {
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("alpha"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
-// Color wraps the corresponding Objective-C method.
+// Color returns the color.
 func (dc *DOMRGBColor) Color() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("color"))
 	return obj.Wrap(_r)

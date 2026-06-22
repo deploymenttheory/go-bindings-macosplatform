@@ -156,25 +156,25 @@ func (s *Statistics) DurationForSource(source *Source) *Quantity {
 	return QuantityFromID(_r)
 }
 
-// QuantityType wraps the corresponding Objective-C method.
+// QuantityType returns the quantity type.
 func (s *Statistics) QuantityType() *QuantityType {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("quantityType"))
 	return QuantityTypeFromID(_r)
 }
 
-// StartDate wraps the corresponding Objective-C method.
+// StartDate returns the start date.
 func (s *Statistics) StartDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// EndDate wraps the corresponding Objective-C method.
+// EndDate returns the end date.
 func (s *Statistics) EndDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
-// Sources wraps the corresponding Objective-C method.
+// Sources returns the sources.
 //
 // Sources returns the collection as a Go slice.
 func (s *Statistics) Sources() []*Source {

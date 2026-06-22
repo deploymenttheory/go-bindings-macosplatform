@@ -73,7 +73,7 @@ func NewProjectRegionOfInterest() *ProjectRegionOfInterest {
 	return projectRegionOfInterestAdopt(_id)
 }
 
-// Rect wraps the corresponding Objective-C method.
+// Rect returns the rect.
 func (proi *ProjectRegionOfInterest) Rect() corefoundation.CGRect {
 	_r := objc.Send[corefoundation.CGRect](objref.IDOf(proi), objc.RegisterName("rect"))
 	return _r

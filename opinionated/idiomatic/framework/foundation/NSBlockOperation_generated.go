@@ -54,43 +54,43 @@ func NewBlockOperation() *BlockOperation {
 	return blockOperationAdopt(_id)
 }
 
-// WithQueuePriority sets the property and returns the receiver so calls can be chained.
+// WithQueuePriority sets the queue priority.
 func (bo *BlockOperation) WithQueuePriority(queuePriority OperationQueuePriority) *BlockOperation {
 	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setQueuePriority:"), queuePriority)
 	return bo
 }
 
-// WithCompletionBlock sets the property and returns the receiver so calls can be chained.
+// WithCompletionBlock sets the completion block.
 func (bo *BlockOperation) WithCompletionBlock(completionBlock func()) *BlockOperation {
 	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setCompletionBlock:"), objc.NewBlock(func(_ objc.Block) { completionBlock() }))
 	return bo
 }
 
-// WithThreadPriority sets the property and returns the receiver so calls can be chained.
+// WithThreadPriority sets the thread priority.
 func (bo *BlockOperation) WithThreadPriority(threadPriority float64) *BlockOperation {
 	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setThreadPriority:"), threadPriority)
 	return bo
 }
 
-// WithQualityOfService sets the property and returns the receiver so calls can be chained.
+// WithQualityOfService sets the quality of service.
 func (bo *BlockOperation) WithQualityOfService(qualityOfService QualityOfService) *BlockOperation {
 	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setQualityOfService:"), qualityOfService)
 	return bo
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (bo *BlockOperation) WithName(name StringProvider) *BlockOperation {
 	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setName:"), objref.IDOf(name))
 	return bo
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (bo *BlockOperation) WithScriptingProperties(scriptingProperties obj.Object) *BlockOperation {
 	objc.Send[objc.ID](objref.IDOf(bo), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return bo
 }
 
-// AddExecutionBlock wraps the corresponding Objective-C method.
+// AddExecutionBlock adds execution block.
 //
 // AddExecutionBlock blocks until the operation completes or ctx is cancelled.
 func (bo *BlockOperation) AddExecutionBlock(ctx context.Context) error {

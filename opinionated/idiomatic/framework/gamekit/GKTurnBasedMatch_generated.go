@@ -408,7 +408,7 @@ func (tbm *TurnBasedMatch) ParticipantQuitInTurnWithOutcomeNextParticipantMatchD
 	}
 }
 
-// MatchID wraps the corresponding Objective-C method.
+// MatchID returns the match ID.
 func (tbm *TurnBasedMatch) MatchID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("matchID"))
 	if _r == 0 {
@@ -417,13 +417,13 @@ func (tbm *TurnBasedMatch) MatchID() string {
 	return purego.GoString(_r)
 }
 
-// CreationDate wraps the corresponding Objective-C method.
+// CreationDate returns the creation date.
 func (tbm *TurnBasedMatch) CreationDate() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("creationDate"))
 	return obj.Wrap(_r)
 }
 
-// Participants wraps the corresponding Objective-C method.
+// Participants returns the participants.
 //
 // Participants returns the collection as a Go slice.
 func (tbm *TurnBasedMatch) Participants() []*TurnBasedParticipant {
@@ -431,25 +431,25 @@ func (tbm *TurnBasedMatch) Participants() []*TurnBasedParticipant {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TurnBasedParticipant { return TurnBasedParticipantFromID(_id) })
 }
 
-// Status wraps the corresponding Objective-C method.
+// Status returns the status.
 func (tbm *TurnBasedMatch) Status() TurnBasedMatchStatus {
 	_r := objc.Send[TurnBasedMatchStatus](objref.IDOf(tbm), objc.RegisterName("status"))
 	return _r
 }
 
-// CurrentParticipant wraps the corresponding Objective-C method.
+// CurrentParticipant returns the current participant.
 func (tbm *TurnBasedMatch) CurrentParticipant() *TurnBasedParticipant {
 	_r := objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("currentParticipant"))
 	return TurnBasedParticipantFromID(_r)
 }
 
-// MatchData wraps the corresponding Objective-C method.
+// MatchData returns the match data.
 func (tbm *TurnBasedMatch) MatchData() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("matchData"))
 	return obj.Wrap(_r)
 }
 
-// Message wraps the corresponding Objective-C method.
+// Message returns the message.
 func (tbm *TurnBasedMatch) Message() string {
 	_r := objc.Send[objc.ID](objref.IDOf(tbm), objc.RegisterName("message"))
 	if _r == 0 {
@@ -458,13 +458,13 @@ func (tbm *TurnBasedMatch) Message() string {
 	return purego.GoString(_r)
 }
 
-// MatchDataMaximumSize wraps the corresponding Objective-C method.
+// MatchDataMaximumSize returns the match data maximum size.
 func (tbm *TurnBasedMatch) MatchDataMaximumSize() int {
 	_r := objc.Send[int](objref.IDOf(tbm), objc.RegisterName("matchDataMaximumSize"))
 	return _r
 }
 
-// Exchanges wraps the corresponding Objective-C method.
+// Exchanges returns the exchanges.
 //
 // Exchanges returns the collection as a Go slice.
 func (tbm *TurnBasedMatch) Exchanges() []*TurnBasedExchange {
@@ -472,7 +472,7 @@ func (tbm *TurnBasedMatch) Exchanges() []*TurnBasedExchange {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TurnBasedExchange { return TurnBasedExchangeFromID(_id) })
 }
 
-// ActiveExchanges wraps the corresponding Objective-C method.
+// ActiveExchanges returns the active exchanges.
 //
 // ActiveExchanges returns the collection as a Go slice.
 func (tbm *TurnBasedMatch) ActiveExchanges() []*TurnBasedExchange {
@@ -480,7 +480,7 @@ func (tbm *TurnBasedMatch) ActiveExchanges() []*TurnBasedExchange {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TurnBasedExchange { return TurnBasedExchangeFromID(_id) })
 }
 
-// CompletedExchanges wraps the corresponding Objective-C method.
+// CompletedExchanges returns the completed exchanges.
 //
 // CompletedExchanges returns the collection as a Go slice.
 func (tbm *TurnBasedMatch) CompletedExchanges() []*TurnBasedExchange {
@@ -488,13 +488,13 @@ func (tbm *TurnBasedMatch) CompletedExchanges() []*TurnBasedExchange {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TurnBasedExchange { return TurnBasedExchangeFromID(_id) })
 }
 
-// ExchangeDataMaximumSize wraps the corresponding Objective-C method.
+// ExchangeDataMaximumSize returns the exchange data maximum size.
 func (tbm *TurnBasedMatch) ExchangeDataMaximumSize() int {
 	_r := objc.Send[int](objref.IDOf(tbm), objc.RegisterName("exchangeDataMaximumSize"))
 	return _r
 }
 
-// ExchangeMaxInitiatedExchangesPerPlayer wraps the corresponding Objective-C method.
+// ExchangeMaxInitiatedExchangesPerPlayer returns the exchange max initiated exchanges per player.
 func (tbm *TurnBasedMatch) ExchangeMaxInitiatedExchangesPerPlayer() int {
 	_r := objc.Send[int](objref.IDOf(tbm), objc.RegisterName("exchangeMaxInitiatedExchangesPerPlayer"))
 	return _r

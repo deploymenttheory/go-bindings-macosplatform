@@ -52,7 +52,7 @@ func NewCustomDetectionTrackWithDetectionsSmooth(detections []*Detection, applyS
 	return customDetectionTrackAdopt(_id)
 }
 
-// AllDetections wraps the corresponding Objective-C method.
+// AllDetections returns the all detections.
 //
 // AllDetections returns the collection as a Go slice.
 func (cdt *CustomDetectionTrack) AllDetections() []*Detection {

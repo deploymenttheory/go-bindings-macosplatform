@@ -72,7 +72,7 @@ func NewModelStructureNeuralNetwork() *ModelStructureNeuralNetwork {
 	return modelStructureNeuralNetworkAdopt(_id)
 }
 
-// Layers wraps the corresponding Objective-C method.
+// Layers returns the layers.
 //
 // Layers returns the collection as a Go slice.
 func (msnn *ModelStructureNeuralNetwork) Layers() []*ModelStructureNeuralNetworkLayer {

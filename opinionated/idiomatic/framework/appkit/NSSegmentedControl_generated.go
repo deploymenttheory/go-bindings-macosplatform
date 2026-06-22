@@ -90,13 +90,13 @@ func (sc *SegmentedControl) WithSelectedSegmentBezelColor(selectedSegmentBezelCo
 	return sc
 }
 
-// WithSegmentDistribution sets the property and returns the receiver so calls can be chained.
+// WithSegmentDistribution sets the segment distribution.
 func (sc *SegmentedControl) WithSegmentDistribution(segmentDistribution SegmentDistribution) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSegmentDistribution:"), segmentDistribution)
 	return sc
 }
 
-// WithBorderShape sets the property and returns the receiver so calls can be chained.
+// WithBorderShape sets the border shape.
 func (sc *SegmentedControl) WithBorderShape(borderShape ControlBorderShape) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBorderShape:"), borderShape)
 	return sc
@@ -234,38 +234,38 @@ func (sc *SegmentedControl) WithAllowsExpansionToolTips(allowsExpansionToolTips 
 	return sc
 }
 
-// WithCell sets the property and returns the receiver so calls can be chained.
+// WithCell sets the cell.
 func (sc *SegmentedControl) WithCell(cell CellProvider) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return sc
 }
 
-// WithSubviews sets the property and returns the receiver so calls can be chained.
+// WithSubviews sets the subviews.
 func (sc *SegmentedControl) WithSubviews(items ...ViewProvider) *SegmentedControl {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSubviews:"), _arr)
 	return sc
 }
 
-// WithHidden sets the property and returns the receiver so calls can be chained.
+// WithHidden sets the hidden.
 func (sc *SegmentedControl) WithHidden(hidden bool) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setHidden:"), hidden)
 	return sc
 }
 
-// WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsFrameChangedNotifications sets the posts frame changed notifications.
 func (sc *SegmentedControl) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return sc
 }
 
-// WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
+// WithAutoresizesSubviews sets the autoresizes subviews.
 func (sc *SegmentedControl) WithAutoresizesSubviews(autoresizesSubviews bool) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return sc
 }
 
-// WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
+// WithAutoresizingMask sets the autoresizing mask.
 func (sc *SegmentedControl) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return sc
@@ -277,19 +277,19 @@ func (sc *SegmentedControl) WithFrame(frame corefoundation.CGRect) *SegmentedCon
 	return sc
 }
 
-// WithFrameRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameRotation sets the frame rotation.
 func (sc *SegmentedControl) WithFrameRotation(frameRotation float64) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return sc
 }
 
-// WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
+// WithFrameCenterRotation sets the frame center rotation.
 func (sc *SegmentedControl) WithFrameCenterRotation(frameCenterRotation float64) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return sc
 }
 
-// WithBoundsRotation sets the property and returns the receiver so calls can be chained.
+// WithBoundsRotation sets the bounds rotation.
 func (sc *SegmentedControl) WithBoundsRotation(boundsRotation float64) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return sc
@@ -301,7 +301,7 @@ func (sc *SegmentedControl) WithBounds(bounds corefoundation.CGRect) *SegmentedC
 	return sc
 }
 
-// WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
+// WithCanDrawConcurrently sets the can draw concurrently.
 func (sc *SegmentedControl) WithCanDrawConcurrently(canDrawConcurrently bool) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return sc
@@ -313,148 +313,148 @@ func (sc *SegmentedControl) WithNeedsDisplay(needsDisplay bool) *SegmentedContro
 	return sc
 }
 
-// WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
+// WithAcceptsTouchEvents sets the accepts touch events.
 func (sc *SegmentedControl) WithAcceptsTouchEvents(acceptsTouchEvents bool) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return sc
 }
 
-// WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
+// WithWantsRestingTouches sets the wants resting touches.
 func (sc *SegmentedControl) WithWantsRestingTouches(wantsRestingTouches bool) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return sc
 }
 
-// WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsRedrawPolicy sets the layer contents redraw policy.
 func (sc *SegmentedControl) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return sc
 }
 
-// WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
+// WithLayerContentsPlacement sets the layer contents placement.
 func (sc *SegmentedControl) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return sc
 }
 
-// WithWantsLayer sets the property and returns the receiver so calls can be chained.
+// WithWantsLayer sets the wants layer.
 func (sc *SegmentedControl) WithWantsLayer(wantsLayer bool) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return sc
 }
 
-// WithLayer sets the property and returns the receiver so calls can be chained.
+// WithLayer sets the layer.
 func (sc *SegmentedControl) WithLayer(layer obj.Object) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return sc
 }
 
-// WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
+// WithCanDrawSubviewsIntoLayer sets the can draw subviews into layer.
 func (sc *SegmentedControl) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return sc
 }
 
-// WithNeedsLayout sets the property and returns the receiver so calls can be chained.
+// WithNeedsLayout sets the needs layout.
 func (sc *SegmentedControl) WithNeedsLayout(needsLayout bool) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return sc
 }
 
-// WithAlphaValue sets the property and returns the receiver so calls can be chained.
+// WithAlphaValue sets the alpha value.
 func (sc *SegmentedControl) WithAlphaValue(alphaValue float64) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return sc
 }
 
-// WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
+// WithLayerUsesCoreImageFilters sets the layer uses core image filters.
 func (sc *SegmentedControl) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return sc
 }
 
-// WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
+// WithBackgroundFilters sets the background filters.
 func (sc *SegmentedControl) WithBackgroundFilters(items ...obj.Object) *SegmentedControl {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return sc
 }
 
-// WithCompositingFilter sets the property and returns the receiver so calls can be chained.
+// WithCompositingFilter sets the compositing filter.
 func (sc *SegmentedControl) WithCompositingFilter(compositingFilter obj.Object) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return sc
 }
 
-// WithContentFilters sets the property and returns the receiver so calls can be chained.
+// WithContentFilters sets the content filters.
 func (sc *SegmentedControl) WithContentFilters(items ...obj.Object) *SegmentedControl {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setContentFilters:"), _arr)
 	return sc
 }
 
-// WithShadow sets the property and returns the receiver so calls can be chained.
+// WithShadow sets the shadow.
 func (sc *SegmentedControl) WithShadow(shadow *Shadow) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return sc
 }
 
-// WithClipsToBounds sets the property and returns the receiver so calls can be chained.
+// WithClipsToBounds sets the clips to bounds.
 func (sc *SegmentedControl) WithClipsToBounds(clipsToBounds bool) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return sc
 }
 
-// WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
+// WithPostsBoundsChangedNotifications sets the posts bounds changed notifications.
 func (sc *SegmentedControl) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return sc
 }
 
-// WithToolTip sets the property and returns the receiver so calls can be chained.
+// WithToolTip sets the tool tip.
 func (sc *SegmentedControl) WithToolTip(toolTip string) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return sc
 }
 
-// WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
+// WithUserInterfaceLayoutDirection sets the user interface layout direction.
 func (sc *SegmentedControl) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return sc
 }
 
-// WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
+// WithPreparedContentRect sets the prepared content rect.
 func (sc *SegmentedControl) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
 	return sc
 }
 
-// WithNextKeyView sets the property and returns the receiver so calls can be chained.
+// WithNextKeyView sets the next key view.
 func (sc *SegmentedControl) WithNextKeyView(nextKeyView ViewProvider) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return sc
 }
 
-// WithFocusRingType sets the property and returns the receiver so calls can be chained.
+// WithFocusRingType sets the focus ring type.
 func (sc *SegmentedControl) WithFocusRingType(focusRingType FocusRingType) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return sc
 }
 
-// WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
+// WithGestureRecognizers sets the gesture recognizers.
 func (sc *SegmentedControl) WithGestureRecognizers(items ...GestureRecognizerProvider) *SegmentedControl {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return sc
 }
 
-// WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
+// WithAllowedTouchTypes sets the allowed touch types.
 func (sc *SegmentedControl) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return sc
 }
 
-// WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
+// WithAdditionalSafeAreaInsets sets the additional safe area insets.
 func (sc *SegmentedControl) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
 	return sc
@@ -466,49 +466,49 @@ func (sc *SegmentedControl) WithPrefersCompactControlSizeMetrics(prefersCompactC
 	return sc
 }
 
-// WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
+// WithWritingToolsCoordinator sets the writing tools coordinator.
 func (sc *SegmentedControl) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return sc
 }
 
-// WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
+// WithNeedsUpdateConstraints sets the needs update constraints.
 func (sc *SegmentedControl) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return sc
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
+// WithTranslatesAutoresizingMaskIntoConstraints sets the translates autoresizing mask into constraints.
 func (sc *SegmentedControl) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return sc
 }
 
-// WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithHorizontalContentSizeConstraintActive sets the horizontal content size constraint active.
 func (sc *SegmentedControl) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return sc
 }
 
-// WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
+// WithVerticalContentSizeConstraintActive sets the vertical content size constraint active.
 func (sc *SegmentedControl) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return sc
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsBestResolutionOpenGLSurface sets the wants best resolution open gl surface.
 func (sc *SegmentedControl) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return sc
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets the wants extended dynamic range open gl surface.
 func (sc *SegmentedControl) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return sc
 }
 
-// WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
+// WithPressureConfiguration sets the pressure configuration.
 func (sc *SegmentedControl) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SegmentedControl {
 	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return sc
@@ -682,67 +682,67 @@ func (sc *SegmentedControl) MinimumSizeWithPrioritizedCompressionOptions(priorit
 	return _r
 }
 
-// SegmentCount wraps the corresponding Objective-C method.
+// SegmentCount returns the segment count.
 func (sc *SegmentedControl) SegmentCount() int {
 	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("segmentCount"))
 	return _r
 }
 
-// SelectedSegment wraps the corresponding Objective-C method.
+// SelectedSegment returns the selected segment.
 func (sc *SegmentedControl) SelectedSegment() int {
 	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("selectedSegment"))
 	return _r
 }
 
-// SegmentStyle wraps the corresponding Objective-C method.
+// SegmentStyle returns the segment style.
 func (sc *SegmentedControl) SegmentStyle() SegmentStyle {
 	_r := objc.Send[SegmentStyle](objref.IDOf(sc), objc.RegisterName("segmentStyle"))
 	return _r
 }
 
-// IsSpringLoaded wraps the corresponding Objective-C method.
+// IsSpringLoaded reports whether the object is spring loaded.
 func (sc *SegmentedControl) IsSpringLoaded() bool {
 	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("isSpringLoaded"))
 	return _r
 }
 
-// TrackingMode wraps the corresponding Objective-C method.
+// TrackingMode returns the tracking mode.
 func (sc *SegmentedControl) TrackingMode() SegmentSwitchTracking {
 	_r := objc.Send[SegmentSwitchTracking](objref.IDOf(sc), objc.RegisterName("trackingMode"))
 	return _r
 }
 
-// DoubleValueForSelectedSegment wraps the corresponding Objective-C method.
+// DoubleValueForSelectedSegment returns the double value for selected segment.
 func (sc *SegmentedControl) DoubleValueForSelectedSegment() float64 {
 	_r := objc.Send[float64](objref.IDOf(sc), objc.RegisterName("doubleValueForSelectedSegment"))
 	return _r
 }
 
-// SelectedSegmentBezelColor wraps the corresponding Objective-C method.
+// SelectedSegmentBezelColor returns the selected segment bezel color.
 func (sc *SegmentedControl) SelectedSegmentBezelColor() *Color {
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("selectedSegmentBezelColor"))
 	return ColorFromID(_r)
 }
 
-// IndexOfSelectedItem wraps the corresponding Objective-C method.
+// IndexOfSelectedItem returns the index of selected item.
 func (sc *SegmentedControl) IndexOfSelectedItem() int {
 	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("indexOfSelectedItem"))
 	return _r
 }
 
-// SegmentDistribution wraps the corresponding Objective-C method.
+// SegmentDistribution returns the segment distribution.
 func (sc *SegmentedControl) SegmentDistribution() SegmentDistribution {
 	_r := objc.Send[SegmentDistribution](objref.IDOf(sc), objc.RegisterName("segmentDistribution"))
 	return _r
 }
 
-// ActiveCompressionOptions wraps the corresponding Objective-C method.
+// ActiveCompressionOptions returns the active compression options.
 func (sc *SegmentedControl) ActiveCompressionOptions() *UserInterfaceCompressionOptions {
 	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("activeCompressionOptions"))
 	return UserInterfaceCompressionOptionsFromID(_r)
 }
 
-// BorderShape wraps the corresponding Objective-C method.
+// BorderShape returns the border shape.
 func (sc *SegmentedControl) BorderShape() ControlBorderShape {
 	_r := objc.Send[ControlBorderShape](objref.IDOf(sc), objc.RegisterName("borderShape"))
 	return _r

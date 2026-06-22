@@ -80,25 +80,25 @@ func NewMTRUnitTestingClusterTestNullableOptionalResponseParamsWithResponseValue
 	return mTRUnitTestingClusterTestNullableOptionalResponseParamsAdopt(_id), nil
 }
 
-// WithWasPresent sets the property and returns the receiver so calls can be chained.
+// WithWasPresent sets the was present.
 func (mutctnorp *MTRUnitTestingClusterTestNullableOptionalResponseParams) WithWasPresent(wasPresent obj.Object) *MTRUnitTestingClusterTestNullableOptionalResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mutctnorp), objc.RegisterName("setWasPresent:"), objref.IDOf(wasPresent))
 	return mutctnorp
 }
 
-// WithWasNull sets the property and returns the receiver so calls can be chained.
+// WithWasNull sets the was null.
 func (mutctnorp *MTRUnitTestingClusterTestNullableOptionalResponseParams) WithWasNull(wasNull obj.Object) *MTRUnitTestingClusterTestNullableOptionalResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mutctnorp), objc.RegisterName("setWasNull:"), objref.IDOf(wasNull))
 	return mutctnorp
 }
 
-// WithValue sets the property and returns the receiver so calls can be chained.
+// WithValue sets the value.
 func (mutctnorp *MTRUnitTestingClusterTestNullableOptionalResponseParams) WithValue(value obj.Object) *MTRUnitTestingClusterTestNullableOptionalResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mutctnorp), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return mutctnorp
 }
 
-// WithOriginalValue sets the property and returns the receiver so calls can be chained.
+// WithOriginalValue sets the original value.
 func (mutctnorp *MTRUnitTestingClusterTestNullableOptionalResponseParams) WithOriginalValue(originalValue obj.Object) *MTRUnitTestingClusterTestNullableOptionalResponseParams {
 	objc.Send[objc.ID](objref.IDOf(mutctnorp), objc.RegisterName("setOriginalValue:"), objref.IDOf(originalValue))
 	return mutctnorp
@@ -110,25 +110,25 @@ func (mutctnorp *MTRUnitTestingClusterTestNullableOptionalResponseParams) WithTi
 	return mutctnorp
 }
 
-// WasPresent wraps the corresponding Objective-C method.
+// WasPresent returns the was present.
 func (mutctnorp *MTRUnitTestingClusterTestNullableOptionalResponseParams) WasPresent() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctnorp), objc.RegisterName("wasPresent"))
 	return obj.Wrap(_r)
 }
 
-// WasNull wraps the corresponding Objective-C method.
+// WasNull returns the was null.
 func (mutctnorp *MTRUnitTestingClusterTestNullableOptionalResponseParams) WasNull() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctnorp), objc.RegisterName("wasNull"))
 	return obj.Wrap(_r)
 }
 
-// Value wraps the corresponding Objective-C method.
+// Value returns the value.
 func (mutctnorp *MTRUnitTestingClusterTestNullableOptionalResponseParams) Value() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctnorp), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// OriginalValue wraps the corresponding Objective-C method.
+// OriginalValue returns the original value.
 func (mutctnorp *MTRUnitTestingClusterTestNullableOptionalResponseParams) OriginalValue() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mutctnorp), objc.RegisterName("originalValue"))
 	return obj.Wrap(_r)

@@ -72,7 +72,7 @@ func NewNeuralEngineComputeDevice() *NeuralEngineComputeDevice {
 	return neuralEngineComputeDeviceAdopt(_id)
 }
 
-// TotalCoreCount wraps the corresponding Objective-C method.
+// TotalCoreCount returns the total core count.
 func (necd *NeuralEngineComputeDevice) TotalCoreCount() int {
 	_r := objc.Send[int](objref.IDOf(necd), objc.RegisterName("totalCoreCount"))
 	return _r

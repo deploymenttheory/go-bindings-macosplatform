@@ -50,19 +50,19 @@ func NewMTRAudioOutputClusterOutputInfo() *MTRAudioOutputClusterOutputInfo {
 	return mTRAudioOutputClusterOutputInfoAdopt(_id)
 }
 
-// WithIndex sets the property and returns the receiver so calls can be chained.
+// WithIndex sets the index.
 func (maocoi *MTRAudioOutputClusterOutputInfo) WithIndex(index obj.Object) *MTRAudioOutputClusterOutputInfo {
 	objc.Send[objc.ID](objref.IDOf(maocoi), objc.RegisterName("setIndex:"), objref.IDOf(index))
 	return maocoi
 }
 
-// WithOutputType sets the property and returns the receiver so calls can be chained.
+// WithOutputType sets the output type.
 func (maocoi *MTRAudioOutputClusterOutputInfo) WithOutputType(outputType obj.Object) *MTRAudioOutputClusterOutputInfo {
 	objc.Send[objc.ID](objref.IDOf(maocoi), objc.RegisterName("setOutputType:"), objref.IDOf(outputType))
 	return maocoi
 }
 
-// WithName sets the property and returns the receiver so calls can be chained.
+// WithName sets the name.
 func (maocoi *MTRAudioOutputClusterOutputInfo) WithName(name string) *MTRAudioOutputClusterOutputInfo {
 	objc.Send[objc.ID](objref.IDOf(maocoi), objc.RegisterName("setName:"), purego.NSString(name))
 	return maocoi

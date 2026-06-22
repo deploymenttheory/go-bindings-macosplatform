@@ -70,19 +70,19 @@ func NewMTRChannelClusterRecordProgramParams() *MTRChannelClusterRecordProgramPa
 	return mTRChannelClusterRecordProgramParamsAdopt(_id)
 }
 
-// WithProgramIdentifier sets the property and returns the receiver so calls can be chained.
+// WithProgramIdentifier sets the program identifier.
 func (mccrpp *MTRChannelClusterRecordProgramParams) WithProgramIdentifier(programIdentifier string) *MTRChannelClusterRecordProgramParams {
 	objc.Send[objc.ID](objref.IDOf(mccrpp), objc.RegisterName("setProgramIdentifier:"), purego.NSString(programIdentifier))
 	return mccrpp
 }
 
-// WithShouldRecordSeries sets the property and returns the receiver so calls can be chained.
+// WithShouldRecordSeries sets the should record series.
 func (mccrpp *MTRChannelClusterRecordProgramParams) WithShouldRecordSeries(shouldRecordSeries obj.Object) *MTRChannelClusterRecordProgramParams {
 	objc.Send[objc.ID](objref.IDOf(mccrpp), objc.RegisterName("setShouldRecordSeries:"), objref.IDOf(shouldRecordSeries))
 	return mccrpp
 }
 
-// WithData sets the property and returns the receiver so calls can be chained.
+// WithData sets the data.
 func (mccrpp *MTRChannelClusterRecordProgramParams) WithData(data obj.Object) *MTRChannelClusterRecordProgramParams {
 	objc.Send[objc.ID](objref.IDOf(mccrpp), objc.RegisterName("setData:"), objref.IDOf(data))
 	return mccrpp
@@ -100,7 +100,7 @@ func (mccrpp *MTRChannelClusterRecordProgramParams) WithServerSideProcessingTime
 	return mccrpp
 }
 
-// ProgramIdentifier wraps the corresponding Objective-C method.
+// ProgramIdentifier returns the program identifier.
 func (mccrpp *MTRChannelClusterRecordProgramParams) ProgramIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(mccrpp), objc.RegisterName("programIdentifier"))
 	if _r == 0 {
@@ -109,13 +109,13 @@ func (mccrpp *MTRChannelClusterRecordProgramParams) ProgramIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// ShouldRecordSeries wraps the corresponding Objective-C method.
+// ShouldRecordSeries returns the should record series.
 func (mccrpp *MTRChannelClusterRecordProgramParams) ShouldRecordSeries() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccrpp), objc.RegisterName("shouldRecordSeries"))
 	return obj.Wrap(_r)
 }
 
-// Data wraps the corresponding Objective-C method.
+// Data returns the data.
 func (mccrpp *MTRChannelClusterRecordProgramParams) Data() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccrpp), objc.RegisterName("data"))
 	return obj.Wrap(_r)

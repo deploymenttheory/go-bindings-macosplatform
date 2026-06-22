@@ -93,8 +93,8 @@ func (bopuc *BluetoothObjectPushUIController) SetTitle(windowTitle string) {
 	objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("setTitle:"), purego.NSString(windowTitle))
 }
 
-// GetTitle returns the title of the transfer panel.
-func (bopuc *BluetoothObjectPushUIController) GetTitle() string {
+// Title returns the title of the transfer panel.
+func (bopuc *BluetoothObjectPushUIController) Title() string {
 	_r := objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("getTitle"))
 	if _r == 0 {
 		return ""
@@ -107,8 +107,8 @@ func (bopuc *BluetoothObjectPushUIController) SetIconImage(image obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("setIconImage:"), objref.IDOf(image))
 }
 
-// GetDevice gets the object representing the remote target device in the transfer.
-func (bopuc *BluetoothObjectPushUIController) GetDevice() obj.Object {
+// Device gets the object representing the remote target device in the transfer.
+func (bopuc *BluetoothObjectPushUIController) Device() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(bopuc), objc.RegisterName("getDevice"))
 	return obj.Wrap(_r)
 }

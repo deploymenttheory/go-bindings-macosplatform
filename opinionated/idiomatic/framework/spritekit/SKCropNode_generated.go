@@ -210,7 +210,7 @@ func (cn *CropNode) WithAccessibilityEnabled(accessibilityEnabled bool) *CropNod
 	return cn
 }
 
-// MaskNode wraps the corresponding Objective-C method.
+// MaskNode returns the mask node.
 func (cn *CropNode) MaskNode() *Node {
 	_r := objc.Send[objc.ID](objref.IDOf(cn), objc.RegisterName("maskNode"))
 	return NodeFromID(_r)

@@ -86,7 +86,7 @@ func (ac *AccountCredential) WithOauthToken(oauthToken string) *AccountCredentia
 	return ac
 }
 
-// OauthToken wraps the corresponding Objective-C method.
+// OauthToken returns the oauth token.
 func (ac *AccountCredential) OauthToken() string {
 	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("oauthToken"))
 	if _r == 0 {

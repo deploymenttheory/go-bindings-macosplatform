@@ -73,19 +73,19 @@ func NewReservationActionWithTypeValidDurationUserActivity(type_ ReservationActi
 	return reservationActionAdopt(_id)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (ra *ReservationAction) Type() ReservationActionType {
 	_r := objc.Send[ReservationActionType](objref.IDOf(ra), objc.RegisterName("type"))
 	return _r
 }
 
-// ValidDuration wraps the corresponding Objective-C method.
+// ValidDuration returns the valid duration.
 func (ra *ReservationAction) ValidDuration() *DateComponentsRange {
 	_r := objc.Send[objc.ID](objref.IDOf(ra), objc.RegisterName("validDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
-// UserActivity wraps the corresponding Objective-C method.
+// UserActivity returns the user activity.
 func (ra *ReservationAction) UserActivity() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(ra), objc.RegisterName("userActivity"))
 	return obj.Wrap(_r)

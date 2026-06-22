@@ -235,19 +235,19 @@ func (l *Light) WithIESProfileURL(iESProfileURL string) *Light {
 	return l
 }
 
-// WithProbeType sets the property and returns the receiver so calls can be chained.
+// WithProbeType sets the probe type.
 func (l *Light) WithProbeType(probeType LightProbeType) *Light {
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setProbeType:"), probeType)
 	return l
 }
 
-// WithProbeUpdateType sets the property and returns the receiver so calls can be chained.
+// WithProbeUpdateType sets the probe update type.
 func (l *Light) WithProbeUpdateType(probeUpdateType LightProbeUpdateType) *Light {
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setProbeUpdateType:"), probeUpdateType)
 	return l
 }
 
-// WithParallaxCorrectionEnabled sets the property and returns the receiver so calls can be chained.
+// WithParallaxCorrectionEnabled sets the parallax correction enabled.
 func (l *Light) WithParallaxCorrectionEnabled(parallaxCorrectionEnabled bool) *Light {
 	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setParallaxCorrectionEnabled:"), parallaxCorrectionEnabled)
 	return l
@@ -455,13 +455,13 @@ func (l *Light) SphericalHarmonicsCoefficients() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// ProbeType wraps the corresponding Objective-C method.
+// ProbeType returns the probe type.
 func (l *Light) ProbeType() LightProbeType {
 	_r := objc.Send[LightProbeType](objref.IDOf(l), objc.RegisterName("probeType"))
 	return _r
 }
 
-// ProbeUpdateType wraps the corresponding Objective-C method.
+// ProbeUpdateType returns the probe update type.
 func (l *Light) ProbeUpdateType() LightProbeUpdateType {
 	_r := objc.Send[LightProbeUpdateType](objref.IDOf(l), objc.RegisterName("probeUpdateType"))
 	return _r
@@ -473,7 +473,7 @@ func (l *Light) ParallaxCorrectionEnabled() bool {
 	return _r
 }
 
-// ProbeEnvironment wraps the corresponding Objective-C method.
+// ProbeEnvironment returns the probe environment.
 func (l *Light) ProbeEnvironment() *MaterialProperty {
 	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("probeEnvironment"))
 	return MaterialPropertyFromID(_r)

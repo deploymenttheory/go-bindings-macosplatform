@@ -93,7 +93,7 @@ func NewDateIntervalWithStartDateEndDate(startDate *Date, endDate *Date) *DateIn
 	return dateIntervalAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (di *DateInterval) WithScriptingProperties(scriptingProperties obj.Object) *DateInterval {
 	objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return di
@@ -129,19 +129,19 @@ func (di *DateInterval) ContainsDate(date *Date) bool {
 	return _r
 }
 
-// StartDate wraps the corresponding Objective-C method.
+// StartDate returns the start date.
 func (di *DateInterval) StartDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("startDate"))
 	return DateFromID(_r)
 }
 
-// EndDate wraps the corresponding Objective-C method.
+// EndDate returns the end date.
 func (di *DateInterval) EndDate() *Date {
 	_r := objc.Send[objc.ID](objref.IDOf(di), objc.RegisterName("endDate"))
 	return DateFromID(_r)
 }
 
-// Duration wraps the corresponding Objective-C method.
+// Duration returns the duration.
 func (di *DateInterval) Duration() float64 {
 	_r := objc.Send[float64](objref.IDOf(di), objc.RegisterName("duration"))
 	return _r

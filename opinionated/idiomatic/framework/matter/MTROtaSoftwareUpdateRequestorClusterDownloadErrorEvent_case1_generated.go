@@ -50,25 +50,25 @@ func NewMTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent() *MTROtaSoftware
 	return mTROtaSoftwareUpdateRequestorClusterDownloadErrorEventAdopt(_id)
 }
 
-// WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
+// WithSoftwareVersion sets the software version.
 func (mosurcdee *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
 	objc.Send[objc.ID](objref.IDOf(mosurcdee), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return mosurcdee
 }
 
-// WithBytesDownloaded sets the property and returns the receiver so calls can be chained.
+// WithBytesDownloaded sets the bytes downloaded.
 func (mosurcdee *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithBytesDownloaded(bytesDownloaded obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
 	objc.Send[objc.ID](objref.IDOf(mosurcdee), objc.RegisterName("setBytesDownloaded:"), objref.IDOf(bytesDownloaded))
 	return mosurcdee
 }
 
-// WithProgressPercent sets the property and returns the receiver so calls can be chained.
+// WithProgressPercent sets the progress percent.
 func (mosurcdee *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithProgressPercent(progressPercent obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
 	objc.Send[objc.ID](objref.IDOf(mosurcdee), objc.RegisterName("setProgressPercent:"), objref.IDOf(progressPercent))
 	return mosurcdee
 }
 
-// WithPlatformCode sets the property and returns the receiver so calls can be chained.
+// WithPlatformCode sets the platform code.
 func (mosurcdee *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithPlatformCode(platformCode obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
 	objc.Send[objc.ID](objref.IDOf(mosurcdee), objc.RegisterName("setPlatformCode:"), objref.IDOf(platformCode))
 	return mosurcdee

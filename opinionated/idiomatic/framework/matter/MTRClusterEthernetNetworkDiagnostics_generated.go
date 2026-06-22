@@ -58,85 +58,85 @@ func NewMTRClusterEthernetNetworkDiagnosticsWithDeviceEndpointQueue(device *MTRD
 	return mTRClusterEthernetNetworkDiagnosticsAdopt(_id)
 }
 
-// ReadAttributePHYRateWithParams wraps the corresponding Objective-C method.
+// ReadAttributePHYRateWithParams reads attribute phy rate with params.
 func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributePHYRateWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributePHYRateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFullDuplexWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFullDuplexWithParams reads attribute full duplex with params.
 func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeFullDuplexWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeFullDuplexWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePacketRxCountWithParams wraps the corresponding Objective-C method.
+// ReadAttributePacketRxCountWithParams reads attribute packet rx count with params.
 func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributePacketRxCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributePacketRxCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributePacketTxCountWithParams wraps the corresponding Objective-C method.
+// ReadAttributePacketTxCountWithParams reads attribute packet tx count with params.
 func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributePacketTxCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributePacketTxCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeTxErrCountWithParams wraps the corresponding Objective-C method.
+// ReadAttributeTxErrCountWithParams reads attribute tx err count with params.
 func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeTxErrCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeTxErrCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCollisionCountWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCollisionCountWithParams reads attribute collision count with params.
 func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeCollisionCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeCollisionCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeOverrunCountWithParams wraps the corresponding Objective-C method.
+// ReadAttributeOverrunCountWithParams reads attribute overrun count with params.
 func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeOverrunCountWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeOverrunCountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeCarrierDetectWithParams wraps the corresponding Objective-C method.
+// ReadAttributeCarrierDetectWithParams reads attribute carrier detect with params.
 func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeCarrierDetectWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeCarrierDetectWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeTimeSinceResetWithParams wraps the corresponding Objective-C method.
+// ReadAttributeTimeSinceResetWithParams reads attribute time since reset with params.
 func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeTimeSinceResetWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeTimeSinceResetWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mcend *MTRClusterEthernetNetworkDiagnostics) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mcend), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

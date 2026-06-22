@@ -153,7 +153,7 @@ func (tcm *TextContentManager) RecordEditActionInRangeNewTextRange(originalTextR
 	objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("recordEditActionInRange:newTextRange:"), objref.IDOf(originalTextRange), objref.IDOf(newTextRange))
 }
 
-// TextLayoutManagers wraps the corresponding Objective-C method.
+// TextLayoutManagers returns the text layout managers.
 //
 // TextLayoutManagers returns the collection as a Go slice.
 func (tcm *TextContentManager) TextLayoutManagers() []*TextLayoutManager {
@@ -161,13 +161,13 @@ func (tcm *TextContentManager) TextLayoutManagers() []*TextLayoutManager {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextLayoutManager { return TextLayoutManagerFromID(_id) })
 }
 
-// PrimaryTextLayoutManager wraps the corresponding Objective-C method.
+// PrimaryTextLayoutManager returns the primary text layout manager.
 func (tcm *TextContentManager) PrimaryTextLayoutManager() *TextLayoutManager {
 	_r := objc.Send[objc.ID](objref.IDOf(tcm), objc.RegisterName("primaryTextLayoutManager"))
 	return TextLayoutManagerFromID(_r)
 }
 
-// HasEditingTransaction wraps the corresponding Objective-C method.
+// HasEditingTransaction reports whether the object has editing transaction.
 func (tcm *TextContentManager) HasEditingTransaction() bool {
 	_r := objc.Send[bool](objref.IDOf(tcm), objc.RegisterName("hasEditingTransaction"))
 	return _r

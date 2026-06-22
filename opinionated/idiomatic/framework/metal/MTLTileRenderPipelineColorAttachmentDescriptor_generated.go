@@ -78,7 +78,7 @@ func (trpcad *TileRenderPipelineColorAttachmentDescriptor) WithPixelFormat(pixel
 	return trpcad
 }
 
-// PixelFormat wraps the corresponding Objective-C method.
+// PixelFormat returns the pixel format.
 func (trpcad *TileRenderPipelineColorAttachmentDescriptor) PixelFormat() PixelFormat {
 	_r := objc.Send[PixelFormat](objref.IDOf(trpcad), objc.RegisterName("pixelFormat"))
 	return _r

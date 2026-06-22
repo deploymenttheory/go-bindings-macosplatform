@@ -87,13 +87,13 @@ func NewURLCredentialWithTrust(trust obj.Object) *URLCredential {
 	return uRLCredentialAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (uc *URLCredential) WithScriptingProperties(scriptingProperties obj.Object) *URLCredential {
 	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return uc
 }
 
-// Persistence wraps the corresponding Objective-C method.
+// Persistence returns the persistence.
 func (uc *URLCredential) Persistence() URLCredentialPersistence {
 	_r := objc.Send[URLCredentialPersistence](objref.IDOf(uc), objc.RegisterName("persistence"))
 	return _r

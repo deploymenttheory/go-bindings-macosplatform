@@ -70,7 +70,7 @@ func NewMTRThreadNetworkDirectoryClusterRemoveNetworkParams() *MTRThreadNetworkD
 	return mTRThreadNetworkDirectoryClusterRemoveNetworkParamsAdopt(_id)
 }
 
-// WithExtendedPanID sets the property and returns the receiver so calls can be chained.
+// WithExtendedPanID sets the extended pan ID.
 func (mtndcrnp *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) WithExtendedPanID(extendedPanID obj.Object) *MTRThreadNetworkDirectoryClusterRemoveNetworkParams {
 	objc.Send[objc.ID](objref.IDOf(mtndcrnp), objc.RegisterName("setExtendedPanID:"), objref.IDOf(extendedPanID))
 	return mtndcrnp
@@ -88,7 +88,7 @@ func (mtndcrnp *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) WithServerS
 	return mtndcrnp
 }
 
-// ExtendedPanID wraps the corresponding Objective-C method.
+// ExtendedPanID returns the extended pan ID.
 func (mtndcrnp *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) ExtendedPanID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mtndcrnp), objc.RegisterName("extendedPanID"))
 	return obj.Wrap(_r)

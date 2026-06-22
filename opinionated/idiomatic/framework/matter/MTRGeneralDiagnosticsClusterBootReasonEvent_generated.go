@@ -70,13 +70,13 @@ func NewMTRGeneralDiagnosticsClusterBootReasonEvent() *MTRGeneralDiagnosticsClus
 	return mTRGeneralDiagnosticsClusterBootReasonEventAdopt(_id)
 }
 
-// WithBootReason sets the property and returns the receiver so calls can be chained.
+// WithBootReason sets the boot reason.
 func (mgdcbre *MTRGeneralDiagnosticsClusterBootReasonEvent) WithBootReason(bootReason obj.Object) *MTRGeneralDiagnosticsClusterBootReasonEvent {
 	objc.Send[objc.ID](objref.IDOf(mgdcbre), objc.RegisterName("setBootReason:"), objref.IDOf(bootReason))
 	return mgdcbre
 }
 
-// BootReason wraps the corresponding Objective-C method.
+// BootReason returns the boot reason.
 func (mgdcbre *MTRGeneralDiagnosticsClusterBootReasonEvent) BootReason() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mgdcbre), objc.RegisterName("bootReason"))
 	return obj.Wrap(_r)

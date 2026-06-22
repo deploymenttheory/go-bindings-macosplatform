@@ -49,25 +49,25 @@ func NewDOMEntity() *DOMEntity {
 	return dOMEntityAdopt(_id)
 }
 
-// WithNodeValue sets the property and returns the receiver so calls can be chained.
+// WithNodeValue sets the node value.
 func (de *DOMEntity) WithNodeValue(nodeValue string) *DOMEntity {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return de
 }
 
-// WithPrefix sets the property and returns the receiver so calls can be chained.
+// WithPrefix sets the prefix.
 func (de *DOMEntity) WithPrefix(prefix string) *DOMEntity {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return de
 }
 
-// WithTextContent sets the property and returns the receiver so calls can be chained.
+// WithTextContent sets the text content.
 func (de *DOMEntity) WithTextContent(textContent string) *DOMEntity {
 	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return de
 }
 
-// PublicID wraps the corresponding Objective-C method.
+// PublicID returns the public ID.
 func (de *DOMEntity) PublicID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("publicId"))
 	if _r == 0 {
@@ -76,7 +76,7 @@ func (de *DOMEntity) PublicID() string {
 	return purego.GoString(_r)
 }
 
-// SystemID wraps the corresponding Objective-C method.
+// SystemID returns the system ID.
 func (de *DOMEntity) SystemID() string {
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("systemId"))
 	if _r == 0 {
@@ -85,7 +85,7 @@ func (de *DOMEntity) SystemID() string {
 	return purego.GoString(_r)
 }
 
-// NotationName wraps the corresponding Objective-C method.
+// NotationName returns the notation name.
 func (de *DOMEntity) NotationName() string {
 	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("notationName"))
 	if _r == 0 {

@@ -63,7 +63,7 @@ func (c *Collection) CanContainCollections() bool {
 	return _r
 }
 
-// LocalizedTitle wraps the corresponding Objective-C method.
+// LocalizedTitle returns the localized title.
 func (c *Collection) LocalizedTitle() string {
 	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("localizedTitle"))
 	if _r == 0 {

@@ -73,7 +73,7 @@ func NewThumbnailRepresentation() *ThumbnailRepresentation {
 	return thumbnailRepresentationAdopt(_id)
 }
 
-// Type wraps the corresponding Objective-C method.
+// Type returns the type.
 func (tr *ThumbnailRepresentation) Type() ThumbnailRepresentationType {
 	_r := objc.Send[ThumbnailRepresentationType](objref.IDOf(tr), objc.RegisterName("type"))
 	return _r

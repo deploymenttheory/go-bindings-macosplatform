@@ -58,69 +58,69 @@ func NewMTRClusterTimeFormatLocalizationWithDeviceEndpointQueue(device *MTRDevic
 	return mTRClusterTimeFormatLocalizationAdopt(_id)
 }
 
-// ReadAttributeHourFormatWithParams wraps the corresponding Objective-C method.
+// ReadAttributeHourFormatWithParams reads attribute hour format with params.
 func (mctfl *MTRClusterTimeFormatLocalization) ReadAttributeHourFormatWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctfl), objc.RegisterName("readAttributeHourFormatWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeHourFormatWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeHourFormatWithValueExpectedValueInterval writes attribute hour format with value expected value interval.
 func (mctfl *MTRClusterTimeFormatLocalization) WriteAttributeHourFormatWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mctfl), objc.RegisterName("writeAttributeHourFormatWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeHourFormatWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeHourFormatWithValueExpectedValueIntervalParams writes attribute hour format with value expected value interval params.
 func (mctfl *MTRClusterTimeFormatLocalization) WriteAttributeHourFormatWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mctfl), objc.RegisterName("writeAttributeHourFormatWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeActiveCalendarTypeWithParams wraps the corresponding Objective-C method.
+// ReadAttributeActiveCalendarTypeWithParams reads attribute active calendar type with params.
 func (mctfl *MTRClusterTimeFormatLocalization) ReadAttributeActiveCalendarTypeWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctfl), objc.RegisterName("readAttributeActiveCalendarTypeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeActiveCalendarTypeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+// WriteAttributeActiveCalendarTypeWithValueExpectedValueInterval writes attribute active calendar type with value expected value interval.
 func (mctfl *MTRClusterTimeFormatLocalization) WriteAttributeActiveCalendarTypeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
 	objc.Send[objc.ID](objref.IDOf(mctfl), objc.RegisterName("writeAttributeActiveCalendarTypeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeActiveCalendarTypeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+// WriteAttributeActiveCalendarTypeWithValueExpectedValueIntervalParams writes attribute active calendar type with value expected value interval params.
 func (mctfl *MTRClusterTimeFormatLocalization) WriteAttributeActiveCalendarTypeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
 	objc.Send[objc.ID](objref.IDOf(mctfl), objc.RegisterName("writeAttributeActiveCalendarTypeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeSupportedCalendarTypesWithParams wraps the corresponding Objective-C method.
+// ReadAttributeSupportedCalendarTypesWithParams reads attribute supported calendar types with params.
 func (mctfl *MTRClusterTimeFormatLocalization) ReadAttributeSupportedCalendarTypesWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctfl), objc.RegisterName("readAttributeSupportedCalendarTypesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithParams reads attribute generated command list with params.
 func (mctfl *MTRClusterTimeFormatLocalization) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctfl), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithParams reads attribute accepted command list with params.
 func (mctfl *MTRClusterTimeFormatLocalization) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctfl), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithParams reads attribute attribute list with params.
 func (mctfl *MTRClusterTimeFormatLocalization) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctfl), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithParams reads attribute feature map with params.
 func (mctfl *MTRClusterTimeFormatLocalization) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctfl), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithParams reads attribute cluster revision with params.
 func (mctfl *MTRClusterTimeFormatLocalization) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mctfl), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)

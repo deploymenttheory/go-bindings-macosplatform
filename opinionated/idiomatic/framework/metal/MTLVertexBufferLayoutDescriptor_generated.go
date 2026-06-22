@@ -90,19 +90,19 @@ func (vbld *VertexBufferLayoutDescriptor) WithStepRate(stepRate int) *VertexBuff
 	return vbld
 }
 
-// Stride wraps the corresponding Objective-C method.
+// Stride returns the stride.
 func (vbld *VertexBufferLayoutDescriptor) Stride() int {
 	_r := objc.Send[int](objref.IDOf(vbld), objc.RegisterName("stride"))
 	return _r
 }
 
-// StepFunction wraps the corresponding Objective-C method.
+// StepFunction returns the step function.
 func (vbld *VertexBufferLayoutDescriptor) StepFunction() VertexStepFunction {
 	_r := objc.Send[VertexStepFunction](objref.IDOf(vbld), objc.RegisterName("stepFunction"))
 	return _r
 }
 
-// StepRate wraps the corresponding Objective-C method.
+// StepRate returns the step rate.
 func (vbld *VertexBufferLayoutDescriptor) StepRate() int {
 	_r := objc.Send[int](objref.IDOf(vbld), objc.RegisterName("stepRate"))
 	return _r

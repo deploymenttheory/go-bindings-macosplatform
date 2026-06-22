@@ -86,7 +86,7 @@ func (lv *LinkView) WithMetadata(metadata *LinkMetadata) *LinkView {
 	return lv
 }
 
-// Metadata wraps the corresponding Objective-C method.
+// Metadata returns the metadata.
 func (lv *LinkView) Metadata() *LinkMetadata {
 	_r := objc.Send[objc.ID](objref.IDOf(lv), objc.RegisterName("metadata"))
 	return LinkMetadataFromID(_r)

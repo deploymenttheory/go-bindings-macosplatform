@@ -56,7 +56,7 @@ func NewMTRBaseClusterMicrowaveOvenControlWithDeviceEndpointIDQueue(device *MTRB
 	return mTRBaseClusterMicrowaveOvenControlAdopt(_id)
 }
 
-// ReadAttributeCookTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeCookTimeWithCompletion reads attribute cook time with completion.
 //
 // ReadAttributeCookTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) ReadAttributeCookTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -106,7 +106,7 @@ func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeCookTimeWith
 	}
 }
 
-// ReadAttributeMaxCookTimeWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxCookTimeWithCompletion reads attribute max cook time with completion.
 //
 // ReadAttributeMaxCookTimeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) ReadAttributeMaxCookTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -156,7 +156,7 @@ func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeMaxCookTimeW
 	}
 }
 
-// ReadAttributePowerSettingWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePowerSettingWithCompletion reads attribute power setting with completion.
 //
 // ReadAttributePowerSettingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) ReadAttributePowerSettingWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -206,7 +206,7 @@ func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributePowerSetting
 	}
 }
 
-// ReadAttributeMinPowerWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMinPowerWithCompletion reads attribute min power with completion.
 //
 // ReadAttributeMinPowerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) ReadAttributeMinPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -256,7 +256,7 @@ func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeMinPowerWith
 	}
 }
 
-// ReadAttributeMaxPowerWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeMaxPowerWithCompletion reads attribute max power with completion.
 //
 // ReadAttributeMaxPowerWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) ReadAttributeMaxPowerWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -306,7 +306,7 @@ func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeMaxPowerWith
 	}
 }
 
-// ReadAttributePowerStepWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePowerStepWithCompletion reads attribute power step with completion.
 //
 // ReadAttributePowerStepWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) ReadAttributePowerStepWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -356,7 +356,7 @@ func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributePowerStepWit
 	}
 }
 
-// ReadAttributeWattRatingWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeWattRatingWithCompletion reads attribute watt rating with completion.
 //
 // ReadAttributeWattRatingWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) ReadAttributeWattRatingWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -406,7 +406,7 @@ func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeWattRatingWi
 	}
 }
 
-// ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeGeneratedCommandListWithCompletion reads attribute generated command list with completion.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -456,7 +456,7 @@ func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeGeneratedCom
 	}
 }
 
-// ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAcceptedCommandListWithCompletion reads attribute accepted command list with completion.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -506,7 +506,7 @@ func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeAcceptedComm
 	}
 }
 
-// ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeAttributeListWithCompletion reads attribute attribute list with completion.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -556,7 +556,7 @@ func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeAttributeLis
 	}
 }
 
-// ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeFeatureMapWithCompletion reads attribute feature map with completion.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
@@ -606,7 +606,7 @@ func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) SubscribeAttributeFeatureMapWi
 	}
 }
 
-// ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeClusterRevisionWithCompletion reads attribute cluster revision with completion.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
 func (mbcmoc *MTRBaseClusterMicrowaveOvenControl) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {

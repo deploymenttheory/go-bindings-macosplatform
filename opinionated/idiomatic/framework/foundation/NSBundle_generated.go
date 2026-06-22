@@ -83,7 +83,7 @@ func NewBundleWithURL(url string) *Bundle {
 	return bundleAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (b *Bundle) WithScriptingProperties(scriptingProperties obj.Object) *Bundle {
 	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return b
@@ -113,7 +113,7 @@ func (b *Bundle) PreflightAndReturnError() error {
 	return nil
 }
 
-// LoadAndReturnError wraps the corresponding Objective-C method.
+// LoadAndReturnError loads and return error.
 //
 // LoadAndReturnError returns an error if the operation did not succeed.
 func (b *Bundle) LoadAndReturnError() error {
@@ -239,61 +239,61 @@ func (b *Bundle) ObjectForInfoDictionaryKey(key string) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// IsLoaded wraps the corresponding Objective-C method.
+// IsLoaded reports whether the object is loaded.
 func (b *Bundle) IsLoaded() bool {
 	_r := objc.Send[bool](objref.IDOf(b), objc.RegisterName("isLoaded"))
 	return _r
 }
 
-// BundleURL wraps the corresponding Objective-C method.
+// BundleURL returns the bundle URL.
 func (b *Bundle) BundleURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("bundleURL"))
 	return URLFromID(_r)
 }
 
-// ResourceURL wraps the corresponding Objective-C method.
+// ResourceURL returns the resource URL.
 func (b *Bundle) ResourceURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("resourceURL"))
 	return URLFromID(_r)
 }
 
-// ExecutableURL wraps the corresponding Objective-C method.
+// ExecutableURL returns the executable URL.
 func (b *Bundle) ExecutableURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("executableURL"))
 	return URLFromID(_r)
 }
 
-// PrivateFrameworksURL wraps the corresponding Objective-C method.
+// PrivateFrameworksURL returns the private frameworks URL.
 func (b *Bundle) PrivateFrameworksURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("privateFrameworksURL"))
 	return URLFromID(_r)
 }
 
-// SharedFrameworksURL wraps the corresponding Objective-C method.
+// SharedFrameworksURL returns the shared frameworks URL.
 func (b *Bundle) SharedFrameworksURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("sharedFrameworksURL"))
 	return URLFromID(_r)
 }
 
-// SharedSupportURL wraps the corresponding Objective-C method.
+// SharedSupportURL returns the shared support URL.
 func (b *Bundle) SharedSupportURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("sharedSupportURL"))
 	return URLFromID(_r)
 }
 
-// BuiltInPlugInsURL wraps the corresponding Objective-C method.
+// BuiltInPlugInsURL returns the built in plug ins URL.
 func (b *Bundle) BuiltInPlugInsURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("builtInPlugInsURL"))
 	return URLFromID(_r)
 }
 
-// AppStoreReceiptURL wraps the corresponding Objective-C method.
+// AppStoreReceiptURL returns the app store receipt URL.
 func (b *Bundle) AppStoreReceiptURL() *URL {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("appStoreReceiptURL"))
 	return URLFromID(_r)
 }
 
-// BundlePath wraps the corresponding Objective-C method.
+// BundlePath returns the bundle path.
 func (b *Bundle) BundlePath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("bundlePath"))
 	if _r == 0 {
@@ -302,7 +302,7 @@ func (b *Bundle) BundlePath() string {
 	return purego.GoString(_r)
 }
 
-// ResourcePath wraps the corresponding Objective-C method.
+// ResourcePath returns the resource path.
 func (b *Bundle) ResourcePath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("resourcePath"))
 	if _r == 0 {
@@ -311,7 +311,7 @@ func (b *Bundle) ResourcePath() string {
 	return purego.GoString(_r)
 }
 
-// ExecutablePath wraps the corresponding Objective-C method.
+// ExecutablePath returns the executable path.
 func (b *Bundle) ExecutablePath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("executablePath"))
 	if _r == 0 {
@@ -320,7 +320,7 @@ func (b *Bundle) ExecutablePath() string {
 	return purego.GoString(_r)
 }
 
-// PrivateFrameworksPath wraps the corresponding Objective-C method.
+// PrivateFrameworksPath returns the private frameworks path.
 func (b *Bundle) PrivateFrameworksPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("privateFrameworksPath"))
 	if _r == 0 {
@@ -329,7 +329,7 @@ func (b *Bundle) PrivateFrameworksPath() string {
 	return purego.GoString(_r)
 }
 
-// SharedFrameworksPath wraps the corresponding Objective-C method.
+// SharedFrameworksPath returns the shared frameworks path.
 func (b *Bundle) SharedFrameworksPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("sharedFrameworksPath"))
 	if _r == 0 {
@@ -338,7 +338,7 @@ func (b *Bundle) SharedFrameworksPath() string {
 	return purego.GoString(_r)
 }
 
-// SharedSupportPath wraps the corresponding Objective-C method.
+// SharedSupportPath returns the shared support path.
 func (b *Bundle) SharedSupportPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("sharedSupportPath"))
 	if _r == 0 {
@@ -347,7 +347,7 @@ func (b *Bundle) SharedSupportPath() string {
 	return purego.GoString(_r)
 }
 
-// BuiltInPlugInsPath wraps the corresponding Objective-C method.
+// BuiltInPlugInsPath returns the built in plug ins path.
 func (b *Bundle) BuiltInPlugInsPath() string {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("builtInPlugInsPath"))
 	if _r == 0 {
@@ -356,7 +356,7 @@ func (b *Bundle) BuiltInPlugInsPath() string {
 	return purego.GoString(_r)
 }
 
-// BundleIdentifier wraps the corresponding Objective-C method.
+// BundleIdentifier returns the bundle identifier.
 func (b *Bundle) BundleIdentifier() string {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
@@ -365,19 +365,19 @@ func (b *Bundle) BundleIdentifier() string {
 	return purego.GoString(_r)
 }
 
-// InfoDictionary wraps the corresponding Objective-C method.
+// InfoDictionary returns the info dictionary.
 func (b *Bundle) InfoDictionary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("infoDictionary"))
 	return obj.Wrap(_r)
 }
 
-// LocalizedInfoDictionary wraps the corresponding Objective-C method.
+// LocalizedInfoDictionary returns the localized info dictionary.
 func (b *Bundle) LocalizedInfoDictionary() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("localizedInfoDictionary"))
 	return obj.Wrap(_r)
 }
 
-// PreferredLocalizations wraps the corresponding Objective-C method.
+// PreferredLocalizations returns the preferred localizations.
 //
 // PreferredLocalizations returns the collection as a Go slice.
 func (b *Bundle) PreferredLocalizations() []string {
@@ -385,7 +385,7 @@ func (b *Bundle) PreferredLocalizations() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Localizations wraps the corresponding Objective-C method.
+// Localizations returns the localizations.
 //
 // Localizations returns the collection as a Go slice.
 func (b *Bundle) Localizations() []string {
@@ -393,7 +393,7 @@ func (b *Bundle) Localizations() []string {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// DevelopmentLocalization wraps the corresponding Objective-C method.
+// DevelopmentLocalization returns the development localization.
 func (b *Bundle) DevelopmentLocalization() string {
 	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("developmentLocalization"))
 	if _r == 0 {
@@ -402,7 +402,7 @@ func (b *Bundle) DevelopmentLocalization() string {
 	return purego.GoString(_r)
 }
 
-// ExecutableArchitectures wraps the corresponding Objective-C method.
+// ExecutableArchitectures returns the executable architectures.
 //
 // ExecutableArchitectures returns the collection as a Go slice.
 func (b *Bundle) ExecutableArchitectures() []*Number {

@@ -72,49 +72,49 @@ func NewNotificationSettings() *NotificationSettings {
 	return notificationSettingsAdopt(_id)
 }
 
-// AuthorizationStatus wraps the corresponding Objective-C method.
+// AuthorizationStatus returns the authorization status.
 func (ns *NotificationSettings) AuthorizationStatus() AuthorizationStatus {
 	_r := objc.Send[AuthorizationStatus](objref.IDOf(ns), objc.RegisterName("authorizationStatus"))
 	return _r
 }
 
-// SoundSetting wraps the corresponding Objective-C method.
+// SoundSetting returns the sound setting.
 func (ns *NotificationSettings) SoundSetting() NotificationSetting {
 	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("soundSetting"))
 	return _r
 }
 
-// BadgeSetting wraps the corresponding Objective-C method.
+// BadgeSetting returns the badge setting.
 func (ns *NotificationSettings) BadgeSetting() NotificationSetting {
 	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("badgeSetting"))
 	return _r
 }
 
-// AlertSetting wraps the corresponding Objective-C method.
+// AlertSetting returns the alert setting.
 func (ns *NotificationSettings) AlertSetting() NotificationSetting {
 	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("alertSetting"))
 	return _r
 }
 
-// NotificationCenterSetting wraps the corresponding Objective-C method.
+// NotificationCenterSetting returns the notification center setting.
 func (ns *NotificationSettings) NotificationCenterSetting() NotificationSetting {
 	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("notificationCenterSetting"))
 	return _r
 }
 
-// LockScreenSetting wraps the corresponding Objective-C method.
+// LockScreenSetting returns the lock screen setting.
 func (ns *NotificationSettings) LockScreenSetting() NotificationSetting {
 	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("lockScreenSetting"))
 	return _r
 }
 
-// ShowPreviewsSetting wraps the corresponding Objective-C method.
+// ShowPreviewsSetting returns the show previews setting.
 func (ns *NotificationSettings) ShowPreviewsSetting() ShowPreviewsSetting {
 	_r := objc.Send[ShowPreviewsSetting](objref.IDOf(ns), objc.RegisterName("showPreviewsSetting"))
 	return _r
 }
 
-// CriticalAlertSetting wraps the corresponding Objective-C method.
+// CriticalAlertSetting returns the critical alert setting.
 func (ns *NotificationSettings) CriticalAlertSetting() NotificationSetting {
 	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("criticalAlertSetting"))
 	return _r
@@ -126,19 +126,19 @@ func (ns *NotificationSettings) ProvidesAppNotificationSettings() bool {
 	return _r
 }
 
-// TimeSensitiveSetting wraps the corresponding Objective-C method.
+// TimeSensitiveSetting returns the time sensitive setting.
 func (ns *NotificationSettings) TimeSensitiveSetting() NotificationSetting {
 	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("timeSensitiveSetting"))
 	return _r
 }
 
-// ScheduledDeliverySetting wraps the corresponding Objective-C method.
+// ScheduledDeliverySetting returns the scheduled delivery setting.
 func (ns *NotificationSettings) ScheduledDeliverySetting() NotificationSetting {
 	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("scheduledDeliverySetting"))
 	return _r
 }
 
-// DirectMessagesSetting wraps the corresponding Objective-C method.
+// DirectMessagesSetting returns the direct messages setting.
 func (ns *NotificationSettings) DirectMessagesSetting() NotificationSetting {
 	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("directMessagesSetting"))
 	return _r

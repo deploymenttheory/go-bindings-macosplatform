@@ -107,7 +107,7 @@ func (t *Tube) WithLevelsOfDetail(items ...*LevelOfDetail) *Tube {
 	return t
 }
 
-// WithTessellator sets the property and returns the receiver so calls can be chained.
+// WithTessellator sets the tessellator.
 func (t *Tube) WithTessellator(tessellator *GeometryTessellator) *Tube {
 	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return t

@@ -66,25 +66,25 @@ func (mnccnis *MTRNetworkCommissioningClusterNetworkInfoStruct) String() string 
 	return rt.Description(objref.IDOf(mnccnis))
 }
 
-// WithNetworkID sets the property and returns the receiver so calls can be chained.
+// WithNetworkID sets the network ID.
 func (mnccnis *MTRNetworkCommissioningClusterNetworkInfoStruct) WithNetworkID(networkID obj.Object) *MTRNetworkCommissioningClusterNetworkInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(mnccnis), objc.RegisterName("setNetworkID:"), objref.IDOf(networkID))
 	return mnccnis
 }
 
-// WithConnected sets the property and returns the receiver so calls can be chained.
+// WithConnected sets the connected.
 func (mnccnis *MTRNetworkCommissioningClusterNetworkInfoStruct) WithConnected(connected obj.Object) *MTRNetworkCommissioningClusterNetworkInfoStruct {
 	objc.Send[objc.ID](objref.IDOf(mnccnis), objc.RegisterName("setConnected:"), objref.IDOf(connected))
 	return mnccnis
 }
 
-// NetworkID wraps the corresponding Objective-C method.
+// NetworkID returns the network ID.
 func (mnccnis *MTRNetworkCommissioningClusterNetworkInfoStruct) NetworkID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccnis), objc.RegisterName("networkID"))
 	return obj.Wrap(_r)
 }
 
-// Connected wraps the corresponding Objective-C method.
+// Connected returns the connected.
 func (mnccnis *MTRNetworkCommissioningClusterNetworkInfoStruct) Connected() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mnccnis), objc.RegisterName("connected"))
 	return obj.Wrap(_r)

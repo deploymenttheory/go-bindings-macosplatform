@@ -70,13 +70,13 @@ func NewMTRCommissionerControlClusterCommissionNodeParams() *MTRCommissionerCont
 	return mTRCommissionerControlClusterCommissionNodeParamsAdopt(_id)
 }
 
-// WithRequestID sets the property and returns the receiver so calls can be chained.
+// WithRequestID sets the request ID.
 func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) WithRequestID(requestID obj.Object) *MTRCommissionerControlClusterCommissionNodeParams {
 	objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("setRequestID:"), objref.IDOf(requestID))
 	return mccccnp
 }
 
-// WithResponseTimeoutSeconds sets the property and returns the receiver so calls can be chained.
+// WithResponseTimeoutSeconds sets the response timeout seconds.
 func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) WithResponseTimeoutSeconds(responseTimeoutSeconds obj.Object) *MTRCommissionerControlClusterCommissionNodeParams {
 	objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("setResponseTimeoutSeconds:"), objref.IDOf(responseTimeoutSeconds))
 	return mccccnp
@@ -94,13 +94,13 @@ func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) WithServerSide
 	return mccccnp
 }
 
-// RequestID wraps the corresponding Objective-C method.
+// RequestID returns the request ID.
 func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) RequestID() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("requestID"))
 	return obj.Wrap(_r)
 }
 
-// ResponseTimeoutSeconds wraps the corresponding Objective-C method.
+// ResponseTimeoutSeconds returns the response timeout seconds.
 func (mccccnp *MTRCommissionerControlClusterCommissionNodeParams) ResponseTimeoutSeconds() obj.Object {
 	_r := objc.Send[objc.ID](objref.IDOf(mccccnp), objc.RegisterName("responseTimeoutSeconds"))
 	return obj.Wrap(_r)

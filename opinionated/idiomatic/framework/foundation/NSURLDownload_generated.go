@@ -78,7 +78,7 @@ func (ud *URLDownload) WithDeletesFileUponFailure(deletesFileUponFailure bool) *
 	return ud
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (ud *URLDownload) WithScriptingProperties(scriptingProperties obj.Object) *URLDownload {
 	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return ud

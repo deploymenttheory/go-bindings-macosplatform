@@ -153,7 +153,7 @@ func NewAttributedStringWithFormatOptionsLocaleContextArguments(format *Attribut
 	return attributedStringAdopt(_id)
 }
 
-// WithScriptingProperties sets the property and returns the receiver so calls can be chained.
+// WithScriptingProperties sets the scripting properties.
 func (as *AttributedString) WithScriptingProperties(scriptingProperties obj.Object) *AttributedString {
 	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return as
@@ -165,7 +165,7 @@ func (as *AttributedString) IsEqualToAttributedString(other *AttributedString) b
 	return _r
 }
 
-// Length wraps the corresponding Objective-C method.
+// Length returns the length.
 func (as *AttributedString) Length() int {
 	_r := objc.Send[int](objref.IDOf(as), objc.RegisterName("length"))
 	return _r

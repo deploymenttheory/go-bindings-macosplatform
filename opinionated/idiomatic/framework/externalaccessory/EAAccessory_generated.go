@@ -72,19 +72,19 @@ func NewAccessory() *Accessory {
 	return accessoryAdopt(_id)
 }
 
-// IsConnected wraps the corresponding Objective-C method.
+// IsConnected reports whether the object is connected.
 func (a *Accessory) IsConnected() bool {
 	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isConnected"))
 	return _r
 }
 
-// ConnectionID wraps the corresponding Objective-C method.
+// ConnectionID returns the connection ID.
 func (a *Accessory) ConnectionID() int {
 	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("connectionID"))
 	return _r
 }
 
-// DockType wraps the corresponding Objective-C method.
+// DockType returns the dock type.
 func (a *Accessory) DockType() string {
 	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("dockType"))
 	if _r == 0 {
